@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interesting facts about different garden types</title>
+    <link rel="stylesheet" href="styleKnowledge.css">
+</head>
+<body>
+    <div id="header-container">
+
+    </div>
+    <div id="main-container">
+        <% knowledges.forEach(knowledge => { %>
+            <div>
+                <h3><%= knowledge.title %></h3>
+                <p><%= knowledge.description %></p>
+            </div>
+        <% }) %>
+    </div>
+    <button id="backToTheTop">TOP</button>
+</body>
+</html>

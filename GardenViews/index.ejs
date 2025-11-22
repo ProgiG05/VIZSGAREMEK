@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindmegtermett</title>
+    <link rel="stylesheet" href="styleIndex.css">
+</head>
+
+<body>
+    <h1>WELCOME BACK!</h1>
+    <div id="header-container">
+        <div id="newGarden"> 
+            <a href="./newGarden.ejs">New Garden</a>
+            <!-- bulding a new garden/ starting a new garden layout -->
+        </div>
+        <div id="myGardens">
+            <a href="./myGardens.ejs">My gardens</a>
+            <!-- listing the users garden layouts (projects)
+            listing the plants
+            listing the works in the shape of a calendar -->
+        </div>
+        <div id="ideas">
+            <a href="./ideas.ejs">Ideas</a>
+            <!-- a scrolling feed, kinda like pinterest, to spark up new ideas for the user -->
+        </div>
+        <div id="knowledge">
+            <a href="./knowledge.ejs">Knowledge</a>
+            <!-- a knowledge page, interesting facts about different types of gardens
+            for example: 
+                space gardening
+                gardening in Antarctica
+                gardening in the desert
+                asian gardens
+                historical gardens 
+                etc. -->
+        </div>
+        <div id="savedPlants">
+            <a href="./savedPlants.ejs">Saved Plants</a>
+            <!-- a library to showcase the saved plants -->
+        </div>
+        <select name="" id="">
+            <option value=""><a href="">Account</a></option>
+            <option value="">Language</option>
+            <option value=""><button id="appereance">Dark mode</button></option> 
+            <option value=""><button id="SignOut">Sign out</button></option>
+            <!-- (additional option: Settings) -->
+        </select>
+    </div>
+    <div id="main-container">
+        <% ideas.forEach(idea => { %>
+            <div>
+                <h3><%= idea.title %></h3>
+                <p><%= idea.description %></p>
+                <ul>
+                    <% idea.plants.forEach(plant => { %>
+                        <li><%= plant %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% }) %>
+    </div>
+    <div id="recentProjects-container">
+        
+    </div>
+    <div id="weather-container">
+
+    </div>
+</body>
+</html>
