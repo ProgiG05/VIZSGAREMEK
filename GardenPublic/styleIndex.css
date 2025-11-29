@@ -1,7 +1,43 @@
+:root{
+    --header-primary:white;
+    --header-secondary:white;
+    --header-border:white;
+    --sub-cont-primary:white;
+    --sub-cont-secondary:white;
+    --sub-cont-border:white;
+
+    --LightMode-header-primary:white;
+    --LightMode-header-secondary:white;
+    --LightMode-header-border:white;
+    --LightMode-sub-cont-primary:white;
+    --LightMode-sub-cont-secondary:white;
+    --LightMode-sub-cont-border:white;
+
+    --DarkMode-header-primary:white;
+    --DarkMode-header-secondary:white;
+    --DarkMode-header-border:white;
+    --DarkMode-sub-cont-primary:white;
+    --DarkMode-sub-cont-secondary:white;
+    --DarkMode-sub-cont-border:white;
+}
+body{
+    background-color: rgb(178, 219, 178);
+}
 #header-container{
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    border-radius: 10px;
-    background-color: rgb(145, 145, 145);
+    font-family: Arial, Helvetica, sans-serif;
+}
+#main-title{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#headerContent{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#headerContent:hover{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#headerContent:active{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#recentProjects-container,#weather-container{
+    font-family: Arial, Helvetica, sans-serif;
 }

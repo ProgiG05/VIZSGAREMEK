@@ -3,68 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mindmegtermett</title>
-    <link rel="stylesheet" href="styleIndex.css">
-</head>
+    <title>Idontknowthetitleyetnorthetitleofthewholeproject</title>
+    <!-- <link rel="stylesheet" href="../GardenPublic/styleIndex.css"> -->
+    <style>
+        :root{
+            --header-primary: #3f5231;
+            --header-secondary:#658147;
+            --header-third:#b1c599;
+            --sub-cont-primary:white;
+            --sub-cont-secondary:white;
+            --sub-cont-border:white;
 
+            --LightMode-header-primary:white;
+            --LightMode-header-secondary:white;
+            --LightMode-header-border:white;
+            --LightMode-sub-cont-primary:white;
+            --LightMode-sub-cont-secondary:white;
+            --LightMode-sub-cont-border:white;
+
+            --DarkMode-header-primary:white;
+            --DarkMode-header-secondary:white;
+            --DarkMode-header-border:white;
+            --DarkMode-sub-cont-primary:white;
+            --DarkMode-sub-cont-secondary:white;
+            --DarkMode-sub-cont-border:white;
+        }
+        body{
+            background-color: #e7ece5;
+        }
+        #main-title{
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--header-border);
+            font-size: 32pt;
+            text-align: center;
+        }
+        #header-container{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: row;
+            width: 85%;
+            margin: auto;
+        }
+        #headerContent{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt;
+            color: var(--header-third);
+            text-decoration: none;
+            background-color: var(--header-primary);
+            border-bottom: 8px solid var(--header-secondary);
+            border-radius: 25px;
+            text-align: center;
+            margin: auto;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 15px;
+            width: 350px;
+            height: 15px;
+        }
+        #headerContent:hover{
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--header-primary);
+            background-color: var(--header-third);
+            font-weight: bold;
+        }
+        #headerContent:active{
+            font-family: Arial, Helvetica, sans-serif;
+            border: none;
+        }
+        #recentProjects-container,#weather-container{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: auto;
+            margin-top: 100px;
+            border: 5px dotted var(--header-primary);
+            border-radius: 20px;
+            width: 95%;
+            height: 60%;
+        }
+    </style>
+</head>
 <body>
-    <h1>WELCOME BACK!</h1>
+    <h1 id="main-title">WELCOME BACK!</h1>
     <div id="header-container">
-        <div id="newGarden"> 
-            <a href="./newGarden.ejs">New Garden</a>
-            <!-- bulding a new garden/ starting a new garden layout -->
-        </div>
-        <div id="myGardens">
-            <a href="./myGardens.ejs">My gardens</a>
-            <!-- listing the users garden layouts (projects)
-            listing the plants
-            listing the works in the shape of a calendar -->
-        </div>
-        <div id="ideas">
-            <a href="./ideas.ejs">Ideas</a>
-            <!-- a scrolling feed, kinda like pinterest, to spark up new ideas for the user -->
-        </div>
-        <div id="knowledge">
-            <a href="./knowledge.ejs">Knowledge</a>
-            <!-- a knowledge page, interesting facts about different types of gardens
-            for example: 
-                space gardening
-                gardening in Antarctica
-                gardening in the desert
-                asian gardens
-                historical gardens 
-                etc. -->
-        </div>
-        <div id="savedPlants">
-            <a href="./savedPlants.ejs">Saved Plants</a>
-            <!-- a library to showcase the saved plants -->
-        </div>
-        <select name="" id="">
-            <option value=""><a href="">Account</a></option>
-            <option value="">Language</option>
-            <option value=""><button id="appereance">Dark mode</button></option> 
-            <option value=""><button id="SignOut">Sign out</button></option>
-            <!-- (additional option: Settings) -->
+        <a id="headerContent" href="./newGarden.ejs">New Garden</a>  
+        <!-- bulding a new garden/ starting a new garden layout -->
+        <a id="headerContent" href="./myGardens.ejs">My gardens</a>
+        <!-- listing the user's garden layouts (projects)-->
+        <a id="headerContent" href="./savedPlants.ejs">Saved Plants</a>
+        <!-- a library to showcase the saved plants -->
+        <a id="headerContent" href="./ideas.ejs">Ideas</a>
+        <!-- a scrolling feed, kinda like pinterest, to spark up new ideas for the user -->
+        <a id="headerContent" href="./knowledge.ejs">Knowledge</a>
+        <!-- a knowledge page, interesting facts about different types of gardens. for example: ,space gardening, gardening in Antarctica, gardening in the desert -->
+        <select name="settings" id="headerContent">
+            <option value="cover">Settings</option>
+            <option value="Account">Account</option>
+            <option value="Language">Language</option>
+            <option value="Dark-mode">Dark mode</option> 
+            <option value="Sign-out">Sign out</option>
         </select>
     </div>
-    <div id="main-container">
-        <% ideas.forEach(idea => { %>
-            <div>
-                <h3><%= idea.title %></h3>
-                <p><%= idea.description %></p>
-                <ul>
-                    <% idea.plants.forEach(plant => { %>
-                        <li><%= plant %></li>
-                    <% }) %>
-                </ul>
-            </div>
-        <% }) %>
-    </div>
-    <div id="recentProjects-container">
-        
-    </div>
-    <div id="weather-container">
-
-    </div>
+    <div id="recentProjects-container"><img src="../GardenPublic/placeholder1.png" alt=""></div>
+    <div id="weather-container"><img src="../GardenPublic/placeholder2.png" alt=""></div>
 </body>
 </html>
