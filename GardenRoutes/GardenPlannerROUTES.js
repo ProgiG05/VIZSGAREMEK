@@ -2,16 +2,18 @@ const express = require('express')
 const GardenController = require("../GardenControll/GardenPlannerCONTROLL")
 const router = express.Router()
 
-// router.get('/',GardenController.showGardens)
-// router.get('/showSavedPlants', GardenController.showSavedPlants)
-router.get('/',GardenController.showIdeas)
-// router.get('/',GardenController.showKnowledge)
-// router.post('/addProject',GardenController.addProject)
-// router.post('/removeProject',GardenController.removeProject)
-// router.post('/addLifestyle',GardenController.addLifestyle)
-// router.post('/addPlant',GardenController.addPlant)
-// router.post('/removePlant',GardenController.removePlant)
-// router.post('/addWork',GardenController.addWork)
-// router.post('/removeWork',GardenController.removeWork)
+
+router.get('/', GardenController.showMainPage)
+router.get('/newGardens', GardenController.showNewGardensPage)
+router.get('/myGardens', GardenController.showMyGardensPage)
+router.get('/savedPlants', GardenController.showSavedPlantsPage)
+router.get('/ideas', GardenController.showIdeasPage)
+router.get('/knowledges', GardenController.showKnowledgesPage)
+
+
+// router.get('/showSavedPlantsData', GardenController.showSavedPlantsData)
+// router.get('/showIdeasData',GardenController.showIdeasData)
+// router.get('/showKnowledgesData',GardenController.showKnowledgesData)
+
 
 module.exports = router

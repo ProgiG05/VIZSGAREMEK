@@ -7,20 +7,15 @@
     <link rel="stylesheet" href="styleIdeas.css">
 </head>
 <body>
-    <div id="header-container"></div>
-    <div id="main-container">
-        <% ideas.forEach(idea => { %>
-            <div>
-                <h3><%= idea.title %></h3>
-                <p><%= idea.description %></p>
-                <ul>
-                    <% idea.plants.forEach(plant => { %>
-                        <li><%= plant %></li>
-                    <% }) %>
-                </ul>
-            </div>
-        <% }) %>
+    <h1>This is the ideas page</h1>
+    <div id="header-container">
+
     </div>
-    <button id="backToTheTop">TOP</button>
+    <div id="main-container">
+        
+    </div>
+    <form action="/" method="get">
+        <button type="submit">Go back to main page</button>
+    </form>
 </body>
 </html>

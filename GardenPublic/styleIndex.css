@@ -1,4 +1,4 @@
-:root{
+        :root{
             --header-primary: #3f5231;
             --header-secondary:#658147;
             --header-third:#b1c599;
@@ -24,50 +24,70 @@
             background-color: #e7ece5;
         }
         #main-title{
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: monospace;
             color: var(--header-border);
-            font-size: 32pt;
+            font-size: 40pt;
             text-align: center;
         }
         #header-container{
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: monospace;
             display: flex;
             flex-direction: row;
-            width: 85%;
+            width: 100%;
             margin: auto;
         }
         #headerContent{
-            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 15px;
+            width: 250px;
+            height: 30px;
+        }
+        #headerContentButton{
+            font-family: monospace;
+            font-size: 14pt;
+            color: var(--header-third);
+            text-decoration: none;
+            background-color: var(--header-primary);
+            border-radius: 25px;
+            border: none;
+            text-align: center;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+        }
+        #headerContentRollDown{
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 15px;
+            width: 250px;
+            height: 30px;
+            font-family: monospace;
             font-size: 12pt;
             color: var(--header-third);
             text-decoration: none;
             background-color: var(--header-primary);
-            border-bottom: 8px solid var(--header-secondary);
             border-radius: 25px;
+            border: none;
             text-align: center;
             margin: auto;
-            margin-left: 10px;
-            margin-right: 10px;
-            padding: 15px;
-            width: 350px;
-            height: 15px;
         }
-        #headerContent:hover{
-            font-family: Arial, Helvetica, sans-serif;
+        #headerContentButton:hover{
             color: var(--header-primary);
             background-color: var(--header-third);
             font-weight: bold;
         }
-        #headerContent:active{
-            font-family: Arial, Helvetica, sans-serif;
+        #headerContentButton:active{
             border: none;
         }
         #recentProjects-container,#weather-container{
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: monospace;
+            font-size: 14pt;
             margin: auto;
             margin-top: 100px;
-            border: 5px dotted var(--header-primary);
+            border: 2px dotted var(--header-primary);
             border-radius: 20px;
             width: 95%;
             height: 60%;
+            padding: 20px;
         }

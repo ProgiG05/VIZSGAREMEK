@@ -9,17 +9,27 @@
 <body>
     <h1 id="main-title">WELCOME BACK!</h1>
     <div id="header-container">
-        <a id="headerContent" href="./newGarden.ejs">New Garden</a>  
-        <!-- bulding a new garden/ starting a new garden layout -->
-        <a id="headerContent" href="./myGardens.ejs">My gardens</a>
-        <!-- listing the user's garden layouts (projects)-->
-        <a id="headerContent" href="./savedPlants.ejs">Saved Plants</a>
-        <!-- a library to showcase the saved plants -->
-        <a id="headerContent" href="./ideas.ejs">Ideas</a>
-        <!-- a scrolling feed, kinda like pinterest, to spark up new ideas for the user -->
-        <a id="headerContent" href="./knowledge.ejs">Knowledge</a>
-        <!-- a knowledge page, interesting facts about different types of gardens. for example: ,space gardening, gardening in Antarctica, gardening in the desert -->
-        <select name="settings" id="headerContent">
+        <form id="headerContent" action="/newGardens" method="get">
+            <button id="headerContentButton" type="submit">New Garden</button>
+            <!-- bulding a new garden/ starting a new garden layout -->
+        </form>  
+        <form id="headerContent" action="/myGardens" method="get">
+            <button id="headerContentButton" type="submit">My gardens</button>
+            <!-- listing the user's garden layouts (projects)-->
+        </form>
+        <form id="headerContent" action="/savedPlants" method="get">
+            <button id="headerContentButton" type="submit">Saved Plants</button>
+            <!-- a library to showcase the saved plants -->
+        </form>
+        <form id="headerContent" action="/ideas" method="get">
+            <button id="headerContentButton" type="submit">Ideas</button>
+            <!-- a scrolling feed, kinda like pinterest, to spark up new ideas for the user -->
+        </form>
+        <form id="headerContent" action="/knowledges" method="get">
+            <button id="headerContentButton" type="submit">Knowledge</button>
+            <!-- a knowledge page, interesting facts about different types of gardens. for example: ,space gardening, gardening in Antarctica, gardening in the desert -->
+        </form>      
+        <select name="settings" id="headerContentRollDown">
             <option value="cover">Settings</option>
             <option value="Account">Account</option>
             <option value="Language">Language</option>
@@ -27,7 +37,7 @@
             <option value="Sign-out">Sign out</option>
         </select>
     </div>
-    <div id="recentProjects-container"><img src="../GardenPublic/placeholder1.png" alt=""></div>
-    <div id="weather-container"><img src="../GardenPublic/placeholder2.png" alt=""></div>
+    <div id="recentProjects-container">Here will be the recent projects data</div>
+    <div id="weather-container">Here will be the weather</div>
 </body>
 </html>
