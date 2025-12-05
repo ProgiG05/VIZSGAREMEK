@@ -8,14 +8,10 @@ app.use(express.static('GardenPublic'))
 app.use(express.urlencoded({extended:true}))
 
 app.use('/',GardenRoutes)
-app.use('/',GardenRoutes)
-// app.use('/addProject',GardenRoutes)
-// app.use('/removeProject',GardenRoutes)
-// app.use('/addLifestyle',GardenRoutes)
-// app.use('/addPlant',GardenRoutes)
-// app.use('/removePlant',GardenRoutes)
-// app.use('/addWork',GardenRoutes)
-// app.use('/removeWork',GardenRoutes)
+
+app.use('/ideas/showDataIdeas',GardenRoutes)
+app.use('/ideas/api', (req,res) => {res.render("ideas")})
+app.use('/knowledges/api', (req,res) => {res.render("knowledges")})
 
 app.listen(3000, () => {
     console.log('Server running http://localhost:3000')

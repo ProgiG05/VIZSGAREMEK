@@ -10,10 +10,8 @@ router.get('/savedPlants', GardenController.showSavedPlantsPage)
 router.get('/ideas', GardenController.showIdeasPage)
 router.get('/knowledges', GardenController.showKnowledgesPage)
 
-
-// router.get('/showSavedPlantsData', GardenController.showSavedPlantsData)
-// router.get('/showIdeasData',GardenController.showIdeasData)
-// router.get('/showKnowledgesData',GardenController.showKnowledgesData)
+router.get('/ideas/showIdeasData',GardenController.GetAllIdeas)
+router.get('/knowledges/showKnowledgesData',GardenController.GetAllKnowledges)
 
 
 module.exports = router

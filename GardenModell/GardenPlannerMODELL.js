@@ -1,36 +1,21 @@
-// create an API to access the database 
-
-//fetch with the created API
-
-//process the data fetched from the database
-
-const {createPool} = require("mysql")
-const pool = createPool({
+const mysql = require("mysql2")
+const connection = createPool({
     host:"localhost",
     user:"root",
     password:"",
-    database:"ideasandknowledgestestingdb",
-    connectionLimit:10
+    database:"ideasandknowledgestestingdb"
 })
 
-const queryOne = `select * from ideas`
-const queryTwo = `select * from knowledge`
+const queryOne = `SELECT * FROM ideas`
+const queryTwo = `SELECT * FROM knowledge`
 
-pool.query(queryOne, (err,result) => {
-    if (err) {
-        return console.log(err)
+module.exports = {
+    GetAllIdeas: async function GetAllIdeas() {
+        const [rows] = await connection.query(queryOne)
+        return rows
+    },
+    GetAllKnowledges : async function GetAllKnowledges() {
+        const [rows] = await connection.query(queryTwo)
+        return rows
     }
-    else{
-        return console.log(result)
-    }
-})
-pool.query(queryTwo, (err,result) => {
-    if (err) {
-        return console.log(err)
-    }
-    else{
-        return console.log(result)
-    }
-})
-
-module.exports = pool
+}
