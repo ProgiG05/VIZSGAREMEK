@@ -13,19 +13,19 @@ exports.showMyGardensPage = (req,res) => {
 exports.showSavedPlantsPage = (req,res) => {
     res.render("savedPlants", {})
 }
-exports.showIdeasPage = (req,res) => {
-    res.render("ideas", {})
-}
-exports.showKnowledgesPage = (req,res) => {
-    res.render("knowledge", {})
-}
+// exports.showIdeasPage = (req,res) => {
+//     res.render("ideas", {})
+// }
+// exports.showKnowledgesPage = (req,res) => {
+//     res.render("knowledges", {})
+// }
 
 //showing the ideas and knowledges on their pages
 exports.GetAllIdeas = async (req,res) => {
-    const IdeasData = GardenModel.GetAllIdeas()
+    const IdeasData = await GardenModel.GetAllIdeas()
     res.json(IdeasData)
 }
 exports.GetAllKnowledges = async (req,res) => {
-    const KnowledgesData = GardenModel.GetAllKnowledges()
+    const KnowledgesData = await GardenModel.GetAllKnowledges()
     res.json(KnowledgesData)
 }

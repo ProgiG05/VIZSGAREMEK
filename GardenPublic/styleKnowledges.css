@@ -1,0 +1,36 @@
+:root{
+    --general-config:white;
+    --container-config:white;
+    --onecard-bg-primary:white;
+    --onecard-font-primary:rgb(0, 0, 0);
+    --onecard-bg-secondary:white;
+    --onecard-font-secondary:rgb(0, 0, 0);
+}
+/* ######################################################## */
+#main-title{
+    background-color: var(--general-config);
+}
+#header-container{
+    background-color: var(--general-config);
+}
+/* ######################################################## */
+#main-container-knowledges{
+    background-color: var(--container-config);
+}
+.OneKnowledgeCard{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+}
+.OneKnowledgeCard:hover{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+}
+.OneKnowledgeTitle{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+}
+.OneKnowledgeDescription{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+}
+/* ######################################################## */
