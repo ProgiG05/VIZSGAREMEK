@@ -11,11 +11,10 @@ app.use(express.static('GardenPublic'))
 app.use(express.urlencoded({extended:true}))
 
 app.use('/',GardenRoutes)
-
 app.use('/ideas/api',GardenRoutes)
 app.use('/ideas/showIdeasData/all', (req,res) => {res.render("ideas")})
-app.use('/knowledges/api',GardenRoutes)
-app.use('/knowledges/showKnowledgesData/all', (req,res) => {res.render("knowledges")})
+app.use('/api',GardenRoutes)
+app.use('/showKnowledgesData/all', (req,res) => {res.render("knowledges")})
 
 app.listen(3000, () => {
     console.log('Server running http://localhost:3000')

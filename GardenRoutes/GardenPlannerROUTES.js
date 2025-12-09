@@ -8,6 +8,6 @@ router.get('/myGardens', GardenController.showMyGardensPage)
 router.get('/savedPlants', GardenController.showSavedPlantsPage)
 
 router.get('/ideas/showIdeasData/all', GardenController.GetAllIdeas)
-router.get('/knowledges/showKnowledgesData/all', GardenController.GetAllKnowledges)
+router.get('/showKnowledgesData/all', GardenController.GetAllKnowledges)
 
 module.exports = router

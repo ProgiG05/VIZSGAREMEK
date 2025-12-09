@@ -1,0 +1,110 @@
+:root{
+    --body-bg-color:#0d313a;
+    --general-config:white;
+    --container-config:white;
+    --onecard-bg-primary:#477c63;
+    --onecard-font-primary:rgb(205, 243, 240);
+    --onecard-bg-secondary:#477c63;
+    --onecard-font-secondary:rgb(0, 0, 0);
+}
+/* ######################################################## */
+body{
+    background-color: var(--body-bg-color);
+    font-family: monospace;
+}
+#main-title{
+    color: var(--general-config);
+    font-size: 40pt;
+    text-align: center;
+    letter-spacing: 10px;
+    font-weight: bolder;
+    margin-bottom: -20px;
+}
+#sub-title{
+    color: var(--general-config);
+    font-size: 14pt;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+#header-container{
+    width: 70%;
+}
+#gobacktohompage-btn{
+    background-color: var(--general-config);
+    width: 50px;
+    height: 50px;
+    border: none;
+    padding: 10px;
+    margin-top: 700px;
+    margin-left: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    float: left;
+    position:fixed;
+}
+#goup-btn{
+    background-color: var(--general-config);
+    width: 50px;
+    height: 50px;
+    border: none;
+    padding: 10px;
+    margin-top: 700px;
+    margin-left: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    float: right;
+    position:fixed;
+}
+#gobacktohompage-btn img{
+    width: 100%;
+    height: 100%;
+}
+#goup-btn img{
+    width: 100%;
+    height: 100%;
+}
+#gobacktohompage-btn:active, #goup-btn:active{
+    transform: scale(0.9);
+}
+/* ################################################################################## */
+#main-container-knowledges{
+    width: 50%;
+    margin: auto;
+}
+.OneKnowledgeCard{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+    padding: 20px;
+    margin-bottom: 50px;
+    border-radius: 30px;
+}
+.OneKnowledgeCard:hover{
+    background-color: var(--onecard-bg-secondary);
+    /* filter: blur(5px); */
+    box-shadow: 5px 5px 5px 5px rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    
+}
+.OneKnowledgeTitle{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+    margin-bottom: 30px;
+    font-size: 18pt;
+    letter-spacing: 5px;
+}
+.OneKnowledgeDescription{
+    background-color: var(--onecard-bg-primary);
+    color: var(--onecard-font-primary);
+    padding-bottom: 10px;
+    line-height: 20px;
+    font-size: 12pt;
+}
+/* ################################################################################## */
+@media (max-width: 768px) {
+    #main-container-knowledges{
+        width: 90%;
+    }
+}/* ################################################################################## */
