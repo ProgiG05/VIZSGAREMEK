@@ -17,12 +17,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         OneKnowledgeCard.appendChild(OneKnowledgeDescription)
 
         KnowledgesCardContainer.appendChild(OneKnowledgeCard)
-
-        // KnowledgesCardContainer.innerHTML += 
-        // `<div class="OneKnowledgeCard">
-        //     <h2 class="OneKnowledgeTitle">${knowledge.title}</h2>
-        //     <p class="OneKnowledgeDescription">${knowledge.description}</p>
-        // </div>`
     });
 })
 

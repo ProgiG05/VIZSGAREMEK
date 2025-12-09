@@ -13,12 +13,12 @@ exports.showMyGardensPage = (req,res) => {
 exports.showSavedPlantsPage = (req,res) => {
     res.render("savedPlants", {})
 }
-// exports.showIdeasPage = (req,res) => {
-//     res.render("ideas", {})
-// }
-// exports.showKnowledgesPage = (req,res) => {
-//     res.render("knowledges", {})
-// }
+exports.showIdeasPage = (req,res) => {
+    res.render("ideas", {})
+}
+exports.showKnowledgesPage = (req,res) => {
+    res.render("knowledges", {})
+}
 
 //showing the ideas and knowledges on their pages
 exports.GetAllIdeas = async (req,res) => {
