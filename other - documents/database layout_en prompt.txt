@@ -1,0 +1,99 @@
+Create a database with the following instructions:
+Name of the database: SproutifiedDB
+Please paste the mysql code
+Please insert 10 entries into each table except for the savedPlants and the savedWorks
+And please fix potential referencing issues
+without commenting into the sql file
+
+First table:
+name: "users"
+contents:
+- id (as primary key)
+- garden_id (as foreign key to the "gardens" table)
+- savedPlants_id (as a foreign key to the "savedPlants" table)
+- username
+- password
+
+Second table:
+name: "savedPlants"
+contents:
+- id (as primary key)
+- user_id (as foreign key to the "users" table)
+- plant_id (as foreign key to the "plants" table)
+- isSaved (true or false)
+- name (name of the plant for example: apple, potato, lemon, mint etc.)
+- type (for example: fruits, vegetables, crops, exotic, herbs etc.)
+- water (low / medium / high) (as in how much water a plant needs)
+- sunlight (low / moderate / high (as in how much sunlight a plant needs))
+- soil (low / moderate / high) (as in how nutritious should the soil be for the plant)
+- planting (list of the planting months)
+- harvesting (list of the harvesting months)
+
+Third table:
+name: "gardens"
+contents:
+- id (as primary key)
+- user_id (as foreign key to the "users" table)
+- plant_id (as foreign key to the "plants" table)
+- size (in square meters)
+
+Fourth table:
+name: "plants"
+contents:
+- id (as primary key)
+- user_id (as foreign key to the "users" table)
+- plant_id (as foreign key to the "plants" table)
+- commonName (the common name of the plant for example: apple, potato, lemon, mint etc.)
+- botanicalName (the botanical name of the plant)
+- type (for example: fruits, vegetables, crops, exotic, herbs etc.)
+- water (low / medium / high) (as in how much water a plant needs)
+- sunlight (low / moderate / high (as in how much sunlight a plant needs))
+- soil (low / moderate / high) (as in how nutritious should the soil be for the plant)
+- planting (list of the planting months)
+- harvesting (list of the harvesting months)
+
+Fifth table:
+name: "works"
+contents:
+- id (as primary key)
+- user_id (as foreign key to the "users" table)
+- garden_id (as foreign key to the "gardens" table)
+- type (planting, harvesting, watering, weeding, chemical spraying)
+
+Sixth table:
+name: "savedWorks"
+contents:
+- id (as primary key)
+- user_id (as foreign key to the "users" table)
+- garden_id (as foreign key to the "gardens" table)
+- isSaved (true or false)
+- type (planting, harvesting, watering, weeding, chemical spraying)
+
+Seventh table:
+name: "knowledges"
+contents:
+- id (as primary key)
+- title (the title of the garden type or gardening style)
+- description (description of the garden type or gardening style)
+
+Eighth table:
+name "ideas"
+contents:
+- id (as primary key)
+- title (the title of the garden idea)
+- plants (list of the plants of the garden idea (max. 5 plants))
+- sunlight (low / moderate / high (as in how much sunlight the plants need, collectively))
+- water (low / medium / high) (as in how much water the plants need, collectively)
+- maintenance (low / average / high) (as in how much work is needed to upkeep the garden)
+
+additions:
+one user can posess multiple gardens
+one garden can posess multiple plants
+one garden can posess multiple works
+
+fill in each table below with 50 different data:
+tablename: "plants"
+tablename: "works"
+tablename: "knowledge"
+tablename: "ideas"
+

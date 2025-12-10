@@ -1,0 +1,10 @@
+git init (initializing a git repo in the current dir)
+git add . (adding everything to the git repo)
+git commit -m "message" (saving your work to the git repo)
+git log (checking when and what you've commited)
+git checkout "the hash code thingy from the logs"
+git remote add origin https://github.com/ProgiG05/VIZSGAREMEK.git (adding a remote git repo)
+git config --get remote.origin.url
+git push -u origin master (master can be different branch)
+git checkout -b "the name of the new branch"
+git pull origin master (master can be different branch)
