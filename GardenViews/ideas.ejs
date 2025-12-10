@@ -3,14 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideas to build different types of gardens</title>
+    <title>Sproutified</title>
     <link rel="stylesheet" href="/styles/styleIdeas.css">
+    <link rel="shortcut icon" href="/pics/plant.png" type="image/x-icon">
 </head>
 <body>
-    <h1 id="main-title">This is the ideas page</h1>
+    <h1 id="main-title">Headquarter of Ideas</h1>
+    <h6 id="sub-title">Here you'll find different garden layout ideas</h6>
     <div id="header-container">
         <form action="/" method="get">
-            <button type="submit">Go back to main page</button>
+            <button id="gobacktohompage-btn" type="submit"><img src="/pics/home.png" alt="home"></button>
+        </form>
+        <!--by hovering it explaines in a liitle textbox what do the options mean (etc.: high water: 500ml/day)-->
+        <form id="sunlight-filtering-station" action="" method="get">
+            <select name="filteringBySunlight" id="sunlightFilter">
+                <option value="high">High</option>
+                <option value="moderate">Moderate</option>
+                <option value="low">Low</option>
+            </select>
+        </form>
+        <form id="water-filtering-station" action="" method="get">
+            <select name="filteringByWater" id="waterFilter">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </form>
+        <form id="maintenance-filtering-station" action="" method="get">
+            <select name="filteringByMaintenance" id="maintenanceFilter">
+                <option value="high">High</option>
+                <option value="average">Average</option>
+                <option value="low">Low</option>
+            </select>
         </form>
     </div>
     <div id="main-container-ideas"></div>

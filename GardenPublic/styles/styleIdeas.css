@@ -1,29 +1,68 @@
 :root{
-    --general-config:white;
+    --general-font-config:rgb(10, 26, 32);
     --container-config:white;
-    --onecard-bg-primary:white;
-    --onecard-font-primary:rgb(0, 0, 0);
-    --onecard-bg-secondary:white;
-    --onecard-font-secondary:rgb(0, 0, 0);
+    --onecard-bg-primary:rgb(14, 50, 56);
+    --onecard-font-primary:rgb(163, 213, 228);
+    --onecard-bg-secondary:rgb(163, 213, 228);
+    --onecard-font-secondary:rgb(14, 50, 56);
 }
 /* ######################################################## */
+body{
+    background-color: rgb(126, 181, 189);
+    font-family: monospace;
+}
 #main-title{
-    background-color: var(--general-config);
+    color: var(--general-font-config);
+    font-size: 40pt;
+    text-align: center;
+    letter-spacing: 10px;
+    font-weight: bolder;
+    margin-bottom: -20px;
+}
+#sub-title{
+    color: var(--general-font-config);
+    font-size: 14pt;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 30px;
 }
 #header-container{
+    width: 70%;
+}
+#gobacktohompage-btn{
     background-color: var(--general-config);
+    width: 50px;
+    height: 50px;
+    border: none;
+    padding: 10px;
+    margin-top: 700px;
+    margin-left: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    float: left;
+    position:fixed;
 }
 /* ######################################################## */
 #main-container-ideas{
     background-color: var(--container-config);
+    margin: auto;
+    width: 80%;
 }
 .OneIdeaCard{
     background-color: var(--onecard-bg-primary);
     color: var(--onecard-font-primary);
+    width: 30%;
+    padding: 10px;
+    margin:15px;
+    border-radius: 20px;
 }
 .OneIdeaCard:hover{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
+    background-color: var(--onecard-bg-secondary);
+    color: var(--onecard-font-secondary);
+    box-shadow: 5px 5px 5px 5px rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 .OneIdeaTitle{
     background-color: var(--onecard-bg-primary);

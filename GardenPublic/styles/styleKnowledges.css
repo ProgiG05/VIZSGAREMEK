@@ -86,7 +86,6 @@ body{
     transform: scale(1.05);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    
 }
 .OneKnowledgeTitle{
     background-color: var(--onecard-bg-primary);

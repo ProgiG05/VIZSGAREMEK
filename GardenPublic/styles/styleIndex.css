@@ -55,6 +55,16 @@
             height: 100%;
             letter-spacing: 5px;
         }
+        #headerContentButton:hover{
+            color: var(--header-primary);
+            background-color: var(--header-third);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #headerContentButton:active{
+            transform: scale(0.95);
+            transition: 0.2s;
+        }
         #headerContentRollDown{
             background-color: var(--header-primary);
             display: flex;
@@ -82,6 +92,11 @@
             width: 30px;
             height: 30px;
         }
+        #openSideBar img:active{
+            animation-name: RotateSettingsIcon;
+            animation-duration: 0.3s;
+            animation-timing-function: linear;
+        }
         #account-btn,#language-btn,#dark-mode-btn,#log-out-btn,#closeSideBar{
             width: 50px;
             height: 50px;
@@ -96,14 +111,6 @@
             transform: scale(0.9);
             transition: 0.3s;
         }
-        #headerContentButton:hover{
-            color: var(--header-primary);
-            background-color: var(--header-third);
-            font-weight: bold;
-        }
-        #headerContentButton:active{
-            border: none;
-        }
         #recentProjects-container,#weather-container{
             font-size: 14pt;
             margin: auto;
@@ -114,4 +121,16 @@
             height: 60%;
             padding: 20px;
             text-align: center;
+        }
+        @keyframes RotateSettingsIcon{
+            from { transform: rotateZ(0deg);}
+            to {transform: rotateZ(180deg);}
+        }
+        @keyframes RollingDown {
+            from { height: 0px;}
+            to {height: 360px;}
+        }
+        @keyframes RollingUp {
+            from { height: 360px;}
+            to {height: 0px;}
         }
