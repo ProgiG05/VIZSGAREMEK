@@ -5,25 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sproutified</title>
     <link rel="stylesheet" href="/styles/styleIdeas.css">
-    <link rel="shortcut icon" href="/pics/plant.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
 </head>
 <body>
     <h1 id="main-title">Headquarter of Ideas</h1>
     <h6 id="sub-title">Here you'll find different garden layout ideas</h6>
+    <form action="/" method="get">
+        <button id="gobacktohompage-btn" type="submit"><img src="./pics/home.png" alt="home"></button>
+    </form>
+    <button id="goup-btn" type="submit"><img src="./pics/arrow_upward.png" alt="top button"></button>
     <div id="header-container">
-        <form action="/" method="get">
-            <button id="gobacktohompage-btn" type="submit"><img src="/pics/home.png" alt="home"></button>
-        </form>
-        <!--by hovering it explaines in a liitle textbox what do the options mean (etc.: high water: 500ml/day)-->
         <form id="sunlight-filtering-station" action="" method="get">
             <select name="filteringBySunlight" id="sunlightFilter">
-                <option value="high">High</option>
-                <option value="moderate">Moderate</option>
-                <option value="low">Low</option>
+                <option value="cover">Sunlight</option>
+                <option name="sunlightMod" value="high">High</option>
+                <option name="sunlightMod" value="moderate">Moderate</option>
+                <option name="sunlightMod" value="low">Low</option>
             </select>
         </form>
         <form id="water-filtering-station" action="" method="get">
             <select name="filteringByWater" id="waterFilter">
+                <option value="cover">Water</option>
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
@@ -31,13 +33,113 @@
         </form>
         <form id="maintenance-filtering-station" action="" method="get">
             <select name="filteringByMaintenance" id="maintenanceFilter">
+                <option value="cover">Maintenance</option>
                 <option value="high">High</option>
                 <option value="average">Average</option>
                 <option value="low">Low</option>
             </select>
         </form>
     </div>
-    <div id="main-container-ideas"></div>
-    <script src="/mains/mainIdeas.js"></script>
+    <div id="main-container-ideas">
+        <!-- Ez mind csak tezt adat -->
+        <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+        <div id="left-container">
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Herbal Kitchen Box</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>basil, thyme, oregano, parsley, chives</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> moderate</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> low</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Balcony Berry Wall</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>strawberries, blueberries, raspberries, goji berries, currants</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> high</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> average</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Tropical Patio Garden</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>pineapple, banana, papaya, lemongrass, taro</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> high</li>
+                    <li class="detailsListItem"><b>Water:</b> high</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> average</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Mediterranean Herb Corner</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>rosemary, sage, lavender, oregano, thyme</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> high</li>
+                    <li class="detailsListItem"><b>Water:</b> low</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> low</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Salad Bowl Planter</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>lettuce, spinach, arugula, kale, chives</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> moderate</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> low</li>
+                </ul>
+            </div>
+        </div>
+        <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+        <div id="right-container">
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Urban Vegetable Crate</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>tomatoes, peppers, eggplant, basil, celery</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> high</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> average</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Rooftop Tomato Rack</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>cherry tomato, roma tomato, basil, oregano, parsley</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> high</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> high</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Desert-Friendly Edible Bed</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>figs, chili peppers, rosemary, dates, oregano</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> high</li>
+                    <li class="detailsListItem"><b>Water:</b> low</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> average</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Cold-Season Root Box</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>carrots, beets, radishes, turnips, parsnips</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> moderate</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> low</li>
+                </ul>
+            </div>
+            <div class="OneIdeaCard">
+                <h2 class="OneIdeaTitle">Indoor LED Microgarden</h2>
+                <p class="OneIdeaPlants"><strong>Plants: </strong>microgreens, lettuce, basil, mint, chives</p>
+                <ul class="detailsList">
+                    <li class="detailsListItem"><b>Sunlight:</b> low</li>
+                    <li class="detailsListItem"><b>Water:</b> medium</li>
+                    <li class="detailsListItem"><b>Maintenance:</b> low</li>
+                </ul>
+            </div>
+        </div>
+        <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+    </div>
+    <script src="./mains/mainIdeas.js"></script>
 </body>
-</html>
+</html> 

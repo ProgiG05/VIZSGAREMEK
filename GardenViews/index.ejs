@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="/pics/plant.png" type="image/x-icon">
 </head>
 <body>
-    <h1 id="main-title">WELCOME BACK!</h1>
     <div id="header-container">
         <form id="headerContent" action="/newGardens" method="get">
             <button id="headerContentButton" type="submit">New Garden</button>
@@ -32,14 +31,15 @@
         </form>
         <button id="openSideBar"><img src="/pics/settings_25dp_FFFFFF.png" alt=""></button>
     </div>
-        <form id="headerContentRollDown">
-            <button id="closeSideBar"><img src="/pics/close.png" alt="close"></button>
-            <button id="language-btn" type="submit"><img src="/pics/translate.png" alt="language"></button>
-            <!-- the language should be a selection with multiple languages -->
-            <button id="dark-mode-btn" type="submit"><img src="/pics/dark_mode.png" alt="dark_mode"></button>
-            <button id="account-btn" type="submit"><img src="/pics/account.png" alt="account"></button>
-            <button id="log-out-btn" type="submit"><img src="/pics/logout.png" alt="logout"></button>
-        </form>
+    <h1 id="main-title">WELCOME BACK!</h1>
+    <form id="headerContentRollDown">
+        <button id="closeSideBar"><img src="/pics/close.png" alt="close"></button>
+        <button id="language-btn" type="submit"><img src="/pics/translate.png" alt="language"></button>
+        <!-- the language should be a selection with multiple languages -->
+        <button id="dark-mode-btn" type="submit"><img src="/pics/dark_mode.png" alt="dark_mode"></button>
+        <button id="account-btn" type="submit"><img src="/pics/account.png" alt="account"></button>
+        <button id="log-out-btn" type="submit"><img src="/pics/logout.png" alt="logout"></button>
+    </form>
     <div id="recentProjects-container">Here will be the recent projects data</div>
     <div id="weather-container">Here will be the weather</div>
     <script src="./mains/mainIndex.js"></script>

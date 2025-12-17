@@ -49,3 +49,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         IdeasCardContainer.appendChild(OneIdeaCard)
     });
 })
+document.getElementById("goup-btn").addEventListener("click", () =>{
+    window.scrollTo({top:0, behavior:"smooth"})
+})
+document.querySelectorAll(".detailsListItem").forEach(item => {
+    item.addEventListener("click", () => {
+        item.classList.toggle("active")
+    })
+})
+document.getElementById('sunlightFilter').addEventListener('change', function() {
+    const selectedValue = this.value;
+    const cards = document.querySelectorAll('.OneIdeaCard');
+                
+    cards.forEach(card => {
+    const sunlight = card.querySelector('.detailsListItem').textContent.toLowerCase();
+                    
+    if (selectedValue === 'cover') {
+        card.parentElement.style.display = 'block';
+    } else if (sunlight.includes(selectedValue)) {
+        card.parentElement.style.display = 'block';
+    } else {
+        card.parentElement.style.display = 'none';
+    }
+    });
+});
+
+// Apply same logic for water and maintenance filters
+document.getElementById('waterFilter').addEventListener('change', function() {
+    filterByAttribute(this.value, 1);
+});
+
+document.getElementById('maintenanceFilter').addEventListener('change', function() {
+    filterByAttribute(this.value, 2);
+});
+
+function filterByAttribute(value, index) {
+    const cards = document.querySelectorAll('.OneIdeaCard');
+    cards.forEach(card => {
+        const items = card.querySelectorAll('.detailsListItem');
+        const attr = items[index].textContent.toLowerCase();
+                    
+        if (value === 'cover') {
+            card.parentElement.style.display = 'block';
+        } else if (attr.includes(value)) {
+            card.parentElement.style.display = 'block';
+        } else {
+            card.parentElement.style.display = 'none';
+        }
+    });
+}

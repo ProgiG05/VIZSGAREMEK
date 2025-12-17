@@ -9,12 +9,10 @@ const connection = mysql.createPool({
 module.exports = {
     GetAllIdeas: async function GetAllIdeas() {
         const [rows] = await connection.query(`SELECT * FROM ideas`)
-        console.log(rows)
         return rows
     },
     GetAllKnowledges : async function GetAllKnowledges() {
         const [rows] = await connection.query(`SELECT * FROM knowledge`)
-        console.log(rows)
         return rows
     }
 }
