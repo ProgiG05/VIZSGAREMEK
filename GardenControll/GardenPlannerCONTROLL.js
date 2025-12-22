@@ -1,8 +1,5 @@
 const GardenModel = require('../GardenModell/GardenPlannerMODELL')
 
-exports.showMainPage = (req,res) => {
-    res.render("index", {})
-}
 exports.showMyGardensPage = (req,res) => {
     res.render("myGardens", {})
 }

@@ -10,8 +10,7 @@ app.set("views","./GardenViews")
 app.use(express.static('GardenPublic'))
 app.use(express.urlencoded({extended:true}))
 
-app.use('/',GardenRoutes)
-// app.use('/api',GardenRoutes)
+app.use('/',GardenRoutes, (req,res) => {res.render("index")})
 
 app.use('/showIdeasPage',(req,res) => {res.render("ideas")})
 app.use('/showIdeasData/all', GardenRoutes)
