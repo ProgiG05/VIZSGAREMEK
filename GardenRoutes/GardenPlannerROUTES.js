@@ -3,10 +3,10 @@ const GardenController = require("../GardenControll/GardenPlannerCONTROLL")
 const router = express.Router()
 
 router.get('/', GardenController.showMainPage)
-router.get('/newGardens', GardenController.showNewGardensPage)
-router.get('/myGardens', GardenController.showMyGardensPage)
-router.get('/savedPlants', GardenController.showSavedPlantsPage)
+router.get('/showMyGardens', GardenController.showMyGardensPage)
 
+router.get('/api/showMySavedPlants/all',GardenController.GetMySavedPlants)
+router.get('/api/showPlantFinder', GardenController.showPlantFinder)
 router.get('/showIdeasData/all', GardenController.GetAllIdeas)
 router.get('/showKnowledgesData/all', GardenController.GetAllKnowledges)
 

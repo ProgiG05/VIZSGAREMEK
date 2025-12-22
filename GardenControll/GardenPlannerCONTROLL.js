@@ -1,23 +1,22 @@
 const GardenModel = require('../GardenModell/GardenPlannerMODELL')
 
-//showing all the pages
 exports.showMainPage = (req,res) => {
     res.render("index", {})
-}
-exports.showNewGardensPage = (req,res) => {
-    res.render("newGarden", {})
 }
 exports.showMyGardensPage = (req,res) => {
     res.render("myGardens", {})
 }
-exports.showSavedPlantsPage = (req,res) => {
-    res.render("savedPlants", {})
-}
+
+//showing all the pages
+
 exports.showIdeasPage = (req,res) => {
     res.render("ideas", {})
 }
 exports.showKnowledgesPage = (req,res) => {
     res.render("knowledges", {})
+}
+exports.showMySavedPlantsPage = (req,res) => {
+    res.render("savedPlants", {})
 }
 
 //showing the ideas and knowledges on their pages
@@ -28,4 +27,12 @@ exports.GetAllIdeas = async (req,res) => {
 exports.GetAllKnowledges = async (req,res) => {
     const KnowledgesData = await GardenModel.GetAllKnowledges()
     res.json(KnowledgesData)
+}
+exports.GetMySavedPlants = async (req,res) => {
+    const savedPlantsData = await GardenModel.GetMySavedPlants()
+    res.json(savedPlantsData)
+}
+exports.showPlantFinder = async (req,res) => {
+    const plantData = await GardenModel.GetSearchedPlantDetails()
+    res.json(plantData)
 }

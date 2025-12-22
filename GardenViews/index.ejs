@@ -3,45 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sproutified</title>
+    <title>Sproutified | Modern Gardening</title>
     <link rel="stylesheet" href="/styles/styleIndex.css">
-    <link rel="shortcut icon" href="/pics/plant.png" type="image/x-icon">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div id="header-container">
-        <form id="headerContent" action="/newGardens" method="get">
-            <button id="headerContentButton" type="submit">New Garden</button>
-            <!-- bulding a new garden/ starting a new garden layout -->
-        </form>  
-        <form id="headerContent" action="/myGardens" method="get">
-            <button id="headerContentButton" type="submit">My gardens</button>
-            <!-- listing the user's garden layouts (projects)-->
-        </form>
-        <form id="headerContent" action="/savedPlants" method="get">
-            <button id="headerContentButton" type="submit">Saved Plants</button>
-            <!-- a library to showcase the saved plants -->
-        </form>
-        <form id="headerContent" action="/showIdeasPage" method="get">
-            <button id="headerContentButton" type="submit">Ideas</button>
-            <!-- a scrolling feed, kinda like pinterest, to spark up new ideas for the user -->
-        </form>
-        <form id="headerContent" action="/showKnowledgesPage" method="get">
-            <button id="headerContentButton" type="submit">Knowledge</button>
-            <!-- a knowledge page, interesting facts about different types of gardens. for example: ,space gardening, gardening in Antarctica, gardening in the desert -->
-        </form>
-        <button id="openSideBar"><img src="/pics/settings_25dp_FFFFFF.png" alt=""></button>
-    </div>
-    <h1 id="main-title">WELCOME BACK!</h1>
-    <form id="headerContentRollDown">
-        <button id="closeSideBar"><img src="/pics/close.png" alt="close"></button>
-        <button id="language-btn" type="submit"><img src="/pics/translate.png" alt="language"></button>
-        <!-- the language should be a selection with multiple languages -->
-        <button id="dark-mode-btn" type="submit"><img src="/pics/dark_mode.png" alt="dark_mode"></button>
-        <button id="account-btn" type="submit"><img src="/pics/account.png" alt="account"></button>
-        <button id="log-out-btn" type="submit"><img src="/pics/logout.png" alt="logout"></button>
-    </form>
-    <div id="recentProjects-container">Here will be the recent projects data</div>
-    <div id="weather-container">Here will be the weather</div>
-    <script src="./mains/mainIndex.js"></script>
+
+    <aside id="sidebar">
+        <!-- Sidebar: settings panel. Toggle with `toggleSidebar()`; appears when `#sidebar` gains the `active` class. -->
+        <div id="sidebar-header">
+            <h2>Settings</h2>
+            <button id="close-sidebar" onclick="toggleSidebar()"><i data-lucide="x"></i></button>
+        </div>
+        
+        <!-- Language control: `#lang-switch` select changes UI strings via JS listener in mainIndex.js -->
+        <div id="language-control">
+            <label><i data-lucide="languages"></i> Language / Nyelv</label>
+            <select id="lang-switch">
+                <option value="en">English</option>
+                <option value="hu">Magyar</option>
+            </select>
+        </div>
+
+        <!-- Account hub: quick links for saved items. `#saved-list` contains clickable entries. -->
+        <div id="account-hub">
+            <h3><i data-lucide="user"></i> My Oasis</h3>
+            <div id="saved-list">
+                <form action="/api/showMySavedPlants" method="get">
+                    <div><button type="submit" id="item-plants"><i data-lucide="leaf"></i> Saved Plants</button></div>
+                </form>
+                <form action="/api/showMyGardeningWorks" method="get">
+                    <div><button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works</button></div>
+                </form>
+                <form action="/api/showMyGardens" method="get">
+                    <div><button type="submit" id="item-layouts"><i data-lucide="grid"></i> Garden Layouts</button></div>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main container: central glass card. See `#main-container` rules in styleIndex.css -->
+    <main id="main-container">
+        <header id="main-header">
+            <div id="logo">Sprout<span>ified</span></div>
+            
+            <div id="header-widgets">
+                <div id="weather-card">
+                    <i data-lucide="cloud-sun" id="weather-icon"></i>
+                    <div id="weather-details">
+                        <span id="temp-display">21°C</span>
+                        <span id="location-display">Budapest, HU</span>
+                    </div>
+                </div>
+                <button id="theme-toggle" aria-label="Toggle theme">
+                    <i data-lucide="moon" id="theme-icon"></i>
+                </button>
+                <button id="sidebar-trigger" onclick="toggleSidebar()">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero/title block. Text is updated by the language switch listener in mainIndex.js -->
+        <section id="hero-title">
+            <h1>Botanical Dashboard</h1>
+            <p>Smart gardening simplified for the next generation.</p>
+        </section>
+
+        <!-- Top navigation grid. Each form contains a `.nav-button` styled button. -->
+        <nav id="top-nav-row">
+            <form class="nav-button-container" action="/showIdeasPage" method="get">
+                <button id="btn-ideas" class="nav-button" type="submit">
+                    <i data-lucide="sparkles"></i>
+                    <div class="btn-text"><strong>Ideas</strong><span>Inspiration Gallery</span></div>
+                </button>
+            </form>
+            <form class="nav-button-container" action="/showKnowledgesPage" method="get">
+                <button id="btn-knowledge" class="nav-button" type="submit">
+                    <i data-lucide="book-open"></i>
+                    <div class="btn-text"><strong>Knowledge</strong><span>Styles & Facts</span></div>
+                </button> 
+            </form>
+            <form class="nav-button-container" action="/newGarden" method="get">
+                <button id="btn-maker" class="nav-button" type="submit">
+                    <i data-lucide="layout-template"></i>
+                    <div class="btn-text"><strong>Garden Maker</strong><span>2D Designer</span></div>
+                </button>
+            </form>  
+        </nav>
+
+        <!-- Bottom row: Plant Finder trigger and collapsible search (`#search-container`) -->
+        <section id="bottom-nav-row">
+            <button id="plant-finder-trigger" onclick="toggleSearch()">
+                <i data-lucide="search"></i>
+                <div class="btn-text">
+                    <strong>Plant Finder</strong>
+                    <span>Search our botanical database by specific criteria</span>
+                </div>
+            </button>
+
+            <form id="search-container" action="/showPlantFinder" method="get">
+                <div id="search-fields">
+                    <!-- Search inputs: IDs are referenced by mainIndex.js when executing a search -->
+                    <input type="text" id="commonName" placeholder="Common Name (e.g. Lemon)">
+                    <input type="text" id="botanicalName" placeholder="Botanical Name">
+                    <select id="type">
+                        <option value="">Select Type</option>
+                        <option>Fruits</option><option>Vegetables</option>
+                        <option>Crops</option><option>Exotic</option><option>Herbs</option>
+                    </select>
+                    <select id="water">
+                        <option value="">Water Needs</option>
+                        <option>Low</option><option>Medium</option><option>High</option>
+                    </select>
+                    <select id="sunlight">
+                        <option value="">Sunlight</option>
+                        <option>Low</option><option>Moderate</option><option>High</option>
+                    </select>
+                    <select id="soil">
+                        <option value="">Soil Nutrition</option>
+                        <option>Low</option><option>Moderate</option><option>High</option>
+                    </select>
+                    <input type="text" id="planting" placeholder="Planting (e.g. April, May)">
+                    <input type="text" id="harvesting" placeholder="Harvesting (e.g. October)">
+                </div>
+                <!-- `#execute-search` button: handled in mainIndex.js; reads `#commonName` and other inputs. -->
+                <button type="submit" id="execute-search">Execute Botanical Search</button>
+            </form>
+        </section>
+        <div id="searchedPlant-container"></div>
+    </main>
+    <script src="/mains/mainIndex.js"></script>
 </body>
 </html>

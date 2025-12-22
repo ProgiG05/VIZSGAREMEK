@@ -11,14 +11,20 @@ app.use(express.static('GardenPublic'))
 app.use(express.urlencoded({extended:true}))
 
 app.use('/',GardenRoutes)
-app.use('/api',GardenRoutes)
+// app.use('/api',GardenRoutes)
 
 app.use('/showIdeasPage',(req,res) => {res.render("ideas")})
 app.use('/showIdeasData/all', GardenRoutes)
 
-app.use("/showKnowledgesPage",(req,res) => {res.render("knowledges")})
+app.use('/showKnowledgesPage',(req,res) => {res.render("knowledges")})
 app.use('/showKnowledgesData/all',GardenRoutes)
 
-app.listen(3000, () => {
-    console.log('Server running http://localhost:3000')
+app.use('/api/showPlantFinder',GardenRoutes)
+
+app.use('/api/showMySavedPlantsPage',(req,res) => {res.render("savedPlants")})
+app.use('/api/showMySavedPlants/all',GardenRoutes)
+
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+    console.log(`Server running http://localhost:${port}`)
 })
