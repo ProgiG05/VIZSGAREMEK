@@ -1,17 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const responseIdeas = await fetch('/api/showIdeasData/all', {
-        method: "GET",
-        headers : {"Content-Type" : "application/json"}
-    })
+    const responseIdeas = await fetch('/api/showIdeasData/all', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("main-container-ideas")
     ListOfIdeas.forEach(idea => {
-        // if (idea.id % 2 == 0) {
-        //     put the idea-card into the right container if the idea id is even
-        // }
-        // else{
-        //     put the idea-card into the left container if the idea id is odd
-        // }
 
         const OneIdeaCard = document.createElement("div")
         OneIdeaCard.setAttribute("class","OneIdeaCard")

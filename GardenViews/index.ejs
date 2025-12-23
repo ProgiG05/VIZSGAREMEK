@@ -29,13 +29,13 @@
         <div id="account-hub">
             <h3><i data-lucide="user"></i> My Oasis</h3>
             <div id="saved-list">
-                <form action="/api/showMySavedPlants" method="get">
+                <form action="/showMySavedPlantsPage" method="get">
                     <button type="submit" id="item-plants"><i data-lucide="leaf"></i> Saved Plants</button>
                 </form>
-                <form action="/api/showMyGardeningWorks" method="get">
-                    <button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works</button>
+                <form action="/showGardeningWorksAndToolsPage" method="get">
+                    <button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works & Tools</button>
                 </form>
-                <form action="/api/showMyGardens" method="get">
+                <form action="/showMyGardensPage" method="get">
                     <button type="submit" id="item-layouts"><i data-lucide="grid"></i> Garden Layouts</button>
                 </form>
             </div>
@@ -84,7 +84,7 @@
                     <div class="btn-text"><strong>Knowledge</strong><span>Styles & Facts</span></div>
                 </button> 
             </form>
-            <form class="nav-button-container" action="/newGarden" method="get">
+            <form class="nav-button-container" action="/showGardenMakerPage" method="get">
                 <button id="btn-maker" class="nav-button" type="submit">
                     <i data-lucide="layout-template"></i>
                     <div class="btn-text"><strong>Garden Maker</strong><span>2D Designer</span></div>
@@ -109,20 +109,29 @@
                     <input type="text" id="botanicalName" placeholder="Botanical Name">
                     <select id="type">
                         <option value="">Select Type</option>
-                        <option>Fruits</option><option>Vegetables</option>
-                        <option>Crops</option><option>Exotic</option><option>Herbs</option>
+                        <option>Fruits</option>
+                        <option>Vegetables</option>
+                        <option>Crops</option>
+                        <option>Exotic</option>
+                        <option>Herbs</option>
                     </select>
                     <select id="water">
                         <option value="">Water Needs</option>
-                        <option>Low</option><option>Medium</option><option>High</option>
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
                     </select>
                     <select id="sunlight">
                         <option value="">Sunlight</option>
-                        <option>Low</option><option>Moderate</option><option>High</option>
+                        <option>Low</option>
+                        <option>Moderate</option>
+                        <option>High</option>
                     </select>
                     <select id="soil">
                         <option value="">Soil Nutrition</option>
-                        <option>Low</option><option>Moderate</option><option>High</option>
+                        <option>Low</option>
+                        <option>Moderate</option>
+                        <option>High</option>
                     </select>
                     <input type="text" id="planting" placeholder="Planting (e.g. April, May)">
                     <input type="text" id="harvesting" placeholder="Harvesting (e.g. October)">

@@ -6,10 +6,10 @@ const connection = mysql.createPool({
     // password: process.env.MSQL_PASSWORD,
     // database: process.env.MSQL_DATABASE
 
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: '',
-    database: 'sproutifieddb'
+    database: 'sproutified_db'
 })
 
 module.exports = {
@@ -21,20 +21,25 @@ module.exports = {
         const [rows] = await connection.query(`SELECT * FROM knowledges`)
         return rows
     },
-    GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,botanicalName,type,water,sunlight,soil,planting,harvesting) {
-        const [rows] = await connection.query(`SELECT * FROM plants WHERE commonName = ? OR botanicalName = ? OR type = ? OR water = ? OR sunlight = ? OR soil = ? OR planting = ? OR harvesting = ?`, [commonName, botanicalName, type, water, sunlight, soil, planting, harvesting])
-        return rows[0]
-    },
-    GetMySavedPlants : async function GetMySavedPlants() {
-        const [rows] = await connection.query(`SELECT * FROM savedPlants`)
-        return rows
-    }
-    // GetGarden : async function GetGarden(id) {
-    //     const [rows] = await connection.query(`SELECT * FROM gardens WHERE id = ?`,[id])
+    // GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,botanicalName,type,water,sunlight,soil,planting,harvesting) {
+    //     const [rows] = await connection.query(`SELECT * FROM plants WHERE commonName = ? OR botanicalName = ? OR type = ? OR water = ? OR sunlight = ? OR soil = ? OR planting = ? OR harvesting = ?`, [commonName, botanicalName, type, water, sunlight, soil, planting, harvesting])
+    //     console.log(rows[0])
     //     return rows[0]
     // },
-    // CreateGarden : async function CreateGarden(id,userID,plantID,size) {
+    // AddNewgarden : async function CreateGarden(id,userID,plantID,size) {
     //     const [rows] = await connection.query(`INSERT INTO gardens VALUES(?,?,?,?)`,[id,userID,plantID,size])
+    //     return rows
+    // },
+    // GetMySavedPlants : async function GetMySavedPlants() {
+    //     const [rows] = await connection.query(`SELECT * FROM savedPlants`)
+    //     return rows
+    // },
+    // GetMyGardens : async function GetMyGardens() {
+    //     const [rows] = await connection.query(`SELECT * FROM gardens`)
+    //     return rows
+    // },
+    // GetAllWorksAndTools : async function GetAllWorksAndTools() {
+    //     const [rows] = await connection.query(`SELECT * FROM worksAndTools`)
     //     return rows
     // },
     // CreateUser : async function CreateUser(id,username,password) {

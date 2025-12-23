@@ -10,18 +10,29 @@ app.set("views","./GardenViews")
 app.use(express.static('GardenPublic'))
 app.use(express.urlencoded({extended:true}))
 
-app.use('/',GardenRoutes, (req,res) => {res.render("index")})
+// Mount API routes first
+app.use('/', GardenRoutes)
 
-app.use('/showIdeasPage',(req,res) => {res.render("ideas")})
-app.use('/showIdeasData/all', GardenRoutes)
+// Explicit page routes
+app.get('/', (req, res) => { res.render('index') })
+app.get('/showIdeasPage', (req, res) => { res.render('ideas') })
+app.get('/showKnowledgesPage', (req, res) => { res.render('knowledges') })
 
-app.use('/showKnowledgesPage',(req,res) => {res.render("knowledges")})
-app.use('/showKnowledgesData/all',GardenRoutes)
+// (API routes are defined inside the router at /api/...)
 
-app.use('/api/showPlantFinder',GardenRoutes)
+app.get('/showGardenMakerPage', (req,res) => {res.render("newGarden")})
+// app.use('/api/addNewGarden',GardenRoutes)
 
-app.use('/api/showMySavedPlantsPage',(req,res) => {res.render("savedPlants")})
-app.use('/api/showMySavedPlants/all',GardenRoutes)
+// app.use('/api/showPlantFinder',GardenRoutes)
+
+app.get('/showMySavedPlantsPage',(req,res) => {res.render("savedPlants")})
+// app.use('/api/showMySavedPlants/all',GardenRoutes)
+
+app.get('/showMyGardensPage',(req,res) => {res.render("myGardens")})
+// app.use('/api/showMyGardensPage/all',GardenRoutes)
+
+app.get('/showGardeningWorksAndToolsPage',(req,res) => {res.render("WorksAndTools")})
+// app.use('/api/showGardeningWorksAndTools/all',GardenRoutes)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

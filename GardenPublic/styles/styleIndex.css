@@ -240,7 +240,7 @@ input, select {
     cursor: pointer;
     color: var(--text-dark);
 }
-#saved-list button:hover { background: var(--primary-green); color: white; }
+#saved-list button:hover { background: var(--primary-green); color: white; transition: 0.2s ease-in-out; }
 @media screen and (max-width: 700px) {
     #top-nav-row{
         display: flex;

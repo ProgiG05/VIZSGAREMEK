@@ -50,24 +50,12 @@ if (langSwitch) {
         const isHu = e.target.value === 'hu';
         document.querySelector('#hero-title h1').innerText = isHu ? "Kertészeti Műszerfal" : "Botanical Dashboard";
         document.querySelector('#hero-title p').innerText = isHu ? "Egyszerűsített kertészkedés a következő generációnak." : "Smart gardening simplified for the next generation.";
+        document.getElementById('item-plants').innerHTML = isHu ? `<i data-lucide="leaf"></i> Mentett növények` : `<i data-lucide="leaf"></i> Saved Plants`;
     });
 }
 
-// Execute search button: reads inputs such as `#commonName` and triggers search action
-const execBtn = document.getElementById('execute-search');
-if (execBtn) {
-    execBtn.onclick = () => {
-        const name = document.getElementById('commonName').value || "all results";
-        console.log(`Filtering botanical data for: ${name}`);
-        // Replace console.log with real filter logic or fetch as needed
-    };
-}
-
 document.getElementById("execute-search").addEventListener("click", async () =>{
-    const responsePlant = await fetch('/api/showPlantFinder', {
-        method : "GET",
-        headers : {"Content-Type" : "application/json"}
-    })
+    const responsePlant = await fetch('/api/showPlantFinder', { method : "GET", headers : {"Content-Type" : "application/json"}})
     const ThePlant = await responsePlant.json()
     const searchedPlantPlace = document.getElementById("searchedPlant-container")
     ThePlant.forEach(plantDetail => {
