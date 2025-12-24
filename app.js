@@ -21,18 +21,18 @@ app.get('/showKnowledgesPage', (req, res) => { res.render('knowledges') })
 // (API routes are defined inside the router at /api/...)
 
 app.get('/showGardenMakerPage', (req,res) => {res.render("newGarden")})
-// app.use('/api/addNewGarden',GardenRoutes)
+app.use('/api/addNewGarden',GardenRoutes)
 
-// app.use('/api/showPlantFinder',GardenRoutes)
+app.use('/api/showPlantFinder',GardenRoutes)
 
 app.get('/showMySavedPlantsPage',(req,res) => {res.render("savedPlants")})
-// app.use('/api/showMySavedPlants/all',GardenRoutes)
+app.use('/api/showMySavedPlants/all',GardenRoutes)
 
 app.get('/showMyGardensPage',(req,res) => {res.render("myGardens")})
-// app.use('/api/showMyGardensPage/all',GardenRoutes)
+app.use('/api/showMyGardensPage/all',GardenRoutes)
 
 app.get('/showGardeningWorksAndToolsPage',(req,res) => {res.render("WorksAndTools")})
-// app.use('/api/showGardeningWorksAndTools/all',GardenRoutes)
+app.use('/api/showGardeningWorksAndTools/all',GardenRoutes)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
