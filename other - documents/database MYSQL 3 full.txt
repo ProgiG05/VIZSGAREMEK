@@ -1,10 +1,11 @@
-CREATE DATABASE SproutifiedDB;
-USE SproutifiedDB;
+CREATE DATABASE sproutified_db;
+USE sproutified_db;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100),
-    password VARCHAR(100)
+    password VARCHAR(100),
+    loggedIn BOOLEAN
 );
 
 CREATE TABLE plants (
@@ -26,6 +27,8 @@ CREATE TABLE gardens (
     user_id INT,
     plant_id INT,
     size INT,
+    title VARCHAR(50),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
@@ -42,25 +45,29 @@ CREATE TABLE savedPlants (
     soil VARCHAR(20),
     planting VARCHAR(100),
     harvesting VARCHAR(100),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (plant_id) REFERENCES plants(id)
 );
 
-CREATE TABLE works (
+CREATE TABLE worksAndTools (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     garden_id INT,
-    type VARCHAR(50),
+    workName VARCHAR(50),
+    toolName VARCHAR(50),
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (garden_id) REFERENCES gardens(id)
 );
 
-CREATE TABLE savedWorks (
+CREATE TABLE savedWorksAndTools (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     garden_id INT,
     isSaved BOOLEAN,
-    type VARCHAR(50),
+    workName VARCHAR(50),
+    toolName VARCHAR(50),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (garden_id) REFERENCES gardens(id)
 );
@@ -79,18 +86,28 @@ CREATE TABLE ideas (
     water VARCHAR(20),
     maintenance VARCHAR(20)
 );
+CREATE TABLE savedIdeas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    isSaved BOOLEAN,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    title VARCHAR(150),
+    plants VARCHAR(200),
+    sunlight VARCHAR(20),
+    water VARCHAR(20),
+    maintenance VARCHAR(20)
+);
 
 INSERT INTO users (username, password) VALUES
-('user1','pass1'),
-('user2','pass2'),
-('user3','pass3'),
-('user4','pass4'),
-('user5','pass5'),
-('user6','pass6'),
-('user7','pass7'),
-('user8','pass8'),
-('user9','pass9'),
-('user10','pass10');
+('user1','pass1',0),
+('user2','pass2',0),
+('user3','pass3',0),
+('user4','pass4',0),
+('user5','pass5',0),
+('user6','pass6',0),
+('user7','pass7',0),
+('user8','pass8',0),
+('user9','pass9',0),
+('user10','pass10',0);
 
 INSERT INTO plants (user_id, commonName, botanicalName, type, water, sunlight, soil, planting, harvesting) VALUES
 (1,'Apple','Malus domestica','fruits','medium','high','moderate','March-April','September-October'),
@@ -116,17 +133,17 @@ INSERT INTO gardens (user_id, plant_id, size) VALUES
 (5,9,28),
 (5,10,35);
 
-INSERT INTO works (user_id, garden_id, type) VALUES
-(1,1,'planting'),
-(1,2,'watering'),
-(2,3,'weeding'),
-(2,4,'harvesting'),
-(3,5,'chemical spraying'),
-(3,6,'watering'),
-(4,7,'planting'),
-(4,8,'weeding'),
-(5,9,'harvesting'),
-(5,10,'watering');
+INSERT INTO worksAndTools (user_id, garden_id, workName, toolName) VALUES
+(1, 1, 'planting', 'Hand Trowel, Gardening Gloves'),
+(1, 2, 'watering', 'Watering Can, Moisture Meter'),
+(2, 3, 'weeding', 'Hand Hoe, Kneeling Pad'),
+(2, 4, 'harvesting', 'Pruning Shears, Garden Basket'),
+(3, 5, 'chemical spraying', 'Backpack Sprayer, Safety Goggles'),
+(3, 6, 'watering', 'Garden Hose, Spray Nozzle'),
+(4, 7, 'planting', 'Garden Shovel, Compost Bag'),
+(4, 8, 'weeding', 'Cape Cod Weeder, Garden Fork'),
+(5, 9, 'harvesting', 'Sickle, Collection Crate'),
+(5, 10, 'watering', 'Oscillating Sprinkler, Water Timer');
 
 INSERT INTO knowledges (title, description) VALUES
 ('Gardening in Space', 
