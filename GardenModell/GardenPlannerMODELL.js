@@ -42,7 +42,8 @@ module.exports = {
     //     const [rows] = await connection.query(`SELECT * FROM worksAndTools`)
     //     return rows
     // },
-    // CreateUser : async function CreateUser(id,username,password) {
+    // CreateUser : async function CreateUser(user) {
+    //     const {id,username,password} = user
     //     const [rows] = await connection.query(`INSERT INTO users VALUES(?,?,?)`,[id,username,password])
     //     return rows
     // }

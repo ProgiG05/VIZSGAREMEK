@@ -50,7 +50,12 @@ if (langSwitch) {
         const isHu = e.target.value === 'hu';
         document.querySelector('#hero-title h1').innerText = isHu ? "Kertészeti Műszerfal" : "Botanical Dashboard";
         document.querySelector('#hero-title p').innerText = isHu ? "Egyszerűsített kertészkedés a következő generációnak." : "Smart gardening simplified for the next generation.";
+        document.querySelector('#account-hub h3').innerHTML = isHu ? `<i data-lucide="user"></i> Oázisom` : `<i data-lucide="user"></i> My Oasis`;
         document.getElementById('item-plants').innerHTML = isHu ? `<i data-lucide="leaf"></i> Mentett növények` : `<i data-lucide="leaf"></i> Saved Plants`;
+        document.getElementById('item-works').innerHTML = isHu ? `<i data-lucide="check-square"></i> Kertészeti munkák & eszközök` : `<i data-lucide="check-square"></i> Gardening Works & Tools`;
+        document.getElementById('item-layouts').innerHTML = isHu ? `<i data-lucide="layout"></i> Kerttervek` : `<i data-lucide="layout"></i> Garden Layouts`;
+        document.getElementById('langTitle').innerHTML = isHu ? `<i data-lucide="languages"></i> Nyelv` : `<i data-lucide="languages"></i> Language`;
+        lucide.createIcons();
     });
 }
 

@@ -233,10 +233,13 @@ input, select {
 }
 #sidebar.active { right: 0;}
 #saved-list button {
+    width: 100%;
     padding: 15px;
     margin-top: 10px;
     background: #e6ece9;
     border-radius: 12px;
+    float: left;
+    text-align: left;
     cursor: pointer;
     color: var(--text-dark);
 }
