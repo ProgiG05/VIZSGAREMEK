@@ -1,15 +1,35 @@
 :root{
-    --body-bg-color:#0d313a;
-    --general-config:white;
+    --body-bg-color-from:#F6F0D7;
+    --body-bg-color-to:#89986D;
+    --general-config:#1B211A;
     --onecard-bg-primary:#c6e7d8;
     --onecard-font-primary:rgb(6, 19, 18);
     --onecard-bg-secondary:rgb(6, 19, 18);
     --onecard-font-secondary:#c6e7d8;
+/* ######################################################## */
+    --bg-dark: #1a1e1a;
+    --text-green: #a7f070;
+    --beige-light: #e0cda7;
+    --beige-dark-shadow: #8a6a3a;
+    --pot-brown: #6b3010;
+    --pot-rim-brown: #7c3a15;
+    --flower-white: #ffffff;
+    --flower-yellow: #f0e632;
+    --stem-green: #66a840;
+    --stat-text: #1a1e1a;
 }
 /* ######################################################## */
 body{
-    background-color: var(--body-bg-color);
-    font-family: monospace;
+    background: linear-gradient(to bottom, var(--body-bg-color-from, var(--body-bg-color-to)));
+    font-family: 'Courier New', Courier, monospace; 
+}
+#header-container{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 50px;
+    align-items:center;
 }
 #main-title{
     color: var(--general-config);
@@ -26,13 +46,16 @@ body{
     font-style: italic;
     margin-bottom: 30px;
 }
-#header-container{
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    margin-bottom: 150px;
-    align-items:center;
+#searchBar{
+    width: 50%;
+    height: 30px;
+    border-radius: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+    text-align: center;
+}
+#searchBar:focus{
+    outline: none;
 }
 /* ######################################################## */
 #gobacktohompage-btn{
@@ -41,7 +64,7 @@ body{
     left: 0;
     margin-bottom: 30px;
     margin-left: 30px;
-    background-color: var(--general-config);
+    background-color: var(--body-bg-color-from);
     width: 50px;
     height: 50px;
     border: none;
@@ -57,7 +80,7 @@ body{
     left: 0;
     margin-bottom: 30px;
     margin-left: 100px;
-    background-color: var(--general-config);
+    background-color: var(--body-bg-color-from);
     width: 50px;
     height: 50px;
     border: none;
@@ -78,80 +101,209 @@ body{
 #gobacktohompage-btn:active, #goup-btn:active{
     transform: scale(0.9);
 }
-#sunlight-filtering-station,#water-filtering-station, #maintenance-filtering-station{
+
+
+#idea-container {
     display: flex;
-    margin:auto;
-}
-#sunlightFilter,#waterFilter,#maintenanceFilter{
-    background-color: var(--onecard-bg-primary);
-    font-family: monospace;
-    font-size: 13pt;
-    text-align: center;
-    height: 50px;
-    width: 150px;
-    border-radius: 10px;
-    font-weight: bold;
-}
-#sunlightFilter:hover,#waterFilter:hover,#maintenanceFilter:hover{
-    cursor: pointer;
-}
-/* ######################################################## */
-#main-container-ideas{
-    background-color: var(--container-config);
-    width: 70%;
+    flex-direction: column;
+    width: 90%; 
     margin: auto;
 }
-#left-container{
-    float: left;
-    width: 45%;
+/* ---- General Card Styling ---- */
+.garden-card {
+    border-radius: 20px;
     padding: 20px;
-}
-#right-container{
-    float: right;
-    width: 45%;
-    padding: 20px;
-}
-.OneIdeaCard{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
-    padding: 40px;
+    width: 350px;
+    background-color: var(--bg-dark);
+    color: var(--text-green);
+    position: relative;
+    margin: auto;
     margin-bottom: 50px;
-    border-radius: 30px;
 }
-.OneIdeaCard:hover{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
-    box-shadow: 5px 5px 5px 5px rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
+.garden-card:hover{
+    scale: calc(1.05);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+/* The beige image area and its shadow */
+.image-placeholder-wrapper {
+    position: relative;
+    height: 200px;
+    margin-bottom: 15px;
+}
+
+.image-placeholder {
+    background-color: var(--beige-light);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.image-placeholder-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 8px; /* Slightly adjusted shadow offset */
+    left: 4px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--beige-dark-shadow);
+    z-index: 1;
+}
+
+/* Typography Sizes Reduced */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: -10px;
+}
+.list-title{
+    font-size: 16px;
+    margin-bottom: -5px;
+}
+
+.plant-list a{
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0 5px 0;
+    font-size: 14px; 
+    line-height: 1.4;
+    text-decoration: none;
+    color: var(--text-green);
+}
+
+/* ---- Footer Section (Stats + Pot) ---- */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 70px; 
+    margin-top: -10px;
+}
+
+.stats-container {
+    display: flex;
+    gap: 10px; 
+}
+
+.stat-box {
+    text-align: center;
+    width: 90px; 
+}
+
+.stat-badge {
+    background-color: var(--beige-light);
+    color: var(--stat-text);
+    padding: 4px 0;
+    font-weight: bold;
+    font-size: 12px; 
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 14px;
+}
+
+/* =========================================
+   CSS DRAWN INTERACTIVE POT BUTTON
+   ========================================= */
+
+.pot-button {
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    position: relative;
+    width: 60px;
+    height: 70px;
+    overflow: visible; 
+    
+    /* New: Scale down the entire pot assembly to fit the smaller card */
+    transform: scale(0.8);
+    transform-origin: bottom right; /* Keep it anchored to the corner */
+    margin-right: -5px; /* Adjusting margin due to scaling loss */
 }
-.OneIdeaTitle{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
-    text-decoration: underline;
-    font-size: 18pt;
-    letter-spacing: 5px;
+
+/* -- The Pot Drawing (Static) -- */
+.pot-base {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 45px;
+    background-color: var(--pot-brown);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    z-index: 10;
 }
-.OneIdeaPlants{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
-    margin-top: 20px;
-    font-size: 14pt;
+
+.pot-rim {
+    position: absolute;
+    bottom: 40px;
+    left: 5%;
+    width: 90%;
+    height: 10px;
+    background-color: var(--pot-rim-brown);
+    z-index: 11;
+    border-radius: 2px;
 }
-.detailsListItem{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
-    font-size: 12pt;
+
+/* -- The Flower Assembly (Animated) -- */
+.flower-assembly {
+    position: absolute;
+    left: 50%;
+    bottom: 0px; /* Hidden state */
+    transform: translateX(-50%);
+    z-index: 5;
+    transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.detailsList{
-    background-color: var(--onecard-bg-primary);
-    color: var(--onecard-font-primary);
+
+/* THE SAVED STATE - Moves up */
+.pot-button.saved .flower-assembly {
+    bottom: 40px; /* Visible state */
 }
-/* ######################################################## */
-@media (max-width: 768px) {
-    #main-container-knowledges{
-        width: 90%;
-    }
+
+/* -- Flower Drawing Details -- */
+.stem {
+    width: 8px;
+    height: 20px;
+    background-color: var(--stem-green);
+    margin: 0 auto;
 }
-/* ######################################################## */
+
+.flower-head {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-bottom: -5px;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    background-color: var(--flower-yellow);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.petal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 36px;
+    background-color: var(--flower-white);
+    border-radius: 20px;
+    transform-origin: center;
+    z-index: 1;
+}
+
+.p1 { transform: translate(-50%, -50%); }
+.p2 { transform: translate(-50%, -50%) rotate(45deg); }
+.p3 { transform: translate(-50%, -50%) rotate(90deg); }
+.p4 { transform: translate(-50%, -50%) rotate(135deg); }

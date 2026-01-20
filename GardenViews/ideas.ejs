@@ -8,44 +8,60 @@
     <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
 </head>
 <body>
-    <h1 id="main-title">Headquarter of Ideas</h1>
-    <h6 id="sub-title">Here you'll find different garden layout ideas</h6>
+    <div id="header-container">
+        <h1 id="main-title">Headquarter of Ideas</h1>
+        <h6 id="sub-title">Here you'll find different garden layout ideas</h6>
+        <input type="text" name="searchBar" id="searchBar" placeholder="Search for anything...">
+    </div>   
     <form action="/" method="get">
         <button id="gobacktohompage-btn" type="submit"><img src="./pics/home.png" alt="home"></button>
     </form>
     <button id="goup-btn" type="submit"><img src="./pics/arrow_upward.png" alt="top button"></button>
-    <div id="header-container">
-        <form id="sunlight-filtering-station" action="" method="get">
-            <select name="filteringBySunlight" id="sunlightFilter">
-                <option value="cover">Sunlight</option>
-                <option name="sunlightMod" value="high">High</option>
-                <option name="sunlightMod" value="moderate">Moderate</option>
-                <option name="sunlightMod" value="low">Low</option>
-            </select>
-        </form>
-        <form id="water-filtering-station" action="" method="get">
-            <select name="filteringByWater" id="waterFilter">
-                <option value="cover">Water</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-            </select>
-        </form>
-        <form id="maintenance-filtering-station" action="" method="get">
-            <select name="filteringByMaintenance" id="maintenanceFilter">
-                <option value="cover">Maintenance</option>
-                <option value="high">High</option>
-                <option value="average">Average</option>
-                <option value="low">Low</option>
-            </select>
-        </form>
-    </div>
-    <div id="main-container-ideas">
-        <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
-        
-        <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
-        
-        <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+    <div id="idea-container">
+        <!-- <div class="garden-card">
+            <div class="image-placeholder-wrapper">
+                <div class="image-placeholder"></div>
+            </div>
+            <h2 class="card-title">Balcony Berry Wall</h2>
+            <h3 class="list-title">Plants for this garden idea:</h3>
+            <ul class="plant-list">
+                <li><a href="">Strawberries</a></li>
+                <li><a href="">Blueberries</a></li>
+                <li><a href="">Raspberries</a></li>
+                <li><a href="">Goji berries</a></li>
+                <li><a href="">Currants</a></li>
+            </ul>
+            <div class="card-footer">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-badge">High</div>
+                        <div class="stat-label">Sunlight</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-badge">Medium</div>
+                        <div class="stat-label">Water</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-badge">Average</div>
+                        <div class="stat-label">Hardiness</div>
+                    </div>
+                </div>
+                <button class="pot-button saved" onclick="toggleSaveState(this)" aria-label="Toggle Save">
+                    <div class="flower-assembly">
+                        <div class="flower-head">
+                            <div class="petal p1"></div>
+                            <div class="petal p2"></div>
+                            <div class="petal p3"></div>
+                            <div class="petal p4"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem"></div>
+                    </div>
+                    <div class="pot-base"></div>
+                    <div class="pot-rim"></div>
+                </button>
+            </div>
+        </div> -->
     </div>
     <script src="./mains/mainIdeas.js"></script>
 </body>

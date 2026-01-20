@@ -8,14 +8,12 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-
     <aside id="sidebar">
         <!-- Sidebar: settings panel. Toggle with `toggleSidebar()`; appears when `#sidebar` gains the `active` class. -->
         <div id="sidebar-header">
             <h2>Settings</h2>
             <button id="close-sidebar" onclick="toggleSidebar()"><i data-lucide="x"></i></button>
         </div>
-        
         <!-- Language control: `#lang-switch` select changes UI strings via JS listener in mainIndex.js -->
         <div id="language-control">
             <label id="langTitle"><i data-lucide="languages"></i>Language</label>
@@ -24,7 +22,6 @@
                 <option value="hu">Magyar</option>
             </select>
         </div>
-
         <!-- Account hub: quick links for saved items. `#saved-list` contains clickable entries. -->
         <div id="account-hub">
             <h3><i data-lucide="user"></i> My Oasis</h3>
@@ -41,12 +38,10 @@
             </div>
         </div>
     </aside>
-
     <!-- Main container: central glass card. See `#main-container` rules in styleIndex.css -->
     <main id="main-container">
         <header id="main-header">
             <div id="logo">Sprout<span>ified</span></div>
-            
             <div id="header-widgets">
                 <div id="weather-card">
                     <i data-lucide="cloud-sun" id="weather-icon"></i>
@@ -63,13 +58,11 @@
                 </button>
             </div>
         </header>
-
         <!-- Hero/title block. Text is updated by the language switch listener in mainIndex.js -->
         <section id="hero-title">
             <h1>Botanical Dashboard</h1>
             <p>Smart gardening simplified for the next generation.</p>
         </section>
-
         <!-- Top navigation grid. Each form contains a `.nav-button` styled button. -->
         <nav id="top-nav-row">
             <form class="nav-button-container" action="/showIdeasPage" method="get">
@@ -91,7 +84,6 @@
                 </button>
             </form>  
         </nav>
-
         <!-- Bottom row: Plant Finder trigger and collapsible search (`#search-container`) -->
         <section id="bottom-nav-row">
             <button id="plant-finder-trigger" onclick="toggleSearch()">

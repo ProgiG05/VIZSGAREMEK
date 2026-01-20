@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         OneKnowledgeDescription.setAttribute("class","OneKnowledgeDescription")
         
         OneKnowledgeTitle.textContent = `${knowledge.title}`
-        OneKnowledgeDescription.textContent = `${knowledge.description}`
+        OneKnowledgeDescription.textContent = `\t${knowledge.description.replace(".",".\n\t")}`
 
         OneKnowledgeCard.appendChild(OneKnowledgeTitle)
         OneKnowledgeCard.appendChild(OneKnowledgeDescription)
