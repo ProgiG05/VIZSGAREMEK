@@ -97,7 +97,7 @@ CREATE TABLE savedIdeas (
     maintenance VARCHAR(20)
 );
 
-INSERT INTO users (username, password) VALUES
+INSERT INTO users (username, password,loggedIn) VALUES
 ('user1','pass1',0),
 ('user2','pass2',0),
 ('user3','pass3',0),
@@ -178,3 +178,4 @@ INSERT INTO ideas (title, plants, sunlight, water, maintenance) VALUES
 ('Desert-Friendly Edible Bed', 'figs,chili peppers,rosemary,dates,oregano', 'high', 'low', 'average'),
 ('Cold-Season Root Box', 'carrots,beets,radishes,turnips,parsnips', 'moderate', 'medium', 'low'),
 ('Indoor LED Microgarden', 'microgreens,lettuce,basil,mint,chives', 'low', 'medium', 'low');
+
