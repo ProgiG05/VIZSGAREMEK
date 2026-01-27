@@ -105,8 +105,9 @@ body{
 
 #idea-container {
     display: flex;
-    flex-direction: column;
-    width: 90%; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 75%; 
     margin: auto;
 }
 /* ---- General Card Styling ---- */
