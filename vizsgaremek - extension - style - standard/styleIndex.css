@@ -1,0 +1,244 @@
+:root {
+    --primary: #052217;
+    --navbar:#16392b;
+    --secondary: rgba(203, 234, 222, 0.541);
+    --third: #8abb9d;
+    --text-main: #E3FFF5;
+}
+
+body.dark-mode {
+    --primary: #052217;
+    --secondary: rgba(203, 234, 222, 0.541);
+    --third: #8abb9d;
+    --text-main: #E3FFF5;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary);
+    /* background-image: linear-gradient(to bottom,#052217 50%, #8abb9d 100%); */
+    color: var(--text-main);
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+section {   
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom,#11402fbf, #8abb9d);
+}
+section:nth-child(even){
+    background-image: linear-gradient(to bottom,#8abb9d , #11402fbf);
+}
+/* ########################################################################################## */
+.showcase_container{
+    top: 0;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.ideaCard{
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+    border-radius: 15px;
+    background: rgba(225, 255, 245, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(225, 255, 245, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    transition: all 0.3s ease;
+}
+.ideaCard:hover{
+    background: rgba(225, 255, 245, 0.12);
+    border: 1px solid rgba(225, 255, 245, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.4);
+    transform: translateY(-5px);
+}
+.ideaCard h2{
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+    color: var(--text-main);
+}
+.ideaCard h3{
+    font-size: 1rem;
+    margin: 10px 0 8px 0;
+    color: rgba(225, 255, 245, 0.9);
+}
+.ideaCard p{
+    font-size: 0.9rem;
+    margin: 10px 0;
+    color: rgba(225, 255, 245, 0.8);
+    line-height: 1.5;
+}
+.ideasPage_Btn{
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    background-color:#112d14;
+    color: #E3FFF5;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 12pt;
+    margin: auto;
+    bottom: 0;
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* ########################## PLANT FINDER SECTION ########################## */
+
+.plant-finder-section {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 40px;
+}
+
+.search-container {
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(225, 255, 245, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(225, 255, 245, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.search-title {
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+    color: var(--text-main);
+    text-align: center;
+    font-weight: 600;
+}
+
+#plant-search-inp {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    background: rgba(225, 255, 245, 0.1);
+    border: 1px solid rgba(225, 255, 245, 0.2);
+    color: var(--text-main);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+#plant-search-inp:focus {
+    outline: none;
+    background: rgba(225, 255, 245, 0.15);
+    border: 1px solid rgba(225, 255, 245, 0.35);
+    box-shadow: 0 0 15px rgba(138, 187, 157, 0.3);
+}
+
+#plant-search-inp::placeholder {
+    color: rgba(227, 255, 245, 0.6);
+}
+
+.water-selection-inp,
+.sunlight-selection-inp,
+.soil-selection-inp {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.water-selection-inp label,
+.sunlight-selection-inp label,
+.soil-selection-inp label {
+    color: rgba(227, 255, 245, 0.8);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.water-selection-inp input,
+.sunlight-selection-inp input,
+.soil-selection-inp input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #8abb9d;
+    margin-right: 8px;
+}
+
+#planting-months-selection,
+#harvesting-months-selection {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    background: rgba(225, 255, 245, 0.1);
+    border: 1px solid rgba(225, 255, 245, 0.2);
+    color: var(--text-main);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#planting-months-selection:focus,
+#harvesting-months-selection:focus {
+    outline: none;
+    background: rgba(225, 255, 245, 0.15);
+    border: 1px solid rgba(225, 255, 245, 0.35);
+    box-shadow: 0 0 15px rgba(138, 187, 157, 0.3);
+}
+
+#search-result {
+    width: 90%;
+    max-width: 800px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(225, 255, 245, 0.05);
+    border: 1px solid rgba(225, 255, 245, 0.15);
+    margin-top: 20px;
+}
+
+#plant-search_Btn {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #112d14;
+    color: #E3FFF5;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 12pt;
+    margin: 20px auto 0;
+    text-align: center;
+    padding-top: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(138, 187, 157, 0.2);
+}
+
+#plant-search_Btn:hover {
+    background-color: #E3FFF5;
+    color: #112d14;
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(138, 187, 157, 0.4);
+    transform: translateY(-2px);
+}

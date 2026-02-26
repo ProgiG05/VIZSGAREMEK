@@ -1,0 +1,114 @@
+Can you make a style.css and a script.js for the html code below:
+Make each section the height of a standard screen
+The main color palette should give the sensation of a garden, should be bright but not too much
+The layout should be a bit futuristic and clean
+The links should be rounded but still rectangle
+The font should be clean and round
+Make smooth transitions
+And try to follow the small comments in the html code
+The html code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sproutified</title>
+    <link rel="stylesheet" href="./styleIndex.css">
+</head>
+<body>
+    <section class="landing-section">
+        <nav id="top-navbar"> <!--shouldn't be fixed-->
+            <button id="settings_Btn"><img src="" alt=""></button> <!--float to the left, the icon can be 3 horizontal lines and when-->
+            <div id="settings-sidepanel"> <!--float in from the left when the button clicked-->
+                <h2>Personal Oasis</h2>
+                <select name="" id="lang-selection">
+                    <option value="en">English</option> 
+                    <option value="hu">Hungarian</option>
+                </select>
+                <a id="personal_Btn" href="">Saved Plants</a>
+                <a id="personal_Btn" href="">Saved Works & Tools</a>
+                <a id="personal_Btn" href="">Garden layouts</a>
+                <button id="darkmode"><img src="" alt=""></button> <!--the dark and light modes should be icons and the button round-->
+            </div>
+            <div id="user-uttons-container">
+                <button id="log-in_Btn"><img src="" alt=""></button>
+                <button id="sign-in_Btn"><img src="" alt=""></button>
+            </div>
+        </nav>
+        <h1 class="main-title"></h1>
+        <p class="small-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod vitae fugit optio sint perspiciatis laborum, eum tempora, architecto quis nobis dolor. Eum, tempora minus? Tempore, dolor. Voluptatibus distinctio eligendi modi!</p>
+        <img class="art1-landing" src="" alt="">
+        <a id="garden-maker-page_Btn" href="">Design now</a><!--bottom and center, not too wide-->
+    </section>
+    <section class="ideas-showcase-section">
+        <img class="art2-ideas-showcase" src="" alt=""> <!--leave some space for this on the top of the page-->
+        <div id="showcase-container"></div> <!--the width should be about 90% and be centered, here will be the different sized cards-->
+        <a id="ideas-page_Btn" href="">See more ideas</a> <!--bottom and center, not too wide-->
+    </section>
+    <section class="plant-finder-section">
+        <div class="search-container"> <!--should be on the left about 40%-50% width-->
+            <h1 class="search-title"></h1>
+            <input id="plant-search-inp" type="text" placeholder="Search for a plant name...">
+            <div class="water-selection-inp">
+                <label for="water-low"></label>
+                <input type="radio" name="water-low" id="water-select">
+                <label for="water-medium"></label>
+                <input type="radio" name="water-medium" id="water-select">
+                <label for="water-high"></label>
+                <input type="radio" name="water-high" id="water-select">
+            </div>
+            <div class="sunlight-selection-inp">
+                <label for="sunlight-low"></label>
+                <input type="radio" name="sunlight-low" id="sunlight-select">
+                <label for="sunlight-moderate"></label>
+                <input type="radio" name="sunlight-moderate" id="sunlight-select">
+                <label for="sunlight-high"></label>
+                <input type="radio" name="sunlight-high" id="sunlight-select">
+            </div>
+            <div class="soil-selection-inp">
+                <label for="soil-low"></label>
+                <input type="radio" name="soil-low" id="soil-select">
+                <label for="soil-moderate"></label>
+                <input type="radio" name="soil-moderate" id="soil-select">
+                <label for="soil-high"></label>
+                <input type="radio" name="soil-high" id="soil-select">  
+            </div>
+            <select name="" id="planting-months-selection">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+            <select name="" id="harvesting-months-selection">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+        </div>
+        <div id="search-result"></div> <!--should be on the rigth side of the page, about 30%-40% width-->
+        <a id="plant-search_Btn" href="">Search for more...</a><!--bottom and center, not too wide-->
+    </section>
+    <section class="knowledges-showcase-section"> <!--should be centered and 60% width-->
+        <div id="knowledge-reader"></div>
+        <a id="knowledges-page_Btn" href="">Learn more...</a><!--bottom and center, not too wide-->
+    </section>
+    <script src="./mainIndex.js"></script>
+</body>
+</html>

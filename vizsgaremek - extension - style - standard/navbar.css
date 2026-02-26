@@ -1,0 +1,30 @@
+#top-navbar {
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: var(--navbar);
+}
+#top-navbar button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 16pt;
+    padding: 10px;
+    background-color: transparent;
+    color: var(--text-main) ;
+}
+#top-navbar button:hover {
+    border-left: var(--text-main);
+    background-color: #5b906f;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+    border-radius: 30px;
+}
