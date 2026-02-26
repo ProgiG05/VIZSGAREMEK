@@ -28,7 +28,7 @@
     margin-left: 8vw; 
 }
 
-.main-title{font-size: 64pt;margin-bottom: 15px; font-family: 'Quicksand', sans-serif;}
+.main-title{font-size: 84pt;margin-bottom: 15px; font-family: 'Quicksand', sans-serif;}
 .main-title span{color:var(--text-landing);}
 
 .small-description {
@@ -37,7 +37,7 @@
     margin: none;
     padding-left: 10px;
     line-height: 20px;
-    font-size: 12pt;
+    font-size: 14pt;
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
     word-spacing: 5px;
@@ -97,3 +97,24 @@
 .left{height: 40px;background-image: linear-gradient(to bottom, #311c0a, #452910) ;transform: rotateY(-90deg) translateZ(200px) translateY(180px);}
 .top table {width: 100%;height: 100%;border-collapse: collapse;}
 .top table td {border: 5px solid #13090188;}
+
+@media screen and (max-width: 1250px) {
+    .landing-cont {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+    .title-cont, .second-cont {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+    .small-description {
+        width: 60%;
+        font-size: 12pt;
+    }
+    #gardenMakerPage_Btn {
+        width: 80%;
+    }
+    
+}

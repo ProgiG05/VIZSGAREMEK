@@ -27,8 +27,8 @@
 
 #closeSidePanel {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 30px;
+    right: 30px;
     background: transparent;
     border: none;
     width: 36px;
@@ -41,10 +41,9 @@
 }
 
 #closeSidePanel img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: block;
-    filter: invert(1) opacity(0.9);
 }
 
 #lang-selection{
@@ -88,7 +87,7 @@
     gap: 8px;
 }
 
-#darkmode img{ width: 18px; height: 18px; display:block; }
+#darkmode img{ width: 30px; height: 30px; display:block; }
 
 #closeSidePanel{
     background-color: transparent;

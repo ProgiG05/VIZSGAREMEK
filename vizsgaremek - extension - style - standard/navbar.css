@@ -28,3 +28,13 @@
     transition-timing-function: ease-in;
     border-radius: 30px;
 }
+@media screen and (max-width: 1000px) {
+    #top-navbar button {
+        font-size: 10pt;
+    } 
+}
+@media screen and (max-width: 650px) {
+    #top-navbar button {
+        font-size: 6pt;
+    }
+}
