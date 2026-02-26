@@ -21,7 +21,7 @@
     </nav>
     <div id="settings-sidepanel"> 
         <h2>Personal Oasis</h2>
-        <button id="closeSidePanel"><img src="./pics/dark/close_25dp_052217_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+        <button id="closeSidePanel"><i data-lucide="x"></i></button>
         <select name="" id="lang-selection">
             <option value="en"><span>English</span></option> 
             <option value="hu"><span>Hungarian</span></option>
@@ -29,6 +29,7 @@
         <a id="personal_Btn" href="">Saved Plants</a>
         <a id="personal_Btn" href="">Saved Works & Tools</a>
         <a id="personal_Btn" href="">Garden layouts</a>
+        <button id="#darkmode"><i data-lucide="moon"></i></button>
     </div>
     <section class="landing-section">
         <div class="landing-cont">
@@ -45,9 +46,15 @@
                         <div class="face right"></div>
                         <div class="face top">
                             <table>
-                                <tr><td></td><td></td><td></td></tr>
-                                <tr><td></td><td></td><td></td></tr>
-                                <tr><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                             </table>
                         </div>
                         <div class="face bottom"></div>
@@ -61,7 +68,7 @@
         <div class="showcase_container" id="showcase-container">
             <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
-                <img src="" alt="">
+                <i data-lucide="image"></i>
                 <h3 class="card_contenttitle">Small description</h3>
                 <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
                 <ul class="card_contents">
@@ -73,7 +80,7 @@
             </div>
              <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
-                <img src="" alt="">
+                <i data-lucide="image"></i>
                 <h3 class="card_contenttitle">Small description</h3>
                 <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
                 <ul class="card_contents">
@@ -84,7 +91,7 @@
             </div>
              <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
-                <img src="" alt="">
+                <i data-lucide="image"></i>
                 <h3 class="card_contenttitle">Small description</h3>
                 <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
                 <ul class="card_contents">
@@ -98,7 +105,7 @@
             </div>
             <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
-                <img src="" alt="">
+                <i data-lucide="image"></i>
                 <h3 class="card_contenttitle">Small description</h3>
                 <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
                 <ul class="card_contents">
@@ -112,7 +119,7 @@
             </div>
             <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
-                <img src="" alt="">
+                <i data-lucide="image"></i>
                 <h3 class="card_contenttitle">Small description</h3>
                 <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
                 <ul class="card_contents">
@@ -125,7 +132,7 @@
             </div>
             <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
-                <img src="" alt="">
+                <i data-lucide="image"></i>
                 <h3 class="card_contenttitle">Small description</h3>
                 <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
                 <ul class="card_contents">
@@ -144,27 +151,30 @@
             <h1 class="search-title"></h1>
             <input id="plant-search-inp" type="text" placeholder="Search for a plant name...">
             <div class="water-selection-inp">
-                <label for="water-low"></label>
+                <h3>Watering need</h3>
+                <label for="water-low">Low</label>
                 <input type="radio" name="water-low" id="water-select">
-                <label for="water-medium"></label>
+                <label for="water-medium">Medium</label>
                 <input type="radio" name="water-medium" id="water-select">
-                <label for="water-high"></label>
+                <label for="water-high">High</label>
                 <input type="radio" name="water-high" id="water-select">
             </div>
             <div class="sunlight-selection-inp">
-                <label for="sunlight-low"></label>
+                <h3>Sunlight need</h3>
+                <label for="sunlight-low">Low</label>
                 <input type="radio" name="sunlight-low" id="sunlight-select">
-                <label for="sunlight-moderate"></label>
+                <label for="sunlight-moderate">Moderate</label>
                 <input type="radio" name="sunlight-moderate" id="sunlight-select">
-                <label for="sunlight-high"></label>
+                <label for="sunlight-high">High</label>
                 <input type="radio" name="sunlight-high" id="sunlight-select">
             </div>
             <div class="soil-selection-inp">
-                <label for="soil-low"></label>
+                <h3>Soil type</h3>
+                <label for="soil-low">Low</label>
                 <input type="radio" name="soil-low" id="soil-select">
-                <label for="soil-moderate"></label>
+                <label for="soil-moderate">Moderate</label>
                 <input type="radio" name="soil-moderate" id="soil-select">
-                <label for="soil-high"></label>
+                <label for="soil-high">High</label>
                 <input type="radio" name="soil-high" id="soil-select">  
             </div>
             <select name="" id="planting-months-selection">
@@ -204,5 +214,7 @@
         <a id="knowledges-page_Btn" href="">Learn more...</a>
     </section> -->
     <script src="./mainIndex.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+    <script>if(window.lucide) lucide.createIcons();</script>
 </body>
 </html>
