@@ -68,30 +68,26 @@
         </section>
         <!-- Top navigation grid. Each form contains a `.nav-button` styled button. -->
         <nav id="top-nav-row">
-            <a href="ideas.html">REAL ideas</a>
-            <form class="nav-button-container">
-                <a href="ideas.html">Ideas</a>
+            <form class="nav-button-container" action="/ideas.html">
                 <button id="btn-ideas" class="nav-button" type="submit">
                     <i data-lucide="sparkles"></i>
                     <div class="btn-text"><strong>Ideas</strong><span>Inspiration Gallery</span></div>
                 </button>
             </form>
-            <form class="nav-button-container">
-                <a href="knowledges.html">Knowledge</a>
+            <form class="nav-button-container" action="/knowledges.html">
                 <button id="btn-knowledge" class="nav-button" type="submit">
                     <i data-lucide="book-open"></i>
                     <div class="btn-text"><strong>Knowledge</strong><span>Styles & Facts</span></div>
                 </button>
             </form>
-            <form class="nav-button-container" action="/gardenmaker" method="get">
+            <!-- <form class="nav-button-container" action="/gardenmaker" method="get">
                 <button id="btn-maker" class="nav-button" type="submit">
                     <i data-lucide="layout-template"></i>
                     <div class="btn-text"><strong>Garden Maker</strong><span>2D Designer</span></div>
                 </button>
-            </form>
-            <form class="nav-button-container">
-                <a href="plants.html">Plants</a>
-                <button id="btn-plants" class="nav-button" type="submit">
+            </form> -->
+            <form class="nav-button-container" action="/plants.html">
+                    <button id="btn-plants" class="nav-button" type="submit">
                     <i data-lucide="leaf"></i>
                     <div class="btn-text"><strong>Plants</strong><span>Botanical Database</span></div>
                 </button>
@@ -107,12 +103,12 @@
                 </div>
             </button>
 
-            <form id="search-container" action="/showPlantFinder" method="get">
+            <form id="search-container" action="/plantfinder" method="get">
                 <div id="search-fields">
                     <!-- Search inputs: IDs are referenced by mainIndex.js when executing a search -->
-                    <input type="text" id="commonName" placeholder="Common Name (e.g. Lemon)">
-                    <input type="text" id="botanicalName" placeholder="Botanical Name">
-                    <select id="type">
+                    <input type="text" id="commonName" name="commonName" placeholder="Common Name (e.g. Lemon)">
+                    <input type="text" id="botanicalName" name="botanicalName" placeholder="Botanical Name">
+                    <select id="type" name="type">
                         <option value="">Select Type</option>
                         <option>Fruits</option>
                         <option>Vegetables</option>
@@ -120,26 +116,26 @@
                         <option>Exotic</option>
                         <option>Herbs</option>
                     </select>
-                    <select id="water">
+                    <select id="water" name="water">
                         <option value="">Water Needs</option>
                         <option>Low</option>
                         <option>Medium</option>
                         <option>High</option>
                     </select>
-                    <select id="sunlight">
+                    <select id="sunlight" name="sunlight">
                         <option value="">Sunlight</option>
                         <option>Low</option>
                         <option>Moderate</option>
                         <option>High</option>
                     </select>
-                    <select id="soil">
+                    <select id="soil" name="soil">
                         <option value="">Soil Nutrition</option>
                         <option>Low</option>
                         <option>Moderate</option>
                         <option>High</option>
                     </select>
-                    <input type="text" id="planting" placeholder="Planting (e.g. April, May)">
-                    <input type="text" id="harvesting" placeholder="Harvesting (e.g. October)">
+                    <input type="text" id="planting" name="planting" placeholder="Planting (e.g. April, May)">
+                    <input type="text" id="harvesting" name="harvesting" placeholder="Harvesting (e.g. October)">
                 </div>
                 <!-- `#execute-search` button: handled in mainIndex.js; reads `#commonName` and other inputs. -->
                 <button type="submit" id="execute-search">Execute Botanical Search</button>

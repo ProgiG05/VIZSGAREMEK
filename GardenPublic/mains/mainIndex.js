@@ -59,9 +59,9 @@ if (langSwitch) {
     });
 }
 
-document.getElementById("execute-search").addEventListener("click", async () =>{
+document.getElementById("search-container").addEventListener("submit", async () =>{
     const responsePlant = await fetch(
-        '/api/showPlantFinder', 
+        '/api/plantfinder', 
         { 
             method : "GET", 
             headers : {"Content-Type" : "application/json"}

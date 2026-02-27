@@ -14,15 +14,8 @@ exports.AddNewGarden = async (req,res) => {
     
 }
 exports.GetSearchedPlantDetails = async (req,res) => {
-    var commonNameSearch = req.body.commonName
-    var botanicalNameSearch = req.body.botanicalName
-    var typeSearch = req.body.type
-    var waterSearch = req.body.water
-    var sunlightSearch = req.body.sunlight
-    var soilSearch = req.body.soil
-    var plantingSearch = req.body.planting
-    var harvestingSearch = req.body.harvesting
-    const plantData = await GardenModel.GetSearchedPlantDetails(commonNameSearch, botanicalNameSearch, typeSearch, waterSearch, sunlightSearch, soilSearch, plantingSearch, harvestingSearch)
+    const {commonName, botanicalName, type, water, sunlight, soil, planting, harvesting} = req.body
+    const plantData = await GardenModel.GetSearchedPlantDetails(commonName, botanicalName, type, water, sunlight, soil, planting, harvesting)
     res.json(plantData)
 }
 exports.GetMySavedPlants = async (req,res) => {
