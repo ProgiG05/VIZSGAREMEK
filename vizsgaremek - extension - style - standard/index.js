@@ -3,7 +3,7 @@ const sidePanel = document.getElementById('settings-sidepanel');
 const darkBtn = document.getElementById('darkmode');
 const cube = document.getElementById('cube');
 document.addEventListener('DOMContentLoaded', () => {
-    // cube.style.animation = 'rotate linear infinite'
+
 });
 document.getElementById('settings_Btn').addEventListener('click',() => {
     sidePanel.style.transitionDuration = '0.2'
@@ -15,9 +15,26 @@ document.getElementById('closeSidePanel').addEventListener('click',() => {
     sidePanel.style.transitionBehavior = 'ease-in'
     sidePanel.style.left = '-360px'
 })
-document.getElementById('darkmode').addEventListener('click',() => {
-    darkBtn.innerHTML = `<img style="float: right; transition: all 1s ease;" src="./pics/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="">`
-})
+
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    darkBtn.classList.add('dark-active');
+}
+
+document.getElementById('darkmode').addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem('darkMode', isDarkMode);
+    
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        darkBtn.classList.add('dark-active');
+    } else {
+        document.body.classList.remove('dark-mode');
+        darkBtn.classList.remove('dark-active');
+    }
+});
+
 document.getElementById("gardenMakerPage_Btn").addEventListener("mouseover", () => {
     cube.style.animation = 'rotate 30s linear infinite'
 })

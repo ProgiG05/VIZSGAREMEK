@@ -1,0 +1,87 @@
+:root {
+    --primary: #052217;
+    --secondary: rgba(203, 234, 222, 0.541);
+    --third: #8abb9d;
+
+    --text-main: #E3FFF5;
+    --section-bg-odd: linear-gradient(to bottom,#11402fbf, #8abb9d);
+    --section-bg-even: linear-gradient(to bottom,#8abb9d , #11402fbf);
+
+    --text-landing: #195840;
+    --landing-bg: linear-gradient(to bottom , rgba(203, 234, 222, 0.541),rgba(28, 115, 82, 0.541));
+    --btn-bg: #112d14;
+    --btn-hover-bg: #E3FFF5;
+    --btn-font-color: #E3FFF5;
+    --btn-hover-font-color: #112d14;
+
+    --navbtn-bg: #1b291c;
+    --navbtn-hover-bg: #add5c7;
+    --navbtn-font-color: #add5c7;
+    --navbtn-hover-font-color: #1b291c;
+
+    --ideacard-bg: #09341cab;
+    --ideacard-font: #f3eac5;
+    --ideacard-accent1: #397234;
+    --ideacard-accent2: #3F2617;
+    --ideacard-accent3: #B78449;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+@media screen and (max-width: 1250px) {
+    .landing-cont {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+    .title-cont, .second-cont {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+    .small-description {
+        width: 60%;
+        font-size: 12pt;
+    }
+    #gardenMakerPage_Btn {
+        width: 80%;
+    }
+    
+}
+@media screen and (max-width: 1000px) {
+    #top-navbar button {
+        font-size: 10pt;
+    } 
+}
+@media screen and (max-width: 650px) {
+    #top-navbar button {
+        font-size: 6pt;
+    }
+}
+@keyframes rotate {
+    0% { transform:  translateZ(-100px) rotateX(-15deg) rotateY(-30deg); }
+    20% { transform: translateZ(-100px) rotateX(-15deg) rotateY(60deg); }
+    40% { transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg); }
+    60% { transform: translateZ(-100px) rotateX(-15deg) rotateY(60deg); }
+    80% { transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg); }
+    100% { transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg); }
+}
+
+section {   
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    background-image: var(--section-bg-odd);
+}
+section:nth-child(even){
+    background-image: var(--section-bg-even);
+}
+
+
+

@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sproutified | Grow a garden</title>
-    <link rel="stylesheet" href="./styleIndex.css">
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="sidepanel.css">
-    <link rel="stylesheet" href="landingSection.css">
+
+    <link rel="stylesheet" href="index.css">
+
+    <link rel="stylesheet" href="./sections/landingSection.css">
+    <link rel="stylesheet" href="./sections/ideasshowcaseSection.css">
     <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
 </head> 
 <body>
@@ -29,7 +32,10 @@
         <a id="personal_Btn" href="">Saved Plants</a>
         <a id="personal_Btn" href="">Saved Works & Tools</a>
         <a id="personal_Btn" href="">Garden layouts</a>
-        <button id="darkmode"><img src="./pics/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+        <button id="darkmode">
+            <img id="dark-icon" class="theme-icon" src="./pics/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
+            <img id="light-icon" class="theme-icon" src="./pics/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
+        </button>
     </div>
     <section class="landing-section">
         <div class="landing-cont">
@@ -65,19 +71,46 @@
         </div> 
     </section>
     <section class="ideas-showcase-section">
+        <div class="ceiling"></div>
         <div class="showcase_container" id="showcase-container">
             <div class="ideaCard">
                 <h2 class="card_title">Card Title</h2>
                 <h3 class="card_contenttitle">Small description</h3>
-                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum . . . </p>
+                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum.</p>
                 <ul class="card_contents">
                     <li class="card_contentItem">Item 1</li>
                     <li class="card_contentItem">Item 2</li>
                     <li class="card_contentItem">Item 3</li>
                     <li class="card_contentItem">Item 4</li>
+                    <li class="card_contentItem">Item 4</li>
                 </ul>
+            </div>
+            <div class="ideaCard">
+                <h2 class="card_title">Card Title</h2>
+                <h3 class="card_contenttitle">Small description</h3>
+                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum.</p>
+                <ul class="card_contents">
+                    <li class="card_contentItem">Item 1</li>
+                    <li class="card_contentItem">Item 2</li>
+                    <li class="card_contentItem">Item 3</li>
+                    <li class="card_contentItem">Item 4</li>
+                    <li class="card_contentItem">Item 4</li>
+                </ul>
+            </div>
+            <div class="ideaCard">
+                <h2 class="card_title">Card Title</h2>
+                <h3 class="card_contenttitle">Small description</h3>
+                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum.</p>
+                <ul class="card_contents">
+                    <li class="card_contentItem">Item 1</li>
+                    <li class="card_contentItem">Item 2</li>
+                    <li class="card_contentItem">Item 3</li>
+                    <li class="card_contentItem">Item 4</li>
+                    <li class="card_contentItem">Item 4</li>
+                </ul>
+            </div>
         </div>
-        <!-- <a class="ideasPage_Btn" id="ideasPage_Btn" href="">See more ideas</a>  -->
+        <a class="ideasPage_Btn" id="ideasPage_Btn" href="">See more ideas</a> 
     </section>
     <section class="plant-finder-section">
         <div class="search-container"> 
@@ -142,12 +175,11 @@
         <div id="search-result"></div> 
         <a id="plant-search_Btn" href="">Search for more</a>
     </section>
-    <!-- <section class="knowledges-showcase-section"> 
+    <section class="knowledges-showcase-section"> 
         <div id="knowledge-reader"></div>
-        <a id="knowledges-page_Btn" href="">Learn more...</a>
-    </section> -->
-    <script src="./mainIndex.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
-    <script>if(window.lucide) lucide.createIcons();</script>
+        <a id="knowledges-page_Btn" href="">Learn more</a>
+    </section>
+    <footer></footer>
+    <script src="index.js"></script>
 </body>
 </html>

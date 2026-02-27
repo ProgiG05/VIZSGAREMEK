@@ -8,7 +8,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: var(--navbar);
 }
 #top-navbar button {
     height: 100%;
@@ -18,23 +17,13 @@
     font-family: monospace;
     font-size: 16pt;
     padding: 10px;
-    background-color: transparent;
-    color: var(--text-main) ;
+    background-color:var(--navbtn-bg);
+    color: var(--navbtn-font-color);
 }
 #top-navbar button:hover {
-    border-left: var(--text-main);
-    background-color: #5b906f;
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
-    border-radius: 30px;
-}
-@media screen and (max-width: 1000px) {
-    #top-navbar button {
-        font-size: 10pt;
-    } 
-}
-@media screen and (max-width: 650px) {
-    #top-navbar button {
-        font-size: 6pt;
-    }
+    letter-spacing: 2px;
+    background-color:var(--navbtn-hover-bg);
+    color:var(--navbtn-hover-font-color);
 }
