@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 CREATE TABLE plants (
     id            INT          AUTO_INCREMENT PRIMARY KEY,
-    plant_id      INT,
+    user_id       INT,
     commonName    VARCHAR(100),
     botanicalName VARCHAR(150),
     type          VARCHAR(50),
@@ -18,7 +18,7 @@ CREATE TABLE plants (
     soil          VARCHAR(20),
     planting      VARCHAR(100),
     harvesting    VARCHAR(100),
-    FOREIGN KEY (plant_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 CREATE TABLE gardens (
@@ -26,10 +26,10 @@ CREATE TABLE gardens (
     user_id  INT,
     plant_id INT,
     size     INT,
-    title    VARCHAR(50),
+    title    VARCHAR(50)  NOT NULL,
     created  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id)  REFERENCES users(id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id)
+    FOREIGN KEY (user_id)  REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE SET NULL
 );
 
 CREATE TABLE savedPlants (
@@ -37,8 +37,8 @@ CREATE TABLE savedPlants (
     user_id  INT,
     plant_id INT,
     created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id)  REFERENCES users(id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id)
+    FOREIGN KEY (user_id)  REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
 
 CREATE TABLE worksAndTools (
@@ -47,29 +47,31 @@ CREATE TABLE worksAndTools (
     garden_id INT,
     workName  VARCHAR(50),
     toolName  VARCHAR(100),
-    FOREIGN KEY (user_id)   REFERENCES users(id),
-    FOREIGN KEY (garden_id) REFERENCES gardens(id)
+    FOREIGN KEY (user_id)   REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (garden_id) REFERENCES gardens(id) ON DELETE CASCADE
 );
 
 CREATE TABLE savedWorksAndTools (
-    id        INT          AUTO_INCREMENT PRIMARY KEY,
-    user_id   INT,
-    garden_id INT,
-    created   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id)   REFERENCES users(id),
-    FOREIGN KEY (garden_id) REFERENCES gardens(id)
+    id               INT       AUTO_INCREMENT PRIMARY KEY,
+    user_id          INT,
+    garden_id        INT,
+    worksandtools_id INT,
+    created          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id)          REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (garden_id)        REFERENCES gardens(id) ON DELETE CASCADE,
+    FOREIGN KEY (worksandtools_id) REFERENCES worksAndTools(id) ON DELETE CASCADE
 );
 
 CREATE TABLE knowledges (
     id          INT           AUTO_INCREMENT PRIMARY KEY,
-    title       VARCHAR(150),
-    description TEXT,
+    title       VARCHAR(150)  NOT NULL,
+    description TEXT          NOT NULL,
     imageURL    VARCHAR(2083)
 );
 
 CREATE TABLE ideas (
     id          INT           AUTO_INCREMENT PRIMARY KEY,
-    title       VARCHAR(150),
+    title       VARCHAR(150)  NOT NULL,
     plants      VARCHAR(200),
     sunlight    VARCHAR(20),
     water       VARCHAR(20),
@@ -82,18 +84,19 @@ CREATE TABLE savedIdeas (
     user_id INT,
     idea_id INT,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (idea_id) REFERENCES ideas(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (idea_id) REFERENCES ideas(id) ON DELETE CASCADE
 );
 
 CREATE TABLE gardenmanager (
-    id              INT         AUTO_INCREMENT PRIMARY KEY,
+    id              INT          AUTO_INCREMENT PRIMARY KEY,
     user_id         INT,
-    gardenname      VARCHAR(50),
+    gardenname      VARCHAR(50)  NOT NULL,
     gardencontent   TEXT,
-    lastgardensaved TIMESTAMP   DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    lastgardensaved TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 INSERT INTO users (username, password) VALUES
 ('user1','pass1'),('user2','pass2'),('user3','pass3'),
@@ -101,7 +104,7 @@ INSERT INTO users (username, password) VALUES
 ('user7','pass7'),('user8','pass8'),('user9','pass9'),
 ('user10','pass10');
 
-INSERT INTO plants (plant_id, commonName, botanicalName, type, water, sunlight, soil, planting, harvesting) VALUES
+INSERT INTO plants (user_id, commonName, botanicalName, type, water, sunlight, soil, planting, harvesting) VALUES
 (1,'Apple','Malus domestica','fruits','medium','high','moderate','March-April','September-October'),
 (1,'Potato','Solanum tuberosum','vegetables','medium','moderate','high','April-May','August'),
 (2,'Tomato','Solanum lycopersicum','vegetables','high','high','high','March-April','July-August'),
@@ -160,7 +163,7 @@ INSERT INTO knowledges (title, description) VALUES
 ('Container Gardening',
 'Container gardening allows plants to be grown in pots, buckets, crates, and other vessels, making it ideal for balconies, patios, and indoor spaces. Almost any edible plant can be grown in a container if the vessel is the right size and has adequate drainage. Tomatoes, peppers, herbs, salad greens, and even dwarf fruit trees perform exceptionally well in containers. The key challenges are managing moisture levels, as containers dry out faster than ground soil, and ensuring consistent nutrition through regular feeding. Container gardening offers unmatched flexibility, letting gardeners move plants to optimize sunlight exposure throughout the day.'),
 ('Seed Saving',
-'Seed saving is the practice of collecting, drying, and storing seeds from your best-performing plants for use in future seasons. It is one of the oldest agricultural traditions and a powerful way to preserve rare or heirloom plant varieties that may not be available commercially. Open-pollinated and heirloom varieties are best suited for seed saving, as hybrid seeds often do not produce true-to-type offspring. Proper drying and storage in cool, dry, dark conditions can keep seeds viable for several years. Seed saving builds self-reliance in the garden and deepens the gardeners connection to the full life cycle of their plants.'),
+'Seed saving is the practice of collecting, drying, and storing seeds from your best-performing plants for use in future seasons. It is one of the oldest agricultural traditions and a powerful way to preserve rare or heirloom plant varieties that may not be available commercially. Open-pollinated and heirloom varieties are best suited for seed saving, as hybrid seeds often do not produce true-to-type offspring. Proper drying and storage in cool, dry, dark conditions can keep seeds viable for several years. Seed saving builds self-reliance in the garden and deepens the gardener''s connection to the full life cycle of their plants.'),
 ('Composting for Gardeners',
 'Composting transforms kitchen scraps and garden waste into rich, dark organic matter that dramatically improves soil health and plant productivity. A well-managed compost pile balances green materials like vegetable peels and fresh grass clippings with brown materials like dried leaves and cardboard. Microorganisms, worms, and insects break down this material over weeks or months into humus, which feeds plants and improves soil structure. Regularly turning the pile introduces oxygen and speeds up decomposition. Composting reduces household waste, eliminates the need for synthetic fertilizers, and creates a sustainable cycle that keeps nutrients circulating within your own garden ecosystem.');
 
