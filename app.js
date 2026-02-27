@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended:true}))
 app.use('/api', GardenRoutes)
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Gardenpublic/index.html')
+    res.sendFile(__dirname + '/Gardenpublic/sites/index.html')
 } )
 
 // Mount API routes first
