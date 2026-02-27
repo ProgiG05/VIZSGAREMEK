@@ -2,7 +2,7 @@ const GardenModel = require('../GardenModell/GardenPlannerMODELL')
 
 //showing the ideas and knowledges on their pages
 
-exports.GetAllIdeas = async (req,res) => {
+exports.GetEveryIdea = async (req,res) => {
     const IdeasData = await GardenModel.GetAllIdeas()
     res.json(IdeasData)
 }

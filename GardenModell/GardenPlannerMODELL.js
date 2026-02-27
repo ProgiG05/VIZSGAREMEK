@@ -4,14 +4,15 @@ const connection = mysql.createPool({
 host:     process.env.DB_HOST,
 user:     process.env.DB_USER,
 password: process.env.DB_PASSWORD,
-database: process.env.DB_DATABASE
+database: process.env.DB_NAME,
+port: process.env.DB_PORT
 })
 
 module.exports = {
-    //GetAllIdeas: async function GetAllIdeas() {
-    //    const [rows] = await connection.query(`SELECT * FROM ideas`)
-    //    return rows
-    //},
+    GetAllIdeas: async() => {
+        const [rows] = await connection.query(`SELECT * FROM ideas`)
+        return rows
+    },
     //GetAllKnowledges : async function GetAllKnowledges() {
     //  const [rows] = await connection.query(`SELECT * FROM knowledges`)
     //  return rows

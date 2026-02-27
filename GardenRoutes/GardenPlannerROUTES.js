@@ -2,7 +2,7 @@ const express = require('express')
 const GardenController = require("../GardenControll/GardenPlannerCONTROLL")
 const router = express.Router()
 
-router.get('/api/showIdeasData/all', GardenController.GetAllIdeas)
+router.get('/api/showIdeasData/all', GardenController.GetEveryIdea)
 
 router.get('/api/showKnowledgesData/all', GardenController.GetAllKnowledges)
 

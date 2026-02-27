@@ -2,7 +2,6 @@ const express = require('express')
 const app = new express()
 const GardenRoutes = require("./GardenRoutes/GardenPlannerROUTES")
 const bodyParser = require("body-parser")
-const dotenv = require("dotenv")
 
 app.use(bodyParser.json())
 
