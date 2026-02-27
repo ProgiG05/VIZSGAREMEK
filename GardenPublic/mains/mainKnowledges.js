@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const responseKnowledges = await fetch('/api/showKnowledgesData/all', {method : "GET" , headers : {"Content-Type" : "application/json"}})
+    const responseKnowledges = await fetch('/api/knowledge', {method : "GET" , headers : {"Content-Type" : "application/json"}})
     const ListOfKnowledges = await responseKnowledges.json()
     const KnowledgesCardContainer = document.getElementById("main-container-knowledges")
     ListOfKnowledges.forEach(knowledge => {

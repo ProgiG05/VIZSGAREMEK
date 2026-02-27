@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="/styles/styleIndex.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
     <aside id="sidebar">
         <!-- Sidebar: settings panel. Toggle with `toggleSidebar()`; appears when `#sidebar` gains the `active` class. -->
@@ -30,7 +32,8 @@
                     <button type="submit" id="item-plants"><i data-lucide="leaf"></i> Saved Plants</button>
                 </form>
                 <form action="/showGardeningWorksAndToolsPage" method="get">
-                    <button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works & Tools</button>
+                    <button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works &
+                        Tools</button>
                 </form>
                 <form action="/showMyGardensPage" method="get">
                     <button type="submit" id="item-layouts"><i data-lucide="grid"></i> Garden Layouts</button>
@@ -65,24 +68,34 @@
         </section>
         <!-- Top navigation grid. Each form contains a `.nav-button` styled button. -->
         <nav id="top-nav-row">
-            <form class="nav-button-container" action="/showIdeasPage" method="get">
+            <a href="ideas.html">REAL ideas</a>
+            <form class="nav-button-container">
+                <a href="ideas.html">Ideas</a>
                 <button id="btn-ideas" class="nav-button" type="submit">
                     <i data-lucide="sparkles"></i>
                     <div class="btn-text"><strong>Ideas</strong><span>Inspiration Gallery</span></div>
                 </button>
             </form>
-            <form class="nav-button-container" action="/showKnowledgesPage" method="get">
+            <form class="nav-button-container">
+                <a href="knowledges.html">Knowledge</a>
                 <button id="btn-knowledge" class="nav-button" type="submit">
                     <i data-lucide="book-open"></i>
                     <div class="btn-text"><strong>Knowledge</strong><span>Styles & Facts</span></div>
-                </button> 
+                </button>
             </form>
-            <form class="nav-button-container" action="/showGardenMakerPage" method="get">
+            <form class="nav-button-container" action="/gardenmaker" method="get">
                 <button id="btn-maker" class="nav-button" type="submit">
                     <i data-lucide="layout-template"></i>
                     <div class="btn-text"><strong>Garden Maker</strong><span>2D Designer</span></div>
                 </button>
-            </form>  
+            </form>
+            <form class="nav-button-container">
+                <a href="plants.html">Plants</a>
+                <button id="btn-plants" class="nav-button" type="submit">
+                    <i data-lucide="leaf"></i>
+                    <div class="btn-text"><strong>Plants</strong><span>Botanical Database</span></div>
+                </button>
+            </form>
         </nav>
         <!-- Bottom row: Plant Finder trigger and collapsible search (`#search-container`) -->
         <section id="bottom-nav-row">
@@ -136,4 +149,5 @@
     </main>
     <script src="/mains/mainIndex.js"></script>
 </body>
+
 </html>

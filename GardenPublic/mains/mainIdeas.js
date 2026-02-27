@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const responseIdeas = await fetch('/api/showIdeasData/all', { method: "GET", headers : {"Content-Type" : "application/json"}})
+    const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("idea-container")
     ListOfIdeas.forEach(idea => {

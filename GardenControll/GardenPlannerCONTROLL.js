@@ -22,7 +22,7 @@ exports.GetSearchedPlantDetails = async (req,res) => {
     var soilSearch = req.body.soil
     var plantingSearch = req.body.planting
     var harvestingSearch = req.body.harvesting
-    const plantData = await GardenModel.GetSearchedPlantDetails()
+    const plantData = await GardenModel.GetSearchedPlantDetails(commonNameSearch, botanicalNameSearch, typeSearch, waterSearch, sunlightSearch, soilSearch, plantingSearch, harvestingSearch)
     res.json(plantData)
 }
 exports.GetMySavedPlants = async (req,res) => {
@@ -36,4 +36,8 @@ exports.GetMyGardens = async (req,res) => {
 exports.GetAllWorksAndTools = async (req,res) => {
     const worksAndToolsData = await GardenModel.GetAllWorksAndTools()
     res.json(worksAndToolsData)
+}
+exports.GetAllPlants = async (req,res) => {
+    const plantsData = await GardenModel.GetAllPlants()
+    res.json(plantsData)
 }

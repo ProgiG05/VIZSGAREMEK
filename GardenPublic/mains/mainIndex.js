@@ -60,7 +60,12 @@ if (langSwitch) {
 }
 
 document.getElementById("execute-search").addEventListener("click", async () =>{
-    const responsePlant = await fetch('/api/showPlantFinder', { method : "GET", headers : {"Content-Type" : "application/json"}})
+    const responsePlant = await fetch(
+        '/api/showPlantFinder', 
+        { 
+            method : "GET", 
+            headers : {"Content-Type" : "application/json"}
+        })
     const ThePlant = await responsePlant.json()
     const searchedPlantPlace = document.getElementById("searchedPlant-container")
     ThePlant.forEach(plantDetail => {
