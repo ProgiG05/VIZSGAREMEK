@@ -12,32 +12,29 @@ app.use(express.urlencoded({extended:true}))
 app.use('/api', GardenRoutes)
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Gardenpublic/sites/index.html')
-} )
+    res.sendFile(__dirname + '/GardenPublic/sites/index.html')
+})
 
-// Mount API routes first
-// app.use('/', GardenRoutes)
+app.get('/showIdeasPage', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/ideas.html'))
+app.get('/ideas.html', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/ideas.html'))
 
-// // Explicit page routes
-// app.get('/', (req, res) => { res.render('index') })
-// app.get('/showIdeasPage', (req, res) => { res.render('ideas') })
-// app.get('/showKnowledgesPage', (req, res) => { res.render('knowledges') })
+app.get('/showKnowledgesPage', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/knowledges.html'))
+app.get('/knowledges.html', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/knowledges.html'))
 
-// // (API routes are defined inside the router at /api/...)
+app.get('/showGardenMakerPage', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/newGarden.html'))
+app.get('/gardenmaker', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/newGarden.html'))
 
-// app.get('/showGardenMakerPage', (req,res) => {res.render("newGarden")})
-// app.use('/api/addNewGarden',GardenRoutes)
+app.get('/showMySavedPlantsPage', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/savedPlants.html'))
+app.get('/savedplants', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/savedPlants.html'))
 
-// app.use('/api/showPlantFinder',GardenRoutes)
+app.get('/showMyGardensPage', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/myGardens.html'))
+app.get('/mygardens', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/myGardens.html'))
 
-// app.get('/showMySavedPlantsPage',(req,res) => {res.render("savedPlants")})
-// app.use('/api/showMySavedPlants/all',GardenRoutes)
+app.get('/showGardeningWorksAndToolsPage', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/WorksAndTools.html'))
+app.get('/worksandtools', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/WorksAndTools.html'))
 
-// app.get('/showMyGardensPage',(req,res) => {res.render("myGardens")})
-// app.use('/api/showMyGardensPage/all',GardenRoutes)
-
-// app.get('/showGardeningWorksAndToolsPage',(req,res) => {res.render("WorksAndTools")})
-// app.use('/api/showGardeningWorksAndTools/all',GardenRoutes)
+app.get('/plants.html', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/plants.html'))
+app.get('/plantfinder', (req, res) => res.sendFile(__dirname + '/GardenPublic/sites/searchedPlants.html'))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
