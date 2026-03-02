@@ -8,14 +8,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         )
     const resp = await plantsData.json()
-
-    document.getElementById('plant-container').innerHTML = resp.map(plant => {
-        return `
+    console.log(resp)
+    resp.forEach(plant => {
+        document.getElementById('plant-container').appendChild(document.createElement('div')).innerHTML = `
             <div class="plant-card">
-                <img src="${plant.image}" alt="${plant.name}">
-                <h2>${plant.name}</h2>
-                <p>${plant.description}</p>
+                <h2>${plant.botanicalName}</h2>
+                <h3>Alias: ${plant.commonName}</h3>
+                <p>Planting: ${plant.planting}</p>
+                <p>Harvesting: ${plant.harvesting}</p>
             </div>
         `
-    }).join('')
+    })
 })
