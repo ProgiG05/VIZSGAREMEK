@@ -15,6 +15,7 @@
 }
 
 .showcase_container {
+    top: 0;
     width: 90%;
     display: flex;
     justify-content: center;
@@ -63,11 +64,11 @@
     width: 200px;
     height: 30px;
     border-radius: 20px;
-    background-color: var(--idea-pageBtn-bg);
-    color: var(--idea-pageBtn-font-color);
+    background-color: var(--ideasPage-bg);
+    color: var(--ideasPage-hover-bg);
     text-decoration: none;
     font-family: monospace;
-    font-size: 14pt;
+    font-size: 12pt;
     margin: auto;
     bottom: 0;
     text-align: center;
@@ -76,11 +77,9 @@
 }
 
 .ideasPage_Btn:hover {
+    background-color: var(--ideasPage-font-color);
+    color: var(--ideasPage-hover-font-color);
+    border: 2px solid #6b3010;
     transition: all 0.3s ease;
-    background-color: var(--idea-pageBtn-hover-bg);
-    color: var(--idea-pageBtn-hover-font-color);
-    cursor: pointer;
-    width: 500px;
-    letter-spacing: 5px;
-    font-weight: bold;
+    width: 300px;
 }

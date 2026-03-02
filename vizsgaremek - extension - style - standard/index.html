@@ -6,13 +6,12 @@
     <title>Sproutified | Grow a garden</title>
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="sidepanel.css">
+    <link rel="stylesheet" href="ideacard.css">
 
     <link rel="stylesheet" href="index.css">
 
     <link rel="stylesheet" href="./sections/landingSection.css">
     <link rel="stylesheet" href="./sections/ideasshowcaseSection.css">
-    <link rel="stylesheet" href="./sections/plantfinderSection.css">
-    <link rel="stylesheet" href="./sections/knowledgesshowcaseSection.css">
     <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
 </head> 
 <body>
@@ -43,8 +42,8 @@
         <div class="landing-cont">
             <div class="title-cont">
                 <h1 class="main-title hidden">Sprout<span>ified</span></h1>
-                <p class="small-description1 hidden">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life. </p>
-                <p class="small-description2 hidden">Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity </p>
+                <p class="small-description hidden">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.</p>
+                <p class="small-description hidden">Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity</p>
             </div>
             <div class="second-cont hidden">
                 <div class="container">
@@ -76,38 +75,137 @@
     <section class="ideas-showcase-section">
         <div class="ceiling"></div>
         <div class="showcase_container" id="showcase-container">
-            <div class="ideaCard">
-                <h2 class="card_title">Card Title</h2>
-                <h3 class="card_contenttitle">Small description</h3>
-                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum.</p>
-                <ul class="card_contents">
-                    <li class="card_contentItem">Item 1</li>
-                    <li class="card_contentItem">Item 2</li>
-                    <li class="card_contentItem">Item 3</li>
-                    <li class="card_contentItem">Item 4</li>
-                    <li class="card_contentItem">Item 5</li>
+            <div class="garden-card hidden">
+                <div class="image-placeholder-wrapper">
+                    <div class="image-placeholder"></div>
+                </div>
+                <h2 class="card-title">Balcony Berry Wall</h2>
+                <h3 class="list-title">Small description</h3>
+                <ul class="plant-list">
+                    <a href=""><li class="card_contentItem">Strawberries</li></a>
+                    <a href=""><li class="card_contentItem">Blueberries</li></a>
+                    <a href=""><li class="card_contentItem">Goji berries</li></a>
+                    <a href=""><li class="card_contentItem">Raspberries</li></a>
+                    <a href=""><li class="card_contentItem">Cloudberries</li></a>
                 </ul>
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Hardiness</div>
+                            <div class="stat-label">Moderate</div>
+                        </div>
+                        <button onclick="toggleSaveState(this)" class="pot-button">
+                            <div class="flower-assembly">
+                                <div class="flower-head">
+                                    <div class="petal p1"></div>
+                                    <div class="petal p2"></div>
+                                    <div class="petal p3"></div>
+                                    <div class="petal p4"></div>
+                                    <div class="center"></div>
+                                </div>
+                                <div class="stem"></div>
+                            </div>
+                            <div class="pot-base"></div>
+                            <div class="pot-rim"></div>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="ideaCard">
-                <h2 class="card_title">Card Title</h2>
-                <h3 class="card_contenttitle">Small description</h3>
-                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum.</p>
-                <ul class="card_contents">
-                    <li class="card_contentItem">Item 1</li>
-                    <li class="card_contentItem">Item 2</li>
-                    <li class="card_contentItem">Item 3</li>
+            <div class="garden-card hidden">
+                <div class="image-placeholder-wrapper">
+                    <div class="image-placeholder"></div>
+                </div>
+                <h2 class="card-title">Balcony Berry Wall</h2>
+                <h3 class="list-title">Small description</h3>
+                <ul class="plant-list">
+                    <a href=""><li class="card_contentItem">Strawberries</li></a>
+                    <a href=""><li class="card_contentItem">Blueberries</li></a>
+                    <a href=""><li class="card_contentItem">Goji berries</li></a>
+                    <a href=""><li class="card_contentItem">Raspberries</li></a>
+                    <a href=""><li class="card_contentItem">Cloudberries</li></a>
                 </ul>
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Hardiness</div>
+                            <div class="stat-label">Moderate</div>
+                        </div>
+                        <button onclick="toggleSaveState(this)" class="pot-button">
+                            <div class="flower-assembly">
+                                <div class="flower-head">
+                                    <div class="petal p1"></div>
+                                    <div class="petal p2"></div>
+                                    <div class="petal p3"></div>
+                                    <div class="petal p4"></div>
+                                    <div class="center"></div>
+                                </div>
+                                <div class="stem"></div>
+                            </div>
+                            <div class="pot-base"></div>
+                            <div class="pot-rim"></div>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="ideaCard">
-                <h2 class="card_title">Card Title</h2>
-                <h3 class="card_contenttitle">Small description</h3>
-                <p class="card_smalldescription">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda, libero, debitis temporibus dolore distinctio iusto amet ipsam omnis animi harum.</p>
-                <ul class="card_contents">
-                    <li class="card_contentItem">Item 1</li>
-                    <li class="card_contentItem">Item 2</li>
-                    <li class="card_contentItem">Item 3</li>
-                    <li class="card_contentItem">Item 4</li>
+            <div class="garden-card hidden">
+                <div class="image-placeholder-wrapper">
+                    <div class="image-placeholder"></div>
+                </div>
+                <h2 class="card-title">Balcony Berry Wall</h2>
+                <h3 class="list-title">Small description</h3>
+                <ul class="plant-list">
+                    <a href=""><li class="card_contentItem">Strawberries</li></a>
+                    <a href=""><li class="card_contentItem">Blueberries</li></a>
+                    <a href=""><li class="card_contentItem">Goji berries</li></a>
+                    <a href=""><li class="card_contentItem">Raspberries</li></a>
+                    <a href=""><li class="card_contentItem">Cloudberries</li></a>
                 </ul>
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Hardiness</div>
+                            <div class="stat-label">Moderate</div>
+                        </div>
+                        <button onclick="toggleSaveState(this)" class="pot-button">
+                            <div class="flower-assembly">
+                                <div class="flower-head">
+                                    <div class="petal p1"></div>
+                                    <div class="petal p2"></div>
+                                    <div class="petal p3"></div>
+                                    <div class="petal p4"></div>
+                                    <div class="center"></div>
+                                </div>
+                                <div class="stem"></div>
+                            </div>
+                            <div class="pot-base"></div>
+                            <div class="pot-rim"></div>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <a class="ideasPage_Btn" id="ideasPage_Btn" href="">See more ideas</a> 
@@ -172,14 +270,12 @@
                 <option value="December">December</option>
             </select>
         </div>
-        <div class="result-cont">
-            <div id="search-result"></div> 
-            <a class="plantsearch_Btn" id="plant-search_Btn" href="">Search for more</a>
-        </div>
+        <div id="search-result"></div> 
+        <a id="plant-search_Btn" href="">Search for more</a>
     </section>
     <section class="knowledges-showcase-section"> 
         <div id="knowledge-reader"></div>
-        <a class="knowledgespage_Btn" id="knowledges-page_Btn" href="">Learn more</a>
+        <a id="knowledges-page_Btn" href="">Learn more</a>
     </section>
     <footer></footer>
     <script src="index.js"></script>
