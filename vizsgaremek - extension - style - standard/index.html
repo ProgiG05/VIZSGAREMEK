@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="./sections/landingSection.css">
     <link rel="stylesheet" href="./sections/ideasshowcaseSection.css">
+    <link rel="stylesheet" href="./sections/plantfinderSection.css">
+    <link rel="stylesheet" href="./sections/knowledgesshowcaseSection.css">
     <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
 </head> 
 <body>
@@ -41,7 +43,8 @@
         <div class="landing-cont">
             <div class="title-cont">
                 <h1 class="main-title hidden">Sprout<span>ified</span></h1>
-                <p class="small-description hidden">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life. <br>Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity </p>
+                <p class="small-description1 hidden">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life. </p>
+                <p class="small-description2 hidden">Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity </p>
             </div>
             <div class="second-cont hidden">
                 <div class="container">
@@ -82,7 +85,7 @@
                     <li class="card_contentItem">Item 2</li>
                     <li class="card_contentItem">Item 3</li>
                     <li class="card_contentItem">Item 4</li>
-                    <li class="card_contentItem">Item 4</li>
+                    <li class="card_contentItem">Item 5</li>
                 </ul>
             </div>
             <div class="ideaCard">
@@ -93,8 +96,6 @@
                     <li class="card_contentItem">Item 1</li>
                     <li class="card_contentItem">Item 2</li>
                     <li class="card_contentItem">Item 3</li>
-                    <li class="card_contentItem">Item 4</li>
-                    <li class="card_contentItem">Item 4</li>
                 </ul>
             </div>
             <div class="ideaCard">
@@ -105,7 +106,6 @@
                     <li class="card_contentItem">Item 1</li>
                     <li class="card_contentItem">Item 2</li>
                     <li class="card_contentItem">Item 3</li>
-                    <li class="card_contentItem">Item 4</li>
                     <li class="card_contentItem">Item 4</li>
                 </ul>
             </div>
@@ -172,12 +172,14 @@
                 <option value="December">December</option>
             </select>
         </div>
-        <div id="search-result"></div> 
-        <a id="plant-search_Btn" href="">Search for more</a>
+        <div class="result-cont">
+            <div id="search-result"></div> 
+            <a class="plantsearch_Btn" id="plant-search_Btn" href="">Search for more</a>
+        </div>
     </section>
     <section class="knowledges-showcase-section"> 
         <div id="knowledge-reader"></div>
-        <a id="knowledges-page_Btn" href="">Learn more</a>
+        <a class="knowledgespage_Btn" id="knowledges-page_Btn" href="">Learn more</a>
     </section>
     <footer></footer>
     <script src="index.js"></script>

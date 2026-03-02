@@ -6,13 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 document.getElementById('settings_Btn').addEventListener('click',() => {
-    sidePanel.style.transitionDuration = '0.2'
-    sidePanel.style.transitionBehavior = 'ease-in'  
+    sidePanel.style.transition = 'all 0.3s ease' 
     sidePanel.style.left = 0
 })
 document.getElementById('closeSidePanel').addEventListener('click',() => {
-    sidePanel.style.transitionDuration = '0.2'
-    sidePanel.style.transitionBehavior = 'ease-in'
+    sidePanel.style.transition = 'all 0.3s ease'
     sidePanel.style.left = '-360px'
 })
 
