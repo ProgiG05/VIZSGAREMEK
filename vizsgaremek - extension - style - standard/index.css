@@ -19,11 +19,28 @@
     --navbtn-font-color: #add5c7;
     --navbtn-hover-font-color: #1b291c;
 
-    --ideacard-bg: #09341cab;
-    --ideacard-font: #f3eac5;
-    --ideacard-accent1: #397234;
-    --ideacard-accent2: #3F2617;
-    --ideacard-accent3: #B78449;
+    --ideasPage-bg: #1a1e1a;
+    --ideasPage-hover-bg: #a7f070;
+    --ideasPage-font-color: #a7f070;
+    --ideasPage-hover-font-color: #1a1e1a;
+
+    --onecard-bg-primary:#c6e7d8;
+    --onecard-font-primary:rgb(6, 19, 18);
+    --onecard-bg-secondary:rgb(6, 19, 18);
+    --onecard-font-secondary:#c6e7d8;
+
+    --bg-dark: #1a1e1a;
+    --text-green: #a7f070;
+    --beige-light: #e0cda7;
+    --beige-dark-shadow: #8a6a3a;
+    --pot-brown: #6b3010;
+    --pot-rim-brown: #7c3a15;
+    --flower-white: #ffffff;
+    --flower-yellow: #f0e632;
+    --stem-green: #66a840;
+    --stat-text: #1a1e1a;
+
+
 }
 
 body {
@@ -83,5 +100,15 @@ section:nth-child(even){
     background-image: var(--section-bg-even);
 }
 
+.hidden {
+    opacity: 0;
+    transition: all 1s ease;
+    transform: translateX(-100px);
+}
 
+.show {
+    opacity: 1;
+    transition: all 1s ease;
+    transform: translateX(0);
+}
 
