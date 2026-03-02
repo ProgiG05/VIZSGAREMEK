@@ -28,14 +28,14 @@
         <div id="account-hub">
             <h3><i data-lucide="user"></i> My Oasis</h3>
             <div id="saved-list">
-                <form action="/showMySavedPlantsPage" method="get">
+                <form action="/savedPlants" method="get">
                     <button type="submit" id="item-plants"><i data-lucide="leaf"></i> Saved Plants</button>
                 </form>
-                <form action="/showGardeningWorksAndToolsPage" method="get">
+                <form action="/WorksAndTools" method="get">
                     <button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works &
                         Tools</button>
                 </form>
-                <form action="/showMyGardensPage" method="get">
+                <form action="/myGardens" method="get">
                     <button type="submit" id="item-layouts"><i data-lucide="grid"></i> Garden Layouts</button>
                 </form>
             </div>
@@ -68,13 +68,13 @@
         </section>
         <!-- Top navigation grid. Each form contains a `.nav-button` styled button. -->
         <nav id="top-nav-row">
-            <form class="nav-button-container" action="/ideas.html">
+            <form class="nav-button-container" action="/ideas">     
                 <button id="btn-ideas" class="nav-button" type="submit">
                     <i data-lucide="sparkles"></i>
                     <div class="btn-text"><strong>Ideas</strong><span>Inspiration Gallery</span></div>
                 </button>
             </form>
-            <form class="nav-button-container" action="/knowledges.html">
+            <form class="nav-button-container" action="/knowledges">
                 <button id="btn-knowledge" class="nav-button" type="submit">
                     <i data-lucide="book-open"></i>
                     <div class="btn-text"><strong>Knowledge</strong><span>Styles & Facts</span></div>
@@ -86,8 +86,8 @@
                     <div class="btn-text"><strong>Garden Maker</strong><span>2D Designer</span></div>
                 </button>
             </form> -->
-            <form class="nav-button-container" action="/plants.html">
-                    <button id="btn-plants" class="nav-button" type="submit">
+            <form class="nav-button-container" action="/plants">
+                <button id="btn-plants" class="nav-button" type="submit">
                     <i data-lucide="leaf"></i>
                     <div class="btn-text"><strong>Plants</strong><span>Botanical Database</span></div>
                 </button>
@@ -103,7 +103,7 @@
                 </div>
             </button>
 
-            <form id="search-container" action="/plantfinder" method="get">
+            <form id="search-container" action="/searchedPlants" method="get">
                 <div id="search-fields">
                     <!-- Search inputs: IDs are referenced by mainIndex.js when executing a search -->
                     <input type="text" id="commonName" name="commonName" placeholder="Common Name (e.g. Lemon)">
