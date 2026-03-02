@@ -43,8 +43,8 @@ module.exports = {
         const [rows] = await connection.query(`INSERT INTO users VALUES(?,?,?)`,[id,username,password])
         return rows
     },
-    GetGardens: async (userid) => {
-    const [rows] = await connection.query('SELECT * FROM gardenmanager WHERE user_id = ?' [userid])
+    GetGardens: async () => {
+    const [rows] = await connection.query('SELECT * FROM gardenmanager')
     return rows
     },
     GetAllPlants: async () => {

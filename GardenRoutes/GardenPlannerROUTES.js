@@ -23,4 +23,6 @@ router.get('/worktools', GardenController.GetAllWorksAndTools)
 
 router.get('/getplants', GardenController.GetAllPlants)
 
+router.get('/gardens', GardenController.GetMyGardens)
+
 module.exports = router

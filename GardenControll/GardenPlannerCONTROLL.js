@@ -23,7 +23,7 @@ exports.GetMySavedPlants = async (req,res) => {
     res.json(savedPlantsData)
 }
 exports.GetMyGardens = async (req,res) => {
-    const myGardensData = await GardenModel.GetMySavedPlants()
+    const myGardensData = await GardenModel.GetGardens()
     res.json(myGardensData)
 }
 exports.GetAllWorksAndTools = async (req,res) => {
