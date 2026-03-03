@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sproutified | Grow a garden</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
+
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="sidepanel.css">
     <link rel="stylesheet" href="ideacard.css">
-
-    <link rel="stylesheet" href="index.css">
 
     <link rel="stylesheet" href="./sections/landingSection.css">
     <link rel="stylesheet" href="./sections/ideasshowcaseSection.css">
     <link rel="stylesheet" href="./sections/plantfinderSection.css">
     <link rel="stylesheet" href="./sections/knowledgesshowcaseSection.css">
-    <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
 </head> 
 <body>
     <nav id="top-navbar"> 
@@ -214,70 +214,89 @@
     </section>
     <section class="plant-finder-section">
         <div class="search-container"> 
-            <h1 class="search-title"></h1>
-            <input id="plant-search-inp" type="text" placeholder="Search for a plant name...">
-            <div class="water-selection-inp">
-                <h3>Watering need</h3>
-                <label for="water-low">Low</label>
-                <input type="radio" name="water-low" id="water-select">
-                <label for="water-medium">Medium</label>
-                <input type="radio" name="water-medium" id="water-select">
-                <label for="water-high">High</label>
-                <input type="radio" name="water-high" id="water-select">
+            <h1 class="search-title">Search for a plant</h1>
+            <div class="textInp-cont">
+                <div>
+                    <label for="commonN">Common name:</label>
+                    <input name="commonN" id="commonplant-search-inp" type="text" placeholder="Search...">
+                </div>
+                <div>
+                    <label for="botanicalN">Botanical name:</label>
+                    <input name="botanicalN" id="botanicalplant-search-inp" type="text" placeholder="Search...">
+                </div>
             </div>
-            <div class="sunlight-selection-inp">
-                <h3>Sunlight need</h3>
-                <label for="sunlight-low">Low</label>
-                <input type="radio" name="sunlight-low" id="sunlight-select">
-                <label for="sunlight-moderate">Moderate</label>
-                <input type="radio" name="sunlight-moderate" id="sunlight-select">
-                <label for="sunlight-high">High</label>
-                <input type="radio" name="sunlight-high" id="sunlight-select">
+            <div class="check-cont">
+                <h3><u>Watering need</u></h3>
+                <div class="water-selection-cont">
+                    <label for="water-low">Low</label>
+                    <input type="checkbox" name="water-low" id="water-select">
+                    <label for="water-medium">Medium</label>
+                    <input type="checkbox" name="water-medium" id="water-select">
+                    <label for="water-high">High</label>
+                    <input type="checkbox" name="water-high" id="water-select">
+                </div>
+                <h3><u>Sunlight need</u></h3>
+                <div class="sunlight-selection-cont">
+                    <label for="sunlight-low">Low</label>
+                    <input type="checkbox" name="sunlight-low" id="sunlight-select">
+                    <label for="sunlight-moderate">Moderate</label>
+                    <input type="checkbox" name="sunlight-moderate" id="sunlight-select">
+                    <label for="sunlight-high">High</label>
+                    <input type="checkbox" name="sunlight-high" id="sunlight-select">
+                </div>
+                <h3><u>Soil type</u></h3>
+                <div class="soil-selection-cont">
+                    <label for="soil-low">Low</label>
+                    <input type="checkbox" name="soil-low" id="soil-select">
+                    <label for="soil-moderate">Moderate</label>
+                    <input type="checkbox" name="soil-moderate" id="soil-select">
+                    <label for="soil-high">High</label>
+                    <input type="checkbox" name="soil-high" id="soil-select">  
+                </div>
             </div>
-            <div class="soil-selection-inp">
-                <h3>Soil type</h3>
-                <label for="soil-low">Low</label>
-                <input type="radio" name="soil-low" id="soil-select">
-                <label for="soil-moderate">Moderate</label>
-                <input type="radio" name="soil-moderate" id="soil-select">
-                <label for="soil-high">High</label>
-                <input type="radio" name="soil-high" id="soil-select">  
+            <div class="selection-cont">
+                <label for="plantingSelection">Planting month: </label>
+                <select name="plantingSelection" id="planting-months-selection">
+                    <option value="none">Choose...</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                <label for="harvestingSelection">Harvesting month: </label>
+                <select name="harvestingSelection" id="harvesting-months-selection">
+                    <option value="none">Choose...</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
             </div>
-            <select name="" id="planting-months-selection">
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-            </select>
-            <select name="" id="harvesting-months-selection">
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-            </select>
         </div>
-        <div id="search-result"></div> 
-        <a id="plant-search_Btn" href="">Search for more</a>
+        <div id="search-result-cont">
+            <div id="searchResult"></div>
+        </div> 
+        <a class="plantsearchPage_Btn" id="plantsearchPage_Btn" href="">Search for more</a>
     </section>
     <section class="knowledges-showcase-section"> 
         <div id="knowledge-reader"></div>
-        <a id="knowledges-page_Btn" href="">Learn more</a>
+        <a class="knowledgesPage_Btn" id="knowledgesPage_Btn" href="">Learn more</a>
     </section>
     <footer></footer>
     <script src="index.js"></script>
