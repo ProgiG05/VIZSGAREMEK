@@ -28,7 +28,7 @@
 .main-title{font-size: 120pt;margin-bottom: 55px; font-family: 'Quicksand', sans-serif; color: var(--text-main);}
 .main-title span{color:var(--text-landing);}
 
-.small-description1 {
+.small-description {
     width: 100%;
     text-align:left;
     margin: none;
@@ -40,23 +40,6 @@
     word-spacing: 5px;
     border-left: var(--text-main) 10px solid;
     color: var(--text-main);
-}
-.small-description2 {
-    width: 100%;
-    text-align:left;
-    margin: none;
-    padding-left: 10px;
-    line-height: 20px;
-    font-size: 14pt;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
-    word-spacing: 5px;
-    border-left: var(--text-main) 10px solid;
-    color: var(--text-main);
-}
-.small-description1:hover, .small-description2:hover{
-    padding-left: 20px;
-    cursor: pointer;
 }
 .second-cont{
     display: flex;
