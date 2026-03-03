@@ -4,8 +4,8 @@
     --third: #8abb9d;
 
     --text-main: #E3FFF5;
-    --section-bg-odd: linear-gradient(to bottom,#11402fbf, #8abb9d);
-    --section-bg-even: linear-gradient(to bottom,#8abb9d , #11402fbf);
+    --section-bg-odd: linear-gradient(to bottom,#11402fdd, #8abb9d);
+    --section-bg-even: linear-gradient(to bottom,#8abb9d , #11402fdd);
 
     --text-landing: #195840;
     --landing-bg: linear-gradient(to bottom , rgba(203, 234, 222, 0.541),rgba(28, 115, 82, 0.541));
@@ -40,7 +40,18 @@
     --stem-green: #66a840;
     --stat-text: #1a1e1a;
 
+    --searchcontainer-bg: #180c2c;
+    --searchcontainer-text:#f1e2ff;
+    --searchcontainer-border:#1B1B1B;
+    --searchcontainer-shadow:#38274189;
+    --innercont-bg:#22113e;
+    --innercont-hover-bg:#1c4c2d92;
+    --innercont-hover-shadow:#4291548c;
 
+    --plantsearchPage-bg: #27104c;
+    --plantsearchPage-hover-bg: #f1e2ff;
+    --plantsearchPage-font-color: #f1e2ff;
+    --plantsearchPage-hover-font-color: #27104c;
 }
 
 body {
@@ -50,6 +61,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
 @media screen and (max-width: 1250px) {
     .landing-cont {
         flex-direction: column;
@@ -60,6 +72,10 @@ body {
         width: 100%;
         margin: 0;
         text-align: center;
+    }
+    .main-title{
+        font-size: 80pt;
+        margin-bottom: 35px;
     }
     .small-description {
         width: 60%;
@@ -74,10 +90,18 @@ body {
     #top-navbar button {
         font-size: 10pt;
     } 
+    .main-title{
+        font-size: 60pt;
+        margin-bottom: 25px;
+    }
 }
 @media screen and (max-width: 650px) {
     #top-navbar button {
         font-size: 6pt;
+    }
+    .main-title{
+        font-size: 50pt;
+        margin-bottom: 15px;
     }
 }
 @keyframes rotate {
