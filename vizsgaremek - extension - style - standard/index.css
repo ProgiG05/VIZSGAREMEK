@@ -4,8 +4,8 @@
     --third: #8abb9d;
 
     --text-main: #E3FFF5;
-    --section-bg-odd: linear-gradient(to bottom,#11402fdd, #8abb9d);
-    --section-bg-even: linear-gradient(to bottom,#8abb9d , #11402fdd);
+    --section-bg-odd: linear-gradient(to bottom,#16513bdd, #4d8a64, #67987a);
+    --section-bg-even: linear-gradient(to bottom,#67987a ,#4d8a64, #16513bdd);
 
     --text-landing: #195840;
     --landing-bg: linear-gradient(to bottom , rgba(203, 234, 222, 0.541),rgba(28, 115, 82, 0.541));
@@ -40,18 +40,31 @@
     --stem-green: #66a840;
     --stat-text: #1a1e1a;
 
-    --searchcontainer-bg: #180c2c;
+    /* --searchcontainer-bg: #281547;
     --searchcontainer-text:#f1e2ff;
     --searchcontainer-border:#1B1B1B;
     --searchcontainer-shadow:#38274189;
     --innercont-bg:#22113e;
     --innercont-hover-bg:#1c4c2d92;
-    --innercont-hover-shadow:#4291548c;
+    --innercont-hover-shadow:#4291548c; */
 
-    --plantsearchPage-bg: #27104c;
+    --searchcontainer-bg: #1c4c2d92;
+    --searchcontainer-text:#ffffff;
+    --searchcontainer-border:#d0edd4;
+    --searchcontainer-shadow:#b7f0be7b;
+    --innercont-bg:#4291548c;
+    --innercont-hover-bg:#76553c;
+    --innercont-hover-shadow:#85734489;
+
+    /* --plantsearchPage-bg: #27104c;
     --plantsearchPage-hover-bg: #f1e2ff;
     --plantsearchPage-font-color: #f1e2ff;
-    --plantsearchPage-hover-font-color: #27104c;
+    --plantsearchPage-hover-font-color: #27104c; */
+
+    --plantsearchPage-bg: #1c4c2dd0;
+    --plantsearchPage-hover-bg: #ffffff;
+    --plantsearchPage-font-color: #ffffff;
+    --plantsearchPage-hover-font-color: #072e15d3;
 }
 
 body {
