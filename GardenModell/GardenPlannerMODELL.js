@@ -50,5 +50,9 @@ module.exports = {
     GetAllPlants: async () => {
         const [rows] = await connection.query('SELECT * FROM plants')
         return rows
+    },
+    DeleteGarden: async (id) => {
+        const [rows] = await connection.query('DELETE FROM gardenmanager WHERE id = ?', [id])
+        return rows
     }
 }

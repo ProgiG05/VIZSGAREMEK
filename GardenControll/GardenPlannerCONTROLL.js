@@ -34,3 +34,9 @@ exports.GetAllPlants = async (req,res) => {
     const plantsData = await GardenModel.GetAllPlants()
     res.json(plantsData)
 }
+exports.DeleteGarden = async (req,res) => {
+    const {id} = req.params
+    const deletedGarden = await GardenModel.DeleteGarden(id)
+    res.json(deletedGarden)
+}
+

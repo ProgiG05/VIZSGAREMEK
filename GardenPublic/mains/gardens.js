@@ -18,9 +18,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         const deleteBtn = document.createElement("button")
         deleteBtn.textContent = "Delete Garden"
         deleteBtn.className = "delete_btn"
+        deleteBtn.id = garden.id
+        deleteBtn.addEventListener("click", async () => {
+            if (confirm("Are you sure you want to delete this garden?")) {
+                DeleteGarden(garden.id)
+            }
+            else {
+                return
+            }
+        })
         gardensContainer.appendChild(deleteBtn)
     })
 })
+
+async function DeleteGarden(id) {
+    const resp = await fetch(`/api/gardens/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+    })
+    const data = await resp.json()
+    console.log(data)
+    window.location.reload()
+}
 
 function CreateTable(splittedContent) {
     const table = document.createElement("table")
@@ -34,10 +53,11 @@ function CreateTable(splittedContent) {
             switch (column) {
                 case "-":
                     tableColumn.className = "empty-cell"
-                    tableColumn.textContent = "Disabled Cell"
+                    tableColumn.textContent = "Empty Cell"
                     break;
                 case "":
                     tableColumn.className = "tobecollected-cell"
+                    tableColumn.textContent = "D"
                     break;
                 default:
                     tableColumn.className = "plant-cell"
@@ -51,3 +71,4 @@ function CreateTable(splittedContent) {
     })
     return table
 }
+

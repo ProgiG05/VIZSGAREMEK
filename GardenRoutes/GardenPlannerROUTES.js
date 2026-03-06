@@ -25,4 +25,6 @@ router.get('/getplants', GardenController.GetAllPlants)
 
 router.get('/gardens', GardenController.GetMyGardens)
 
+router.delete('/gardens/:id', GardenController.DeleteGarden)
+
 module.exports = router
