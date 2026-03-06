@@ -25,7 +25,7 @@
     padding: 10px;
 }
 
-.main-title{font-size: 90pt;margin-bottom: 35px; font-family: 'Quicksand', sans-serif; color: var(--text-main);}
+.main-title{font-size: 6.8rem;margin-bottom: 35px; font-family: Georgia, 'Times New Roman', Times, serif; color: var(--text-main);}
 .main-title span{color:var(--text-landing);}
 
 .small-description {
