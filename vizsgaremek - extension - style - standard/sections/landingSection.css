@@ -1,81 +1,77 @@
-.landing-section {
-    justify-content: center;
-    align-items: center;
-}
+.landing-section {justify-content: center;align-items: center;}
 .landing-cont{
+    width: 95%;
+    height: 80%;
     display: flex;
     flex-direction: row;
-    width: 95%;
-    height: 90%;
-    background-image: var(--landing-bg);
-    border-radius: 40px;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 10px;
-    margin-top: 50px;
+    border-radius: 40px;
+    padding: 0.625rem;
+    margin-top: 3.125rem;
+    background-image: var(--landing-bg);
+    gap: 1.25rem;
 }
-.title-cont{
-    display: flex;
-    flex-direction: column;
+/* left container with the main title and the two subtitles */
+.first-cont{
     width: 40%;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
     margin-top: 8vh;
     margin-left: 8vw; 
-    padding: 10px;
+    padding: 0.625rem;
 }
-
-.main-title{font-size: 6.8rem;margin-bottom: 35px; font-family: Georgia, 'Times New Roman', Times, serif; color: var(--text-main);}
+.main-title{font-size: 10rem;margin-bottom: 35px; font-family: Georgia, 'Times New Roman', Times, serif; color: var(--text-main);}
 .main-title span{color:var(--text-landing);}
-
 .small-description {
     width: 100%;
     text-align:left;
     margin: none;
-    padding-left: 10px;
-    line-height: 20px;
-    font-size: 11pt;
+    padding-left: 0.625rem;
+    border-left: var(--text-main) 0.625rem solid;
+    line-height: 1.25rem;
+    color: var(--text-main);
+    font-size: 1rem;
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
-    word-spacing: 5px;
-    border-left: var(--text-main) 10px solid;
-    color: var(--text-main);
+    word-spacing: 0.313rem;
 }
-
+/*right container with the 3D animation and button*/
 .second-cont{
-    display: flex;
-    flex-direction: column;
     width: 40%;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 10vh;
     margin-left: 8vw;
-    justify-content: center;
 }
-
-#gardenMakerPage_Btn{
+.gardenMakerPage_Btn{
     width: 60%;
-    height: 50px;
+    height: 1.875rem;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    padding: 0.625rem;
     border-radius: 30px;
     background-color:var(--btn-bg);
     color: var(--btn-font-color);
     text-decoration: none;
     font-family: monospace;
-    font-size: 1.5rem;
-    margin: auto;
-    text-align: center;
-    align-items: center;
-    padding-top: 20px;
+    font-size: 1.3rem;
+    transition-timing-function: ease-in;
+    transition-duration: 0.2s;
 }
-#gardenMakerPage_Btn:hover{
+.gardenMakerPage_Btn:hover{
     background-color:var(--btn-hover-bg);
     color:var(--btn-hover-font-color);
     letter-spacing: 5px;
-    font-size: 1.6rem;
     font-weight: bold;
     transition-timing-function: ease-in;
     transition-duration: 0.2s;
 }
-
 .container {width: 400px;height: 400px;margin: auto ;perspective: 1000px;}
 .cube {width: 100%;height: 100%;position: relative;transform-style: preserve-3d;transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg);}
 .face{position: absolute;width: 400px;height: 400px;}
@@ -87,5 +83,3 @@
 .left{height: 40px;background-image: linear-gradient(to bottom, #311c0a, #452910) ;transform: rotateY(-90deg) translateZ(200px) translateY(180px);}
 .top table {width: 100%;height: 100%;border-collapse: collapse;}
 .top table td {border: 5px solid #13090188;}
-
-

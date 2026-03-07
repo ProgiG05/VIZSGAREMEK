@@ -1,143 +1,103 @@
 .garden-card {
-    border-radius: 20px;
-    padding: 20px;
-    width: 350px;
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    width: 50%;
+    height: fit-content;
     background-color: var(--bg-dark);
     color: var(--text-green);
     position: relative;
     margin: auto;
-    margin-bottom: 50px;
 }
 .garden-card:hover{
-    scale: calc(1.02);
+    scale: calc(1.01);
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
 }
 
-/* The beige image area and its shadow */
 .image-placeholder-wrapper {
     position: relative;
-    height: 200px;
-    margin-bottom: 15px;
+    height: 15%;
+    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
 }
-
-.image-placeholder {
-    background-color: var(--beige-light);
+.image-placeholder-wrapper img{
     width: 100%;
     height: 100%;
-    position: relative;
-    z-index: 2;
+    /* aspect-ratio: 3/2; */
+    /* object-fit: contain; */
 }
-
-.image-placeholder-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 8px; /* Slightly adjusted shadow offset */
-    left: 4px;
-    width: 100%;
-    height: 100%;
-    background-color: var(--beige-dark-shadow);
-    z-index: 1;
-}
-
-/* Typography Sizes Reduced */
+.image-placeholder-wrapper img:hover{
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+    opacity: 0.3;
+    cursor: pointer;
+}  
 .card-title {
-    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.9rem;
     font-weight: bold;
-    margin-bottom: -10px;
+    text-align: center;
 }
-.list-title{
-    font-size: 16px;
-    margin-bottom: -5px;
+.card-description{
+    font-family: monospace;
+    font-size: 1rem;
+    text-indent: 1rem;
+    text-align: left;
+    word-spacing: 0.1rem;
 }
-
 .plant-list a{
     list-style-type: none;
     padding: 0;
     margin: 5px 0 5px 0;
-    font-size: 14px; 
-    line-height: 1.4;
+    font-size: 0.875rem; 
     text-decoration: none;
     color: var(--text-green);
+    font-family: 'Courier New', Courier, monospace;
 }
+.plant-list a:hover{text-decoration: underline;}
 
-/* ---- Footer Section (Stats + Pot) ---- */
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 70px; 
-    margin-top: -10px;
-}
-
-.stats-container {
-    display: flex;
-    gap: 10px; 
-}
-
-.stat-box {
-    text-align: center;
-    width: 90px; 
-}
-
-.stat-badge {
-    background-color: var(--beige-light);
-    color: var(--stat-text);
-    padding: 4px 0;
-    font-weight: bold;
-    font-size: 12px; 
-    border-radius: 4px;
-    margin-bottom: 4px;
-}
-
-.stat-label {
-    font-size: 14px;
-}
-
-/* =========================================
-   CSS DRAWN INTERACTIVE POT BUTTON
-   ========================================= */
+.cardbottom-cont{display: flex;flex-direction: row;width: 100%;padding: 0;margin: 0;}
+.card-footer {display: flex;height: 100%; margin: auto;}
+.stats-container {display: flex;gap: 10px; }
+.stat-box {text-align: center;width: 7rem;}
+.stat-badge {background-color: var(--beige-light);color: var(--stat-text);font-weight: bold;font-size: 0.9rem; border-radius: 5px;padding: 0.3rem;}
+.stat-label {font-size: 1rem;font-weight: bold;text-decoration: underline;margin-top: 5px;}
 
 .pot-button {
+    right: 0;
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
     position: relative;
-    width: 60px;
-    height: 70px;
+    width: 3.75rem;
+    height: 4.375rem;
     overflow: visible; 
-    
-    /* New: Scale down the entire pot assembly to fit the smaller card */
-    transform: scale(0.8);
+    transform: scale(0.8);/* New: Scale down the entire pot assembly to fit the smaller card */
     transform-origin: bottom right; /* Keep it anchored to the corner */
     margin-right: -5px; /* Adjusting margin due to scaling loss */
 }
-
-/* -- The Pot Drawing (Static) -- */
 .pot-base {
     position: absolute;
     bottom: 0;
     left: 10%;
     width: 80%;
-    height: 45px;
+    height: 2.813rem;
     background-color: var(--pot-brown);
     clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
     z-index: 10;
 }
-
 .pot-rim {
     position: absolute;
-    bottom: 40px;
+    bottom: 2.5rem;
     left: 5%;
     width: 90%;
-    height: 10px;
+    height: 0.625rem;
     background-color: var(--pot-rim-brown);
     z-index: 11;
     border-radius: 2px;
 }
-
-/* -- The Flower Assembly (Animated) -- */
 .flower-assembly {
     position: absolute;
     left: 50%;
@@ -146,51 +106,41 @@
     z-index: 5;
     transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
-/* THE SAVED STATE - Moves up */
-.pot-button.saved .flower-assembly {
-    bottom: 40px; /* Visible state */
-}
-
-/* -- Flower Drawing Details -- */
+.pot-button.saved .flower-assembly {bottom: 2.5rem; /* Visible state */}
 .stem {
-    width: 8px;
-    height: 20px;
+    width: 0.5rem;
+    height: 1.25rem;
     background-color: var(--stem-green);
     margin: 0 auto;
 }
-
 .flower-head {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     margin-bottom: -5px;
 }
-
 .center {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 14px;
-    height: 14px;
+    width: 0.875rem;
+    height: 0.875rem;
     background-color: var(--flower-yellow);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
 }
-
 .petal {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12px;
-    height: 36px;
+    width: 0.75rem;
+    height: 2.25rem;
     background-color: var(--flower-white);
     border-radius: 20px;
     transform-origin: center;
     z-index: 1;
 }
-
 .p1 { transform: translate(-50%, -50%); }
 .p2 { transform: translate(-50%, -50%) rotate(45deg); }
 .p3 { transform: translate(-50%, -50%) rotate(90deg); }

@@ -9,13 +9,13 @@ const knowledgesBtn = document.getElementById("goto_Knowledge")
 
 
 ideasBtn.addEventListener("click", () => {
-    window.scrollTo({top:750,behavior:"smooth"})
+    window.scrollTo({top:1000,behavior:"smooth"})
 })
 plantfinderBtn.addEventListener("click", () => {
-    window.scrollTo({top:1400,behavior:"smooth"})
+    window.scrollTo({top:1950,behavior:"smooth"})
 })
 knowledgesBtn.addEventListener("click"  , () => {
-    window.scrollTo({top:2250,behavior:"smooth"})
+    window.scrollTo({top:2940,behavior:"smooth"})
 })
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -68,6 +68,8 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll(".hidden")
 hiddenElements.forEach((e) => observer.observe(e))
+const hidden2Elements = document.querySelectorAll(".hidden2")
+hidden2Elements.forEach((e) => observer.observe(e))
 
 document.querySelectorAll(".detailsListItem").forEach(item => {
     item.addEventListener("click", () => {

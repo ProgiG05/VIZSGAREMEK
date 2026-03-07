@@ -40,26 +40,13 @@
     --stem-green: #66a840;
     --stat-text: #1a1e1a;
 
-    /* --searchcontainer-bg: #281547;
-    --searchcontainer-text:#f1e2ff;
-    --searchcontainer-border:#1B1B1B;
-    --searchcontainer-shadow:#38274189;
-    --innercont-bg:#22113e;
-    --innercont-hover-bg:#1c4c2d92;
-    --innercont-hover-shadow:#4291548c; */
-
     --searchcontainer-bg: #1c4c2d92;
     --searchcontainer-text:#ffffff;
     --searchcontainer-border:#d0edd4;
     --searchcontainer-shadow:#b7f0be7b;
     --innercont-bg:#4291548c;
-    --innercont-hover-bg:#76553c;
-    --innercont-hover-shadow:#85734489;
-
-    /* --plantsearchPage-bg: #27104c;
-    --plantsearchPage-hover-bg: #f1e2ff;
-    --plantsearchPage-font-color: #f1e2ff;
-    --plantsearchPage-hover-font-color: #27104c; */
+    --innercont-hover-bg:#021e0c;
+    --innercont-hover-shadow:#073d1a73;
 
     --plantsearchPage-bg: #1c4c2dd0;
     --plantsearchPage-hover-bg: #ffffff;
@@ -142,8 +129,12 @@ section:nth-child(even){
     transition: all 1s ease;
     transform: translateX(-100px);
 }
-
-.show {
+.hidden2 {
+    opacity: 0;
+    transition: all 1s ease;
+    transform: translateX(100px);
+}
+.show{
     opacity: 1;
     transition: all 1s ease;
     transform: translateX(0);

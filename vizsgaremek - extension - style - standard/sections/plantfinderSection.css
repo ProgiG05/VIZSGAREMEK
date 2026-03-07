@@ -2,42 +2,42 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding-top: 6.25rem;
 }
-.search-container{
+.search-cont{
+    width: 30%;
+    height: 75%;
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: fit-content;
+    justify-content: space-around;
+    padding: 1.4rem;
+    margin-left: 1.25rem;
+    margin-top: 1.25rem;
     background-color: var(--searchcontainer-bg);
     color: var(--searchcontainer-text);
-    box-shadow: 2px 2px 0px 2px var(--searchcontainer-shadow);
+    box-shadow: 2px 2px 0px var(--searchcontainer-shadow);
     font-family: monospace;
     font-size: 1.1rem;
     border-radius: 30px;
-    padding: 1.4rem;
-    margin-left: 20px;
-    margin-top: 20px;
-    gap: 10px;
+    gap: 0.625rem;
 }
-
 .search-title{
     font-size: 2rem;
     text-align: center;
     margin: 0;
 }
-
 .textInp-cont{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 15px;
+    padding: 0.938rem;
     border-radius: 10px;
     background-color: var(--innercont-bg);
-    transition: all 0.3s ease;
+    transition: all 1.5s ease;
+    gap: 0.625rem;
 }
 .textInp-cont:hover{
     background-color: var(--innercont-hover-bg);
-    box-shadow: 2px 2px 0px 2px var(--innercont-hover-shadow);
+    box-shadow: 2px 2px 0px  var(--innercont-hover-shadow);
     transition: all 0.3s ease;
 }
 #commonplant-search-inp, #botanicalplant-search-inp{
@@ -50,14 +50,12 @@
     outline: none;
     border: none;
 }
-#commonplant-search-inp:focus,#botanicalplant-search-inp:focus{
-    outline: none;
-}
+#commonplant-search-inp:focus,#botanicalplant-search-inp:focus{outline: none;}
 .check-cont{
-    padding: 15px;
+    padding: 0.938rem;
     border-radius: 15px;
     background-color: var(--innercont-bg);
-    transition: all 0.3s ease;
+    transition: all 1.5s ease;
 }
 .check-cont:hover{
     background-color: var(--innercont-hover-bg);
@@ -67,100 +65,143 @@
 .check-cont div{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 0.625rem;
 }
 .selection-cont{
     display: flex;
     flex-direction:column;
-    gap: 10px;
-    padding: 15px;
+    padding: 0.938rem;
     border-radius: 15px;
     background-color: var(--innercont-bg);
-    transition: all 0.3s ease;
+    transition: all 1.5s ease;
+    gap: 0.625rem;
 }
 .selection-cont:hover{
     background-color: var(--innercont-hover-bg);
     box-shadow: 2px 2px 0px 2px var(--innercont-hover-shadow);
     transition: all 0.3s ease;
 }
-.result-title{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 4.5rem;
-    color: #021e0c;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-.result-cont{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-}
-
-#searchResult{
-    background-color: var(--searchcontainer-bg);
-    align-items: center;
-    justify-items: center;
+.searchPlant_Btn{
+    width: 85%;
+    height: 2.5rem;
     margin: auto;
-    padding: 10px;
-    width: 80%;
-    height: 60%;
+    bottom: 0;
+    text-align: center;
     border-radius: 20px;
-}
-.top-cont{
-    display: flex;
-    flex-direction: column;
-}
-.top-cont h2{
-    font-family: monospace;
-    font-size: 2rem;
-    margin: 0;
-    padding: 0;
-}
-.resultKey{
-    font-family: monospace;
-    font-size: 1.2rem;
-    text-align: left;
-    padding-right: 40px;
-}
-.resultValue{
-    font-family: monospace;
-    font-size: 1.2rem;
-    text-align: right;
-}
-
-
-.plantsearchPage_Btn{
-    width: 200px;
-    height: 30px;
-    border-radius: 20px;
+    border: none;
     background-color: var(--plantsearchPage-bg);
     color: var(--plantsearchPage-font-color);
     text-decoration: none;
     font-family: monospace;
-    font-size: 12pt;
-    margin: auto;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+.searchPlant_Btn:hover{
+    width: 90%;
+    border: 3px solid #0a3d1f;
+    background-color: var(--plantsearchPage-hover-bg);
+    color: var(--plantsearchPage-hover-font-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.result-title{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 4.5rem;
+    color: #021e0c;
+}
+.result-cont{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.searchResult{
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    margin-top: 5rem;
+    padding: 1.25rem;
+    border-radius: 20px;
+    background-color: var(--searchcontainer-bg);
+}
+.plantdetails-title{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 0.8rem;
+    color: #021e0c;
+}
+.resultimage-cont{
+    width: 30%;
+    height: 90%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    float: left;
+    margin-left: 1.875rem;
+    margin-right: 1.875rem;
+}
+.resultimage-cont img{
+    width: 100%;;
+    height: 100%;
+    border-radius: 20px;
+}
+.result-details-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+
+}
+.result-details-cont table{margin-top: 1.875rem;}
+.resultKey{
+    height: 3rem;
+    text-align: center;
+    border-top-left-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
+    font-family: monospace;
+    font-size: 1.2rem;
+    background-color: var(--innercont-bg);
+    color: white;
+}
+.resultValue{
+    padding-left: 1.25rem;
+    text-align: left;
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+    font-family: monospace;
+    font-size: 1rem;
+    background-color: white;
+    color: #021e0c;
+}
+.plantsearchPage_Btn{
+    width: 12.5rem;
+    height: 1.875rem;
+    padding-top: 0.625rem;
+    margin-top: 1.875rem;
     bottom: 0;
     text-align: center;
-    padding-top: 10px;
+    border-radius: 20px;
+    background-color: var(--plantsearchPage-bg);
+    color: var(--plantsearchPage-font-color);
+    font-family: monospace;
+    font-size: 1rem;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 .plantsearchPage_Btn:hover{
+    width: 18.75rem;
     background-color: var(--plantsearchPage-hover-bg);
     color: var(--plantsearchPage-hover-font-color);
-    border: 3px solid #0a3d1f;
     transition: all 0.3s ease;
-    width: 300px;
-}
-.plantsearch_Btn{
-    width: 200px;
-    height: 50px;
-    background-color: var(--idea-pageBtn-bg);
-    color: var(--idea-pageBtn-font-color);
-    border: none;
-    border-radius: 10px;
-    font-family: monospace;
-    font-size: 14pt;
-    cursor: pointer;
 }
