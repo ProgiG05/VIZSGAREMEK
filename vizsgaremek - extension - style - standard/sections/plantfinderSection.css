@@ -119,7 +119,6 @@
     align-items: center;
     justify-items: center;
 }
-
 .searchResult{
     width: 80%;
     height: 60%;
@@ -131,6 +130,7 @@
     padding: 1.25rem;
     border-radius: 20px;
     background-color: var(--searchcontainer-bg);
+    box-shadow: 2px 2px 0px var(--searchcontainer-shadow);
 }
 .plantdetails-title{
     margin: 0;
