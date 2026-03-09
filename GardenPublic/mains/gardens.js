@@ -60,8 +60,6 @@ function CreateTable(splittedContent, plants) {
             switch (column) {
                 case "-":
                     tableColumn.className = "empty-cell"
-
-                    tableColumn.textContent = "Empty Cell"
                     break;
                 case "":
                     tableColumn.className = "tobecollected-cell"
