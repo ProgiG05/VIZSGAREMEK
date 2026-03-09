@@ -1,11 +1,18 @@
 const gardensContainer = document.getElementById("gardens-container")
 document.addEventListener("DOMContentLoaded", async () => {
-    const response = await fetch("/api/gardens", {
+    const gardensResponse = await fetch("/api/gardens", {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     })
-    const gardens = await response.json()
+    const gardens = await gardensResponse.json()
+    const plantsResponse = await fetch("/api/plants", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
+    const plants = await plantsResponse.json()
+
     console.log(gardens)
+    console.log(plants)
     gardens.forEach(garden => {
         const splittedContent = garden.gardencontent.split(";")
         const gardenCard = document.createElement("div")
@@ -13,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <h2>${garden.gardenname}</h2>
             <p>${garden.gardencontent}</p>
         `
-        gardenCard.appendChild(CreateTable(splittedContent))
+        gardenCard.appendChild(CreateTable(splittedContent, plants))
         gardensContainer.appendChild(gardenCard)
         const deleteBtn = document.createElement("button")
         deleteBtn.textContent = "Delete Garden"
@@ -41,7 +48,7 @@ async function DeleteGarden(id) {
     window.location.reload()
 }
 
-function CreateTable(splittedContent) {
+function CreateTable(splittedContent, plants) {
     const table = document.createElement("table")
     table.className = "garden-table"
     splittedContent.forEach(row => {
@@ -53,6 +60,7 @@ function CreateTable(splittedContent) {
             switch (column) {
                 case "-":
                     tableColumn.className = "empty-cell"
+
                     tableColumn.textContent = "Empty Cell"
                     break;
                 case "":
@@ -60,8 +68,9 @@ function CreateTable(splittedContent) {
                     tableColumn.textContent = "D"
                     break;
                 default:
+                    const plantName = plants.find(plant => plant.id == parseInt(column))
                     tableColumn.className = "plant-cell"
-                    tableColumn.textContent = column
+                    tableColumn.textContent = plantName ? plantName.commonName : "Unknown Plant"
                     break;
             }
 

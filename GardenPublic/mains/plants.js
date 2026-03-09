@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const plantsData = await fetch('/api/getplants',
+    const plantsData = await fetch('/api/plants',
         {
             method: 'GET',
             headers: {

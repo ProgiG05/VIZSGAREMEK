@@ -9,7 +9,7 @@ router.get('/ideas', GardenController.GetEveryIdea)
 router.get('/knowledge', GardenController.GetAllKnowledges)
 
 //router.post('/api/addNewGarden',GardenController.AddNewGarden)
-router.post('/garders', GardenController.AddNewGarden)
+router.post('/gardens', GardenController.AddNewGarden)
 
 //router.get('/api/showPlantFinder',GardenController.GetSearchedPlantDetails)
 router.get('/plantfinder', GardenController.GetSearchedPlantDetails)
@@ -21,7 +21,7 @@ router.get('/savedplants', GardenController.GetMySavedPlants)
 router.get('/worktools', GardenController.GetAllWorksAndTools)
 
 
-router.get('/getplants', GardenController.GetAllPlants)
+router.get('/plants', GardenController.GetAllPlants)
 
 router.get('/gardens', GardenController.GetMyGardens)
 
