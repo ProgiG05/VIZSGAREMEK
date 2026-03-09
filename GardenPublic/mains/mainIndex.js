@@ -59,18 +59,3 @@ if (langSwitch) {
     });
 }
 
-document.getElementById("search-container").addEventListener("submit", async () =>{
-    const responsePlant = await fetch(
-        '/api/plantfinder', 
-        { 
-            method : "GET", 
-            headers : {"Content-Type" : "application/json"}
-        })
-    const ThePlant = await responsePlant.json()
-    const searchedPlantPlace = document.getElementById("searchedPlant-container")
-    ThePlant.forEach(plantDetail => {
-        const plantCommonName = document.createElement("p")
-        plantCommonName.textContent = `Common name: ${plantDetail.commonName}`
-        searchedPlantPlace.appendChild(plantCommonName)
-    });
-})

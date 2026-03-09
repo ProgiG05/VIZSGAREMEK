@@ -19,8 +19,8 @@ module.exports = {
     },
     GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,botanicalName,type,water,sunlight,soil,planting,harvesting) {
         const [rows] = await connection.query(`SELECT * FROM plants WHERE commonName LIKE ? OR botanicalName LIKE ? OR type LIKE ? OR water LIKE ? OR sunlight LIKE ? OR soil LIKE ? OR planting LIKE ? OR harvesting LIKE ?`, [commonName, botanicalName, type, water, sunlight, soil, planting, harvesting])
-        console.log(rows[0])
-        return rows[0]
+        console.log(rows)
+        return rows
     },
     AddNewgarden : async function CreateGarden(id,userID,plantID,size) {
         const [rows] = await connection.query(`INSERT INTO gardens VALUES(?,?,?,?)`,[id,userID,plantID,size])
