@@ -148,3 +148,4 @@ function updateLanguage(lang) {
     document.getElementById('ideas-title').innerText = translations[lang].ideastitle
     document.getElementById('ideasPage_Btn').innerText = translations[lang].ideaspage
 }
+
