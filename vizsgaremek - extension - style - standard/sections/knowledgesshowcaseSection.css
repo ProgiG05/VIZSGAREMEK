@@ -2,7 +2,8 @@
 .knowledges-title{
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding-left:0;
+    text-align: left;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 5rem;
     color: #021e0c;
@@ -46,7 +47,7 @@
 }
 .knowledges-subtitle{
     width: 100%;
-    text-align: left;
+    text-align: center;
     margin: 0;
     padding: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;

@@ -4,17 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sproutified | Grow a garden</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="./smallstyles/navbar.css">
-    <link rel="stylesheet" href="./smallstyles/sidepanel.css">
-    <link rel="stylesheet" href="./smallstyles/ideacard.css">
-
-    <link rel="stylesheet" href="./sections/landingSection.css">
-    <link rel="stylesheet" href="./sections/ideasshowcaseSection.css">
-    <link rel="stylesheet" href="./sections/plantfinderSection.css">
-    <link rel="stylesheet" href="./sections/knowledgesshowcaseSection.css">
+    <link rel="stylesheet" href="./fullstyle.css">
 </head> 
 <body>
     <nav id="top-navbar"> 
@@ -26,26 +16,26 @@
         <button id="signUp_Btn">Sign up</button>
     </nav>
     <div class="settings-sidepanel" id="settings-sidepanel"> 
-        <h2>Personal Oasis</h2>
+        <h2 id="sidepanel-title">Personal Oasis</h2>
         <button class="closeSidePanel" id="closeSidePanel"><img src="./pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close"></button>
         <select class="lang-selection" id="lang-selection">
             <option value="en"><span>English</span></option> 
             <option value="hu"><span>Hungarian</span></option>
         </select>
-        <a id="personal_Btn" href="">Saved Plants</a>
-        <a id="personal_Btn" href="">Saved Works & Tools</a>
-        <a id="personal_Btn" href="">Garden layouts</a>
+        <a id="savedP_Btn" href="">Saved Plants</a>
+        <a id="savedWT_Btn" href="">Saved Works & Tools</a>
+        <a id="savedGL_Btn" href="">Saved garden layouts</a>
         <button class="darkmode" id="darkmode">
-            <img id="dark-icon" class="theme-icon" src="./pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
-            <img id="light-icon" class="theme-icon" src="./pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
+            <img id="light-icon" class="theme-icon" src="./pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
+            <img id="dark-icon" class="theme-icon" src="./pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
         </button>
     </div>
     <section class="landing-section">
         <div class="landing-cont">
             <div class="first-cont">
                 <h1 class="main-title hidden">Sprout<span>ified</span></h1>
-                <p class="small-description hidden">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.</p>
-                <p class="small-description hidden">Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity</p>
+                <p class="small-description hidden" id="smalldescription1">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.</p>
+                <p class="small-description hidden" id="smalldescription2">Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity.</p>
             </div>
             <div class="second-cont hidden2">
                 <div class="container">
@@ -75,7 +65,7 @@
         </div> 
     </section>
     <section class="ideas-showcase-section">
-        <h1 class="ideas-title hidden2">Discover Garden ideas</h1>
+        <h1 class="ideas-title hidden2" id="ideas-title">Discover Garden ideas</h1>
         <div class="showcase_container" id="showcase-container">
             <div class="garden-card hidden">
                 <div class="image-placeholder-wrapper">
