@@ -6,16 +6,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         headers: {"Content-Type": "application/json"}
     })
     const searchedPlant = await response.json()
-    searchedPlant.forEach(plantDetail => {
-        const plantInfo = document.createElement("pre")
-        plantInfo.textContent = JSON.stringify(plantDetail, null, 2)
-        // plantInfo.innerHTML = `
-        // <div class="plant-card">
-        //     <h2>${plantDetail.botanicalName}</h2>
-        //     <h3>Alias: ${plantDetail.commonName}</h3>
-        //     <p>Planting: ${plantDetail.planting}</p>
-        //     <p>Harvesting: ${plantDetail.harvesting}</p>
-        // </div>`
-        searchedPlantContainer.appendChild(plantInfo)
+    searchedPlantContainer.innerHTML = '';
+    
+    if (!searchedPlant || searchedPlant.length === 0) {
+        searchedPlantContainer.innerHTML = '<p>No plants found.</p>';
+        return;
+    }
+    
+    searchedPlant.forEach(p => {
+        const box = document.createElement("div"), row = (l, v) => `<div class="info-line"><strong>${l}</strong><span>${v || ''}</span></div>`;
+        box.className = 'plain-info-box';
+        box.innerHTML = row('commonName', p.commonName) + row('botanicalName', p.botanicalName) + row('type', p.type) + 
+            row('water', p.water || p.Watering) + row('sunlight', p.sunlight || p.Sunlight) + row('soil', p.soil || p.Soil) + 
+            row('planting', p.planting || p['Planting season']) + row('harvesting', p.harvesting || p['Harvesting season']) + 
+            row('seeds', p.seeds) + row('growth_rate', p.growth_rate) + row('medicinal', p.medicinal) + row('indoor', p.indoor) + row('description', p.description);
+        searchedPlantContainer.appendChild(box)
     })
 })

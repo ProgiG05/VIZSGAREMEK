@@ -58,4 +58,41 @@ if (langSwitch) {
         lucide.createIcons();
     });
 }
+const searchForm = document.getElementById('search-container');
+const resultsContainer = document.getElementById('searchedPlant-container');
 
+if (searchForm && resultsContainer) {
+    searchForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(searchForm);
+        const params = new URLSearchParams(formData);
+        
+        try {
+            resultsContainer.innerHTML = '<p>Searching...</p>';
+            const response = await fetch(`/api/plantfinder?${params.toString()}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            const plants = await response.json();
+            resultsContainer.innerHTML = '';
+            
+            if (!plants || plants.length === 0) {
+                resultsContainer.innerHTML = '<p>No plants found matching your criteria.</p>';
+                return;
+            }
+            
+            plants.forEach(p => {
+                const box = document.createElement('div'), row = (l, v) => `<div class="info-line"><strong>${l}</strong><span>${v || ''}</span></div>`;
+                box.className = 'plain-info-box';
+                box.innerHTML = row('commonName', p.commonName) + row('botanicalName', p.botanicalName) + row('type', p.type) + 
+                    row('water', p.water || p.Watering) + row('sunlight', p.sunlight || p.Sunlight) + row('soil', p.soil || p.Soil) + 
+                    row('planting', p.planting || p['Planting season']) + row('harvesting', p.harvesting || p['Harvesting season']) + 
+                    `<div class="info-line" style="margin-top:10px;border-bottom:none;"><a href="/searchedPlants?botanicalName=${encodeURIComponent(p.botanicalName || '')}" style="text-decoration:underline;color:inherit;font-weight:bold;">More Info ></a></div>`;
+                resultsContainer.appendChild(box);
+            });
+        } catch (error) {
+            console.error('Error fetching plants:', error);
+            resultsContainer.innerHTML = '<p>Error executing search. Please try again.</p>';
+        }
+    });
+}
