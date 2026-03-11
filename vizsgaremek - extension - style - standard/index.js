@@ -131,6 +131,7 @@ const langSelect = document.getElementById('lang-selection');
 langSelect.addEventListener('change', (e) => {
     const lang = e.target.value;
     updateLanguage(lang);
+    // localStorage.setItem('lang', lang ? 'hu' : 'en')
 });
 
 function updateLanguage(lang) {
@@ -148,4 +149,3 @@ function updateLanguage(lang) {
     document.getElementById('ideas-title').innerText = translations[lang].ideastitle
     document.getElementById('ideasPage_Btn').innerText = translations[lang].ideaspage
 }
-
