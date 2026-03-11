@@ -718,8 +718,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: 
-    center;
+    align-items: center;
     justify-items: center;
 }
 .knowledges-title{
@@ -841,6 +840,31 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         align-items: center;
         justify-items: center;
     }
+    .ideas-title{
+        margin: 0;
+        padding: 0;
+    }
+    .ideas-showcase-section{
+        padding-top: 6rem;
+    }
+    .plant-finder-main-container{
+        margin-top:-2rem;
+    }
+    .result-title{
+        margin-top: 1rem;
+    }
+    .knowledges-title{
+        margin: 0;
+    }
+    .bigknowledge-cont{
+        margin-top: 12.5rem;
+    }
+    .bigknowledge-reader{
+        gap: 0;
+    }
+    .smallstory:nth-child(odd), .bigstory:nth-child(odd){
+        margin: 0;
+    }
 }
 /*Base2*/
 @media (max-width: 1200px) {
@@ -872,6 +896,10 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     }
     .gardenMakerPage_Btn{
         margin-bottom: 5rem;
+    }
+    .ideas-title{
+        margin: 0;
+        padding: 0;
     }
 }
 /*Base3: Tablets and large phones*/
