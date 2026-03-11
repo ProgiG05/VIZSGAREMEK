@@ -15,25 +15,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     const plants = await plantsResponse.json();
 
     // 2. Create Global UI Elements (Buttons & Selection Area)
+    //containers
     const controlsContainer = document.createElement("div");
     controlsContainer.id = "controls-container";
     controlsContainer.style.margin = "20px 0";
 
+    //disabled button
     const disablecellbtn = document.createElement("button");
     disablecellbtn.textContent = "Disable Cell";
     disablecellbtn.className = "disablecellbtn";
     disablecellbtn.style.display = "none";
 
+    //empty button
     const emptycellbtn = document.createElement("button");
     emptycellbtn.textContent = "Empty Cell";
     emptycellbtn.className = "emptycellbtn";
     emptycellbtn.style.display = "none";
 
+    //plant button
     const plantcellbtn = document.createElement("button");
     plantcellbtn.textContent = "Plant Cell";
     plantcellbtn.className = "plantcellbtn";
     plantcellbtn.style.display = "none";
 
+    //plant selection
     const plantselection = document.createElement("div");
     plantselection.id = "plantselection";
     plantselection.style.display = "none";
@@ -54,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         gardenCard.className = "garden-card";
         gardenCard.id = "garden" + garden.id
         gardenCard.innerHTML = `
-            <h2>${garden.gardenname}</h2>
+            <h2 class="garden-name">${garden.gardenname}</h2>
             <p>${garden.gardencontent}</p>
         `;
 
@@ -63,6 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteBtn.style.display = "block"
         deleteBtn.textContent = "Delete Garden";
         deleteBtn.className = "delete_btn";
+        deleteBtn.style.display = "none";
         deleteBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to delete this garden?")) {
                 DeleteGarden(garden.id);
@@ -75,7 +81,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         editBtn.className = "edit_btn";
         editBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to edit this garden?")) {
-                EditGarden(garden.id);
+                EditGarden(garden.id, plants);
+                deleteBtn.style.display = "block";
             }
         });
 
@@ -231,7 +238,7 @@ function CreateTable(splittedContent, plants) {
     return table;
 }
 
-function EditGarden(gardenid) {
+function EditGarden(gardenid, plants) {
     const allCards = document.querySelectorAll(".garden-card");
     const targetId = "garden" + gardenid;
     
@@ -243,12 +250,51 @@ function EditGarden(gardenid) {
                 const backBtn = document.createElement("button");
                 backBtn.textContent = "Back to List";
                 backBtn.className = "back_btn";
-                backBtn.style.display = "block";
+                backBtn.style.display = "inline-block";
                 backBtn.style.marginTop = "10px";
                 backBtn.addEventListener("click", () => {
                     window.location.reload(); // Simple way to reset view
                 });
                 card.appendChild(backBtn);
+
+                const saveBtn = document.createElement("button");
+                saveBtn.textContent = "Save Changes";
+                saveBtn.className = "save_btn";
+                saveBtn.style.display = "inline-block";
+                saveBtn.style.marginTop = "10px";
+                saveBtn.addEventListener("click", () => {
+                    const gardenTable = card.querySelector("table");
+                    
+                    const gardenTableData = Array.from(gardenTable.querySelectorAll("tr")).map(row => {
+                        return Array.from(row.querySelectorAll("td")).map(cell => {
+                            switch (cell.textContent) {
+                                case "-":
+                                    return "-";
+                                case "+":
+                                    return "";
+                                default:
+                                    const plant = plants.find(p => p.commonName === cell.textContent);
+                                    return plant ? plant.id : "";
+                            }
+                        }).join(",");
+                    }).join(";");
+
+                    console.log("Saving garden content:", gardenTableData);
+                    const garden = {
+                        id: gardenid,
+                        name: card.querySelector(".garden-name").textContent,
+                        content: gardenTableData,
+                    };
+
+                    fetch(`/api/gardens/${gardenid}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(garden)
+                    });
+                    console.log("Garden saved:", garden);
+                    window.location.reload();
+                });
+                card.appendChild(saveBtn);
             }
             // Hide the Edit button while editing
             const editBtn = card.querySelector(".edit_btn");
@@ -261,3 +307,4 @@ function EditGarden(gardenid) {
     // Hide control buttons container unless a cell is active (handled by showControls)
     // The existing showControls logic will still work when cells are clicked.
 }
+

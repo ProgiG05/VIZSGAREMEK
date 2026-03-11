@@ -20,4 +20,6 @@ router.get('/gardens', GardenController.GetMyGardens)
 
 router.delete('/gardens/:id', GardenController.DeleteGarden)
 
+router.post('/gardens/:id', GardenController.UpdateGarden)
+
 module.exports = router
