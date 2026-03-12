@@ -15,6 +15,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const plants = await plantsResponse.json();
 
     // 2. Create Global UI Elements (Buttons & Selection Area)
+
+    //creating the add button on top
+    const newGardenBtn = document.createElement("button");
+    newGardenBtn.className = "newgarden_btn";
+    newGardenBtn.addEventListener("click", () => {
+        ShowAddGardenForm();
+    })
+    
+
+
+
     //containers
     const controlsContainer = document.createElement("div");
     controlsContainer.id = "controls-container";
@@ -175,6 +186,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const clickedCell = event.target.closest('td');
 
         if (clickedCell && gardensContainer.contains(clickedCell)) {
+            const gardenCard = clickedCell.closest('.garden-card');
+            if (!gardenCard || !gardenCard.classList.contains('is-editing')) {
+                return; // Only allow interaction if the garden is being edited
+            }
+            
             const currentActive = getActiveCell();
             if (currentActive && currentActive !== clickedCell) {
                 deactivateCell(currentActive);
@@ -245,6 +261,7 @@ function EditGarden(gardenid, plants) {
     allCards.forEach(card => {
         if (card.id === targetId) {
             card.style.display = "block";
+            card.classList.add("is-editing");
             // Add a Back button if not already present
             if (!card.querySelector(".back_btn")) {
                 const backBtn = document.createElement("button");
@@ -262,7 +279,7 @@ function EditGarden(gardenid, plants) {
                 saveBtn.className = "save_btn";
                 saveBtn.style.display = "inline-block";
                 saveBtn.style.marginTop = "10px";
-                saveBtn.addEventListener("click", () => {
+                saveBtn.addEventListener("click", async () => {
                     const gardenTable = card.querySelector("table");
                     
                     const gardenTableData = Array.from(gardenTable.querySelectorAll("tr")).map(row => {
@@ -282,15 +299,11 @@ function EditGarden(gardenid, plants) {
                     console.log("Saving garden content:", gardenTableData);
                     const garden = {
                         id: gardenid,
+                        user_id: null,
                         name: card.querySelector(".garden-name").textContent,
                         content: gardenTableData,
                     };
-
-                    fetch(`/api/gardens/${gardenid}`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(garden)
-                    });
+                    await SaveGarden(garden);
                     console.log("Garden saved:", garden);
                     window.location.reload();
                 });
@@ -304,7 +317,14 @@ function EditGarden(gardenid, plants) {
         }
     });
 
-    // Hide control buttons container unless a cell is active (handled by showControls)
-    // The existing showControls logic will still work when cells are clicked.
+}
+
+async function SaveGarden(garden){
+    const resp = await fetch(`/api/gardens/${garden.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(garden)
+    });
+    return resp.json();
 }
 

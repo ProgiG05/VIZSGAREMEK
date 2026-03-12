@@ -55,8 +55,8 @@ module.exports = {
         const [rows] = await connection.query('DELETE FROM gardenmanager WHERE id = ?', [id])
         return rows
     },
-    UpdateGarden: async (id, name, content) => {
-        const [rows] = await connection.query('UPDATE gardenmanager SET content = ? , name = ? WHERE id = ?', [content, name, id])
+    UpdateGarden: async (garden) => {
+        const [rows] = await connection.query('UPDATE gardenmanager SET gardencontent = ? , gardenname = ?, user_id = ? WHERE id = ?', [garden.content, garden.name, garden.user_id, garden.id])
         return rows
     }
 }
