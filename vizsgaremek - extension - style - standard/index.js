@@ -11,18 +11,16 @@ window.onload = () => {
 // --- Navbar scrolling actions logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-// const ideasBtn = document.getElementById("goto_Ideas")
-// ideasBtn.addEventListener("click", () => {
-//     window.scrollTo({top:900,behavior:"smooth"})
-// })
-// const plantfinderBtn = document.getElementById("goto_PlantFinder")
-// plantfinderBtn.addEventListener("click", () => {
-//     window.scrollTo({top:1950,behavior:"smooth"})
-// })
-// const knowledgesBtn = document.getElementById("goto_Knowledge")
-// knowledgesBtn.addEventListener("click"  , () => {
-//     window.scrollTo({top:2940,behavior:"smooth"})
-// })
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById('top-navbar').style.top = "0";
+  } else {
+    document.getElementById('top-navbar').style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+} 
 
 // --- Side Panel Toggle ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

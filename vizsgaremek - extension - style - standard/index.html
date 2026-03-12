@@ -6,15 +6,16 @@
     <title>Sproutified | Grow a garden</title>
     <link rel="shortcut icon" href="./pics/icons/plant.png" type="image/x-icon">
     <link rel="stylesheet" href="./fullstyle.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head> 
 <body>
     <nav id="top-navbar"> 
-        <button id="settings_Btn">Settings</button> 
-        <button id="goto_Ideas">Ideas</button>
-        <button id="goto_PlantFinder">Plant finder</button>
-        <button id="goto_Knowledge">Knowledge</button>
-        <button id="logIn_Btn">Login</button>
-        <button id="signUp_Btn">Sign up</button>
+        <a id="settings_Btn">Settings</a> 
+        <a href="#ideas-showcase-section" id="goto_Ideas">Ideas</a>
+        <a href="#plant-finder-section" id="goto_PlantFinder">Plant finder</a>
+        <a href="#knowledges-showcase-section" id="goto_Knowledge">Knowledge</a>
+        <a id="logIn_Btn">Login</a>
+        <a id="signUp_Btn">Sign up</a>
     </nav>
     <div class="settings-sidepanel" id="settings-sidepanel"> 
         <h2 id="sidepanel-title">Personal Oasis</h2>
@@ -65,7 +66,7 @@
             </div>
         </div> 
     </section>
-    <section class="ideas-showcase-section">
+    <section class="ideas-showcase-section" id="ideas-showcase-section">
         <h1 class="ideas-title hidden2" id="ideas-title">Discover Garden ideas</h1>
         <div class="showcase_container" id="showcase-container">
             <div class="garden-card hidden">
@@ -218,7 +219,7 @@
         </div>
         <a class="ideasPage_Btn" id="ideasPage_Btn" href="">See more ideas</a> 
     </section>
-    <section class="plant-finder-section">
+    <section class="plant-finder-section" id="plant-finder-section">
         <h1 class="result-title hidden">Find your ideal plant</h1>
         <div class="plant-finder-main-container">
             <div class="search-cont hidden"> 
@@ -341,7 +342,7 @@
             </div>
         </div>
     </section>
-    <section class="knowledges-showcase-section"> 
+    <section class="knowledges-showcase-section" id="knowledges-showcase-section"> 
         <div class="smallknowledge-cont hidden">
             <h1 class="knowledges-title">Learn something interesting about<br>the world of gardens</h1>
             <h2 class="knowledges-subtitle">Discover Tips & Tricks for gardening</h2>
