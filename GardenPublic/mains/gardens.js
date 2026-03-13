@@ -230,7 +230,7 @@ async function DeleteGarden(id) {
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
-    table.style.display = "inline-table"; // Better layout for multiple tables
+    table.style.display = "inline-table";
     
     splittedContent.forEach(row => {
         const columns = row.split(",");
@@ -354,7 +354,16 @@ async function ShowAddGardenForm(container) {
         <button type="submit">Add Garden</button>
         </form>
         <button class="back_btn" onclick="window.location.reload()">Cancel</button>
+        <button class="preview_btn" id="preview_btn">Preview</button>
+        <div id="previewContainer"></div>
     `;
+    document.getElementById("preview_btn").addEventListener("click", () => {
+        const gardenRows = document.getElementById("gardenRows").value;
+        const gardenColumns = document.getElementById("gardenColumns").value;
+        const previewContainer = document.getElementById("previewContainer");
+        previewContainer.innerHTML = "";
+        previewContainer.appendChild(previewGarden(gardenRows, gardenColumns));
+    });
     document.getElementById("addGardenForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const gardenName = document.getElementById("gardenName").value;
@@ -383,5 +392,21 @@ async function newGarden(garden) {
         body: JSON.stringify(garden)
     });
     return resp.json();
+}
+
+function previewGarden(rows, columns) {
+    const gardenTable = document.createElement("table");
+    gardenTable.className = "garden-table";
+    gardenTable.style.display = "inline-table";
+    for (let i = 0; i < rows; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < columns; j++) {
+            const cell = document.createElement("td");
+            cell.textContent = "+";
+            row.appendChild(cell);
+        }
+        gardenTable.appendChild(row);
+    }
+    return gardenTable;
 }
 

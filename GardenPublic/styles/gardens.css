@@ -144,9 +144,10 @@ td.active {
     color: white;
 }
 .garden-card {
-    width: 30%;
+    width: fit-content;
     margin: auto;
     border: 2px solid black;
+
 }
 
 
