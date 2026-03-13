@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     //containers
     const controlsContainer = document.createElement("div");
     controlsContainer.id = "controls-container";
-    controlsContainer.style.margin = "20px 0";
+    controlsContainer.style.margin = "auto";
+    controlsContainer.style.alignItems = "center";
 
     //disabled button
     const disablecellbtn = document.createElement("button");
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteBtn.className = "delete_btn";
         deleteBtn.style.display = "none";
         deleteBtn.addEventListener("click", () => {
-            if (confirm("Are you sure you want to delete this garden?")) {
+            if (confirm("Are you sure you want to delete this garden? You will not access this garden after deletion.")) {
                 DeleteGarden(garden.id);
             }
         });
