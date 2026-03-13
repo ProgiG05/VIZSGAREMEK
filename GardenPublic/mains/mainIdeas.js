@@ -125,3 +125,8 @@ document.querySelectorAll(".detailsListItem").forEach(item => {
 function toggleSaveState(buttonElement) {
     buttonElement.classList.toggle('saved');
 }
+
+document.getElementById("searchBar").addEventListener("input", () => {
+    const searchValue = document.getElementById("searchBar").value.toLowerCase();
+
+})
