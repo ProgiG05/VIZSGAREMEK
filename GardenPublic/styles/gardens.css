@@ -4,6 +4,9 @@ body {
 .garden-table {
     margin: 0 auto;
     text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .garden-table td {
@@ -12,8 +15,7 @@ body {
     padding: 10px;
     margin: 20px;
     height: 100px;
-    width: 100px;
-    
+    width: 100px;    
 }
 .plant-cell:hover {
     background-color: green;
@@ -140,6 +142,10 @@ td.active {
     background-color: darkgreen;
     transition: background-color 0.6s ease;
     color: white;
+}
+.garden-card {
+    width: 30%;
+    margin: auto;
 }
 
 

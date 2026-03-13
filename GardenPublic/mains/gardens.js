@@ -7,12 +7,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         headers: { "Content-Type": "application/json" }
     });
     const gardens = await gardensResponse.json();
+    console.log(gardens)
 
     const plantsResponse = await fetch("/api/plants", {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     });
     const plants = await plantsResponse.json();
+    console.log(plants)
 
     // 2. Create Global UI Elements (Buttons & Selection Area)
 
@@ -88,6 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 DeleteGarden(garden.id);
             }
         });
+        gardenCard.appendChild(document.createElement("br"));
 
         const editBtn = document.createElement("button");
         editBtn.style.display = "block"
@@ -95,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         editBtn.className = "edit_btn";
         editBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to edit this garden?")) {
-                EditGarden(garden.id, plants);
+                EditGarden(garden.id, plants, newGardenBtn);
                 deleteBtn.style.display = "block";
             }
         });
@@ -257,7 +260,8 @@ function CreateTable(splittedContent, plants) {
     return table;
 }
 
-function EditGarden(gardenid, plants) {
+function EditGarden(gardenid, plants, newgarden) {
+    newgarden.style.display = "none";
     const allCards = document.querySelectorAll(".garden-card");
     const targetId = "garden" + gardenid;
     const gardenName = document.getElementById("garden" + gardenid).querySelector(".garden-name");
@@ -343,26 +347,21 @@ async function ShowAddGardenForm(container) {
         <label for="gardenName">Garden Name:</label>
         <input type="text" id="gardenName" name="gardenName" required>
         <label for="gardenRows">Rows:</label>
-        <input type="number" id="gardenRows" name="gardenRows" required>
+        <input type="number" id="gardenRows" name="gardenRows" max="20" min="1" required>
         <label for="gardenColumns">Columns:</label>
-        <input type="number" id="gardenColumns" name="gardenColumns" required>
+        <input type="number" id="gardenColumns" name="gardenColumns" max="20" min="1" required>
         <button type="submit">Add Garden</button>
         </form>
+        <button class="back_btn" onclick="window.location.reload()">Cancel</button>
     `;
-    addGardenForm.addEventListener("submit", async (e) => {
+    document.getElementById("addGardenForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const gardenName = document.getElementById("gardenName").value;
         const gardenRows = document.getElementById("gardenRows").value;
         const gardenColumns = document.getElementById("gardenColumns").value;
-        let content = "";
-        
-        for (let i = 0; i < gardenRows; i++) {
-            for (let j = 0; j < gardenColumns; j++) {
-                content += "+";
-                content += ",";
-            }
-            content += ";";
-        }
+        const content = Array(parseInt(gardenRows)).fill(
+            Array(parseInt(gardenColumns)).fill("+").join(",")
+        ).join(";");
         const garden = {
             user_id: null,
             gardenname: gardenName,
@@ -373,7 +372,7 @@ async function ShowAddGardenForm(container) {
         console.log("Garden added:", garden);
         window.location.reload();
     });
-    document.body.appendChild(addGardenForm);
+    document.body.appendChild(document.getElementById("addGardenForm"));
 }
 
 async function newGarden(garden) {
