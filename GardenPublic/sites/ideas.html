@@ -3,50 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sproutified</title>
-    <link rel="stylesheet" href="/styles/styleIdeas.css">
-    <link rel="shortcut icon" href="./pics/plant.png" type="image/x-icon">
+    <title>Sproutified | Spark an idea</title>
+    <link rel="stylesheet" href="../styles/styleIdeas.css">
+    <link rel="shortcut icon" href="../pics/icons/plant.png" type="image/x-icon">
 </head>
 <body>
-    <div id="header-container">
-        <h1 id="main-title">Headquarter of Ideas</h1>
-        <h6 id="sub-title">Here you'll find different garden layout ideas</h6>
+    <nav id="top-navbar"> 
+        <a id="settings_Btn">Settings</a> 
+        <a href="" id="goto_Ideas">Ideas</a>
+        <a href="" id="goto_PlantFinder">Plant finder</a>
+        <a href="" id="goto_Knowledge">Knowledge</a>
+    </nav>
+    <div class="settings-sidepanel" id="settings-sidepanel"> 
+        <h2 id="sidepanel-title">Personal Oasis</h2>
+        <button class="closeSidePanel" id="closeSidePanel"><img src="../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close"></button>
+        <select class="lang-selection" id="lang-selection">
+            <option value="en"><span>English</span></option> 
+            <option value="hu"><span>Hungarian</span></option>
+        </select>
+        <a id="savedP_Btn" href="">Saved Plants</a>
+        <a id="savedWT_Btn" href="">Saved Works & Tools</a>
+        <a id="savedGL_Btn" href="">Saved garden layouts</a>
+        <button class="darkmode" id="darkmode">
+            <img id="light-icon" class="theme-icon" src="../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
+            <img id="dark-icon" class="theme-icon" src="../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
+        </button>
+    </div>
+    <div class="header-container" id="header-container">
+        <h1 class="main-title">Headquarter of Ideas</h1>
+        <p class="sub-title ">Here you'll find different types of garden layout ideas</p>
         <input type="text" name="searchBar" id="searchBar" placeholder="Search for anything...">
     </div>   
-    <form action="/" method="get">
-        <button id="gobacktohompage-btn" type="submit"><img src="./pics/home.png" alt="home"></button>
-    </form>
-    <button id="goup-btn" type="submit"><img src="./pics/arrow_upward.png" alt="top button"></button>
-    <div id="idea-container">
-        <!-- <div class="garden-card">
+    <div class="gardenIdeas-container" id="gardenIdeas-container">
+        <div class="garden-card hidden">
             <div class="image-placeholder-wrapper">
-                <div class="image-placeholder"></div>
+                <img src="../pics/gardenideas/gardenidea3.png" alt="The Pollinator Paradise">
             </div>
-            <h2 class="card-title">Balcony Berry Wall</h2>
-            <h3 class="list-title">Plants for this garden idea:</h3>
-            <ul class="plant-list">
-                <li><a href="">Strawberries</a></li>
-                <li><a href="">Blueberries</a></li>
-                <li><a href="">Raspberries</a></li>
-                <li><a href="">Goji berries</a></li>
-                <li><a href="">Currants</a></li>
-            </ul>
-            <div class="card-footer">
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <div class="stat-badge">High</div>
-                        <div class="stat-label">Sunlight</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-badge">Medium</div>
-                        <div class="stat-label">Water</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-badge">Average</div>
-                        <div class="stat-label">Hardiness</div>
+            <h2 class="card-title">The Pollinator Paradise</h2>
+            <p class="card-description">A vibrant, buzzing oasis designed to attract butterflies and bees. This garden features a succession of colorful blooms and native plants, providing essential nectar throughout the seasons.</p>
+            <p class="card-description">The variety of heights and textures creates a lively, natural look that supports local biodiversity while remaining incredibly easy to care for.</p>
+            <hr>
+            <p class="plant-list">
+                <a class="plantListItem" href="">Purple Coneflower (Echinacea purpurea)</a>,
+                <a class="plantListItem" href="">Butterfly Bush (Buddleja davidii)</a>,
+                <a class="plantListItem" href="">Milkweed (Asclepias syriaca)</a>,
+                <a class="plantListItem" href="">Bee Balm (Monarda didyma)</a>,
+                <a class="plantListItem" href="">Black-eyed Susan (Rudbeckia hirta)</a>,
+                <a class="plantListItem" href="">Aster (Symphyotrichum spp.)</a>
+            </p>
+            <div class="cardbottom-cont">
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">Medium</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Maintenance</div>
+                            <div class="stat-label">Easy</div>
+                        </div> 
                     </div>
                 </div>
-                <button class="pot-button saved" onclick="toggleSaveState(this)" aria-label="Toggle Save">
+                <button onclick="toggleSaveState(this)" class="pot-button">
                     <div class="flower-assembly">
                         <div class="flower-head">
                             <div class="petal p1"></div>
@@ -61,8 +83,253 @@
                     <div class="pot-rim"></div>
                 </button>
             </div>
-        </div> -->
+        </div>
+        <div class="garden-card hidden">
+            <div class="image-placeholder-wrapper">
+                <img src="../pics/gardenideas/gardenidea1.png" alt="The Sun-Drenched Haven">
+            </div>
+            <h2 class="card-title">The Sun-Drenched Haven</h2>
+            <p class="card-description">This Mediterranean-inspired retreat pairs drought-tolerant lavender and rosemary with structural agaves. </p>
+            <p class="card-description">A gravel path leads to a quiet bench under a small olive tree, creating a water-wise sanctuary that thrives in full sun with minimal effort.</p>
+            <hr>
+            <p class="plant-list">
+                <a class="plantListItem" href="">Olive Tree (Olea europaea) </a>,
+                <a class="plantListItem" href="">Lavender (Lavandula angustifolia) </a>,
+                <a class="plantListItem" href="">Rosemary (Rosmarinus officinalis) </a>,
+                <a class="plantListItem" href="">Agave (Agave spp.) </a>,
+                <a class="plantListItem" href="">Mexican Feather Grass (Nassella tenuissima) </a>,
+                <a class="plantListItem" href="">Thyme (Thymus vulgaris) </a>
+            </p>
+            <div class="cardbottom-cont">
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">Low</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Maintenance</div>
+                            <div class="stat-label">Easy</div>
+                        </div> 
+                    </div>
+                </div>
+                <button onclick="toggleSaveState(this)" class="pot-button">
+                    <div class="flower-assembly">
+                        <div class="flower-head">
+                            <div class="petal p1"></div>
+                            <div class="petal p2"></div>
+                            <div class="petal p3"></div>
+                            <div class="petal p4"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem"></div>
+                    </div>
+                    <div class="pot-base"></div>
+                    <div class="pot-rim"></div>
+                </button>
+            </div>
+        </div>
+        <div class="garden-card hidden">
+            <div class="image-placeholder-wrapper">
+                <img src="../pics/gardenideas/gardenidea2.png" alt="The Shady Woodland Retreat">
+            </div>
+            <h2 class="card-title">The Shady Woodland Retreat</h2>
+            <p class="card-description">Escape to a tranquil, cool sanctuary. This garden uses a canopy of existing trees to nurture a dense tapestry of textures and forms, featuring varied greens from hostas and ferns.</p>
+            <p class="card-description">A winding path creates a natural, easy-to-maintain sense of journey.</p>
+            <hr>
+            <p class="plant-list">
+                <a class="plantListItem" href="">Japanese Maple (Acer palmatum)</a>,
+                <a class="plantListItem" href="">Hosta (Hosta spp.)</a>,
+                <a class="plantListItem" href="">Ostrich Fern (Matteuccia struthiopteris)</a>,
+                <a class="plantListItem" href="">Japanese Forest Grass (Hakonechloa macra)</a>,
+                <a class="plantListItem" href="">Bleeding Heart (Dicentra spectabilis)</a>,
+                <a class="plantListItem" href="">Wild Ginger (Asarum canadense)</a>
+            </p>
+            <div class="cardbottom-cont">
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">Low</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">Medium</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Maintenance</div>
+                            <div class="stat-label">Easy</div>
+                        </div> 
+                    </div>
+                </div>
+                <button onclick="toggleSaveState(this)" class="pot-button">
+                    <div class="flower-assembly">
+                        <div class="flower-head">
+                            <div class="petal p1"></div>
+                            <div class="petal p2"></div>
+                            <div class="petal p3"></div>
+                            <div class="petal p4"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem"></div>
+                    </div>
+                    <div class="pot-base"></div>
+                    <div class="pot-rim"></div>
+                </button>
+            </div>
+        </div>
+        <div class="garden-card hidden">
+            <div class="image-placeholder-wrapper">
+                <img src="../pics/gardenideas/gardenidea2.png" alt="The Shady Woodland Retreat">
+            </div>
+            <h2 class="card-title">The Shady Woodland Retreat</h2>
+            <p class="card-description">Escape to a tranquil, cool sanctuary. This garden uses a canopy of existing trees to nurture a dense tapestry of textures and forms, featuring varied greens from hostas and ferns.</p>
+            <p class="card-description">A winding path creates a natural, easy-to-maintain sense of journey.</p>
+            <hr>
+            <p class="plant-list">
+                <a class="plantListItem" href="">Japanese Maple (Acer palmatum)</a>,
+                <a class="plantListItem" href="">Hosta (Hosta spp.)</a>,
+                <a class="plantListItem" href="">Ostrich Fern (Matteuccia struthiopteris)</a>,
+                <a class="plantListItem" href="">Japanese Forest Grass (Hakonechloa macra)</a>,
+                <a class="plantListItem" href="">Bleeding Heart (Dicentra spectabilis)</a>,
+                <a class="plantListItem" href="">Wild Ginger (Asarum canadense)</a>
+            </p>
+            <div class="cardbottom-cont">
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">Low</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">Medium</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Maintenance</div>
+                            <div class="stat-label">Easy</div>
+                        </div> 
+                    </div>
+                </div>
+                <button onclick="toggleSaveState(this)" class="pot-button">
+                    <div class="flower-assembly">
+                        <div class="flower-head">
+                            <div class="petal p1"></div>
+                            <div class="petal p2"></div>
+                            <div class="petal p3"></div>
+                            <div class="petal p4"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem"></div>
+                    </div>
+                    <div class="pot-base"></div>
+                    <div class="pot-rim"></div>
+                </button>
+            </div>
+        </div>
+        <div class="garden-card hidden">
+            <div class="image-placeholder-wrapper">
+                <img src="../pics/gardenideas/gardenidea1.png" alt="The Sun-Drenched Haven">
+            </div>
+            <h2 class="card-title">The Sun-Drenched Haven</h2>
+            <p class="card-description">This Mediterranean-inspired retreat pairs drought-tolerant lavender and rosemary with structural agaves. </p>
+            <p class="card-description">A gravel path leads to a quiet bench under a small olive tree, creating a water-wise sanctuary that thrives in full sun with minimal effort.</p>
+            <hr>
+            <p class="plant-list">
+                <a class="plantListItem" href="">Olive Tree (Olea europaea) </a>,
+                <a class="plantListItem" href="">Lavender (Lavandula angustifolia) </a>,
+                <a class="plantListItem" href="">Rosemary (Rosmarinus officinalis) </a>,
+                <a class="plantListItem" href="">Agave (Agave spp.) </a>,
+                <a class="plantListItem" href="">Mexican Feather Grass (Nassella tenuissima) </a>,
+                <a class="plantListItem" href="">Thyme (Thymus vulgaris) </a>
+            </p>
+            <div class="cardbottom-cont">
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">Low</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Maintenance</div>
+                            <div class="stat-label">Easy</div>
+                        </div> 
+                    </div>
+                </div>
+                <button onclick="toggleSaveState(this)" class="pot-button">
+                    <div class="flower-assembly">
+                        <div class="flower-head">
+                            <div class="petal p1"></div>
+                            <div class="petal p2"></div>
+                            <div class="petal p3"></div>
+                            <div class="petal p4"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem"></div>
+                    </div>
+                    <div class="pot-base"></div>
+                    <div class="pot-rim"></div>
+                </button>
+            </div>
+        </div>
+        <div class="garden-card hidden">
+            <div class="image-placeholder-wrapper">
+                <img src="../pics/gardenideas/gardenidea3.png" alt="The Pollinator Paradise">
+            </div>
+            <h2 class="card-title">The Pollinator Paradise</h2>
+            <p class="card-description">A vibrant, buzzing oasis designed to attract butterflies and bees. This garden features a succession of colorful blooms and native plants, providing essential nectar throughout the seasons.</p>
+            <p class="card-description">The variety of heights and textures creates a lively, natural look that supports local biodiversity while remaining incredibly easy to care for.</p>
+            <hr>
+            <p class="plant-list">
+                <a class="plantListItem" href="">Purple Coneflower (Echinacea purpurea)</a>,
+                <a class="plantListItem" href="">Butterfly Bush (Buddleja davidii)</a>,
+                <a class="plantListItem" href="">Milkweed (Asclepias syriaca)</a>,
+                <a class="plantListItem" href="">Bee Balm (Monarda didyma)</a>,
+                <a class="plantListItem" href="">Black-eyed Susan (Rudbeckia hirta)</a>,
+                <a class="plantListItem" href="">Aster (Symphyotrichum spp.)</a>
+            </p>
+            <div class="cardbottom-cont">
+                <div class="card-footer">
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-badge">Sunlight</div>
+                            <div class="stat-label">High</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Water</div>
+                            <div class="stat-label">Medium</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-badge">Maintenance</div>
+                            <div class="stat-label">Easy</div>
+                        </div> 
+                    </div>
+                </div>
+                <button onclick="toggleSaveState(this)" class="pot-button">
+                    <div class="flower-assembly">
+                        <div class="flower-head">
+                            <div class="petal p1"></div>
+                            <div class="petal p2"></div>
+                            <div class="petal p3"></div>
+                            <div class="petal p4"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem"></div>
+                    </div>
+                    <div class="pot-base"></div>
+                    <div class="pot-rim"></div>
+                </button>
+            </div>
+        </div>
     </div>
-    <script src="./mains/mainIdeas.js"></script>
+    <script src="../mains/mainIdeas.js"></script>
 </body>
 </html> 
