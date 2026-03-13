@@ -1,63 +1,154 @@
-// mainIndex.js — UI behavior for index.ejs
-// Key IDs referenced:
-// - #sidebar, #sidebar.active: off-canvas settings pane
-// - #lang-switch: language selector
-// - #theme-toggle, #theme-icon, body.dark: theme control
-// - #search-container, #execute-search and the search input IDs
-// Lucide icons are initialized here.
-lucide.createIcons();
+// --- Initialize State ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-function toggleSidebar() {
-    // Toggle the sidebar `active` class (selector: #sidebar.active)
-    document.getElementById('sidebar').classList.toggle('active');
+window.onload = () => {
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-theme');
+        darkBtn.classList.add('dark-active');
+    }
+};
+
+// --- Navbar scrolling actions logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById('top-navbar').style.top = "0";
+  } else {
+    document.getElementById('top-navbar').style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+} 
+
+// --- Side Panel Toggle ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const settingsBtn = document.getElementById('settings_Btn');
+const sidePanel = document.getElementById('settings-sidepanel');
+const closePanel = document.getElementById('closeSidePanel');
+
+settingsBtn.addEventListener('click', () => {
+    sidePanel.style.transition = '0.4s all ease'
+    sidePanel.style.left = 0
+});
+closePanel.addEventListener('click', () => {
+    sidePanel.style.transition = '0.4s all ease'
+    sidePanel.style.left = "-22.5rem"
+});
+
+// --- Dark Mode Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+const body = document.body;
+const darkBtn = document.getElementById('darkmode');
+
+darkBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-theme');
+    darkBtn.classList.toggle('dark-active');
+    
+    // Optional: Save preference to localStorage
+    const isDark = body.classList.contains('dark-theme');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+// --- Garden maker 3D art animation logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const cube = document.getElementById('cube');
+document.getElementById("gardenMakerPage_Btn").addEventListener("mouseover", () => {
+    cube.style.animation = 'rotate 30s linear infinite'
+})
+document.getElementById("gardenMakerPage_Btn").addEventListener("mouseleave", () => {
+    cube.style.animation = ''
+})
+
+// --- Scrolling animations logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        console.log(entry)
+        if (entry.isIntersecting) {entry.target.classList.add('show')} 
+        else {entry.target.classList.remove('show')}
+    })
+})
+const hiddenElements = document.querySelectorAll(".hidden")
+hiddenElements.forEach((e) => observer.observe(e))
+const hidden2Elements = document.querySelectorAll(".hidden2")
+hidden2Elements.forEach((e) => observer.observe(e))
+
+// --- Save garden ideas button logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+document.querySelectorAll(".detailsListItem").forEach(item => {
+    item.addEventListener("click", () => {item.classList.toggle("active")})
+})
+function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved');}
+
+// --- Language Dictionary ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const translations = {
+    en: {
+        settings: "Settings",
+        ideas: "Ideas",
+        plantFinder: "Plant finder",
+        knowledge: "Knowledge",
+        sidepaneltitle: "Personal Oasis",
+        savedP: "Saved Plants",
+        savedWT: "Saved Works & Tools",
+        savedGL: "Saved garden layouts",
+        smalldescription1: "Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.",
+        smalldescription2: "Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity.",
+        designNow: "Design now",
+        ideastitle: "Discover Garden ideas",
+        ideaspage: "See more ideas",
+    },
+    hu: {
+        settings: "Beállítások",
+        ideas: "Ötletek",
+        plantFinder: "Növénykereső",
+        knowledge: "Tudásbázis",
+        sidepaneltitle: "Személyes oázis",
+        savedP: "Mentett növények",
+        savedWT: "Mentett kerti munkák és eszközök",
+        savedGL: "Mentett kert tervek",
+        smalldescription1: "Akár egy üres földfoltot bámulsz, akár egy régi kertet szeretnél felfrissíteni, mi biztosítjuk a botanikai terveket, hogy életre keltsük elképzelésed.",
+        smalldescription2: "Platformunk ötvözi a művészetet és a tudományt, az egyedi kerttervezési ötleteket, átfogó növénykereső adatbázist és válogatott tervezési inspirációk galériáját kínálva, hogy a kreativitásod szikrájára új láng lobbanjon.",
+        designNow: "Tervezés",
+        ideastitle: "Fedezz fel kertötleteket",
+        ideaspage: "Több kertötlet",
+    }
+};
+
+// --- Language switch logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const langSelect = document.getElementById('lang-selection');
+langSelect.addEventListener('change', (e) => {
+    const lang = e.target.value;
+    updateLanguage(lang);
+    // localStorage.setItem('lang', lang ? 'hu' : 'en')
+});
+
+function updateLanguage(lang) {
+    document.getElementById('settings_Btn').innerText = translations[lang].settings;
+    document.getElementById('goto_Ideas').innerText = translations[lang].ideas;
+    document.getElementById('goto_PlantFinder').innerText = translations[lang].plantFinder;
+    document.getElementById('goto_Knowledge').innerText = translations[lang].knowledge
+    document.getElementById('gardenMakerPage_Btn').innerText = translations[lang].designNow;
+    document.getElementById('smalldescription1').innerText = translations[lang].smalldescription1
+    document.getElementById('smalldescription2').innerText = translations[lang].smalldescription2
+    document.getElementById('sidepanel-title').innerText = translations[lang].sidepaneltitle
+    document.getElementById('savedP_Btn').innerText = translations[lang].savedP
+    document.getElementById('savedWT_Btn').innerText = translations[lang].savedWT
+    document.getElementById('savedGL_Btn').innerText = translations[lang].savedGL
+    document.getElementById('ideas-title').innerText = translations[lang].ideastitle
+    document.getElementById('ideasPage_Btn').innerText = translations[lang].ideaspage
 }
 
-function toggleSearch() {
-    // Expand/collapse the search panel (selector: #search-container.active)
-    document.getElementById('search-container').classList.toggle('active');
-}
 
-/* Theme handling */
-function applyTheme(isDark) {
-    // Adds/removes `dark` class on <body>, toggling CSS rules under `body.dark`
-    document.body.classList.toggle('dark', isDark);
-    // Update the theme icon (selector: #theme-icon)
-    const themeIcon = document.getElementById('theme-icon');
-    if (themeIcon) themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
-    lucide.createIcons();
-}
-
-function toggleTheme() {
-    const isDark = !document.body.classList.contains('dark');
-    applyTheme(isDark);
-    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
-}
-
-/* Initialize theme from localStorage */
-(function initTheme() {
-    // Read saved theme from localStorage and initialize
-    const saved = (() => { try { return localStorage.getItem('theme'); } catch (e) { return null; }})();
-    applyTheme(saved === 'dark');
-    // Attach click handler to `#theme-toggle` button
-    const themeBtn = document.getElementById('theme-toggle');
-    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
-})();
-
-// Language switch: updates the visible hero title and subtitle
-const langSwitch = document.getElementById('lang-switch');
-if (langSwitch) {
-    langSwitch.addEventListener('change', (e) => {
-        const isHu = e.target.value === 'hu';
-        document.querySelector('#hero-title h1').innerText = isHu ? "Kertészeti Műszerfal" : "Botanical Dashboard";
-        document.querySelector('#hero-title p').innerText = isHu ? "Egyszerűsített kertészkedés a következő generációnak." : "Smart gardening simplified for the next generation.";
-        document.querySelector('#account-hub h3').innerHTML = isHu ? `<i data-lucide="user"></i> Oázisom` : `<i data-lucide="user"></i> My Oasis`;
-        document.getElementById('item-plants').innerHTML = isHu ? `<i data-lucide="leaf"></i> Mentett növények` : `<i data-lucide="leaf"></i> Saved Plants`;
-        document.getElementById('item-works').innerHTML = isHu ? `<i data-lucide="check-square"></i> Kertészeti munkák & eszközök` : `<i data-lucide="check-square"></i> Gardening Works & Tools`;
-        document.getElementById('item-layouts').innerHTML = isHu ? `<i data-lucide="layout"></i> Kerttervek` : `<i data-lucide="layout"></i> Garden Layouts`;
-        document.getElementById('langTitle').innerHTML = isHu ? `<i data-lucide="languages"></i> Nyelv` : `<i data-lucide="languages"></i> Language`;
-        lucide.createIcons();
-    });
-}
 const searchForm = document.getElementById('search-container');
 const resultsContainer = document.getElementById('searchedPlant-container');
 

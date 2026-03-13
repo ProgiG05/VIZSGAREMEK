@@ -1,155 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sproutified | Modern Gardening</title>
-    <link rel="stylesheet" href="/styles/styleIndex.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-
+    <title>Sproutified | Grow a garden</title>
+    <link rel="shortcut icon" href="./pics/icons/plant.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/styleIndex.css">
+</head> 
 <body>
-    <aside id="sidebar">
-        <!-- Sidebar: settings panel. Toggle with `toggleSidebar()`; appears when `#sidebar` gains the `active` class. -->
-        <div id="sidebar-header">
-            <h2>Settings</h2>
-            <button id="close-sidebar" onclick="toggleSidebar()"><i data-lucide="x"></i></button>
-        </div>
-        <!-- Language control: `#lang-switch` select changes UI strings via JS listener in mainIndex.js -->
-        <div id="language-control">
-            <label id="langTitle"><i data-lucide="languages"></i>Language</label>
-            <select id="lang-switch">
-                <option value="en">English</option>
-                <option value="hu">Magyar</option>
-            </select>
-        </div>
-        <!-- Account hub: quick links for saved items. `#saved-list` contains clickable entries. -->
-        <div id="account-hub">
-            <h3><i data-lucide="user"></i> My Oasis</h3>
-            <div id="saved-list">
-                <form action="/savedPlants" method="get">
-                    <button type="submit" id="item-plants"><i data-lucide="leaf"></i> Saved Plants</button>
-                </form>
-                <form action="/WorksAndTools" method="get">
-                    <button type="submit" id="item-works"><i data-lucide="calendar-check"></i> Gardening Works &
-                        Tools</button>
-                </form>
-                <form action="/myGardens" method="get">
-                    <button type="submit" id="item-layouts"><i data-lucide="grid"></i> Garden Layouts</button>
-                </form>
+    <nav id="top-navbar"> 
+        <a id="settings_Btn">Settings</a> 
+        <a href="#ideas-showcase-section" id="goto_Ideas">Ideas</a>
+        <a href="#plant-finder-section" id="goto_PlantFinder">Plant finder</a>
+        <a href="#knowledges-showcase-section" id="goto_Knowledge">Knowledge</a>
+        <a id="logIn_Btn">Login</a>
+        <a id="signUp_Btn">Sign up</a>
+    </nav>
+    <div class="settings-sidepanel" id="settings-sidepanel"> 
+        <h2 id="sidepanel-title">Personal Oasis</h2>
+        <button class="closeSidePanel" id="closeSidePanel"><img src="../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close"></button>
+        <select class="lang-selection" id="lang-selection">
+            <option value="en"><span>English</span></option> 
+            <option value="hu"><span>Hungarian</span></option>
+        </select>
+        <a id="savedP_Btn" href="">Saved Plants</a>
+        <a id="savedWT_Btn" href="">Saved Works & Tools</a>
+        <a id="savedGL_Btn" href="">Saved garden layouts</a>
+        <button class="darkmode" id="darkmode">
+            <img id="light-icon" class="theme-icon" src="../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
+            <img id="dark-icon" class="theme-icon" src="../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
+        </button>
+    </div>
+    <section class="landing-section" id="landing-cont">
+        <div class="landing-cont">
+            <div class="first-cont">
+                <h1 class="main-title hidden">Sprout<span>ified</span></h1>
+                <p class="small-description hidden" id="smalldescription1">Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.</p>
+                <p class="small-description hidden" id="smalldescription2">Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity.</p>
+            </div>
+            <div class="second-cont hidden2">
+                <div class="container">
+                    <div class="cube" id="cube">
+                        <div class="face front"></div>
+                        <div class="face back"></div>
+                        <div class="face left"></div>
+                        <div class="face right"></div>
+                        <div class="face top">
+                            <table>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </table>
+                        </div>
+                        <div class="face bottom"></div>
+                    </div>  
+                </div>
+                <a class="gardenMakerPage_Btn" id="gardenMakerPage_Btn" href="../sites/gardens.html">Design now</a>
+            </div>
+        </div> 
+    </section>
+    <section class="ideas-showcase-section" id="ideas-showcase-section">
+        <h1 class="ideas-title hidden2" id="ideas-title">Discover Garden ideas</h1>
+        <div class="showcase_container" id="showcase-container">
+            <div class="garden-card hidden">
+                <div class="image-placeholder-wrapper">
+                    <img src="../pics/gardenideas/gardenidea3.png" alt="The Pollinator Paradise">
+                </div>
+                <h2 class="card-title">The Pollinator Paradise</h2>
+                <p class="card-description">A vibrant, buzzing oasis designed to attract butterflies and bees. This garden features a succession of colorful blooms and native plants, providing essential nectar throughout the seasons.</p>
+                <p class="card-description">The variety of heights and textures creates a lively, natural look that supports local biodiversity while remaining incredibly easy to care for.</p>
+                <hr>
+                <p class="plant-list">
+                    <a class="plantListItem" href="">Purple Coneflower (Echinacea purpurea)</a>,
+                    <a class="plantListItem" href="">Butterfly Bush (Buddleja davidii)</a>,
+                    <a class="plantListItem" href="">Milkweed (Asclepias syriaca)</a>,
+                    <a class="plantListItem" href="">Bee Balm (Monarda didyma)</a>,
+                    <a class="plantListItem" href="">Black-eyed Susan (Rudbeckia hirta)</a>,
+                    <a class="plantListItem" href="">Aster (Symphyotrichum spp.)</a>
+                </p>
+                <div class="cardbottom-cont">
+                    <div class="card-footer">
+                        <div class="stats-container">
+                            <div class="stat-box">
+                                <div class="stat-badge">Sunlight</div>
+                                <div class="stat-label">High</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-badge">Water</div>
+                                <div class="stat-label">Medium</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-badge">Maintenance</div>
+                                <div class="stat-label">Easy</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <button onclick="toggleSaveState(this)" class="pot-button">
+                        <div class="flower-assembly">
+                            <div class="flower-head">
+                                <div class="petal p1"></div>
+                                <div class="petal p2"></div>
+                                <div class="petal p3"></div>
+                                <div class="petal p4"></div>
+                                <div class="center"></div>
+                            </div>
+                            <div class="stem"></div>
+                        </div>
+                        <div class="pot-base"></div>
+                        <div class="pot-rim"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="garden-card hidden">
+                <div class="image-placeholder-wrapper">
+                    <img src="../pics/gardenideas/gardenidea1.png" alt="The Sun-Drenched Haven">
+                </div>
+                <h2 class="card-title">The Sun-Drenched Haven</h2>
+                <p class="card-description">This Mediterranean-inspired retreat pairs drought-tolerant lavender and rosemary with structural agaves. </p>
+                <p class="card-description">A gravel path leads to a quiet bench under a small olive tree, creating a water-wise sanctuary that thrives in full sun with minimal effort.</p>
+                <hr>
+                <p class="plant-list">
+                    <a class="plantListItem" href="">Olive Tree (Olea europaea) </a>,
+                    <a class="plantListItem" href="">Lavender (Lavandula angustifolia) </a>,
+                    <a class="plantListItem" href="">Rosemary (Rosmarinus officinalis) </a>,
+                    <a class="plantListItem" href="">Agave (Agave spp.) </a>,
+                    <a class="plantListItem" href="">Mexican Feather Grass (Nassella tenuissima) </a>,
+                    <a class="plantListItem" href="">Thyme (Thymus vulgaris) </a>
+                </p>
+                <div class="cardbottom-cont">
+                    <div class="card-footer">
+                        <div class="stats-container">
+                            <div class="stat-box">
+                                <div class="stat-badge">Sunlight</div>
+                                <div class="stat-label">High</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-badge">Water</div>
+                                <div class="stat-label">Low</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-badge">Maintenance</div>
+                                <div class="stat-label">Easy</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <button onclick="toggleSaveState(this)" class="pot-button">
+                        <div class="flower-assembly">
+                            <div class="flower-head">
+                                <div class="petal p1"></div>
+                                <div class="petal p2"></div>
+                                <div class="petal p3"></div>
+                                <div class="petal p4"></div>
+                                <div class="center"></div>
+                            </div>
+                            <div class="stem"></div>
+                        </div>
+                        <div class="pot-base"></div>
+                        <div class="pot-rim"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="garden-card hidden">
+                <div class="image-placeholder-wrapper">
+                    <img src="../pics/gardenideas/gardenidea2.png" alt="The Shady Woodland Retreat">
+                </div>
+                <h2 class="card-title">The Shady Woodland Retreat</h2>
+                <p class="card-description">Escape to a tranquil, cool sanctuary. This garden uses a canopy of existing trees to nurture a dense tapestry of textures and forms, featuring varied greens from hostas and ferns.</p>
+                <p class="card-description">A winding path creates a natural, easy-to-maintain sense of journey.</p>
+                <hr>
+                <p class="plant-list">
+                    <a class="plantListItem" href="">Japanese Maple (Acer palmatum)</a>,
+                    <a class="plantListItem" href="">Hosta (Hosta spp.)</a>,
+                    <a class="plantListItem" href="">Ostrich Fern (Matteuccia struthiopteris)</a>,
+                    <a class="plantListItem" href="">Japanese Forest Grass (Hakonechloa macra)</a>,
+                    <a class="plantListItem" href="">Bleeding Heart (Dicentra spectabilis)</a>,
+                    <a class="plantListItem" href="">Wild Ginger (Asarum canadense)</a>
+                </p>
+                <div class="cardbottom-cont">
+                    <div class="card-footer">
+                        <div class="stats-container">
+                            <div class="stat-box">
+                                <div class="stat-badge">Sunlight</div>
+                                <div class="stat-label">Low</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-badge">Water</div>
+                                <div class="stat-label">Medium</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-badge">Maintenance</div>
+                                <div class="stat-label">Easy</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <button onclick="toggleSaveState(this)" class="pot-button">
+                        <div class="flower-assembly">
+                            <div class="flower-head">
+                                <div class="petal p1"></div>
+                                <div class="petal p2"></div>
+                                <div class="petal p3"></div>
+                                <div class="petal p4"></div>
+                                <div class="center"></div>
+                            </div>
+                            <div class="stem"></div>
+                        </div>
+                        <div class="pot-base"></div>
+                        <div class="pot-rim"></div>
+                    </button>
+                </div>
             </div>
         </div>
-    </aside>
-    <!-- Main container: central glass card. See `#main-container` rules in styleIndex.css -->
-    <main id="main-container">
-        <header id="main-header">
-            <div id="logo">Sprout<span>ified</span></div>
-            <div id="header-widgets">
-                <div id="weather-card">
-                    <i data-lucide="cloud-sun" id="weather-icon"></i>
-                    <div id="weather-details">
-                        <span id="temp-display">21°C</span>
-                        <span id="location-display">Budapest, HU</span>
+        <a class="ideasPage_Btn" id="ideasPage_Btn" href="../sites/ideas.html">See more ideas</a> 
+    </section>
+    <section class="plant-finder-section" id="plant-finder-section">
+        <h1 class="result-title hidden">Find your ideal plant</h1>
+        <div class="plant-finder-main-container">
+            <div class="search-cont hidden"> 
+                <h1 class="search-title">Search for a plant</h1>
+                <div class="textInp-cont">
+                    <div>
+                        <label for="commonN">Common name:</label>
+                        <input name="commonN" class="commonplant-search-inp" id="commonplant-search-inp" type="text" placeholder="Search...">
+                    </div>
+                    <div>
+                        <label for="botanicalN">Botanical name:</label>
+                        <input name="botanicalN" class="botanicalplant-search-inp" id="botanicalplant-search-inp" type="text" placeholder="Search...">
                     </div>
                 </div>
-                <button id="theme-toggle" aria-label="Toggle theme">
-                    <i data-lucide="moon" id="theme-icon"></i>
-                </button>
-                <button id="sidebar-trigger" onclick="toggleSidebar()">
-                    <i data-lucide="settings"></i>
-                </button>
+                <div class="check-cont">
+                    <h3><u>Watering need</u></h3>
+                    <div class="water-selection-cont">
+                        <label for="water-low">Low</label>
+                        <input type="checkbox" name="water-low" id="water-select">
+                        <label for="water-medium">Medium</label>
+                        <input type="checkbox" name="water-medium" id="water-select">
+                        <label for="water-high">High</label>
+                        <input type="checkbox" name="water-high" id="water-select">
+                    </div>
+                    <h3><u>Sunlight need</u></h3>
+                    <div class="sunlight-selection-cont">
+                        <label for="sunlight-low">Low</label>
+                        <input type="checkbox" name="sunlight-low" id="sunlight-select">
+                        <label for="sunlight-moderate">Moderate</label>
+                        <input type="checkbox" name="sunlight-moderate" id="sunlight-select">
+                        <label for="sunlight-high">High</label>
+                        <input type="checkbox" name="sunlight-high" id="sunlight-select">
+                    </div>
+                    <h3><u>Soil type</u></h3>
+                    <div class="soil-selection-cont">
+                        <label for="soil-low">Low</label>
+                        <input type="checkbox" name="soil-low" id="soil-select">
+                        <label for="soil-moderate">Moderate</label>
+                        <input type="checkbox" name="soil-moderate" id="soil-select">
+                        <label for="soil-high">High</label>
+                        <input type="checkbox" name="soil-high" id="soil-select">  
+                    </div>
+                </div>
+                <div class="selection-cont">
+                    <label for="plantingSelection">Planting month: </label>
+                    <select name="plantingSelection" id="planting-months-selection">
+                        <option value="none">Choose...</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <label for="harvestingSelection">Harvesting month: </label>
+                    <select name="harvestingSelection" id="harvesting-months-selection">
+                        <option value="none">Choose...</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </div>
+                <button class="searchPlant_Btn" id="searchPlant_Btn">Search</button>
             </div>
-        </header>
-        <!-- Hero/title block. Text is updated by the language switch listener in mainIndex.js -->
-        <section id="hero-title">
-            <h1>Botanical Dashboard</h1>
-            <p>Smart gardening simplified for the next generation.</p>
-        </section>
-        <!-- Top navigation grid. Each form contains a `.nav-button` styled button. -->
-        <nav id="top-nav-row">
-            <form class="nav-button-container" action="/ideas">     
-                <button id="btn-ideas" class="nav-button" type="submit">
-                    <i data-lucide="sparkles"></i>
-                    <div class="btn-text"><strong>Ideas</strong><span>Inspiration Gallery</span></div>
-                </button>
-            </form>
-            <form class="nav-button-container" action="/knowledges">
-                <button id="btn-knowledge" class="nav-button" type="submit">
-                    <i data-lucide="book-open"></i>
-                    <div class="btn-text"><strong>Knowledge</strong><span>Styles & Facts</span></div>
-                </button>
-            </form>
-            <!-- <form class="nav-button-container" action="/gardenmaker" method="get">
-                <button id="btn-maker" class="nav-button" type="submit">
-                    <i data-lucide="layout-template"></i>
-                    <div class="btn-text"><strong>Garden Maker</strong><span>2D Designer</span></div>
-                </button>
-            </form> -->
-            <form class="nav-button-container" action="/plants">
-                <button id="btn-plants" class="nav-button" type="submit">
-                    <i data-lucide="leaf"></i>
-                    <div class="btn-text"><strong>Plants</strong><span>Botanical Database</span></div>
-                </button>
-            </form>
-            <form class="nav-button-container" action="/gardens">
-                <button id="btn-gardens" class="nav-button" type="submit">
-                    <i data-lucide="leaf"></i>
-                    <div class="btn-text"><strong>Gardens</strong><span>My Gardens</span></div>
-                </button>
-            </form>
-        </nav>
-        <!-- Bottom row: Plant Finder trigger and collapsible search (`#search-container`) -->
-        <section id="bottom-nav-row">
-            <button id="plant-finder-trigger" onclick="toggleSearch()">
-                <i data-lucide="search"></i>
-                <div class="btn-text">
-                    <strong>Plant Finder</strong>
-                    <span>Search our botanical database by specific criteria</span>
-                </div>
-            </button>
-
-            <form id="search-container" action="/searchedPlants" method="get">
-                <div id="search-fields">
-                    <!-- Search inputs: IDs are referenced by mainIndex.js when executing a search -->
-                    <input type="text" id="commonName" name="commonName" placeholder="Common Name (e.g. Lemon)">
-                    <input type="text" id="botanicalName" name="botanicalName" placeholder="Botanical Name">
-                    <select id="type" name="type">
-                        <option value="">Select Type</option>
-                        <option>Fruits</option>
-                        <option>Vegetables</option>
-                        <option>Crops</option>
-                        <option>Exotic</option>
-                        <option>Herbs</option>
-                    </select>
-                    <select id="water" name="water">
-                        <option value="">Water Needs</option>
-                        <option>Low</option>
-                        <option>Medium</option>
-                        <option>High</option>
-                    </select>
-                    <select id="sunlight" name="sunlight">
-                        <option value="">Sunlight</option>
-                        <option>Low</option>
-                        <option>Moderate</option>
-                        <option>High</option>
-                    </select>
-                    <select id="soil" name="soil">
-                        <option value="">Soil Nutrition</option>
-                        <option>Low</option>
-                        <option>Moderate</option>
-                        <option>High</option>
-                    </select>
-                    <input type="text" id="planting" name="planting" placeholder="Planting (e.g. April, May)">
-                    <input type="text" id="harvesting" name="harvesting" placeholder="Harvesting (e.g. October)">
-                </div>
-                <!-- `#execute-search` button: handled in mainIndex.js; reads `#commonName` and other inputs. -->
-                <button type="submit" id="execute-search">Execute Botanical Search</button>
-            </form>
-        </section>
-        <div id="searchedPlant-container"></div>
-    </main>
-    <script src="/mains/mainIndex.js"></script>
+            <div class="searchResult hidden2" id="searchResult">
+                <div class="resultimage-cont" id="resultimage"><img src="../pics/others/searchedplant_placeholder.png" alt="Monstera Deliciosa (Swiss Cheese Plant)"></div>
+                <div class="result-details-cont">
+                    <h2 class="plantdetails-title">Plant Details</h2>
+                    <table>
+                        <tr>
+                            <td class="resultKey">Common name:</td>
+                            <td class="resultValue">Monstera Deliciosa, Swiss Cheese Plant</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Scientific name:</td>
+                            <td class="resultValue">Monstera deliciosa</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Type:</td>
+                            <td class="resultValue">Tropical perennial, epiphyte</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Watering:</td>
+                            <td class="resultValue">Allow soil to dry between waterings. Water thoroughly but rarely. Avoid waterlogged soil.</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Sunlight:</td>
+                            <td class="resultValue">Bright, indirect light. Tolerate lower light but produce fewer fenestrations.</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Soil:</td>
+                            <td class="resultValue">Well-draining, chunky potting mix (peat, bark, perlite).</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Planting season:</td>
+                            <td class="resultValue">Year-round (Indoors)</td>
+                        </tr>
+                        <tr>
+                            <td class="resultKey">Harvesting season:</td>
+                            <td class="resultValue">N/A (as an ornamental plant)</td>
+                        </tr>
+                    </table>
+                    <a class="plantsearchPage_Btn" id="plantsearchPage_Btn" href="">Get more info</a>
+                </div>  
+            </div>
+        </div>
+    </section>
+    <section class="knowledges-showcase-section" id="knowledges-showcase-section"> 
+        <div class="smallknowledge-cont hidden">
+            <h1 class="knowledges-title">Learn something interesting about<br>the world of gardens</h1>
+            <h2 class="knowledges-subtitle">Discover Tips & Tricks for gardening</h2>
+            <div class="smallknowledge-reader">
+                <p class="smallstory">Group plants by water and light needs. Clustering thirsty species separately from drought-tolerant ones prevents overwatering and simplifies your routine.</p>
+                <p class="smallstory">Use trellises and wall planters to grow upwards. Vertical gardening saves space, improves air circulation, and keeps your paths clear.</p>
+                <p class="smallstory">Draw a simple garden map instead of using labels. A bird’s-eye sketch helps you track plant locations and growth dates.</p>
+            </div>
+            <a class="knowledgesPage_Btn" id="knowledgesPage_Btn" href="">Learn more</a>
+        </div>
+        <div class="bigknowledge-cont hidden2">
+            <h2 class="knowledges-subtitle">Visit different garden types from all around the world</h2>
+            <div class="bigknowledge-reader">
+                <p class="bigstory">Matcha’s story started in 1191 when the monk Eisai brought seeds from China to Japan, eventually finding the perfect terroir in Uji, Kyoto. Originally a medicinal tonic for Zen monks, matcha farming evolved significantly during the 16th century with the invention of shading.</p>
+                <p class="bigstory">By covering the bushes weeks before harvest, farmers forced the plants to produce extra chlorophyll and L-theanine, creating that signature vibrant green and mellow umami taste.</p>
+                <p class="bigstory">This labor-intensive tradition remains the backbone of Japanese tea culture, transforming humble leaves into the "liquid jade" we obsess over today.</p>
+            </div>
+            <a class="knowledgesPage_Btn" id="knowledgesPage_Btn" href="">Learn more</a>
+        </div>
+    </section>
+    <footer></footer>
+    <script src="../mains/mainIndex.js"></script>
 </body>
-
 </html>
