@@ -6,7 +6,7 @@ router.get('/ideas', GardenController.GetEveryIdea)
 
 router.get('/knowledge', GardenController.GetAllKnowledges)
 
-router.post('/gardens', GardenController.AddNewGarden)
+router.post('/gardens/newgarden', GardenController.AddNewgarden)
 
 router.get('/plantfinder', GardenController.GetSearchedPlantDetails)
 

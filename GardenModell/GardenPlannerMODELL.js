@@ -22,8 +22,8 @@ module.exports = {
         console.log(rows)
         return rows
     },
-    AddNewgarden : async function CreateGarden(id,userID,plantID,size) {
-        const [rows] = await connection.query(`INSERT INTO gardens VALUES(?,?,?,?)`,[id,userID,plantID,size])
+    AddNewgarden : async function CreateGarden(garden) {
+        const [rows] = await connection.query(`INSERT INTO gardenmanager VALUES(?,?,?)`,[garden.user_id, garden.gardenname, garden.gardencontent])
         return rows
     },
     GetMySavedPlants : async function GetMySavedPlants() {

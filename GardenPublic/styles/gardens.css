@@ -27,6 +27,14 @@ body {
 .empty-cell:hover {
     cursor: default;
 }
+.newgarden_btn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+}
 .delete_btn {
     background-color: red;
     color: white;

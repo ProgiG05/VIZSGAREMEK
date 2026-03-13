@@ -19,8 +19,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     //creating the add button on top
     const newGardenBtn = document.createElement("button");
     newGardenBtn.className = "newgarden_btn";
-    newGardenBtn.addEventListener("click", () => {
-        ShowAddGardenForm();
+    newGardenBtn.textContent = "Add New Garden";
+    newGardenBtn.addEventListener("click", async () => {
+        await ShowAddGardenForm(gardensContainer);
     })
     
 
@@ -55,6 +56,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     plantselection.style.display = "none";
     plantselection.style.marginTop = "10px";
 
+    
+    gardensContainer.appendChild(newGardenBtn);
     controlsContainer.appendChild(disablecellbtn);
     controlsContainer.appendChild(emptycellbtn);
     controlsContainer.appendChild(plantcellbtn);
@@ -234,10 +237,10 @@ function CreateTable(splittedContent, plants) {
             const plantId = parseInt(column);
             
             switch (column) {
-                case "-":
+                case "":
                     tableColumn.className = "empty-cell";
                     break;
-                case "":
+                case "+":
                     tableColumn.className = "tobecollected-cell";
                     tableColumn.textContent = "+";
                     break;
@@ -257,11 +260,17 @@ function CreateTable(splittedContent, plants) {
 function EditGarden(gardenid, plants) {
     const allCards = document.querySelectorAll(".garden-card");
     const targetId = "garden" + gardenid;
+    const gardenName = document.getElementById("garden" + gardenid).querySelector(".garden-name");
+    gardenName.addEventListener("click", () => {
+        gardenName.contentEditable = true;
+        gardenName.focus();
+    })
     
     allCards.forEach(card => {
         if (card.id === targetId) {
             card.style.display = "block";
             card.classList.add("is-editing");
+            card.style.margin = "auto";
             // Add a Back button if not already present
             if (!card.querySelector(".back_btn")) {
                 const backBtn = document.createElement("button");
@@ -285,10 +294,10 @@ function EditGarden(gardenid, plants) {
                     const gardenTableData = Array.from(gardenTable.querySelectorAll("tr")).map(row => {
                         return Array.from(row.querySelectorAll("td")).map(cell => {
                             switch (cell.textContent) {
-                                case "-":
-                                    return "-";
-                                case "+":
+                                case "":
                                     return "";
+                                case "+":
+                                    return "+";
                                 default:
                                     const plant = plants.find(p => p.commonName === cell.textContent);
                                     return plant ? plant.id : "";
@@ -300,7 +309,7 @@ function EditGarden(gardenid, plants) {
                     const garden = {
                         id: gardenid,
                         user_id: null,
-                        name: card.querySelector(".garden-name").textContent,
+                        name: gardenName.textContent,
                         content: gardenTableData,
                     };
                     await SaveGarden(garden);
@@ -321,6 +330,54 @@ function EditGarden(gardenid, plants) {
 
 async function SaveGarden(garden){
     const resp = await fetch(`/api/gardens/${garden.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(garden)
+    });
+    return resp.json();
+}
+
+async function ShowAddGardenForm(container) {
+    container.innerHTML = `
+        <form id="addGardenForm">
+        <label for="gardenName">Garden Name:</label>
+        <input type="text" id="gardenName" name="gardenName" required>
+        <label for="gardenRows">Rows:</label>
+        <input type="number" id="gardenRows" name="gardenRows" required>
+        <label for="gardenColumns">Columns:</label>
+        <input type="number" id="gardenColumns" name="gardenColumns" required>
+        <button type="submit">Add Garden</button>
+        </form>
+    `;
+    addGardenForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const gardenName = document.getElementById("gardenName").value;
+        const gardenRows = document.getElementById("gardenRows").value;
+        const gardenColumns = document.getElementById("gardenColumns").value;
+        let content = "";
+        
+        for (let i = 0; i < gardenRows; i++) {
+            for (let j = 0; j < gardenColumns; j++) {
+                content += "+";
+                content += ",";
+            }
+            content += ";";
+        }
+        const garden = {
+            user_id: null,
+            gardenname: gardenName,
+            gardencontent: content,
+        };
+        console.log(garden);
+        await newGarden(garden);
+        console.log("Garden added:", garden);
+        window.location.reload();
+    });
+    document.body.appendChild(addGardenForm);
+}
+
+async function newGarden(garden) {
+    const resp = await fetch(`/api/gardens/newgarden`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(garden)

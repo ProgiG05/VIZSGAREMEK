@@ -10,8 +10,10 @@ exports.GetAllKnowledges = async (req,res) => {
     const KnowledgesData = await GardenModel.GetAllKnowledges()
     res.json(KnowledgesData)
 }
-exports.AddNewGarden = async (req,res) => {
-    
+exports.AddNewgarden = async (req,res) => {
+    const garden = req.body
+    const newGarden = await GardenModel.AddNewgarden(garden)
+    res.json(newGarden)
 }
 exports.GetSearchedPlantDetails = async (req,res) => {
     const {commonName, botanicalName, type, water, sunlight, soil, planting, harvesting} = req.query
