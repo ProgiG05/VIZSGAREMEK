@@ -579,7 +579,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     box-shadow: 2px 2px 0px  var(--innercont-hover-shadow);
     transition: all 0.3s ease;
 }
-#commonplant-search-inp, #botanicalplant-search-inp{
+.commonplant-search-inp, .botanicalplant-search-inp{
     width: 40%;
     height: fit-content;
     float: right;
@@ -589,7 +589,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     outline: none;
     border: none;
 }
-#commonplant-search-inp:focus,#botanicalplant-search-inp:focus{outline: none;}
+.commonplant-search-inp:focus, .botanicalplant-search-inp:focus{outline: none;}
 .check-cont{
     padding: 0.938rem;
     border-radius: 15px;
