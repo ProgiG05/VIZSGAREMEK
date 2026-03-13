@@ -1,10 +1,11 @@
 :root{
-    --body-bg: linear-gradient(to bottom, #a3b68a, #5c724a);
+    --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
     --general-font-color:#131b11;
-    --onecard-bg-primary:#c6e7d8;
-    --onecard-font-primary:rgb(6, 19, 18);
-    --onecard-bg-secondary:rgb(6, 19, 18);
-    --onecard-font-secondary:#c6e7d8;
+    --text-main: #ffffff;
+    --navbarBtn-bg: #23291fde;
+    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-hover-bg: #57644e;
+    --navbarBtn-hover-font-color: rgb(255, 255, 255);
 /* ######################################################## */
     --bg-dark: #1a1e1a;
     --text-green: #a7f070;
@@ -21,14 +22,21 @@
 body{
     background-image: var(--body-bg);
 }
+body.dark-theme{
+    --body-bg: linear-gradient(to bottom, #293320, #161b11);
+    --general-font-color:#d8e9c2;
+    --navbarBtn-bg: #708066ee;
+    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-hover-bg: #16220e;
+    --navbarBtn-hover-font-color: rgb(255, 255, 255);
+}
 #top-navbar {
     width: 100%;
     height: 3.75rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    margin-top: 0;   
+    justify-content: space-evenly; 
     top: 0;
 }
 
@@ -43,8 +51,8 @@ body{
     text-decoration: none;
     font-family: monospace;
     font-size: 1.3rem;
-    background-color:var(--navbtn-bg);
-    color: var(--navbtn-font-color);
+    background-color: var(--navbarBtn-bg);
+    color: var(--navbarBtn-font-color);
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
 }
@@ -53,8 +61,32 @@ body{
     transition-timing-function: ease-in;
     letter-spacing: 0.125rem;
     cursor: pointer;
-    background-color:var(--navbtn-hover-bg);
-    color:var(--navbtn-hover-font-color);
+    background-color:var(--navbarBtn-hover-bg);
+    color:var(--navbarBtn-hover-font-color);
+}
+#top-navbar button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 1.3rem;
+    background-color: var(--navbarBtn-bg);
+    color: var(--navbarBtn-font-color);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+#top-navbar button:hover {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+    letter-spacing: 0.125rem;
+    cursor: pointer;
+    background-color:var(--navbarBtn-hover-bg);
+    color:var(--navbarBtn-hover-font-color);
 }
 .settings-sidepanel {
     width: 18.75rem;
@@ -188,6 +220,7 @@ body{
     flex-wrap: wrap;
     width: 95%; 
     margin: auto;
+    align-items: center;
     gap: 1.1rem;
 }
 
@@ -208,31 +241,23 @@ body{
     color: var(--text-green);
     position: relative;
 }
-.garden-card:hover{
-    scale: calc(1.01);
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.2s;
-}
-
 .image-placeholder-wrapper {
-    position: relative;
-    height: 15%;
+    height: 10%;
     box-shadow: 4px 4px 2px var(--beige-dark-shadow);
     transition-timing-function: ease-in-out;
     transition-duration: 0.5s;
 }
-.image-placeholder-wrapper img{
+.insideImage{
     width: 100%;
     height: 100%;
-    /* aspect-ratio: 3/2; */
-    /* object-fit: contain; */
+    aspect-ratio: 3/2;
 }
-.image-placeholder-wrapper img:hover{
+.insideImage:hover{
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
     opacity: 0.3;
     cursor: pointer;
-}  
+}
 .card-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
@@ -263,7 +288,9 @@ body{
 .stats-container {display: flex;gap: 10px; }
 .stat-box {text-align: center;width: 7rem;}
 .stat-badge {background-color: var(--beige-light);color: var(--stat-text);font-weight: bold;font-size: 0.9rem; border-radius: 5px;padding: 0.3rem;}
+.stat-badge:hover{cursor:help;}
 .stat-label {font-size: 1rem;font-weight: bold;text-decoration: underline;margin-top: 5px;}
+.stat-label:hover{cursor:default;}
 
 .pot-button {
     right: 0;
