@@ -115,26 +115,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     margin-top: 0;   
     top: 0;
 }
-/* #top-navbar button {
-    height: 100%;
-    width: 100%;
-    padding: 0.625rem;
-    border: none;
-    font-family: monospace;
-    font-size: 1.3rem;
-    background-color:var(--navbtn-bg);
-    color: var(--navbtn-font-color);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-}
-#top-navbar button:hover {
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    letter-spacing: 0.125rem;
-    cursor: pointer;
-    background-color:var(--navbtn-hover-bg);
-    color:var(--navbtn-hover-font-color);
-} */
 #top-navbar a {
     height: 100%;
     width: 100%;
@@ -145,7 +125,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     border: none;
     text-decoration: none;
     font-family: monospace;
-    font-size: 1.3rem;
+    font-size: clamp(0.7rem,1.1vw,1.6rem);
     background-color:var(--navbtn-bg);
     color: var(--navbtn-font-color);
     transition-duration: 0.2s;
@@ -269,7 +249,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     padding: 0.625rem;
 }
 .main-title{
-    font-size: clamp(2.5rem, 8.5vw, 7.5rem);
+    font-size: clamp(2.5rem, 8.4vw, 9.8rem);
     margin-bottom: 1.5rem;
     font-family: Georgia, 'Times New Roman', Times, serif; 
     color: var(--text-main);
@@ -284,8 +264,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     line-height: 1.25rem;
     color: var(--text-main);
     font-size: 0.9vw;
-    font-family: 'Quicksand', sans-serif; 
-    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace; 
+    font-style: italic;
+    font-weight: 700;
     word-spacing: 0.35rem;
 }
 /*right container with the 3D animation and button*/
@@ -382,6 +363,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     letter-spacing: 0.2rem;
     transition: all 0.3s ease;
 }
+
+/*-------------------------------------------------------------------------------*/
+/*
 .garden-card {
     border-radius: 1.25rem;
     padding: 1.25rem;
@@ -408,8 +392,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .image-placeholder-wrapper img{
     width: 100%;
     height: 100%;
-    /* aspect-ratio: 3/2; */
-    /* object-fit: contain; */
 }
 .image-placeholder-wrapper img:hover{
     transition-timing-function: ease-in-out;
@@ -459,9 +441,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     width: 3.75rem;
     height: 4.375rem;
     overflow: visible; 
-    transform: scale(0.8);/* New: Scale down the entire pot assembly to fit the smaller card */
-    transform-origin: bottom right; /* Keep it anchored to the corner */
-    margin-right: -5px; /* Adjusting margin due to scaling loss */
+    transform: scale(0.8);
+    transform-origin: bottom right; 
+    margin-right: -5px; 
 }
 .pot-base {
     position: absolute;
@@ -479,6 +461,147 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     left: 5%;
     width: 90%;
     height: 0.625rem;
+    background-color: var(--pot-rim-brown);
+    z-index: 11;
+    border-radius: 2px;
+}
+.flower-assembly {
+    position: absolute;
+    left: 50%;
+    bottom: 0px; 
+    transform: translateX(-50%);
+    z-index: 5;
+    transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pot-button.saved .flower-assembly {bottom: 2.5rem; }
+.stem {
+    width: 0.5rem;
+    height: 1.25rem;
+    background-color: var(--stem-green);
+    margin: 0 auto;
+}
+.flower-head {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: -5px;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: var(--flower-yellow);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.petal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.75rem;
+    height: 2.25rem;
+    background-color: var(--flower-white);
+    border-radius: 20px;
+    transform-origin: center;
+    z-index: 1;
+}
+.p1 { transform: translate(-50%, -50%); }
+.p2 { transform: translate(-50%, -50%) rotate(45deg); }
+.p3 { transform: translate(-50%, -50%) rotate(90deg); }
+.p4 { transform: translate(-50%, -50%) rotate(135deg); }
+*/
+.garden-card {
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    margin: 0.6rem;
+    width: 30%;
+    height: fit-content;
+    background-color: var(--bg-dark);
+    color: var(--text-green);
+    position: relative;
+}
+.image-placeholder-wrapper {
+    height: 10%;
+    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+}
+.insideImage{
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3/2;
+}
+.insideImage:hover{
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+    opacity: 0.3;
+    cursor: pointer;
+}
+.card-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: clamp(0.3rem, 2vw, 2rem);
+    font-weight: bold;
+    text-align: center;
+}
+.card-description{
+    font-family: monospace;
+    font-size: clamp(0.3rem, 1vw, 1rem);
+    text-indent: 1rem;
+    text-align: left;
+    word-spacing: 0.1rem;
+}
+.plant-list a{
+    list-style-type: none;
+    padding: 0;
+    padding: 0.501vh 0 0.501vh 0;
+    font-size: clamp(0.3rem,0.729vw,1.2rem); 
+    text-decoration: none;
+    color: var(--text-green);
+    font-family: 'Courier New', Courier, monospace;
+}
+.plant-list a:hover{text-decoration: underline;}
+.cardbottom-cont{display: flex;flex-direction: row;width: 100%;padding: 0;margin: 0;}
+.card-footer {display: flex;height: 100%; margin: auto;}
+.stats-container {display: flex;gap: 10px;}
+.stat-box {text-align: center;width: 5.833vw;}
+.stat-badge {background-color: var(--beige-light);color: var(--stat-text);font-weight: bold;font-size: 0.75vw; border-radius: 5px;padding: 0.25vw;}
+.stat-badge:hover{cursor:help;}
+.stat-label {font-size: 0.833vw;font-weight: bold;text-decoration: underline;margin-top: 5px;}
+.stat-label:hover{cursor:default;}
+
+.pot-button {
+    right: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    width: 3.725rem;
+    height: 3.646vh;
+    overflow: visible; 
+    transform: scale(0.8);/* New: Scale down the entire pot assembly to fit the smaller card */
+    transform-origin: bottom right; /* Keep it anchored to the corner */
+    margin-right: -5px; /* Adjusting margin due to scaling loss */
+}
+.pot-base {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 4.501vh;
+    background-color: var(--pot-brown);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    z-index: 10;
+}
+.pot-rim {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 5%;
+    width: 90%;
+    height: 1vh;
     background-color: var(--pot-rim-brown);
     z-index: 11;
     border-radius: 2px;
@@ -531,11 +654,13 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .p3 { transform: translate(-50%, -50%) rotate(90deg); }
 .p4 { transform: translate(-50%, -50%) rotate(135deg); }
 
+/*-------------------------------------------------------------------------------*/
+
 .plant-finder-section{
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 6.25rem;
+    padding-top: 9.25rem;
 }
 .plant-finder-main-container{
     display: flex;
@@ -741,15 +866,25 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .knowledges-showcase-section{
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-items: center;
 }
+.reader-cont{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    padding: 0;
+    margin: 0;
+}
 .knowledges-title{
     width: 100%;
-    margin: 0;
-    padding: 0;
+    margin-left: 200px;
+    padding: 40px;
     text-align: left;
+    border-left: 20px solid var(--knowledges-main-title);
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 4.167vw;
     color: var(--knowledges-main-title);
@@ -765,7 +900,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .smallknowledge-reader{
     width: 100%;
-    height: 30rem;
+    height: 35rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -779,7 +914,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .bigknowledge-reader{
     width: 100%;
-    height: 30rem;
+    height: 35rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -830,7 +965,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     backdrop-filter: blur(5px);
     color: white;
     font-family: monospace;
-    font-size: 1.05rem;
+    font-size: clamp(0.6rem, 1vw, 1.2rem);
 }
 .smallstory:nth-child(even), .bigstory:nth-child(even){
     width: 70%;
@@ -843,7 +978,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     backdrop-filter: blur(5px);
     color: white;
     font-family: monospace;
-    font-size: 1rem;
+    font-size: clamp(0.6rem, 1vw, 1.2rem);
 }
 
 
@@ -875,19 +1010,26 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         margin-top:-2rem;
     }
     .result-title{
-        margin-top: 1rem;
+        margin: 3rem;
     }
     .knowledges-title{
         margin: 0;
     }
-    .bigknowledge-cont{
-        margin-top: 12.5rem;
-    }
-    .bigknowledge-reader{
+    .bigknowledge-reader,.smallknowledge-reader{
         gap: 0;
+        justify-content: space-evenly;
+    }
+    .smallstory:nth-child(even), .bigstory:nth-child(even){
+        margin-left: 1rem;
+        margin-right: 0;
+        padding: 1.2rem;
+        justify-content: center;
     }
     .smallstory:nth-child(odd), .bigstory:nth-child(odd){
-        margin: 0;
+        margin-left: 1rem;
+        margin-right: 0;
+        padding: 1.2rem;
+        justify-content: center;
     }
 }
 /*Base2*/
@@ -926,11 +1068,8 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         padding: 0;
     }
 }
-/*Base3: Tablets and large phones*/
-@media (max-width: 768px) {
-    
-}
-/*Base4:  Small phones, portrait mode.*/
-@media (max-width: 480px) {
-    
+@media (max-width: 700px) {
+    .pot-button{
+        transform: scale(0.5);
+    }
 }

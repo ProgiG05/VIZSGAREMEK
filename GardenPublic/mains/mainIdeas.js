@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     console.log()
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
     ListOfIdeas.forEach(idea => {
-        console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
+        //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
         
         // 1. Create the Main Card Container
         const OneIdeaCard = document.createElement("div");
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         imgWrapper.setAttribute("class", "image-placeholder-wrapper");
         const imgPlace = document.createElement("img");
         imgPlace.setAttribute("class", "insideImage");
+        imgPlace.setAttribute("id", "insideImage");
         imgPlace.setAttribute("src","../pics/gardenideas/"+ idea.picture)
         imgPlace.setAttribute("alt",`${idea.title}`)
         imgWrapper.appendChild(imgPlace);
@@ -90,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                 }
             }
             if (label === 'Hardiness') {
-                if (value === 'Low') {
+                if (value === 'Easy' || value === 'Low') {
                     badge.setAttribute("title","Low effort")
                 }
                 if (value === 'Average') {
@@ -161,11 +162,18 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
 function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved');}
 
-document.querySelectorAll(".detailsListItem").forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("active")
-    })
+document.getElementById('toup').addEventListener('click', () => {
+    window.scrollTo({top:0, behavior: 'smooth'})
 })
+
+// const observer = new IntersectionObserver((entries) => {
+//     entries.forEach((entry) => {
+//         if (entry.isIntersecting) {entry.target.classList.add('show')} 
+//         else {entry.target.classList.remove('show')}
+//     })
+// })
+// const cards = document.querySelectorAll('.hidden')
+// cards.forEach((e) => observer.observe(e))
 
 window.onload = () => {
     if (localStorage.getItem('theme') === 'dark') {
@@ -219,7 +227,7 @@ document.getElementById("searchBar").addEventListener("input", async (e) => {
         if (ideaTitle.includes(searchValue)) {
             // 1. Create the Main Card Container
             const OneIdeaCard = document.createElement("div");
-            OneIdeaCard.setAttribute("class", "garden-card");
+            OneIdeaCard.setAttribute("class", "garden-card hidden");
 
             // 2. Create the Image Placeholder Section
             const imgWrapper = document.createElement("div");
@@ -333,6 +341,4 @@ document.getElementById("searchBar").addEventListener("input", async (e) => {
             IdeasCardContainer.appendChild(OneIdeaCard);
         }
     });
-
-    
 })
