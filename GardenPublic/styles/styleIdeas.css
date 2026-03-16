@@ -1,8 +1,8 @@
 :root{
     --body-bg: linear-gradient(to bottom, #a3b68a , #4a5c3c );
-    --general-font-color:#131b11;
+    --general-font-color:#1e2b1b;
     --text-main: #ffffff;
-    --navbarBtn-bg: #23291fde;
+    --navbarBtn-bg: #4a5544de;
     --navbarBtn-font-color:rgb(255, 255, 255);
     --navbarBtn-hover-bg: #57644e;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
@@ -29,8 +29,8 @@ body{
 }
 body.dark-theme{
     --body-bg: linear-gradient(to bottom, #293320, #161b11);
-    --general-font-color:#d8e9c2;
-    --navbarBtn-bg: #708066ee;
+    --general-font-color:#a9b697;
+    --navbarBtn-bg: #515e4aee;
     --navbarBtn-font-color:rgb(255, 255, 255);
     --navbarBtn-hover-bg: #16220e;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
@@ -261,6 +261,7 @@ body.dark-theme{
     font-size: clamp(0.3rem, 2vw, 2rem);
     font-weight: bold;
     text-align: center;
+    cursor:default;
 }
 .card-description{
     font-family: monospace;
@@ -268,6 +269,7 @@ body.dark-theme{
     text-indent: 1rem;
     text-align: left;
     word-spacing: 0.1rem;
+    cursor:default;
 }
 .plant-list a{
     list-style-type: none;

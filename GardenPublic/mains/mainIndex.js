@@ -22,6 +22,19 @@ window.onscroll = function() {
   prevScrollpos = currentScrollPos;
 } 
 
+document.getElementById('goto_Ideas').addEventListener('click', () => {
+    document.getElementById('ideas-title').scrollIntoView({behavior:'smooth'})
+})
+document.getElementById('goto_PlantFinder').addEventListener('click', () => {
+    document.getElementById('plant-finder-section').scrollIntoView({behavior:'smooth'})
+})
+document.getElementById('goto_Knowledge').addEventListener('click', () => {
+    document.getElementById('knowledges-showcase-section').scrollIntoView({behavior:'smooth'})
+})
+// document.getElementById('toup').addEventListener('click', () => {
+//     window.scrollTo({top:0,behavior:'smooth'})
+// })
+
 // --- Side Panel Toggle ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -148,6 +161,11 @@ function updateLanguage(lang) {
     document.getElementById('ideasPage_Btn').innerText = translations[lang].ideaspage
 }
 
+// --- Garden Idea cards samples fetch logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+// --- Plant search logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 const searchForm = document.getElementById('search-container');
 const resultsContainer = document.getElementById('searchedPlant-container');
