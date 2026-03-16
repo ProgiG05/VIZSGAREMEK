@@ -91,6 +91,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
+    box-sizing: border-box; 
     background-color: var(--body-bg);
     transition: 0.3s all ease-in;
 }
@@ -911,9 +912,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 /*Base1:*/
 @media (max-width: 1300px) {
-    .search-cont{
-        width: 50%;
-    }
+    .search-cont{width: 50%;}
     .searchResult{
         width: 50%;
         display: flex;
@@ -921,23 +920,14 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         align-items: center;
         justify-items: center;
     }
-    .ideas-title{
-        margin: 0;
-        padding: 0;
-    }
-    .ideas-showcase-section{
-        padding-top: 6rem;
-    }
-    .plant-finder-main-container{
-        margin-top:-2rem;
-    }
-    .result-title{
-        margin: 3rem;
-    }
-    .bigknowledge-reader,.smallknowledge-reader{
-        gap: 0;
-        justify-content: space-evenly;
-    }
+    .result-title{margin: 3rem;}
+    .plant-finder-section{padding-bottom: 12.5rem;}
+    .plant-finder-main-container{margin-top:-2rem;}
+    
+    .ideas-title{margin: 0;padding: 0;}
+    .ideas-showcase-section{padding-top: 6rem;}
+
+    .bigknowledge-reader,.smallknowledge-reader{gap: 0;justify-content: space-evenly;}
     .smallstory:nth-child(even), .bigstory:nth-child(even){
         margin-left: 1rem;
         margin-right: 0;
@@ -950,9 +940,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         padding: 1.2rem;
         justify-content: center;
     }
-    .plant-finder-section{
-        padding-bottom: 12.5rem;
-    }
+
 }
 /*Base2*/
 @media (max-width: 1200px) {
@@ -970,59 +958,22 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         margin: 0;
         padding: 0;
     }
-    .main-title{
-        font-size: 14vw;
-    }
-    .small-description{
-        width: 80%;
-        font-size: 1.5vw;
-    }
-    .second-cont{
-        width: 90%;
-        margin: 0;
-        padding: 0;
-    }
-    .gardenMakerPage_Btn{
-        margin-bottom: 5rem;
-    }
-    .ideas-title{
-        margin: 0;
-        padding: 0;
-    }
+    .main-title{font-size: 14vw;}
+    .small-description{width: 80%;font-size: 1.5vw;}
+    .second-cont{width: 90%;margin: 0;padding: 0;}
+    .gardenMakerPage_Btn{ margin-bottom: 5rem;}
+    
+    .ideas-title{margin: 0;padding: 0;}
 }
 
 @media (max-width: 1000px)  {
-    .garden-card:last-child{
-        display: none;
-    }
-    .garden-card{
-        width: 50%;
-    }
-    
+    .garden-card:last-child{display: none;}
+    .garden-card{width: 50%;}
 }
 @media (max-width: 900px) {
-    .knowledges-showcase-section{
-        padding-top: 12rem;
-    }
-    .small-description{
-        font-size: 2.4vw;
-    }
-    .landing-cont{
-        margin-top: 10rem;
-    }
-    .plant-finder-main-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .search-cont{
-        width: 90%;
-    }
-    .searchResult{
-        width: 90%;
-        flex-direction: row;
-    }
+    .landing-cont{margin-top: 10rem;}
+    .small-description{font-size: 2.4vw;}
+
     .showcase_container{
         width: 90%;
         display: flex;
@@ -1030,43 +981,29 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         justify-content: center;
         align-items: center;
     }
-    .garden-card{
-        height: fit-content;
-        width: 60%;
+    .garden-card{height: fit-content;width: 60%;}
+    .garden-card:nth-last-child(-n + 2) {display: none;}
+    .image-placeholder-wrapper {height: 45%;}
+    .card-title {font-size: 2rem;}
+    .card-description{font-size: 1.6vw;}
+    .plant-list a{font-size: 1.2vw; }
+    .stat-badge{font-size: 1.2vw;width: 110%;}
+    .stat-label{font-size: 1.2vw;}
+
+    .plant-finder-main-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    .garden-card:nth-last-child(-n + 2) {
-        display: none;
-    }
-    .image-placeholder-wrapper {
-        height: 45%;
-    }
-    .card-title {
-        font-size: 2rem;
-    }
-    .card-description{
-        font-size: 1.6vw;
-    }
-    .plant-list a{
-        font-size: 1.2vw; 
-    }
-    .stat-badge{
-        font-size: 1.2vw;
-        width: 110%;
-    }
-    .stat-label{
-        font-size: 1.2vw;
-    }
+    .search-cont{width: 90%;}
+    .searchResult{width: 90%;flex-direction: row;}
+
+    .knowledges-showcase-section{padding-top: 12rem;}
 }
 @media (max-width: 700px) {
-    .garden-card{
-        height: fit-content;
-        width: 80%;
-    }
-    .reader-cont{
-        flex-direction: column;
-    }
-    .smallknowledge-cont, .bigknowledge-cont{
-        width: 90%;
-    }
+    .garden-card{height: fit-content;width: 80%;}
     
+    .reader-cont{flex-direction: column;}
+    .smallknowledge-cont, .bigknowledge-cont{width: 90%;}
 }
