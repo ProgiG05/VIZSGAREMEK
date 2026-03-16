@@ -74,8 +74,18 @@ body.dark-theme {
     --plant-details-title:#e8faed;
     --knowledges-main-title:#c7f1d3;
     --knowledges-subtitle: #c7f1d3;
+}   
+
+html{
+    padding: 0;
+    margin: 0;  
+    width: 100%;
+    overflow-x: hidden; 
+    overflow-y: auto;
+    box-sizing: border-box; 
 }
 body {
+    max-width: 100%;
     margin: 0;
     padding: 0; 
     font-family: 'Quicksand', sans-serif;
@@ -87,7 +97,9 @@ body {
 section {   
     height: 100vh;
     width: 100%;
+    max-width: 100%;
     padding: 0;
+    margin: 0;
     display: flex;
     background-image: var(--section-bg-odd);
 }
@@ -374,7 +386,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     font-size: clamp(3rem, 6vw, 7.5rem);
     color: var(--ideas-main-title);
 }
-.showcase_container {
+.showcase_container{
     top: 0;
     width: 85%;
     display: flex;
@@ -407,156 +419,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     letter-spacing: 0.2rem;
     transition: all 0.3s ease;
 }
-
-/*-------------------------------------------------------------------------------*/
-/*
-.garden-card {
-    border-radius: 1.25rem;
-    padding: 1.25rem;
-    width: 50%;
-    height: fit-content;
-    background-color: var(--bg-dark);
-    color: var(--text-green);
-    position: relative;
-    margin: auto;
-}
-.garden-card:hover{
-    scale: calc(1.01);
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.2s;
-}
-
-.image-placeholder-wrapper {
-    position: relative;
-    height: 15%;
-    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.5s;
-}
-.image-placeholder-wrapper img{
-    width: 100%;
-    height: 100%;
-}
-.image-placeholder-wrapper img:hover{
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.2s;
-    opacity: 0.3;
-    cursor: pointer;
-}  
-.card-title {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    font-size: 1.9rem;
-    font-weight: bold;
-    text-align: center;
-}
-.card-description{
-    font-family: monospace;
-    font-size: 1rem;
-    text-indent: 1rem;
-    text-align: left;
-    word-spacing: 0.1rem;
-}
-.plant-list a{
-    list-style-type: none;
-    padding: 0;
-    margin: 5px 0 5px 0;
-    font-size: 0.875rem; 
-    text-decoration: none;
-    color: var(--text-green);
-    font-family: 'Courier New', Courier, monospace;
-}
-.plant-list a:hover{text-decoration: underline;}
-
-.cardbottom-cont{display: flex;flex-direction: row;width: 100%;padding: 0;margin: 0;}
-.card-footer {display: flex;height: 100%; margin: auto;}
-.stats-container {display: flex;gap: 10px; }
-.stat-box {text-align: center;width: 7rem;}
-.stat-badge {background-color: var(--beige-light);color: var(--stat-text);font-weight: bold;font-size: 0.9rem; border-radius: 5px;padding: 0.3rem;}
-.stat-label {font-size: 1rem;font-weight: bold;text-decoration: underline;margin-top: 5px;}
-
-.pot-button {
-    right: 0;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-    width: 3.75rem;
-    height: 4.375rem;
-    overflow: visible; 
-    transform: scale(0.8);
-    transform-origin: bottom right; 
-    margin-right: -5px; 
-}
-.pot-base {
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    width: 80%;
-    height: 2.813rem;
-    background-color: var(--pot-brown);
-    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
-    z-index: 10;
-}
-.pot-rim {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 5%;
-    width: 90%;
-    height: 0.625rem;
-    background-color: var(--pot-rim-brown);
-    z-index: 11;
-    border-radius: 2px;
-}
-.flower-assembly {
-    position: absolute;
-    left: 50%;
-    bottom: 0px; 
-    transform: translateX(-50%);
-    z-index: 5;
-    transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.pot-button.saved .flower-assembly {bottom: 2.5rem; }
-.stem {
-    width: 0.5rem;
-    height: 1.25rem;
-    background-color: var(--stem-green);
-    margin: 0 auto;
-}
-.flower-head {
-    position: relative;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-bottom: -5px;
-}
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0.875rem;
-    height: 0.875rem;
-    background-color: var(--flower-yellow);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-.petal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0.75rem;
-    height: 2.25rem;
-    background-color: var(--flower-white);
-    border-radius: 20px;
-    transform-origin: center;
-    z-index: 1;
-}
-.p1 { transform: translate(-50%, -50%); }
-.p2 { transform: translate(-50%, -50%) rotate(45deg); }
-.p3 { transform: translate(-50%, -50%) rotate(90deg); }
-.p4 { transform: translate(-50%, -50%) rotate(135deg); }
-*/
 .garden-card {
     border-radius: 1.25rem;
     padding: 1.25rem;
@@ -626,9 +488,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     width: 3.725rem;
     height: 3.646vh;
     overflow: visible; 
-    transform: scale(0.8);/* New: Scale down the entire pot assembly to fit the smaller card */
-    transform-origin: bottom right; /* Keep it anchored to the corner */
-    margin-right: -5px; /* Adjusting margin due to scaling loss */
+    transform: scale(0.8);
+    transform-origin: bottom right; 
+    margin-right: -5px; 
 }
 .pot-base {
     position: absolute;
@@ -642,7 +504,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .pot-rim {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: 4vh;
     left: 5%;
     width: 90%;
     height: 1vh;
@@ -653,12 +515,13 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .flower-assembly {
     position: absolute;
     left: 50%;
-    bottom: 0px; /* Hidden state */
+    bottom: 0px;
     transform: translateX(-50%);
     z-index: 5;
     transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
 }
-.pot-button.saved .flower-assembly {bottom: 2.5rem; /* Visible state */}
+.pot-button.saved .flower-assembly {bottom: 4vh; opacity: 1;}
 .stem {
     width: 0.5rem;
     height: 1.25rem;
@@ -1071,9 +934,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .result-title{
         margin: 3rem;
     }
-    .knowledges-title{
-        margin: 0;
-    }
     .bigknowledge-reader,.smallknowledge-reader{
         gap: 0;
         justify-content: space-evenly;
@@ -1089,6 +949,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         margin-right: 0;
         padding: 1.2rem;
         justify-content: center;
+    }
+    .plant-finder-section{
+        padding-bottom: 12.5rem;
     }
 }
 /*Base2*/
@@ -1127,8 +990,83 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         padding: 0;
     }
 }
-@media (max-width: 700px) {
-    .pot-button{
-        transform: scale(0.5);
+
+@media (max-width: 1000px)  {
+    .garden-card:last-child{
+        display: none;
     }
+    .garden-card{
+        width: 50%;
+    }
+    
+}
+@media (max-width: 900px) {
+    .knowledges-showcase-section{
+        padding-top: 12rem;
+    }
+    .small-description{
+        font-size: 2.4vw;
+    }
+    .landing-cont{
+        margin-top: 10rem;
+    }
+    .plant-finder-main-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .search-cont{
+        width: 90%;
+    }
+    .searchResult{
+        width: 90%;
+        flex-direction: row;
+    }
+    .showcase_container{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .garden-card{
+        height: fit-content;
+        width: 60%;
+    }
+    .garden-card:nth-last-child(-n + 2) {
+        display: none;
+    }
+    .image-placeholder-wrapper {
+        height: 45%;
+    }
+    .card-title {
+        font-size: 2rem;
+    }
+    .card-description{
+        font-size: 1.6vw;
+    }
+    .plant-list a{
+        font-size: 1.2vw; 
+    }
+    .stat-badge{
+        font-size: 1.2vw;
+        width: 110%;
+    }
+    .stat-label{
+        font-size: 1.2vw;
+    }
+}
+@media (max-width: 700px) {
+    .garden-card{
+        height: fit-content;
+        width: 80%;
+    }
+    .reader-cont{
+        flex-direction: column;
+    }
+    .smallknowledge-cont, .bigknowledge-cont{
+        width: 90%;
+    }
+    
 }
