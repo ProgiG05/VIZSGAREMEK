@@ -22,13 +22,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const newGardenBtn = document.createElement("button");
     newGardenBtn.className = "newgarden_btn";
     newGardenBtn.textContent = "Add New Garden";
-    newGardenBtn.addEventListener("click", async () => {
-        await ShowAddGardenForm(gardensContainer);
+    newGardenBtn.addEventListener("click", () => {
+        window.location.href = "/sites/newGarden.html";
     })
-
-
-
-
     //containers
     const controlsContainer = document.createElement("div");
     controlsContainer.id = "controls-container";
@@ -100,7 +96,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         editBtn.className = "edit_btn";
         editBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to edit this garden?")) {
-                EditGarden(garden.id, plants, newGardenBtn);
+                window.location.href = "/sites/editgarden.html?id=" + garden.id;
+                EditGarden(garden.id, plants);
                 deleteBtn.style.display = "block";
             }
         });
@@ -264,152 +261,7 @@ function CreateTable(splittedContent, plants) {
     return table;
 }
 
-function EditGarden(gardenid, plants, newgarden) {
-    newgarden.style.display = "none";
-    const allCards = document.querySelectorAll(".garden-card");
-    const targetId = "garden" + gardenid;
-    const gardenName = document.getElementById("garden" + gardenid).querySelector(".garden-name");
-    gardenName.addEventListener("click", () => {
-        gardenName.contentEditable = true;
-        gardenName.focus();
-    })
 
-    allCards.forEach(card => {
-        if (card.id === targetId) {
-            card.style.display = "block";
-            card.classList.add("is-editing");
-            card.style.margin = "auto";
-            // Add a Back button if not already present
-            if (!card.querySelector(".back_btn")) {
-                const backBtn = document.createElement("button");
-                backBtn.textContent = "Back to List";
-                backBtn.className = "back_btn";
-                backBtn.style.display = "inline-block";
-                backBtn.style.marginTop = "10px";
-                backBtn.addEventListener("click", () => {
-                    window.location.reload(); // Simple way to reset view
-                });
-                card.appendChild(backBtn);
 
-                const saveBtn = document.createElement("button");
-                saveBtn.textContent = "Save Changes";
-                saveBtn.className = "save_btn";
-                saveBtn.style.display = "inline-block";
-                saveBtn.style.marginTop = "10px";
-                saveBtn.addEventListener("click", async () => {
-                    const gardenTable = card.querySelector("table");
 
-                    const gardenTableData = Array.from(gardenTable.querySelectorAll("tr")).map(row => {
-                        return Array.from(row.querySelectorAll("td")).map(cell => {
-                            switch (cell.textContent) {
-                                case "":
-                                    return "";
-                                case "+":
-                                    return "+";
-                                default:
-                                    const plant = plants.find(p => p.commonName === cell.textContent);
-                                    return plant ? plant.id : "";
-                            }
-                        }).join(",");
-                    }).join(";");
-
-                    console.log("Saving garden content:", gardenTableData);
-                    const garden = {
-                        id: gardenid,
-                        user_id: null,
-                        name: gardenName.textContent,
-                        content: gardenTableData,
-                    };
-                    await SaveGarden(garden);
-                    console.log("Garden saved:", garden);
-                    window.location.reload();
-                });
-                card.appendChild(saveBtn);
-            }
-            // Hide the Edit button while editing
-            const editBtn = card.querySelector(".edit_btn");
-            if (editBtn) editBtn.style.display = "none";
-        } else {
-            card.style.display = "none";
-        }
-    });
-
-}
-
-async function SaveGarden(garden) {
-    const resp = await fetch(`/api/gardens/${garden.id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(garden)
-    });
-    return resp.json();
-}
-
-async function ShowAddGardenForm(container) {
-    container.innerHTML = `
-        <form id="addGardenForm">
-        <label for="gardenName">Garden Name:</label>
-        <input type="text" id="gardenName" name="gardenName" required>
-        <label for="gardenRows">Rows:</label>
-        <input type="number" id="gardenRows" name="gardenRows" max="20" min="1" required>
-        <label for="gardenColumns">Columns:</label>
-        <input type="number" id="gardenColumns" name="gardenColumns" max="20" min="1" required>
-        <button type="submit">Add Garden</button>
-        </form>
-        <button class="back_btn" onclick="window.location.reload()">Cancel</button>
-        <button class="preview_btn" id="preview_btn">Preview</button>
-        <div id="previewContainer"></div>
-    `;
-    document.getElementById("preview_btn").addEventListener("click", () => {
-        const gardenRows = document.getElementById("gardenRows").value;
-        const gardenColumns = document.getElementById("gardenColumns").value;
-        const previewContainer = document.getElementById("previewContainer");
-        previewContainer.innerHTML = "";
-        previewContainer.appendChild(previewGarden(gardenRows, gardenColumns));
-    });
-    document.getElementById("addGardenForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const gardenName = document.getElementById("gardenName").value;
-        const gardenRows = document.getElementById("gardenRows").value;
-        const gardenColumns = document.getElementById("gardenColumns").value;
-        const content = Array(parseInt(gardenRows)).fill(
-            Array(parseInt(gardenColumns)).fill("+").join(",")
-        ).join(";");
-        const garden = {
-            user_id: null,
-            gardenname: gardenName,
-            gardencontent: content,
-        };
-        console.log(garden);
-        await newGarden(garden);
-        console.log("Garden added:", garden);
-        window.location.reload();
-    });
-    document.body.appendChild(document.getElementById("addGardenForm"));
-}
-
-async function newGarden(garden) {
-    const resp = await fetch(`/api/gardens/newgarden`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(garden)
-    });
-    return resp.json();
-}
-
-function previewGarden(rows, columns) {
-    const gardenTable = document.createElement("table");
-    gardenTable.className = "garden-table";
-    gardenTable.style.display = "inline-table";
-    for (let i = 0; i < rows; i++) {
-        const row = document.createElement("tr");
-        for (let j = 0; j < columns; j++) {
-            const cell = document.createElement("td");
-            cell.textContent = "+";
-            row.appendChild(cell);
-        }
-        gardenTable.appendChild(row);
-    }
-    return gardenTable;
-}
 

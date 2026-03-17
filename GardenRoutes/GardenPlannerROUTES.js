@@ -18,6 +18,8 @@ router.get('/plants', GardenController.GetAllPlants)
 
 router.get('/gardens', GardenController.GetMyGardens)
 
+router.get('/gardens/:id', GardenController.GetGardenById)
+
 router.delete('/gardens/:id', GardenController.DeleteGarden)
 
 router.post('/gardens/:id', GardenController.UpdateGarden)

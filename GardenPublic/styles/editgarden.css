@@ -1,0 +1,192 @@
+:root {
+    --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
+    --bg-dark: #7da87d;
+    --text-green: #a7f070;
+    --text-main: #ffffff;
+    --beige-dark-shadow: #8a6a3a;
+    --btn-bg: #112d14;
+    --btn-hover-bg: #E3FFF5;
+    --btn-font-color: #E3FFF5;
+    --btn-hover-font-color: #112d14;
+}
+
+body {
+    background-image: var(--body-bg);
+    background-attachment: fixed;
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#editGardenContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.garden-card {
+    background-color: var(--bg-dark);
+    color: var(--text-green);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border: 3px solid var(--text-green); /* Visual feedback that we are editing */
+}
+
+.garden-name {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2.5rem;
+    margin: 0;
+    color: var(--text-main);
+    text-align: center;
+    outline: none;
+}
+
+.garden-name[contenteditable="true"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Garden Table Styling */
+.garden-table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    margin: 1rem 0;
+}
+
+.garden-table td {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
+}
+
+.garden-table td.empty-cell {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.garden-table td.tobecollected-cell {
+    background-color: rgba(167, 240, 112, 0.2);
+    color: var(--text-green);
+    font-size: 1.5rem;
+}
+
+.garden-table td.plant-cell {
+    background-color: var(--text-green);
+    color: var(--bg-dark);
+    font-weight: bold;
+}
+
+.garden-table td.active {
+    border: 3px solid var(--text-main);
+    box-shadow: 0 0 15px var(--text-green);
+    transform: scale(1.1);
+    z-index: 5;
+}
+
+/* Controls Interface */
+#controls-container {
+    background-color: var(--bg-dark);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--text-green);
+}
+
+/* Plant Selection Area */
+#plantselection {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+#plantselection .plant-card {
+    background-color: #2a2e2a;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(167, 240, 112, 0.3);
+    color: var(--text-green);
+}
+
+#plantselection .plant-card:hover {
+    background-color: #3a3e3a;
+    border-color: var(--text-green);
+    transform: translateY(-5px);
+}
+
+#plantselection .plant-card p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+/* Button Styling */
+button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: var(--btn-bg);
+    color: var(--btn-font-color);
+}
+
+button:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-font-color);
+    letter-spacing: 1px;
+}
+
+.back_btn {
+    background-color: #4a5c3c;
+    color: var(--text-main);
+    border: 1px solid var(--text-green);
+}
+
+.save_btn {
+    background-color: var(--text-green);
+    color: var(--bg-dark);
+}
+
+@media (max-width: 768px) {
+    .garden-table td {
+        width: 45px;
+        height: 45px;
+        font-size: 0.7rem;
+    }
+}

@@ -34,6 +34,10 @@ module.exports = {
         const [rows] = await connection.query(`SELECT * FROM gardenmanager`)
         return rows
     },
+    GetGardenById : async function GetGardenById(id) {
+        const [rows] = await connection.query(`SELECT * FROM gardenmanager WHERE id = ?`, [id])
+        return rows
+    },
     GetAllWorksAndTools : async function GetAllWorksAndTools() {
         const [rows] = await connection.query(`SELECT * FROM worksAndTools`)
         return rows
