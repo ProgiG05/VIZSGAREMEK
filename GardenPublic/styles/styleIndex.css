@@ -104,6 +104,7 @@ section {
     align-items: center;
     justify-content: center;
     background-image: var(--section-bg-odd);
+    /* border: 1px solid red; */
 }
 section:nth-child(even){background-image: var(--section-bg-even);}
 
@@ -119,6 +120,17 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     80% { transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg); }
     100% { transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg); }
 }
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
+
+
+
+
+
+
+
+
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 #top-navbar {
     width: 100%;
     height: 3.75rem;
@@ -281,7 +293,17 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .toup img{width: 100%;height: 100%;margin: 0;padding: 0;}
 .toup:hover{cursor: pointer;}
 .toup:active{transform: translateY(5px);transition: 0.3s all ease;}
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
+
+
+
+
+
+
+
+
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .landing-section {justify-content: center;align-items: center;}
 .landing-cont{
     width: 90%;
@@ -351,7 +373,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: var(--btn-font-color);
     text-decoration: none;
     font-family: monospace;
-    font-size: 0.9vw;
+    font-size: clamp(0.8rem,0.9vw,2rem);
     transition-timing-function: ease-in;
     transition-duration: 0.2s;
 }
@@ -376,7 +398,17 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .left{height: 40px;background-image: linear-gradient(to bottom, #311c0a, #452910) ;transform: rotateY(-90deg) translateZ(150px) translateY(130px);}
 .top table {width: 100%;height: 100%;border-collapse: collapse;}
 .top table td {border: 5px solid #13090188;}
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
+
+
+
+
+
+
+
+
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .ideas-showcase-section {
     width: 100%;
     display: flex;
@@ -388,21 +420,23 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(3rem, 6vw, 7.5rem);
     color: var(--ideas-main-title);
+    margin: 0;
+    padding: 0;
 }
 .showcase_container{
     top: 0;
-    width: 85%;
+    width: 90%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 0.625rem;
     gap: 1.875rem;
-    padding-bottom: 50px;
+    padding-bottom: 5rem;
 }
 .ideasPage_Btn {
-    width: 12.5rem;
-    height: 1.875rem;
-    padding: 0.5rem;
+    width: 30%;
+    height: 2rem;
+    padding: 0.3rem;
     text-align: center;
     justify-items: center;
     align-items: center;
@@ -411,11 +445,11 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: var(--ideasPage-hover-bg);
     text-decoration: none;
     font-family: monospace;
-    font-size: 12pt;
+    font-size: clamp(1.2rem,1.2vw,2rem);
     transition: all 0.3s ease;
 }
 .ideasPage_Btn:hover {
-    width: 18.75rem;
+    width: 40%;
     background-color: var(--ideasPage-font-color);
     color: var(--ideasPage-hover-font-color);
     font-weight: bold;
@@ -430,7 +464,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     height: fit-content;
     background-color: var(--bg-dark);
     color: var(--text-green);
-    position: relative;
 }
 .image-placeholder-wrapper {
     height: 10%;
@@ -457,7 +490,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .card-description{
     font-family: monospace;
-    font-size: clamp(0.3rem, 1vw, 1rem);
+    font-size: clamp(0.3rem, 1.1vw, 1rem);
     text-indent: 1rem;
     text-align: left;
     word-spacing: 0.1rem;
@@ -563,9 +596,17 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .p2 { transform: translate(-50%, -50%) rotate(45deg); }
 .p3 { transform: translate(-50%, -50%) rotate(90deg); }
 .p4 { transform: translate(-50%, -50%) rotate(135deg); }
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
-/*-------------------------------------------------------------------------------*/
 
+
+
+
+
+
+
+
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .plant-finder-section{
     width: 100%;
     display: flex;
@@ -591,7 +632,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: var(--searchcontainer-text);
     box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
     font-family: monospace;
-    font-size: 1.1rem;
+    font-size: 1.2vw;
     border-radius: 30px;
     gap: 0.625rem;
 }
@@ -615,7 +656,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     transition: all 0.3s ease;
 }
 .commonplant-search-inp, .botanicalplant-search-inp{
-    width: 40%;
+    width: 60%;
     height: fit-content;
     float: right;
     font-family: monospace;
@@ -657,7 +698,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     transition: all 0.3s ease;
 }
 .searchPlant_Btn{
-    width: 85%;
+    width: 70%;
     height: 2.5rem;
     margin: auto;
     bottom: 0;
@@ -673,7 +714,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .searchPlant_Btn:hover{
     width: 90%;
-    border: 3px solid #0a3d1f;
     background-color: var(--plantsearchPage-hover-bg);
     color: var(--plantsearchPage-hover-font-color);
     transition: all 0.3s ease;
@@ -753,26 +793,37 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: #021e0c;
 }
 .plantsearchPage_Btn{
-    width: 12.5rem;
+    width: fit-content;
     height: 1.875rem;
-    padding-top: 0.625rem;
+    padding: 0.6rem 2rem 0.6rem 2rem;
     margin-top: 1.875rem;
     bottom: 0;
     text-align: center;
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: var(--plantsearchPage-bg);
     color: var(--plantsearchPage-font-color);
     font-family: monospace;
-    font-size: 1rem;
+    font-size: clamp(0.6rem,1.3vw,2rem);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 .plantsearchPage_Btn:hover{
-    width: 18.75rem;
+    padding: 0.6rem 5rem 0.6rem 5rem;
     background-color: var(--plantsearchPage-hover-bg);
     color: var(--plantsearchPage-hover-font-color);
     transition: all 0.3s ease;
 }
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
+
+
+
+
+
+
+
+
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .knowledges-showcase-section{
     width: 100%;
     display: flex;
@@ -791,13 +842,11 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .knowledges-title{
     width: 80%;
-    /* margin-left: 200px;
-    margin-right: 200px; */
     padding: 40px;
     text-align: left;
     border-left: 20px solid var(--knowledges-main-title);
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 4vw;
+    font-size: clamp(1.8rem,4.2vw,4rem);
     color: var(--knowledges-main-title);
 }
 .smallknowledge-cont, .bigknowledge-cont{
@@ -838,12 +887,12 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     gap: 20px;
 }
 .knowledges-subtitle{
-    width: 110%;
+    width: 100%;
     text-align: center;
     margin: 0;
     padding: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.7vw;
+    font-size: clamp(1.6rem,2.5vw,5rem);
     color: var(--knowledges-subtitle);
 }
 .knowledgesPage_Btn {
@@ -906,6 +955,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     background-color: #021e0cd8;
     transition: 0.3s all ease;
 }
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
 
 /* ################################################################### */
@@ -913,11 +963,39 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 /* ################################################################### */
 
 
+/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 /*Base1:*/
-@media (max-width: 1300px) {
-    .search-cont{width: 50%;}
+@media (max-width: 1400px) {
+    /*Plant finder section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .search-cont{width: 45%;}
     .searchResult{
-        width: 50%;
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+    }
+    /*------------------------------------------------------------------------------------------------------*/
+}
+@media (max-width: 1300px) {
+    /*Ideas section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .ideas-title{margin: 0;padding: 0;}
+    .ideas-showcase-section{padding-top: 6rem;}
+    .showcase_container{margin-bottom:-5rem}
+    .ideasPage_Btn{margin-bottom: 5rem;margin-top: 0;}
+    .garden-card{width: 40%;}
+    /*------------------------------------------------------------------------------------------------------*/
+
+    /*Plant finder section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .search-cont{width: 40%;}
+    .searchResult{
+        width: 40%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -926,14 +1004,25 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .result-title{margin: 3rem;}
     .plant-finder-section{padding-bottom: 12.5rem;}
     .plant-finder-main-container{margin-top:-2rem;}
-    
-    .ideas-title{margin: 0;padding: 0;}
-    .ideas-showcase-section{padding-top: 6rem;}
+    /*------------------------------------------------------------------------------------------------------*/
 
+    /*Knowledges section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
     .knowledges-title{
-        padding-top: 10rem;
+        margin: 0;
+        padding: 0; 
+        width: 90%;
+        font-size: clamp(1.8rem,3vw,4rem);
+        padding: 20px;
+        border-left: 15px solid var(--knowledges-main-title);
     }
-    .bigknowledge-reader,.smallknowledge-reader{gap: 0;justify-content: space-evenly;}
+    .smallknowledge-cont, .bigknowledge-cont{margin-bottom: 2rem;}
+    .bigknowledge-reader,.smallknowledge-reader{
+        gap: 0;
+        height: 25rem;
+        justify-content: space-evenly;
+    }
     .smallstory:nth-child(even), .bigstory:nth-child(even){
         margin-left: 1rem;
         margin-right: 0;
@@ -946,10 +1035,14 @@ section:nth-child(even){background-image: var(--section-bg-even);}
         padding: 1.2rem;
         justify-content: center;
     }
+    /*------------------------------------------------------------------------------------------------------*/
 
 }
 /*Base2*/
 @media (max-width: 1200px) {
+    /*Landing section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
     .landing-cont{
         height: fit-content;
         display: flex;
@@ -968,18 +1061,62 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .small-description{width: 80%;font-size: 1.5vw;}
     .second-cont{width: 90%;margin: 0;padding: 0;}
     .gardenMakerPage_Btn{ margin-bottom: 5rem;}
-    
-    .ideas-title{margin: 0;padding: 0;}
-}
+    /*------------------------------------------------------------------------------------------------------*/
 
+    /*Ideas section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .ideas-title{margin-bottom: 6rem; font-size: 6.8vw;padding: 0;}
+    /*------------------------------------------------------------------------------------------------------*/
+}
+@media (max-width: 1100px)  {
+    /*Ideas section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .ideas-title{margin-bottom: 6rem;font-size: 7.5vw;}
+    .showcase_container{padding-bottom: 0rem;}
+    .garden-card:last-child{display: none;}
+    .garden-card{width: 60%;}
+    .ideasPage_Btn{width: 50%;margin-top: 7rem;}
+    .ideasPage_Btn:hover{width: 60%;}
+    /*------------------------------------------------------------------------------------------------------*/
+
+    /*Plant finder section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .plant-finder-section{align-items: center;justify-content: center;}
+    .plant-finder-main-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .search-cont{width: 80%;font-size: 1.6vw;}
+    .searchResult{width: 80%;flex-direction: row;}
+    .selection-cont{flex-direction: row;}
+    .selection-cont select{width: 30%; font-size: 1.2vw;}
+    .result-title{font-size: 7vw;}
+    /*------------------------------------------------------------------------------------------------------*/
+}
 @media (max-width: 1000px)  {
+    /*Ideas section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
     .garden-card:last-child{display: none;}
     .garden-card{width: 50%;}
+    /*------------------------------------------------------------------------------------------------------*/
 }
 @media (max-width: 900px) {
-    .landing-cont{margin-top: 10rem;}
-    .small-description{font-size: 2.4vw;}
+    /*Landing section:*/
 
+    /*------------------------------------------------------------------------------------------------------*/
+    .landing-cont{margin-top: 8rem;margin-bottom: 8rem;}
+    .small-description{font-size: 2.4vw;}
+    /*------------------------------------------------------------------------------------------------------*/
+
+    /*Ideas section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
     .showcase_container{
         width: 90%;
         display: flex;
@@ -995,21 +1132,42 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .plant-list a{font-size: 1.2vw; }
     .stat-badge{font-size: 1.2vw;width: 110%;}
     .stat-label{font-size: 1.2vw;}
+    /*------------------------------------------------------------------------------------------------------*/
 
+    /*Plant finder section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
     .plant-finder-main-container{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-    .search-cont{width: 90%;}
-    .searchResult{width: 90%;flex-direction: row;}
-
-    .knowledges-showcase-section{padding-top: 12rem;}
+    .search-cont{width: 80%;}
+    .searchResult{width: 80%;flex-direction: row;}
+    /*------------------------------------------------------------------------------------------------------*/
 }
 @media (max-width: 700px) {
+    /*Ideas section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .ideas-title{font-size: 10vw;width: 50%;text-align: center;margin: 0.5rem;padding: 0.5rem;}
     .garden-card{height: fit-content;width: 80%;}
-    
+    /*------------------------------------------------------------------------------------------------------*/
+
+    /*Plant finder section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .search-cont{width: 70%;font-size: 3vw;}
+    .selection-cont select{width: 30%; font-size: 2vw;}
+    .searchResult{width: 70%;}
+    /*------------------------------------------------------------------------------------------------------*/
+
+    /*Knowledges section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .knowledges-showcase-section{padding-top: 20rem;}
     .reader-cont{flex-direction: column;}
-    .smallknowledge-cont, .bigknowledge-cont{width: 90%;}
+    .smallknowledge-cont, .bigknowledge-cont{width: 90%; height: 35%; margin: 0.5rem;padding:0.5rem ;}
+    /*------------------------------------------------------------------------------------------------------*/
 }
