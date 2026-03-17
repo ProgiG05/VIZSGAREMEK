@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     newGardenBtn.addEventListener("click", async () => {
         await ShowAddGardenForm(gardensContainer);
     })
-    
+
 
 
 
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     controlsContainer.id = "controls-container";
     controlsContainer.style.margin = "auto";
     controlsContainer.style.alignItems = "center";
+    controlsContainer.style.display = "none";
 
     //disabled button
     const disablecellbtn = document.createElement("button");
@@ -59,13 +60,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     plantselection.style.display = "none";
     plantselection.style.marginTop = "10px";
 
-    
+
     gardensContainer.appendChild(newGardenBtn);
     controlsContainer.appendChild(disablecellbtn);
     controlsContainer.appendChild(emptycellbtn);
     controlsContainer.appendChild(plantcellbtn);
     controlsContainer.appendChild(plantselection);
-    
+
     // Insert controls before the gardens container
     gardensContainer.parentNode.insertBefore(controlsContainer, gardensContainer);
 
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteBtn.className = "delete_btn";
         deleteBtn.style.display = "none";
         deleteBtn.addEventListener("click", () => {
-            if (confirm("Are you sure you want to delete this garden? You will not access this garden after deletion.")) {
+            if (confirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.")) {
                 DeleteGarden(garden.id);
             }
         });
@@ -113,12 +114,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const getActiveCell = () => gardensContainer.querySelector('td.active');
 
     const showControls = () => {
+        controlsContainer.style.display = "flex";
         disablecellbtn.style.display = "inline-block";
         emptycellbtn.style.display = "inline-block";
         plantcellbtn.style.display = "inline-block";
     };
 
     const hideControls = () => {
+        controlsContainer.style.display = "none";
         disablecellbtn.style.display = "none";
         emptycellbtn.style.display = "none";
         plantcellbtn.style.display = "none";
@@ -178,7 +181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const plantId = parseInt(clickedCard.dataset.id);
             const plant = plants.find(p => p.id === plantId);
             const target = getActiveCell();
-            
+
             if (target && plant) {
                 target.className = 'plant-cell';
                 target.textContent = plant.commonName;
@@ -197,7 +200,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!gardenCard || !gardenCard.classList.contains('is-editing')) {
                 return; // Only allow interaction if the garden is being edited
             }
-            
+
             const currentActive = getActiveCell();
             if (currentActive && currentActive !== clickedCell) {
                 deactivateCell(currentActive);
@@ -231,7 +234,7 @@ function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
     table.style.display = "inline-table";
-    
+
     splittedContent.forEach(row => {
         const columns = row.split(",");
         const tableRow = document.createElement("tr");
@@ -239,7 +242,7 @@ function CreateTable(splittedContent, plants) {
         columns.forEach(column => {
             const tableColumn = document.createElement("td");
             const plantId = parseInt(column);
-            
+
             switch (column) {
                 case "":
                     tableColumn.className = "empty-cell";
@@ -270,7 +273,7 @@ function EditGarden(gardenid, plants, newgarden) {
         gardenName.contentEditable = true;
         gardenName.focus();
     })
-    
+
     allCards.forEach(card => {
         if (card.id === targetId) {
             card.style.display = "block";
@@ -295,7 +298,7 @@ function EditGarden(gardenid, plants, newgarden) {
                 saveBtn.style.marginTop = "10px";
                 saveBtn.addEventListener("click", async () => {
                     const gardenTable = card.querySelector("table");
-                    
+
                     const gardenTableData = Array.from(gardenTable.querySelectorAll("tr")).map(row => {
                         return Array.from(row.querySelectorAll("td")).map(cell => {
                             switch (cell.textContent) {
@@ -333,7 +336,7 @@ function EditGarden(gardenid, plants, newgarden) {
 
 }
 
-async function SaveGarden(garden){
+async function SaveGarden(garden) {
     const resp = await fetch(`/api/gardens/${garden.id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
