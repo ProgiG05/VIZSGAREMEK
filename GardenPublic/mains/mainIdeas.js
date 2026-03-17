@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             const link = document.createElement("a");
             link.setAttribute("class","plantListItem")
             link.setAttribute("href", "#");
-            link.textContent = plantName + ", ";
+            link.textContent = plantName + " ";
             plantList.appendChild(link);
         });
         OneIdeaCard.appendChild(plantList);
@@ -260,7 +260,7 @@ document.getElementById("searchBar").addEventListener("input", async (e) => {
                 const link = document.createElement("a");
                 link.setAttribute("class","plantListItem")
                 link.setAttribute("href", "#");
-                link.textContent = plantName + ", ";
+                link.textContent = plantName + " ";
                 plantList.appendChild(link);
             });
             OneIdeaCard.appendChild(plantList);
