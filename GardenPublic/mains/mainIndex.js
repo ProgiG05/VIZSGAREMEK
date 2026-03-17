@@ -22,15 +22,15 @@ window.onscroll = function() {
   prevScrollpos = currentScrollPos;
 } 
 
-document.getElementById('goto_Ideas').addEventListener('click', () => {
-    document.getElementById('ideas-title').scrollIntoView({behavior:'smooth'})
-})
-document.getElementById('goto_PlantFinder').addEventListener('click', () => {
-    document.getElementById('plant-finder-section').scrollIntoView({behavior:'smooth'})
-})
-document.getElementById('goto_Knowledge').addEventListener('click', () => {
-    document.getElementById('knowledges-showcase-section').scrollIntoView({behavior:'smooth'})
-})
+// document.getElementById('goto_Ideas').addEventListener('click', () => {
+//     document.getElementById('ideas-title').scrollIntoView({behavior:'smooth'})
+// })
+// document.getElementById('goto_PlantFinder').addEventListener('click', () => {
+//     document.getElementById('plant-finder-section').scrollIntoView({behavior:'smooth'})
+// })
+// document.getElementById('goto_Knowledge').addEventListener('click', () => {
+//     document.getElementById('knowledges-showcase-section').scrollIntoView({behavior:'smooth'})
+// })
 // document.getElementById('toup').addEventListener('click', () => {
 //     window.scrollTo({top:0,behavior:'smooth'})
 // })

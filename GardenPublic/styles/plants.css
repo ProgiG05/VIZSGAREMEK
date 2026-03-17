@@ -1,0 +1,88 @@
+:root {
+    --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
+    --bg-dark: #1a1e1a;
+    --text-green: #a7f070;
+    --text-main: #ffffff;
+    --beige-dark-shadow: #8a6a3a;
+}
+
+body {
+    background-image: var(--body-bg);
+    background-attachment: fixed;
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#plant-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+/* Handling the extra div wrapper from plants.js appendChild(createElement('div')) */
+#plant-container > div {
+    width: clamp(300px, 30%, 450px);
+    display: flex;
+}
+
+.plant-card {
+    background-color: var(--bg-dark);
+    color: var(--text-green);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    width: 100%;
+    height: auto;
+    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.plant-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.plant-card h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+    text-align: center;
+    border-bottom: 2px solid var(--text-green);
+    padding-bottom: 0.5rem;
+}
+
+.plant-card h3 {
+    font-family: monospace;
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin: 0.5rem 0;
+    font-style: italic;
+    color: var(--text-main);
+}
+
+.plant-card p {
+    font-family: monospace;
+    font-size: 1rem;
+    margin: 0.2rem 0;
+    line-height: 1.4;
+}
+
+.plant-card p b {
+    color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+    #plant-container > div {
+        width: 100%;
+        max-width: 500px;
+    }
+}
