@@ -125,7 +125,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 
-
+/*Navbar - Sidepanel - ToUp button*/
 
 
 
@@ -273,8 +273,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 
-
-
+/*Landing section*/
 
 
 
@@ -340,7 +339,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     width: 50%;
     height: 1.2 vw;
     text-align: center;
-    align-items: center;
+    align-content: center;
     justify-items: center;
     margin: auto;
     padding: 0.625rem;
@@ -379,7 +378,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 
-
+/*Ideas showcase section*/
 
 
 
@@ -415,13 +414,13 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     padding: 0.3rem;
     text-align: center;
     justify-items: center;
-    align-items: center;
+    align-content: center;
     border-radius: 20px;
     background-color: var(--ideasPage-bg);
     color: var(--ideasPage-hover-bg);
     text-decoration: none;
     font-family: monospace;
-    font-size: clamp(1.2rem,1.2vw,2rem);
+    font-size: clamp(1.2rem,1.1vw,2rem);
     transition: all 0.3s ease;
 }
 .ideasPage_Btn:hover {
@@ -443,14 +442,14 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .image-placeholder-wrapper {
     height: 10%;
-    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
+    box-shadow: 2px 2px 2px var(--beige-dark-shadow);
     transition-timing-function: ease-in-out;
     transition-duration: 0.5s;
 }
 .insideImage{
     width: 100%;
     height: 100%;
-    aspect-ratio: 3/2;
+    aspect-ratio: 4/2.5;
 }
 .insideImage:hover{
     transition-timing-function: ease-in-out;
@@ -577,7 +576,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 
-
+/*Plant finder section*/
 
 
 
@@ -749,7 +748,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     padding: 0;
 }
 .resultKey{
-    height: 2.5vw;
+    padding: 0rem 0.7rem 0rem 0.7rem;
     text-align: center;
     border-top-left-radius: 1.25rem;
     border-bottom-left-radius: 1.25rem;
@@ -759,7 +758,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: white;
 }
 .resultValue{
-    padding-left: 1.25rem;
+    padding: 0.5rem 0rem 0.5rem 1.25rem;
     text-align: left;
     border-top-right-radius: 1.25rem;
     border-bottom-right-radius: 1.25rem;
@@ -770,16 +769,17 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .plantsearchPage_Btn{
     width: fit-content;
-    height: 1.875rem;
+    height: fit-content;
     padding: 0.6rem 2rem 0.6rem 2rem;
     margin-top: 1.875rem;
     bottom: 0;
     text-align: center;
+    align-content: center;
     border-radius: 30px;
     background-color: var(--plantsearchPage-bg);
     color: var(--plantsearchPage-font-color);
     font-family: monospace;
-    font-size: clamp(0.6rem,1.3vw,2rem);
+    font-size: clamp(0.6rem,1.1vw,2rem);
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -794,7 +794,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 
-
+/*Knowledges section*/
 
 
 
@@ -817,12 +817,12 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     margin: 0;
 }
 .knowledges-title{
-    width: 80%;
-    padding: 40px;
+    width: 88%;
+    padding: 2rem;
     text-align: left;
     border-left: 20px solid var(--knowledges-main-title);
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(1.8rem,4.2vw,4rem);
+    font-size: clamp(1.8rem,4vw,3.62rem);
     color: var(--knowledges-main-title);
 }
 .smallknowledge-cont, .bigknowledge-cont{
@@ -875,8 +875,8 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     width: 12.5rem;
     height: 1.875rem;
     bottom: 0;
-    padding-top: 0.625rem;
     text-align: center;
+    align-content: center;
     border-radius: 20px;
     text-decoration: none;
     font-family: monospace;
@@ -940,7 +940,11 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
-/*Base1:*/
+@media (max-width: 1920px) {
+    .ideasPage_Btn{margin-top: -4rem;}
+    .plant-finder-main-container{margin-bottom: 10rem;}
+    .knowledges-subtitle{font-size: clamp(1.6rem,2vw,5rem);}
+}
 @media (max-width: 1400px) {
     /*Plant finder section:*/
 
@@ -1014,7 +1018,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*------------------------------------------------------------------------------------------------------*/
 
 }
-/*Base2*/
 @media (max-width: 1200px) {
     /*Landing section:*/
 
@@ -1121,6 +1124,11 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     }
     .search-cont{width: 80%;}
     .searchResult{width: 80%;flex-direction: row;}
+    .plantdetails-title{font-size: 4vw;}
+    .resultKey{font-size: 1.5vw;}
+    .resultValue{font-size: 1.5vw;}
+    .plantsearchPage_Btn{font-size: 1.6vw;margin-bottom: 2rem;padding: 0.3rem 3rem 0.3rem 3rem;}
+    .plantsearchPage_Btn:hover{padding: 0.3rem 6rem 0.3rem 6rem;}
     /*------------------------------------------------------------------------------------------------------*/
 }
 @media (max-width: 700px) {
@@ -1134,6 +1142,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*Plant finder section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
+    .plant-finder-section{padding-top: 15rem;}
     .search-cont{width: 70%;font-size: 3vw;}
     .selection-cont select{width: 30%; font-size: 2vw;}
     .searchResult{width: 70%;}
