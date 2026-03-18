@@ -141,7 +141,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     margin-top: 0;   
     top: 0;
 }
-#top-navbar a {
+#top-navbar a, #top-navbar button {
     height: 100%;
     width: 100%;
     display: flex;
@@ -157,31 +157,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
 }
-#top-navbar a:hover {
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    letter-spacing: 0.125rem;
-    cursor: pointer;
-    background-color:var(--navbtn-hover-bg);
-    color:var(--navbtn-hover-font-color);
-}
-#top-navbar button {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    text-decoration: none;
-    font-family: monospace;
-    font-size: clamp(0.7rem,1.1vw,1.6rem);
-    background-color:var(--navbtn-bg);
-    color: var(--navbtn-font-color);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-}
-#top-navbar button:hover {
+#top-navbar a:hover, #top-navbar button:hover {
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
     letter-spacing: 0.125rem;

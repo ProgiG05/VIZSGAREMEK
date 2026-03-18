@@ -31,10 +31,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const editGardenContainer = document.getElementById("editGardenContainer");
     
     // Add controls to the top
-    editGardenContainer.appendChild(controls.container);
 
     // Initial Render
     EditGarden(garden, plants, editGardenContainer, controls);
+    editGardenContainer.appendChild(controls.container);
+
 });
 
 //#########################################################
@@ -47,12 +48,12 @@ function loadContents(plants) {
 
     // Disabled button
     const disablecellbtn = document.createElement("button");
-    disablecellbtn.textContent = "Disable Cell";
+    disablecellbtn.textContent = "Empty Cell";
     disablecellbtn.className = "disablecellbtn";
 
     // Empty button
     const emptycellbtn = document.createElement("button");
-    emptycellbtn.textContent = "Empty Cell";
+    emptycellbtn.textContent = "Disable Cell";
     emptycellbtn.className = "emptycellbtn";
 
     // Plant button
@@ -63,7 +64,7 @@ function loadContents(plants) {
     // Plant selection area
     const plantselection = document.createElement("div");
     plantselection.id = "plantselection";
-    plantselection.style.display = "none";
+    // plantselection.style.display = "none"; // Handled by CSS positioning now
 
     // Populate plants for selection
     plants.forEach(plant => {
@@ -77,8 +78,8 @@ function loadContents(plants) {
         plantselection.appendChild(card);
     });
 
-    controlsContainer.appendChild(disablecellbtn);
     controlsContainer.appendChild(emptycellbtn);
+    controlsContainer.appendChild(disablecellbtn);
     controlsContainer.appendChild(plantcellbtn);
     controlsContainer.appendChild(plantselection);
 
@@ -199,12 +200,11 @@ function EditGarden(garden, plants, parentContainer, controls) {
 
     const showControls = () => {
         controls.container.style.display = "flex";
-        controls.selection.style.display = "none";
-
     };
 
     const hideControls = () => {
         controls.container.style.display = "none";
+        controls.selection.classList.remove('show');
     };
 
     controls.disableBtn.onclick = () => {
@@ -228,7 +228,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     };
 
     controls.plantBtn.onclick = () => {
-        controls.selection.style.display = "grid";
+        controls.selection.classList.add('show');
     };
 
     controls.selection.onclick = (e) => {
@@ -242,7 +242,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
                 cell.textContent = plant.commonName;
                 cell.classList.remove('active');
                 controls.container.style.display = "none";
-                controls.selection.style.display = "none";
+                controls.selection.classList.remove('show');
             }
         }
     };
