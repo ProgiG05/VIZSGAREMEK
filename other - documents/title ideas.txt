@@ -1,73 +1,15 @@
-Clean & Modern
+🌼 Plain & Generic
 
-GardenGrid
-
-PlotCraft
-
-TerraLayout
-
-GreenBlueprint
-
-GardenSchema
-
-VerdantPlan
-
-FloraForm
-
-🌱 Friendly & Approachable
-
-GardenBuddy
-
-GrowGuide
-
-PlantPath
-
-PlotPal
-
-SproutSpace
-
-LeafLane
+  Clean & Modern, GardenGrid, PlotCraft, TerraLayout, GreenBlueprint, GardenSchema, VerdantPlan, FloraForm, SproutSpace
 
 🌼 Creative & Nature-Inspired
 
-BloomCanvas
-
-MeadowMap
-
-Root & Render
-
-GardenMosaic
-
-SproutSketch
-
-EdenDraft
-
-WildPlotter
+  BloomCanvas, Root & Render, GardenMosaic, SproutSketch, WildPlotter
 
 🌳 Professional & Trustworthy
 
-GardenDesignPro
-
-LayoutGardens
-
-GreenCartographer
-
-GardenAtlas
-
-PlanMyGarden
-
-ProPlotDesign
+  GardenDesignPro, LayoutGardens, GreenCartographer, GardenAtlas, PlanMyGarden, ProPlotDesign
 
 🪴 Playful & Trendy
 
-GrowGenius
-
-PlotPix
-
-Sproutify
-
-LeafLogic
-
-GardenFlow
-
-BotaniCraft
+  GrowGenius, PlotPix, Sproutify, LeafLogic, GardenFlow, BotaniCraft
