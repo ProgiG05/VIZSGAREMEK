@@ -151,7 +151,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const backBtn = document.createElement("button");
     backBtn.textContent = "Back to List";
     backBtn.className = "back_btn";
-    backBtn.onclick = () => window.location.href = "/gardens.html";
+    backBtn.onclick = () => {if (confirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/gardens.html";}}
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete Garden";
@@ -163,9 +163,19 @@ function EditGarden(garden, plants, parentContainer, controls) {
         }
     };
 
+    const addRowsColumnsBtn = document.createElement("button");
+    addRowsColumnsBtn.textContent = "Add Rows/Columns";
+    addRowsColumnsBtn.className = "addrowscolumns_btn";
+    addRowsColumnsBtn.onclick = () => {
+        if (confirm("Are you sure you want to add rows/columns to this garden? Any unsaved changes will be lost.")) {
+            AddRowsColumns(garden, plants, editGardenContainer);
+        }
+    }
+
     footer.appendChild(saveBtn);
     footer.appendChild(backBtn);
     footer.appendChild(deleteBtn);
+    footer.appendChild(addRowsColumnsBtn);
     gardenCard.appendChild(footer);
 
     parentContainer.appendChild(gardenCard);
@@ -289,3 +299,56 @@ async function DeleteGarden(id) {
     });
     return resp.json();
 }
+
+function AddRowsColumns(garden, plants, parentContainer) {
+    const addRowsColumnsForm = document.createElement("form");
+    addRowsColumnsForm.id = "addrowscolumns-form";
+    addRowsColumnsForm.style.display = "flex";
+    parentContainer.appendChild(addRowsColumnsForm);
+
+    const addRowsLabel = document.createElement("label");
+    addRowsLabel.textContent = "Add Rows: ";
+    const addRowsInput = document.createElement("input");
+    addRowsInput.type = "number";
+    addRowsInput.min = "1";
+    addRowsInput.max = "20";
+    addRowsInput.value = "1";
+    addRowsInput.id = "addrows-input";
+    addRowsColumnsForm.appendChild(addRowsLabel);
+    addRowsColumnsForm.appendChild(addRowsInput);
+
+    const addColumnsLabel = document.createElement("label");
+    addColumnsLabel.textContent = "Add Columns: ";
+    const addColumnsInput = document.createElement("input");
+    addColumnsInput.type = "number";
+    addColumnsInput.min = "1";
+    addColumnsInput.max = "20";
+    addColumnsInput.value = "1";
+    addColumnsInput.id = "addcolumns-input";
+    addRowsColumnsForm.appendChild(addColumnsLabel);
+    addRowsColumnsForm.appendChild(addColumnsInput);
+
+    const addRowsColumnsBtn = document.createElement("button");
+    addRowsColumnsBtn.textContent = "Add Rows/Columns";
+    addRowsColumnsBtn.className = "addrowscolumns_btn";
+    addRowsColumnsBtn.onclick = () => {
+        if (confirm("Are you sure you want to add rows/columns to this garden? Any unsaved changes will be lost.")) {
+            const addRows = addRowsInput.value;
+            const addColumns = addColumnsInput.value;
+            const splittedContent = garden.gardencontent.split(";");
+            for (let j = 0; j < addColumns; j++) {
+                for (let i = 0; i < addRows; i++) {
+                    splittedContent[i] += ",";
+                }
+                splittedContent.push("+".repeat(addColumns));
+            }
+            
+            console.log(splittedContent);
+            //CreateTable(splittedContent, plants);
+        }
+    }
+    addRowsColumnsForm.appendChild(addRowsColumnsBtn);
+    
+    
+}
+    
