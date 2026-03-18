@@ -152,8 +152,19 @@ function EditGarden(garden, plants, parentContainer, controls) {
     backBtn.className = "back_btn";
     backBtn.onclick = () => window.location.href = "/gardens.html";
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete Garden";
+    deleteBtn.className = "delete_btn";
+    deleteBtn.onclick = () => {
+        if (confirm("Are you sure you want to delete this garden?")) {
+            DeleteGarden(garden.id);
+            window.location.href = "/gardens.html";
+        }
+    };
+
     footer.appendChild(saveBtn);
     footer.appendChild(backBtn);
+    footer.appendChild(deleteBtn);
     gardenCard.appendChild(footer);
 
     parentContainer.appendChild(gardenCard);
@@ -267,6 +278,14 @@ async function SaveGarden(garden) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(garden)
+    });
+    return resp.json();
+}
+
+async function DeleteGarden(id) {
+    const resp = await fetch(`/api/gardens/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
     });
     return resp.json();
 }

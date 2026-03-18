@@ -190,3 +190,11 @@ button:hover {
         font-size: 0.7rem;
     }
 }
+.delete_btn {
+    background-color: #5c1a1a;
+    color: #ffcccc;
+}
+.delete_btn:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}

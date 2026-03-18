@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteBtn.style.display = "block"
         deleteBtn.textContent = "Delete Garden";
         deleteBtn.className = "delete_btn";
-        deleteBtn.style.display = "none";
+        // deleteBtn.style.display = "none";
         deleteBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.")) {
                 DeleteGarden(garden.id);
@@ -102,118 +102,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
-        gardenCard.appendChild(deleteBtn);
         gardenCard.appendChild(editBtn);
+        gardenCard.appendChild(deleteBtn);
         gardensContainer.appendChild(gardenCard);
-    });
-
-    // 4. Helper Functions for UI State
-    const getActiveCell = () => gardensContainer.querySelector('td.active');
-
-    const showControls = () => {
-        controlsContainer.style.display = "flex";
-        disablecellbtn.style.display = "inline-block";
-        emptycellbtn.style.display = "inline-block";
-        plantcellbtn.style.display = "inline-block";
-    };
-
-    const hideControls = () => {
-        controlsContainer.style.display = "none";
-        disablecellbtn.style.display = "none";
-        emptycellbtn.style.display = "none";
-        plantcellbtn.style.display = "none";
-        plantselection.style.display = "none";
-        plantselection.innerHTML = "";
-    };
-
-    const deactivateCell = (cell) => {
-        if (cell) cell.classList.remove('active');
-    };
-
-    // 5. Event Listeners for Controls
-    disablecellbtn.addEventListener("click", () => {
-        const target = getActiveCell();
-        if (target) {
-            target.className = 'tobecollected-cell';
-            target.textContent = "+";
-            deactivateCell(target);
-            hideControls();
-        }
-    });
-
-    emptycellbtn.addEventListener('click', () => {
-        const target = getActiveCell();
-        if (target) {
-            target.className = 'empty-cell';
-            target.textContent = "";
-            deactivateCell(target);
-            hideControls();
-        }
-    });
-
-    plantcellbtn.addEventListener("click", () => {
-        plantselection.innerHTML = "";
-        plantselection.style.display = "flex";
-        plantselection.style.flexWrap = "wrap";
-        plantselection.style.gap = "10px";
-
-        plants.forEach(plant => {
-            const card = document.createElement("div");
-            card.className = "plant-card";
-            card.dataset.id = plant.id; // Use dataset instead of raw ID for better delegation
-            card.innerHTML = `
-                <p><strong>${plant.commonName}</strong></p>
-                <p>Alias: ${plant.botanicalName}</p>
-                <p>Planting: ${plant.planting}</p>
-                <p>Harvesting: ${plant.harvesting}</p>
-            `;
-            plantselection.appendChild(card);
-        });
-    });
-
-    // Delegated listener for plant selection
-    plantselection.addEventListener("click", (e) => {
-        const clickedCard = e.target.closest('.plant-card');
-        if (clickedCard) {
-            const plantId = parseInt(clickedCard.dataset.id);
-            const plant = plants.find(p => p.id === plantId);
-            const target = getActiveCell();
-
-            if (target && plant) {
-                target.className = 'plant-cell';
-                target.textContent = plant.commonName;
-                deactivateCell(target);
-                hideControls();
-            }
-        }
-    });
-
-    // 6. Global Click Listener for Table Cells
-    document.addEventListener('click', (event) => {
-        const clickedCell = event.target.closest('td');
-
-        if (clickedCell && gardensContainer.contains(clickedCell)) {
-            const gardenCard = clickedCell.closest('.garden-card');
-            if (!gardenCard || !gardenCard.classList.contains('is-editing')) {
-                return; // Only allow interaction if the garden is being edited
-            }
-
-            const currentActive = getActiveCell();
-            if (currentActive && currentActive !== clickedCell) {
-                deactivateCell(currentActive);
-            }
-            clickedCell.classList.add('active');
-            showControls();
-        } else {
-            // If clicking outside cell & controls, hide everything
-            if (!event.target.closest('#controls-container')) {
-                const currentActive = getActiveCell();
-                if (currentActive) {
-                    deactivateCell(currentActive);
-                    hideControls();
-                }
-            }
-        }
     });
 });
 
