@@ -166,6 +166,111 @@ body {
     font-size: 0.9rem;
 }
 
+#addrowscolumns-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--bg-dark);
+    color: var(--text-green);
+}
+
+#addrowscolumns-form input {
+    width: 100px;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--text-green);
+    background-color: var(--bg-dark);
+    color: black;
+}
+
+#addrowscolumns-form label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+}
+
+#addrowscolumns-form button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--text-green);
+    background-color: var(--bg-dark);
+    color: black;
+}
+
+#addrowscolumns-form button:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-font-color);
+    letter-spacing: 1px;
+}
+
+#removerowscolumns-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--bg-dark);
+    color: var(--text-green);
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#removerowscolumns-form button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--text-green);
+    background-color: var(--bg-dark);
+    color: black;
+}
+
+#removerowscolumns-form button:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-font-color);
+    letter-spacing: 1px;
+}
+
+#manage-rows-columns-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: transparent;
+}
+
+.cancel_btn {
+    background-color: #4a5c3c;
+    color: var(--text-main);
+    border: 1px solid var(--text-green);
+}
+
+.cancel_btn:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-font-color);
+    letter-spacing: 1px;
+}
+
+.addrowscolumns_btn {
+    background-color: #4a5c3c;
+    color: var(--text-main);
+    border: 1px solid var(--text-green);
+}
+
+.addrowscolumns_btn:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-font-color);
+    letter-spacing: 1px;
+}
+
+
 /* Button Styling */
 button {
     padding: 0.8rem 1.5rem;

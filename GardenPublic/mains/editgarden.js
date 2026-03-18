@@ -131,6 +131,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     gardenCard.id = "garden" + garden.id;
     gardenCard.innerHTML = `
         <h2 class="garden-name" contenteditable="true">${garden.gardenname}</h2>
+        <h4>${garden.gardencontent}</h4>
     `;
 
     const splittedContent = garden.gardencontent.split(";");
@@ -163,19 +164,15 @@ function EditGarden(garden, plants, parentContainer, controls) {
         }
     };
 
-    const addRowsColumnsBtn = document.createElement("button");
-    addRowsColumnsBtn.textContent = "Add Rows/Columns";
-    addRowsColumnsBtn.className = "addrowscolumns_btn";
-    addRowsColumnsBtn.onclick = () => {
-        if (confirm("Are you sure you want to add rows/columns to this garden? Any unsaved changes will be lost.")) {
-            AddRowsColumns(garden, plants, editGardenContainer);
-        }
-    }
+    const manageRowsColumnsBtn = document.createElement("button");
+    manageRowsColumnsBtn.textContent = "Manage Rows/Columns";
+    manageRowsColumnsBtn.className = "manage_rows_columns_btn";
+    manageRowsColumnsBtn.onclick = () => ManageRowsColumns(garden, plants, parentContainer, controls);
 
     footer.appendChild(saveBtn);
     footer.appendChild(backBtn);
     footer.appendChild(deleteBtn);
-    footer.appendChild(addRowsColumnsBtn);
+    footer.appendChild(manageRowsColumnsBtn);
     gardenCard.appendChild(footer);
 
     parentContainer.appendChild(gardenCard);
@@ -300,19 +297,24 @@ async function DeleteGarden(id) {
     return resp.json();
 }
 
-function AddRowsColumns(garden, plants, parentContainer) {
-    const addRowsColumnsForm = document.createElement("form");
+function ManageRowsColumns(garden, plants, parentContainer, controls) {
+    console.log(garden.gardencontent);
+    const ManageRowsColumnContainer = document.createElement("div");
+    ManageRowsColumnContainer.id = "manage-rows-columns-container";
+    parentContainer.appendChild(ManageRowsColumnContainer);
+
+    const addRowsColumnsForm = document.createElement("div");
     addRowsColumnsForm.id = "addrowscolumns-form";
     addRowsColumnsForm.style.display = "flex";
-    parentContainer.appendChild(addRowsColumnsForm);
+    ManageRowsColumnContainer.appendChild(addRowsColumnsForm);
 
     const addRowsLabel = document.createElement("label");
     addRowsLabel.textContent = "Add Rows: ";
     const addRowsInput = document.createElement("input");
     addRowsInput.type = "number";
-    addRowsInput.min = "1";
+    addRowsInput.min = "0";
     addRowsInput.max = "20";
-    addRowsInput.value = "1";
+    addRowsInput.value = "0";
     addRowsInput.id = "addrows-input";
     addRowsColumnsForm.appendChild(addRowsLabel);
     addRowsColumnsForm.appendChild(addRowsInput);
@@ -321,34 +323,126 @@ function AddRowsColumns(garden, plants, parentContainer) {
     addColumnsLabel.textContent = "Add Columns: ";
     const addColumnsInput = document.createElement("input");
     addColumnsInput.type = "number";
-    addColumnsInput.min = "1";
+    addColumnsInput.min = "0";
     addColumnsInput.max = "20";
-    addColumnsInput.value = "1";
+    addColumnsInput.value = "0";
     addColumnsInput.id = "addcolumns-input";
     addRowsColumnsForm.appendChild(addColumnsLabel);
     addRowsColumnsForm.appendChild(addColumnsInput);
 
+    const cancelBtn = document.createElement("button");
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.className = "cancel_btn";
+    cancelBtn.onclick = () => {
+        ManageRowsColumnContainer.style.display = "none";
+    }
+
     const addRowsColumnsBtn = document.createElement("button");
     addRowsColumnsBtn.textContent = "Add Rows/Columns";
     addRowsColumnsBtn.className = "addrowscolumns_btn";
+    addRowsColumnsBtn.type = "button";
     addRowsColumnsBtn.onclick = () => {
         if (confirm("Are you sure you want to add rows/columns to this garden? Any unsaved changes will be lost.")) {
-            const addRows = addRowsInput.value;
-            const addColumns = addColumnsInput.value;
-            const splittedContent = garden.gardencontent.split(";");
-            for (let j = 0; j < addColumns; j++) {
-                for (let i = 0; i < addRows; i++) {
-                    splittedContent[i] += ",";
-                }
-                splittedContent.push("+".repeat(addColumns));
-            }
+            const addRows = parseInt(addRowsInput.value) || 0;
+            const addColumns = parseInt(addColumnsInput.value) || 0;
             
-            console.log(splittedContent);
-            //CreateTable(splittedContent, plants);
+            let rows = garden.gardencontent.split(";");
+            
+            // Add columns to existing rows
+            if (addColumns > 0) {
+                rows = rows.map(row => {
+                    let cols = row.split(",");
+                    for (let i = 0; i < addColumns; i++) {
+                        cols.push("");
+                    }
+                    return cols.join(",");
+                });
+            }
+
+            // Add new rows
+            if (addRows > 0) {
+                const currentColumnCount = rows[0].split(",").length;
+                for (let i = 0; i < addRows; i++) {
+                    const newRow = Array(currentColumnCount).fill("").join(",");
+                    rows.push(newRow);
+                }
+            }
+
+            garden.gardencontent = rows.join(";");
+            console.log(garden.gardencontent);
+            // Re-render the garden
+            parentContainer.innerHTML = "";
+            EditGarden(garden, plants, parentContainer, controls);
+            parentContainer.appendChild(controls.container);
         }
     }
     addRowsColumnsForm.appendChild(addRowsColumnsBtn);
-    
-    
+
+
+
+    const removeRowsColumnsForm = document.createElement("div");
+    removeRowsColumnsForm.id = "removerowscolumns-form";
+    ManageRowsColumnContainer.appendChild(removeRowsColumnsForm);
+
+    const removeLastRowBtn = document.createElement("button");
+    removeLastRowBtn.textContent = "Remove Last Row";
+    removeLastRowBtn.className = "removelastrow_btn";
+    removeLastRowBtn.type = "button";
+    removeLastRowBtn.onclick = () => {
+        if (confirm("Are you sure you want to remove the last row from this garden? Any unsaved changes will be lost.")) {
+            let rows = garden.gardencontent.split(";");
+            console.log(rows);
+
+            console.log(rows[rows.length - 1].split(",").length === rows[rows.length - 1].map(val => val == ",").length + 1);
+
+            if (rows[rows.length - 1].split(",").length === rows[rows.length - 1].map(val => val == ",").length + 1) {
+                rows.pop();
+            }
+            else {
+                alert("Last row is not empty, cannot remove it.")
+                console.log(rows[rows.length - 1].split(",").length);
+                return;
+            }
+            garden.gardencontent = rows.join(";");
+            console.log(garden.gardencontent);
+            // Re-render the garden
+            parentContainer.innerHTML = "";
+            EditGarden(garden, plants, parentContainer, controls);
+            parentContainer.appendChild(controls.container);
+        }
+    }
+    removeRowsColumnsForm.appendChild(removeLastRowBtn);
+
+    const removeLastColumnBtn = document.createElement("button");
+    removeLastColumnBtn.textContent = "Remove Last Column";
+    removeLastColumnBtn.className = "removelastcolumn_btn";
+    removeLastColumnBtn.type = "button";
+    removeLastColumnBtn.onclick = () => {
+        if (confirm("Are you sure you want to remove the last column from this garden? Any unsaved changes will be lost.")) {
+            let rows = garden.gardencontent.split(";");
+            console.log(rows);
+            rows = rows.map(row => {
+                let cols = row.split(",");
+
+                if (cols[cols.length - 1].length === 0) {
+                    cols.pop();
+                }
+                else {
+                    alert("Last column is not empty, cannot remove it.")
+                    return row;
+                }
+                return cols.join(",");
+            });
+            garden.gardencontent = rows.join(";");
+            console.log(garden.gardencontent);
+            // Re-render the garden
+            parentContainer.innerHTML = "";
+            EditGarden(garden, plants, parentContainer, controls);
+            parentContainer.appendChild(controls.container);
+        }
+    }
+    removeRowsColumnsForm.appendChild(removeLastColumnBtn);
+
+    ManageRowsColumnContainer.appendChild(cancelBtn);
 }
     
