@@ -743,7 +743,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     align-items: center;
     justify-items:center;
 }
-.result-details-cont table{
+.result-details-cont-table{
     margin: 0;
     padding: 0;
 }
@@ -953,6 +953,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 @media (max-width: 1920px) {
     .ideasPage_Btn{margin-top: -4rem;}
     .plant-finder-main-container{margin-bottom: 10rem;}
+    .search-cont{width: 50%;}
     .knowledges-subtitle{font-size: clamp(1.6rem,2vw,5rem);}
 }
 @media (max-width: 1400px) {

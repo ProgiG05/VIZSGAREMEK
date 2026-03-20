@@ -167,42 +167,41 @@ function updateLanguage(lang) {
 // --- Plant search logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const resultsContainer = document.getElementById('searchResult');
+
 
 document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
     e.preventDefault()
+
+    const resultsContainer = document.getElementById('searchResult');
+    
+    //Search data:
+    //------------------------------------------------------------------------------------------------------------------
+    const commonNameSearch = document.getElementById('commonplant-search-inp').value
+    const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
+
+    const waterCheckboxes = document.querySelectorAll('.water-checkbox')
+    const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checkboxes
+
+    const sunlightCheckboxes = document.querySelectorAll('.sunlight-checkbox')
+    const ActiveSunlightCheckboxes = Array.from(sunlightCheckboxes).filter(x => x.checked).map(y => y.value)
+
+    const soilCheckboxes = document.querySelectorAll('.soil-checkbox')
+    const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value)
+    //------------------------------------------------------------------------------------------------------------------
     try {
-        resultsContainer.innerHTML = '<p class="extraMSG">Searching...</p>';
-        const response = await fetch(`/api/plantfinder`,{
-            method: "GET",
-            headers: {'Content-Type' : 'application/json'}
-        });
+        const response = await fetch(`/api/plants`,{method: "GET", headers: {'Content-Type' : 'application/json'}});
         console.log(response)
         if (!response.ok) throw new Error('Network response was not ok');
         const plants = await response.json();
         console.log(plants)
         resultsContainer.innerHTML = '';
+        if (!plants || plants.length === 0) {resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';return;}
         
-        if (!plants || plants.length === 0) {
-            resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';
-            return;
-        }
-
-
-        let commonNameSearch = document.getElementById('commonplant-search-inp').value
-        let botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
-        
-        const waterCheckboxes = document.querySelectorAll('.water-checkbox')
-        const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checkboxes
-
-        const sunlightCheckboxes = document.querySelectorAll('.sunlight-checkbox')
-        const ActiveSunlightCheckboxes = Array.from(sunlightCheckboxes).filter(x => x.checked).map(y => y.value)
-        
-        const soilCheckboxes = document.querySelectorAll('.soil-checkbox')
-        const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value)
-
         plants.forEach(p => {
-            if (p.commonName.toLowerCase() === commonNameSearch.toLowerCase() || p.botanicalName.toLowerCase() === botanicalNameSearch.toLowerCase()) {
+            let cmn = p.commonName.toLowerCase()
+            let bmn = p.botanicalName.toLowerCase()
+            let criteria1 = cmn.includes(commonNameSearch.toLowerCase()) || bmn.includes(botanicalNameSearch.toLowerCase())
+            if (cmn === commonNameSearch.toLowerCase()) {
                 const resultDetailsCont = document.createElement('div')
                 resultDetailsCont.setAttribute('class','result-details-cont')
 
@@ -212,42 +211,57 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
                 const imgInner = document.createElement('img')
                 imgInner.setAttribute('class','result-imgInner')
                 imgInner.setAttribute('alt',`${p.commonName}`)
-                imgCont.setAttribute('src','../pics/others/searchedplant_placeholder.png')
+                imgInner.setAttribute('src','../pics/others/searchedplant_placeholder.png')
                 imgCont.appendChild(imgInner)
                 resultDetailsCont.appendChild(imgCont)
 
                 const plantResultTitle = document.createElement('h2')
                 plantResultTitle.setAttribute('class','plantdetails-title')
-                plantResultTitle.innerText = "Plant Details"
+                plantResultTitle.textContent = "Plant Details"
                 resultDetailsCont.appendChild(plantResultTitle)
 
-                const row = (key, value) => {
+                const plantResultTable = document.createElement('table') 
+                plantResultTable.setAttribute('class','result-details-cont-table')
+
+                function makeRow(key, value) {
                     const plantResultTableRow = document.createElement('tr')
 
                     const plantResultTableData1 = document.createElement('td')
                     plantResultTableData1.setAttribute('class','resultKey')
-                    plantResultTableData1.innerText = `${key}`
+                    plantResultTableData1.textContent = `${key}`
 
                     const plantResultTableData2 = document.createElement('td')
                     plantResultTableData2.setAttribute('class','resultValue')
-                    plantResultTableData2.innerText = `${value}`
+                    plantResultTableData2.textContent = `${value}`
 
                     plantResultTableRow.appendChild(plantResultTableData1)
                     plantResultTableRow.appendChild(plantResultTableData2)
+
+                    plantResultTable.appendChild(plantResultTableRow)
                 }
 
-                const plantResultTable = document.createElement('table')    
-                plantResultTable.innerHTML += 
-                    row('Common name:', p.commonName) + row('Botanical name:', p.botanicalName) + row('Type', p.type) + 
-                    row('Watering:', p.water) + row('Sunlight:', p.sunlight) + row('Soil:', p.soil) + 
-                    row('Planting:', p.planting) + row('Harvesting:', p.harvesting) 
+                makeRow('Common name:', p.commonName) 
+                makeRow('Botanical name:', p.botanicalName)
+                makeRow('Type', p.type)
+                makeRow('Watering:', p.water)
+                makeRow('Sunlight:', p.sunlight)
+                makeRow('Soil:', p.soil)
+                makeRow('Planting:', p.planting)
+                makeRow('Harvesting:', p.harvesting)
                 
                 resultDetailsCont.appendChild(plantResultTable);
 
                 const plantSearchPageBtn = document.createElement('a')
-                plantSearchPageBtn.appendChild('class','plantsearchPage_Btn')
-                plantSearchPageBtn.appendChild('id','plantsearchPage_Btn')
-                plantSearchPageBtn.appendChild('href','../sites/plants.html')
+                plantSearchPageBtn.setAttribute('class','plantsearchPage_Btn')
+                plantSearchPageBtn.setAttribute('id','plantsearchPage_Btn')
+                plantSearchPageBtn.setAttribute('href','../sites/plants.html')
+                plantSearchPageBtn.textContent = 'Get more info'
+                resultDetailsCont.appendChild(plantSearchPageBtn)
+
+                resultsContainer.appendChild(resultDetailsCont)
+            }
+            else{
+                resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';
             }
         });
     } catch (error) {
