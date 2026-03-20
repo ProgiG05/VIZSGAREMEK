@@ -236,34 +236,34 @@
                     <h3><u>Watering need</u></h3>
                     <div class="water-selection-cont">
                         <label for="water-low">Low</label>
-                        <input type="checkbox" name="water-low" id="water-select">
+                        <input type="checkbox" name="water-low" value="low" class="water-checkbox">
                         <label for="water-medium">Medium</label>
-                        <input type="checkbox" name="water-medium" id="water-select">
+                        <input type="checkbox" name="water-medium" value="medium"  class="water-checkbox">
                         <label for="water-high">High</label>
-                        <input type="checkbox" name="water-high" id="water-select">
+                        <input type="checkbox" name="water-high" value="high"  class="water-checkbox">
                     </div>
                     <h3><u>Sunlight need</u></h3>
                     <div class="sunlight-selection-cont">
                         <label for="sunlight-low">Low</label>
-                        <input type="checkbox" name="sunlight-low" id="sunlight-select">
+                        <input type="checkbox" name="sunlight-low" value="low"  class="sunlight-checkbox">
                         <label for="sunlight-moderate">Moderate</label>
-                        <input type="checkbox" name="sunlight-moderate" id="sunlight-select">
+                        <input type="checkbox" name="sunlight-moderate" value="moderate"  class="sunlight-checkbox">
                         <label for="sunlight-high">High</label>
-                        <input type="checkbox" name="sunlight-high" id="sunlight-select">
+                        <input type="checkbox" name="sunlight-high" value="high"  class="sunlight-checkbox">
                     </div>
                     <h3><u>Soil type</u></h3>
                     <div class="soil-selection-cont">
                         <label for="soil-low">Low</label>
-                        <input type="checkbox" name="soil-low" id="soil-select">
+                        <input type="checkbox" name="soil-low" value="low"  class="soil-checkbox">
                         <label for="soil-moderate">Moderate</label>
-                        <input type="checkbox" name="soil-moderate" id="soil-select">
+                        <input type="checkbox" name="soil-moderate" value="moderate" class="soil-checkbox">
                         <label for="soil-high">High</label>
-                        <input type="checkbox" name="soil-high" id="soil-select">  
+                        <input type="checkbox" name="soil-high" value="high" class="soil-checkbox">  
                     </div>
                 </div>
                 <div class="selection-cont">
                     <label for="plantingSelection">Planting month: </label>
-                    <select name="plantingSelection" id="planting-months-selection">
+                    <select name="plantingSelection" class="planting-months-selection">
                         <option value="none">Choose...</option>
                         <option value="January">January</option>
                         <option value="February">February</option>
@@ -279,7 +279,7 @@
                         <option value="December">December</option>
                     </select>
                     <label for="harvestingSelection">Harvesting month: </label>
-                    <select name="harvestingSelection" id="harvesting-months-selection">
+                    <select name="harvestingSelection" class="harvesting-months-selection">
                         <option value="none">Choose...</option>
                         <option value="January">January</option>
                         <option value="February">February</option>
@@ -298,45 +298,21 @@
                 <button class="searchPlant_Btn" id="searchPlant_Btn">Search</button>
             </div>
             <div class="searchResult hidden2" id="searchResult">
-                <div class="resultimage-cont" id="resultimage"><img src="../pics/others/searchedplant_placeholder.png" alt="Monstera Deliciosa (Swiss Cheese Plant)"></div>
+                <!-- <div class="resultimage-cont" id="resultimage"><img class="result-imgInner" src="../pics/others/searchedplant_placeholder.png" alt="Swiss Cheese Plant"></div>
                 <div class="result-details-cont">
                     <h2 class="plantdetails-title">Plant Details</h2>
                     <table>
-                        <tr>
-                            <td class="resultKey">Common:</td>
-                            <td class="resultValue">Swiss Cheese Plant</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Scientific:</td>
-                            <td class="resultValue">Monstera deliciosa</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Type:</td>
-                            <td class="resultValue">Tropical perennial, epiphyte</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Watering:</td>
-                            <td class="resultValue">Allow soil to dry between waterings. Water thoroughly but rarely.</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Sunlight:</td>
-                            <td class="resultValue">Bright, indirect light. Tolerate lower light.</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Soil:</td>
-                            <td class="resultValue">Well-draining, chunky potting mix (peat, bark, perlite).</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Planting:</td>
-                            <td class="resultValue">Year-round (Indoors)</td>
-                        </tr>
-                        <tr>
-                            <td class="resultKey">Harvesting:</td>
-                            <td class="resultValue">N/A (as an ornamental plant)</td>
-                        </tr>
+                        <tr><td class="resultKey">Common:</td><td class="resultValue">Swiss Cheese Plant</td></tr>
+                        <tr><td class="resultKey">Scientific:</td><td class="resultValue">Monstera deliciosa</td></tr>
+                        <tr><td class="resultKey">Type:</td><td class="resultValue">Tropical perennial, epiphyte</td></tr>
+                        <tr><td class="resultKey">Watering:</td><td class="resultValue">Allow soil to dry between waterings. Water thoroughly but rarely.</td></tr>
+                        <tr><td class="resultKey">Sunlight:</td><td class="resultValue">Bright, indirect light. Tolerate lower light.</td></tr>
+                        <tr><td class="resultKey">Soil:</td><td class="resultValue">Well-draining, chunky potting mix (peat, bark, perlite).</td></tr>
+                        <tr><td class="resultKey">Planting:</td><td class="resultValue">Year-round (Indoors)</td></tr>
+                        <tr><td class="resultKey">Harvesting:</td><td class="resultValue">N/A (as an ornamental plant)</td></tr>
                     </table>
-                    <a class="plantsearchPage_Btn" id="plantsearchPage_Btn" href="">Get more info</a>
-                </div>  
+                    <a class="plantsearchPage_Btn" id="plantsearchPage_Btn" href="../sites/plants.html">Get more info</a>
+                </div>   -->
             </div>
         </div>
     </section>

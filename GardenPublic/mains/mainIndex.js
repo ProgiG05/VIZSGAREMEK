@@ -167,41 +167,91 @@ function updateLanguage(lang) {
 // --- Plant search logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const searchForm = document.getElementById('search-container');
-const resultsContainer = document.getElementById('searchedPlant-container');
+const resultsContainer = document.getElementById('searchResult');
 
-if (searchForm && resultsContainer) {
-    searchForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
+    e.preventDefault()
+    try {
+        resultsContainer.innerHTML = '<p class="extraMSG">Searching...</p>';
+        const response = await fetch(`/api/plantfinder`,{
+            method: "GET",
+            headers: {'Content-Type' : 'application/json'}
+        });
+        console.log(response)
+        if (!response.ok) throw new Error('Network response was not ok');
+        const plants = await response.json();
+        console.log(plants)
+        resultsContainer.innerHTML = '';
         
-        const formData = new FormData(searchForm);
-        const params = new URLSearchParams(formData);
-        
-        try {
-            resultsContainer.innerHTML = '<p>Searching...</p>';
-            const response = await fetch(`/api/plantfinder?${params.toString()}`);
-            if (!response.ok) throw new Error('Network response was not ok');
-            
-            const plants = await response.json();
-            resultsContainer.innerHTML = '';
-            
-            if (!plants || plants.length === 0) {
-                resultsContainer.innerHTML = '<p>No plants found matching your criteria.</p>';
-                return;
-            }
-            
-            plants.forEach(p => {
-                const box = document.createElement('div'), row = (l, v) => `<div class="info-line"><strong>${l}</strong><span>${v || ''}</span></div>`;
-                box.className = 'plain-info-box';
-                box.innerHTML = row('commonName', p.commonName) + row('botanicalName', p.botanicalName) + row('type', p.type) + 
-                    row('water', p.water || p.Watering) + row('sunlight', p.sunlight || p.Sunlight) + row('soil', p.soil || p.Soil) + 
-                    row('planting', p.planting || p['Planting season']) + row('harvesting', p.harvesting || p['Harvesting season']) + 
-                    `<div class="info-line" style="margin-top:10px;border-bottom:none;"><a href="/searchedPlants?botanicalName=${encodeURIComponent(p.botanicalName || '')}" style="text-decoration:underline;color:inherit;font-weight:bold;">More Info ></a></div>`;
-                resultsContainer.appendChild(box);
-            });
-        } catch (error) {
-            console.error('Error fetching plants:', error);
-            resultsContainer.innerHTML = '<p>Error executing search. Please try again.</p>';
+        if (!plants || plants.length === 0) {
+            resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';
+            return;
         }
-    });
-}
+
+
+        let commonNameSearch = document.getElementById('commonplant-search-inp').value
+        let botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
+        
+        const waterCheckboxes = document.querySelectorAll('.water-checkbox')
+        const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checkboxes
+
+        const sunlightCheckboxes = document.querySelectorAll('.sunlight-checkbox')
+        const ActiveSunlightCheckboxes = Array.from(sunlightCheckboxes).filter(x => x.checked).map(y => y.value)
+        
+        const soilCheckboxes = document.querySelectorAll('.soil-checkbox')
+        const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value)
+
+        plants.forEach(p => {
+            if (p.commonName.toLowerCase() === commonNameSearch.toLowerCase() || p.botanicalName.toLowerCase() === botanicalNameSearch.toLowerCase()) {
+                const resultDetailsCont = document.createElement('div')
+                resultDetailsCont.setAttribute('class','result-details-cont')
+
+                const imgCont = document.createElement('div')
+                imgCont.setAttribute('class', 'resultimage-cont')
+
+                const imgInner = document.createElement('img')
+                imgInner.setAttribute('class','result-imgInner')
+                imgInner.setAttribute('alt',`${p.commonName}`)
+                imgCont.setAttribute('src','../pics/others/searchedplant_placeholder.png')
+                imgCont.appendChild(imgInner)
+                resultDetailsCont.appendChild(imgCont)
+
+                const plantResultTitle = document.createElement('h2')
+                plantResultTitle.setAttribute('class','plantdetails-title')
+                plantResultTitle.innerText = "Plant Details"
+                resultDetailsCont.appendChild(plantResultTitle)
+
+                const row = (key, value) => {
+                    const plantResultTableRow = document.createElement('tr')
+
+                    const plantResultTableData1 = document.createElement('td')
+                    plantResultTableData1.setAttribute('class','resultKey')
+                    plantResultTableData1.innerText = `${key}`
+
+                    const plantResultTableData2 = document.createElement('td')
+                    plantResultTableData2.setAttribute('class','resultValue')
+                    plantResultTableData2.innerText = `${value}`
+
+                    plantResultTableRow.appendChild(plantResultTableData1)
+                    plantResultTableRow.appendChild(plantResultTableData2)
+                }
+
+                const plantResultTable = document.createElement('table')    
+                plantResultTable.innerHTML += 
+                    row('Common name:', p.commonName) + row('Botanical name:', p.botanicalName) + row('Type', p.type) + 
+                    row('Watering:', p.water) + row('Sunlight:', p.sunlight) + row('Soil:', p.soil) + 
+                    row('Planting:', p.planting) + row('Harvesting:', p.harvesting) 
+                
+                resultDetailsCont.appendChild(plantResultTable);
+
+                const plantSearchPageBtn = document.createElement('a')
+                plantSearchPageBtn.appendChild('class','plantsearchPage_Btn')
+                plantSearchPageBtn.appendChild('id','plantsearchPage_Btn')
+                plantSearchPageBtn.appendChild('href','../sites/plants.html')
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching plants:', error);
+        resultsContainer.innerHTML = '<p class="extraMSG">Error executing search. Please try again.</p>';
+    }
+})

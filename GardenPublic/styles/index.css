@@ -732,7 +732,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     margin-left: 1.875rem;
     margin-right: 1.875rem;
 }
-.resultimage-cont img{
+.result-imgInner{
     width: 100%;
     height: 100%;
     border-radius: 20px;
@@ -788,6 +788,16 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     background-color: var(--plantsearchPage-hover-bg);
     color: var(--plantsearchPage-hover-font-color);
     transition: all 0.3s ease;
+}
+.extraMSG{
+    text-align: center;
+    text-wrap: balance;
+    margin: auto;
+    align-content: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #000000;
 }
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
@@ -973,7 +983,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*Plant finder section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
-    .search-cont{width: 40%;}
+    .search-cont{width: fit-content;}
+    .commonplant-search-inp{width: 55%;}
+    .botanicalplant-search-inp{width: 55%;}
     .searchResult{
         width: 40%;
         display: flex;
@@ -1047,6 +1059,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*------------------------------------------------------------------------------------------------------*/
     .ideas-title{margin-bottom: 6rem; font-size: 6.8vw;padding: 0;}
     /*------------------------------------------------------------------------------------------------------*/
+    
 }
 @media (max-width: 1100px)  {
     /*Ideas section:*/
@@ -1154,5 +1167,24 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .knowledges-showcase-section{padding-top: 20rem;}
     .reader-cont{flex-direction: column;}
     .smallknowledge-cont, .bigknowledge-cont{width: 90%; height: 35%; margin: 0.5rem;padding:0.5rem ;}
+    /*------------------------------------------------------------------------------------------------------*/
+}
+@media (max-width: 550px)  {
+    /*------------------------------------------------------------------------------------------------------*/
+
+    /*Plant finder section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .search-cont{width: 85%;margin: auto;}
+    .searchResult{width: 85%;}
+    .plantdetails-title{font-size: 4vw;}
+    .resultKey{font-size: 1.5vw; padding: 0.2rem;}
+    .resultValue{font-size: 1.5vw;padding: 0.2rem;}
+    /*------------------------------------------------------------------------------------------------------*/
+    
+    /*Knowledges section:*/
+
+    /*------------------------------------------------------------------------------------------------------*/
+    .knowledges-title{margin-left: 4rem;}
     /*------------------------------------------------------------------------------------------------------*/
 }
