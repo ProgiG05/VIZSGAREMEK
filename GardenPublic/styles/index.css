@@ -600,14 +600,14 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 1.4rem;
-    margin-left: 1.25rem;
-    margin-top: 1.25rem;
+    padding: 1.2rem;
+    margin-left: 1.15rem;
+    margin-top: 1.15rem;
     background-color: var(--searchcontainer-bg);
     color: var(--searchcontainer-text);
     box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
     font-family: monospace;
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     border-radius: 30px;
     gap: 0.625rem;
 }
@@ -952,8 +952,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 @media (max-width: 1920px) {
     .ideasPage_Btn{margin-top: -4rem;}
-    .plant-finder-main-container{margin-bottom: 10rem;}
-    .search-cont{width: 50%;}
+    .plant-finder-main-container{margin-bottom: 9.3rem;}
+    .search-cont{width: 30%;}
+    .searchResult{width: 50%;}
     .knowledges-subtitle{font-size: clamp(1.6rem,2vw,5rem);}
 }
 @media (max-width: 1400px) {

@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault()
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
-    console.log()
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
     ListOfIdeas.forEach(idea => {
         //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
@@ -168,12 +167,13 @@ document.getElementById('toup').addEventListener('click', () => {
 
 // const observer = new IntersectionObserver((entries) => {
 //     entries.forEach((entry) => {
+//         // console.log(entry)
 //         if (entry.isIntersecting) {entry.target.classList.add('show')} 
 //         else {entry.target.classList.remove('show')}
 //     })
 // })
-// const cards = document.querySelectorAll('.hidden')
-// cards.forEach((e) => observer.observe(e))
+// const hiddenElements = document.querySelectorAll(".hidden")
+// hiddenElements.forEach((e) => observer.observe(e))
 
 window.onload = () => {
     if (localStorage.getItem('theme') === 'dark') {
@@ -216,10 +216,10 @@ closePanel.addEventListener('click', () => {
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 document.getElementById("searchBar").addEventListener("input", async (e) => {
+    e.preventDefault()
     const searchValue = document.getElementById("searchBar").value.toLowerCase();
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
     IdeasCardContainer.innerHTML = ``
-    e.preventDefault()
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
     ListOfIdeas.forEach(idea => {
