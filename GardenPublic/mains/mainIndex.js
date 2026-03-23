@@ -1,6 +1,10 @@
 // --- Initialize State ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+document.addEventListener('DOMContentLoaded', async () => {
+    await sampleIdeas()
+})
+
 window.onload = () => {
     if (localStorage.getItem('theme') === 'dark') {
         body.classList.add('dark-theme');
@@ -269,3 +273,122 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
         resultsContainer.innerHTML = '<p class="extraMSG">Error executing search. Please try again.</p>';
     }
 })
+
+async function sampleIdeas() {
+    const idasPlace = document.getElementById('showcase-container')
+    const response = await fetch(`/api/ideas`,{method: "GET"    , headers: {'Content-Type' : 'application/json'}});
+    const ideas = await response.json();
+
+    const returnIdeas = [ideas[0], ideas[1], ideas[2]]
+
+    console.log(returnIdeas)
+    
+    returnIdeas.forEach(idea => {
+        //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
+        
+        // 1. Create the Main Card Container
+        const OneIdeaCard = document.createElement("div");
+        OneIdeaCard.setAttribute("class", "garden-card");
+
+        // 2. Create the Image Placeholder Section
+        const imgWrapper = document.createElement("div");
+        imgWrapper.setAttribute("class", "image-placeholder-wrapper");
+        const imgPlace = document.createElement("img");
+        imgPlace.setAttribute("class", "insideImage");
+        imgPlace.setAttribute("id", "insideImage");
+        imgPlace.setAttribute("src","../pics/gardenideas/"+ idea.picture)
+        imgPlace.setAttribute("alt",`${idea.title}`)
+        imgWrapper.appendChild(imgPlace);
+        OneIdeaCard.appendChild(imgWrapper);
+
+        // 3. Create the Title
+        const OneIdeaTitle = document.createElement("h2");
+        OneIdeaTitle.textContent = idea.title; 
+        OneIdeaTitle.setAttribute("class", "card-title");
+        OneIdeaCard.appendChild(OneIdeaTitle);
+
+        // 4. Create the section of the description
+        const OneIdeaDescription = document.createElement("p");
+        OneIdeaDescription.textContent = idea.description; 
+        OneIdeaDescription.setAttribute("class", "card-description");
+        OneIdeaCard.appendChild(OneIdeaDescription);
+
+        OneIdeaCard.appendChild(document.createElement("hr"))
+
+        const plantList = document.createElement("p");
+        plantList.setAttribute("class", "plant-list");
+
+        idea.plants.split(",").forEach(plantName => {
+            const link = document.createElement("a");
+            link.setAttribute("class","plantListItem")
+            link.setAttribute("href", "#");
+            link.textContent = plantName + " ";
+            plantList.appendChild(link);
+        });
+        OneIdeaCard.appendChild(plantList);
+
+        // 5. Create the Footer & Stats Container
+        const cardFooter = document.createElement("div");
+        cardFooter.setAttribute("class", "card-footer");
+
+        const statsContainer = document.createElement("div");
+        statsContainer.setAttribute("class", "stats-container");
+
+        const createStatBox = (label, value) => {
+            const statBox = document.createElement("div");
+            statBox.setAttribute("class", "stat-box");
+            
+            const badge = document.createElement("div");
+            badge.setAttribute("class", "stat-badge");
+
+            badge.textContent = value;
+            
+            const statLabel = document.createElement("div");
+            statLabel.setAttribute("class", "stat-label");
+            statLabel.textContent = label;
+
+            if (label === 'Sunlight') {
+                if (value === 'Low') {
+                    badge.setAttribute("title","Shady place")
+                }
+                if (value === 'Moderate') {
+                    badge.setAttribute("title","Near a window")
+                }
+                if (value === 'High') {
+                    badge.setAttribute("title","Mostly outside")
+                }
+            }
+            if (label === 'Water') {
+                if (value === 'Low') {
+                    badge.setAttribute("title","Once every two weeks")
+                }
+                if (value === 'Medium') {
+                    badge.setAttribute("title","1-2 times a week")
+                }
+                if (value === 'High') {
+                    badge.setAttribute("title","Every 3 days")
+                }
+            }
+            if (label === 'Hardiness') {
+                if (value === 'Easy' || value === 'Low') {
+                    badge.setAttribute("title","Low effort")
+                }
+                if (value === 'Average') {
+                    badge.setAttribute("title","Needs time and care")
+                }
+                if (value === 'High') {
+                    badge.setAttribute("title","Requires planning")
+                }
+            }
+            
+            statBox.appendChild(badge);
+            statBox.appendChild(statLabel);
+            return statBox;
+        };
+
+        statsContainer.appendChild(createStatBox("Sunlight", idea.sunlight));
+        statsContainer.appendChild(createStatBox("Water", idea.water));
+        statsContainer.appendChild(createStatBox("Hardiness", idea.maintenance));
+        cardFooter.appendChild(statsContainer);
+    })
+}

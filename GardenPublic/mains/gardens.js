@@ -1,6 +1,21 @@
 const gardensContainer = document.getElementById("gardens-container");
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const settingsBtn = document.getElementById('settings_Btn');
+    const sidePanel = document.getElementById('settings-sidepanel');
+    const closePanel = document.getElementById('closeSidePanel');
+
+    settingsBtn.addEventListener('click', () => {
+        sidePanel.style.transition = '0.4s all ease'
+        sidePanel.style.left = 0
+    });
+closePanel.addEventListener('click', () => {
+    sidePanel.style.transition = '0.4s all ease'
+    sidePanel.style.left = "-22.5rem"
+});
+
+
     // 1. Fetch data
     const gardensResponse = await fetch("/api/gardens", {
         method: "GET",

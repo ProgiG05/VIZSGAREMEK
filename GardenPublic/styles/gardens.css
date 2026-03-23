@@ -32,6 +32,66 @@ body {
     user-select: none;
 }
 
+.settings-sidepanel {
+    width: 18.75rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 100;
+    gap: 1.25rem;
+    padding: 1.875rem;
+    left: -22.5rem;
+    top: 0;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.7);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+.settings-sidepanel h2 {
+    margin: 0 0 1.125rem 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--text-main);
+}
+.settings-sidepanel a {
+    display: block;
+    padding: 0.625rem 0.75rem;
+    margin: 0.375rem 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    color: var(--text-main);
+    text-decoration: none;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+    font-weight: bold;
+}
+.settings-sidepanel a:hover{
+    background: rgba(255, 255, 255, 0.238);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+.closeSidePanel {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 0.25rem;
+    top: 1.875rem;
+    right: 1.875rem;
+    background: transparent;
+    border: none;
+    cursor: pointer; 
+}
+.closeSidePanel img {
+    width: 1.875rem;
+    height: 1.875rem;
+    display: block;
+}
+
 .garden-card {
     background-color: var(--bg-dark);
     color: var(--text-green);

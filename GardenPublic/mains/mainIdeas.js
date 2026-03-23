@@ -3,6 +3,21 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
+
+    const settingsBtn = document.getElementById('settings_Btn');
+    const sidePanel = document.getElementById('settings-sidepanel');
+    const closePanel = document.getElementById('closeSidePanel');
+
+    settingsBtn.addEventListener('click', () => {
+        sidePanel.style.transition = '0.4s all ease'
+        sidePanel.style.left = 0
+    });
+    closePanel.addEventListener('click', () => {
+        sidePanel.style.transition = '0.4s all ease'
+        sidePanel.style.left = "-22.5rem"
+    });
+
+    
     ListOfIdeas.forEach(idea => {
         //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
         
