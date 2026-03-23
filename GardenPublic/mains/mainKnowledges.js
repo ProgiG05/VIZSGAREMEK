@@ -18,10 +18,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (let i = 0; i < descriptionBuffer.length; i++) {
             const paragraph = document.createElement('p')
             paragraph.setAttribute('class','OneKnowledgeParagraph')
-            paragraph.textContent = `${descriptionBuffer[i]}${descriptionBuffer[i+1]}`
+            if (descriptionBuffer[i+1] !== undefined) {
+                paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`
+            }
+            else{
+                paragraph.textContent = `${descriptionBuffer[i]}`
+            }
+            
             OneKnowledgeDescription.appendChild(paragraph)
         }
-
 
         OneKnowledgeCard.appendChild(OneKnowledgeTitle)
         OneKnowledgeCard.appendChild(OneKnowledgeDescription)

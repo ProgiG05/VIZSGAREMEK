@@ -3,7 +3,7 @@
     --bg-dark: #112d14;
     --text-green: #a7f070;
     --text-main: #ffffff;
-    --beige-dark-shadow: #8a6a3a;
+    --beige-dark-shadow: #4fbe70;
     --navbtn-bg: #122c0db7;
     --navbtn-hover-bg: #e2fdf4;
     --navbtn-font-color: #a7cabe;
@@ -15,7 +15,6 @@ body {
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
-    font-family: 'Quicksand', sans-serif;
     color: var(--text-main);
 }
 body.dark-theme{
@@ -37,7 +36,7 @@ body.dark-theme{
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    position: sticky;
+    /* position: sticky; */
     top: 0;
 }
 
@@ -172,9 +171,8 @@ body.dark-theme{
 }
 
 .main-container-knowledges {
-    width: 90%;
-    max-width: 900px;
-    margin: 0 auto 5rem auto;
+    width: 70%;
+    margin: auto;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -186,7 +184,8 @@ body.dark-theme{
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--beige-dark-shadow);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(167, 240, 112, 0.1);
+    border: 1px solid rgba(194, 226, 170, 0.1);
+    
 }
 
 .OneKnowledgeCard:hover {
@@ -198,28 +197,26 @@ body.dark-theme{
 .OneKnowledgeTitle {
     color: var(--text-green);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    font-size: 3vw;
+    font-size: clamp(1.5rem,3vw,5rem);
     text-align: center;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    margin: 0.2rem 0 1.5rem 0;
     letter-spacing: 1px;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .OneKnowledgeDescription {
     color: var(--text-main);
     line-height: 1.8;
     font-family: monospace; 
-    font-size: 1.1rem;
     white-space: pre-line;
     opacity: 0.95;
     text-align: justify;
 }
 .OneKnowledgeParagraph {
-    font-size: 0.8vw;
-    text-indent: 0.5rem;
+    font-size: clamp(0.6rem, 0.8vw, 2rem);
+    text-indent: 1rem;
     text-align: left;
-    margin: 0.5rem 0rem 0.5rem 0.2rem;
+    margin: 0.7rem 0rem 0.3rem 0.2rem;
 }
 
 /* Floating Buttons Area */
