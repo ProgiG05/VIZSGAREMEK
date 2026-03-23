@@ -87,7 +87,7 @@ body {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-.garden-table td.tobecollected-cell {
+.garden-table td.disabled-cell {
     background-color: rgba(167, 240, 112, 0.2);
     color: var(--text-green);
     font-size: 1.5rem;

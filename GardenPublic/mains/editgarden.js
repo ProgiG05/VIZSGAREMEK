@@ -109,7 +109,7 @@ function CreateTable(splittedContent, plants) {
                     tableColumn.className = "empty-cell";
                     break;
                 case "+":
-                    tableColumn.className = "tobecollected-cell";
+                    tableColumn.className = "disabled-cell";
                     tableColumn.textContent = "+";
                     break;
                 default:
@@ -217,7 +217,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     controls.disableBtn.onclick = () => {
         const cell = getActiveCell();
         if (cell) {
-            cell.className = "tobecollected-cell";
+            cell.className = "disabled-cell";
             cell.textContent = "+";
             cell.classList.remove('active');
             controls.container.style.display = "none";
@@ -259,7 +259,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
         const gardenTableData = Array.from(table.querySelectorAll("tr")).map(row => {
             return Array.from(row.querySelectorAll("td")).map(cell => {
                 if (cell.classList.contains("empty-cell")) return "";
-                if (cell.classList.contains("tobecollected-cell")) return "+";
+                if (cell.classList.contains("disabled-cell")) return "+";
                 const plant = plants.find(p => p.commonName === cell.textContent);
                 return plant ? plant.id : "";
             }).join(",");
@@ -393,9 +393,13 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             let rows = garden.gardencontent.split(";");
             console.log(rows);
 
-            console.log(rows[rows.length - 1].split(",").length === rows[rows.length - 1].map(val => val == ",").length + 1);
+            console.log(rows[rows.length - 1].split(",").length);
+            console.log(rows[rows.length - 1].split(","));
+            console.log(rows[rows.length - 1].split(",").map(val => val === "+").length);
+            console.log(rows[rows.length - 1].split(",").map(val => val === "+"));
 
-            if (rows[rows.length - 1].split(",").length === rows[rows.length - 1].map(val => val == ",").length + 1) {
+
+            if (rows[rows.length - 1].split(",").length === rows[rows.length - 1].split(",").map(val => val === "").length) {
                 rows.pop();
             }
             else {
@@ -424,12 +428,14 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             rows = rows.map(row => {
                 let cols = row.split(",");
 
-                if (cols[cols.length - 1].length === 0) {
-                    cols.pop();
-                }
-                else {
-                    alert("Last column is not empty, cannot remove it.")
-                    return row;
+                for (let i = 0; i < cols.length; i++) {
+                    if (cols[i].length === 0) {
+                        cols.pop();
+                    }
+                    else {
+                        alert("Last column is not empty, cannot remove it.")
+                        return row;
+                    }
                 }
                 return cols.join(",");
             });
