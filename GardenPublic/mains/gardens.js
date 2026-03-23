@@ -112,8 +112,6 @@ closePanel.addEventListener('click', () => {
         editBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to edit this garden?")) {
                 window.location.href = "/sites/editgarden.html?id=" + garden.id;
-                EditGarden(garden.id, plants);
-                deleteBtn.style.display = "block";
             }
         });
 

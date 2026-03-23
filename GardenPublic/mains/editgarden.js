@@ -30,8 +30,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const controls = loadContents(plants);
     const editGardenContainer = document.getElementById("editGardenContainer");
     
-    // Add controls to the top
-
     // Initial Render
     EditGarden(garden, plants, editGardenContainer, controls);
     editGardenContainer.appendChild(controls.container);
@@ -173,9 +171,8 @@ function EditGarden(garden, plants, parentContainer, controls) {
     resetBtn.textContent = "Reset Garden";
     resetBtn.className = "reset_btn";
     resetBtn.onclick = () => {
-        if (confirm("Are you sure you want to reset this garden?")) {
-            EditGarden(garden, plants, parentContainer, controls);
-            parentContainer.appendChild(controls.container);
+        if (confirm("Are you sure you want to reset this garden? Any unsaved changes will be lost.")) {
+            window.location.reload();
         }
     };
 
@@ -232,6 +229,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             cell.textContent = "+";
             cell.classList.remove('active');
             controls.container.style.display = "none";
+            garden.gardencontent = tempSaveGardenData();
         }
     };
 
@@ -242,6 +240,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             cell.textContent = "";
             cell.classList.remove('active');
             controls.container.style.display = "none";
+            garden.gardencontent = tempSaveGardenData();
         }
     };
 
@@ -263,10 +262,11 @@ function EditGarden(garden, plants, parentContainer, controls) {
                 controls.selection.classList.remove('show');
             }
         }
+        
+        garden.gardencontent = tempSaveGardenData();
     };
 
-    saveBtn.onclick = async () => {
-        const gardenName = gardenCard.querySelector(".garden-name").textContent;
+    function tempSaveGardenData() {
         const gardenTableData = Array.from(table.querySelectorAll("tr")).map(row => {
             return Array.from(row.querySelectorAll("td")).map(cell => {
                 if (cell.classList.contains("empty-cell")) return "";
@@ -275,6 +275,13 @@ function EditGarden(garden, plants, parentContainer, controls) {
                 return plant ? plant.id : "";
             }).join(",");
         }).join(";");
+
+        return gardenTableData;
+    }
+
+    saveBtn.onclick = async () => {
+        const gardenName = gardenCard.querySelector(".garden-name").textContent;
+        const gardenTableData = tempSaveGardenData();
 
         const updatedGarden = {
             id: garden.id,
@@ -309,7 +316,6 @@ async function DeleteGarden(id) {
 }
 
 function ManageRowsColumns(garden, plants, parentContainer, controls) {
-    console.log(garden.gardencontent);
     const ManageRowsColumnContainer = document.createElement("div");
     ManageRowsColumnContainer.id = "manage-rows-columns-container";
     parentContainer.appendChild(ManageRowsColumnContainer);
