@@ -1,0 +1,10 @@
+1. Authorization: When a user is logged in, they can only access what is authorized 
+2. Input validation: SQL Injection, Cross-site scripting (XSS), validate before query
+3. CORS policy
+4. Rate limiting on all endpoints
+5. (Password link should expire after about 30 min)
+6. Error handling in the front end,multiple unique errors plus one catch -> user should never see the raw stacktree 
+7. (Database indexing)
+8. (Basic amount of logging)
+9. Alerts
+10. Rollback strategy - (Blue-Green deployment strategy)
