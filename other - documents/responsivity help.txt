@@ -1,0 +1,132 @@
+To ensure your layout looks acceptable at any zoom level and screen width, the most critical changes involve moving away from fixed viewport heights (`100vh`) and "hard" overflow settings. [cite_start]When a user zooms in, content naturally becomes larger and requires more vertical space; if the container is locked to the viewport height, the content will be cut off[cite: 1617, 1618].
+
+Here are the specific fixes for your CSS to achieve a truly responsive and "zoom-proof" layout:
+
+### 1. Global Layout Fixes
+The biggest issue is `section { height: 100vh; overflow: hidden; }`. This prevents scrolling if the content is taller than the screen.
+
+```css
+section {   
+    min-height: 100vh; /* Changed from height: 100vh */
+    height: auto;      /* Allows content to grow */
+    width: 100%;
+    overflow: visible; /* Changed from hidden so zoomed content isn't cut off */
+    padding: 4rem 0;   /* Added padding for spacing on small screens */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically by default */
+    align-items: center;
+    justify-content: center;
+}
+```
+
+### 2. Make Containers Flexible
+[cite_start]Containers using `flex-direction: row` without wrapping will break on small screens or high zoom[cite: 1458, 1500].
+
+```css
+/* Update these containers to allow wrapping */
+.showcase_container, 
+.plant-finder-main-container, 
+.reader-cont,
+.landing-cont {
+    display: flex;
+    flex-wrap: wrap; /* CRITICAL: Allows items to move to the next line */
+    justify-content: center;
+    width: 95%;
+    height: auto;    /* Avoid fixed heights */
+}
+```
+
+### 3. Responsive Units for Text and Spacing
+[cite_start]Using `vw` for font sizes or critical widths can make text unreadable on small screens or prevent it from scaling properly with browser zoom[cite: 1256, 1276].
+
+* **Fix Fonts:** Use `rem` (which scales with zoom) or `clamp()`.
+* **Fix Widths:** Use `%` for containers but add `max-width` in `px` or `rem` to prevent them from becoming too wide on large monitors.
+
+```css
+.main-title {
+    font-size: clamp(2.5rem, 8vw, 6rem); /* Stays within a readable range */
+}
+
+.small-description {
+    font-size: 1rem; /* Use rem instead of 0.9vw for readability */
+    width: 90%;
+    max-width: 600px;
+}
+
+.garden-card {
+    width: 100%;       /* Default to full width for mobile */
+    max-width: 400px;  /* Prevent it from getting too huge */
+    margin: 1rem;
+}
+```
+
+### 4. Specific Section Adjustments
+
+#### Landing Page
+The landing page needs to stack the text and the 3D cube vertically on smaller screens.
+```css
+.landing-cont {
+    flex-direction: column; /* Stack on mobile */
+    height: auto;
+    padding: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .landing-cont {
+        flex-direction: row; /* Side-by-side on desktop */
+    }
+}
+```
+
+#### Search Results & Tables
+Tables often break layouts. [cite_start]Ensure they can shrink[cite: 1594, 1598].
+```css
+.result-details-cont-table {
+    width: 100%;
+    max-width: 100%;
+    word-break: break-word; /* Prevents long text from pushing the table out */
+}
+
+.resultKey, .resultValue {
+    font-size: 1rem; /* Fixed size that respects zoom */
+    padding: 0.5rem;
+}
+```
+
+### 5. Improved Media Queries
+Instead of many specific width overrides, use a few "standard" breakpoints that focus on layout shifts:
+
+```css
+/* Tablets and small laptops */
+@media (max-width: 1024px) {
+    .search-cont, .searchResult {
+        width: 90%;
+    }
+    .first-cont, .second-cont {
+        width: 100%;
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 600px) {
+    #top-navbar {
+        height: auto;
+        flex-wrap: wrap;
+    }
+    #top-navbar a {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    .garden-card {
+        width: 95%;
+    }
+}
+```
+
+### Summary of Best Practices for Zoom/Responsive Layouts:
+1.  **Never use `overflow: hidden` on a main content section** unless you are 100% sure the content will never exceed the box size.
+2.  **Prefer `min-height` over `height`** for sections.
+3.  [cite_start]**Always use `flex-wrap: wrap`** on parent containers that hold multiple child elements (like your garden cards or search boxes)[cite: 1458, 1500].
+4.  **Use `rem` for font sizes**; it is the most compatible unit for browser zooming.
