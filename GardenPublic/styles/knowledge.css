@@ -185,7 +185,6 @@ body.dark-theme{
     box-shadow: 6px 6px 4px var(--beige-dark-shadow);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(194, 226, 170, 0.1);
-    
 }
 
 .OneKnowledgeCard:hover {

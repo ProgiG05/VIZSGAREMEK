@@ -94,17 +94,18 @@ body {
     transition: 0.3s all ease-in;
 }
 section {   
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     width: 100%;
     max-width: 100vw;
-    overflow: hidden;
+    overflow: visible;
     padding: 0;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background-image: var(--section-bg-odd);
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 section:nth-child(even){background-image: var(--section-bg-even);}
 
@@ -282,14 +283,13 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .landing-section {justify-content: center;align-items: center;}
 .landing-cont{
     width: 90%;
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 40px;
     padding: 0.625rem;
-    margin-top: 3.125rem;
     background-image: var(--landing-bg);
     gap: 1.25rem;
 }
@@ -301,7 +301,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     flex-direction: column;
     margin-top: 8vh;
     margin-left: 6.5vw; 
-    padding: 0.625rem;
+    padding: 1rem;
 }
 .main-title{
     font-size: clamp(2.5rem, 8.4vw, 9.8rem);
@@ -334,6 +334,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     align-items: center;
     margin-top: 10vh;
     margin-left: 8vw;
+    padding: 1rem;
 }
 .gardenMakerPage_Btn{
     width: 50%;
@@ -393,7 +394,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .ideas-title{
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(3rem, 6vw, 7.5rem);
+    font-size: clamp(3rem, 6.5vw, 8rem);
     color: var(--ideas-main-title);
     margin: 0;
     padding: 0;
@@ -440,6 +441,11 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     background-color: var(--bg-dark);
     color: var(--text-green);
 }
+.garden-card:hover{
+    cursor: pointer;
+    transform: translateY(-5px) scale(1.01);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 .image-placeholder-wrapper {
     height: 10%;
     box-shadow: 2px 2px 2px var(--beige-dark-shadow);
@@ -450,12 +456,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     width: 100%;
     height: 100%;
     aspect-ratio: 4/2.5;
-}
-.insideImage:hover{
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.2s;
-    opacity: 0.3;
-    cursor: pointer;
 }
 .card-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
