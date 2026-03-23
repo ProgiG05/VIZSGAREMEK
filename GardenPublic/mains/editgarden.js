@@ -396,10 +396,10 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             console.log(rows[rows.length - 1].split(",").length);
             console.log(rows[rows.length - 1].split(","));
             console.log(rows[rows.length - 1].split(",").map(val => val === "+").length);
-            console.log(rows[rows.length - 1].split(",").map(val => val === "+"));
+            console.log(rows[rows.length - 1].split(",").map(val => val === "").includes(false));
 
 
-            if (rows[rows.length - 1].split(",").length === rows[rows.length - 1].split(",").map(val => val === "").length) {
+            if (!rows[rows.length - 1].split(",").map(val => val === "").includes(false)) {
                 rows.pop();
             }
             else {
