@@ -85,7 +85,7 @@ body {
 
 .garden-table td.empty-cell {
     background-color: transparent;
-    border: 2px solid transparent;
+    border: 2px solid rgba(117, 117, 117, 0.1);
 }
 
 .garden-table td.disabled-cell {

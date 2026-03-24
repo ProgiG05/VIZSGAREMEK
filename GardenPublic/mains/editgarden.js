@@ -293,7 +293,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
         const result = await SaveGarden(updatedGarden);
         if (result) {
             alert("Garden saved successfully!");
-            window.location.href = "/gardens.html";
+            window.location.reload();
         }
     };
 }
@@ -412,7 +412,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
                 rows.pop();
             }
             else {
-                alert("Last row is not empty, cannot remove it.")
+                alert("Last row is not empty, it cannot be removed.")
                 return;
             }
             garden.gardencontent = rows.join(";");
@@ -432,24 +432,27 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     removeLastColumnBtn.onclick = () => {
         if (confirm("Are you sure you want to remove the last column from this garden? Any unsaved changes will be lost.")) {
             let rows = garden.gardencontent.split(";");
-            console.log(rows);
+            let canRemove = true;
             rows = rows.map(row => {
                 let cols = row.split(",");
-                console.log(cols);
-
-                for (let i = 0; i < cols.length; i++) {
-                    if (cols[i].length === 0) {
-                        cols.pop();
-                    }
-                    else {
-                        alert("Last column is not empty, cannot remove it.")
-                        return row;
-                    }
+                if (cols[cols.length - 1] != "") {
+                    canRemove = false;
+                    return row
                 }
                 return cols.join(",");
             });
+            if (canRemove) {
+                rows = rows.map(row => {
+                    let cols = row.split(",");
+                    cols.pop();
+                    return cols.join(",");
+                });
+            }
+            else {
+                alert("Last column is not empty, it cannot be removed.")
+                return;
+            }
             garden.gardencontent = rows.join(";");
-            console.log(garden.gardencontent);
             // Re-render the garden
             parentContainer.innerHTML = "";
             EditGarden(garden, plants, parentContainer, controls);
