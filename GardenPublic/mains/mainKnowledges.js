@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 
-
     ListOfKnowledges.forEach(knowledge => {
         const OneKnowledgeCard = document.createElement("div")
         OneKnowledgeCard.setAttribute("class","OneKnowledgeCard")
