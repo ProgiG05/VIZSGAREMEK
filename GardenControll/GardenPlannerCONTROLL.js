@@ -51,4 +51,49 @@ exports.UpdateGarden = async (req,res) => {
     const updatedGarden = await GardenModel.UpdateGarden(garden)
     res.json(updatedGarden)
 }
+const argon2 = require('argon2')
+
+exports.Register = async (req, res) => {
+    try {
+        const { username, password } = req.body
+        if (!username || !password) {
+            return res.status(400).json({ success: false, message: 'Username and password are required' })
+        }
+        const passwordHash = await argon2.hash(password)
+        await GardenModel.CreateUser(username, passwordHash)
+        return res.status(201).json({ success: true, message: 'User registered successfully' })
+    } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({ success: false, message: 'Username already taken' })
+        }
+        console.error('Register error:', err)
+        return res.status(500).json({ success: false, message: 'Server error' })
+    }
+}
+
+exports.Login = async (req, res) => {
+    try {
+        const { username, password } = req.body
+        if (!username || !password) {
+            return res.status(400).json({ success: false, message: 'Username and password are required' })
+        }
+        const rows = await GardenModel.GetUserByUsername(username)
+        if (rows.length === 0) {
+            return res.status(401).json({ success: false, message: 'Invalid username or password' })
+        }
+        const user = rows[0]
+        const passwordOk = await argon2.verify(user.password, password)
+        if (!passwordOk) {
+            return res.status(401).json({ success: false, message: 'Invalid username or password' })
+        }
+        return res.status(200).json({
+            success: true,
+            message: 'Login successful',
+            user: { id: user.id, username: user.username }
+        })
+    } catch (err) {
+        console.error('Login error:', err)
+        return res.status(500).json({ success: false, message: 'Server error' })
+    }
+}
 

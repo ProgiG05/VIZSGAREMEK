@@ -62,5 +62,19 @@ module.exports = {
     UpdateGarden: async (garden) => {
         const [rows] = await connection.query('UPDATE gardenmanager SET gardencontent = ? , gardenname = ?, user_id = ? WHERE id = ?', [garden.content, garden.name, garden.user_id, garden.id])
         return rows
-    }
+    },
+    GetUserByUsername: async function GetUserByUsername(username) {
+    const [rows] = await connection.query(
+        `SELECT * FROM users WHERE username = ? LIMIT 1`,
+        [username]
+    )
+    return rows
+    },
+    CreateUser: async function CreateUser(username, passwordHash) {
+    const [rows] = await connection.query(
+        `INSERT INTO users (username, password) VALUES (?, ?)`,
+        [username, passwordHash]
+    )
+    return rows
+    },
 }

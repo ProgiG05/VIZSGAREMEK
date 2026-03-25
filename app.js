@@ -4,7 +4,6 @@ const GardenRoutes = require("./GardenRoutes/GardenPlannerROUTES")
 const bodyParser = require("body-parser")
 
 app.use(bodyParser.json())
-
 app.use(express.static('GardenPublic'))
 app.use(express.static('GardenPublic/sites', { extensions: ['html'] }))
 app.use(express.urlencoded({ extended: true }))

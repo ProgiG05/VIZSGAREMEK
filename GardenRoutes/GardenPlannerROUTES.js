@@ -23,5 +23,7 @@ router.get('/gardens/:id', GardenController.GetGardenById)
 router.delete('/gardens/:id', GardenController.DeleteGarden)
 
 router.post('/gardens/:id', GardenController.UpdateGarden)
+router.post('/login', GardenController.Login)
+router.post('/register', GardenController.Register)
 
 module.exports = router
