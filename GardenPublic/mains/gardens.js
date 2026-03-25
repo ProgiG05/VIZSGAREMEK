@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         sidePanel.style.transition = '0.4s all ease'
         sidePanel.style.left = 0
     });
-closePanel.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = "-22.5rem"
-});
+    closePanel.addEventListener('click', () => {
+        sidePanel.style.transition = '0.4s all ease'
+        sidePanel.style.left = "-22.5rem"
+    });
 
 
     // 1. Fetch data
@@ -36,50 +36,20 @@ closePanel.addEventListener('click', () => {
     //creating the add button on top
     const newGardenBtn = document.createElement("button");
     newGardenBtn.className = "newgarden_btn";
+    newGardenBtn.id = "newgarden_btn";
     newGardenBtn.textContent = "Add New Garden";
     newGardenBtn.addEventListener("click", () => {
         window.location.href = "/sites/newGarden.html";
     })
     //containers
-    const controlsContainer = document.createElement("div");
-    controlsContainer.id = "controls-container";
-    controlsContainer.style.margin = "auto";
-    controlsContainer.style.alignItems = "center";
-    controlsContainer.style.display = "none";
 
-    //disabled button
-    const disablecellbtn = document.createElement("button");
-    disablecellbtn.textContent = "Disable Cell";
-    disablecellbtn.className = "disablecellbtn";
-    disablecellbtn.style.display = "none";
 
-    //empty button
-    const emptycellbtn = document.createElement("button");
-    emptycellbtn.textContent = "Empty Cell";
-    emptycellbtn.className = "emptycellbtn";
-    emptycellbtn.style.display = "none";
-
-    //plant button
-    const plantcellbtn = document.createElement("button");
-    plantcellbtn.textContent = "Plant Cell";
-    plantcellbtn.className = "plantcellbtn";
-    plantcellbtn.style.display = "none";
-
-    //plant selection
-    const plantselection = document.createElement("div");
-    plantselection.id = "plantselection";
-    plantselection.style.display = "none";
-    plantselection.style.marginTop = "10px";
 
 
     gardensContainer.appendChild(newGardenBtn);
-    controlsContainer.appendChild(disablecellbtn);
-    controlsContainer.appendChild(emptycellbtn);
-    controlsContainer.appendChild(plantcellbtn);
-    controlsContainer.appendChild(plantselection);
+    
 
     // Insert controls before the gardens container
-    gardensContainer.parentNode.insertBefore(controlsContainer, gardensContainer);
 
     // 3. Render Gardens
     gardens.forEach(garden => {
