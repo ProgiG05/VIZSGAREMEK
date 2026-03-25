@@ -1,0 +1,156 @@
+:root {
+    --forest-green: #2d5a27;
+    --leaf-green: #4caf50;
+    --soft-sage: #8da88b;
+    --mist-green: #f1f8f1;
+    --earth-brown: #5d4037;
+    --white: #ffffff;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--mist-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: row; /* Desktop layout */
+    background: var(--white);
+    max-width: 1000px;
+    width: 95%;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* --- Left Side: Form --- */
+.signup-form-cont {
+    flex: 1.2;
+    padding: 50px;
+}
+
+.form-title {
+    color: var(--forest-green);
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+.form-subtitle {
+    color: var(--soft-sage);
+    margin-bottom: 30px;
+}
+
+.textInp-cont {
+    margin-bottom: 15px;
+}
+
+.textInp-cont label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--earth-brown);
+    margin-bottom: 5px;
+}
+
+.garden-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #edf2ed;
+    border-radius: 10px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.garden-input:focus {
+    outline: none;
+    border-color: var(--leaf-green);
+    background-color: #f9fff9;
+}
+
+/* Special styling for the dropdown */
+.garden-select {
+    cursor: pointer;
+    background-color: var(--white);
+}
+
+/* --- Right Side: Image --- */
+.signup-info-cont {
+    flex: 1;
+    background-image: linear-gradient(to bottom, rgba(45, 90, 39, 0.7), rgba(45, 90, 39, 0.7)), 
+                      url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=1000');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    color: white;
+}
+
+.main-title span {
+    color: #c8e6c9;
+}
+
+/* --- Button & Links --- */
+.signup-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--forest-green);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: var(--transition);
+}
+
+.signup-btn:hover {
+    background: var(--leaf-green);
+    transform: scale(1.02);
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link {
+    color: var(--forest-green);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* --- Checkbox --- */
+.check-cont {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+.check-cont a {
+    color: var(--leaf-green);
+}
+
+/* --- Responsive --- */
+@media (max-width: 850px) {
+    .signup-container {
+        flex-direction: column-reverse; /* Form on top for mobile */
+    }
+    .signup-info-cont {
+        min-height: 200px;
+    }
+}
