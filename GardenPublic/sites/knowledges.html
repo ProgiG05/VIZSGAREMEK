@@ -8,41 +8,41 @@
     <link rel="shortcut icon" href="../pics/icons/plant.png" type="image/x-icon">
 </head>
 <body>
-    <div class="content-wrapper">
-        <nav id="top-navbar"> 
-            <a id="settings_Btn">Settings</a> 
-            <a id="home_Btn" href="../sites/index.html">Home</a>
-            <a id="goto_Ideas" href="../sites/ideas.html">Ideas</a>
-            <a id="goto_PlantFinder" href="../sites/plants.html">Plants</a>
-            <a id="goto_Gardens" href="../sites/gardens.html">Gardens</a>
-            <a id="logIn_Btn" href="../sites/login.html">Login / Register</a>
-        </nav>
-        <div class="settings-sidepanel" id="settings-sidepanel"> 
-            <h2 id="sidepanel-title">Personal Oasis</h2>
-            <button class="closeSidePanel" id="closeSidePanel"><img src="../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close"></button>
-            <select class="lang-selection" id="lang-selection">
-                <option value="en"><span>English</span></option> 
-                <option value="hu"><span>Hungarian</span></option>
-            </select>
-            <a id="savedI_Btn" href="../sites/ideas.html">Ideas</a>
-            <a id="savedP_Btn" href="../sites/plants.html">Plants</a>
-            <a id="savedGL_Btn" href="../sites/gardens.html">Gardens</a>
-            <button class="darkmode" id="darkmode">
-                <img id="light-icon" class="theme-icon" src="../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
-                <img id="dark-icon" class="theme-icon" src="../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
-            </button>
-        </div>
-        <header class="header">
-            <img src="../pics/others/layer2.1.png" alt="" class="layer1">
-            <img src="../pics/others/layer2.2.png" alt="" class="layer2">
-            <img src="../pics/others/layer2.3.png" alt="" class="layer3">
-            <p class="title-cont">
-                <span class="main-title">Knowledge center</span>
-                <span class="sub-title">Learn more about different types of gardens and gardening styles</span>
-            </p>
-        </header>
-        <div class="main-container-knowledges" id="main-container-knowledges"></div>
+    <nav id="top-navbar"> 
+        <a id="settings_Btn">Settings</a> 
+        <a id="home_Btn" href="../sites/index.html">Home</a>
+        <a id="goto_Ideas" href="../sites/ideas.html">Ideas</a>
+        <a id="goto_PlantFinder" href="../sites/plants.html">Plants</a>
+        <a id="goto_Gardens" href="../sites/gardens.html">Gardens</a>
+        <a id="logIn_Btn" href="../sites/login.html">Login / Register</a>
+    </nav>
+    <div class="settings-sidepanel" id="settings-sidepanel"> 
+        <h2 id="sidepanel-title">Personal Oasis</h2>
+        <button class="closeSidePanel" id="closeSidePanel"><img src="../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close"></button>
+        <select class="lang-selection" id="lang-selection">
+            <option value="en"><span>English</span></option> 
+            <option value="hu"><span>Hungarian</span></option>
+        </select>
+        <a id="savedI_Btn" href="../sites/ideas.html">Ideas</a>
+        <a id="savedP_Btn" href="../sites/plants.html">Plants</a>
+        <a id="savedGL_Btn" href="../sites/gardens.html">Gardens</a>
+        <button class="darkmode" id="darkmode">
+            <img id="light-icon" class="theme-icon" src="../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
+            <img id="dark-icon" class="theme-icon" src="../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
+        </button>
     </div>
+    <section class="parallax-section">
+        <p id="title-cont" class="title-cont">
+            <span class="main-title">Knowledge center</span>
+            <span class="sub-title">Learn more about different types of gardens and gardening styles</span>
+        </p>
+        <img src="../pics/others/layer2.1.png" alt="" id="backhill" class="layer1">
+        <img src="../pics/others/layer2.2.png" alt="" id="middlehill" class="layer2">
+        <img src="../pics/others/layer2.3.png" alt="" id="fronthill" class="layer3">
+    </section>
+    <section class="content-section">
+        <div class="main-container-knowledges" id="main-container-knowledges"></div>
+    </section>
     <button id="goup-btn" type="submit"><img src="../pics/icons/arrow_upward_alt_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="UP"></button>
     <script src="../mains/mainKnowledges.js"></script>
 </body>

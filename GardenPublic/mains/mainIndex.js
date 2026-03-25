@@ -134,16 +134,15 @@ window.onload = () => {
 // --- Navbar scrolling actions logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById('top-navbar').style.top = "0";
-  } else {
-    document.getElementById('top-navbar').style.top = "-50px";
-  }
-  prevScrollpos = currentScrollPos;
-} 
+window.addEventListener('scroll', () => {
+    let scrollHeight = window.scrollY
+    if (Math.round(scrollHeight,2) <= 100) {
+        document.getElementById('top-navbar').style.position = 'fixed'
+    }
+    else{
+        document.getElementById('top-navbar').style.position = 'absolute'
+    }
+})
 
 // document.getElementById('goto_Ideas').addEventListener('click', () => {
 //     document.getElementById('ideas-title').scrollIntoView({behavior:'smooth'})

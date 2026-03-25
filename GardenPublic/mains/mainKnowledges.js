@@ -87,6 +87,29 @@ darkBtn.addEventListener('click', () => {
 });
 // --- Scroll up btn Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-document.getElementById("goup-btn").addEventListener("click", () => {
-    window.scrollTo({top:0, behavior: 'smooth'})
+// document.getElementById("goup-btn").addEventListener("click", () => {
+//     window.scrollTo({top:0, behavior: 'smooth'})
+// })
+// --- Parallax effect Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+const backhill = document.getElementById('backhill')
+const middlehill = document.getElementById('middlehill')
+const fronthill = document.getElementById('fronthill')
+
+const titles = document.getElementById('title-cont')
+
+const navbar = document.getElementById('top-navbar')
+
+window.addEventListener('scroll', () => {
+    let scrollHeight = window.scrollY
+    console.log(Math.round(scrollHeight,2))
+    // backhill.style.left = scrollHeight * -1.5 + 'px'
+    // middlehill.style.left = scrollHeight * 1.5 + 'px'
+
+    if (Math.round(scrollHeight,2) <= 200) {
+        navbar.style.position = 'fixed'
+    }
+    else{
+        navbar.style.position = 'absolute'
+    }
 })

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Plant Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/signup.css">
+    <link rel="shortcut icon" href="../pics/icons/plant.png" type="image/x-icon">
+</head>
+<body>
+    <section class="signup-section">
+        <div class="signup-container">
+            <div class="signup-form-cont first-cont">
+                <form class="signup-card">
+                    <h2 class="form-title">Start Your Garden</h2>
+                    <p class="form-subtitle">Join our community of urban botanists.</p>
+
+                    <div class="textInp-cont">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" class="garden-input" placeholder="Lila Leaf">
+                    </div>
+
+                    <div class="textInp-cont">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="garden-input" placeholder="lila@garden.com">
+                    </div>
+
+                    <div class="textInp-cont">
+                        <label for="interest">Primary Interest</label>
+                        <select id="interest" class="garden-input garden-select">
+                            <option value="indoor">Indoor Jungle</option>
+                            <option value="veggie">Edible Garden</option>
+                            <option value="succulent">Succulents & Cacti</option>
+                            <option value="balcony">Balcony Blooms</option>
+                        </select>
+                    </div>
+
+                    <div class="textInp-cont">
+                        <label for="password">Create Password</label>
+                        <input type="password" id="password" class="garden-input" placeholder="••••••••">
+                    </div>
+
+                    <div class="check-cont">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the <a href="#">Nurture Terms</a></label>
+                    </div>
+
+                    <button type="submit" class="signup-btn">Plant My Account</button>
+                    
+                    <div class="form-footer">
+                        <p>Already rooted? <a href="login.html" class="login-link">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="signup-info-cont second-cont">
+                <div class="overlay-text">
+                    <h1 class="main-title">New <span>Sprouts</span></h1>
+                    <p class="small-description">Create a profile to get watering reminders, sunlight tracking, and expert advice for your specific soil type.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
