@@ -1,10 +1,12 @@
 :root{
-    --body-bg: linear-gradient(to bottom, #a3b68a , #4a5c3c );
+    --body-bg: linear-gradient(to bottom, #b2cd8f , #384d28 );
     --general-font-color:#1e2b1b;
+    --title-text-shadow:rgba(17, 26, 4, 0.878);
+    --gardenideas-cont-bg:#000000;
     --text-main: #ffffff;
-    --navbarBtn-bg: #4a5544de;
+    --navbarBtn-bg: #334429e2;
     --navbarBtn-font-color:rgb(255, 255, 255);
-    --navbarBtn-hover-bg: #57644e;
+    --navbarBtn-hover-bg: #212c19;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
 /* ######################################################## */
     --bg-dark: #1a1e1a;
@@ -29,8 +31,10 @@ body{
     padding: 0;
 }
 body.dark-theme{
-    --body-bg: linear-gradient(to bottom, #293320, #161b11);
-    --general-font-color:#a9b697;
+    --body-bg: linear-gradient(to bottom, #192310, #161b11);
+    --general-font-color:#e9fbcf;
+    --title-text-shadow:rgba(24, 38, 4, 0.848);
+    --gardenideas-cont-bg:#000000;
     --navbarBtn-bg: #515e4aee;
     --navbarBtn-font-color:rgb(255, 255, 255);
     --navbarBtn-hover-bg: #16220e;
@@ -177,6 +181,7 @@ body.dark-theme{
     color: var(--general-font-color);
     font-size: clamp(2.5rem, 10vw, 10.8rem);
     text-align: center;
+    text-shadow: var(--title-text-shadow);
     letter-spacing: 10px;
     font-weight: bolder;
     margin-bottom: -20px;
@@ -226,7 +231,8 @@ body.dark-theme{
     width: 2.5rem;
     border-radius: 10px;
     border: none;
-    background-color: var(--general-font-color);
+    background-color: #1e2b1b;
+    border: 1px solid var(--general-font-color);
     align-items: center;
     justify-content: center;
     transition: 0.2s all ease;

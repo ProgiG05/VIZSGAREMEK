@@ -3,12 +3,17 @@
     --parallax-sect-bg: #cdbe71;
     --text-main:rgb(255, 255, 255);
     --card-bg:rgb(85, 61, 10);
+    --paragraph-bg:rgba(121, 87, 15, 0.607);
     --card-shadow:rgba(249, 249, 157, 0.751);
     --card-text:rgb(255, 238, 224);
     --navbtn-bg: #071903;
     --navbtn-hover-bg: #e2fdf4;
     --navbtn-font-color: #a7cabe;
     --navbtn-hover-font-color: #061803;
+    --readmore-bg: #042210;
+    --readmore-hover-bg: #e2fdf4;
+    --readmore-color: #a7cabe;
+    --readmore-hover-font-color: #061803;
 }
 body.dark-theme{
     --body-bg: linear-gradient(to bottom, #677D6A, #1A3636);
@@ -88,15 +93,41 @@ body {
     gap: 2rem;
 }
 .OneKnowledgeCard {
-    width: 60%;
+    width: 75%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     background-color: var(--card-bg);
     padding: 2.5rem;
-    margin: auto;
+    margin: 2rem auto;
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--card-shadow);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(194, 226, 170, 0.1);
     z-index: 1000;
+    position: relative;
+}
+/* 1. Added a subtle "Scanner" light effect on hover */
+.OneKnowledgeCard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        transparent, 
+        rgba(255, 255, 255, 0.05), 
+        transparent
+    );
+    transition: 0.5s;
+    pointer-events: none;
+}
+.OneKnowledgeCard:hover::before {
+    left: 150%;
 }
 .OneKnowledgeCard:hover {
     transform: translateY(-10px) scale(1.02);
@@ -106,25 +137,93 @@ body {
 .OneKnowledgeTitle {
     color: var(--card-text);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    font-size: clamp(1.5rem,3vw,5rem);
+    font-size: clamp(1.8rem, 5vw, 5.5rem);
     text-align: center;
     margin: 0.2rem 0 1.5rem 0;
     letter-spacing: 1px;
     font-weight: bold;
 }
+/* 2. Title Accent: A centered underline that expands on hover */
+.OneKnowledgeTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1rem;
+    left: 50%;
+    width: 10rem;
+    height: 3px;
+    background: var(--card-text);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    opacity: 0.6;
+}
+
+.OneKnowledgeCard:hover .OneKnowledgeTitle::after {
+    width: 30rem;
+}
+.OneKnowledgeSummary{
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    color: var(--card-text);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left; 
+    width: 65%;
+    text-align: center;
+    word-spacing: 0.3vw;
+}
+.readmoreBtn{
+    background-color: var(--readmore-bg);
+    color: var(--readmore-color);
+    font-family: monospace;
+    border-radius: 10px;
+    width: 60%;
+    height: fit-content;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+.readmoreBtn:hover{
+    background-color: var(--readmore-hover-bg);
+    color: var(--readmore-hover-font-color);
+    width: 70%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.closeBtn{
+    background-color: var(--readmore-bg);
+    color: var(--readmore-color);
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.closeBtn:hover{
+    background-color: var(--readmore-hover-bg);
+    color: var(--readmore-hover-font-color);
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    transition: all 0.3s ease;
+}
 .OneKnowledgeDescription {
     color: var(--card-text);
     line-height: 1.8;
-    font-family: monospace; 
+    font-family: 'Courier New', monospace;
     white-space: pre-line;
-    opacity: 0.95;
-    text-align: justify;
+    opacity: 0.9;
+    text-align: left; 
+    border-left: 5px solid rgba(176, 246, 123, 0.601);
+    padding-left: 1.5rem;
 }
 .OneKnowledgeParagraph {
-    font-size: clamp(0.6rem, 0.8vw, 2rem);
+    font-size: clamp(0.9rem, 1.1vw, 1.4rem);
     text-indent: 1rem;
     text-align: left;
     margin: 0.7rem 0rem 0.3rem 0.2rem;
+}
+/* 4. Custom selection color (Matching your theme) */
+.OneKnowledgeCard ::selection {
+    background: var(--card-text);
+    color: var(--card-bg);
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -175,6 +274,7 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
+    z-index: 1000;
 }
 .settings-sidepanel h2 {
     margin: 0 0 1.125rem 0;
@@ -254,8 +354,8 @@ body {
     z-index: 1000;
 }
 #goup-btn {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.917vw;
+    height: 5.6vh;
     margin-left: 1rem;
     margin-bottom: 1rem;
     bottom: 0;

@@ -5,47 +5,57 @@ document.addEventListener("DOMContentLoaded", async () => {
     const ListOfKnowledges = await responseKnowledges.json()
     const KnowledgesCardContainer = document.getElementById("main-container-knowledges")
 
-    const settingsBtn = document.getElementById('settings_Btn');
-    const sidePanel = document.getElementById('settings-sidepanel');
-    const closePanel = document.getElementById('closeSidePanel');
-
-    settingsBtn.addEventListener('click', () => {
-        sidePanel.style.transition = '0.4s all ease'
-        sidePanel.style.left = 0
-    });
-    closePanel.addEventListener('click', () => {
-        sidePanel.style.transition = '0.4s all ease'
-        sidePanel.style.left = "-22.5rem"
-    });
-
-
     ListOfKnowledges.forEach(knowledge => {
         const OneKnowledgeCard = document.createElement("div")
         OneKnowledgeCard.setAttribute("class","OneKnowledgeCard")
+
         const OneKnowledgeTitle = document.createElement("h2")
         OneKnowledgeTitle.setAttribute("class","OneKnowledgeTitle")
+        OneKnowledgeTitle.textContent = `${knowledge.title}`
 
-        const OneKnowledgeDescription = document.createElement("p")
+        const OneKnowledgeSummary = document.createElement('p')
+        OneKnowledgeSummary.setAttribute('class','OneKnowledgeSummary')
+        OneKnowledgeSummary.textContent = `${knowledge.summary}`
+
+        const readMoreBtn = document.createElement('button')
+        readMoreBtn.setAttribute('class','readmoreBtn')
+        readMoreBtn.setAttribute('id','readmoreBtn')
+        readMoreBtn.textContent = 'Read more'
+
+        const closeBtn = document.createElement("button")
+        closeBtn.setAttribute('class','closeBtn')
+        closeBtn.setAttribute('id','closeBtn')
+        closeBtn.textContent = 'Close'
+
+        readMoreBtn.addEventListener('click', () => {
+            let descriptionBuffer = knowledge.description.split('.')
+            for (let i = 0; i < descriptionBuffer.length; i++) {
+                const paragraph = document.createElement('p')
+                paragraph.setAttribute('class','OneKnowledgeParagraph')
+                if (descriptionBuffer[i+1] !== undefined) {
+                    paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`
+                }
+                else{
+                    paragraph.textContent = `${descriptionBuffer[i]}`
+                }
+                
+                OneKnowledgeDescription.appendChild(paragraph)
+            }
+            OneKnowledgeDescription.appendChild(closeBtn)
+            OneKnowledgeCard.removeChild(readMoreBtn)
+        })
+        closeBtn.addEventListener('click', () => {
+            OneKnowledgeCard.appendChild(readMoreBtn)
+            OneKnowledgeDescription.innerHTML = ""
+        })
+
+        const OneKnowledgeDescription = document.createElement("div")
         OneKnowledgeDescription.setAttribute("class","OneKnowledgeDescription")
         
-        OneKnowledgeTitle.textContent = `${knowledge.title}`
-        let descriptionBuffer = knowledge.description.split('.')
-        for (let i = 0; i < descriptionBuffer.length; i++) {
-            const paragraph = document.createElement('p')
-            paragraph.setAttribute('class','OneKnowledgeParagraph')
-            if (descriptionBuffer[i+1] !== undefined) {
-                paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`
-            }
-            else{
-                paragraph.textContent = `${descriptionBuffer[i]}`
-            }
-            
-            OneKnowledgeDescription.appendChild(paragraph)
-        }
-
         OneKnowledgeCard.appendChild(OneKnowledgeTitle)
+        OneKnowledgeCard.appendChild(OneKnowledgeSummary)
+        OneKnowledgeCard.appendChild(readMoreBtn)
         OneKnowledgeCard.appendChild(OneKnowledgeDescription)
-
         KnowledgesCardContainer.appendChild(OneKnowledgeCard)
     });
 })
@@ -87,29 +97,19 @@ darkBtn.addEventListener('click', () => {
 });
 // --- Scroll up btn Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-// document.getElementById("goup-btn").addEventListener("click", () => {
-//     window.scrollTo({top:0, behavior: 'smooth'})
-// })
+document.getElementById("goup-btn").addEventListener("click", () => {
+    window.scrollTo({top:0, behavior: 'smooth'})
+})
 // --- Parallax effect Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 const backhill = document.getElementById('backhill')
 const middlehill = document.getElementById('middlehill')
 const fronthill = document.getElementById('fronthill')
-
-const titles = document.getElementById('title-cont')
-
 const navbar = document.getElementById('top-navbar')
-
 window.addEventListener('scroll', () => {
     let scrollHeight = window.scrollY
-    console.log(Math.round(scrollHeight,2))
-    // backhill.style.left = scrollHeight * -1.5 + 'px'
-    // middlehill.style.left = scrollHeight * 1.5 + 'px'
-
-    if (Math.round(scrollHeight,2) <= 200) {
-        navbar.style.position = 'fixed'
-    }
-    else{
-        navbar.style.position = 'absolute'
-    }
+    backhill.style.left = scrollHeight * -0.5 + 'px'
+    middlehill.style.left = scrollHeight * 0.6 + 'px'
+    if (Math.round(scrollHeight,2) <= 200) {navbar.style.position = 'fixed'}
+    else{navbar.style.position = 'absolute'}
 })
