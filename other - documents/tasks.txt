@@ -1,0 +1,30 @@
+index page: 
+	make the sample idea cards, come from fetch
+	make the plant searcher work
+ideas page:
+	fix the searching function
+	add a reader function
+knowledges page:
+	replace the pictures with divs(cut path)
+	make the reader cards more enjoyable
+	change some colors and fonts
+plants page:
+	add a search/finder container with detailed search options
+	make groups based on the type of the plants (as a filtering option)
+	(ABC line as another filtering option)	
+	redesign the cards: fetched data + save button + smth
+gardens page:
+	redesign the garden card:
+		dimensions, height and width
+		grid items
+		icons
+	redesign the page layout:
+		neat showcase layout
+garden adding page:
+	layout change, left to right, adding station + adding elements | preview section
+	same color pattern to the gardens page
+garden editing page:
+	right and left floating inwards panels
+	same color pattern to the gardens page
+	
+	 	

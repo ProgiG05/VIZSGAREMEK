@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS `gardenmanager` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT DEFAULT NULL,
+  `gardenname` VARCHAR(50) DEFAULT NULL,
+  `gardencontent` TEXT,
+  `lastgardensaved` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB;
+
+INSERT INTO `gardenmanager` (`id`, `user_id`, `gardenname`, `gardencontent`, `lastgardensaved`) 
+VALUES
+  (37, NULL, 'Salsa Patch', '13,29,35;+,,15;,,;,+,', '2026-03-24 12:09:05'),
+  (39, NULL, 'Victory Garden', '7,8,7,8;8,7,8,7;9,9,9,9', '2026-03-03 09:00:00'),
+  (41, NULL, 'Empty Cell Test 1', '-,0,2;0,2,0;2,-,1', '2026-03-01 08:15:00'),
+  (42, NULL, 'Disabled Cell Test 1', '3,,2;0,2,;5,-,1', '2026-03-01 08:15:00'),
+  (44, NULL, 'new garden test', '+,+,+,+,;+,+,+,+,;+,+,+,+,;+,+,+,+,10', '2026-03-13 10:35:54'),
+  (46, NULL, 'Alexovics kertje', '32', '2026-03-18 10:04:04'),
+  (50, NULL, 'anyad', '+,+;+,+', '2026-03-17 13:02:40'),
+  (56, NULL, 'assidugaic', '+,7,+,+,1;+,+,,,+;,+,3,+,7', '2026-03-17 14:37:25');
