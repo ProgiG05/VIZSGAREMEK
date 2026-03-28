@@ -32,30 +32,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             for (let i = 0; i < descriptionBuffer.length; i++) {
                 const paragraph = document.createElement('p')
                 paragraph.setAttribute('class','OneKnowledgeParagraph')
-                if (descriptionBuffer[i+1] !== undefined) {
-                    paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`
-                }
-                else{
-                    paragraph.textContent = `${descriptionBuffer[i]}`
-                }
-                
+                if ( descriptionBuffer[i+1] !== undefined) {paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`}
+                else{ paragraph.textContent = `${descriptionBuffer[i]}`}
                 OneKnowledgeDescription.appendChild(paragraph)
             }
             OneKnowledgeDescription.appendChild(closeBtn)
             OneKnowledgeCard.removeChild(readMoreBtn)
+            OneKnowledgeCard.appendChild(OneKnowledgeDescription)
         })
         closeBtn.addEventListener('click', () => {
             OneKnowledgeCard.appendChild(readMoreBtn)
             OneKnowledgeDescription.innerHTML = ""
+            OneKnowledgeCard.removeChild(OneKnowledgeDescription)
         })
-
         const OneKnowledgeDescription = document.createElement("div")
         OneKnowledgeDescription.setAttribute("class","OneKnowledgeDescription")
-        
         OneKnowledgeCard.appendChild(OneKnowledgeTitle)
         OneKnowledgeCard.appendChild(OneKnowledgeSummary)
         OneKnowledgeCard.appendChild(readMoreBtn)
-        OneKnowledgeCard.appendChild(OneKnowledgeDescription)
         KnowledgesCardContainer.appendChild(OneKnowledgeCard)
     });
 })
@@ -108,8 +102,9 @@ const fronthill = document.getElementById('fronthill')
 const navbar = document.getElementById('top-navbar')
 window.addEventListener('scroll', () => {
     let scrollHeight = window.scrollY
-    backhill.style.left = scrollHeight * -0.5 + 'px'
-    middlehill.style.left = scrollHeight * 0.6 + 'px'
+    backhill.style.marginBottom = scrollHeight * 0.15 + 'px'
+    middlehill.style.marginBottom = scrollHeight * 0.1 + 'px'
+    fronthill.style.marginBottom = scrollHeight * 0.08 + 'px'
     if (Math.round(scrollHeight,2) <= 200) {navbar.style.position = 'fixed'}
     else{navbar.style.position = 'absolute'}
 })

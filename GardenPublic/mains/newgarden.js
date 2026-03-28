@@ -30,9 +30,7 @@ async function ShowAddGardenForm(container) {
         const gardenName = document.getElementById("gardenName").value;
         const gardenRows = document.getElementById("gardenRows").value;
         const gardenColumns = document.getElementById("gardenColumns").value;
-        const content = Array(parseInt(gardenRows)).fill(
-            Array(parseInt(gardenColumns)).fill("+").join(",")
-        ).join(";");
+        const content = Array(parseInt(gardenRows)).fill(Array(parseInt(gardenColumns)).fill("+").join(",")).join(";");
         const garden = {
             user_id: null,
             gardenname: gardenName,

@@ -1,7 +1,6 @@
 const gardensContainer = document.getElementById("gardens-container");
 
 document.addEventListener("DOMContentLoaded", async () => {
-
     const settingsBtn = document.getElementById('settings_Btn');
     const sidePanel = document.getElementById('settings-sidepanel');
     const closePanel = document.getElementById('closeSidePanel');
@@ -15,8 +14,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         sidePanel.style.left = "-22.5rem"
     });
 
-
     // 1. Fetch data
+
     const gardensResponse = await fetch("/api/gardens", {
         method: "GET",
         headers: { "Content-Type": "application/json" }
@@ -32,23 +31,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(plants)
 
     // 2. Create Global UI Elements (Buttons & Selection Area)
-
-    //creating the add button on top
-    const newGardenBtn = document.createElement("button");
-    newGardenBtn.className = "newgarden_btn";
-    newGardenBtn.id = "newgarden_btn";
-    newGardenBtn.textContent = "Add New Garden";
-    newGardenBtn.addEventListener("click", () => {
-        window.location.href = "/sites/newGarden.html";
-    })
-    //containers
-
-
-
-
-    gardensContainer.appendChild(newGardenBtn);
+    document.getElementById("newgarden_btn").addEventListener("click", () => {window.location.href = "/sites/newgarden.html";})
     
-
     // Insert controls before the gardens container
 
     // 3. Render Gardens
@@ -134,8 +118,3 @@ function CreateTable(splittedContent, plants) {
     });
     return table;
 }
-
-
-
-
-
