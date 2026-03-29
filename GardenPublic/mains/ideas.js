@@ -1,9 +1,4 @@
 document.addEventListener("DOMContentLoaded", async (e) => {
-    e.preventDefault()
-    const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
-    const ListOfIdeas = await responseIdeas.json()
-    const IdeasCardContainer = document.getElementById("gardenIdeas-container")
-
     const settingsBtn = document.getElementById('settings_Btn');
     const sidePanel = document.getElementById('settings-sidepanel');
     const closePanel = document.getElementById('closeSidePanel');
@@ -17,7 +12,11 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         sidePanel.style.left = "-22.5rem"
     });
 
-    
+    e.preventDefault()
+    const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
+    const ListOfIdeas = await responseIdeas.json()
+    const IdeasCardContainer = document.getElementById("gardenIdeas-container")
+
     ListOfIdeas.forEach(idea => {
         //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
         

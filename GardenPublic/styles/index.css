@@ -688,7 +688,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: var(--plantsearch-main-title);
 }
 .plant-search-result-cont{
-    width: 70%;
+    width: 75%;
     height: fit-content;
     display: flex;
     flex-direction: row;
@@ -733,6 +733,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     padding: 0;
 }
 .resultKey{
+    width: fit-content;
     padding: 0rem 0.7rem 0rem 0.7rem;
     text-align: center;
     border-top-left-radius: 1.25rem;
@@ -743,6 +744,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: white;
 }
 .resultValue{
+    width: fit-content;
     padding: 0.5rem 0rem 0.5rem 1.25rem;
     text-align: left;
     border-top-right-radius: 1.25rem;
@@ -935,10 +937,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
-@media (max-width: 1920px) {
-    .search-cont{width: 30%;}
-    .plant-search-result-cont{width: 50%;}
-}
 @media (max-width: 1400px) {
     /*Plant finder section:*/
 

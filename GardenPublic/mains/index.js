@@ -3,14 +3,12 @@
 
 document.addEventListener('DOMContentLoaded', async (e) => {
     e.preventDefault()
-    const idasPlace = document.getElementById('showcase-container')
-    const response = await fetch(`/api/ideas`,{method: "GET", headers: {'Content-Type' : 'application/json'}});
-    const ideas = await response.json();
+    const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
+    const ListOfIdeas = await responseIdeas.json()
+    const IdeasCardContainer = document.getElementById("showcase-container")
 
-    const returnIdeas = [ideas[0], ideas[1], ideas[2]]
+    const returnIdeas = [ListOfIdeas[0],ListOfIdeas[1],ListOfIdeas[2]]
 
-    console.log(returnIdeas)
-    
     returnIdeas.forEach(idea => {
         //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
         
@@ -118,6 +116,52 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         statsContainer.appendChild(createStatBox("Water", idea.water));
         statsContainer.appendChild(createStatBox("Hardiness", idea.maintenance));
         cardFooter.appendChild(statsContainer);
+
+        // 6. Create the Complex "Pot Button"
+        const potButton = document.createElement("button");
+        potButton.setAttribute("class", "pot-button");
+        potButton.setAttribute("title", "save this garden idea");
+        potButton.setAttribute("onclick", "toggleSaveState(this)");
+        potButton.setAttribute("aria-label", "Toggle Save");
+
+        // Create the flower assembly inside the button
+        const flowerAssembly = document.createElement("div");
+        flowerAssembly.setAttribute("class", "flower-assembly");
+
+        const flowerHead = document.createElement("div");
+        flowerHead.setAttribute("class", "flower-head");
+        for (let i = 1; i <= 4; i++) {
+            const petal = document.createElement("div");
+            petal.setAttribute("class", `petal p${i}`);
+            flowerHead.appendChild(petal);
+        }
+        const center = document.createElement("div");
+        center.setAttribute("class", "center");
+        flowerHead.appendChild(center);
+
+        const stem = document.createElement("div");
+        stem.setAttribute("class", "stem");
+
+        flowerAssembly.appendChild(flowerHead);
+        flowerAssembly.appendChild(stem);
+
+        const potBase = document.createElement("div");
+        potBase.setAttribute("class", "pot-base");
+        const potRim = document.createElement("div");
+        potRim.setAttribute("class", "pot-rim");
+
+        potButton.appendChild(flowerAssembly);
+        potButton.appendChild(potBase);
+        potButton.appendChild(potRim);
+
+        const cardbottomCont = document.createElement("div")
+        cardbottomCont.setAttribute("class","cardbottom-cont")
+        cardbottomCont.appendChild(cardFooter)
+        cardbottomCont.appendChild(potButton)
+
+        OneIdeaCard.appendChild(cardbottomCont);
+        // 7. Final Assembly
+        IdeasCardContainer.appendChild(OneIdeaCard);
     })
 })
 
@@ -133,16 +177,6 @@ window.onload = () => {
 
 // --- Navbar scrolling actions logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-window.addEventListener('scroll', () => {
-    let scrollHeight = window.scrollY
-    if (Math.round(scrollHeight,2) <= 100) {
-        document.getElementById('top-navbar').style.position = 'fixed'
-    }
-    else{
-        document.getElementById('top-navbar').style.position = 'absolute'
-    }
-})
 
 // document.getElementById('goto_Ideas').addEventListener('click', () => {
 //     document.getElementById('ideas-title').scrollIntoView({behavior:'smooth'})
@@ -240,9 +274,36 @@ const translations = {
         ideastitle: "Discover Garden ideas",
         ideaspage: "See more ideas",
         plantfindertitle: "Find your ideal plant",
-
+        plantsearchtitle:"Search for a plant",
         knowledgestitle: "Learn something interesting about the world of gardens",
-        knowledges: "Learn more"
+        knowledgessubtitle1: "Discover Tips & Tricks for gardening",
+        knowledgessubtitle2: "Explore gardens from around the world",
+        knowledges: "Learn more",
+        // New keys for the search section
+        commonName: "Common name:",
+        botanicalName: "Botanical name:",
+        wateringNeed: "Watering need",
+        sunlightNeed: "Sunlight need",
+        soilType: "Soil type",
+        low: "Low",
+        medium: "Medium",
+        high: "High",
+        moderate: "Moderate",
+        plantingMonth: "Planting month:",
+        harvestingMonth: "Harvesting month:",
+        searchBtn: "Search",
+        choose: "Choose...",
+        // New keys for results
+        plantDetails: "Plant Details",
+        resCommon: "Common:",
+        resScientific: "Scientific:",
+        resType: "Type:",
+        resWatering: "Watering:",
+        resSunlight: "Sunlight:",
+        resSoil: "Soil:",
+        resPlanting: "Planting:",
+        resHarvesting: "Harvesting:",
+        moreInfo: "Get more info"
     },
     hu: {
         settings: "Beállítások",
@@ -259,9 +320,36 @@ const translations = {
         ideastitle: "Fedezz fel kertötleteket",
         ideaspage: "Több kertötlet",
         plantfindertitle: "Találd meg az ideális növényed",
-
+        plantsearchtitle:"Keress növényeket",
         knowledgestitle: "Tudj meg valami érdekeset a kertek világáról",
-        knowledges: "Tudj meg többet"
+        knowledgessubtitle1: "Fedezz fel kertészeti tippeket és trükköket",
+        knowledgessubtitle2: "Fedezz fel kerteket a világ minden tájáról",
+        knowledges: "Tudj meg többet",
+        // New keys for the search section
+        commonName: "Gyakori név:",
+        botanicalName: "Botanikai név:",
+        wateringNeed: "Öntözési igény",
+        sunlightNeed: "Fényigény",
+        soilType: "Talajtípus",
+        low: "Alacsony",
+        medium: "Közepes",
+        high: "Magas",
+        moderate: "Mérsékelt",
+        plantingMonth: "Ültetési hónap:",
+        harvestingMonth: "Betakarítási hónap:",
+        searchBtn: "Keresés",
+        choose: "Válassz...",
+        // New keys for results
+        plantDetails: "Növény részletei",
+        resCommon: "Gyakori név:",
+        resScientific: "Tudományos név:",
+        resType: "Típus:",
+        resWatering: "Öntözés:",
+        resSunlight: "Fényigény:",
+        resSoil: "Talaj:",
+        resPlanting: "Ültetés:",
+        resHarvesting: "Betakarítás:",
+        moreInfo: "További információ"
     }
 };
 
@@ -276,21 +364,63 @@ langSelect.addEventListener('change', (e) => {
 });
 
 function updateLanguage(lang) {
-    document.getElementById('settings_Btn').innerText = translations[lang].settings;
-    document.getElementById('goto_Ideas').innerText = translations[lang].ideas;
-    document.getElementById('goto_PlantFinder').innerText = translations[lang].plantFinder;
-    document.getElementById('goto_Knowledge').innerText = translations[lang].knowledge
-    document.getElementById('gardenMakerPage_Btn').innerText = translations[lang].designNow;
-    document.getElementById('smalldescription1').innerText = translations[lang].smalldescription1
-    document.getElementById('smalldescription2').innerText = translations[lang].smalldescription2
-    document.getElementById('sidepanel-title').innerText = translations[lang].sidepaneltitle
-    document.getElementById('savedP_Btn').innerText = translations[lang].savedP
-    document.getElementById('savedWT_Btn').innerText = translations[lang].savedWT
-    document.getElementById('savedGL_Btn').innerText = translations[lang].savedGL
-    document.getElementById('ideas-title').innerText = translations[lang].ideastitle
-    document.getElementById('ideasPage_Btn').innerText = translations[lang].ideaspage
-    document.getElementById('plant-finder-title').innerText = translations[lang].plantfindertitle
-    document.getElementById('knowledges-title').innerText = translations[lang].knowledgestitle
+    const t = translations[lang];
+
+    // Original elements
+    document.getElementById('settings_Btn').innerText = t.settings;
+    document.getElementById('goto_Ideas').innerText = t.ideas;
+    document.getElementById('goto_PlantFinder').innerText = t.plantFinder;
+    document.getElementById('goto_Knowledge').innerText = t.knowledge;
+    document.getElementById('gardenMakerPage_Btn').innerText = t.designNow;
+    document.getElementById('smalldescription1').innerText = t.smalldescription1;
+    document.getElementById('smalldescription2').innerText = t.smalldescription2;
+    document.getElementById('sidepanel-title').innerText = t.sidepaneltitle;
+    document.getElementById('savedP_Btn').innerText = t.savedP;
+    document.getElementById('savedWT_Btn').innerText = t.savedWT;
+    document.getElementById('savedGL_Btn').innerText = t.savedGL;
+    document.getElementById('ideas-title').innerText = t.ideastitle;
+    document.getElementById('ideasPage_Btn').innerText = t.ideaspage;
+    document.getElementById('plant-finder-title').innerText = t.plantfindertitle;
+    document.getElementById('search-title').innerText = t.plantsearchtitle;
+    document.getElementById('knowledges-title').innerText = t.knowledgestitle;
+    document.getElementById('knowledges-subtitle1').innerText = t.knowledgessubtitle1
+    document.getElementById('knowledges-subtitle2').innerText = t.knowledgessubtitle2
+
+    // Search Form Labels & Placeholders
+    document.querySelector('label[for="commonplant-search-inp"]').innerText = t.commonName;
+    document.querySelector('label[for="botanicalplant-search-inp"]').innerText = t.botanicalName;
+    document.getElementById('commonplant-search-inp').placeholder = lang === 'en' ? "Search..." : "Keresés...";
+    
+    // Checkbox Group Headers
+    const h3s = document.querySelectorAll('.check-cont h3 u');
+    h3s[0].innerText = t.wateringNeed;
+    h3s[1].innerText = t.sunlightNeed;
+    h3s[2].innerText = t.soilType;
+
+    // Checkbox Labels (Low, Medium, High)
+    document.querySelectorAll('label[for*="-low"]').forEach(el => el.innerText = t.low);
+    document.querySelectorAll('label[for*="-medium"]').forEach(el => el.innerText = t.medium);
+    document.querySelectorAll('label[for*="-moderate"]').forEach(el => el.innerText = t.moderate);
+    document.querySelectorAll('label[for*="-high"]').forEach(el => el.innerText = t.high);
+
+    // Dropdown Labels
+    document.querySelector('label[for="plantingSelection"]').innerText = t.plantingMonth;
+    document.querySelector('label[for="harvestingSelection"]').innerText = t.harvestingMonth;
+    document.getElementById('searchPlant_Btn').innerText = t.searchBtn;
+
+    // Results Table
+    document.querySelector('.plantdetails-title').innerText = t.plantDetails;
+    const tableKeys = document.querySelectorAll('.resultKey');
+    tableKeys[0].innerText = t.resCommon;
+    tableKeys[1].innerText = t.resScientific;
+    tableKeys[2].innerText = t.resType;
+    tableKeys[3].innerText = t.resWatering;
+    tableKeys[4].innerText = t.resSunlight;
+    tableKeys[5].innerText = t.resSoil;
+    tableKeys[6].innerText = t.resPlanting;
+    tableKeys[7].innerText = t.resHarvesting;
+    
+    document.getElementById('plantsearchPage_Btn').innerText = t.moreInfo;
     
 }
 
@@ -298,16 +428,17 @@ function updateLanguage(lang) {
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
-    console.log('working')
     e.preventDefault()
 
     const resultsContainer = document.getElementById('plant-search-result-cont');
+    resultsContainer.innerHTML = ``
     
     //Search data:
     //------------------------------------------------------------------------------------------------------------------
     const commonNameSearch = document.getElementById('commonplant-search-inp').value
+    console.log(commonNameSearch)
     const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
-
+    console.log(botanicalNameSearch)
     const waterCheckboxes = document.querySelectorAll('.water-checkbox')
     const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checkboxes
 
@@ -323,12 +454,17 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
         const plants = await response.json();
         console.log(plants)
         if (!plants || plants.length === 0) {resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';return;}
-        
+    
+
         plants.forEach(p => {
             let cmn = p.commonName.toLowerCase()
-            let bmn = p.botanicalName.toLowerCase()
-            let criteria1 = cmn.includes(commonNameSearch.toLowerCase()) || bmn.includes(botanicalNameSearch.toLowerCase())
-            if (cmn === commonNameSearch.toLowerCase()) {
+            let bnn = p.botanicalName.toLowerCase()
+            console.log(cmn)
+            console.log(bnn)
+            let criteria1 = cmn.toLowerCase().includes(commonNameSearch.toLowerCase())
+            let criteria2 = bnn.toLowerCase().includes(botanicalNameSearch.toLowerCase())
+
+            if (criteria1) {
                 const resultDetailsCont = document.createElement('div')
                 resultDetailsCont.setAttribute('class','result-details-cont')
 
@@ -340,7 +476,7 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
                 imgInner.setAttribute('alt',`${p.commonName}`)
                 imgInner.setAttribute('src','../pics/others/searchedplant_placeholder.png')
                 imgCont.appendChild(imgInner)
-                resultDetailsCont.appendChild(imgCont)
+                resultsContainer.appendChild(imgCont)
 
                 const plantResultTitle = document.createElement('h2')
                 plantResultTitle.setAttribute('class','plantdetails-title')
