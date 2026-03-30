@@ -436,35 +436,82 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
     //Search data:
     //------------------------------------------------------------------------------------------------------------------
     const commonNameSearch = document.getElementById('commonplant-search-inp').value
-    console.log(commonNameSearch)
+
     const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
-    console.log(botanicalNameSearch)
+
     const waterCheckboxes = document.querySelectorAll('.water-checkbox')
-    const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checkboxes
+    const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checked checkboxes
 
     const sunlightCheckboxes = document.querySelectorAll('.sunlight-checkbox')
     const ActiveSunlightCheckboxes = Array.from(sunlightCheckboxes).filter(x => x.checked).map(y => y.value)
 
     const soilCheckboxes = document.querySelectorAll('.soil-checkbox')
     const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value)
+
+    const plantingSeasonSelect = document.querySelector('#plantingSelection')
+    const selectedPlantingSeason = plantingSeasonSelect.value
+
+    const harvestingSeasonSelect = document.querySelector('#harvestingSelection')
+    const selectedHarvestingSeason = harvestingSeasonSelect.value
+
+    let searchData = `Common name:\t-\t${commonNameSearch}
+        \nBotanical name:\t-\t${botanicalNameSearch}
+        \nWater:\t-\t${ActiveWaterCheckboxes}
+        \nSunlight:\t-\t${ActiveSunlightCheckboxes}
+        \nSoil:\t-\t${ActiveSoilCheckboxes}
+        \nPlanting:\t-\t${selectedPlantingSeason}
+        \nHarvesting:\t-\t${selectedHarvestingSeason}`
+    console.log('Search data:\n')
+    console.log(searchData)
+
     //------------------------------------------------------------------------------------------------------------------
     try {
         const response = await fetch(`/api/plants`,{method: "GET", headers: {'Content-Type' : 'application/json'}});
         if (!response.ok) throw new Error('Network response was not ok');
         const plants = await response.json();
-        console.log(plants)
         if (!plants || plants.length === 0) {resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';return;}
     
-
+        console.log(plants)
+        console.log()  
         plants.forEach(p => {
             let cmn = p.commonName.toLowerCase()
-            let bnn = p.botanicalName.toLowerCase()
-            console.log(cmn)
-            console.log(bnn)
-            let criteria1 = cmn.toLowerCase().includes(commonNameSearch.toLowerCase())
-            let criteria2 = bnn.toLowerCase().includes(botanicalNameSearch.toLowerCase())
+            let bnn = p.botanicalName.toLowerCase()  
 
-            if (criteria1) {
+            let wa = p.water
+            let su = p.sunlight
+            let so = p.soil
+
+            let pl = p.planting.toLowerCase()
+            let ha = p.harvesting.toLowerCase()
+
+            let resultData = `Common name:\t-\t${cmn}
+                \nBotanical name:\t-\t${bnn}
+                \nWater:\t-\t${wa}
+                \nSunlight:\t-\t${su}
+                \nSoil:\t-\t${so}
+                \nPlanting:\t-\t${pl}
+                \nHarvesting:\t-\t${ha}`
+            // console.log('Result data:\n')
+            // console.log(resultData)
+            
+            let criteria1 = cmn.includes(commonNameSearch.toLowerCase())
+            let criteria2 = bnn.includes(botanicalNameSearch.toLowerCase())
+            console.log(`Common name: ${criteria1}`)
+            console.log(`Botanical name: ${criteria2}`)
+
+            let criteria3 = ActiveWaterCheckboxes.some(x => x.includes(wa.toLowerCase()))
+            let criteria4 = ActiveSunlightCheckboxes.some(x => x.includes(su.toLowerCase()))
+            let criteria5 = ActiveSoilCheckboxes.some(x => x.includes(so.toLowerCase()))
+            console.log(`Water: ${criteria3}`)
+            console.log(`Sunlight: ${criteria4}`)
+            console.log(`Soil: ${criteria5}`)
+
+            let criteria6 = pl.includes(selectedPlantingSeason.toLowerCase())
+            let criteria7 = ha.includes(selectedHarvestingSeason.toLowerCase())
+            console.log(`Planting season: ${criteria6}`)
+            console.log(`Harvesting season: ${criteria7}`)
+
+            if (criteria1 && criteria2 && criteria3 && criteria4 && criteria5 && criteria6 && criteria7) {
                 const resultDetailsCont = document.createElement('div')
                 resultDetailsCont.setAttribute('class','result-details-cont')
 
