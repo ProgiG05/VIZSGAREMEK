@@ -941,9 +941,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*Plant finder section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
-    .search-cont{width: 45%;}
+    .search-cont{width: 30%;}
     .plant-search-result-cont{
-        width: 45%;
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;

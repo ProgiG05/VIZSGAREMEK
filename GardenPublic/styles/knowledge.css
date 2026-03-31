@@ -1,6 +1,7 @@
 :root {
     --body-bg: rgb(27, 23, 12);
-    --parallax-sect-bg: #cdbe71;
+    /* --parallax-sect-bg: #cdbe71; */
+    --parallax-sect-bg: #98acb3;
     --text-main:rgb(255, 255, 255);
     --card-bg: linear-gradient(to bottom, rgb(98, 129, 65) ,rgb(27, 33, 26));
     --paragraph-bg:rgba(88, 37, 3, 0.607);

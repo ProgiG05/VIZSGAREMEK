@@ -297,7 +297,7 @@ const translations = {
         plantDetails: "Plant Details",
         resCommon: "Common:",
         resScientific: "Scientific:",
-        resType: "Type:",
+        // resType: "Type:",
         resWatering: "Watering:",
         resSunlight: "Sunlight:",
         resSoil: "Soil:",
@@ -343,7 +343,7 @@ const translations = {
         plantDetails: "Növény részletei",
         resCommon: "Gyakori név:",
         resScientific: "Tudományos név:",
-        resType: "Típus:",
+        // resType: "Típus:",
         resWatering: "Öntözés:",
         resSunlight: "Fényigény:",
         resSoil: "Talaj:",
@@ -388,7 +388,7 @@ function updateLanguage(lang) {
 
     // Search Form Labels & Placeholders
     document.querySelector('label[for="commonplant-search-inp"]').innerText = t.commonName;
-    document.querySelector('label[for="botanicalplant-search-inp"]').innerText = t.botanicalName;
+    // document.querySelector('label[for="botanicalplant-search-inp"]').innerText = t.botanicalName;
     document.getElementById('commonplant-search-inp').placeholder = lang === 'en' ? "Search..." : "Keresés...";
     
     // Checkbox Group Headers
@@ -413,12 +413,12 @@ function updateLanguage(lang) {
     const tableKeys = document.querySelectorAll('.resultKey');
     tableKeys[0].innerText = t.resCommon;
     tableKeys[1].innerText = t.resScientific;
-    tableKeys[2].innerText = t.resType;
-    tableKeys[3].innerText = t.resWatering;
-    tableKeys[4].innerText = t.resSunlight;
-    tableKeys[5].innerText = t.resSoil;
-    tableKeys[6].innerText = t.resPlanting;
-    tableKeys[7].innerText = t.resHarvesting;
+    // tableKeys[1].innerText = t.resType;
+    tableKeys[2].innerText = t.resWatering;
+    tableKeys[3].innerText = t.resSunlight;
+    tableKeys[4].innerText = t.resSoil;
+    tableKeys[5].innerText = t.resPlanting;
+    tableKeys[6].innerText = t.resHarvesting;
     
     document.getElementById('plantsearchPage_Btn').innerText = t.moreInfo;
     
@@ -426,18 +426,154 @@ function updateLanguage(lang) {
 
 // --- Plant search logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+const plantSpecs = {
+    watering: {
+        low: "Allow soil to dry completely before giving a thorough soak.",
+        medium: "Apply water when the top inch of soil feels dry.",
+        high: "Keep soil consistently moist without allowing it to become waterlogged."
+    },
+    sunlight: {
+        low: "Shady indoor corners or full shade under outdoor tree canopies.",
+        moderate: "Bright filtered light indoors or dappled shade in outdoor spaces.",
+        high: "Direct window sun indoors or full sun in outdoor gardens."
+    },
+    soil: {
+        low: "Lean, well-draining substrate with very minimal organic matter or nutrients.",
+        moderate: "Balanced medium with a steady, moderate supply of essential nutrients.",
+        high: "Dense, fertile medium packed with high concentrations of organic matter."
+    }
+};
+const resultsContainer = document.getElementById('plant-search-result-cont');
+function displayResults(result) {
+    resultsContainer.innerHTML = ""
+    if (!result || result.length === 0) {resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';return;}
 
-document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
+    result.forEach(p => {
+        const resultDetailsCont = document.createElement('div')
+        resultDetailsCont.setAttribute('class','result-details-cont')
+
+        const imgCont = document.createElement('div')
+        imgCont.setAttribute('class', 'resultimage-cont')
+
+        const imgInner = document.createElement('img')
+        imgInner.setAttribute('class','result-imgInner')
+        imgInner.setAttribute('alt',`${p.commonName}`)
+        imgInner.setAttribute('src','../pics/others/searchedplant_placeholder.png')
+        imgCont.appendChild(imgInner)
+        resultsContainer.appendChild(imgCont)
+
+        const plantResultTitle = document.createElement('h2')
+        plantResultTitle.setAttribute('class','plantdetails-title')
+        plantResultTitle.textContent = "Plant Details"
+        resultDetailsCont.appendChild(plantResultTitle)
+
+        const plantResultTable = document.createElement('table') 
+        plantResultTable.setAttribute('class','result-details-cont-table')
+
+        function makeRow(key, value) {
+            const plantResultTableRow = document.createElement('tr')
+
+            const plantResultTableData1 = document.createElement('td')
+            plantResultTableData1.setAttribute('class','resultKey')
+
+            const plantResultTableData2 = document.createElement('td')
+            plantResultTableData2.setAttribute('class','resultValue')
+
+            switch (key) {
+                case "Watering":
+                    switch (value) {
+                        case "low":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[watering].low}`
+                            break;
+                        case "medium":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[watering].medium}`
+                            break;
+                        case "high":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[watering].high}`
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "Sunlight":
+                    switch (value) {
+                        case "low":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[sunlight].low}`
+                            break;
+                        case "medium":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[sunlight].moderate}`
+                            break;
+                        case "high":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[sunlight].high}`
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case "Soil":
+                    switch (value) {
+                        case "low":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}: ${plantSpecs[soil].low}`
+                            break;
+                        case "medium":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}:  ${plantSpecs[soil].moderate}`
+                            break;
+                        case "high":
+                            plantResultTableData1.textContent = `${key}`
+                            plantResultTableData2.textContent = `${value}:  ${plantSpecs[soil].high}`
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
+            plantResultTableRow.appendChild(plantResultTableData1)
+            plantResultTableRow.appendChild(plantResultTableData2)
+
+            plantResultTable.appendChild(plantResultTableRow)
+        }
+
+        makeRow('Common name:', p.commonName) 
+        makeRow('Botanical name:', p.botanicalName)
+        makeRow('Watering:', p.water)
+        makeRow('Sunlight:', p.sunlight)
+        makeRow('Soil:', p.soil)
+        makeRow('Planting:', p.planting)
+        makeRow('Harvesting:', p.harvesting)
+        
+        resultDetailsCont.appendChild(plantResultTable);
+
+        const plantSearchPageBtn = document.createElement('a')
+        plantSearchPageBtn.setAttribute('class','plantsearchPage_Btn')
+        plantSearchPageBtn.setAttribute('id','plantsearchPage_Btn')
+        plantSearchPageBtn.setAttribute('href','../sites/plants.html')
+        plantSearchPageBtn.textContent = 'Get more info'
+        resultDetailsCont.appendChild(plantSearchPageBtn)
+
+        resultsContainer.appendChild(resultDetailsCont)
+    })
+}
+
+//resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';
+
+document.getElementById('searchPlant_Btn').addEventListener("click", async (e) => {
     e.preventDefault()
-
-    const resultsContainer = document.getElementById('plant-search-result-cont');
-    resultsContainer.innerHTML = ``
-    
     //Search data:
     //------------------------------------------------------------------------------------------------------------------
     const commonNameSearch = document.getElementById('commonplant-search-inp').value
 
-    const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
+    // const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
 
     const waterCheckboxes = document.querySelectorAll('.water-checkbox')
     const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checked checkboxes
@@ -448,132 +584,47 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
     const soilCheckboxes = document.querySelectorAll('.soil-checkbox')
     const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value)
 
-    const plantingSeasonSelect = document.querySelector('#plantingSelection')
-    const selectedPlantingSeason = plantingSeasonSelect.value
+    const plantingSeasonSelect = document.querySelector('#plantingSelection').value
+    const harvestingSeasonSelect = document.querySelector('#harvestingSelection').value
 
-    const harvestingSeasonSelect = document.querySelector('#harvestingSelection')
-    const selectedHarvestingSeason = harvestingSeasonSelect.value
+    let criteriaCommonName
+    let criteriaWater
+    let criteriaSunlight
+    let criteriaSoil
+    let criteriaPlanting
+    let criteriaHarvesting
 
-    let searchData = `Common name:\t-\t${commonNameSearch}
-        \nBotanical name:\t-\t${botanicalNameSearch}
-        \nWater:\t-\t${ActiveWaterCheckboxes}
-        \nSunlight:\t-\t${ActiveSunlightCheckboxes}
-        \nSoil:\t-\t${ActiveSoilCheckboxes}
-        \nPlanting:\t-\t${selectedPlantingSeason}
-        \nHarvesting:\t-\t${selectedHarvestingSeason}`
-    console.log('Search data:\n')
-    console.log(searchData)
-
-    //------------------------------------------------------------------------------------------------------------------
     try {
         const response = await fetch(`/api/plants`,{method: "GET", headers: {'Content-Type' : 'application/json'}});
         if (!response.ok) throw new Error('Network response was not ok');
         const plants = await response.json();
-        if (!plants || plants.length === 0) {resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';return;}
-    
-        console.log(plants)
-        console.log()  
-        plants.forEach(p => {
-            let cmn = p.commonName.toLowerCase()
-            let bnn = p.botanicalName.toLowerCase()  
 
-            let wa = p.water
-            let su = p.sunlight
-            let so = p.soil
+        const filteredPlants = plants.filter(p => {
+            criteriaCommonName = criteriaCommonName === "" || p.commonName.toLowerCase().includes(commonNameSearch.toLowerCase())
+            console.log(`${p.commonName}`)
+            console.log(`Common name: ${criteriaCommonName}`)
 
-            let pl = p.planting.toLowerCase()
-            let ha = p.harvesting.toLowerCase()
+            criteriaWater = ActiveWaterCheckboxes.length === 0 ||  ActiveWaterCheckboxes.includes(p.water.toLowerCase())
+            criteriaSunlight =ActiveSunlightCheckboxes.length === 0 ||  ActiveSunlightCheckboxes.includes(p.sunlight.toLowerCase())
+            criteriaSoil = ActiveSoilCheckboxes.length === 0 || ActiveSoilCheckboxes.includes(p.soil.toLowerCase())
+            console.log(`Water: ${criteriaWater}`)
+            console.log(`Sunlight: ${criteriaSunlight}`)
+            console.log(`Soil: ${criteriaSoil}`)
 
-            let resultData = `Common name:\t-\t${cmn}
-                \nBotanical name:\t-\t${bnn}
-                \nWater:\t-\t${wa}
-                \nSunlight:\t-\t${su}
-                \nSoil:\t-\t${so}
-                \nPlanting:\t-\t${pl}
-                \nHarvesting:\t-\t${ha}`
-            // console.log('Result data:\n')
-            // console.log(resultData)
-            
-            let criteria1 = cmn.includes(commonNameSearch.toLowerCase())
-            let criteria2 = bnn.includes(botanicalNameSearch.toLowerCase())
-            console.log(`Common name: ${criteria1}`)
-            console.log(`Botanical name: ${criteria2}`)
 
-            let criteria3 = ActiveWaterCheckboxes.some(x => x.includes(wa.toLowerCase()))
-            let criteria4 = ActiveSunlightCheckboxes.some(x => x.includes(su.toLowerCase()))
-            let criteria5 = ActiveSoilCheckboxes.some(x => x.includes(so.toLowerCase()))
-            console.log(`Water: ${criteria3}`)
-            console.log(`Sunlight: ${criteria4}`)
-            console.log(`Soil: ${criteria5}`)
+            criteriaPlanting = !plantingSeasonSelect || p.planting.toLowerCase().includes(plantingSeasonSelect.toLowerCase())
+            criteriaHarvesting = !harvestingSeasonSelect || p.harvesting.toLowerCase().includes(harvestingSeasonSelect.toLowerCase())
+            console.log(`Planting: ${criteriaPlanting}`)
+            console.log(`harvesting: ${criteriaHarvesting}`)
 
-            let criteria6 = pl.includes(selectedPlantingSeason.toLowerCase())
-            let criteria7 = ha.includes(selectedHarvestingSeason.toLowerCase())
-            console.log(`Planting season: ${criteria6}`)
-            console.log(`Harvesting season: ${criteria7}`)
 
-            if (criteria1 && criteria2 && criteria3 && criteria4 && criteria5 && criteria6 && criteria7) {
-                const resultDetailsCont = document.createElement('div')
-                resultDetailsCont.setAttribute('class','result-details-cont')
+            return criteriaCommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting
+        })
+        console.log(filteredPlants)
+        displayResults(filteredPlants)
 
-                const imgCont = document.createElement('div')
-                imgCont.setAttribute('class', 'resultimage-cont')
-
-                const imgInner = document.createElement('img')
-                imgInner.setAttribute('class','result-imgInner')
-                imgInner.setAttribute('alt',`${p.commonName}`)
-                imgInner.setAttribute('src','../pics/others/searchedplant_placeholder.png')
-                imgCont.appendChild(imgInner)
-                resultsContainer.appendChild(imgCont)
-
-                const plantResultTitle = document.createElement('h2')
-                plantResultTitle.setAttribute('class','plantdetails-title')
-                plantResultTitle.textContent = "Plant Details"
-                resultDetailsCont.appendChild(plantResultTitle)
-
-                const plantResultTable = document.createElement('table') 
-                plantResultTable.setAttribute('class','result-details-cont-table')
-
-                function makeRow(key, value) {
-                    const plantResultTableRow = document.createElement('tr')
-
-                    const plantResultTableData1 = document.createElement('td')
-                    plantResultTableData1.setAttribute('class','resultKey')
-                    plantResultTableData1.textContent = `${key}`
-
-                    const plantResultTableData2 = document.createElement('td')
-                    plantResultTableData2.setAttribute('class','resultValue')
-                    plantResultTableData2.textContent = `${value}`
-
-                    plantResultTableRow.appendChild(plantResultTableData1)
-                    plantResultTableRow.appendChild(plantResultTableData2)
-
-                    plantResultTable.appendChild(plantResultTableRow)
-                }
-
-                makeRow('Common name:', p.commonName) 
-                makeRow('Botanical name:', p.botanicalName)
-                makeRow('Type', p.type)
-                makeRow('Watering:', p.water)
-                makeRow('Sunlight:', p.sunlight)
-                makeRow('Soil:', p.soil)
-                makeRow('Planting:', p.planting)
-                makeRow('Harvesting:', p.harvesting)
-                
-                resultDetailsCont.appendChild(plantResultTable);
-
-                const plantSearchPageBtn = document.createElement('a')
-                plantSearchPageBtn.setAttribute('class','plantsearchPage_Btn')
-                plantSearchPageBtn.setAttribute('id','plantsearchPage_Btn')
-                plantSearchPageBtn.setAttribute('href','../sites/plants.html')
-                plantSearchPageBtn.textContent = 'Get more info'
-                resultDetailsCont.appendChild(plantSearchPageBtn)
-
-                resultsContainer.appendChild(resultDetailsCont)
-            }
-            else{ resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';}
-        });
     } catch (error) {
-        console.error('Error fetching plants:', error);
-        resultsContainer.innerHTML = '<p class="extraMSG">Error executing search. Please try again.</p>';
+        console.error('Error:', error);
+        resultsContainer.innerHTML = '<p class="extraMSG">Error executing search.</p>';
     }
 })
