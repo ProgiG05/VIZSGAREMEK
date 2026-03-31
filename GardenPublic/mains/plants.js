@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         `
     })
     searchPlant(plantcontainer)
-    document.getElementById('clear-water-btn').addEventListener('click', clearFilters('water'))
-    document.getElementById('clear-sunlight-btn').addEventListener('click', clearFilters('sunlight'))
-    document.getElementById('clear-soil-btn').addEventListener('click', clearFilters('soil'))
+    document.getElementById('clear-water-btn').addEventListener('click', () => clearFilters('water'))
+    document.getElementById('clear-sunlight-btn').addEventListener('click', () => clearFilters('sunlight'))
+    document.getElementById('clear-soil-btn').addEventListener('click', () => clearFilters('soil'))
 })
 
 function searchPlant(container) {
@@ -57,6 +57,7 @@ function searchPlant(container) {
             plantingMonth: document.getElementById('plantingSelection').value || "none",
             harvestingMonth: document.getElementById('harvestingSelection').value || "none"
         }
+        
 
         const plantsData = await fetch('/api/plantfinder?commonName=' + data.name + '&water=' + data.water + '&sunlight=' + data.sunlight + '&soil=' + data.soil + '&plantingMonth=' + data.plantingMonth + '&harvestingMonth=' + data.harvestingMonth,
             {
@@ -67,8 +68,8 @@ function searchPlant(container) {
             }
         )
         const resp = await plantsData.json()
-        console.log(resp)
         SearchPlantDetails(resp, container)
+        clearForm()
     })
 }
 
@@ -94,4 +95,13 @@ function SearchPlantDetails(details, container) {
 function clearFilters(type) {
     const checks = document.querySelectorAll(`.${type}-checkbox`)
     checks.forEach(check => check.checked = false)
+}
+
+function clearForm() {
+    document.getElementById('commonplant-search-inp').value = ""
+    document.getElementById('plantingSelection').value = ""
+    document.getElementById('harvestingSelection').value = ""
+    clearFilters('water')
+    clearFilters('sunlight')
+    clearFilters('soil')
 }
