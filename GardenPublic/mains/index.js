@@ -413,7 +413,6 @@ function updateLanguage(lang) {
     const tableKeys = document.querySelectorAll('.resultKey');
     tableKeys[0].innerText = t.resCommon;
     tableKeys[1].innerText = t.resScientific;
-    // tableKeys[1].innerText = t.resType;
     tableKeys[2].innerText = t.resWatering;
     tableKeys[3].innerText = t.resSunlight;
     tableKeys[4].innerText = t.resSoil;
@@ -426,6 +425,7 @@ function updateLanguage(lang) {
 
 // --- Plant search logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// --- Plant search logic ---
 const plantSpecs = {
     watering: {
         low: "Allow soil to dry completely before giving a thorough soak.",
@@ -443,188 +443,114 @@ const plantSpecs = {
         high: "Dense, fertile medium packed with high concentrations of organic matter."
     }
 };
-const resultsContainer = document.getElementById('plant-search-result-cont');
-function displayResults(result) {
-    resultsContainer.innerHTML = ""
-    if (!result || result.length === 0) {resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';return;}
-
-    result.forEach(p => {
-        const resultDetailsCont = document.createElement('div')
-        resultDetailsCont.setAttribute('class','result-details-cont')
-
-        const imgCont = document.createElement('div')
-        imgCont.setAttribute('class', 'resultimage-cont')
-
-        const imgInner = document.createElement('img')
-        imgInner.setAttribute('class','result-imgInner')
-        imgInner.setAttribute('alt',`${p.commonName}`)
-        imgInner.setAttribute('src','../pics/others/searchedplant_placeholder.png')
-        imgCont.appendChild(imgInner)
-        resultsContainer.appendChild(imgCont)
-
-        const plantResultTitle = document.createElement('h2')
-        plantResultTitle.setAttribute('class','plantdetails-title')
-        plantResultTitle.textContent = "Plant Details"
-        resultDetailsCont.appendChild(plantResultTitle)
-
-        const plantResultTable = document.createElement('table') 
-        plantResultTable.setAttribute('class','result-details-cont-table')
-
-        function makeRow(key, value) {
-            const plantResultTableRow = document.createElement('tr')
-
-            const plantResultTableData1 = document.createElement('td')
-            plantResultTableData1.setAttribute('class','resultKey')
-
-            const plantResultTableData2 = document.createElement('td')
-            plantResultTableData2.setAttribute('class','resultValue')
-
-            switch (key) {
-                case "Watering":
-                    switch (value) {
-                        case "low":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[watering].low}`
-                            break;
-                        case "medium":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[watering].medium}`
-                            break;
-                        case "high":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[watering].high}`
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case "Sunlight":
-                    switch (value) {
-                        case "low":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[sunlight].low}`
-                            break;
-                        case "medium":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[sunlight].moderate}`
-                            break;
-                        case "high":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[sunlight].high}`
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case "Soil":
-                    switch (value) {
-                        case "low":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}: ${plantSpecs[soil].low}`
-                            break;
-                        case "medium":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}:  ${plantSpecs[soil].moderate}`
-                            break;
-                        case "high":
-                            plantResultTableData1.textContent = `${key}`
-                            plantResultTableData2.textContent = `${value}:  ${plantSpecs[soil].high}`
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            
-            plantResultTableRow.appendChild(plantResultTableData1)
-            plantResultTableRow.appendChild(plantResultTableData2)
-
-            plantResultTable.appendChild(plantResultTableRow)
-        }
-
-        makeRow('Common name:', p.commonName) 
-        makeRow('Botanical name:', p.botanicalName)
-        makeRow('Watering:', p.water)
-        makeRow('Sunlight:', p.sunlight)
-        makeRow('Soil:', p.soil)
-        makeRow('Planting:', p.planting)
-        makeRow('Harvesting:', p.harvesting)
-        
-        resultDetailsCont.appendChild(plantResultTable);
-
-        const plantSearchPageBtn = document.createElement('a')
-        plantSearchPageBtn.setAttribute('class','plantsearchPage_Btn')
-        plantSearchPageBtn.setAttribute('id','plantsearchPage_Btn')
-        plantSearchPageBtn.setAttribute('href','../sites/plants.html')
-        plantSearchPageBtn.textContent = 'Get more info'
-        resultDetailsCont.appendChild(plantSearchPageBtn)
-
-        resultsContainer.appendChild(resultDetailsCont)
-    })
-}
-
-//resultsContainer.innerHTML = '<p class="extraMSG">No plants found matching your criteria.</p>';
 
 document.getElementById('searchPlant_Btn').addEventListener("click", async (e) => {
-    e.preventDefault()
-    //Search data:
-    //------------------------------------------------------------------------------------------------------------------
-    const commonNameSearch = document.getElementById('commonplant-search-inp').value
+    e.preventDefault();
 
-    // const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value
+    // 1. Grab Search Data
+    const commonNameSearch = document.getElementById('commonplant-search-inp').value.toLowerCase();
 
-    const waterCheckboxes = document.querySelectorAll('.water-checkbox')
-    const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value) // gets an array of the value of the checked checkboxes
+    const waterCheckboxes = document.querySelectorAll('.water-checkbox');
+    const ActiveWaterCheckboxes = Array.from(waterCheckboxes).filter(x => x.checked).map(y => y.value.toLowerCase());
 
-    const sunlightCheckboxes = document.querySelectorAll('.sunlight-checkbox')
-    const ActiveSunlightCheckboxes = Array.from(sunlightCheckboxes).filter(x => x.checked).map(y => y.value)
+    const sunlightCheckboxes = document.querySelectorAll('.sunlight-checkbox');
+    const ActiveSunlightCheckboxes = Array.from(sunlightCheckboxes).filter(x => x.checked).map(y => y.value.toLowerCase());
 
-    const soilCheckboxes = document.querySelectorAll('.soil-checkbox')
-    const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value)
+    const soilCheckboxes = document.querySelectorAll('.soil-checkbox');
+    const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value.toLowerCase());
 
-    const plantingSeasonSelect = document.querySelector('#plantingSelection').value
-    const harvestingSeasonSelect = document.querySelector('#harvestingSelection').value
+    const plantingSeasonSelect = document.querySelector('#plantingSelection').value.toLowerCase();
+    const harvestingSeasonSelect = document.querySelector('#harvestingSelection').value.toLowerCase();
 
-    let criteriaCommonName
-    let criteriaWater
-    let criteriaSunlight
-    let criteriaSoil
-    let criteriaPlanting
-    let criteriaHarvesting
+    const resultTitle = document.getElementById('plantdetails-title');
 
     try {
-        const response = await fetch(`/api/plants`,{method: "GET", headers: {'Content-Type' : 'application/json'}});
+        // 2. Fetch Data
+        const response = await fetch(`/api/plants`, {method: "GET", headers: {'Content-Type' : 'application/json'}});
         if (!response.ok) throw new Error('Network response was not ok');
         const plants = await response.json();
 
+        // 3. Filter Data
         const filteredPlants = plants.filter(p => {
-            criteriaCommonName = criteriaCommonName === "" || p.commonName.toLowerCase().includes(commonNameSearch.toLowerCase())
-            console.log(`${p.commonName}`)
-            console.log(`Common name: ${criteriaCommonName}`)
+            const criteriaCommonName = !commonNameSearch || p.commonName.toLowerCase().includes(commonNameSearch);
+            
+            // Checkboxes: Match if nothing is checked OR if it matches checked values
+            const criteriaWater = ActiveWaterCheckboxes.length === 0 || ActiveWaterCheckboxes.includes(p.water.toLowerCase());
+            const criteriaSunlight = ActiveSunlightCheckboxes.length === 0 || ActiveSunlightCheckboxes.includes(p.sunlight.toLowerCase());
+            const criteriaSoil = ActiveSoilCheckboxes.length === 0 || ActiveSoilCheckboxes.includes(p.soil.toLowerCase());
 
-            criteriaWater = ActiveWaterCheckboxes.length === 0 ||  ActiveWaterCheckboxes.includes(p.water.toLowerCase())
-            criteriaSunlight =ActiveSunlightCheckboxes.length === 0 ||  ActiveSunlightCheckboxes.includes(p.sunlight.toLowerCase())
-            criteriaSoil = ActiveSoilCheckboxes.length === 0 || ActiveSoilCheckboxes.includes(p.soil.toLowerCase())
-            console.log(`Water: ${criteriaWater}`)
-            console.log(`Sunlight: ${criteriaSunlight}`)
-            console.log(`Soil: ${criteriaSoil}`)
+            // Dropdowns: Match if "Choose..." (none/empty) OR if it matches
+            const criteriaPlanting = !plantingSeasonSelect || plantingSeasonSelect === "none" || p.planting.toLowerCase().includes(plantingSeasonSelect);
+            const criteriaHarvesting = !harvestingSeasonSelect || harvestingSeasonSelect === "none" || p.harvesting.toLowerCase().includes(harvestingSeasonSelect);
 
+            // Use && to ensure ALL checked criteria must be met
+            return criteriaCommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting;
+        });
 
-            criteriaPlanting = !plantingSeasonSelect || p.planting.toLowerCase().includes(plantingSeasonSelect.toLowerCase())
-            criteriaHarvesting = !harvestingSeasonSelect || p.harvesting.toLowerCase().includes(harvestingSeasonSelect.toLowerCase())
-            console.log(`Planting: ${criteriaPlanting}`)
-            console.log(`harvesting: ${criteriaHarvesting}`)
-
-
-            return criteriaCommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting
-        })
-        console.log(filteredPlants)
-        displayResults(filteredPlants)
+        // 4. Send to display function (passing the array, not just index 0)
+        displayResults(filteredPlants);
 
     } catch (error) {
         console.error('Error:', error);
-        resultsContainer.innerHTML = '<p class="extraMSG">Error executing search.</p>';
+        if (resultTitle) resultTitle.innerText = 'Error executing search';
     }
-})
+});
+
+
+function displayResults(results) {
+    const resultContainer = document.getElementById('plant-search-result-cont');
+    const resultTable = document.getElementById('result-details-cont-table');
+    const resultTitle = document.getElementById('plantdetails-title');
+
+    // Reveal the container
+    resultContainer.classList.remove('hidden2');
+
+    // Check if we found anything
+    if (!results || results.length === 0) { 
+        resultTitle.innerText = 'No plants found matching your criteria.';
+        resultTable.innerHTML = ""; // Clear table
+        return;
+    }
+
+    // Note: Since your HTML only has space for ONE plant details block, 
+    // we will populate it with the FIRST matching result (results[0]).
+    const p = results[0]; 
+
+    resultTitle.innerText = "Plant Details";
+    resultTable.innerHTML = ""; // Clear out previous table rows
+
+    // Clean function to create rows
+    function makeRow(key, value, category = null) {
+        if (!value) return; // Skip if there's no data for this field
+
+        const tr = document.createElement('tr');
+        
+        const tdKey = document.createElement('td');
+        tdKey.className = 'resultKey';
+        tdKey.textContent = key;
+
+        const tdVal = document.createElement('td');
+        tdVal.className = 'resultValue';
+
+        // Check if this needs a long description from plantSpecs
+        if (category && plantSpecs[category] && plantSpecs[category][value.toLowerCase()]) {
+            tdVal.textContent = `${value}: ${plantSpecs[category][value.toLowerCase()]}`;
+        } else {
+            // Normal text output (like Common Name, Harvesting, etc)
+            tdVal.textContent = value; 
+        }
+
+        tr.appendChild(tdKey);
+        tr.appendChild(tdVal);
+        resultTable.appendChild(tr);
+    }
+
+    // Build the rows using our dictionary categories where applicable
+    makeRow('Common:', p.commonName);
+    makeRow('Scientific:', p.botanicalName);
+    makeRow('Watering:', p.water, 'watering');
+    makeRow('Sunlight:', p.sunlight, 'sunlight');
+    makeRow('Soil:', p.soil, 'soil');
+    makeRow('Planting:', p.planting);
+    makeRow('Harvesting:', p.harvesting);
+}

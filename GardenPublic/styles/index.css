@@ -776,16 +776,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: var(--plantsearchPage-hover-font-color);
     transition: all 0.3s ease;
 }
-.extraMSG{
-    text-align: center;
-    text-wrap: balance;
-    margin: auto;
-    align-content: center;
-    font-size: 1.5vw;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-    color: #000000;
-}
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
 
