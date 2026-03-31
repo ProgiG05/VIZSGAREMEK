@@ -129,7 +129,6 @@ function EditGarden(garden, plants, parentContainer, controls) {
     gardenCard.id = "garden" + garden.id;
     gardenCard.innerHTML = `
         <h2 class="garden-name" contenteditable="true">${garden.gardenname}</h2>
-        <h4>${garden.gardencontent}</h4>
     `;
 
     const splittedContent = garden.gardencontent.split(";");

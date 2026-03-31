@@ -16,8 +16,8 @@ exports.AddNewgarden = async (req,res) => {
     res.json(newGarden)
 }
 exports.GetSearchedPlantDetails = async (req,res) => {
-    const {commonName, botanicalName, type, water, sunlight, soil, planting, harvesting} = req.query
-    const plantData = await GardenModel.GetSearchedPlantDetails(commonName, botanicalName, type, water, sunlight, soil, planting, harvesting)
+    const {commonName, type, water, sunlight, soil, planting, harvesting} = req.query
+    const plantData = await GardenModel.GetSearchedPlantDetails(commonName, type, water, sunlight, soil, planting, harvesting)
     res.json(plantData)
 }
 exports.GetMySavedPlants = async (req,res) => {

@@ -17,8 +17,8 @@ module.exports = {
      const [rows] = await connection.query(`SELECT * FROM knowledges`)
      return rows
     },
-    GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,botanicalName,type,water,sunlight,soil,planting,harvesting) {
-        const [rows] = await connection.query(`SELECT * FROM plants WHERE commonName LIKE ? OR botanicalName LIKE ? OR type LIKE ? OR water LIKE ? OR sunlight LIKE ? OR soil LIKE ? OR planting LIKE ? OR harvesting LIKE ?`, [commonName, botanicalName, type, water, sunlight, soil, planting, harvesting])
+    GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,type,water,sunlight,soil,planting,harvesting) {
+        const [rows] = await connection.query(`SELECT * FROM plants WHERE commonName LIKE ? AND type LIKE ? AND water LIKE ? AND sunlight LIKE ? AND soil LIKE ? AND planting LIKE ? AND harvesting LIKE ?`, [commonName, type, water, sunlight, soil, planting, harvesting])
         console.log(rows)
         return rows
     },

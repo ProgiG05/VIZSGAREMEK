@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         gardenCard.id = "garden" + garden.id
         gardenCard.innerHTML = `
             <h2 class="garden-name">${garden.gardenname}</h2>
-            <p>${garden.gardencontent}</p>
         `;
 
         gardenCard.appendChild(CreateTable(splittedContent, plants));
