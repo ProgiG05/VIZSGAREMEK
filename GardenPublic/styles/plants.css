@@ -109,128 +109,154 @@ body {
 .closeSidePanel img {width: 1.875rem;height: 1.875rem;display: block;}
 
 
-.plant-finder-main-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-.search-cont{
-    width: 30%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 1.2rem;
-    margin-left: 1.15rem;
-    margin-top: 1.15rem;
-    background-color: var(--searchcontainer-bg);
-    color: var(--searchcontainer-text);
-    box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
-    font-family: monospace;
-    font-size: 1.1vw;
-    border-radius: 30px;
-    gap: 0.625rem;
-}
-.search-title{
-    font-size: clamp(1.4rem, 2.2vw , 3rem);
-    text-align: center;
-    margin: 0;
-}
-.textInp-cont{
-    display: flex;
-    flex-direction: column;
-    padding: 0.938rem;
-    border-radius: 10px;
-    background-color: var(--innercont-bg);
-    transition: all 1.5s ease;
-    gap: 0.625rem;
-}
-.textInp-cont:hover{
-    background-color: var(--innercont-hover-bg);
-    box-shadow: 2px 2px 0px  var(--innercont-hover-shadow);
-    transition: all 0.3s ease;
-}
-.commonplant-search-inp, .botanicalplant-search-inp{
-    width: 60%;
-    height: fit-content;
-    float: right;
-    font-family: monospace;
-    font-size: 1rem;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-}
-.commonplant-search-inp:focus, .botanicalplant-search-inp:focus{outline: none;}
-.check-cont{
-    padding: 0.938rem;
-    border-radius: 15px;
-    background-color: var(--innercont-bg);
-    transition: all 1.5s ease;
-}
-.check-cont:hover{
-    background-color: var(--innercont-hover-bg);
-    box-shadow: 2px 2px 0px 2px var(--innercont-hover-shadow);
-    transition: all 0.3s ease;
-}
-.check-cont div{
-    display: flex;
-    flex-direction: row;
-    gap: 0.625rem;
-}
-.selection-cont{
-    display: flex;
-    flex-direction:column;
-    padding: 0.938rem;
-    border-radius: 15px;
-    background-color: var(--innercont-bg);
-    transition: all 1.5s ease;
-    gap: 0.625rem;
-    margin-bottom: 2rem;
-}
-.selection-cont:hover{
-    background-color: var(--innercont-hover-bg);
-    box-shadow: 2px 2px 0px 2px var(--innercont-hover-shadow);
-    transition: all 0.3s ease;
-}
-.searchPlant_Btn{
-    width: 70%;
-    height: 2.5rem;
-    margin: auto;
-    bottom: 0;
-    text-align: center;
-    border-radius: 20px;
-    border: none;
-    background-color: var(--plantsearchPage-bg);
-    color: var(--plantsearchPage-font-color);
-    text-decoration: none;
-    font-family: monospace;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-}
-.searchPlant_Btn:hover{
-    width: 90%;
-    background-color: var(--plantsearchPage-hover-bg);
-    color: var(--plantsearchPage-hover-font-color);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
 .plant-finder-title{
-    margin: 0;
-    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(5rem, 7vw,9rem);
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(3rem, 7vw, 9rem);
-    color: var(--plantsearch-main-title);
 }
-.plant-finder-subtitle{
-    margin: 0;
-    padding: 1rem;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(1rem, 1.5vw, 2rem);
-    color: var(--plantsearch-main-title);
+
+/* Container constraint */
+.plant-finder-main-container {
+    width: fit-content;
+    min-width: 90%;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Main Form Layout */
+#search-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 25px;
+    background-color: #e0ffbc; /* Very light mint green */
+    border: 1px solid #152915;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Search Title Styling */
+.search-title {
+    width: 100%;
+    color: #1b5e20; /* Dark forest green */
+    font-size: 1.4rem;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #a5d6a7;
+    padding-bottom: 5px;
+}
+
+/* Input Containers */
+.textInp-cont {
+    display: flex;
+    gap: 15px;
+}
+
+.textInp-cont div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Radio Groups (Water, Sunlight, Soil) */
+.check-cont {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.check-cont h3 {
+    font-size: 0.85rem;
+    color: #2e7d32;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Styling the selection boxes */
+.water-selection-cont, 
+.sunlight-selection-cont, 
+.soil-selection-cont {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff;
+    padding: 8px 12px;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+}
+
+/* Buttons inside radio groups */
+.check-cont button {
+    background: none;
+    border: 1px solid #81c784;
+    color: #2e7d32;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 2px 6px;
+}
+
+.check-cont button:hover {
+    background-color: #e8f5e9;
+}
+
+/* Dropdown Containers */
+.selection-cont {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.selection-cont label {
+    color: #2e7d32;
+}
+
+/* Form Controls (Inputs & Selects) */
+input[type="text"], 
+select {
+    padding: 8px 12px;
+    border: 1px solid #a5d6a7;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, 
+select:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* The Main Search Button */
+.searchPlant_Btn {
+    padding: 10px 30px;
+    background-color: #43a047;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    height: 42px; /* Matching input heights */
+}
+
+.searchPlant_Btn:hover {
+    background-color: #2e7d32;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Labels */
+label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: #388e3c;
+}
+
+
 
 
 
@@ -306,10 +332,5 @@ body {
     color: var(--text-main);
 }
 
-@media (max-width: 768px) {
-    #plant-container > div {
-        width: 100%;
-        max-width: 500px;
-    }
-}
+
 
