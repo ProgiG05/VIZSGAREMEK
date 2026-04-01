@@ -14,15 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     const plantsData = await fetch('/api/plants',
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-                }
+            {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'}
             }
         )
     const resp = await plantsData.json()
-
 
     console.log(resp)
     const plantcontainer = document.getElementById('plant-container')
@@ -58,13 +55,10 @@ function searchPlant(container) {
             harvestingMonth: document.getElementById('harvestingSelection').value || "none"
         }
         
-
         const plantsData = await fetch('/api/plantfinder?commonName=' + data.name + '&water=' + data.water + '&sunlight=' + data.sunlight + '&soil=' + data.soil + '&plantingMonth=' + data.plantingMonth + '&harvestingMonth=' + data.harvestingMonth,
             {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: {'Content-Type': 'application/json'}
             }
         )
         const resp = await plantsData.json()

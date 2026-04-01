@@ -425,7 +425,6 @@ function updateLanguage(lang) {
 
 // --- Plant search logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-// --- Plant search logic ---
 const plantSpecs = {
     watering: {
         low: "Allow soil to dry completely before giving a thorough soak.",
@@ -447,7 +446,6 @@ const plantSpecs = {
 document.getElementById('searchPlant_Btn').addEventListener("click", async (e) => {
     e.preventDefault();
 
-    // 1. Grab Search Data
     const commonNameSearch = document.getElementById('commonplant-search-inp').value.toLowerCase();
 
     const waterCheckboxes = document.querySelectorAll('.water-checkbox');
@@ -465,29 +463,31 @@ document.getElementById('searchPlant_Btn').addEventListener("click", async (e) =
     const resultTitle = document.getElementById('plantdetails-title');
 
     try {
-        // 2. Fetch Data
         const response = await fetch(`/api/plants`, {method: "GET", headers: {'Content-Type' : 'application/json'}});
         if (!response.ok) throw new Error('Network response was not ok');
         const plants = await response.json();
 
-        // 3. Filter Data
         const filteredPlants = plants.filter(p => {
             const criteriaCommonName = !commonNameSearch || p.commonName.toLowerCase().includes(commonNameSearch);
+            console.log(`Name: ${criteriaCommonName}`)
             
-            // Checkboxes: Match if nothing is checked OR if it matches checked values
             const criteriaWater = ActiveWaterCheckboxes.length === 0 || ActiveWaterCheckboxes.includes(p.water.toLowerCase());
             const criteriaSunlight = ActiveSunlightCheckboxes.length === 0 || ActiveSunlightCheckboxes.includes(p.sunlight.toLowerCase());
             const criteriaSoil = ActiveSoilCheckboxes.length === 0 || ActiveSoilCheckboxes.includes(p.soil.toLowerCase());
+            console.log(`Water: ${criteriaWater}`)
+            console.log(`Sunlight: ${criteriaSunlight}`)
+            console.log(`Soil: ${criteriaSoil}`)
 
-            // Dropdowns: Match if "Choose..." (none/empty) OR if it matches
             const criteriaPlanting = !plantingSeasonSelect || plantingSeasonSelect === "none" || p.planting.toLowerCase().includes(plantingSeasonSelect);
             const criteriaHarvesting = !harvestingSeasonSelect || harvestingSeasonSelect === "none" || p.harvesting.toLowerCase().includes(harvestingSeasonSelect);
+            console.log(`Planting: ${criteriaPlanting}`)
+            console.log(`Harvesting: ${criteriaHarvesting}`)
 
             // Use && to ensure ALL checked criteria must be met
             return criteriaCommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting;
         });
 
-        // 4. Send to display function (passing the array, not just index 0)
+        //Send to display function (passing the array)
         displayResults(filteredPlants);
 
     } catch (error) {
@@ -496,30 +496,30 @@ document.getElementById('searchPlant_Btn').addEventListener("click", async (e) =
     }
 });
 
-
 function displayResults(results) {
     const resultContainer = document.getElementById('plant-search-result-cont');
     const resultTable = document.getElementById('result-details-cont-table');
     const resultTitle = document.getElementById('plantdetails-title');
+    const resultBtn = document.getElementById('plantsearchPage_Btn')
 
-    // Reveal the container
     resultContainer.classList.remove('hidden2');
 
-    // Check if we found anything
     if (!results || results.length === 0) { 
         resultTitle.innerText = 'No plants found matching your criteria.';
-        resultTable.innerHTML = ""; // Clear table
+        resultTitle.style.width = "50%"
+        resultTitle.style.textAlign = "left"
+        resultTable.innerHTML = ""; 
+        resultBtn.style.display = "none"
         return;
     }
 
-    // Note: Since your HTML only has space for ONE plant details block, 
-    // we will populate it with the FIRST matching result (results[0]).
-    const p = results[0]; 
+    resultBtn.style.display = "block"
+
+    const p = results[0]; //first and best matching result
 
     resultTitle.innerText = "Plant Details";
-    resultTable.innerHTML = ""; // Clear out previous table rows
+    resultTable.innerHTML = ""; 
 
-    // Clean function to create rows
     function makeRow(key, value, category = null) {
         if (!value) return; // Skip if there's no data for this field
 
@@ -536,7 +536,6 @@ function displayResults(results) {
         if (category && plantSpecs[category] && plantSpecs[category][value.toLowerCase()]) {
             tdVal.textContent = `${value}: ${plantSpecs[category][value.toLowerCase()]}`;
         } else {
-            // Normal text output (like Common Name, Harvesting, etc)
             tdVal.textContent = value; 
         }
 
@@ -545,7 +544,6 @@ function displayResults(results) {
         resultTable.appendChild(tr);
     }
 
-    // Build the rows using our dictionary categories where applicable
     makeRow('Common:', p.commonName);
     makeRow('Scientific:', p.botanicalName);
     makeRow('Watering:', p.water, 'watering');

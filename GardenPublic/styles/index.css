@@ -687,6 +687,14 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     font-size: clamp(3rem, 7vw, 9rem);
     color: var(--plantsearch-main-title);
 }
+.plant-finder-subtitle{
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    color: var(--plantsearch-main-title);
+}
 .plant-search-result-cont{
     width: 75%;
     height: fit-content;
@@ -757,8 +765,8 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .plantsearchPage_Btn{
     width: fit-content;
     height: fit-content;
+    margin-top: 1.5rem;
     padding: 0.6rem 2rem 0.6rem 2rem;
-    margin-top: 1.875rem;
     bottom: 0;
     text-align: center;
     align-content: center;
@@ -927,20 +935,6 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
-@media (max-width: 1400px) {
-    /*Plant finder section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
-    .search-cont{width: 30%;}
-    .plant-search-result-cont{
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-items: center;
-    }
-    /*------------------------------------------------------------------------------------------------------*/
-}
 @media (max-width: 1300px) {
     /*Ideas section:*/
 
@@ -952,13 +946,11 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*Plant finder section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
-    .search-cont{width: fit-content;}
     .commonplant-search-inp{width: 55%;}
     .botanicalplant-search-inp{width: 55%;}
     .plant-search-result-cont{
-        width: 40%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-items: center;
     }
@@ -1021,10 +1013,10 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
     /*------------------------------------------------------------------------------------------------------*/
     .plant-finder-section{align-items: center;justify-content: center;}
-    .search-cont{width: 80%;font-size: 1.6vw;}
+    .search-cont{font-size: 1.2vw;}
     .plant-search-result-cont{width: 80%;}
     .selection-cont{flex-direction: row;}
-    .selection-cont select{width: 30%; font-size: 1.2vw;}
+    .selection-cont select{width: 30%; font-size: 1vw;}
     .plant-finder-title{font-size: 7vw;}
     /*------------------------------------------------------------------------------------------------------*/
 }
@@ -1035,6 +1027,8 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .garden-card:last-child{display: none;}
     .garden-card{width: 50%;}
     /*------------------------------------------------------------------------------------------------------*/
+    .plant-finder-main-container{flex-direction: column;}
+    .search-cont{width: 80%;font-size: 1.7vw;}
 }
 @media (max-width: 900px) {
     /*------------------------------------------------------------------------------------------------------*/
@@ -1058,7 +1052,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*Plant finder section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
-    .plant-finder-main-container{flex-direction: column;}
+    
     .search-cont{width: 80%;}
     .plant-search-result-cont{width: 80%;flex-direction: row;}
     .plantdetails-title{font-size: 4vw;}
@@ -1081,7 +1075,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*------------------------------------------------------------------------------------------------------*/
     .search-cont{width: 70%;font-size: 3vw;}
     .selection-cont select{width: 30%; font-size: 2vw;}
-    .plant-search-result-cont{width: 70%;}
+    .plant-search-result-cont{width: 70%;flex-direction: column;}
     /*------------------------------------------------------------------------------------------------------*/
 
     /*Knowledges section:*/

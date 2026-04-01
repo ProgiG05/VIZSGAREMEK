@@ -1,17 +1,17 @@
 :root {
-    --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
+    --body-bg: #16513b;
     --bg-dark: #1a1e1a;
     --text-green: #a7f070;
     --text-main: #ffffff;
     --beige-dark-shadow: #8a6a3a;
-    --navbtn-bg: #39703f;
-    --navbtn-hover-bg: #E3FFF5;
-    --navbtn-font-color: #E3FFF5;
-    --navbtn-hover-font-color: #112d14;
+    --navbtn-bg: #1b291cbb;
+    --navbtn-hover-bg: #add5c7;
+    --navbtn-font-color: #add5c7;
+    --navbtn-hover-font-color: #1b291c;
 }
 
 body {
-    background-image: var(--body-bg);
+    background-color: var(--body-bg);
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
@@ -26,7 +26,6 @@ body {
     justify-content: space-evenly;
     margin-top: 0;   
     top: 0;
-
 }
 #top-navbar a, #top-navbar button {
     height: 100%;
@@ -52,7 +51,6 @@ body {
     background-color:var(--navbtn-hover-bg);
     color:var(--navbtn-hover-font-color);
 }
-
 .settings-sidepanel {
     width: 18.75rem;
     height: 100vh;
@@ -109,6 +107,138 @@ body {
     cursor: pointer; 
 }
 .closeSidePanel img {width: 1.875rem;height: 1.875rem;display: block;}
+
+
+.plant-finder-main-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.search-cont{
+    width: 30%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1.2rem;
+    margin-left: 1.15rem;
+    margin-top: 1.15rem;
+    background-color: var(--searchcontainer-bg);
+    color: var(--searchcontainer-text);
+    box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
+    font-family: monospace;
+    font-size: 1.1vw;
+    border-radius: 30px;
+    gap: 0.625rem;
+}
+.search-title{
+    font-size: clamp(1.4rem, 2.2vw , 3rem);
+    text-align: center;
+    margin: 0;
+}
+.textInp-cont{
+    display: flex;
+    flex-direction: column;
+    padding: 0.938rem;
+    border-radius: 10px;
+    background-color: var(--innercont-bg);
+    transition: all 1.5s ease;
+    gap: 0.625rem;
+}
+.textInp-cont:hover{
+    background-color: var(--innercont-hover-bg);
+    box-shadow: 2px 2px 0px  var(--innercont-hover-shadow);
+    transition: all 0.3s ease;
+}
+.commonplant-search-inp, .botanicalplant-search-inp{
+    width: 60%;
+    height: fit-content;
+    float: right;
+    font-family: monospace;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+.commonplant-search-inp:focus, .botanicalplant-search-inp:focus{outline: none;}
+.check-cont{
+    padding: 0.938rem;
+    border-radius: 15px;
+    background-color: var(--innercont-bg);
+    transition: all 1.5s ease;
+}
+.check-cont:hover{
+    background-color: var(--innercont-hover-bg);
+    box-shadow: 2px 2px 0px 2px var(--innercont-hover-shadow);
+    transition: all 0.3s ease;
+}
+.check-cont div{
+    display: flex;
+    flex-direction: row;
+    gap: 0.625rem;
+}
+.selection-cont{
+    display: flex;
+    flex-direction:column;
+    padding: 0.938rem;
+    border-radius: 15px;
+    background-color: var(--innercont-bg);
+    transition: all 1.5s ease;
+    gap: 0.625rem;
+    margin-bottom: 2rem;
+}
+.selection-cont:hover{
+    background-color: var(--innercont-hover-bg);
+    box-shadow: 2px 2px 0px 2px var(--innercont-hover-shadow);
+    transition: all 0.3s ease;
+}
+.searchPlant_Btn{
+    width: 70%;
+    height: 2.5rem;
+    margin: auto;
+    bottom: 0;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--plantsearchPage-bg);
+    color: var(--plantsearchPage-font-color);
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+.searchPlant_Btn:hover{
+    width: 90%;
+    background-color: var(--plantsearchPage-hover-bg);
+    color: var(--plantsearchPage-hover-font-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.plant-finder-title{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: clamp(3rem, 7vw, 9rem);
+    color: var(--plantsearch-main-title);
+}
+.plant-finder-subtitle{
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    color: var(--plantsearch-main-title);
+}
+
+
+
+
+
+
+
+
 
 
 #plant-container {
