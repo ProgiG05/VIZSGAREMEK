@@ -66,6 +66,16 @@ CREATE TABLE saved_ideas (
 
 
 
+CREATE TABLE idea_plants (
+    idea_id INT,
+    plant_id INT,
+    PRIMARY KEY (idea_id, plant_id),
+    FOREIGN KEY (idea_id) REFERENCES ideas(id) ON DELETE CASCADE,
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
+);
+
+
+
 CREATE TABLE knowledges (
     id          INT           AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(150)  NOT NULL,
@@ -140,6 +150,53 @@ INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water
 ('Aloe Vera', 'Aloe barbadensis miller', 'Arabian Peninsula', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'April-May', 'Year-round'),
 ('Cucumber', 'Cucumis sativus', 'South Asia', 'vegetables', 'high', 'high', 'high', 0, 1, 'April-May', 'July-August', 'August'),
 ('Rosemary', 'Salvia rosmarinus', 'Mediterranean', 'herbs', 'low', 'high', 'low', 0, 0, 'March-April', 'May-June', 'Year-round');
+('Thyme', 'Thymus vulgaris', 'Mediterranean', 'herbs', 'low', 'high', 'low', 1, 1, 'April-May', 'June', 'Year-round'),
+('Oregano', 'Origanum vulgare', 'Mediterranean', 'herbs', 'low', 'high', 'moderate', 1, 1, 'April-May', 'July', 'Year-round'),
+('Parsley', 'Petroselinum crispum', 'Mediterranean', 'herbs', 'medium', 'moderate', 'high', 1, 1, 'March-April', 'None', 'June-October'),
+('Chives', 'Allium schoenoprasum', 'Asia/Europe', 'herbs', 'medium', 'moderate', 'high', 1, 1, 'March-May', 'None', 'April-November'),
+('Strawberry', 'Fragaria x ananassa', 'North America', 'fruits', 'medium', 'high', 'moderate', 0, 1, 'March-April', 'October', 'June-July'),
+('Blueberry', 'Vaccinium corymbosum', 'North America', 'fruits', 'high', 'high', 'high', 0, 0, 'March-April', 'January-February', 'July-August'),
+('Raspberry', 'Rubus idaeus', 'Europe/Asia', 'fruits', 'medium', 'high', 'high', 0, 0, 'November-March', 'February', 'July-August'),
+('Goji berry', 'Lycium barbarum', 'Asia', 'fruits', 'medium', 'high', 'moderate', 0, 1, 'March-May', 'February', 'August-October'),
+('Pineapple', 'Ananas comosus', 'South America', 'fruits', 'medium', 'high', 'low', 1, 0, 'Year-round', 'None', 'Year-round'),
+('Banana', 'Musa', 'Southeast Asia', 'fruits', 'high', 'high', 'high', 0, 0, 'Year-round', 'Year-round', 'Year-round'),
+('Papaya', 'Carica papaya', 'Central America', 'fruits', 'high', 'high', 'moderate', 0, 1, 'Year-round', 'None', 'Year-round'),
+('Lemongrass', 'Cymbopogon', 'Asia', 'herbs', 'high', 'high', 'moderate', 1, 0, 'March-May', 'None', 'July-October'),
+('Taro', 'Colocasia esculenta', 'Southeast Asia', 'vegetables', 'high', 'moderate', 'high', 0, 0, 'March-April', 'None', 'October-November'),
+('Sage', 'Salvia officinalis', 'Mediterranean', 'herbs', 'low', 'high', 'low', 1, 1, 'April-May', 'March', 'Year-round'),
+('Lettuce', 'Lactuca sativa', 'Egypt', 'vegetables', 'medium', 'moderate', 'moderate', 1, 1, 'March-May', 'None', 'May-July'),
+('Spinach', 'Spinacia oleracea', 'Central Asia', 'vegetables', 'medium', 'moderate', 'high', 0, 1, 'March-April', 'None', 'May-June'),
+('Arugula', 'Eruca vesicaria', 'Mediterranean', 'vegetables', 'medium', 'moderate', 'moderate', 1, 1, 'April-May', 'None', 'May-September'),
+('Kale', 'Brassica oleracea', 'Europe', 'vegetables', 'medium', 'high', 'moderate', 0, 1, 'March-May', 'None', 'June-October'),
+('Pepper', 'Capsicum annuum', 'Central/South America', 'vegetables', 'medium', 'high', 'high', 1, 1, 'March-April', 'None', 'July-October'),
+('Eggplant', 'Solanum melongena', 'Asia', 'vegetables', 'high', 'high', 'high', 0, 1, 'April-May', 'None', 'August-September'),
+('Celery', 'Apium graveolens', 'Mediterranean', 'vegetables', 'high', 'moderate', 'high', 0, 1, 'March-April', 'None', 'August-October'),
+('Cherry tomato', 'S. lycopersicum var. cerasiforme', 'South America', 'vegetables', 'high', 'high', 'high', 0, 1, 'March-April', 'June-August', 'July-September'),
+('Roma tomato', 'S. lycopersicum Roma', 'South America', 'vegetables', 'high', 'high', 'high', 0, 1, 'March-April', 'June-August', 'August-September'),
+('Fig', 'Ficus carica', 'Middle East', 'fruits', 'medium', 'high', 'moderate', 0, 0, 'March-April', 'January-February', 'August-September'),
+('Chili pepper', 'Capsicum annuum', 'Americas', 'vegetables', 'medium', 'high', 'moderate', 1, 1, 'March-April', 'None', 'August-October'),
+('Date Palm', 'Phoenix dactylifera', 'Middle East', 'fruits', 'low', 'high', 'low', 0, 1, 'March-May', 'None', 'September-October'),
+('Carrot', 'Daucus carota', 'Persia', 'vegetables', 'medium', 'high', 'low', 0, 1, 'March-July', 'None', 'June-October'),
+('Beet', 'Beta vulgaris', 'Mediterranean', 'vegetables', 'medium', 'moderate', 'moderate', 0, 1, 'April-July', 'None', 'June-October'),
+('Radish', 'Raphanus sativus', 'Asia', 'vegetables', 'medium', 'moderate', 'low', 1, 1, 'March-September', 'None', 'April-October'),
+('Turnip', 'Brassica rapa', 'Europe', 'vegetables', 'medium', 'moderate', 'moderate', 0, 1, 'March-April', 'None', 'June-July'),
+('Parsnip', 'Pastinaca sativa', 'Europe/Asia', 'vegetables', 'medium', 'high', 'high', 0, 1, 'March-April', 'None', 'October-November'),
+('Microgreens', 'Various species', 'Worldwide', 'vegetables', 'high', 'low', 'moderate', 1, 1, 'Year-round', 'None', 'Year-round'),
+('Purple Coneflower', 'Echinacea purpurea', 'North America', 'flowers', 'medium', 'high', 'moderate', 0, 1, 'March-May', 'None', 'July-September'),
+('Butterfly bush', 'Buddleja', 'Asia/Americas', 'flowers', 'medium', 'high', 'moderate', 0, 0, 'March-April', 'March', 'July-September'),
+('Milkweed', 'Asclepias', 'Americas', 'flowers', 'low', 'high', 'low', 0, 1, 'March-April', 'None', 'June-August'),
+('Bee Balm', 'Monarda', 'North America', 'flowers', 'high', 'high', 'high', 0, 1, 'April-May', 'None', 'July-August'),
+('Black-eyed Susan', 'Rudbeckia hirta', 'North America', 'flowers', 'low', 'high', 'moderate', 0, 1, 'March-May', 'None', 'July-September'),
+('Aster', 'Asteraceae', 'Worldwide', 'flowers', 'medium', 'high', 'moderate', 0, 1, 'April-May', 'None', 'August-October'),
+('Olive Tree', 'Olea europaea', 'Mediterranean', 'fruits', 'low', 'high', 'low', 0, 0, 'March-April', 'February-March', 'October-November'),
+('Agave', 'Agave', 'Americas', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'None', 'Year-round'),
+('Mexican Feather Grass', 'Stipa tenuissima', 'Americas', 'grass', 'low', 'high', 'low', 0, 1, 'March-April', 'March', 'Year-round'),
+('Japanese Maple', 'Acer palmatum', 'Asia', 'trees', 'medium', 'moderate', 'moderate', 0, 0, 'November-March', 'January', 'None'),
+('Hosta', 'Hosta', 'Asia', 'flowers', 'high', 'low', 'high', 0, 0, 'March-April', 'None', 'None'),
+('Ostrich Fern', 'Matteuccia struthiopteris', 'N. Hemisphere', 'ferns', 'high', 'low', 'high', 1, 0, 'March-April', 'None', 'None'),
+('Japanese Forest Grass', 'Hakonechloa macra', 'Japan', 'grass', 'high', 'low', 'high', 0, 0, 'March-April', 'March', 'None'),
+('Bleeding Heart', 'Lamprocapnos spectabilis', 'Asia', 'flowers', 'medium', 'low', 'high', 0, 0, 'March-April', 'None', 'May-June'),
+('Wild Ginger', 'Asarum', 'N. Hemisphere', 'herbs', 'medium', 'low', 'high', 1, 0, 'March-April', 'None', 'Year-round');
 
 
 
@@ -317,7 +374,7 @@ INSERT INTO `ideas` (`title`, `description`, `picture`,`plants`,`sunlight`,`wate
 (
 'The Sun-Drenched Haven',
 'This Mediterranean-inspired retreat pairs drought-tolerant lavender and rosemary with structural agaves. A gravel path leads to a quiet bench under a small olive tree, creating a water-wise sanctuary that thrives in High sunlight with minimal effort. This Low water and Easy maintenance garden offers a peaceful, sunny getaway.',
-'TheSun-DrenchedHaven',
+'TheSunDrenchedHaven',
 'Olive Tree, Lavender, Rosemary, Agave, Mexican Feather Grass, Thyme',
 'High',
 'Low',
