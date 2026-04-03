@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         const imgPlace = document.createElement("img");
         imgPlace.setAttribute("class", "insideImage");
         imgPlace.setAttribute("id", "insideImage");
-        imgPlace.setAttribute("src","../pics/gardenideas/"+ idea.picture)
+        imgPlace.setAttribute("src","../pics/gardenideas/"+ idea.picture + ".png")
         imgPlace.setAttribute("alt",`${idea.title}`)
         imgWrapper.appendChild(imgPlace);
         OneIdeaCard.appendChild(imgWrapper);

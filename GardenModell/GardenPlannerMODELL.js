@@ -18,28 +18,28 @@ module.exports = {
      return rows
     },
     GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,type,water,sunlight,soil,planting,harvesting) {
-        const [rows] = await connection.query(`SELECT * FROM plants WHERE commonName LIKE ? OR type LIKE ? OR water LIKE ? OR sunlight LIKE ? OR soil LIKE ? OR planting LIKE ? OR harvesting LIKE ?`, [commonName, type, water, sunlight, soil, planting, harvesting])
+        const [rows] = await connection.query(`SELECT * FROM plants WHERE common_name LIKE ? OR type LIKE ? OR water LIKE ? OR sunlight LIKE ? OR soil LIKE ? OR planting LIKE ? OR harvesting LIKE ?`, [commonName, type, water, sunlight, soil, planting, harvesting])
         console.log(rows)
         return rows
     },
     AddNewgarden : async function CreateGarden(garden) {
-        const [rows] = await connection.query(`INSERT INTO gardenmanager (user_id, gardenname, gardencontent) VALUES(?,?,?)`,[garden.user_id, garden.gardenname, garden.gardencontent])
+        const [rows] = await connection.query(`INSERT INTO gardenmanager (user_id, garden_name, garden_content) VALUES(?,?,?)`,[garden.user_id, garden.gardenname, garden.gardencontent])
         return rows
     },
     GetMySavedPlants : async function GetMySavedPlants() {
-        const [rows] = await connection.query(`SELECT * FROM savedPlants`)
+        const [rows] = await connection.query(`SELECT * FROM saved_plants`)
         return rows
     },
     GetMyGardens : async function GetMyGardens() {
-        const [rows] = await connection.query(`SELECT * FROM gardenmanager`)
+        const [rows] = await connection.query(`SELECT * FROM garden_manager`)
         return rows
     },
     GetGardenById : async function GetGardenById(id) {
-        const [rows] = await connection.query(`SELECT * FROM gardenmanager WHERE id = ?`, [id])
+        const [rows] = await connection.query(`SELECT * FROM garden_manager WHERE id = ?`, [id])
         return rows
     },
     GetAllWorksAndTools : async function GetAllWorksAndTools() {
-        const [rows] = await connection.query(`SELECT * FROM worksAndTools`)
+        const [rows] = await connection.query(`SELECT * FROM worksandtools`)
         return rows
     },
     CreateUser : async function CreateUser(user) {
@@ -48,7 +48,7 @@ module.exports = {
         return rows
     },
     GetGardens: async () => {
-    const [rows] = await connection.query('SELECT * FROM gardenmanager')
+    const [rows] = await connection.query('SELECT * FROM garden_manager')
     return rows
     },
     GetAllPlants: async () => {
@@ -56,11 +56,11 @@ module.exports = {
         return rows
     },
     DeleteGarden: async (id) => {
-        const [rows] = await connection.query('DELETE FROM gardenmanager WHERE id = ?', [id])
+        const [rows] = await connection.query('DELETE FROM garden_manager WHERE id = ?', [id])
         return rows
     },
     UpdateGarden: async (garden) => {
-        const [rows] = await connection.query('UPDATE gardenmanager SET gardencontent = ? , gardenname = ?, user_id = ? WHERE id = ?', [garden.content, garden.name, garden.user_id, garden.id])
+        const [rows] = await connection.query('UPDATE garden_manager SET garden_content = ? , garden_name = ?, user_id = ? WHERE id = ?', [garden.content, garden.name, garden.user_id, garden.id])
         return rows
     },
     GetUserByUsername: async function GetUserByUsername(username) {

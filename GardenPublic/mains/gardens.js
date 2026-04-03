@@ -37,12 +37,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 3. Render Gardens
     gardens.forEach(garden => {
-        const splittedContent = garden.gardencontent.split(";");
+        const splittedContent = garden.garden_content.split(";");
         const gardenCard = document.createElement("div");
         gardenCard.className = "garden-card";
         gardenCard.id = "garden" + garden.id
         gardenCard.innerHTML = `
-            <h2 class="garden-name">${garden.gardenname}</h2>
+            <h2 class="garden-name">${garden.garden_name}</h2>
         `;
 
         gardenCard.appendChild(CreateTable(splittedContent, plants));

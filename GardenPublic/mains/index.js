@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         const imgPlace = document.createElement("img");
         imgPlace.setAttribute("class", "insideImage");
         imgPlace.setAttribute("id", "insideImage");
-        imgPlace.setAttribute("src","../pics/gardenideas/"+ idea.picture)
+        imgPlace.setAttribute("src","../pics/gardenideas/" + idea.picture + ".png")
         imgPlace.setAttribute("alt",`${idea.title}`)
         imgWrapper.appendChild(imgPlace);
         OneIdeaCard.appendChild(imgWrapper);
@@ -281,7 +281,7 @@ const translations = {
         knowledges: "Learn more",
         // New keys for the search section
         commonName: "Common name:",
-        botanicalName: "Botanical name:",
+        botanical_name: "Botanical name:",
         wateringNeed: "Watering need",
         sunlightNeed: "Sunlight need",
         soilType: "Soil type",
@@ -327,7 +327,7 @@ const translations = {
         knowledges: "Tudj meg többet",
         // New keys for the search section
         commonName: "Gyakori név:",
-        botanicalName: "Botanikai név:",
+        botanical_name: "Botanikai név:",
         wateringNeed: "Öntözési igény",
         sunlightNeed: "Fényigény",
         soilType: "Talajtípus",
@@ -387,8 +387,8 @@ function updateLanguage(lang) {
     document.getElementById('knowledges-subtitle2').innerText = t.knowledgessubtitle2
 
     // Search Form Labels & Placeholders
-    document.querySelector('label[for="commonplant-search-inp"]').innerText = t.commonName;
-    // document.querySelector('label[for="botanicalplant-search-inp"]').innerText = t.botanicalName;
+    document.querySelector('label[for="commonplant-search-inp"]').innerText = t.common_name;
+    // document.querySelector('label[for="botanicalplant-search-inp"]').innerText = t.botanical_name;
     document.getElementById('commonplant-search-inp').placeholder = lang === 'en' ? "Search..." : "Keresés...";
     
     // Checkbox Group Headers
@@ -468,8 +468,8 @@ document.getElementById('searchPlant_Btn').addEventListener("click", async (e) =
         const plants = await response.json();
 
         const filteredPlants = plants.filter(p => {
-            const criteriaCommonName = !commonNameSearch || p.commonName.toLowerCase().includes(commonNameSearch);
-            console.log(`Name: ${criteriaCommonName}`)
+            const criteriacommonName = !commonNameSearch || p.common_name.toLowerCase().includes(commonNameSearch);
+            console.log(`Name: ${criteriacommonName}`)
             
             const criteriaWater = ActiveWaterCheckboxes.length === 0 || ActiveWaterCheckboxes.includes(p.water.toLowerCase());
             const criteriaSunlight = ActiveSunlightCheckboxes.length === 0 || ActiveSunlightCheckboxes.includes(p.sunlight.toLowerCase());
@@ -484,7 +484,7 @@ document.getElementById('searchPlant_Btn').addEventListener("click", async (e) =
             console.log(`Harvesting: ${criteriaHarvesting}`)
 
             // Use && to ensure ALL checked criteria must be met
-            return criteriaCommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting;
+            return criteriacommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting;
         });
 
         //Send to display function (passing the array)
@@ -544,8 +544,8 @@ function displayResults(results) {
         resultTable.appendChild(tr);
     }
 
-    makeRow('Common:', p.commonName);
-    makeRow('Scientific:', p.botanicalName);
+    makeRow('Common:', p.common_name);
+    makeRow('Scientific:', p.botanical_name);
     makeRow('Watering:', p.water, 'watering');
     makeRow('Sunlight:', p.sunlight, 'sunlight');
     makeRow('Soil:', p.soil, 'soil');

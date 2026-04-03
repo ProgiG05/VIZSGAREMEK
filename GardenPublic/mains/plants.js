@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     resp.forEach(plant => {
         plantcontainer.appendChild(document.createElement('div')).innerHTML = `
             <div class="plant-card">
-                <h2>${plant.commonName}</h2>
-                <h3>Alias: ${plant.botanicalName}</h3>
+                <h2>${plant.common_name}</h2>
+                <h3>Alias: ${plant.botanical_name}</h3>
                 <p>Planting: ${plant.planting}</p>
                 <p>Harvesting: ${plant.harvesting}</p>
             </div>
@@ -55,7 +55,7 @@ function searchPlant(container) {
             harvestingMonth: document.getElementById('harvestingSelection').value || "none"
         }
         
-        const plantsData = await fetch('/api/plantfinder?commonName=' + data.name + '&water=' + data.water + '&sunlight=' + data.sunlight + '&soil=' + data.soil + '&plantingMonth=' + data.plantingMonth + '&harvestingMonth=' + data.harvestingMonth,
+        const plantsData = await fetch('/api/plantfinder?common_name=' + data.name + '&water=' + data.water + '&sunlight=' + data.sunlight + '&soil=' + data.soil + '&plantingMonth=' + data.plantingMonth + '&harvestingMonth=' + data.harvestingMonth,
             {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
@@ -74,8 +74,8 @@ function SearchPlantDetails(details, container) {
     details.forEach(plant => {
         container.appendChild(document.createElement('div')).innerHTML = `
             <div class="plant-card">
-                <h2>${plant.commonName}</h2>
-                <h3>Alias: ${plant.botanicalName}</h3>
+                <h2>${plant.common_name}</h2>
+                <h3>Alias: ${plant.botanical_name}</h3>
                 <p>Planting: ${plant.planting}</p>
                 <p>Harvesting: ${plant.harvesting}</p>
                 <p>Soil: ${plant.soil}</p>
