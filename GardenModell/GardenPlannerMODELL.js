@@ -23,7 +23,7 @@ module.exports = {
         return rows
     },
     AddNewgarden : async function CreateGarden(garden) {
-        const [rows] = await connection.query(`INSERT INTO gardenmanager (user_id, garden_name, garden_content) VALUES(?,?,?)`,[garden.user_id, garden.gardenname, garden.gardencontent])
+        const [rows] = await connection.query(`INSERT INTO garden_manager (user_id, garden_name, garden_content) VALUES(?,?,?)`,[garden.user_id, garden.garden_name, garden.garden_content])
         return rows
     },
     GetMySavedPlants : async function GetMySavedPlants() {

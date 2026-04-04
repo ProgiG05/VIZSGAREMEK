@@ -28,8 +28,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="plant-card">
                 <h2>${plant.common_name}</h2>
                 <h3>Alias: ${plant.botanical_name}</h3>
+                <p>Origin: ${plant.origin}</p>
+                <p>Type: ${plant.type}</p>
                 <p>Planting: ${plant.planting}</p>
+                <p>Pruning: ${plant.pruning}</p>
                 <p>Harvesting: ${plant.harvesting}</p>
+                <p>Soil: ${plant.soil}</p>
+                <p>Water: ${plant.water}</p>
+                <p>Sunlight: ${plant.sunlight}</p>
+                <p>Indoor: ${plant.indoor ? "Yes" : "No"}</p>
+                <p>Seeds: ${plant.seeds ? "Yes" : "No"}</p>
             </div>
         `
     })
@@ -76,11 +84,16 @@ function SearchPlantDetails(details, container) {
             <div class="plant-card">
                 <h2>${plant.common_name}</h2>
                 <h3>Alias: ${plant.botanical_name}</h3>
+                <p>Origin: ${plant.origin}</p>
+                <p>Type: ${plant.type}</p>
                 <p>Planting: ${plant.planting}</p>
+                <p>Pruning: ${plant.pruning}</p>
                 <p>Harvesting: ${plant.harvesting}</p>
                 <p>Soil: ${plant.soil}</p>
                 <p>Water: ${plant.water}</p>
                 <p>Sunlight: ${plant.sunlight}</p>
+                <p>Indoor: ${plant.indoor ? "Yes" : "No"}</p>
+                <p>Seeds: ${plant.seeds ? "Yes" : "No"}</p>
             </div>
         `
     })

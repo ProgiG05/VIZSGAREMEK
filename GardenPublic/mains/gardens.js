@@ -108,7 +108,7 @@ function CreateTable(splittedContent, plants) {
                 default:
                     const plant = plants.find(p => p.id === plantId);
                     tableColumn.className = "plant-cell";
-                    tableColumn.textContent = plant ? plant.commonName : "Unknown";
+                    tableColumn.textContent = plant ? plant.common_name : "Unknown";
                     break;
             }
             tableRow.appendChild(tableColumn);

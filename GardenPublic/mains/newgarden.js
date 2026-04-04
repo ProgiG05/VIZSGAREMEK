@@ -33,8 +33,8 @@ async function ShowAddGardenForm(container) {
         const content = Array(parseInt(gardenRows)).fill(Array(parseInt(gardenColumns)).fill("+").join(",")).join(";");
         const garden = {
             user_id: null,
-            gardenname: gardenName,
-            gardencontent: content,
+            garden_name: gardenName,
+            garden_content: content,
         };
         await newGarden(garden);
         window.location.href = "/gardens.html";

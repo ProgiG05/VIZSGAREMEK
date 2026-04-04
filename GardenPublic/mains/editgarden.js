@@ -70,8 +70,8 @@ function loadContents(plants) {
         card.className = "plant-card";
         card.dataset.id = plant.id;
         card.innerHTML = `
-            <p><strong>${plant.commonName}</strong></p>
-            <p><em>${plant.botanicalName}</em></p>
+            <p><strong>${plant.common_name}</strong></p>
+            <p><em>${plant.botanical_name}</em></p>
         `;
         plantselection.appendChild(card);
     });
@@ -113,7 +113,7 @@ function CreateTable(splittedContent, plants) {
                 default:
                     const plant = plants.find(p => p.id === plantId);
                     tableColumn.className = "plant-cell";
-                    tableColumn.textContent = plant ? plant.commonName : "Unknown";
+                    tableColumn.textContent = plant ? plant.common_name : "Unknown";
                     break;
             }
             tableRow.appendChild(tableColumn);
@@ -128,10 +128,10 @@ function EditGarden(garden, plants, parentContainer, controls) {
     gardenCard.className = "garden-card";
     gardenCard.id = "garden" + garden.id;
     gardenCard.innerHTML = `
-        <h2 class="garden-name" contenteditable="true">${garden.gardenname}</h2>
+        <h2 class="garden-name" contenteditable="true">${garden.garden_name}</h2>
     `;
 
-    const splittedContent = garden.gardencontent.split(";");
+    const splittedContent = garden.garden_content.split(";");
     const table = CreateTable(splittedContent, plants);
     gardenCard.appendChild(table);
 
@@ -228,7 +228,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             cell.textContent = "+";
             cell.classList.remove('active');
             controls.container.style.display = "none";
-            garden.gardencontent = tempSaveGardenData();
+            garden.garden_content = tempSaveGardenData();
         }
     };
 
@@ -239,7 +239,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             cell.textContent = "";
             cell.classList.remove('active');
             controls.container.style.display = "none";
-            garden.gardencontent = tempSaveGardenData();
+            garden.garden_content = tempSaveGardenData();
         }
     };
 
@@ -262,7 +262,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             }
         }
         
-        garden.gardencontent = tempSaveGardenData();
+        garden.garden_content = tempSaveGardenData();
     };
 
     function tempSaveGardenData() {
@@ -270,7 +270,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             return Array.from(row.querySelectorAll("td")).map(cell => {
                 if (cell.classList.contains("empty-cell")) return "";
                 if (cell.classList.contains("disabled-cell")) return "+";
-                const plant = plants.find(p => p.commonName === cell.textContent);
+                const plant = plants.find(p => p.common_name === cell.textContent);
                 return plant ? plant.id : "";
             }).join(",");
         }).join(";");
@@ -362,7 +362,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
         const addRows = parseInt(addRowsInput.value) || 0;
         const addColumns = parseInt(addColumnsInput.value) || 0;
         
-        let rows = garden.gardencontent.split(";");
+        let rows = garden.garden_content.split(";");
         
         // Add columns to existing rows
         if (addColumns > 0) {
@@ -384,8 +384,8 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             }
         }
 
-        garden.gardencontent = rows.join(";");
-        console.log(garden.gardencontent);
+        garden.garden_content = rows.join(";");
+        console.log(garden.garden_content);
         // Re-render the garden
         parentContainer.innerHTML = "";
         EditGarden(garden, plants, parentContainer, controls);
@@ -405,7 +405,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     removeLastRowBtn.type = "button";
     removeLastRowBtn.onclick = () => {
         if (confirm("Are you sure you want to remove the last row from this garden? Any unsaved changes will be lost.")) {
-            let rows = garden.gardencontent.split(";");
+            let rows = garden.garden_content.split(";");
 
             if (!rows[rows.length - 1].split(",").map(val => val === "").includes(false)) {
                 rows.pop();
@@ -414,8 +414,8 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
                 alert("Last row is not empty, it cannot be removed.")
                 return;
             }
-            garden.gardencontent = rows.join(";");
-            console.log(garden.gardencontent);
+            garden.garden_content = rows.join(";");
+            console.log(garden.garden_content);
             // Re-render the garden
             parentContainer.innerHTML = "";
             EditGarden(garden, plants, parentContainer, controls);
@@ -430,7 +430,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     removeLastColumnBtn.type = "button";
     removeLastColumnBtn.onclick = () => {
         if (confirm("Are you sure you want to remove the last column from this garden? Any unsaved changes will be lost.")) {
-            let rows = garden.gardencontent.split(";");
+            let rows = garden.garden_content.split(";");
             let canRemove = true;
             rows = rows.map(row => {
                 let cols = row.split(",");
@@ -451,7 +451,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
                 alert("Last column is not empty, it cannot be removed.")
                 return;
             }
-            garden.gardencontent = rows.join(";");
+            garden.garden_content = rows.join(";");
             // Re-render the garden
             parentContainer.innerHTML = "";
             EditGarden(garden, plants, parentContainer, controls);
