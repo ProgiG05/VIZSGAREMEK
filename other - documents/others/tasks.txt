@@ -1,18 +1,26 @@
 index page: 
-	make the sample idea cards, come from fetch
-	make the plant searcher work
+	make some design changes
+	(maybe more pictures, more icons)
+	make it more compact, use every space
 ideas page:
 	fix the searching function
 	add a reader function
+	change color scheme
+	make the title, subtitle and search bar on the left,
+	and a placeholder with the same hight on the right displaying a randomized card, or smth else
+	(maybe apply the same hill art)
+	ideas and knowledges page should be identical
 knowledges page:
-	replace the pictures with divs(cut path)
-	make the reader cards more enjoyable
+	(hill art stayes or not?)
+	make the reader cards more enjoyable and immersive
 	change some colors and fonts
+	make it the same like the ideas page
 plants page:
 	add a search/finder container with detailed search options
 	make groups based on the type of the plants (as a filtering option)
 	(ABC line as another filtering option)	
 	redesign the cards: fetched data + save button + smth
+	landing section, direction row, left: title + subtitle, right: search container
 gardens page:
 	redesign the garden card:
 		dimensions, height and width
@@ -26,5 +34,11 @@ garden adding page:
 garden editing page:
 	right and left floating inwards panels
 	same color pattern to the gardens page
-	
+
+
+
+other:
+	login system: token
+	error handling
+	documentation: inline comments + word document
 	 	
