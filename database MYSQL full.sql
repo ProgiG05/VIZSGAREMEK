@@ -149,7 +149,7 @@ INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water
 ('Basil', 'Ocimum basilicum', 'Central Africa', 'herbs', 'medium', 'high', 'moderate', 1, 1, 'April', 'June-August', 'July'),
 ('Aloe Vera', 'Aloe barbadensis miller', 'Arabian Peninsula', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'April-May', 'Year-round'),
 ('Cucumber', 'Cucumis sativus', 'South Asia', 'vegetables', 'high', 'high', 'high', 0, 1, 'April-May', 'July-August', 'August'),
-('Rosemary', 'Salvia rosmarinus', 'Mediterranean', 'herbs', 'low', 'high', 'low', 0, 0, 'March-April', 'May-June', 'Year-round');
+('Rosemary', 'Salvia rosmarinus', 'Mediterranean', 'herbs', 'low', 'high', 'low', 0, 0, 'March-April', 'May-June', 'Year-round'),
 ('Thyme', 'Thymus vulgaris', 'Mediterranean', 'herbs', 'low', 'high', 'low', 1, 1, 'April-May', 'June', 'Year-round'),
 ('Oregano', 'Origanum vulgare', 'Mediterranean', 'herbs', 'low', 'high', 'moderate', 1, 1, 'April-May', 'July', 'Year-round'),
 ('Parsley', 'Petroselinum crispum', 'Mediterranean', 'herbs', 'medium', 'moderate', 'high', 1, 1, 'March-April', 'None', 'June-October'),
