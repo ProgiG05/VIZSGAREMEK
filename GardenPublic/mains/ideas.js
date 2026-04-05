@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
 
+    const randomNum = Math.floor(Math.random() * ListOfIdeas.length)
+    const oneIdeaShowcasecont = document.getElementById("oneCardShowcase_cont")
+    const randomIdea = ListOfIdeas[randomNum]
+
+    console.log(randomIdea)
+
     ListOfIdeas.forEach(idea => {
         //console.log("Title: " + idea.title + "\nDescription: " + idea.description + "\nPicture: " + idea.picture + "\nPlants: " + idea.plants + "\nSunlight: " + idea.sunlight + "\nWater: " + idea.water + "\nMaintenance: " + idea.maintenance)
         

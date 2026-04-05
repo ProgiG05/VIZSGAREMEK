@@ -168,34 +168,57 @@ body.dark-theme{
 .hidden2 {opacity: 0;transition: all 1s ease;transform: translateX(100px);}
 .show{opacity: 1;transition: all 1s ease;transform: translateX(0);}
 
+
+
+
+
+
 .header-container{
-    width: 80%;
+    width: 95%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin: auto;
     margin-bottom: 50px;
     align-items:center;
 }
+.left-cont{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border: 2px solid red;
+}
+.right-cont{
+    width: 50%;
+    border: 2px solid red;
+}
 .main-title{
     font-family: Georgia, 'Times New Roman', Times, serif; 
     color: var(--general-font-color);
-    font-size: clamp(2.5rem, 10vw, 10.8rem);
-    text-align: center;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    text-align: left;
     text-shadow: var(--title-text-shadow);
     letter-spacing: 10px;
     font-weight: bolder;
     margin-bottom: -20px;
+    padding-left: 2rem;
+    text-wrap: balance;
 }
 .sub-title{
     font-family: 'Courier New', Courier, monospace; 
     color: var(--general-font-color);
-    font-size: calc(0.8rem, 2vw, 4rem);
-    text-align: center;
+    font-size: calc(0.8rem, 4vw, 5rem);
+    text-align: left;
+    padding-left: 2rem;
     font-style: italic;
-    margin-bottom: 30px;
+    margin: 2rem 0 0 0;
+    text-wrap: balance;
 }
 #searchBar{
-    width: 35vw;
+    width: 30vw;
     height: fit-content;
     padding: 0.5rem 0 0.5rem 0;
     font-size: clamp(0.7rem,1vw,3rem);
@@ -207,7 +230,7 @@ body.dark-theme{
 }
 #searchBar:focus{
     outline: none;
-    width: 40vw;
+    width: 35vw;
     transition: all 0.2s ease-in-out;
 }
 /* ######################################################## */
