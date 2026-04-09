@@ -1,37 +1,22 @@
 document.addEventListener("DOMContentLoaded", async (e) => {
-    const settingsBtn = document.getElementById('settings_Btn');
-    const sidePanel = document.getElementById('settings-sidepanel');
-    const closePanel = document.getElementById('closeSidePanel');
-
-    settingsBtn.addEventListener('click', () => {
-        sidePanel.style.transition = '0.4s all ease'
-        sidePanel.style.left = 0
-    });
-    closePanel.addEventListener('click', () => {
-        sidePanel.style.transition = '0.4s all ease'
-        sidePanel.style.left = "-22.5rem"
-    });
-
     e.preventDefault()
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
 
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
-    const oneIdeaShowcasecont = document.getElementById("oneCardShowcase_cont")
-
+    const OneIdeaShowcasecont = document.getElementById("oneCardShowcase_cont")
 
     if (ListOfIdeas.length > 0) {
         const randomNum = Math.floor(Math.random() * ListOfIdeas.length)
-        const randomFeaturedIdeaCard = ListOfIdeas[randomNum]
-        oneIdeaShowcasecont.appendChild(createIdeaCard(randomFeaturedIdeaCard))
+        OneIdeaShowcasecont.appendChild(createIdeaCard(ListOfIdeas[randomNum]))
     }
 
     ListOfIdeas.forEach(idea => {
-        const card = createIdeaCard(idea)
-        IdeasCardContainer.appendChild(card)
+        IdeasCardContainer.appendChild(createIdeaCard(idea))
     });
 
 })
+
 function createIdeaCard(idea) {
     // 1. Create the Main Card Container
     const OneIdeaCard = document.createElement("div");
@@ -52,6 +37,7 @@ function createIdeaCard(idea) {
     const OneIdeaTitle = document.createElement("h2");
     OneIdeaTitle.textContent = idea.title;
     OneIdeaTitle.setAttribute("class", "card-title");
+    OneIdeaTitle.setAttribute("onclick", "ConvertToReadingMode(this)")
     OneIdeaCard.appendChild(OneIdeaTitle);
 
     const OneIdeaDescription = document.createElement("p");
@@ -139,7 +125,8 @@ function createIdeaCard(idea) {
     
     return OneIdeaCard;
 }
-// --- Other stuff Logic ---
+
+// --- Save idea function Logic, Go to the top of the page Logic, Dark theme local storage Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved');}
 document.getElementById('toup').addEventListener('click', () => {
@@ -151,6 +138,10 @@ window.onload = () => {
         darkBtn.classList.add('dark-active')
     }
 }
+function ConvertToReadingMode(card) {
+
+}
+
 // --- Dark Mode Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 const body = document.body;
@@ -181,10 +172,35 @@ closePanel.addEventListener('click', () => {
     sidePanel.style.left = "-22.5rem"
 });
 
-// --- Searchbar Logic ---
+// --- Searchbar Logic 1---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-document.getElementById("searchBar").addEventListener("input", async (e) => {
+
+document.getElementById("showSearch").addEventListener("click", () => {
+    document.getElementById("search-cont").scrollIntoView({behavior:"smooth"})
+})
+
+// document.getElementById("searchBar").addEventListener("input", async (e) => {
+//     e.preventDefault()
+//     const searchValue = document.getElementById("searchBar").value.toLowerCase();
+//     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
+//     IdeasCardContainer.innerHTML = ``
+//     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
+//     const ListOfIdeas = await responseIdeas.json()
+//     ListOfIdeas.forEach(idea => {
+//         let ideaTitle = idea.title.toLowerCase()
+//         if (ideaTitle.includes(searchValue)) {
+//             const card = createIdeaCard(idea)
+//             IdeasCardContainer.appendChild(card)
+//         }
+//         //handling no matching result
+//     });
+// })
+
+// --- Searchbar Logic 2---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+document.getElementById("searchBtn").addEventListener("click", async (e) => {
     e.preventDefault()
     const searchValue = document.getElementById("searchBar").value.toLowerCase();
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")

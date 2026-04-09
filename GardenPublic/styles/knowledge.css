@@ -1,108 +1,132 @@
 :root {
-    --body-bg: rgb(27, 23, 12);
-    /* --parallax-sect-bg: #cdbe71; */
-    --parallax-sect-bg: #98acb3;
-    --text-main:rgb(255, 255, 255);
+    /* ######################################################## */
+    --body-bg: linear-gradient(to bottom, #b2cd8f , #384d28 );
+    --header-cont-bg: linear-gradient(to left, #364d26,#92ac70);
+    --card-cont-bg: linear-gradient(to right, #364d26,#92ac70);
+    --general-font-color:#060b04;
+    --navbarBtn-bg: #334429e2;
+    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-hover-bg: #212c19;
+    --navbarBtn-hover-font-color: rgb(255, 255, 255);
+    --search-btns-bg: #e0e9d5;
+    --search-btns-font: #1a1e1a;
+    --search-btns-hover-bg: #1a1e1a;
+    --search-btns-hover-font: #e0e9d5;
+    /* ######################################################## */
     --card-bg: linear-gradient(to bottom, rgb(98, 129, 65) ,rgb(27, 33, 26));
     --paragraph-bg:rgba(88, 37, 3, 0.607);
     --card-shadow:rgba(249, 249, 157, 0.751);
     --card-text:rgb(255, 238, 224);
-
-    --navbtn-bg: #071903;
-    --navbtn-hover-bg: #e2fdf4;
-    --navbtn-font-color: #a7cabe;
-    --navbtn-hover-font-color: #061803;
-
     --cardBtn-bg: #042210;
     --cardBtn-hover-bg: #e2fdf4;
     --cardbtn-color: #a7cabe;
     --cardbtn-hover-font-color: #061803;
+    /* ######################################################## */
 }
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
 body.dark-theme{
     --body-bg: linear-gradient(to bottom, #677D6A, #1A3636);
-    --navbtn-bg: #5d8863e1;
-    --navbtn-hover-bg: #76b684;
-    --navbtn-font-color: #ecfdf0;
-    --navbtn-hover-font-color: #f0fff2;
+    --navbarBtn-bg: #515e4aee;
+    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-hover-bg: #16220e;
+    --navbarBtn-hover-font-color: rgb(255, 255, 255);
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 body {
-    background-color: var(--body-bg);
-    min-height: 100vh;
+    background-image: var(--body-bg);
+    transition: all 0.2s ease;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-}
-.parallax-section{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    background-color: var(--parallax-sect-bg);
-}
-.hill-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-.hill-svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 600px;
-}
-.layer-2-1 { fill: #4b5332; transform: translateY(-50px)}
-.layer-2-2 { fill: #2e351a;}
-.layer-2-3 { fill: #1a160f; transform: translateY(100px);}
-
-.content-section{
-    overflow-y: visible;
-    min-height: 100vh;
-    height: auto;
-}
-.title-cont{
-    position: absolute;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
+    justify-items: center;
+}
+.header-container{
+    width: 95%;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0 5rem 0;
+    padding: 2rem 0 2rem 0;
+    border-radius: 5rem;
+    align-items:center;
+    background-image: var(--header-cont-bg);
+}
+.left-cont{
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    z-index: 10;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+}
+.right-cont{
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+.right-cont > div{width: 80%;}
+.main-title{
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    color: var(--text-main);
+    color: var(--general-font-color);
+    font-size: clamp(2.5rem, 5.9vw, 7rem);
+    text-shadow: var(--title-text-shadow);
+    letter-spacing: 5px;
+    font-weight: bolder;
+    margin: 0;
+    text-wrap: balance;
+    text-align: left;
+    padding-left: 5rem;
 }
-.main-title {
-    font-size: clamp(2rem, 9vw, 12rem);
-    letter-spacing: 0.5rem;
-    font-weight: 800;
-    margin: 1.5rem 0 0.5rem 0;
-    text-transform: uppercase;
-}
-.sub-title {
-    font-size: clamp(1.2rem, 1.7vw, 3rem);
+.sub-title{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: var(--general-font-color);
+    font-size: clamp(1rem, 1vw, 1.2rem);
+    text-align: left;
+    width: 90%;
+    line-height: 2.7vh;
     font-style: italic;
-    opacity: 0.9;
-    margin-bottom: 3rem;
+    text-wrap: balance;
+    padding-left: 5rem;
+}
+#showContainer{
+    width: 30vw;
+    height: fit-content;
+    padding: 0.8rem 0 0.8rem 0;
+    margin: 8rem 0 0 0 ;
+    font-size: clamp(0.7rem,1vw,3rem);
+    border-radius: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--search-btns-bg);
+    color: var(--search-btns-font);
+}
+#showContainer:hover{
+    width: 32vw;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--search-btns-hover-bg);
+    color: var(--search-btns-hover-font);
+    letter-spacing: 2px;
+    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.main-container-knowledges {
-    background-color:  rgb(27, 23, 12);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    gap: 2rem;
-}
-.OneKnowledgeCard {
-    width: 75%;
+.ShowCaseOneKnowledgeCard{
+    width: 40%;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -110,16 +134,160 @@ body {
     justify-content: center;
     overflow: hidden;
     background-image: var(--card-bg);
-    padding: 2.5rem;
-    margin: 2rem auto;
+    padding: 1.5rem;
+    margin: 1.5rem ;
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--card-shadow);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(194, 226, 170, 0.1);
     z-index: 1000;
     position: relative;
 }
-/* 1. Added a subtle "Scanner" light effect on hover */
+.ShowCaseOneKnowledgeCard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        transparent, 
+        rgba(255, 255, 255, 0.05), 
+        transparent
+    );
+    transition: 0.5s;
+    pointer-events: none;
+}
+.ShowCaseOneKnowledgeCard:hover::before {
+    left: 150%;
+}
+.ShowCaseOneKnowledgeCard:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+    border-color: var(--card-text);
+}
+.ShowCaseOneKnowledgeTitle{
+    color: var(--card-text);
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    font-size: clamp(1.8rem, 5vw, 5.5rem);
+    text-align: center;
+    text-wrap: balance;
+    margin: 0.2rem 0 1.5rem 0;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.ShowCaseOneKnowledgeTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1rem;
+    left: 50%;
+    width: 10rem;
+    height: 3px;
+    background: var(--card-text);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    opacity: 0.6;
+}
+
+.ShowCaseOneKnowledgeCard:hover .ShowCaseOneKnowledgeTitle::after {
+    width: 30rem;
+}
+.ShowCaseOneKnowledgeSummary{
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
+    color: var(--card-text);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: left; 
+    width: 80%;
+    word-spacing: 0.3vw;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.knowledges-container{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: var(--card-cont-bg);
+    border-radius: 5rem;
+}
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.OneKnowledgeSet{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin: 1rem 0 1rem 0;
+    transition: all 0.5s ease;
+}
+.OneKnowledgeSet.expanded {width: 95%;}
+.OneKnowledgeSet.expanded .readMoreBtn{display: none;}
+.OneKnowledgeSet.expanded .OneKnowledgeCard{ width: 100% !important; flex-direction: column;}
+.readMoreBtn{
+    background-color: var(--cardBtn-bg);
+    color: var(--cardbtn-color);
+    font-family: monospace;
+    border-radius: 2rem;
+    width: 2vw;
+    min-height: 50%;
+    padding: 0;
+    margin: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    writing-mode: vertical-rl; 
+    text-orientation: upright;
+}
+.closeBtn{
+    background-color: var(--cardBtn-bg);
+    color: var(--cardbtn-color);
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.closeBtn:hover{
+    background-color: var(--cardBtn-hover-bg);
+    color: var(--cardbtn-hover-font-color);
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    transition: all 0.3s ease;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.OneKnowledgeCard {
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    overflow: hidden;
+    background-image: var(--card-bg);
+    padding: 2.5rem;
+    margin: 2rem ;
+    border-radius: 1.5rem;
+    box-shadow: 6px 6px 4px var(--card-shadow);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(194, 226, 170, 0.1);
+    z-index: 1000;
+    position: relative;
+}
+.OneKnowledgeCard .card-content{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.OneKnowledgeCard .card-actions{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 .OneKnowledgeCard::before {
     content: '';
     position: absolute;
@@ -143,16 +311,19 @@ body {
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
     border-color: var(--card-text);
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
 .OneKnowledgeTitle {
     color: var(--card-text);
     font-family: Georgia, 'Times New Roman', Times, serif; 
     font-size: clamp(1.8rem, 5vw, 5.5rem);
-    text-align: center;
+    text-align: left;
+    text-wrap: balance;
     margin: 0.2rem 0 1.5rem 0;
     letter-spacing: 1px;
     font-weight: bold;
 }
-/* 2. Title Accent: A centered underline that expands on hover */
 .OneKnowledgeTitle::after {
     content: '';
     position: absolute;
@@ -166,53 +337,20 @@ body {
     transition: width 0.3s ease;
     opacity: 0.6;
 }
-
 .OneKnowledgeCard:hover .OneKnowledgeTitle::after {
     width: 30rem;
 }
 .OneKnowledgeSummary{
-    font-size: clamp(1rem, 1.5vw, 2rem);
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
     color: var(--card-text);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: left; 
     width: 65%;
-    text-align: center;
     word-spacing: 0.3vw;
 }
-.readmoreBtn{
-    background-color: var(--cardBtn-bg);
-    color: var(--cardbtn-color);
-    font-family: monospace;
-    border-radius: 10px;
-    width: 60%;
-    height: fit-content;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
-}
-.readmoreBtn:hover{
-    background-color: var(--cardBtn-hover-bg);
-    color: var(--cardbtn-hover-font-color);
-    width: 70%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.closeBtn{
-    background-color: var(--cardBtn-bg);
-    color: var(--cardbtn-color);
-    width: fit-content;
-    height: fit-content;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-.closeBtn:hover{
-    background-color: var(--cardBtn-hover-bg);
-    color: var(--cardbtn-hover-font-color);
-    width: fit-content;
-    height: fit-content;
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    transition: all 0.3s ease;
-}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
 .OneKnowledgeDescription {
     color: var(--card-text);
     line-height: 1.8;
@@ -222,9 +360,16 @@ body {
     text-align: left; 
     border-left: 5px solid rgba(176, 246, 123, 0.601);
     padding-left: 1.5rem;
-    height: 20rem;
-    width: 75%;
-    overflow-y: scroll;
+    height: auto;
+    max-height: 25rem;
+    width: 50%;
+    overflow-y: auto;
+    animation: slideIn 0.4s ease;
+    flex: 1;
+}
+@keyframes slideIn {
+    from { opacity: 0; max-height: 0;}
+    to { opacity: 1; max-height: 25rem;}
 }
 .OneKnowledgeParagraph {
     font-size: clamp(0.4rem, 0.8vw, 1rem);
@@ -234,162 +379,41 @@ body {
     background-color: var(--paragraph-bg);
     padding: 0.5rem;
     border-radius: 10px;
+    width: 80%;
 }
+.OneKnowledgeParagraph:nth-child(odd) {margin-left: 5rem;}
+.OneKnowledgeParagraph:nth-child(even) { margin-right: 5rem;}
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-#top-navbar {
-    width: 100%;
-    height: 3.75rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
+.OneKnowledgePicture{
+    object-fit: contain;
+    aspect-ratio: 2/3;
+    width: 50%;
+    height: fit-content;
 }
-#top-navbar a {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-family: monospace;
-    font-size: clamp(0.7rem, 1.1vw, 1.6rem);
-    background-color: var(--navbtn-bg);
-    color: var(--navbtn-font-color);
-    transition: all 0.2s ease-in;
-}
-#top-navbar a:hover {
-    letter-spacing: 0.125rem;
-    background-color: var(--navbtn-hover-bg);
-    color: var(--navbtn-hover-font-color);
-}
-.settings-sidepanel {
-    width: 18.75rem;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.toup{
     position: fixed;
-    z-index: 100;
-    gap: 1.25rem;
-    padding: 1.875rem;
-    left: -22.5rem;
-    top: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.7);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    z-index: 1000;
-}
-.settings-sidepanel h2 {
-    margin: 0 0 1.125rem 0;
-    font-size: 1.75rem;
-    font-weight: bold;
-    line-height: 1.2;
-    color: var(--text-main);
-}
-.settings-sidepanel a {
-    display: block;
-    padding: 0.625rem 0.75rem;
-    margin: 0.375rem 0;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.03);
-    color: var(--text-main);
-    text-decoration: none;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    font-weight: bold;
-}
-.settings-sidepanel a:hover{
-    background: rgba(255, 255, 255, 0.238);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-}
-.closeSidePanel {
-    width: 2.25rem;
-    height: 2.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    padding: 0.25rem;
-    top: 1.875rem;
-    right: 1.875rem;
-    background: transparent;
-    border: none;
-    cursor: pointer; 
-}
-.closeSidePanel img {width: 1.875rem;height: 1.875rem;display: block;}
-.lang-selection{
-    width: 100%;
-    margin: 0.5rem 0 1rem 0;
-    padding: 0.5rem 0.625rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.12);
-    background: transparent;
-    color: var(--text-main);
-    font-size: 0.95rem;
-}
-.darkmode{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.875rem;
-    padding: 0.5rem 0.625rem;
-    gap: 0.625rem;
-    background: transparent;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: var(--text-main);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.darkmode:hover {background: rgba(255, 255, 255, 0.1);}
-.theme-icon {width: 1.875rem;height: 1.875rem;transition: all 0.5s ease;}
-#dark-icon {order: 1;}
-#light-icon {order: 2;opacity: 0;}
-#darkmode.dark-active #dark-icon {opacity: 0;}
-#darkmode.dark-active #light-icon {opacity: 1;}
-#header-container {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    display: flex;
-    gap: 1rem;
-    z-index: 1000;
-}
-#goup-btn {
-    width: 2.917vw;
-    height: 5.6vh;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
     bottom: 0;
     left: 0;
-    position: fixed;
-    border-radius: 50%;
+    margin-left: 0.5vw;
+    margin-bottom: 0.9vh;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 10px;
     border: none;
-    cursor: pointer;
-    display: flex;
+    background-color: #1e2b1b;
+    border: 1px solid var(--general-font-color);
     align-items: center;
     justify-content: center;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s ease;
+    transition: 0.2s all ease;
+    z-index: 1000;
 }
-#goup-btn:hover {
-    transform: scale(1.1);
-    background-color: var(--navbtn-hover-bg);
-}
-#goup-btn:active {
-    transform: scale(0.95);
-    transition: all 0.2s ease;
-}
-#goup-btn img {
-    width: 1.8rem;
-    height: 1.8rem;
-    filter: brightness(0.2); 
-}
+.toup img{width: 100%;height: 100%;margin: 0;padding: 0;}
+.toup:hover{cursor: pointer;}
+.toup:active{transform: translateY(5px);transition: 0.3s all ease;}
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
