@@ -43,7 +43,7 @@ function createKnowledgeSection(knowledge) {
     const readMoreBtn = document.createElement('button')
     readMoreBtn.setAttribute('class','readMoreBtn')
     readMoreBtn.setAttribute('id','readMoreBtn')
-    readMoreBtn.textContent = 'Read more'
+    readMoreBtn.textContent = `>`
 
     const closeBtn = document.createElement("button")
     closeBtn.setAttribute('class','closeBtn')
@@ -69,11 +69,13 @@ function createKnowledgeSection(knowledge) {
             const paragraph = document.createElement('p')
             paragraph.setAttribute('class','OneKnowledgeParagraph')
 
-            if (descriptionBuffer[i+1] !== undefined) {
+            if (descriptionBuffer[i+1] !== undefined && descriptionBuffer[i] !== undefined) {
                 paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`
+                console.log(`First sentence: ${descriptionBuffer[i]}\nSecond sentence: ${descriptionBuffer[i+1]}\n`)
             }
             if (descriptionBuffer[i+1] === undefined) {
                 paragraph.textContent = `${descriptionBuffer[i]}`
+                console.log(`One sentence: ${descriptionBuffer[i]}`)
             }
 
             OneKnowledgeDescription.appendChild(paragraph)
@@ -86,6 +88,9 @@ function createKnowledgeSection(knowledge) {
         
         // Hide readMoreBtn
         readMoreBtn.style.display = 'none'
+
+        OneKnowledgeSet.removeChild(imageWrapper)
+        OneKnowledgeCard.appendChild(imageWrapper)
     })
     
     closeBtn.addEventListener('click', () => {
@@ -106,11 +111,20 @@ function createKnowledgeSection(knowledge) {
         
         // Show readMoreBtn again
         readMoreBtn.style.display = ''
+
+        OneKnowledgeSet.appendChild(imageWrapper)
+        OneKnowledgeCard.removeChild(imageWrapper)
     })
+
+
+    const imageWrapper = document.createElement("div")
+    imageWrapper.setAttribute("class","OneKnowledgePictureWrapper")
 
     const imagePlace = document.createElement("img")
     imagePlace.setAttribute("class","OneKnowledgePicture")
     imagePlace.setAttribute("src", "../pics/gardenknowledges/" + knowledge.picture + ".png");
+
+    imageWrapper.appendChild(imagePlace)
     
     // 7. Assembly
     cardContent.appendChild(OneKnowledgeTitle)
@@ -119,7 +133,7 @@ function createKnowledgeSection(knowledge) {
     
     OneKnowledgeSet.appendChild(OneKnowledgeCard)
     OneKnowledgeSet.appendChild(readMoreBtn)
-    OneKnowledgeSet.appendChild(imagePlace)
+    OneKnowledgeSet.appendChild(imageWrapper)
 
     return OneKnowledgeSet
 }
