@@ -203,16 +203,28 @@ document.getElementById("showSearch").addEventListener("click", () => {
 document.getElementById("searchBtn").addEventListener("click", async (e) => {
     e.preventDefault()
     const searchValue = document.getElementById("searchBar").value.toLowerCase();
+    if (searchValue === "") {alert("Searchbar is empty")}
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
     IdeasCardContainer.innerHTML = ``
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
+    const match = true
     ListOfIdeas.forEach(idea => {
         let ideaTitle = idea.title.toLowerCase()
         if (ideaTitle.includes(searchValue)) {
             const card = createIdeaCard(idea)
             IdeasCardContainer.appendChild(card)
         }
+        else{
+            match == false
+        }
         //handling no matching result
     });
+    if (match) {
+        const MessageContainer = document.createElement("div")
+        MessageContainer.setAttribute("class","message-cont")
+        MessageContainer.textContent = "No matching result"
+        IdeasCardContainer.appendChild(MessageContainer)
+    }
+
 })

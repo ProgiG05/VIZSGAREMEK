@@ -218,7 +218,10 @@ body {
 .OneKnowledgeSet{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 95%;
+    max-height: 40%;
     margin: 1rem 0 1rem 0;
     transition: all 0.5s ease;
 }
@@ -387,10 +390,12 @@ body {
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .OneKnowledgePicture{
-    object-fit: contain;
-    aspect-ratio: 2/3;
-    width: 50%;
+    width: 45%;
+    height: 80%;
+    margin: 2rem;
     height: fit-content;
+    border-radius: 2rem;
+    border: 2px solid red;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */

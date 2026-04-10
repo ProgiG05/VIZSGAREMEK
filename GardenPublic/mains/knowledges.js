@@ -108,9 +108,9 @@ function createKnowledgeSection(knowledge) {
         readMoreBtn.style.display = ''
     })
 
-    // const imagewrapper = document.createElement("img")
-    // imagewrapper.setAttribute("class","OneKnowledgePicture")
-    // imagewrapper.setAttribute("src", "../pics/gardenknowledges/" + knowledge.picture + ".png");
+    const imagePlace = document.createElement("img")
+    imagePlace.setAttribute("class","OneKnowledgePicture")
+    imagePlace.setAttribute("src", "../pics/gardenknowledges/" + knowledge.picture + ".png");
     
     // 7. Assembly
     cardContent.appendChild(OneKnowledgeTitle)
@@ -119,7 +119,7 @@ function createKnowledgeSection(knowledge) {
     
     OneKnowledgeSet.appendChild(OneKnowledgeCard)
     OneKnowledgeSet.appendChild(readMoreBtn)
-    // OneKnowledgeSet.appendChild(imagewrapper)
+    OneKnowledgeSet.appendChild(imagePlace)
 
     return OneKnowledgeSet
 }
