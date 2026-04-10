@@ -1,22 +1,35 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const gardenId = window.location.search.split("=")[1];
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = "/sites/login.html";
+        return;
+    }
+
+    // ####### GET GARDEN ID FROM URL #######
+    const urlparams = new URLSearchParams(window.location.search)
+    const gardenId = urlparams.get("id");
     if (!gardenId) {
         alert("No garden ID provided!");
         window.location.href = "/gardens.html";
         return;
     }
 
-    // 1. Fetch data
+    // ####### FETCH DATA #######
     const gardenResp = await fetch(`/api/gardens/${gardenId}`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" }
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     });
     const gardenArray = await gardenResp.json();
     const garden = gardenArray[0]; // The API returns an array
 
-    if (!garden) {
+    if (!gardenArray) {
         alert("Garden not found!");
-        window.location.href = "/gardens.html";
+        console.log(gardenArray)
+        console.log(garden)
+        //window.location.href = "/gardens.html";
         return;
     }
 
@@ -26,18 +39,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     const plants = await plantsResp.json();
 
-    // 2. Setup UI
+    // ####### SETUP UI #######
     const controls = loadContents(plants);
     const editGardenContainer = document.getElementById("editGardenContainer");
     
-    // Initial Render
-    EditGarden(garden, plants, editGardenContainer, controls);
+    // ####### INITIAL RENDER #######
+    EditGarden(gardenArray, plants, editGardenContainer, controls);
     editGardenContainer.appendChild(controls.container);
 
 });
 
 //#########################################################
 
+// ####### LOAD CONTENTS #######
 function loadContents(plants) {
     // Containers
     const controlsContainer = document.createElement("div");
@@ -72,6 +86,7 @@ function loadContents(plants) {
         card.innerHTML = `
             <p><strong>${plant.common_name}</strong></p>
             <p><em>${plant.botanical_name}</em></p>
+            <p>${plant.id}</p>
         `;
         plantselection.appendChild(card);
     });
@@ -90,10 +105,12 @@ function loadContents(plants) {
     };
 }
 
+// ####### CREATE TABLE #######
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
     
+    // ####### RENDER TABLE #######
     splittedContent.forEach(row => {
         const columns = row.split(",");
         const tableRow = document.createElement("tr");
@@ -123,19 +140,22 @@ function CreateTable(splittedContent, plants) {
     return table;
 }
 
+// ####### EDIT GARDEN #######
 function EditGarden(garden, plants, parentContainer, controls) {
     const gardenCard = document.createElement("div");
     gardenCard.className = "garden-card";
     gardenCard.id = "garden" + garden.id;
     gardenCard.innerHTML = `
         <h2 class="garden-name" contenteditable="true">${garden.garden_name}</h2>
+        <p>${garden.garden_content}</p>
     `;
 
+    // ####### RENDER TABLE #######
     const splittedContent = garden.garden_content.split(";");
     const table = CreateTable(splittedContent, plants);
     gardenCard.appendChild(table);
 
-    // Footer buttons
+    // ####### FOOTER BUTTONS #######
     const footer = document.createElement("div");
     footer.className = "card-footer";
     footer.style.marginTop = "1rem";
@@ -255,7 +275,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
             const cell = getActiveCell();
             if (cell && plant) {
                 cell.className = "plant-cell";
-                cell.textContent = plant.commonName;
+                cell.textContent = plant.common_name;
                 cell.classList.remove('active');
                 controls.container.style.display = "none";
                 controls.selection.classList.remove('show');
@@ -298,18 +318,26 @@ function EditGarden(garden, plants, parentContainer, controls) {
 }
 
 async function SaveGarden(garden) {
+    const token = localStorage.getItem('token');
     const resp = await fetch(`/api/gardens/${garden.id}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(garden)
     });
     return resp.json();
 }
 
 async function DeleteGarden(id) {
+    const token = localStorage.getItem('token');
     const resp = await fetch(`/api/gardens/${id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" }
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     });
     return resp.json();
 }

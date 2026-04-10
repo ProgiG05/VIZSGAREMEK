@@ -80,6 +80,50 @@ body {
     display: block;
 }
 
+.login_btn {
+    width: 40%;
+    height: fit-content;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_btn:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+
+.login_btn:active{
+    background-color: rgba(0, 0, 0, 0.6);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+
+.loginText {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.newgarden_btn:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+    width: 40% !important;
+}
+
+.newgarden_btn:active{
+    background-color: rgba(0, 0, 0, 0.6);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+
 .configure-cont{
     width: 80%;
     margin: auto;

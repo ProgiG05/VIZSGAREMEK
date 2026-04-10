@@ -1,8 +1,12 @@
 // --- Initialize State ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+const token = localStorage.getItem("token");
 
 document.addEventListener('DOMContentLoaded', async (e) => {
     e.preventDefault()
+    if (token) {
+        document.getElementById("logIn_Btn").innerHTML = "Logout";
+    }
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("showcase-container")

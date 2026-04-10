@@ -30,12 +30,12 @@ module.exports = {
         const [rows] = await connection.query(`SELECT * FROM saved_plants`)
         return rows
     },
-    GetMyGardens : async function GetMyGardens() {
-        const [rows] = await connection.query(`SELECT * FROM garden_manager`)
+    GetGardensByUserId : async function GetGardensByUserId(userId) {
+        const [rows] = await connection.query(`SELECT * FROM garden_manager WHERE user_id = ?`, [userId])
         return rows
     },
-    GetGardenById : async function GetGardenById(id) {
-        const [rows] = await connection.query(`SELECT * FROM garden_manager WHERE id = ?`, [id])
+    GetGardenById : async function GetGardenById(id, userId) {
+        const [rows] = await connection.query(`SELECT * FROM garden_manager WHERE id = ? AND user_id = ?`, [id, userId])
         return rows
     },
     GetAllWorksAndTools : async function GetAllWorksAndTools() {
@@ -47,20 +47,20 @@ module.exports = {
         const [rows] = await connection.query(`INSERT INTO users (id,username,password) VALUES(?,?,?)`,[id,username,password])
         return rows
     },
-    GetGardens: async () => {
-    const [rows] = await connection.query('SELECT * FROM garden_manager')
+    GetGardens: async (userId) => {
+    const [rows] = await connection.query('SELECT * FROM garden_manager WHERE user_id = ?', [userId])
     return rows
     },
     GetAllPlants: async () => {
         const [rows] = await connection.query('SELECT * FROM plants')
         return rows
     },
-    DeleteGarden: async (id) => {
-        const [rows] = await connection.query('DELETE FROM garden_manager WHERE id = ?', [id])
+    DeleteGarden: async (id, userId) => {
+        const [rows] = await connection.query('DELETE FROM garden_manager WHERE id = ? AND user_id = ?', [id, userId])
         return rows
     },
-    UpdateGarden: async (garden) => {
-        const [rows] = await connection.query('UPDATE garden_manager SET garden_content = ? , garden_name = ?, user_id = ? WHERE id = ?', [garden.content, garden.name, garden.user_id, garden.id])
+    UpdateGarden: async (garden, userId) => {
+        const [rows] = await connection.query('UPDATE garden_manager SET garden_content = ? , garden_name = ? WHERE id = ? AND user_id = ?', [garden.content, garden.name, garden.id, userId])
         return rows
     },
     GetUserByUsername: async function GetUserByUsername(username) {

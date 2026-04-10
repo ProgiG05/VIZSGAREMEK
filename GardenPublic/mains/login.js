@@ -14,6 +14,7 @@ document.querySelector('.login-card').addEventListener('submit', async (e) => {
 
     if (data.success) {
         localStorage.setItem('user', JSON.stringify(data.user))
+        localStorage.setItem('token', data.token)
         window.location.href = '/index.html'
     } else {
         alert(data.message)

@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = "/sites/login.html";
+        return;
+    }
     const container = document.getElementById("addGardenForm");
     ShowAddGardenForm(container);
 });
@@ -43,9 +48,13 @@ async function ShowAddGardenForm(container) {
 }
 
 async function newGarden(garden) {
+    const token = localStorage.getItem('token');
     const resp = await fetch(`/api/gardens/newgarden`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(garden)
     });
     return resp.json();

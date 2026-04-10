@@ -1,6 +1,12 @@
 const gardensContainer = document.getElementById("gardens-container");
+const token = localStorage.getItem('token');
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    if (token) {
+        document.getElementById("logIn_Btn").innerHTML = "Logout";
+    }
+
     const settingsBtn = document.getElementById('settings_Btn');
     const sidePanel = document.getElementById('settings-sidepanel');
     const closePanel = document.getElementById('closeSidePanel');
@@ -14,24 +20,45 @@ document.addEventListener("DOMContentLoaded", async () => {
         sidePanel.style.left = "-22.5rem"
     });
 
+    if (!token) {
+        document.getElementById("newgarden_btn").style.display = "none";
+        const loginText = document.createElement("h1")
+        loginText.textContent = "You need to be logged in to view and create gardens."
+        loginText.style.display = "block"
+        gardensContainer.appendChild(loginText);
+
+        const loginBtn = document.createElement("button")
+        loginBtn.textContent = "Login / Register"
+        loginBtn.className = "login_btn"
+        loginBtn.style.display = "block"
+        loginBtn.addEventListener("click", () => {window.location.href = "/sites/login.html";})
+        gardensContainer.appendChild(loginBtn);
+        return;
+    }
+
     // 1. Fetch data
 
     const gardensResponse = await fetch("/api/gardens", {
         method: "GET",
-        headers: { "Content-Type": "application/json" }
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     });
     const gardens = await gardensResponse.json();
-    console.log(gardens)
+    console.log("Gardens:",gardens)
 
     const plantsResponse = await fetch("/api/plants", {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     });
     const plants = await plantsResponse.json();
-    console.log(plants)
+    console.log("Plants:", plants)
 
     // 2. Create Global UI Elements (Buttons & Selection Area)
-    document.getElementById("newgarden_btn").addEventListener("click", () => {window.location.href = "/sites/newgarden.html";})
+    document.getElementById("newgarden_btn").addEventListener("click", () => {
+        window.location.href = "/sites/newgarden.html";
+    })
     
     // Insert controls before the gardens container
 
@@ -43,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         gardenCard.id = "garden" + garden.id
         gardenCard.innerHTML = `
             <h2 class="garden-name">${garden.garden_name}</h2>
+            <p class="garden-id">${garden.id}</p>
         `;
 
         gardenCard.appendChild(CreateTable(splittedContent, plants));
@@ -77,10 +105,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function DeleteGarden(id) {
     const resp = await fetch(`/api/gardens/${id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" }
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     });
     const data = await resp.json();
-    console.log(data);
     window.location.reload();
 }
 
