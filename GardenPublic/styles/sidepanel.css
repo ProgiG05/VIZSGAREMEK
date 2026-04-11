@@ -1,3 +1,6 @@
+:root{
+    --text-main: #ffffff;
+}
 .settings-sidepanel {
     width: 18.75rem;
     height: 100vh;

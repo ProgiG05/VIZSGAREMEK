@@ -1,336 +1,230 @@
 :root {
-    --body-bg: #16513b;
-    --bg-dark: #1a1e1a;
-    --text-green: #a7f070;
-    --text-main: #ffffff;
-    --beige-dark-shadow: #8a6a3a;
-    --navbtn-bg: #1b291cbb;
-    --navbtn-hover-bg: #add5c7;
-    --navbtn-font-color: #add5c7;
-    --navbtn-hover-font-color: #1b291c;
+    --primary-color: #628141;
+    --secondary-color: #1B211A;
+    --accent-color: #EBD5AB;
+    --text-color: #EBD5AB;
+    --bg-color: #1B211A;
+    --card-bg: #242b23;
+    --input-bg: #1B211A;
+    --border-color: #8BAE66;
+    --font-main: Georgia, serif;
+    --font-data: 'Courier New', monospace;
+}
+
+body.dark-mode {
+    --bg-color: #0e110d;
+    --card-bg: #1B211A;
+    --primary-color: #8BAE66;
+    --text-color: #fdf8ef;
+    --border-color: #628141;
 }
 
 body {
-    background-color: var(--body-bg);
-    background-attachment: fixed;
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
-    min-height: 100vh;
-    font-family: 'Quicksand', sans-serif;
+    padding: 1.25rem;
+    line-height: 1.6;
+    transition: all 0.4s ease;
 }
-#top-navbar {
-    width: 100%;
-    height: 3.75rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: 0;   
-    top: 0;
-}
-#top-navbar a, #top-navbar button {
-    height: 100%;
-    width: 100%;
-    display: flex;
+
+.header-container {
     text-align: center;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    text-decoration: none;
-    font-family: monospace;
-    font-size: clamp(0.7rem,1.1vw,1.6rem);
-    background-color:var(--navbtn-bg);
-    color: var(--navbtn-font-color);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
+    margin-bottom: 5vh;
+    padding: 8vh 5vw;
+    background-color: var(--secondary-color);
+    border: 0.125rem solid var(--primary-color);
+    border-radius: 1.25rem;
+    box-shadow: inset 0 0 3.125rem rgba(0,0,0,0.6);
 }
-#top-navbar a:hover, #top-navbar button:hover {
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    letter-spacing: 0.125rem;
-    cursor: pointer;
-    background-color:var(--navbtn-hover-bg);
-    color:var(--navbtn-hover-font-color);
-}
-.settings-sidepanel {
-    width: 18.75rem;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    z-index: 100;
-    gap: 1.25rem;
-    padding: 1.875rem;
-    left: -22.5rem;
-    top: 0;
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.7);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.settings-sidepanel h2 {
-    margin: 0 0 1.125rem 0;
-    font-size: 1.75rem;
-    font-weight: bold;
-    line-height: 1.2;
-    color: var(--text-main);
-}
-.settings-sidepanel a {
+
+.main-title{
     display: block;
-    padding: 0.625rem 0.75rem;
-    margin: 0.375rem 0;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.03);
-    color: var(--text-main);
-    text-decoration: none;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-    font-weight: bold;
+    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--accent-color);
 }
-.settings-sidepanel a:hover{
-    background: rgba(255, 255, 255, 0.238);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in;
-}
-.closeSidePanel {
-    width: 2.25rem;
-    height: 2.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    padding: 0.25rem;
-    top: 1.875rem;
-    right: 1.875rem;
-    background: transparent;
-    border: none;
-    cursor: pointer; 
-}
-.closeSidePanel img {width: 1.875rem;height: 1.875rem;display: block;}
 
+.sub-title {
+    display: block;
+    max-width: 45rem;
+    margin: 1.5rem auto 0;
+    font-style: italic;
+    color: var(--border-color);
+    font-size: 1.1rem;
+}
 
-.plant-finder-title{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: clamp(5rem, 7vw,9rem);
+.plant-finder-main-container {
+    max-width: 90vw;
+    width: 68.75rem;
+    margin: 0 auto;
+}
+
+#search-form {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    border: 0.063rem solid var(--primary-color);
+    box-shadow: 0 1.25rem 2.5rem rgba(0,0,0,0.5);
+}
+
+.search-title {
+    font-family: var(--font-main);
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
-/* Container constraint */
-.plant-finder-main-container {
-    width: fit-content;
-    min-width: 90%;
-    margin: 20px auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Main Form Layout */
-#search-form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 20px;
-    padding: 25px;
-    background-color: #e0ffbc; /* Very light mint green */
-    border: 1px solid #152915;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    font-family: 'Courier New', Courier, monospace;
-}
-
-/* Search Title Styling */
-.search-title {
-    width: 100%;
-    color: #1b5e20; /* Dark forest green */
-    font-size: 1.4rem;
-    margin: 0 0 10px 0;
-    border-bottom: 2px solid #a5d6a7;
-    padding-bottom: 5px;
-}
-
-/* Input Containers */
-.textInp-cont {
-    display: flex;
-    gap: 15px;
-}
-
-.textInp-cont div {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Radio Groups (Water, Sunlight, Soil) */
-.check-cont {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-}
-
-.check-cont h3 {
-    font-size: 0.85rem;
-    color: #2e7d32;
-    margin: 0 0 5px 0;
+label {
+    font-family: var(--font-main);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.063rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.625rem;
+    color: var(--accent-color);
 }
 
-/* Styling the selection boxes */
-.water-selection-cont, 
-.sunlight-selection-cont, 
-.soil-selection-cont {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: #ffffff;
-    padding: 8px 12px;
-    border: 1px solid #a5d6a7;
-    border-radius: 8px;
-}
-
-/* Buttons inside radio groups */
-.check-cont button {
-    background: none;
-    border: 1px solid #81c784;
-    color: #2e7d32;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    cursor: pointer;
-    margin-left: 5px;
-    padding: 2px 6px;
-}
-
-.check-cont button:hover {
-    background-color: #e8f5e9;
-}
-
-/* Dropdown Containers */
-.selection-cont {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.selection-cont label {
-    color: #2e7d32;
-}
-
-/* Form Controls (Inputs & Selects) */
 input[type="text"], 
 select {
-    padding: 8px 12px;
-    border: 1px solid #a5d6a7;
-    border-radius: 6px;
-    outline: none;
-    transition: border-color 0.3s;
+    font-family: var(--font-data);
+    background-color: var(--input-bg);
+    border: 0.063rem solid var(--primary-color);
+    color: #ffffff;
+    padding: 0.938rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-input[type="text"]:focus, 
-select:focus {
-    border-color: #2e7d32;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+.textInput-cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-/* The Main Search Button */
-.searchPlant_Btn {
-    padding: 10px 30px;
-    background-color: #43a047;
+.checkBox-cont {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    gap: 2rem;
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.3);
+    border-radius: 1rem;
+}
+
+.sub-selection-title {
+    font-family: var(--font-main);
+    color: var(--accent-color);
+    border-left: 0.25rem solid var(--primary-color);
+    padding-left: 1rem;
+    margin: 1.25rem 0 0.625rem;
+}
+
+.selection-cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+button[id^="clear-"] {
+    font-family: var(--font-data);
+    background: var(--primary-color);
     color: white;
+    border: none;
+    padding: 0.313rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.searchPlant_Btn {
+    font-family: var(--font-main);
+    width: 100%;
+    background-color: var(--accent-color);
+    color: #1B211A;
+    padding: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.75rem;
     cursor: pointer;
-    transition: background 0.3s ease;
-    height: 42px; /* Matching input heights */
+    margin-top: 2.5rem;
+    transition: transform 0.2s, background 0.3s;
 }
 
 .searchPlant_Btn:hover {
-    background-color: #2e7d32;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Labels */
-label {
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 4px;
-    color: #388e3c;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-#plant-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-top: 2rem;
-}
-
-/* Handling the extra div wrapper from plants.js appendChild(createElement('div')) */
-#plant-container > div {
-    width: clamp(300px, 30%, 450px);
-    display: flex;
+    background-color: #d9c193;
+    transform: translateY(-0.125rem);
 }
 
 .plant-card {
-    background-color: var(--bg-dark);
-    color: var(--text-green);
+    background-color: var(--card-bg);
     border-radius: 1.25rem;
-    padding: 2rem;
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    border: 0.063rem solid var(--primary-color);
+}
+
+.plant-title {
+    font-family: var(--font-main);
+    color: var(--accent-color);
+    font-size: 2.2rem;
+    border-bottom: 0.063rem solid var(--primary-color);
+    padding-bottom: 1rem;
+}
+
+.plant-details-table {
     width: 100%;
-    height: auto;
-    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    margin-top: 1.25rem;
 }
 
-.plant-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
+.detail-label {
+    font-family: var(--font-main);
+    color: var(--accent-color);
+    padding: 0.75rem;
+    font-weight: bold;
 }
 
-.plant-card h2 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin: 0 0 0.5rem 0;
-    font-size: 1.8rem;
-    text-align: center;
-    border-bottom: 2px solid var(--text-green);
-    padding-bottom: 0.5rem;
+.detail-value {
+    font-family: var(--font-data);
+    padding: 0.75rem;
+    color: #f0f0f0;
 }
 
-.plant-card h3 {
-    font-family: monospace;
-    font-size: 1.1rem;
-    font-weight: normal;
-    margin: 0.5rem 0;
-    font-style: italic;
-    color: var(--text-main);
+.other-searched-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
 }
 
-.plant-card p {
-    font-family: monospace;
-    font-size: 1rem;
-    margin: 0.2rem 0;
-    line-height: 1.4;
+@media (max-width: 53.125rem) {
+    .textInput-cont, .selection-cont {
+        grid-template-columns: 1fr;
+    }
 }
 
-.plant-card p b {
-    color: var(--text-main);
+@media (max-width: 30rem) {
+    body {
+        padding: 0.625rem;
+    }
+    
+    #search-form {
+        padding: 1.25rem;
+    }
+    
+    .detail-label, .detail-value {
+        display: block;
+        width: 100%;
+        font-size: 0.9rem;
+    }
+    
+    .detail-value {
+        padding-top: 0.313rem;
+        margin-bottom: 0.625rem;
+        border-bottom: 0.063rem solid var(--primary-color);
+    }
 }
-
-
-
