@@ -4,6 +4,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const PlantsContainer = document.getElementById('other-searched-results')
 
+    const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
+    const AllPlantTypes = []
+    response.forEach(onetype => !AllPlantTypes.includes(onetype.type) ? AllPlantTypes.push(onetype.type) : "")
+
+    AllPlantTypes.forEach(onetype => {
+        const TypeButton = document.createElement("button")
+        TypeButton.setAttribute("class","typeGroup_Btn")
+        TypeButton.setAttribute("id","typeGroup_Btn")
+        TypeButton.textContent = `${onetype.trim()}`
+        TypesGroupingContainer.appendChild(TypeButton)
+    })
+
     response.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
 
     searchPlant(PlantsContainer)
@@ -156,9 +168,12 @@ darkBtn.addEventListener('click', () => {
     const isDark = body.classList.contains('dark-theme');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
-// --- Scroll up btn & scroll down btn Logic ---
+// --- Scroll up btn & scroll to seaerch btn & scrool to browse btn Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-document.getElementById("toup").addEventListener("click", () => {
-    window.scrollTo({top:0, behavior: 'smooth'})
+document.getElementById("showSearch_Btn").addEventListener("click", () => {
+    document.getElementById("search-form").scrollIntoView({behavior:"smooth"})
+})
+document.getElementById("showBroswe_Btn").addEventListener("click", () => {
+    document.getElementById("plant-type-grouping-cont").scrollIntoView({behavior:"smooth"})
 })

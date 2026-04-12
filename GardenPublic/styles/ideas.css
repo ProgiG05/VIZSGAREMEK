@@ -136,13 +136,15 @@ body{
 .sub-title{
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
+    border-left: 1rem solid var(--general-font-color);
     font-size: clamp(1rem, 1vw, 1.2rem);
     text-align: left;
     width: 90%;
     line-height: 2.7vh;
     font-style: italic;
     text-wrap: balance;
-    padding-left: 5rem;
+    padding-left: 2rem;
+    margin-left: 5rem;
 }
 #showSearch{
     width: 30vw;
@@ -380,9 +382,9 @@ body{
     left: 0;
     margin-left: 0.5vw;
     margin-bottom: 0.9vh;
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 10px;
+    height: 2.8rem;
+    width: 2.8rem;
+    border-radius: 2rem;
     border: none;
     background-color: #1e2b1b;
     border: 1px solid var(--general-font-color);
