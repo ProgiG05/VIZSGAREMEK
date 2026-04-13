@@ -37,15 +37,17 @@
     <div class="header-container">
         <h1 class="main-title">The Botanical Sanctuary</h1>
         <p class="sub-title ">Step into a digital herbarium designed to help you cultivate peace and purpose. Whether you are a seasoned gardener or a first-time plant parent, our curated database ensures your green companions find their perfect forever home in your unique environment.</p>
-        <button id="showSearch_Btn">Search</button>
-        <button id="showBroswe_Btn">Browse</button>
+        <div class="quick-buttons-cont">
+            <button class="showSearch_Btn" id="showSearch_Btn">Search</button>
+            <button class="showBroswe_Btn" id="showBroswe_Btn">Browse</button>
+        </div>
     </div>  
 
     <div class="plant-finder-main-container">
 
         <!--Searching container (as form) with search input-cont and result output-cont-->
         <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
-        <form id="search-form">
+        <form class="search-form" id="search-form">
 
             <h1 class="search-title">Detailed search</h1>
 
@@ -138,7 +140,7 @@
 
         <!--For the first and most matching result-->
         <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
-        <div class="first-searched-result" id="first-searched-result"></div>
+        <div class="first-searched-result" id="first-searched-result">&nbsp;</div>
 
     </div>
 
