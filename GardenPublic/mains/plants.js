@@ -22,15 +22,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
     const AllPlantTypes = []
-    response.forEach(onetype => !AllPlantTypes.includes(onetype.type) ? AllPlantTypes.push(onetype.type) : "")
+    response.forEach(onetype => {
+        if (!AllPlantTypes.includes(onetype.type)) {AllPlantTypes.push(onetype.type)}
+    })
 
     AllPlantTypes.forEach(onetype => {
         const TypeButton = document.createElement("button")
-        TypeButton.setAttribute("class","typeGroup_Btn")
-        TypeButton.setAttribute("id","typeGroup_Btn")
+        TypeButton.classList.add("typeGroup_Btn")
         TypeButton.textContent = `${onetype.trim()}`
         TypesGroupingContainer.appendChild(TypeButton)
     })
+
+    const AllOrigins = []
+    response.forEach(oneorigin => {
+        if (!AllOrigins.includes(oneorigin.origin)) {AllOrigins.push(oneorigin.origin)}
+    } )
+    console.log(AllOrigins)
+
 
     response.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
 
@@ -101,25 +109,43 @@ function searchPlant(container) {
     const form = document.getElementById('search-form')
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
+
+        document.getElementById("other-searched-results").scrollIntoView({behavior:"smooth"})
+
         const waterchecks = document.querySelectorAll('.water-checkbox')
         const sunlightchecks = document.querySelectorAll('.sunlight-checkbox')
         const soilchecks = document.querySelectorAll('.soil-checkbox')
 
         const data = {
-            name: document.getElementById('commonplant-search-inp').value || "none",
-            water: Array.from(waterchecks).filter(x => x.checked).map(y => y.value)[0] || "none",
-            sunlight: Array.from(sunlightchecks).filter(x => x.checked).map(y => y.value)[0] || "none",
-            soil: Array.from(soilchecks).filter(x => x.checked).map(y => y.value)[0] || "none",
+            commonName: document.getElementById('commonplant-search-inp').value.trim() || "none",
+            botanicalName: document.getElementById('botanicalplant-search-inp').value.trim() || "none",
+            water: Array.from(waterchecks).find(x => x.checked)?.value || "none",
+            sunlight: Array.from(sunlightchecks).find(x => x.checked)?.value || "none",
+            soil: Array.from(soilchecks).find(x => x.checked)?.value || "none",
             plantingMonth: document.getElementById('plantingSelection').value || "none",
-            harvestingMonth: document.getElementById('harvestingSelection').value || "none"
+            harvestingMonth: document.getElementById('harvestingSelection').value || "none",
+            origin: document.getElementById('originSelection').value || "none",
+            indoor: document.getElementById('indoorCheckbox').checked ? "yes" : "none",
+            seeds: document.getElementById('seedsCheckbox').checked ? "yes" : "none"
         }
-        
-        const plantsData = await fetch('/api/plantfinder?common_name=' + data.name + '&water=' + data.water + '&sunlight=' + data.sunlight + '&soil=' + data.soil + '&plantingMonth=' + data.plantingMonth + '&harvestingMonth=' + data.harvestingMonth,
-            {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
-            }
-        )
+
+        const queryParams = new URLSearchParams({
+            common_name: data.commonName,
+            botanical_name: data.botanicalName,
+            water: data.water,
+            sunlight: data.sunlight,
+            soil: data.soil,
+            plantingMonth: data.plantingMonth,
+            harvestingMonth: data.harvestingMonth,
+            origin: data.origin,
+            indoor: data.indoor,
+            seeds: data.seeds
+        })
+
+        const plantsData = await fetch(`/api/plantfinder?${queryParams.toString()}`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        })
         const response = await plantsData.json()
         SearchPlantDetails(response, container)
         clearForm()
@@ -128,10 +154,10 @@ function searchPlant(container) {
 
 function SearchPlantDetails(details, container) {
     const searchedPlantsContainer = document.getElementById('first-searched-result')
-    searchedPlantsContainer.innerText = `Searched Plants:`
+    searchedPlantsContainer.textContent = `Searched Plants:`
 
-    container.innerText  = ``
-    details.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
+    container.innerHTML = ''
+    details.forEach(plant => { container.appendChild(createPlantCards(plant)) })
 }
 
 function clearFilters(type) {
@@ -141,8 +167,12 @@ function clearFilters(type) {
 
 function clearForm() {
     document.getElementById('commonplant-search-inp').value = ""
-    document.getElementById('plantingSelection').value = ""
-    document.getElementById('harvestingSelection').value = ""
+    document.getElementById('botanicalplant-search-inp').value = ""
+    document.getElementById('plantingSelection').value = "none"
+    document.getElementById('harvestingSelection').value = "none"
+    document.getElementById('originSelection').value = "none"
+    document.getElementById('indoorCheckbox').checked = false
+    document.getElementById('seedsCheckbox').checked = false
     clearFilters('water')
     clearFilters('sunlight')
     clearFilters('soil')
