@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     const gardenArray = await gardenResp.json();
     const garden = gardenArray[0]; // The API returns an array
+    //console.log(garden)
 
     if (!gardenArray) {
         alert("Garden not found!");
@@ -174,10 +175,10 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete Garden";
     deleteBtn.className = "delete_btn";
-    deleteBtn.onclick = () => {
+    deleteBtn.onclick = async () => {
         if (confirm("Are you sure you want to delete this garden?")) {
-            DeleteGarden(garden.id);
-            window.location.href = "/gardens.html";
+            await DeleteGarden(garden.id);
+            window.location.href = "/sites/gardens.html";
         }
     };
 
@@ -339,7 +340,9 @@ async function DeleteGarden(id) {
             "Authorization": `Bearer ${token}`
         }
     });
-    return resp.json();
+    const data = await resp.json();
+    console.log(data);
+    return data;
 }
 
 function ManageRowsColumns(garden, plants, parentContainer, controls) {

@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function DeleteGarden(id) {
     const resp = await fetch(`/api/gardens/${id}`, {
         method: "DELETE",
-        headers: { 
+        headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         }

@@ -87,11 +87,9 @@ function createKnowledgeSection(knowledge) {
 
             if (descriptionBuffer[i+1] !== undefined && descriptionBuffer[i] !== undefined) {
                 paragraph.textContent = `${descriptionBuffer[i]}.${descriptionBuffer[i+1]}`
-                console.log(`First sentence: ${descriptionBuffer[i]}\nSecond sentence: ${descriptionBuffer[i+1]}\n`)
             }
             if (descriptionBuffer[i+1] === undefined) {
                 paragraph.textContent = `${descriptionBuffer[i]}`
-                console.log(`One sentence: ${descriptionBuffer[i]}`)
             }
 
             OneKnowledgeDescription.appendChild(paragraph)
