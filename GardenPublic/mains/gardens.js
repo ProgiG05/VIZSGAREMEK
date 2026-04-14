@@ -3,8 +3,18 @@ const token = localStorage.getItem('token');
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    if (token) {
-        document.getElementById("logIn_Btn").innerHTML = "Logout";
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (token && user) {
+        const loginBtn = document.getElementById("logIn_Btn");
+        const accountHandler = (e) => {
+            e.preventDefault();
+            window.location.href = "/sites/accounts.html";
+        };
+
+        if (loginBtn) {
+            loginBtn.innerHTML = `${user.username}`;
+            loginBtn.addEventListener("click", accountHandler);
+        }
     }
 
     const settingsBtn = document.getElementById('settings_Btn');

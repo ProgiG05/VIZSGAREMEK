@@ -1,4 +1,20 @@
+const token = localStorage.getItem("token");
+
 document.addEventListener('DOMContentLoaded', async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (token && user) {
+        const loginBtn = document.getElementById("logIn_Btn");
+        const accountHandler = (e) => {
+            e.preventDefault();
+            window.location.href = "/sites/accounts.html";
+        };
+
+        if (loginBtn) {
+            loginBtn.innerHTML = `${user.username}`;
+            loginBtn.addEventListener("click", accountHandler);
+        }
+    }
+
     const plantsData = await fetch('/api/plants', {method: 'GET',headers: {'Content-Type': 'application/json'}})
     const response = await plantsData.json()
 

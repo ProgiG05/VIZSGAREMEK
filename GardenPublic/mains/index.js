@@ -4,8 +4,24 @@ const token = localStorage.getItem("token");
 
 document.addEventListener('DOMContentLoaded', async (e) => {
     e.preventDefault()
-    if (token) {
-        document.getElementById("logIn_Btn").innerHTML = "Logout";
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (token && user) {
+        const loginBtn = document.getElementById("logIn_Btn");
+        const sideLoginBtn = document.getElementById("login_Btn");
+        
+        const accountHandler = (e) => {
+            e.preventDefault();
+            window.location.href = "/sites/accounts.html";
+        };
+
+        if (loginBtn) {
+            loginBtn.innerHTML = `${user.username}`;
+            loginBtn.addEventListener("click", accountHandler);
+        }
+        if (sideLoginBtn) {
+            sideLoginBtn.innerHTML = `${user.username}`;
+            sideLoginBtn.addEventListener("click", accountHandler);
+        }
     }
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
@@ -391,7 +407,7 @@ function updateLanguage(lang) {
     document.getElementById('knowledges-subtitle2').innerText = t.knowledgessubtitle2
 
     // Search Form Labels & Placeholders
-    document.querySelector('label[for="commonplant-search-inp"]').innerText = t.common_name;
+    //document.querySelector('label[for="commonplant-search-inp"]').innerText = t.common_name;
     // document.querySelector('label[for="botanicalplant-search-inp"]').innerText = t.botanical_name;
     document.getElementById('commonplant-search-inp').placeholder = lang === 'en' ? "Search..." : "Keresés...";
     
