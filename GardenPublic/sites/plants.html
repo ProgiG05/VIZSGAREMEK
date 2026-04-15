@@ -47,7 +47,7 @@
     <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
     <form class="search-form" id="search-form">
 
-        <h1 class="search-title">Detailed search</h1>
+        <h1 class="search-title">Detailed plant search</h1>
 
         <div class="searching-cont">
 
@@ -55,51 +55,54 @@
 
                 <div class="textInput-cont search-sub-cont">
                     <div class="CommonN-input-cont">
-                        <label for="commonplant-search-inp">Common name</label>
+                        <label for="commonplant-search-inp">Simple / Common name:</label>
                         <input class="commonname-search-input" id="commonplant-search-inp" name="commonName" type="text" placeholder="Search plants by common name">
                     </div>
                     <div class="BotanicalN-input-cont">
-                        <label for="botanicalplant-search-inp">Botanical name</label>
+                        <label for="botanicalplant-search-inp">Scientific / Botanical name:</label>
                         <input class="botanicalname-search-input" id="botanicalplant-search-inp" name="botanicalName" type="text" placeholder="Search plants by botanical name">
                     </div>
                 </div>
 
-                <div class="checkBox-cont search-sub-cont">
+                <div class="radioBtn-cont search-sub-cont">
 
-                    <h3 class="sub-selection-title">Watering need</h3>
+                    <h3 class="sub-selection-title">Watering need:</h3>
                     <div class="water-selection-cont">
                         <label for="water-low">Low</label>
-                        <input type="radio" name="water" value="low" id="water-low" class="water-checkbox">
+                        <input type="radio" name="water" value="low" id="water-low" class="water-radioBtn">
                         <label for="water-medium">Medium</label>
-                        <input type="radio" name="water" value="medium" id="water-medium"  class="water-checkbox">
+                        <input type="radio" name="water" value="medium" id="water-medium"  class="water-radioBtn">
                         <label for="water-high">High</label>
-                        <input type="radio" name="water" value="high" id="water-high"  class="water-checkbox">
-                        <button type="button" id="clear-water-btn">Clear</button>
+                        <input type="radio" name="water" value="high" id="water-high"  class="water-radioBtn">
+                        <button type="button" class="clearBtn" id="clear-water-btn">Clear</button>
                     </div>
 
-                    <h3 class="sub-selection-title">Sunlight need</h3>
+                    <h3 class="sub-selection-title">Sunlight need:</h3>
                     <div class="sunlight-selection-cont">
                         <label for="sunlight-low">Low</label>
-                        <input type="radio" name="sunlight" value="low" id="sunlight-low"  class="sunlight-checkbox">
+                        <input type="radio" name="sunlight" value="low" id="sunlight-low"  class="sunlight-radioBtn">
                         <label for="sunlight-moderate">Moderate</label>
-                        <input type="radio" name="sunlight" value="moderate" id="sunlight-moderate" class="sunlight-checkbox">
+                        <input type="radio" name="sunlight" value="moderate" id="sunlight-moderate" class="sunlight-radioBtn">
                         <label for="sunlight-high">High</label>
-                        <input type="radio" name="sunlight" value="high" id="sunlight-high" class="sunlight-checkbox">
-                        <button type="button" id="clear-sunlight-btn">Clear</button>
+                        <input type="radio" name="sunlight" value="high" id="sunlight-high" class="sunlight-radioBtn">
+                        <button type="button" class="clearBtn" id="clear-sunlight-btn">Clear</button>
                     </div>
 
-                    <h3 class="sub-selection-title">Soil type</h3>
+                    <h3 class="sub-selection-title">Soil type:</h3>
                     <div class="soil-selection-cont">
                         <label for="soil-low">Low</label>
-                        <input type="radio" name="soil" value="low" id="soil-low" class="soil-checkbox">
+                        <input type="radio" name="soil" value="low" id="soil-low" class="soil-radioBtn">
                         <label for="soil-moderate">Moderate</label>
-                        <input type="radio" name="soil" value="moderate" id="soil-moderate" class="soil-checkbox">
+                        <input type="radio" name="soil" value="moderate" id="soil-moderate" class="soil-radioBtn">
                         <label for="soil-high">High</label>
-                        <input type="radio" name="soil" value="high" id="soil-high" class="soil-checkbox">
-                        <button type="button" id="clear-soil-btn">Clear</button>
+                        <input type="radio" name="soil" value="high" id="soil-high" class="soil-radioBtn">
+                        <button type="button" class="clearBtn" id="clear-soil-btn">Clear</button>
                     </div>
 
                 </div>
+                
+            </div>
+            <div class="right-container">
 
                 <div class="selection-cont search-sub-cont">
 
@@ -136,13 +139,7 @@
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
-                </div>
-                
-                
-            </div>
-            <div class="right-container">
 
-                <div class="pruning-selection-cont search-sub-cont">
                     <label for="pruningSelection">Pruning month: </label>
                     <select id="pruningSelection" class="pruning-months-selection">
                         <option value="none">Choose...</option>
@@ -162,7 +159,7 @@
                 </div>
                 
                 <div class="origin-selection-cont search-sub-cont">
-                    <label for="originSelection">Origin</label>
+                    <label for="originSelection">Place of Origin:</label>
                     <select id="originSelection" name="origin" class="origin-selection">
                         <option value="none">Choose...</option>
                         <option value="South America">South America</option>
@@ -174,7 +171,7 @@
                 </div>
 
                 <div class="indoor-switch-cont search-sub-cont">
-                    <label for="indoorCheckbox">Indoor</label>
+                    <label for="indoorCheckbox">Can the plant be kept indoors?</label>
                     <label class="switch">
                         <input type="checkbox" id="indoorCheckbox" name="indoor">
                         <span class="slider round"></span>
@@ -182,7 +179,7 @@
                 </div>
 
                 <div class="seeds-switch-cont search-sub-cont">
-                    <label for="seedsCheckbox">Seeds</label>
+                    <label for="seedsCheckbox">Does the plant have seeds?</label>
                     <label class="switch">
                         <input type="checkbox" id="seedsCheckbox" name="seeds">
                         <span class="slider round"></span>
@@ -196,16 +193,15 @@
 
     </form>
 
-    <!--For the first and most matching result-->
     <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
 
     <div class="plant-type-grouping-cont" id="plant-type-grouping-cont"></div>
 
     <!--For the other similar results + the initial plants-->
     <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
-    <div class="other-searched-results" id="other-searched-results">
-        <div class="first-searched-result" id="first-searched-result">&nbsp;</div>
-    </div>
+    <div class="first-searched-result" id="first-searched-result">&nbsp;</div>
+    
+    <div class="other-searched-results" id="other-searched-results"></div>
 
     <script src="../mains/plants.js"></script>
 </body>

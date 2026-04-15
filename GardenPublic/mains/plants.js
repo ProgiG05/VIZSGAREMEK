@@ -161,7 +161,7 @@ function SearchPlantDetails(details, container) {
 }
 
 function clearFilters(type) {
-    const checks = document.querySelectorAll(`.${type}-checkbox`)
+    const checks = document.querySelectorAll(`.${type}-radioBtn`)
     checks.forEach(check => check.checked = false)
 }
 
