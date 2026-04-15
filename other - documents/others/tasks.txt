@@ -4,13 +4,16 @@ index page:
 ideas page:
 	change color scheme
 	ideas and knowledges page should be identical
+	check / add responsiveness
 knowledges page:
 	make the reader cards more immersive
 	change some colors and fonts
 	ideas and knowledges page should be identical
+	check / add responsiveness
 plants page:
 	style the plant searcher container
 	redesign the cards: fetched data(table) + save button(simple button) 
+	check / add responsiveness
 	landing container:
 		title + subtitle + navbuttons
 	plant searcher container:
@@ -20,6 +23,7 @@ plants page:
 		the rest: load button, 2 columns, 40% width
 
 gardens page:
+	check / add responsiveness
 	redesign the garden card:
 		dimensions, height and width
 		grid items
@@ -27,9 +31,11 @@ gardens page:
 	redesign the page layout:
 		neat showcase layout
 garden adding page:
+	check / add responsiveness
 	layout change, left to right, adding station + adding elements | preview section
 	same color pattern to the gardens page
 garden editing page:
+	check / add responsiveness
 	right and left floating inwards panels
 	same color pattern to the gardens page
 
