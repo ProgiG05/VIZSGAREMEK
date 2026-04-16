@@ -59,8 +59,35 @@ function createPlantCards(plant) {
     // Title
     const PlantTitle = document.createElement("h1");
     PlantTitle.setAttribute("class", "plant-title");
-    PlantTitle.textContent = `${plant.common_name} - ${plant.botanical_name}`;
-    PlantCard.appendChild(PlantTitle);
+    PlantTitle.textContent = `${plant.common_name}`;
+
+    // SubTitle
+    const PlantSubTitle = document.createElement("h3");
+    PlantSubTitle.setAttribute("class", "plant-subtitle");
+    PlantSubTitle.textContent = `${plant.botanical_name}`;
+
+    // Save button
+    const SavePlantButton = document.createElement("button")
+    SavePlantButton.setAttribute("class","savePlant_Btn")
+    SavePlantButton.setAttribute("id","savePlant_Btn")
+    const savePic = document.createElement("img")
+    savePic.setAttribute("src","../pics/icons/book_2_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png")
+    savePic.setAttribute("alt","Save")
+    SavePlantButton.appendChild(savePic)
+
+    // Container for the titles
+    const TitleContainer = document.createElement("div")
+    TitleContainer.setAttribute("class","plant-card-title-cont")
+    TitleContainer.appendChild(PlantTitle)
+    TitleContainer.appendChild(PlantSubTitle)
+
+    // Container of the titles and the savebutton
+    const HeaderContainer = document.createElement("div")
+    HeaderContainer.setAttribute("class","plant-card-header-cont")
+    HeaderContainer.appendChild(TitleContainer)
+    HeaderContainer.appendChild(SavePlantButton)
+    
+    PlantCard.appendChild(HeaderContainer)
 
     // Create the Table
     const Table = document.createElement("table");
@@ -86,18 +113,18 @@ function createPlantCards(plant) {
     // Populate Table Rows
     addTableRow("Common name:", plant.common_name);
     addTableRow("Botanical name:", plant.botanical_name);
-    addTableRow("Origin:", plant.origin);
-    addTableRow("Type:", plant.type);
-    addTableRow("Planting:", plant.planting);
+    addTableRow("Place of Origin:", plant.origin);
+    addTableRow("Plant type:", plant.type);
+    addTableRow("Planting season:", plant.planting);
     
-    const pruningText = plant.pruning.toLowerCase() === "none" ? "no need for pruning" : plant.pruning;
-    addTableRow("Pruning:", pruningText);
-    addTableRow("Harvesting:", plant.harvesting);
-    addTableRow("Soil:", plant.soil);
-    addTableRow("Water:", plant.water);
-    addTableRow("Sunlight:", plant.sunlight);
-    addTableRow("Indoor:", plant.indoor ? "Yes" : "No");
-    addTableRow("Seeds:", plant.seeds ? "Yes" : "No");
+    const pruningText = plant.pruning.toLowerCase() === "none" ? "No need for pruning" : plant.pruning;
+    addTableRow("Pruning season:", pruningText);
+    addTableRow("Harvesting season:", plant.harvesting);
+    addTableRow("Soil type:", plant.soil);
+    addTableRow("Water quantity:", plant.water);
+    addTableRow("Sunlight intensity:", plant.sunlight);
+    addTableRow("Is it Indoor:", plant.indoor ? "Yes, it can stay inside also" : "No, it can't be kept inside");
+    addTableRow("Has Seeds:", plant.seeds ? "Yes, can be propagated by seed" : "No, can't be propagated by seed");
 
     // Append table to the card
     PlantCard.appendChild(Table);
@@ -221,5 +248,5 @@ document.getElementById("showSearch_Btn").addEventListener("click", () => {
     document.getElementById("search-form").scrollIntoView({behavior:"smooth"})
 })
 document.getElementById("showBroswe_Btn").addEventListener("click", () => {
-    document.getElementById("plant-type-grouping-cont").scrollIntoView({behavior:"smooth"})
+    document.getElementById("browse-title").scrollIntoView({behavior:"smooth"})
 })
