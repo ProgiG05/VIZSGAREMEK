@@ -1,21 +1,14 @@
+import { setupNavbar } from './navbar.js';
+
 // --- Knowledges cards read Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 const token = localStorage.getItem("token");
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (token && user) {
-        const loginBtn = document.getElementById("logIn_Btn");
-        const accountHandler = (e) => {
-            e.preventDefault();
-            window.location.href = "/sites/accounts.html";
-        };
 
-        if (loginBtn) {
-            loginBtn.innerHTML = `${user.username}`;
-            loginBtn.addEventListener("click", accountHandler);
-        }
-    }
+document.addEventListener("DOMContentLoaded", async () => {
+    setupNavbar();
+    const user = JSON.parse(localStorage.getItem("user"));
+
 
     const responseKnowledges = await fetch('/api/knowledge', {method : "GET" , headers : {"Content-Type" : "application/json"}})
     const ListOfKnowledges = await responseKnowledges.json()
@@ -189,39 +182,8 @@ function createKnowledgeCard(knowledge) {
 // --- Localstorage Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 window.onload = () => {
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-theme');
-        darkBtn.classList.add('dark-active');
-    }
 };
-// --- Side Panel Toggle ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const settingsBtn = document.getElementById('settings_Btn');
-const sidePanel = document.getElementById('settings-sidepanel');
-const closePanel = document.getElementById('closeSidePanel');
-
-settingsBtn.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = 0
-});
-closePanel.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = "-22.5rem"
-});
-
-// --- Dark Mode Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const body = document.body;
-const darkBtn = document.getElementById('darkmode');
-
-darkBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    darkBtn.classList.toggle('dark-active');
-    
-    const isDark = body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
 // --- Scroll up btn & scroll down btn Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 

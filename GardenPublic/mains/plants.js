@@ -1,21 +1,19 @@
+import { setupNavbar } from './navbar.js';
+
 const token = localStorage.getItem("token");
 
+
 document.addEventListener('DOMContentLoaded', async () => {
+    setupNavbar();
     const user = JSON.parse(localStorage.getItem("user"));
-    if (token && user) {
-        const loginBtn = document.getElementById("logIn_Btn");
-        const accountHandler = (e) => {
-            e.preventDefault();
-            window.location.href = "/sites/accounts.html";
-        };
 
-        if (loginBtn) {
-            loginBtn.innerHTML = `${user.username}`;
-            loginBtn.addEventListener("click", accountHandler);
-        }
-    }
 
-    const plantsData = await fetch('/api/plants', {method: 'GET',headers: {'Content-Type': 'application/json'}})
+    const plantsData = await fetch(
+        '/api/plants', 
+        {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        })
     const response = await plantsData.json()
 
     // const searchedPlantsContainer = document.getElementById('first-searched-result')
@@ -33,6 +31,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const TypeButton = document.createElement("button")
         TypeButton.classList.add("typeGroup_Btn")
         TypeButton.textContent = `${onetype.trim()}`
+        TypeButton.id = `${onetype.trim()}`
+        TypeButton.addEventListener('click', async () => {
+            await typeFilter(TypeButton.id, response)
+        })
         TypesGroupingContainer.appendChild(TypeButton)
     })
 
@@ -216,39 +218,9 @@ function clearForm() {
 // --- Localstorage Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 window.onload = () => {
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-theme');
-        darkBtn.classList.add('dark-active');
-    }
 };
-// --- Side Panel Toggle ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const settingsBtn = document.getElementById('settings_Btn');
-const sidePanel = document.getElementById('settings-sidepanel');
-const closePanel = document.getElementById('closeSidePanel');
 
-settingsBtn.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = 0
-});
-closePanel.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = "-22.5rem"
-});
-
-// --- Dark Mode Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const body = document.body;
-const darkBtn = document.getElementById('darkmode');
-
-darkBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    darkBtn.classList.toggle('dark-active');
-    
-    const isDark = body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
 // --- Scroll up btn & scroll to seaerch btn & scrool to browse btn Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -258,3 +230,10 @@ document.getElementById("showSearch_Btn").addEventListener("click", () => {
 document.getElementById("showBroswe_Btn").addEventListener("click", () => {
     document.getElementById("browse-title").scrollIntoView({behavior:"smooth"})
 })
+
+async function typeFilter(type, plantsData) {
+    const filteredPlants = plantsData.filter(plant => plant.type === type)
+    const PlantsContainer = document.getElementById('other-searched-results')
+    PlantsContainer.innerHTML = ""
+    filteredPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant)))
+}

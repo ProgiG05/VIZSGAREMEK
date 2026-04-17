@@ -7,24 +7,33 @@
     <link rel="stylesheet" href="../styles/account.css">
 </head>
 <body>
-    <div class="account-container" id="account-container">
-        <div class="account-header" id="account-header">
+    <div class="account-container">
+        <div class="main-account-card">
             
-        </div>
-        <div class="account-content">
-            <div class="account-sidebar">
-                <div class="account-sidebar-item">
-                    <div>Profile</div>
-                </div>
-                <div class="account-sidebar-item">
-                    <div>Settings</div>
-                </div>
-                <div class="account-sidebar-item">
-                    <button id="logout_btn">Logout</button>
-                </div>
+            <div class="account-header" id="account-header">
+                <h1 class="main-title"></h1>
             </div>
+
+            <div class="account-content-wrapper">
+                <aside class="account-sidebar">
+                    <div class="account-sidebar-item">
+                        <div>Profile</div>
+                    </div>
+                    <div class="account-sidebar-item">
+                        <div>Settings</div>
+                    </div>
+                    <div class="account-sidebar-item">
+                        <button id="logout_btn">Logout</button>
+                    </div>
+                </aside>
+
+                <main class="account-main-display">
+                    <p class="card-description">Welcome back to your garden dashboard. Manage your settings and plants here.</p>
+                </main>
+            </div>
+
         </div>
     </div>
-    <script src="../mains/accounts.js"></script>
+    <script type="module" src="../mains/accounts.js"></script>
 </body>
 </html>

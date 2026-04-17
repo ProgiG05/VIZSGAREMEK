@@ -1,4 +1,8 @@
+import { setupNavbar } from './navbar.js';
+
 document.addEventListener("DOMContentLoaded", async () => {
+    setupNavbar();
+
     const searchedPlantContainer = document.getElementById("searchedPlant-container")
 
     const response = await fetch(`/api/plantfinder${window.location.search}`, {

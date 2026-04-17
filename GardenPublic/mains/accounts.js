@@ -1,5 +1,6 @@
 const token = localStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", () => {
+
     const user = JSON.parse(localStorage.getItem("user"));
     if (!token) {
         window.location.href = "/sites/login.html";

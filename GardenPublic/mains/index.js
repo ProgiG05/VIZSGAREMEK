@@ -1,28 +1,16 @@
+import { setupNavbar } from './navbar.js';
+
 // --- Initialize State ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 const token = localStorage.getItem("token");
 
 document.addEventListener('DOMContentLoaded', async (e) => {
-    e.preventDefault()
+    setupNavbar();
+    
+    // e.preventDefault() // Removed because it might interfere with normal clicks on children
+    
     const user = JSON.parse(localStorage.getItem("user"));
-    if (token && user) {
-        const loginBtn = document.getElementById("logIn_Btn");
-        const sideLoginBtn = document.getElementById("login_Btn");
-        
-        const accountHandler = (e) => {
-            e.preventDefault();
-            window.location.href = "/sites/accounts.html";
-        };
 
-        if (loginBtn) {
-            loginBtn.innerHTML = `${user.username}`;
-            loginBtn.addEventListener("click", accountHandler);
-        }
-        if (sideLoginBtn) {
-            sideLoginBtn.innerHTML = `${user.username}`;
-            sideLoginBtn.addEventListener("click", accountHandler);
-        }
-    }
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("showcase-container")
@@ -186,13 +174,10 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 })
 
 window.onload = () => {
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-theme');
-        darkBtn.classList.add('dark-active');
-    }
-    const savedLang = localStorage.getItem('lang') || 'en'
-    if (langSelect) {langSelect.value = savedLang}
-    updateLanguage(savedLang)
+
+    // const savedLang = localStorage.getItem('lang') || 'en'
+    // if (langSelect) {langSelect.value = savedLang}
+    // updateLanguage(savedLang)
 };
 
 // --- Navbar scrolling actions logic ---
@@ -214,32 +199,32 @@ window.onload = () => {
 // --- Side Panel Toggle ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const settingsBtn = document.getElementById('settings_Btn');
-const sidePanel = document.getElementById('settings-sidepanel');
-const closePanel = document.getElementById('closeSidePanel');
+// const settingsBtn = document.getElementById('settings_Btn');
+// const sidePanel = document.getElementById('settings-sidepanel');
+// const closePanel = document.getElementById('closeSidePanel');
 
-settingsBtn.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = 0
-});
-closePanel.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = "-22.5rem"
-});
+// settingsBtn.addEventListener('click', () => {
+//     sidePanel.style.transition = '0.4s all ease'
+//     sidePanel.style.left = 0
+// });
+// closePanel.addEventListener('click', () => {
+//     sidePanel.style.transition = '0.4s all ease'
+//     sidePanel.style.left = "-22.5rem"
+// });
 
-// --- Dark Mode Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const body = document.body;
-const darkBtn = document.getElementById('darkmode');
+// // --- Dark Mode Logic ---
+// //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// const body = document.body;
+// const darkBtn = document.getElementById('darkmode');
 
-darkBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    darkBtn.classList.toggle('dark-active');
+// darkBtn.addEventListener('click', () => {
+//     body.classList.toggle('dark-theme');
+//     darkBtn.classList.toggle('dark-active');
     
-    // Optional: Save preference to localStorage
-    const isDark = body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
+//     // Optional: Save preference to localStorage
+//     const isDark = body.classList.contains('dark-theme');
+//     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+// });
 
 // --- Garden maker 3D art animation logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -278,100 +263,100 @@ function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved')
 // --- Language Dictionary ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const translations = {
-    en: {
-        settings: "Settings",
-        ideas: "Ideas",
-        plantFinder: "Plant finder",
-        knowledge: "Knowledge",
-        sidepaneltitle: "Personal Oasis",
-        savedP: "Saved Plants",
-        savedWT: "Saved Works & Tools",
-        savedGL: "Saved garden layouts",
-        smalldescription1: "Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.",
-        smalldescription2: "Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity.",
-        designNow: "Design now",
-        ideastitle: "Discover Garden ideas",
-        ideaspage: "See more ideas",
-        plantfindertitle: "Find your ideal plant",
-        plantsearchtitle:"Search for a plant",
-        knowledgestitle: "Learn something interesting about the world of gardens",
-        knowledgessubtitle1: "Discover Tips & Tricks for gardening",
-        knowledgessubtitle2: "Explore gardens from around the world",
-        knowledges: "Learn more",
-        // New keys for the search section
-        commonName: "Common name:",
-        botanical_name: "Botanical name:",
-        wateringNeed: "Watering need",
-        sunlightNeed: "Sunlight need",
-        soilType: "Soil type",
-        low: "Low",
-        medium: "Medium",
-        high: "High",
-        moderate: "Moderate",
-        plantingMonth: "Planting month:",
-        harvestingMonth: "Harvesting month:",
-        searchBtn: "Search",
-        choose: "Choose...",
-        // New keys for results
-        plantDetails: "Plant Details",
-        resCommon: "Common:",
-        resScientific: "Scientific:",
-        // resType: "Type:",
-        resWatering: "Watering:",
-        resSunlight: "Sunlight:",
-        resSoil: "Soil:",
-        resPlanting: "Planting:",
-        resHarvesting: "Harvesting:",
-        moreInfo: "Get more info"
-    },
-    hu: {
-        settings: "Beállítások",
-        ideas: "Ötletek",
-        plantFinder: "Növénykereső",
-        knowledge: "Tudásbázis",
-        sidepaneltitle: "Személyes oázis",
-        savedP: "Mentett növények",
-        savedWT: "Mentett kerti munkák és eszközök",
-        savedGL: "Mentett kert tervek",
-        smalldescription1: "Akár egy üres földfoltot bámulsz, akár egy régi kertet szeretnél felfrissíteni, mi biztosítjuk a botanikai terveket, hogy életre keltsük elképzelésed.",
-        smalldescription2: "Platformunk ötvözi a művészetet és a tudományt, az egyedi kerttervezési ötleteket, átfogó növénykereső adatbázist és válogatott tervezési inspirációk galériáját kínálva, hogy a kreativitásod szikrájára új láng lobbanjon.",
-        designNow: "Tervezés",
-        ideastitle: "Fedezz fel kertötleteket",
-        ideaspage: "Több kertötlet",
-        plantfindertitle: "Találd meg az ideális növényed",
-        plantsearchtitle:"Keress növényeket",
-        knowledgestitle: "Tudj meg valami érdekeset a kertek világáról",
-        knowledgessubtitle1: "Fedezz fel kertészeti tippeket és trükköket",
-        knowledgessubtitle2: "Fedezz fel kerteket a világ minden tájáról",
-        knowledges: "Tudj meg többet",
-        // New keys for the search section
-        commonName: "Gyakori név:",
-        botanical_name: "Botanikai név:",
-        wateringNeed: "Öntözési igény",
-        sunlightNeed: "Fényigény",
-        soilType: "Talajtípus",
-        low: "Alacsony",
-        medium: "Közepes",
-        high: "Magas",
-        moderate: "Mérsékelt",
-        plantingMonth: "Ültetési hónap:",
-        harvestingMonth: "Betakarítási hónap:",
-        searchBtn: "Keresés",
-        choose: "Válassz...",
-        // New keys for results
-        plantDetails: "Növény részletei",
-        resCommon: "Gyakori név:",
-        resScientific: "Tudományos név:",
-        // resType: "Típus:",
-        resWatering: "Öntözés:",
-        resSunlight: "Fényigény:",
-        resSoil: "Talaj:",
-        resPlanting: "Ültetés:",
-        resHarvesting: "Betakarítás:",
-        moreInfo: "További információ"
-    }
-};
+// const translations = {
+//     en: {
+//         settings: "Settings",
+//         ideas: "Ideas",
+//         plantFinder: "Plant finder",
+//         knowledge: "Knowledge",
+//         sidepaneltitle: "Personal Oasis",
+//         savedP: "Saved Plants",
+//         savedWT: "Saved Works & Tools",
+//         savedGL: "Saved garden layouts",
+//         smalldescription1: "Whether you’re staring at a blank patch of dirt or looking to refresh a seasoned landscape, we provide the botanical blueprints to bring your vision to life.",
+//         smalldescription2: "Our platform blends art and science, offering custom garden layouts, a comprehensive plant-finding database, and a gallery of curated design inspiration to spark your creativity.",
+//         designNow: "Design now",
+//         ideastitle: "Discover Garden ideas",
+//         ideaspage: "See more ideas",
+//         plantfindertitle: "Find your ideal plant",
+//         plantsearchtitle:"Search for a plant",
+//         knowledgestitle: "Learn something interesting about the world of gardens",
+//         knowledgessubtitle1: "Discover Tips & Tricks for gardening",
+//         knowledgessubtitle2: "Explore gardens from around the world",
+//         knowledges: "Learn more",
+//         // New keys for the search section
+//         commonName: "Common name:",
+//         botanical_name: "Botanical name:",
+//         wateringNeed: "Watering need",
+//         sunlightNeed: "Sunlight need",
+//         soilType: "Soil type",
+//         low: "Low",
+//         medium: "Medium",
+//         high: "High",
+//         moderate: "Moderate",
+//         plantingMonth: "Planting month:",
+//         harvestingMonth: "Harvesting month:",
+//         searchBtn: "Search",
+//         choose: "Choose...",
+//         // New keys for results
+//         plantDetails: "Plant Details",
+//         resCommon: "Common:",
+//         resScientific: "Scientific:",
+//         // resType: "Type:",
+//         resWatering: "Watering:",
+//         resSunlight: "Sunlight:",
+//         resSoil: "Soil:",
+//         resPlanting: "Planting:",
+//         resHarvesting: "Harvesting:",
+//         moreInfo: "Get more info"
+//     },
+//     hu: {
+//         settings: "Beállítások",
+//         ideas: "Ötletek",
+//         plantFinder: "Növénykereső",
+//         knowledge: "Tudásbázis",
+//         sidepaneltitle: "Személyes oázis",
+//         savedP: "Mentett növények",
+//         savedWT: "Mentett kerti munkák és eszközök",
+//         savedGL: "Mentett kert tervek",
+//         smalldescription1: "Akár egy üres földfoltot bámulsz, akár egy régi kertet szeretnél felfrissíteni, mi biztosítjuk a botanikai terveket, hogy életre keltsük elképzelésed.",
+//         smalldescription2: "Platformunk ötvözi a művészetet és a tudományt, az egyedi kerttervezési ötleteket, átfogó növénykereső adatbázist és válogatott tervezési inspirációk galériáját kínálva, hogy a kreativitásod szikrájára új láng lobbanjon.",
+//         designNow: "Tervezés",
+//         ideastitle: "Fedezz fel kertötleteket",
+//         ideaspage: "Több kertötlet",
+//         plantfindertitle: "Találd meg az ideális növényed",
+//         plantsearchtitle:"Keress növényeket",
+//         knowledgestitle: "Tudj meg valami érdekeset a kertek világáról",
+//         knowledgessubtitle1: "Fedezz fel kertészeti tippeket és trükköket",
+//         knowledgessubtitle2: "Fedezz fel kerteket a világ minden tájáról",
+//         knowledges: "Tudj meg többet",
+//         // New keys for the search section
+//         commonName: "Gyakori név:",
+//         botanical_name: "Botanikai név:",
+//         wateringNeed: "Öntözési igény",
+//         sunlightNeed: "Fényigény",
+//         soilType: "Talajtípus",
+//         low: "Alacsony",
+//         medium: "Közepes",
+//         high: "Magas",
+//         moderate: "Mérsékelt",
+//         plantingMonth: "Ültetési hónap:",
+//         harvestingMonth: "Betakarítási hónap:",
+//         searchBtn: "Keresés",
+//         choose: "Válassz...",
+//         // New keys for results
+//         plantDetails: "Növény részletei",
+//         resCommon: "Gyakori név:",
+//         resScientific: "Tudományos név:",
+//         // resType: "Típus:",
+//         resWatering: "Öntözés:",
+//         resSunlight: "Fényigény:",
+//         resSoil: "Talaj:",
+//         resPlanting: "Ültetés:",
+//         resHarvesting: "Betakarítás:",
+//         moreInfo: "További információ"
+//     }
+// };
 
 // --- Language switch logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

@@ -1,4 +1,11 @@
+import { setupNavbar } from './navbar.js';
+
+const handler = document.getElementById("handler");
+
+
 document.addEventListener("DOMContentLoaded", async () => {
+    setupNavbar();
+
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = "/sites/login.html";
@@ -346,9 +353,10 @@ async function DeleteGarden(id) {
 }
 
 function ManageRowsColumns(garden, plants, parentContainer, controls) {
+    handler.innerHTML = "";
     const ManageRowsColumnContainer = document.createElement("div");
     ManageRowsColumnContainer.id = "manage-rows-columns-container";
-    parentContainer.appendChild(ManageRowsColumnContainer);
+    handler.appendChild(ManageRowsColumnContainer);
 
     const addRowsColumnsForm = document.createElement("div");
     addRowsColumnsForm.id = "addrowscolumns-form";

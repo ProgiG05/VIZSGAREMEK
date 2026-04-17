@@ -1,34 +1,13 @@
+import { setupNavbar } from './navbar.js';
+
 const gardensContainer = document.getElementById("gardens-container");
 const token = localStorage.getItem('token');
 
+
 document.addEventListener("DOMContentLoaded", async () => {
-
+    setupNavbar();
     const user = JSON.parse(localStorage.getItem("user"));
-    if (token && user) {
-        const loginBtn = document.getElementById("logIn_Btn");
-        const accountHandler = (e) => {
-            e.preventDefault();
-            window.location.href = "/sites/accounts.html";
-        };
 
-        if (loginBtn) {
-            loginBtn.innerHTML = `${user.username}`;
-            loginBtn.addEventListener("click", accountHandler);
-        }
-    }
-
-    const settingsBtn = document.getElementById('settings_Btn');
-    const sidePanel = document.getElementById('settings-sidepanel');
-    const closePanel = document.getElementById('closeSidePanel');
-
-    settingsBtn.addEventListener('click', () => {
-        sidePanel.style.transition = '0.4s all ease'
-        sidePanel.style.left = 0
-    });
-    closePanel.addEventListener('click', () => {
-        sidePanel.style.transition = '0.4s all ease'
-        sidePanel.style.left = "-22.5rem"
-    });
 
     if (!token) {
         document.getElementById("newgarden_btn").style.display = "none";

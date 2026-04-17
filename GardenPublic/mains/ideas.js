@@ -1,19 +1,12 @@
+import { setupNavbar } from './navbar.js';
+
 const token = localStorage.getItem("token");
 
-document.addEventListener("DOMContentLoaded", async (e) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (token && user) {
-        const loginBtn = document.getElementById("logIn_Btn");
-        const accountHandler = (e) => {
-            e.preventDefault();
-            window.location.href = "/sites/accounts.html";
-        };
 
-        if (loginBtn) {
-            loginBtn.innerHTML = `${user.username}`;
-            loginBtn.addEventListener("click", accountHandler);
-        }
-    }
+document.addEventListener("DOMContentLoaded", async (e) => {
+    setupNavbar();
+    const user = JSON.parse(localStorage.getItem("user"));
+
 
     e.preventDefault()
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
@@ -149,44 +142,12 @@ document.getElementById('toup').addEventListener('click', () => {
     window.scrollTo({top:0, behavior: 'smooth'})
 })
 window.onload = () => {
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-theme')
-        darkBtn.classList.add('dark-active')
-    }
 }
 function ConvertToReadingMode(card) {
 
 }
 
-// --- Dark Mode Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const body = document.body;
-const darkBtn = document.getElementById('darkmode');
 
-darkBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    darkBtn.classList.toggle('dark-active');
-    
-    // Optional: Save preference to localStorage
-    const isDark = body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
-
-// --- Side Panel Toggle ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-const settingsBtn = document.getElementById('settings_Btn');
-const sidePanel = document.getElementById('settings-sidepanel');
-const closePanel = document.getElementById('closeSidePanel');
-
-settingsBtn.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = 0
-});
-closePanel.addEventListener('click', () => {
-    sidePanel.style.transition = '0.4s all ease'
-    sidePanel.style.left = "-22.5rem"
-});
 
 // --- Searchbar Logic 1---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -239,7 +200,7 @@ document.getElementById("searchBtn").addEventListener("click", async (e) => {
     if (match) {
         const MessageContainer = document.createElement("div")
         MessageContainer.setAttribute("class","message-cont")
-        MessageContainer.textContent = "No matching result"
+        MessageContainer.textContent = ""
         IdeasCardContainer.appendChild(MessageContainer)
     }
 
