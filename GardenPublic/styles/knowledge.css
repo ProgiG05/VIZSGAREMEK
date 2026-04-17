@@ -9,15 +9,16 @@
     --search-btns-hover-bg: #1a1e1a;
     --search-btns-hover-font: #e0e9d5;
 
-    --card-bg: linear-gradient(to bottom, rgb(98, 129, 65) ,rgb(27, 33, 26));
+    --card-bg: #1a1e1a;
     --paragraph-bg:rgb(255, 239, 229);
     --paragraph-font:rgb(10, 4, 1);
     --card-shadow:rgba(249, 249, 157, 0.751);
-    --card-text:rgb(255, 238, 224);
-    --cardBtn-bg: #042210;
-    --cardBtn-hover-bg: #e2fdf4;
-    --cardbtn-color: #a7cabe;
-    --cardbtn-hover-font-color: #061803;
+    --card-text:#a7f070;
+    --card-borders-color:rgb(255, 212, 185);
+    --cardBtn-bg: #6b3010;
+    --cardBtn-hover-bg: #7c3a15;
+    --cardbtn-color: #ffffff;
+    --cardbtn-hover-font-color: #d9fad3;
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 body.dark-theme{
@@ -131,8 +132,8 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-image: var(--card-bg);
-    padding: 1.5rem;
+    background-color: var(--card-bg);
+    padding: 1rem;
     margin: 1.5rem ;
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--card-shadow);
@@ -167,7 +168,7 @@ body {
 .ShowCaseOneKnowledgeTitle{
     color: var(--card-text);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    font-size: clamp(1.8rem, 5vw, 5.5rem);
+    font-size: clamp(1.8rem, 4vw, 4.5rem);
     text-align: center;
     text-wrap: balance;
     margin: 0.2rem 0 1.5rem 0;
@@ -192,14 +193,27 @@ body {
     width: 30rem;
 }
 .ShowCaseOneKnowledgeSummary{
-    font-size: clamp(1rem, 1.2vw, 1.4rem);
+    font-size: clamp(0.6rem, 1vw, 1.1rem);
     color: var(--card-text);
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: left; 
+    text-align: justify; 
     width: 80%;
     word-spacing: 0.3vw;
-    border-top: 0.2rem solid var(--general-font-color);
-    padding-top: 2.5rem;
+    border-top: 0.2rem solid var(--card-text);
+    padding-top: 1.5rem;
+}
+.ShowCaseOneKnowledgePictureWrapper{
+    width: 80%;
+    height: 50%;
+    margin: 2rem;
+}
+.ShowCaseOneKnowledgePicture{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/2;
+    border-radius: 2rem;
+    border: 0.2rem solid var(--card-borders-color);
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -240,14 +254,14 @@ body {
     color: var(--cardbtn-color);
     font-family: monospace;
     font-size: 2vw;
-    border-radius: 2rem;
+    border-radius: 0.7rem;
     width: 2vw;
     height: fit-content;
     padding: 10rem 0 10rem 0;
     transition: all 0.3s ease;
     cursor: pointer;
     text-align: center;
-    border: none;
+    border: 0.2rem solid var(--card-bg);
     transition: 0.3s all ease;
 }
 .readMoreBtn:hover{
@@ -258,20 +272,20 @@ body {
 .closeBtn{
     background-color: var(--cardBtn-bg);
     color: var(--cardbtn-color);
-    width: fit-content;
+    width: 70%;
     height: fit-content;
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    border-radius: 10px;
-    border: none;
+    border-radius: 1rem;
+    border: 0.2rem solid rgb(18, 11, 2);
     transition: all 0.3s ease;
 }
 .closeBtn:hover{
     background-color: var(--cardBtn-hover-bg);
     color: var(--cardbtn-hover-font-color);
-    width: fit-content;
+    width: 90%;
     height: fit-content;
-    padding: 0.5rem 2rem 0.5rem 2rem;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -285,7 +299,7 @@ body {
     justify-content: flex-start;
     gap: 2rem;
     overflow: visible;
-    background-image: var(--card-bg);
+    background-color: var(--card-bg);
     padding: 2.5rem;
     margin: 2rem ;
     border-radius: 1.5rem;
@@ -303,8 +317,11 @@ body {
 }
 .OneKnowledgeCard .card-actions{
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
+    width: 20%;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -312,7 +329,7 @@ body {
 .OneKnowledgeTitle {
     color: var(--card-text);
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    font-size: clamp(1.8rem, 5vw, 5.1rem);
+    font-size: clamp(1.8rem, 4.2vw, 4.6rem);
     text-align: left;
     text-wrap: balance;
     margin: 0.2rem 0 1.5rem 0;
@@ -342,7 +359,7 @@ body {
     text-align: left; 
     width: 90%;
     word-spacing: 0.3vw;
-    border-top: 0.2rem solid var(--general-font-color);
+    border-top: 0.2rem solid var(--card-text);
     padding-top: 2.5rem;
 }
 
@@ -356,7 +373,7 @@ body {
     opacity: 0.9;
     text-align: left; 
     border-left: 5px solid rgba(176, 246, 123, 0.601);
-    padding-left: 1.5rem;
+    padding-left: 1rem;
     height: 20rem;
     width: 100%;
     overflow-y: auto;
@@ -371,11 +388,11 @@ body {
     font-size: clamp(0.6rem, 1vw, 1.2rem);
     text-indent: 1rem;
     text-align: justify;
-    margin: 0.7rem 0rem 0.3rem 0.2rem;
+    margin: 0.4rem 0rem 0.1rem 0rem;
     background-color: var(--paragraph-bg);
     padding: 0.5rem;
     border-radius: 10px;
-    width: 85%;
+    width: 95%;
 }
 
 @keyframes slideIn {
@@ -397,7 +414,7 @@ body {
     object-fit: cover;
     aspect-ratio: 4/2.5;
     border-radius: 2rem;
-    border: 0.2rem solid white;
+    border: 0.2rem solid var(--card-borders-color);
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */

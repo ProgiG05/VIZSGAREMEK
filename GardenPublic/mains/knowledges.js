@@ -170,6 +170,17 @@ function createKnowledgeCard(knowledge) {
     OneKnowledgeCard.appendChild(OneKnowledgeTitle)
     OneKnowledgeCard.appendChild(OneKnowledgeSummary)
 
+    const imageWrapper = document.createElement("div")
+    imageWrapper.setAttribute("class","ShowCaseOneKnowledgePictureWrapper")
+
+    const imagePlace = document.createElement("img")
+    imagePlace.setAttribute("class","ShowCaseOneKnowledgePicture")
+    imagePlace.setAttribute("src", "../pics/gardenknowledges/" + knowledge.picture + ".png");
+
+    imageWrapper.appendChild(imagePlace)
+
+    OneKnowledgeCard.appendChild(imageWrapper)
+
     return OneKnowledgeCard
 }
 
