@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const plantsData = await fetch('/api/plants', {method: 'GET',headers: {'Content-Type': 'application/json'}})
     const response = await plantsData.json()
 
+    // const searchedPlantsContainer = document.getElementById('first-searched-result')
+    // searchedPlantsContainer.appendChild(createPlantCards(response[0]))
+
     const PlantsContainer = document.getElementById('other-searched-results')
 
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
@@ -55,6 +58,7 @@ function createPlantCards(plant) {
     // Plantcard wrapper
     const PlantCard = document.createElement("div");
     PlantCard.setAttribute("class", "plant-card");
+    PlantCard.style.zIndex = `${plant.id}`
 
     // Title
     const PlantTitle = document.createElement("h1");
@@ -111,18 +115,18 @@ function createPlantCards(plant) {
     };
 
     // Populate Table Rows
-    addTableRow("Common name:", plant.common_name);
-    addTableRow("Botanical name:", plant.botanical_name);
-    addTableRow("Place of Origin:", plant.origin);
-    addTableRow("Plant type:", plant.type);
-    addTableRow("Planting season:", plant.planting);
+    addTableRow("Common name:", capitalizeFirstLetter(plant.common_name));
+    addTableRow("Botanical name:", capitalizeFirstLetter(plant.botanical_name));
+    addTableRow("Place of Origin:", capitalizeFirstLetter(plant.origin));
+    addTableRow("Plant type:", capitalizeFirstLetter(plant.type));
+    addTableRow("Planting season:", capitalizeFirstLetter(plant.planting));
     
     const pruningText = plant.pruning.toLowerCase() === "none" ? "No need for pruning" : plant.pruning;
     addTableRow("Pruning season:", pruningText);
-    addTableRow("Harvesting season:", plant.harvesting);
-    addTableRow("Soil type:", plant.soil);
-    addTableRow("Water quantity:", plant.water);
-    addTableRow("Sunlight intensity:", plant.sunlight);
+    addTableRow("Harvesting season:", capitalizeFirstLetter(plant.harvesting));
+    addTableRow("Soil type:", capitalizeFirstLetter(plant.soil));
+    addTableRow("Water quantity:", capitalizeFirstLetter(plant.water));
+    addTableRow("Sunlight intensity:", capitalizeFirstLetter(plant.sunlight));
     addTableRow("Is it Indoor:", plant.indoor ? "Yes, it can stay inside also" : "No, it can't be kept inside");
     addTableRow("Has Seeds:", plant.seeds ? "Yes, can be propagated by seed" : "No, can't be propagated by seed");
 
@@ -130,6 +134,10 @@ function createPlantCards(plant) {
     PlantCard.appendChild(Table);
 
     return PlantCard;
+}
+
+function capitalizeFirstLetter(word) {
+    return String(word).charAt(0).toUpperCase() + String(word).slice(1)
 }
 
 function searchPlant(container) {

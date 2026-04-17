@@ -3,8 +3,8 @@
     --main-font-color: #0b0e0a;
     --accent-color: #ad5d50;
     --second-accent-color:#ba7832;
-    --third-accent-color:#155087;
-    --fourth-accent-color:#0a3054;
+    --saveBtn-bg:#155087;
+    --saveBtn-hover-bg:#0a3054;
     --font-main: Georgia, serif;
     --font-data: 'Courier New', monospace;
     --font-text: Arial;
@@ -21,6 +21,7 @@
 
     --card-bg: #1c3723;
     --card-font-color:#ebffe7;
+    --card-border: 0.5rem solid #0a1d0f;
     --card-table-key-bg: #F7C85C;
     --card-table-key-font: #071c0d;
     --card-table-value-bg: #FFF6C0;
@@ -154,10 +155,10 @@ body {
     margin: 4rem 0 1rem 0;
     padding: 2rem 0 0rem 0;
     text-align: center;
+    text-wrap: balance;
     width: 90%;
     border-top: 0.4rem solid var(--main-font-color);;
 }
-
 .searching-cont {
     display: grid;
     grid-template-columns: 1.5fr 1fr; 
@@ -341,27 +342,11 @@ input[type="text"], select {
 
 
 .first-searched-result{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 2rem auto;
-    background-color: rgba(255, 255, 255, 0.92);
-    width: 80%;
-    padding: 1rem 1.25rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-}
-.first-result-card{
-    margin: 0;
-}
-.first-result-title{
-    margin: 0;
-}
-.first-details-table{
-    margin: 0;
-}
-.first-label{
-    margin: 0;
-}
-.first-value{
-    margin: 0;
+    width: 90%;
 }
 
 /*Third container and its contents*/
@@ -395,37 +380,58 @@ input[type="text"], select {
     cursor: pointer;
 }
 
+.loadMore_Btn{
+    background-color: var(--general-button-bg);
+    color: var(--general-button-font-color);
+    font-size: clamp(0.5rem, 1.2vw, 1.4rem);
+    font-family: var(--font-data);
+    width: 80%;
+    height: fit-content;
+    padding: 0.5rem 0 0.5rem 0;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.loadMore_Btn:hover{
+    background-color: var(--general-button-hover-bg);
+    color: var(--general-button-hover-font-color);
+    transition: all 0.3s ease;
+}
+
 /*Fourth container and its contents*/
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 .other-searched-results {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
+    grid-template-columns: 1fr 1fr 1fr; 
     align-items: center;
     justify-content: center;
     width: 95%;
-    gap: 2rem;
+    height: 90vh;
 }
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
 .plant-card {
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 1rem;
     margin-top: 1rem;
+    width: 80%;
+    height: fit-content;
     background-color: var(--card-bg);
     color: var(--card-font-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 5px 10px rgba(62, 62, 62, 0.162);
+    border:var(--card-border)
 }
 .plant-card-header-cont{
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-
 }
 .plant-card-title-cont{
     display: flex;
@@ -459,13 +465,14 @@ input[type="text"], select {
 }
 .detail-label {
     font-family: var(--font-text);
-    font-size: clamp(0.5rem,0.9vw,1.2rem);
+    font-size: clamp(0.5rem,0.7vw,1rem);
     background-color: var(--card-table-key-bg);
     color: var(--card-table-key-font);
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
-    padding: 0.75rem;
+    padding: 0.5rem;
     font-weight: bold;
+    text-align: center;
 }
 .detail-value {
     font-family: var(--font-data);
@@ -478,23 +485,18 @@ input[type="text"], select {
     font-weight: bold;
 }
 .savePlant_Btn{
-    width: 15%;
-    padding: 2.5rem 1rem 2.5rem 1rem;
-    background-color: var(--third-accent-color);
+    height: 100%;
+    width: auto;
+    padding: 2rem 1rem 2rem 1rem;
+    background-color: var(--saveBtn-bg);
     border-radius: 1rem;
     border: none;
     transition: 0.3s all ease;
 }
 .savePlant_Btn:hover{
     cursor: pointer;
-    background-color: var(--fourth-accent-color);
+    background-color: var(--saveBtn-hover-bg);
     transition: 0.3s all ease;
-}
-.savePlant_Btn img{
-    object-fit: contain;
-    aspect-ratio: 3.5/4;
-    height: 80%;
-    width: 80%;
 }
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
