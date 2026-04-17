@@ -96,8 +96,8 @@ body {
     line-height: 2.7vh;
     font-style: italic;
     text-wrap: balance;
-    padding-left: 2rem;
-    margin-left: 5rem;
+    padding-left: 2vw;
+    margin-left: 5vw;
 }
 #showContainer{
     width: 30vw;
