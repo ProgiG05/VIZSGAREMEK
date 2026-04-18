@@ -5,23 +5,18 @@ const token = localStorage.getItem("token");
 
 document.addEventListener('DOMContentLoaded', async () => {
     setupNavbar();
+
     const user = JSON.parse(localStorage.getItem("user"));
 
-
-    const plantsData = await fetch(
-        '/api/plants', 
-        {
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'}
-        })
+    const plantsData = await fetch('/api/plants', {method: 'GET', headers: {'Content-Type': 'application/json'}})
     const response = await plantsData.json()
 
     // const searchedPlantsContainer = document.getElementById('first-searched-result')
     // searchedPlantsContainer.appendChild(createPlantCards(response[0]))
 
     const PlantsContainer = document.getElementById('other-searched-results')
-
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
+
     const AllPlantTypes = []
     response.forEach(onetype => {
         if (!AllPlantTypes.includes(onetype.type)) {AllPlantTypes.push(onetype.type)}
@@ -32,18 +27,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         TypeButton.classList.add("typeGroup_Btn")
         TypeButton.textContent = `${onetype.trim()}`
         TypeButton.id = `${onetype.trim()}`
-        TypeButton.addEventListener('click', async () => {
-            await typeFilter(TypeButton.id, response)
-        })
+        TypeButton.addEventListener('click', async () => {await typeFilter(TypeButton.id, response)})
         TypesGroupingContainer.appendChild(TypeButton)
     })
 
     const AllOrigins = []
     response.forEach(oneorigin => {
         if (!AllOrigins.includes(oneorigin.origin)) {AllOrigins.push(oneorigin.origin)}
-    } )
-    console.log(AllOrigins)
-
+    })
+    const OriginSelection = document.getElementById("originSelection")
+    for (let i = 0; i < AllOrigins.length; i++) {
+        const OriginOption = document.createElement("option")
+        OriginOption.setAttribute("value",`${AllOrigins[i]}`)
+        OriginOption.textContent = `${AllOrigins[i]}`
+        OriginSelection.appendChild(OriginOption)
+    }
 
     response.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
 
@@ -51,6 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('clear-water-btn').addEventListener('click', () => clearFilters('water'))
     document.getElementById('clear-sunlight-btn').addEventListener('click', () => clearFilters('sunlight'))
     document.getElementById('clear-soil-btn').addEventListener('click', () => clearFilters('soil'))
+    document.getElementById("loadMore_Btn").addEventListener('click', () => {console.log('Under construction')})
 })
 
 // --- Creating the cards Logic ---
@@ -191,9 +190,9 @@ function searchPlant(container) {
 
 function SearchPlantDetails(details, container) {
     const searchedPlantsContainer = document.getElementById('first-searched-result')
-    searchedPlantsContainer.textContent = `Searched Plants:`
 
-    container.innerHTML = ''
+    container.innerText = ''
+
     details.forEach(plant => { container.appendChild(createPlantCards(plant)) })
 }
 
@@ -214,11 +213,6 @@ function clearForm() {
     clearFilters('sunlight')
     clearFilters('soil')
 }
-
-// --- Localstorage Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-window.onload = () => {
-};
 
 
 // --- Scroll up btn & scroll to seaerch btn & scrool to browse btn Logic ---

@@ -8,6 +8,22 @@ database: process.env.DB_NAME,
 port: process.env.DB_PORT
 })
 
+const plant_search_query = `
+    SELECT * FROM plants 
+    WHERE 
+    common_name LIKE ? OR
+    botanical_name LIKE ? OR 
+    origin LIKE ? OR
+    type LIKE ? OR 
+    water LIKE ? OR 
+    sunlight LIKE ? OR 
+    soil LIKE ? OR 
+    indoor LIKE ? OR
+    seeds LIKE ? OR
+    planting LIKE ? OR 
+    pruning LIKE ? OR
+    harvesting LIKE ?`
+
 module.exports = {
     GetAllIdeas: async() => {
         const [rows] = await connection.query(`SELECT * FROM ideas`)
@@ -17,8 +33,8 @@ module.exports = {
      const [rows] = await connection.query(`SELECT * FROM knowledges`)
      return rows
     },
-    GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName,type,water,sunlight,soil,planting,harvesting) {
-        const [rows] = await connection.query(`SELECT * FROM plants WHERE common_name LIKE ? OR type LIKE ? OR water LIKE ? OR sunlight LIKE ? OR soil LIKE ? OR planting LIKE ? OR harvesting LIKE ?`, [commonName, type, water, sunlight, soil, planting, harvesting])
+    GetSearchedPlantDetails : async function GetSearchedPlantDetails(commonName, botanicalName, origin, type, water, sunlight, soil, indoor, seeds, planting, pruning, harvesting) {
+        const [rows] = await connection.query(plant_search_query, [commonName, botanicalName, origin, type, water, sunlight, soil, indoor, seeds, planting, pruning, harvesting])
         console.log(rows)
         return rows
     },

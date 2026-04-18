@@ -252,7 +252,6 @@ document.getElementById('searchPlant_Btn').addEventListener("click", async (e) =
     const ActiveSoilCheckboxes = Array.from(soilCheckboxes).filter(x => x.checked).map(y => y.value.toLowerCase());
 
     const plantingSeasonSelect = document.querySelector('#plantingSelection').value.toLowerCase();
-    // const harvestingSeasonSelect = document.querySelector('#harvestingSelection').value.toLowerCase();
 
     const resultTitle = document.getElementById('plantdetails-title');
 
@@ -273,9 +272,7 @@ document.getElementById('searchPlant_Btn').addEventListener("click", async (e) =
             console.log(`Soil: ${criteriaSoil}`)
 
             const criteriaPlanting = !plantingSeasonSelect || plantingSeasonSelect === "none" || p.planting.toLowerCase().includes(plantingSeasonSelect);
-            // const criteriaHarvesting = !harvestingSeasonSelect || harvestingSeasonSelect === "none" || p.harvesting.toLowerCase().includes(harvestingSeasonSelect);
             console.log(`Planting: ${criteriaPlanting}`)
-            // console.log(`Harvesting: ${criteriaHarvesting}`)
 
             // Use && to ensure ALL checked criteria must be met
             return criteriacommonName && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting;
@@ -294,17 +291,24 @@ function displayResults(results) {
     const resultContainer = document.getElementById('plant-search-result-cont');
     const resultTable = document.getElementById('result-details-cont-table');
     const resultTitle = document.getElementById('plantdetails-title');
-    const resultBtn = document.getElementById('plantsearchPage_Btn')
+    const resultBtn = document.getElementById('plantsearchPage_Btn');
+    const resultPic = document.getElementById('resultimage')
 
     resultContainer.classList.remove('hidden2');
 
     if (!results || results.length === 0) { 
         resultTitle.innerText = 'No plants found matching your criteria.';
-        resultTitle.style.width = "50%"
+        resultTitle.style.width = "80%"
         resultTitle.style.textAlign = "left"
         resultTable.innerHTML = ""; 
         resultBtn.style.display = "none"
+        resultPic.style.display = "none"
         return;
+    }
+    else{
+        resultTitle.style.textAlign = "center"
+        resultTitle.style.width = "100%"
+        resultPic.style.display = "block"
     }
 
     resultBtn.style.display = "block"
@@ -344,5 +348,4 @@ function displayResults(results) {
     makeRow('Sunlight:', p.sunlight, 'sunlight');
     makeRow('Soil:', p.soil, 'soil');
     makeRow('Planting:', p.planting);
-    // makeRow('Harvesting:', p.harvesting);
 }

@@ -3,7 +3,7 @@
     --secondary: rgba(203, 234, 222, 0.541);
     --third: #8abb9d;
 
-    --body-bg: #16513b;
+    --body-bg: #4d795d;
     --text-main: #E3FFF5;
     --section-main-titles-font-color:#011b0a;
     --section-bg-odd: linear-gradient(to bottom,#16513bdd, #4d8a64, #67987a);
@@ -16,7 +16,7 @@
     --btn-font-color: #E3FFF5;
     --btn-hover-font-color: #112d14;
 
-    --navbtn-bg: #1b291cbb;
+    --navbtn-bg: #1b291cde;
     --navbtn-hover-bg: #add5c7;
     --navbtn-font-color: #add5c7;
     --navbtn-hover-font-color: #1b291c;
@@ -50,7 +50,7 @@
     --innercont-hover-bg:#043b1751;
     --innercont-hover-shadow:#073d1a73;
 
-    --plant-details-title: #021e0c;
+    --plant-details-title: #ffffff;
     --plantsearchPage-bg: #0d2d18d0;
     --plantsearchPage-hover-bg: #ffffff;
     --plantsearchPage-font-color: #ffffff;
@@ -84,7 +84,7 @@ body {
     box-sizing: border-box; 
     font-family: 'Quicksand', sans-serif;
     background-color: var(--body-bg);
-    transition: 0.3s all ease-in;
+    transition: 0.2s all ease-in;
 }
 section {   
     min-height: 100vh;
@@ -97,9 +97,9 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: var(--section-bg-odd);
+    /* background-image: var(--section-bg-odd); */
 }
-section:nth-child(even){background-image: var(--section-bg-even);}
+/* section:nth-child(even){background-image: var(--section-bg-even);} */
 
 .hidden {opacity: 0;transition: all 1s ease;transform: translateX(-100px);}
 .hidden2 {opacity: 0;transition: all 1s ease;transform: translateX(100px);}
@@ -640,6 +640,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .textInp-cont label{
     width: 40%;
+    font-size: clamp(0.7rem, 1.1vw, 1.4rem);
 }
 .textInp-cont input{
     width: 60%;
@@ -666,10 +667,10 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .check-cont h3{
     width: 90%;
+    font-size: clamp(0.8rem,0.9vw,1.4rem); 
     border-bottom: 0.15rem solid var(--searchcontainer-text);
     padding: 0 0 0.4rem 0;
 }
-
 .water-selection-cont, .sunlight-selection-cont, .soil-selection-cont{
     display: flex;
     flex-direction: row;
@@ -682,6 +683,10 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     cursor: pointer;
     font-size: clamp(0.6rem,0.9vw,1.4rem); 
     font-weight: normal;
+}
+.water-selection-cont input, .sunlight-selection-cont input, .soil-selection-cont input {
+    margin: 0 0 0 -1.1vw;
+    width: 10%;
 }
 
 /* ----- Planting Season ----- */
@@ -697,7 +702,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .selection-cont label{
     width: 40%;
-    font-size: 1vw;
+    font-size: clamp(0.7rem, 1.1vw, 1.4rem);
 }
 .selection-cont select{
     width: 60%;
@@ -722,7 +727,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: #E3FFF5;
     padding: 0.4rem 1.2rem 0.4rem 1.2rem;
     margin-left: 1vw;
-    font-size: clamp(0.5rem,0.8vw,1rem);
+    font-size: clamp(0.6rem,0.8vw,1rem);
     font-family: monospace;
     border-radius: 0.8rem;
     border: none;
@@ -736,8 +741,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 }
 .searchPlant_Btn{
     width: 70%;
-    height: 2.5rem;
+    height: fit-content;
     margin: auto;
+    padding: 0.8rem 1rem 0.8rem 1rem;
     bottom: 0;
     text-align: center;
     border-radius: 20px;
@@ -746,7 +752,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     color: var(--plantsearchPage-font-color);
     text-decoration: none;
     font-family: monospace;
-    font-size: 1.2rem;
+    font-size: clamp(0.5rem,0.9vw,1.2rem);
     transition: all 0.3s ease;
 }
 .searchPlant_Btn:hover{
@@ -773,11 +779,12 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
 }
 .plantdetails-title{
+    width: 100%;
     text-align: center;
     font-family: monospace;
-    font-size: clamp(1rem, 3.5vw, 4rem);
+    font-size: clamp(3rem, 3.8vw, 4.4rem);
     font-weight: bold;
-    margin: 3rem 0 1rem 0;
+    margin: 2rem 0 2rem 0;
     color: var(--plant-details-title);
 }
 .resultimage-cont{
@@ -803,6 +810,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 .result-details-cont-table{
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 .resultKey{
     width: fit-content;
@@ -839,7 +847,7 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     background-color: var(--plantsearchPage-bg);
     color: var(--plantsearchPage-font-color);
     font-family: monospace;
-    font-size: clamp(0.6rem,0.9vw,1.2rem);
+    font-size: clamp(0.5rem,0.9vw,1.2rem);
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -1076,10 +1084,9 @@ section:nth-child(even){background-image: var(--section-bg-even);}
 
     /*------------------------------------------------------------------------------------------------------*/
     .plant-finder-section{align-items: center;justify-content: center;}
-    .search-cont{font-size: 1.2vw;}
-    .plant-search-result-cont{width: 80%;}
-    .selection-cont{flex-direction: row;}
-    .plant-finder-title{font-size: 7vw;}
+    .water-selection-cont label, .sunlight-selection-cont label, .soil-selection-cont label {margin: 0;}
+    .plant-search-result-cont{align-items: center;justify-content: center;}
+    .plantdetails-title{margin: 2rem 0 2rem 0;}
     .resultimage-cont{display: none;}
     /*------------------------------------------------------------------------------------------------------*/
 }
@@ -1113,10 +1120,15 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     /*Plant finder section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
-    
+    .plant-finder-main-container{flex-direction: column;}
+    .plant-search-data-cont{width: 70%;}
+    .plant-search-result-cont{width: 70%;}
+    .searchPlant_Btn{padding: 0.4rem 1rem 0.4rem 1rem;}
 
-    .plantsearchPage_Btn{font-size: 1.6vw;margin-bottom: 2rem;padding: 0.3rem 3rem 0.3rem 3rem;}
-    .plantsearchPage_Btn:hover{padding: 0.3rem 6rem 0.3rem 6rem;}
+    .plantdetails-title{margin: 1rem 0 1rem 0;}
+    .result-details-cont{width: 90%;}
+    .plantsearchPage_Btn{width: 70%;padding: 0.3rem 1rem 0.3rem 1rem;}
+    .plantsearchPage_Btn:hover{width: 80%;}
     /*------------------------------------------------------------------------------------------------------*/
 }
 @media (max-width: 700px) {
@@ -1127,37 +1139,10 @@ section:nth-child(even){background-image: var(--section-bg-even);}
     .garden-card{height: fit-content;width: 80%;}
     /*------------------------------------------------------------------------------------------------------*/
 
-    /*Plant finder section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
-    .search-cont{width: 70%;font-size: 3vw;}
-    .selection-cont select{width: 30%; font-size: 2vw;}
-    .plant-search-result-cont{width: 70%;flex-direction: column;}
-    /*------------------------------------------------------------------------------------------------------*/
-
     /*Knowledges section:*/
 
     /*------------------------------------------------------------------------------------------------------*/
     .reader-cont{flex-direction: column;}
     .smallknowledge-cont, .bigknowledge-cont{width: 90%; height: 35%; margin: 0.5rem;padding:0.5rem ;}
-    /*------------------------------------------------------------------------------------------------------*/
-}
-@media (max-width: 550px)  {
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*Plant finder section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
-    .search-cont{width: 85%;margin: auto;}
-    .plant-search-result-cont{width: 85%;}
-    .plantdetails-title{font-size: 4vw;}
-    .resultKey{font-size: 1.5vw; padding: 0.2rem;}
-    .resultValue{font-size: 1.5vw;padding: 0.2rem;}
-    /*------------------------------------------------------------------------------------------------------*/
-    
-    /*Knowledges section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
-    .knowledges-title{margin-left: 4rem;}
     /*------------------------------------------------------------------------------------------------------*/
 }

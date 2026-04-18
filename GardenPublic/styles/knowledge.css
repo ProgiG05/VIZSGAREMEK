@@ -390,7 +390,7 @@ body {
     text-align: justify;
     margin: 0.4rem 0rem 0.1rem 0rem;
     background-color: var(--paragraph-bg);
-    padding: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     border-radius: 10px;
     width: 95%;
 }
