@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     const ListOfIdeas = await responseIdeas.json()
     const IdeasCardContainer = document.getElementById("showcase-container")
 
+    const randoms = Math.floor(Math.random() * ListOfIdeas.length)
     const returnIdeas = [ListOfIdeas[0],ListOfIdeas[1],ListOfIdeas[2]]
 
     returnIdeas.forEach(idea => {
@@ -298,25 +299,19 @@ function displayResults(results) {
 
     if (!results || results.length === 0) { 
         resultTitle.innerText = 'No plants found matching your criteria.';
-        resultTitle.style.width = "80%"
         resultTitle.style.textAlign = "left"
         resultTable.innerHTML = ""; 
         resultBtn.style.display = "none"
         resultPic.style.display = "none"
         return;
     }
-    else{
-        resultTitle.style.textAlign = "center"
-        resultTitle.style.width = "100%"
-        resultPic.style.display = "block"
-    }
-
-    resultBtn.style.display = "block"
-
-    const p = results[0]; //first and best matching result
-
+    resultTitle.style.textAlign = "center"
     resultTitle.innerText = "Plant Details";
     resultTable.innerHTML = ""; 
+    resultPic.style.display = "block"
+    resultBtn.style.display = "block"
+    
+    const p = results[0]; //first and best matching result
 
     function makeRow(key, value, category = null) {
         if (!value) return; // Skip if there's no data for this field
