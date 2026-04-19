@@ -2,11 +2,9 @@ import { setupNavbar } from './navbar.js';
 
 const token = localStorage.getItem("token");
 
-
 document.addEventListener("DOMContentLoaded", async (e) => {
     setupNavbar();
     const user = JSON.parse(localStorage.getItem("user"));
-
 
     e.preventDefault()
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
@@ -146,8 +144,6 @@ window.onload = () => {
 function ConvertToReadingMode(card) {
 
 }
-
-
 
 // --- Searchbar Logic 1---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

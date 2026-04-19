@@ -1,10 +1,6 @@
 :root {
     --body-bg: #b2cd8f;
     --main-font-color: #0b0e0a;
-    --accent-color: #ad5d50;
-    --second-accent-color:#ba7832;
-    --saveBtn-bg:#155087;
-    --saveBtn-hover-bg:#0a3054;
     --font-main: Georgia, serif;
     --font-data: 'Courier New', monospace;
     --font-text: Arial;
@@ -19,13 +15,23 @@
     --pfinder-cont-input-bg:#fffaf6;
     --pfinder-subcont-bg:#222c1d;
 
-    --card-bg: #1c3723;
-    --card-font-color:#ebffe7;
-    --card-border: 0.5rem solid #0a1d0f;
-    --card-table-key-bg: #F7C85C;
-    --card-table-key-font: #071c0d;
-    --card-table-value-bg: #FFF6C0;
-    --card-table-value-font: #071c0d;
+    --card-bg: #362918;
+    --card-font-color:#030c01;
+    --card-border: 0.4rem solid #0c0402;
+
+    --card-title-bg: #FFDE42;
+    --card-subtitle-bg:#ba7832;
+
+    --pot-brown: #6b3010;
+    --pot-rim-brown: #7c3a15;
+    --flower-white: #ffffff;
+    --flower-yellow: #f0e632;
+    --stem-green: #66a840;
+
+    --card-table-key-bg: #9dab62;
+    --card-table-key-font: #0d1102;
+    --card-table-value-bg: #E3DBBB;
+    --card-table-value-font: #0d1102;
 }
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 body.dark-theme {
@@ -228,6 +234,8 @@ body {
     padding-bottom: 0.3rem;
 }
 
+/*-----------------------------------------------------------------------------------------*/
+
 .water-selection-cont, 
 .sunlight-selection-cont, 
 .soil-selection-cont {
@@ -254,7 +262,9 @@ body {
     font-weight: normal;
 }
 
-.clearBtn {
+/*-----------------------------------------------------------------------------------------*/
+
+.clearBtn{
     background-color: var(--general-button-bg);
     color: var(--general-button-font-color);
     padding: 0.4rem 1.2rem 0.4rem 1.2rem;
@@ -283,33 +293,94 @@ body {
     gap: 1.5rem;
 }
 
+/*-----------------------------------------------------------------------------------------*/
+
 .planting-months-selection, .harvesting-months-selection {
     background-color: var(--pfinder-cont-input-bg);
     border: none;
 }
+
+/*-----------------------------------------------------------------------------------------*/
 
 .origin-selection-cont{
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal columns */
     gap: 1.5rem;
 }
+
+/*-----------------------------------------------------------------------------------------*/
+
 .indoor-switch-cont, .seeds-switch-cont{
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal columns */
     gap: 1.5rem;
 }
+/* Hide default HTML checkbox */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: clamp(2.5rem, 4vw, 3.5rem);
+  height: clamp(1.5rem, 2.8vw, 2rem);
+}
+
+.switch input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 0.6rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(100% - 0.4rem);
+  width: calc(50% - 0.25rem);
+  left: 0.2rem;
+  top: 0.2rem;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .slider {background-color: #27b43c;}
+input:focus + .slider {box-shadow: 0 0 0.2rem rgba(39, 180, 60, 0.6);}
+input:checked + .slider:before {transform: translateX(calc(100% + 0.1rem));}
+
+/* Rounded slider container */
+.slider.round {border-radius: 0.6rem;}
+.slider.round:before {border-radius: 50%;}
+
+/*-----------------------------------------------------------------------------------------*/
 
 /* General Overrides */
 label {
     font-family: var(--font-data);
-    font-size: clamp(0.5rem,1.2vw,2rem); 
+    font-size: clamp(0.6rem,1vw,1.5rem); 
     font-weight: bold;
 }
 
 input[type="text"], select {
     font-family: var(--font-data);
-    padding: 0.5rem 0 0.5rem 0.2rem;
-    border-radius: 0.5rem;
+    font-size: clamp(0.6rem,1vw,1.5rem);
+    padding: 0.4rem 0 0.4rem 0.2rem;
+    border-radius: 0.6rem;
 }
 
 
@@ -342,10 +413,10 @@ input[type="text"], select {
 
 .first-searched-result{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 2rem auto;
-    width: 90%;
+    width: 80%;
 }
 
 /*Third container and its contents*/
@@ -379,19 +450,29 @@ input[type="text"], select {
     cursor: pointer;
 }
 
-.loadMore_Btn{
+.result-button-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.loadMore_Btn, .GoBackSearch_Btn{
     background-color: var(--general-button-bg);
     color: var(--general-button-font-color);
     font-size: clamp(0.5rem, 1.2vw, 1.4rem);
     font-family: var(--font-data);
-    width: 80%;
+    width: 40%;
     height: fit-content;
     padding: 0.5rem 0 0.5rem 0;
     border-radius: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.loadMore_Btn:hover{
+.loadMore_Btn:hover, .GoBackSearch_Btn:hover{
     background-color: var(--general-button-hover-bg);
     color: var(--general-button-hover-font-color);
     transition: all 0.3s ease;
@@ -415,7 +496,7 @@ input[type="text"], select {
     border-radius: 1.5rem;
     padding: 1rem;
     margin-top: 1rem;
-    width: 80%;
+    width: 85%;
     height: fit-content;
     background-color: var(--card-bg);
     color: var(--card-font-color);
@@ -435,6 +516,7 @@ input[type="text"], select {
 .plant-card-title-cont{
     display: flex;
     flex-direction: column;
+    float: left;
     width: 80%;
 }
 .plant-title {
@@ -445,7 +527,7 @@ input[type="text"], select {
     padding: 0.3rem 0 0.3rem 0;
     width: 100%;
     border-radius: 1rem;
-    background-color: var(--accent-color);
+    background-color: var(--card-title-bg);
 }
 .plant-subtitle{
     font-family: var(--font-main);
@@ -456,15 +538,15 @@ input[type="text"], select {
     padding: 0.3rem 0 0.3rem 0;
     width: 100%;
     border-radius: 1rem;
-    background-color: var(--second-accent-color);
+    background-color: var(--card-subtitle-bg);
 }
 .plant-details-table {
     width: 100%;
     margin-top: 1.25rem;
 }
 .detail-label {
-    font-family: var(--font-text);
-    font-size: clamp(0.5rem,0.7vw,1rem);
+    font-family: var(--font-main);
+    font-size: clamp(0.6rem,0.8vw,1.1rem);
     background-color: var(--card-table-key-bg);
     color: var(--card-table-key-font);
     border-top-left-radius: 1rem;
@@ -483,95 +565,123 @@ input[type="text"], select {
     padding: 0.75rem;
     font-weight: bold;
 }
-.savePlant_Btn{
-    height: 100%;
-    width: auto;
-    padding: 2rem 1rem 2rem 1rem;
-    background-color: var(--saveBtn-bg);
-    border-radius: 1rem;
+
+.pot-button {
+    right: 0;
+    background: none;
     border: none;
-    transition: 0.3s all ease;
-}
-.savePlant_Btn:hover{
+    padding: 0;
     cursor: pointer;
-    background-color: var(--saveBtn-hover-bg);
-    transition: 0.3s all ease;
+    position: relative;
+    width: 3.725rem;
+    height: 3.8vh;
+    overflow: visible; 
+    transform: scale(0.8);
+    transform-origin: bottom right; 
+    margin-left: -1rem;
+    margin-bottom: -1rem;
 }
+.pot-base {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 4.7vh;
+    background-color: var(--pot-brown);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    z-index: 10;
+}
+.pot-rim {
+    position: absolute;
+    bottom: 4vh;
+    left: 5%;
+    width: 90%;
+    height: 1vh;
+    background-color: var(--pot-rim-brown);
+    z-index: 11;
+    border-radius: 2px;
+}
+.flower-assembly {
+    position: absolute;
+    left: 50%;
+    bottom: 0px; 
+    transform: translateX(-50%);
+    z-index: 5;
+    transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+}
+
+.pot-button.saved .flower-assembly {bottom: 4vh; opacity: 1;}
+
+.stem {
+    width: 0.5rem;
+    height: 1.25rem;
+    background-color: var(--stem-green);
+    margin: 0 auto;
+}
+.flower-head {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: -5px;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: var(--flower-yellow);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.petal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.75rem;
+    height: 2.25rem;
+    background-color: var(--flower-white);
+    border-radius: 20px;
+    transform-origin: center;
+    z-index: 1;
+}
+.p1 { transform: translate(-50%, -50%); }
+.p2 { transform: translate(-50%, -50%) rotate(45deg); }
+.p3 { transform: translate(-50%, -50%) rotate(90deg); }
+.p4 { transform: translate(-50%, -50%) rotate(135deg); }
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 
-@media (max-width: 900px) {
-
+@media (max-width: 1100px) {
+    .other-searched-results {grid-template-columns: 1fr 1fr ; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+    .clearBtn{width: 90%;}
+}
 
+@media (max-width: 700px) {
+    .other-searched-results {grid-template-columns: 1fr; grid-template-columns: auto;}
+    .plant-card{width: 100%;}
+    .switch {
+        width: clamp(2rem, 6vw, 2.8rem);
+        height: clamp(1.2rem, 4vw, 1.5rem);
+    }
+    .slider:before {
+        width: calc(50% - 0.2rem);
+        height: calc(100% - 0.3rem);
+        top: 0.15rem;
+        left: 0.15rem;
+    }
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  left: 0;
-}
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
 
-input:checked + .slider {
-  background-color: #27b43c;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #27b43c;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}

@@ -2,7 +2,6 @@ import { setupNavbar } from './navbar.js';
 
 const token = localStorage.getItem("token");
 
-
 document.addEventListener('DOMContentLoaded', async () => {
     setupNavbar();
 
@@ -45,11 +44,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     response.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
 
-    searchPlant(PlantsContainer)
+    // searchPlant(PlantsContainer)
+
     document.getElementById('clear-water-btn').addEventListener('click', () => clearFilters('water'))
     document.getElementById('clear-sunlight-btn').addEventListener('click', () => clearFilters('sunlight'))
     document.getElementById('clear-soil-btn').addEventListener('click', () => clearFilters('soil'))
-    document.getElementById("loadMore_Btn").addEventListener('click', () => {console.log('Under construction')})
 })
 
 // --- Creating the cards Logic ---
@@ -71,14 +70,37 @@ function createPlantCards(plant) {
     PlantSubTitle.setAttribute("class", "plant-subtitle");
     PlantSubTitle.textContent = `${plant.botanical_name}`;
 
-    // Save button
-    const SavePlantButton = document.createElement("button")
-    SavePlantButton.setAttribute("class","savePlant_Btn")
-    SavePlantButton.setAttribute("id","savePlant_Btn")
-    const savePic = document.createElement("img")
-    savePic.setAttribute("src","../pics/icons/book_2_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png")
-    savePic.setAttribute("alt","Save")
-    SavePlantButton.appendChild(savePic)
+    // Save button 
+    const potButton = document.createElement("button");
+    potButton.setAttribute("class", "pot-button");
+    potButton.setAttribute("onclick","toggleSaveState(this)")
+    
+    const flowerAssembly = document.createElement("div");
+    flowerAssembly.setAttribute("class", "flower-assembly");
+    const flowerHead = document.createElement("div");
+    flowerHead.setAttribute("class", "flower-head");
+    for (let i = 1; i <= 4; i++) {
+        const petal = document.createElement("div");
+        petal.setAttribute("class", `petal p${i}`);
+        flowerHead.appendChild(petal);
+    }
+    const center = document.createElement("div");
+    center.setAttribute("class", "center");
+    flowerHead.appendChild(center);
+    
+    const stem = document.createElement("div");
+    stem.setAttribute("class", "stem");
+    flowerAssembly.appendChild(flowerHead);
+    flowerAssembly.appendChild(stem);
+
+    const potBase = document.createElement("div");
+    potBase.setAttribute("class", "pot-base");
+    const potRim = document.createElement("div");
+    potRim.setAttribute("class", "pot-rim");
+
+    potButton.appendChild(flowerAssembly);
+    potButton.appendChild(potBase);
+    potButton.appendChild(potRim);
 
     // Container for the titles
     const TitleContainer = document.createElement("div")
@@ -90,7 +112,8 @@ function createPlantCards(plant) {
     const HeaderContainer = document.createElement("div")
     HeaderContainer.setAttribute("class","plant-card-header-cont")
     HeaderContainer.appendChild(TitleContainer)
-    HeaderContainer.appendChild(SavePlantButton)
+    // HeaderContainer.appendChild(SavePlantButton)
+    HeaderContainer.appendChild(potButton)
     
     PlantCard.appendChild(HeaderContainer)
 
@@ -128,8 +151,9 @@ function createPlantCards(plant) {
     addTableRow("Soil type:", capitalizeFirstLetter(plant.soil));
     addTableRow("Water quantity:", capitalizeFirstLetter(plant.water));
     addTableRow("Sunlight intensity:", capitalizeFirstLetter(plant.sunlight));
-    addTableRow("Is it Indoor:", plant.indoor ? "Yes, it can stay inside also" : "No, it can't be kept inside");
+    addTableRow("Is it Indoor:", plant.indoor ? "Yes, can stay inside also" : "No, can't be kept inside");
     addTableRow("Has Seeds:", plant.seeds ? "Yes, can be propagated by seed" : "No, can't be propagated by seed");
+
 
     // Append table to the card
     PlantCard.appendChild(Table);
@@ -137,16 +161,23 @@ function createPlantCards(plant) {
     return PlantCard;
 }
 
-function capitalizeFirstLetter(word) {
-    return String(word).charAt(0).toUpperCase() + String(word).slice(1)
-}
+// --- String first letter capitalize Logic & Pot button save Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved');}
+
+function capitalizeFirstLetter(word) {return String(word).charAt(0).toUpperCase() + String(word).slice(1)}
+
+// --- Plant searching Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+const form = document.getElementById('search-form')
 
 function searchPlant(container) {
-    const form = document.getElementById('search-form')
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
-
-        document.getElementById("other-searched-results").scrollIntoView({behavior:"smooth"})
+        const searchedPlantsContainer = document.getElementById('first-searched-result')
+        searchedPlantsContainer.scrollIntoView({behavior:"smooth"})
 
         const waterchecks = document.querySelectorAll('.water-checkbox')
         const sunlightchecks = document.querySelectorAll('.sunlight-checkbox')
@@ -183,23 +214,54 @@ function searchPlant(container) {
             headers: {'Content-Type': 'application/json'}
         })
         const response = await plantsData.json()
-        SearchPlantDetails(response, container)
+
+        SearchPlantDetails(response, searchedPlantsContainer)
         clearForm()
     })
 }
 
+// --- Filling up the first result container with the search result Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 function SearchPlantDetails(details, container) {
-    const searchedPlantsContainer = document.getElementById('first-searched-result')
-
     container.innerText = ''
-
     details.forEach(plant => { container.appendChild(createPlantCards(plant)) })
+
+    const ButtonCont = document.createElement("div")
+    ButtonCont.setAttribute("id","result-button-container")
+    ButtonCont.setAttribute("class","result-button-container")
+
+    const LoadMoreBtn = document.createElement('button')
+    LoadMoreBtn.setAttribute("id","loadMore_Btn")
+    LoadMoreBtn.setAttribute("class","loadMore_Btn")
+    LoadMoreBtn.textContent = "Load more"
+    LoadMoreBtn.addEventListener("click", () => {
+        console.log("Load more search results / load all")
+    })
+    ButtonCont.appendChild(LoadMoreBtn)
+
+    const GoBackToSearchingBtn = document.createElement('button')
+    GoBackToSearchingBtn.setAttribute("id","GoBackSearch_Btn")
+    GoBackToSearchingBtn.setAttribute("class","GoBackSearch_Btn")
+    GoBackToSearchingBtn.textContent = "Search another"
+    GoBackToSearchingBtn.addEventListener("click", () => {
+        form.scrollIntoView({behavior:"smooth"})
+    })
+    ButtonCont.appendChild(GoBackToSearchingBtn)
+
+    container.appendChild(ButtonCont)
 }
+
+// --- Clearing the radio button filters Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 function clearFilters(type) {
     const checks = document.querySelectorAll(`.${type}-radioBtn`)
     checks.forEach(check => check.checked = false)
 }
+
+// --- Clear all the search details in the searching container Logic ---
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 function clearForm() {
     document.getElementById('commonplant-search-inp').value = ""
@@ -213,7 +275,6 @@ function clearForm() {
     clearFilters('sunlight')
     clearFilters('soil')
 }
-
 
 // --- Scroll up btn & scroll to seaerch btn & scrool to browse btn Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -231,3 +292,41 @@ async function typeFilter(type, plantsData) {
     PlantsContainer.innerHTML = ""
     filteredPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant)))
 }
+
+document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    const commonNameSearch = document.getElementById('commonplant-search-inp').value.toLowerCase().trim();
+    const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value.toLowerCase().trim();
+    const water = document.querySelector('.water-radioBtn:checked')?.value.toLowerCase() || null;
+    const sunlight = document.querySelector('.sunlight-radioBtn:checked')?.value.toLowerCase() || null;
+    const soil = document.querySelector('.soil-radioBtn:checked')?.value.toLowerCase() || null;
+    const plantingMonth = document.getElementById('plantingSelection').value.toLowerCase();
+    const harvestingMonth = document.getElementById('harvestingSelection').value.toLowerCase();
+    const origin = document.getElementById('originSelection').value.toLowerCase();
+    const indoorChecked = document.getElementById('indoorCheckbox').checked;
+    const seedsChecked = document.getElementById('seedsCheckbox').checked;
+
+    const response = await fetch('/api/plants', {method: "GET", headers: {'Content-Type' : 'application/json'}})
+    const plants = await response.json()
+
+    const filteredPlants = plants.filter(p => {
+        const criteriaCommon = !commonNameSearch || p.common_name.toLowerCase().includes(commonNameSearch);
+        const criteriaBotanical = !botanicalNameSearch || p.botanical_name.toLowerCase().includes(botanicalNameSearch);
+        const criteriaWater = !water || p.water.toLowerCase() === water;
+        const criteriaSunlight = !sunlight || p.sunlight.toLowerCase() === sunlight;
+        const criteriaSoil = !soil || p.soil.toLowerCase() === soil;
+        const criteriaPlanting = plantingMonth === "none" || !plantingMonth || p.planting.toLowerCase().includes(plantingMonth);
+        const criteriaHarvesting = harvestingMonth === "none" || !harvestingMonth || p.harvesting.toLowerCase().includes(harvestingMonth);
+        const criteriaOrigin = origin === "none" || !origin || p.origin.toLowerCase() === origin;
+        const criteriaIndoor = !indoorChecked || p.indoor;
+        const criteriaSeeds = !seedsChecked || p.seeds;
+
+        return criteriaCommon && criteriaBotanical && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting && criteriaOrigin && criteriaIndoor && criteriaSeeds;
+    });
+
+    const searchedPlantsContainer = document.getElementById('first-searched-result');
+    searchedPlantsContainer.scrollIntoView({behavior:"smooth"});
+    SearchPlantDetails(filteredPlants, searchedPlantsContainer);
+    clearForm();
+})

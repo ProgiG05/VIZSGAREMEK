@@ -10,18 +10,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     if (!token) {
+        const infoCont = document.getElementById("information-cont")
+
         document.getElementById("newgarden_btn").style.display = "none";
         const loginText = document.createElement("h1")
         loginText.textContent = "You need to be logged in to view and create gardens."
+        loginText.className = "loginText"
         loginText.style.display = "block"
-        gardensContainer.appendChild(loginText);
+        infoCont.appendChild(loginText);
 
         const loginBtn = document.createElement("button")
         loginBtn.textContent = "Login / Register"
         loginBtn.className = "login_btn"
         loginBtn.style.display = "block"
         loginBtn.addEventListener("click", () => {window.location.href = "/sites/login.html";})
-        gardensContainer.appendChild(loginBtn);
+        infoCont.appendChild(loginBtn);
         return;
     }
 

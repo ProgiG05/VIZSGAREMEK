@@ -48,11 +48,34 @@
     --innercont-hover-bg:#043b1751;
     --innercont-hover-shadow:#073d1a73;
 
-    --plant-details-title: #ffffff;
     --plantsearchPage-bg: #0d2d18d0;
     --plantsearchPage-hover-bg: #ffffff;
     --plantsearchPage-font-color: #ffffff;
     --plantsearchPage-hover-font-color: #072e15d3;
+
+    --plant-search-result-title: #ffffff;
+    --plant-search-result-bg: #362918e8;
+    --plant-search-result-font-color:#030c01e4;
+    --plant-search-result-border: 0.4rem solid #0c0402c6;
+
+    --plant-search-result-title-bg: #e1cd68;
+    --plant-search-result-subtitle-bg:#ba7832;
+
+    --pot-brown: #6b3010;
+    --pot-rim-brown: #7c3a15;
+    --flower-white: #ffffff;
+    --flower-yellow: #f0e632;
+    --stem-green: #66a840;
+
+    --plant-search-result-table-key-bg: #9dab62;
+    --plant-search-result-table-key-font: #0d1102;
+    --plant-search-result-table-value-bg: #E3DBBB;
+    --plant-search-result-table-value-font: #0d1102;
+
+    --plantresultBtn-bg: #9dab62;
+    --plantresultBtn-hover-bg: #0d1102;
+    --plantresultBtn-font-color: #0d1102;
+    --plantresultBtn-hover-font-color: #9dab62;
 
 }
 body.dark-theme {
@@ -821,18 +844,21 @@ section {
     justify-content: center;
     margin: 2rem;
     padding: 1.25rem;
-    border-radius: 20px;
-    background-color: var(--searchcontainer-bg);
-    box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
+    border-radius: 3rem;
+    background-color: var(--plant-search-result-bg);
+    border: var(--plant-search-result-border);
 }
 .plantdetails-title{
     width: 100%;
     text-align: center;
-    font-family: monospace;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(3rem, 3.8vw, 4.4rem);
     font-weight: bold;
-    margin: 2rem 0 2rem 0;
-    color: var(--plant-details-title);
+    margin: 1rem 0 1rem 0;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    border-radius: 1.5rem;
+    color: var(--plant-search-result-font-color);
+    background-color: var(--plant-search-result-title-bg);
 }
 .resultimage-cont{
     width: 35%;
@@ -866,10 +892,11 @@ section {
     text-align: center;
     border-top-left-radius: 1.25rem;
     border-bottom-left-radius: 1.25rem;
-    font-family: monospace;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(0.7rem, 0.9vw, 1.1rem);
-    background-color: var(--innercont-bg);
-    color: white;
+    font-weight: bold;
+    background-color: var(--plant-search-result-table-key-bg);
+    color: var(--plant-search-result-table-key-font);
 }
 .resultValue{
     width: fit-content;
@@ -880,8 +907,8 @@ section {
     border-bottom-right-radius: 1.25rem;
     font-family: monospace;
     font-size: clamp(0.7rem, 0.9vw, 1.1rem);
-    background-color: white;
-    color: #021e0c;
+    background-color: var(--plant-search-result-table-value-bg);
+    color: var(--plant-search-result-table-value-font);
 }
 .plantsearchPage_Btn{
     width: 50%;
@@ -892,8 +919,8 @@ section {
     text-align: center;
     align-content: center;
     border-radius: 30px;
-    background-color: var(--plantsearchPage-bg);
-    color: var(--plantsearchPage-font-color);
+    background-color: var(--plantresultBtn-bg);
+    color: var(--plantresultBtn-font-color);
     font-family: monospace;
     font-size: clamp(0.5rem,0.9vw,1.2rem);
     text-decoration: none;
@@ -901,8 +928,8 @@ section {
 }
 .plantsearchPage_Btn:hover{
     width: 70%;
-    background-color: var(--plantsearchPage-hover-bg);
-    color: var(--plantsearchPage-hover-font-color);
+    background-color: var(--plantresultBtn-hover-bg);
+    color: var(--plantresultBtn-hover-font-color);
     transition: all 0.3s ease;
 }
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/

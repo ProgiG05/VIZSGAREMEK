@@ -4,38 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/gardens.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/sidepanel.css">
     <link rel="shortcut icon" href="../pics/icons/plant.png" type="image/x-icon">
     <title>Gardens | Green Design</title>
 </head>
 <body>
-    <nav id="top-navbar"> 
-        <a id="settings_Btn">Settings</a> 
-        <a id="home_Btn" href="../sites/index.html">Home</a>
-        <a id="goto_Ideas" href="../sites/ideas.html">Ideas</a>
-        <a id="goto_PlantFinder" href="../sites/plants.html">Plants</a>
-        <a id="goto_Knowledge" href="../sites/knowledges.html">Knowledge</a>
-        <a id="logIn_Btn" href="../sites/login.html">Login</a>
-    </nav>
-    <div class="settings-sidepanel" id="settings-sidepanel">
-        <h2 id="sidepanel-title">Personal Oasis</h2>
-        <button class="closeSidePanel" id="closeSidePanel"><img src="../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close"></button>
-        <select class="lang-selection" id="lang-selection">
-            <option value="en"><span>English</span></option> 
-            <option value="hu"><span>Hungarian</span></option>
-        </select>
-        <a id="savedI_Btn" href="../sites/ideas.html">Ideas</a>
-        <a id="savedP_Btn" href="../sites/plants.html">Plants</a>
-        <a id="savedGL_Btn" href="../sites/gardens.html">Gardens</a>
-        <button class="darkmode" id="darkmode">
-            <img id="light-icon" class="theme-icon" src="../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
-            <img id="dark-icon" class="theme-icon" src="../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
-        </button>
-    </div>
+    <nav id="top-navbar"> </nav>
+
     <div id="configure-cont" class="configure-cont">
         <h1 class="main-title">Garden layouts</h1>
         <button id="newgarden_btn" class="newgarden_btn">Add New Garden</button>
+        <div class="information-cont" id="information-cont"></div>
     </div>
+
     <div id="gardens-container" class="gardens-container"></div>
+
     <script type="module" src="../mains/gardens.js"></script>
 </body>
 </html>

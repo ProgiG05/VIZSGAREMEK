@@ -300,6 +300,7 @@ function displayResults(results) {
     if (!results || results.length === 0) { 
         resultTitle.innerText = 'No plants found matching your criteria.';
         resultTitle.style.textAlign = "left"
+        resultTitle.style.backgroundColor = "var(--plant-search-result-subtitle-bg)"
         resultTable.innerHTML = ""; 
         resultBtn.style.display = "none"
         resultPic.style.display = "none"
@@ -307,6 +308,7 @@ function displayResults(results) {
     }
     resultTitle.style.textAlign = "center"
     resultTitle.innerText = "Plant Details";
+    resultTitle.style.backgroundColor = "var(--plant-search-result-title-bg)"
     resultTable.innerHTML = ""; 
     resultPic.style.display = "block"
     resultBtn.style.display = "block"
