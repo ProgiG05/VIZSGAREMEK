@@ -47,8 +47,9 @@ export function setupNavbar() {
         loginBtn.textContent = "Login / Register";
         header.appendChild(loginBtn);
     }
+}
 
-    // --- Generate Side Panel if it doesn't exist ---
+export function setupSidePanel() {
     let sidePanel = document.getElementById('settings-sidepanel');
     if (!sidePanel) {
         sidePanel = document.createElement('div');
@@ -109,8 +110,9 @@ export function setupNavbar() {
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         };
     }
+}
 
-    // --- Login State Management ---
+export function setupLoginState() {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
     if (token && user) {

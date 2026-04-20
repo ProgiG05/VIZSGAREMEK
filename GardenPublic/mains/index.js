@@ -1,4 +1,6 @@
 import { setupNavbar } from './navbar.js';
+import { setupSidePanel } from '.navbar.js';
+import { setupLoginState } from '.navbar.js';
 
 // --- Initialize State ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -6,7 +8,8 @@ const token = localStorage.getItem("token");
 
 document.addEventListener('DOMContentLoaded', async (e) => {
     setupNavbar();
-    
+    setupSidePanel();
+    setupLoginState();
     // e.preventDefault() // Removed because it might interfere with normal clicks on children
     
     const user = JSON.parse(localStorage.getItem("user"));

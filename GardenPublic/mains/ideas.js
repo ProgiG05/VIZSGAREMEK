@@ -1,9 +1,13 @@
 import { setupNavbar } from './navbar.js';
+import { setupSidePanel } from './navbar.js';
+import { setupLoginState } from './navbar.js';
 
 const token = localStorage.getItem("token");
 
 document.addEventListener("DOMContentLoaded", async (e) => {
     setupNavbar();
+    setupSidePanel();
+    setupLoginState();
     const user = JSON.parse(localStorage.getItem("user"));
 
     e.preventDefault()

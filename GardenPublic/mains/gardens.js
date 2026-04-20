@@ -1,4 +1,6 @@
 import { setupNavbar } from './navbar.js';
+import { setupSidePanel } from './navbar.js';
+import { setupLoginState } from './navbar.js';
 
 const gardensContainer = document.getElementById("gardens-container");
 const token = localStorage.getItem('token');
@@ -6,6 +8,8 @@ const token = localStorage.getItem('token');
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
+    setupSidePanel();
+    setupLoginState();
     const user = JSON.parse(localStorage.getItem("user"));
 
 

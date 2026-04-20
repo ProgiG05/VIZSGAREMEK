@@ -1,4 +1,5 @@
 import { setupNavbar } from './navbar.js';
+import { setupSidePanel} from './navbar.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
