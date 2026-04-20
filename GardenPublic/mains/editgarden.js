@@ -155,10 +155,16 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const gardenCard = document.createElement("div");
     gardenCard.className = "garden-card";
     gardenCard.id = "garden" + garden.id;
-    gardenCard.innerHTML = `
-        <h2 class="garden-name" contenteditable="true">${garden.garden_name}</h2>
-        <p>${garden.garden_content}</p>
-    `;
+
+    const gardenTitle = document.createElement("h2");
+    gardenTitle.className = "garden-name";
+    gardenTitle.textContent = garden.garden_name;
+    gardenTitle.contentEditable = "true";
+    gardenCard.appendChild(gardenTitle);
+
+    const gardcontent = document.createElement('p')
+    gardcontent.textContent = garden.garden_content
+    gardenCard.appendChild(gardcontent)
 
     // ####### RENDER TABLE #######
     const splittedContent = garden.garden_content.split(";");

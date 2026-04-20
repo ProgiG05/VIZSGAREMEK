@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         loginBtn.textContent = "Login / Register"
         loginBtn.className = "login_btn"
         loginBtn.style.display = "block"
-        loginBtn.addEventListener("click", () => {window.location.href = "/sites/login.html";})
+        loginBtn.addEventListener("click", () => { window.location.href = "/sites/login.html"; })
         infoCont.appendChild(loginBtn);
         return;
     }
@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const gardensResponse = await fetch("/api/gardens", {
         method: "GET",
-        headers: { 
+        headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         }
     });
     const gardens = await gardensResponse.json();
-    console.log("Gardens:",gardens)
+    console.log("Gardens:", gardens)
 
     const plantsResponse = await fetch("/api/plants", {
         method: "GET",
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("newgarden_btn").addEventListener("click", () => {
         window.location.href = "/sites/newgarden.html";
     })
-    
+
     // Insert controls before the gardens container
 
     // 3. Render Gardens
@@ -63,11 +63,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const splittedContent = garden.garden_content.split(";");
         const gardenCard = document.createElement("div");
         gardenCard.className = "garden-card";
-        gardenCard.id = "garden" + garden.id
-        gardenCard.innerHTML = `
-            <h2 class="garden-name">${garden.garden_name}</h2>
-            <p class="garden-id">${garden.id}</p>
-        `;
+        gardenCard.id = "garden" + garden.id;
+
+        const gardenTitle = document.createElement("h2");
+        gardenTitle.className = "garden-name";
+        gardenTitle.textContent = garden.garden_name;
+        gardenCard.appendChild(gardenTitle);
 
         gardenCard.appendChild(CreateTable(splittedContent, plants));
         const deleteBtn = document.createElement("button");

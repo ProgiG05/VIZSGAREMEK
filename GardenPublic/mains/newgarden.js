@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "/sites/login.html";
         return;
     }
-    const container = document.getElementById("addGardenForm");
+    const container = document.getElementById("add-garden-cont");
     ShowAddGardenForm(container);
 });
 
 function ShowAddGardenForm(container) {
     const form = document.createElement('form');
     form.setAttribute('id', 'addGardenForm');
-    form.setAttribute('class', 'add-garden-form ');
+    form.setAttribute('class', 'add-garden-form');
 
     // --- Garden Name Section ---
     const labelName = document.createElement('label');
