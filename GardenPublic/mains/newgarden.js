@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 function ShowAddGardenForm(container) {
     const form = document.createElement('form');
     form.setAttribute('id', 'addGardenForm');
+    form.setAttribute('class', 'add-garden-form ');
 
     // --- Garden Name Section ---
     const labelName = document.createElement('label');

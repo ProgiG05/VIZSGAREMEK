@@ -14,9 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const plantsData = await fetch('/api/plants', {method: 'GET', headers: {'Content-Type': 'application/json'}})
     const response = await plantsData.json()
 
-    // const searchedPlantsContainer = document.getElementById('first-searched-result')
-    // searchedPlantsContainer.appendChild(createPlantCards(response[0]))
-
     const PlantsContainer = document.getElementById('other-searched-results')
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
 
@@ -28,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     AllPlantTypes.forEach(onetype => {
         const TypeButton = document.createElement("button")
         TypeButton.classList.add("typeGroup_Btn")
-        TypeButton.textContent = `${onetype.trim()}`
+        TypeButton.textContent = `${capitalizeFirstLetter(onetype.trim())}`
         TypeButton.id = `${onetype.trim()}`
         TypeButton.addEventListener('click', async () => {await typeFilter(TypeButton.id, response)})
         TypesGroupingContainer.appendChild(TypeButton)
@@ -47,8 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     response.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
-
-    // searchPlant(PlantsContainer)
 
     document.getElementById('clear-water-btn').addEventListener('click', () => clearFilters('water'))
     document.getElementById('clear-sunlight-btn').addEventListener('click', () => clearFilters('sunlight'))
@@ -158,7 +153,6 @@ function createPlantCards(plant) {
     addTableRow("Is it Indoor:", plant.indoor ? "Yes, can stay inside also" : "No, can't be kept inside");
     addTableRow("Has Seeds:", plant.seeds ? "Yes, can be propagated by seed" : "No, can't be propagated by seed");
 
-
     // Append table to the card
     PlantCard.appendChild(Table);
 
@@ -172,64 +166,15 @@ function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved')
 
 function capitalizeFirstLetter(word) {return String(word).charAt(0).toUpperCase() + String(word).slice(1)}
 
-// --- Plant searching Logic ---
+// --- Filling up the first result container with the search result Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 const form = document.getElementById('search-form')
 
-function searchPlant(container) {
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        const searchedPlantsContainer = document.getElementById('first-searched-result')
-        searchedPlantsContainer.scrollIntoView({behavior:"smooth"})
-
-        const waterchecks = document.querySelectorAll('.water-checkbox')
-        const sunlightchecks = document.querySelectorAll('.sunlight-checkbox')
-        const soilchecks = document.querySelectorAll('.soil-checkbox')
-
-        const data = {
-            commonName: document.getElementById('commonplant-search-inp').value.trim() || "none",
-            botanicalName: document.getElementById('botanicalplant-search-inp').value.trim() || "none",
-            water: Array.from(waterchecks).find(x => x.checked)?.value || "none",
-            sunlight: Array.from(sunlightchecks).find(x => x.checked)?.value || "none",
-            soil: Array.from(soilchecks).find(x => x.checked)?.value || "none",
-            plantingMonth: document.getElementById('plantingSelection').value || "none",
-            harvestingMonth: document.getElementById('harvestingSelection').value || "none",
-            origin: document.getElementById('originSelection').value || "none",
-            indoor: document.getElementById('indoorCheckbox').checked ? "yes" : "none",
-            seeds: document.getElementById('seedsCheckbox').checked ? "yes" : "none"
-        }
-
-        const queryParams = new URLSearchParams({
-            common_name: data.commonName,
-            botanical_name: data.botanicalName,
-            water: data.water,
-            sunlight: data.sunlight,
-            soil: data.soil,
-            plantingMonth: data.plantingMonth,
-            harvestingMonth: data.harvestingMonth,
-            origin: data.origin,
-            indoor: data.indoor,
-            seeds: data.seeds
-        })
-
-        const plantsData = await fetch(`/api/plantfinder?${queryParams.toString()}`, {
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'}
-        })
-        const response = await plantsData.json()
-
-        SearchPlantDetails(response, searchedPlantsContainer)
-        clearForm()
-    })
-}
-
-// --- Filling up the first result container with the search result Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 function SearchPlantDetails(details, container) {
     container.innerText = ''
-    details.forEach(plant => { container.appendChild(createPlantCards(plant)) })
+    const firstresult = details[0]
+    container.appendChild(createPlantCards(firstresult))
 
     const ButtonCont = document.createElement("div")
     ButtonCont.setAttribute("id","result-button-container")
@@ -239,8 +184,13 @@ function SearchPlantDetails(details, container) {
     LoadMoreBtn.setAttribute("id","loadMore_Btn")
     LoadMoreBtn.setAttribute("class","loadMore_Btn")
     LoadMoreBtn.textContent = "Load more"
-    LoadMoreBtn.addEventListener("click", () => {
-        console.log("Load more search results / load all")
+    LoadMoreBtn.addEventListener("click", async () => {
+        container.removeChild(ButtonCont)
+        ButtonCont.removeChild(LoadMoreBtn)
+        for (let i = 1; i < details.length; i++) {
+            container.appendChild(createPlantCards(details[i]))
+            container.appendChild(ButtonCont)
+        }
     })
     ButtonCont.appendChild(LoadMoreBtn)
 
@@ -250,6 +200,7 @@ function SearchPlantDetails(details, container) {
     GoBackToSearchingBtn.textContent = "Search another"
     GoBackToSearchingBtn.addEventListener("click", () => {
         form.scrollIntoView({behavior:"smooth"})
+        container.innerText = ''
     })
     ButtonCont.appendChild(GoBackToSearchingBtn)
 
