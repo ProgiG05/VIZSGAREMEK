@@ -1,5 +1,7 @@
 :root {
     --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
+    --main-font-color: #0b0e0a;
+    --font-main: Georgia, serif;
     --bg-dark: #7da87d;
     --text-green: #a7f070;
     --text-main: #ffffff;
@@ -21,6 +23,34 @@ body {
     align-items: center;
     justify-content: flex-start;
 }
+.header-container {
+    margin: 1rem 0 1rem 0;
+    text-align: center;
+    text-wrap: balance;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-title{
+    font-family: var(--font-main);
+    font-size: clamp(2rem,5vw, 7rem);
+    margin: 1rem 0 2rem 0;
+    color: var(--main-font-color);
+}
+.sub-title {
+    width: 60%;
+    margin: auto;
+    font-style: italic;
+    text-align: justify;
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.2vw, 1.3rem);
+    color: var(--main-font-color);
+    border-left: 1rem solid black;
+    padding-left: 2rem;
+    margin: 1rem 0 1rem 0;
+}
 
 /* Container for the form and preview */
 .add-garden-cont {
@@ -29,7 +59,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgb(255, 0, 204);
 }
 
 /* The actual form element inside the container */
@@ -40,18 +69,18 @@ body {
     border-radius: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    width: 80%;
+    gap: 1rem;
+    width: 60%;
     height: fit-content;
-    margin: 2rem auto;
-    box-shadow: 6px 6px 4px var(--beige-dark-shadow);
-    border: 2px solid red;
+    margin: 1rem;
 }
 
 .add-garden-form  label {
     font-weight: bold;
+    font-family: monospace;
     color: var(--text-main);
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 1.5vw, 1.7rem);
+    text-align: left;
 }
 
 .add-garden-form input {
@@ -67,6 +96,18 @@ body {
 .add-garden-form input:focus {
     outline: 2px solid var(--text-green);
     background-color: rgba(255, 255, 255, 0.25);
+}
+
+.button-cont{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.cancel-btn, .preview-btn{
+    width: 50%;
 }
 
 /* Button Styling */
@@ -95,16 +136,6 @@ button:active {
     transform: translateY(0);
 }
 
-.back_btn {
-    background-color: #4a5c3c;
-    color: var(--text-main);
-    border: 1px solid var(--text-green);
-}
-
-.preview_btn {
-    background-color: var(--text-green);
-    color: var(--bg-dark);
-}
 
 /* Preview Section */
 #previewContainer {

@@ -10,10 +10,18 @@
     --general-button-hover-bg:#0b0e0a;
     --general-button-hover-font-color:#f5ece5;
 
-    --pfinder-cont-bg:#45523e;
-    --pfinder-cont-font-color:#f5ece5;
+    --pfinder-cont-bg:#4c3a22f5;
+    --pfinder-cont-font-color:#030c01e4;
     --pfinder-cont-input-bg:#fffaf6;
-    --pfinder-subcont-bg:#222c1d;
+    --pfinder-subcont-bg:#f0e3ade9;
+    --pfinder-border: 0.3rem solid #0c0402c6;
+    --pfinder-accent1-color: #9dab62;
+    --pfinder-accent2-color: #ba7832df;
+    --pfinder-cont-title-bg: var(--card-title-bg);
+    --pfinderBtn-bg: #0d1102e7;
+    --pfinderBtn-hover-bg: #E3DBBB;
+    --pfinderBtn-font-color: #E3DBBB;
+    --pfinderBtn-hover-font-color: #0d1102;
 
     --card-bg: #362918;
     --card-font-color:#030c01;
@@ -141,20 +149,22 @@ body {
     width: 90%;
     min-height: 80vh; 
     height: auto; 
-    max-height: 95vh;
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.402);
     box-sizing: border-box;
-    border: 0.4rem solid rgba(31, 45, 29, 0.638);
+    border: var(--pfinder-border);
+    box-shadow: 1rem 0.5rem rgba(62, 62, 62, 0.162);
     overflow-y: auto;
 }
 
 .search-title {
     font-family: var(--font-main);
+    background-color: var(--pfinder-cont-title-bg);
+    box-shadow: 0.5rem 0.5rem var(--pfinder-accent2-color);
+    border-radius: 1rem;
     font-size: clamp(1.75rem, 4.5vw, 5rem);
-    margin: 0.3rem 0 1.2rem 0;
+    margin: 0.5rem 0 1.5rem 0;
     padding: 0.1rem 0 0.5rem 0;
     text-align: center;
-    border-bottom: 0.2rem solid var(--pfinder-cont-font-color);
 }
 .browse-title{
     font-family: var(--font-main);
@@ -174,6 +184,7 @@ body {
 }
 .search-sub-cont {
     background-color: var(--pfinder-subcont-bg);
+    box-shadow: 0.3rem 0.3rem var(--pfinder-accent1-color);
     border-radius: 1.25rem;
     padding: 1.5rem;
     gap: 0.75rem;
@@ -181,13 +192,13 @@ body {
 .left-container{
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.8rem;
     height: 100%;
 }
 .right-container {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.8rem;
     height: 100%;
 }
 
@@ -231,7 +242,7 @@ body {
     font-family: var(--font-data);
     margin: 0.5rem 0 0.25rem 0;
     font-size: clamp(1rem, 1.2vw,1.5rem);
-    border-bottom: 1px solid rgba(245, 236, 229, 0.2); 
+    border-bottom: 0.2rem solid var(--pfinder-cont-font-color); 
     padding-bottom: 0.3rem;
 }
 
@@ -266,8 +277,8 @@ body {
 /*-----------------------------------------------------------------------------------------*/
 
 .clearBtn{
-    background-color: var(--general-button-bg);
-    color: var(--general-button-font-color);
+    background-color: var(--pfinderBtn-bg);
+    color: var(--pfinderBtn-font-color);
     padding: 0.3rem 1.2rem 0.3rem 1.2rem;
     margin-left: 1.5vw;
     font-size: clamp(0.5rem,0.8vw,1rem);
@@ -278,8 +289,8 @@ body {
 }
 
 .clearBtn:hover {
-    background-color: var(--general-button-hover-bg);
-    color: var(--general-button-hover-font-color);
+    background-color: var(--pfinderBtn-hover-bg);
+    color: var(--pfinderBtn-hover-font-color);
     transform: translateY(-0.125rem);
 }
 
@@ -297,7 +308,7 @@ body {
 
 /*-----------------------------------------------------------------------------------------*/
 
-.planting-months-selection, .harvesting-months-selection {
+.planting-months-selection, .harvesting-months-selection, .pruning-months-selection, .origin-selection {
     background-color: var(--pfinder-cont-input-bg);
     border: none;
 }
@@ -344,7 +355,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #9aad6a;
   border-radius: 1rem;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -361,7 +372,7 @@ body {
   transition: transform 0.3s ease;
 }
 
-input:checked + .slider {background-color: #27b43c;}
+input:checked + .slider {background-color: #52a75f;}
 input:checked + .slider:before {transform: translateX(calc(100% + 0.1rem));}
 
 /* Rounded slider container */
@@ -391,8 +402,8 @@ input[type="text"], select {
 .searchPlant_Btn {
     font-family: var(--font-main);
     width: 100%;
-    background-color: var(--general-button-bg);
-    color: var(--general-button-font-color);
+    background-color: var(--pfinderBtn-bg);
+    color: var(--pfinderBtn-font-color);
     padding: 1.1rem;
     font-size: 1.5rem;
     font-weight: bold;
@@ -403,8 +414,8 @@ input[type="text"], select {
     transition: transform 0.3s, background 0.3s;
 }
 .searchPlant_Btn:hover {
-    background-color: var(--general-button-hover-bg);
-    color: var(--general-button-hover-font-color);
+    background-color: var(--pfinderBtn-hover-bg);
+    color: var(--pfinderBtn-hover-font-color);
     transform: translateY(-0.125rem);
 }
 
@@ -506,7 +517,7 @@ input[type="text"], select {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 5px 10px rgba(62, 62, 62, 0.162);
+    box-shadow: 1rem 0.5rem rgba(62, 62, 62, 0.162);
     border:var(--card-border)
 }
 .plant-card-header-cont{
