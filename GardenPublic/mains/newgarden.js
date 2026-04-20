@@ -13,22 +13,81 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function ShowAddGardenForm(container) {
-    container.innerHTML = `
-        <form id="addGardenForm">
-        <label for="gardenName">Garden Name:</label>
-        <input type="text" id="gardenName" name="gardenName" required>
-        <label for="gardenRows">Rows:</label>
-        <input type="number" id="gardenRows" name="gardenRows" max="20" min="1" required>
-        <label for="gardenColumns">Columns:</label>
-        <input type="number" id="gardenColumns" name="gardenColumns" max="20" min="1" required>
-        <button type="submit">Add Garden</button>
-        </form>
-        <button class="back_btn" onclick="window.location.href = '/gardens.html'">Cancel</button>
-        <button class="preview_btn" id="preview_btn">Preview</button>
-        <div id="previewContainer"></div>
-    `;
+    const form = document.createElement('form');
+    form.setAttribute('id', 'addGardenForm');
+
+    // --- Garden Name Section ---
+    const labelName = document.createElement('label');
+    labelName.setAttribute('for', 'gardenName');
+    labelName.textContent = 'Garden Name:'; 
+
+    const inputName = document.createElement('input');
+    inputName.setAttribute('type', 'text');
+    inputName.setAttribute('id', 'gardenName');
+    inputName.setAttribute('name', 'gardenName');
+    inputName.required = true; 
+
+    // --- Garden Rows Section ---
+    const labelRows = document.createElement('label');
+    labelRows.setAttribute('for', 'gardenRows');
+    labelRows.textContent = 'Rows:';
+
+    const inputRows = document.createElement('input');
+    inputRows.setAttribute('type', 'number');
+    inputRows.setAttribute('id', 'gardenRows');
+    inputRows.setAttribute('name', 'gardenRows');
+    inputRows.setAttribute('max', '20');
+    inputRows.setAttribute('min', '1');
+    inputRows.required = true;
+
+    // --- Garden Columns Section ---
+    const labelCols = document.createElement('label');
+    labelCols.setAttribute('for', 'gardenColumns');
+    labelCols.textContent = 'Columns:';
+
+    const inputCols = document.createElement('input');
+    inputCols.setAttribute('type', 'number');
+    inputCols.setAttribute('id', 'gardenColumns');
+    inputCols.setAttribute('name', 'gardenColumns');
+    inputCols.setAttribute('max', '20');
+    inputCols.setAttribute('min', '1');
+    inputCols.required = true;
+
+    // --- Submit Button ---
+    const submitBtn = document.createElement('button');
+    submitBtn.setAttribute('type', 'submit');
+    submitBtn.textContent = 'Add Garden';
+
+    // Assemble the Form
+    form.appendChild(labelName);
+    form.appendChild(inputName);
+    form.appendChild(labelRows);
+    form.appendChild(inputRows);
+    form.appendChild(labelCols);
+    form.appendChild(inputCols);
+    form.appendChild(submitBtn);
+
+    // 2. Create the External Buttons and Container
+    const cancelBtn = document.createElement('button');
+    cancelBtn.setAttribute('class', 'back_btn');
+    cancelBtn.setAttribute('onclick', "window.location.href = '/gardens.html'");
+    cancelBtn.textContent = 'Cancel';
+
+    const previewBtn = document.createElement('button');
+    previewBtn.setAttribute('class', 'preview_btn');
+    previewBtn.setAttribute('id', 'preview_btn');
+    previewBtn.textContent = 'Preview';
+
+    const previewContainer = document.createElement('div');
+    previewContainer.setAttribute('id', 'previewContainer');
+
+    container.appendChild(form)
+    container.body.appendChild(cancelBtn);
+    container.body.appendChild(previewBtn);
+    container.body.appendChild(previewContainer);
+
     document.getElementById("preview_btn").addEventListener("click", () => {
-        const gardenRows = document.getElementById("gardenRows").value;
+        const gardenRows = document.getElementById("gardenRows").value; 
         const gardenColumns = document.getElementById("gardenColumns").value;
         const previewContainer = document.getElementById("previewContainer");
         previewContainer.innerHTML = "";

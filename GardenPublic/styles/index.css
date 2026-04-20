@@ -1,34 +1,34 @@
 :root {
-    --primary: #052217;
-    --secondary: rgba(203, 234, 222, 0.541);
-    --third: #8abb9d;
-
+    /*------------------------------------------------------------------------------*/
     --body-bg: #4d795d;
     --text-main: #E3FFF5;
     --section-main-titles-font-color:#011b0a;
+    /*------------------------------------------------------------------------------*/
 
+    /*------------------------------------------------------------------------------*/
     --text-landing: #195840;
     --landing-bg: linear-gradient(to bottom , rgba(203, 234, 222, 0.541),rgba(28, 115, 82, 0.541));
     --btn-bg: #0a330f;
     --btn-hover-bg: #E3FFF5;
     --btn-font-color: #E3FFF5;
     --btn-hover-font-color: #112d14;
-
     --navbtn-bg: #1b291cde;
     --navbtn-hover-bg: #add5c7;
     --navbtn-font-color: #add5c7;
     --navbtn-hover-font-color: #1b291c;
+    /*------------------------------------------------------------------------------*/
 
+    /*------------------------------------------------------------------------------*/
     --ideasPage-bg: #1a1e1a;
     --ideasPage-hover-bg: #a7f070;
     --ideasPage-font-color: #a7f070;
     --ideasPage-hover-font-color: #1a1e1a;
-
+    /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     --onecard-bg-primary:#c6e7d8;
     --onecard-font-primary:rgb(6, 19, 18);
     --onecard-bg-secondary:rgb(6, 19, 18);
     --onecard-font-secondary:#c6e7d8;
-
+    /*oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo*/
     --bg-dark: #1a1e1a;
     --text-green: #a7f070;
     --beige-light: #e0cda7;
@@ -39,11 +39,12 @@
     --flower-yellow: #f0e632;
     --stem-green: #66a840;
     --stat-text: #1a1e1a;
+    /*------------------------------------------------------------------------------*/
 
-    --searchcontainer-bg: #1c4c2d92;
+    /* --searchcontainer-bg: #1c4c2d92;
     --searchcontainer-text:#ffffff;
     --searchcontainer-border:#d0edd4;
-    --searchcontainer-shadow:#b7f0be7b;
+    --searchcontainer-shadow: 5px 10px #b7f0be7b;
     --innercont-bg:#3681488c;
     --innercont-hover-bg:#043b1751;
     --innercont-hover-shadow:#073d1a73;
@@ -51,32 +52,36 @@
     --plantsearchPage-bg: #0d2d18d0;
     --plantsearchPage-hover-bg: #ffffff;
     --plantsearchPage-font-color: #ffffff;
-    --plantsearchPage-hover-font-color: #072e15d3;
-
+    --plantsearchPage-hover-font-color: #072e15d3; */
+    
+    /*------------------------------------------------------------------------------*/
+    --searchcontainer-bg: #4c3a22f5;
+    --searchcontainer-text:#030c01e4;
+    --searchcontainer-border:0.3rem solid #0c0402c6;
+    --searchcontainer-shadow:10px 10px rgba(62, 62, 62, 0.298);
+    --innercont-bg:#9dab62;
+    --innercont-hover-bg:#b1c26c;
+    --innercont-hover-shadow:#E3DBBB;
+    --plantsearchPage-bg: #0d1102e7;
+    --plantsearchPage-hover-bg: #E3DBBB;
+    --plantsearchPage-font-color: #E3DBBB;
+    --plantsearchPage-hover-font-color: #0d1102;
+    /*oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo*/
     --plant-search-result-title: #ffffff;
-    --plant-search-result-bg: #362918e8;
+    --plant-search-result-bg: #4c3a22f5;
     --plant-search-result-font-color:#030c01e4;
-    --plant-search-result-border: 0.4rem solid #0c0402c6;
-
-    --plant-search-result-title-bg: #e1cd68;
+    --plant-search-result-border: 0.3rem solid #0c0402c6;
+    --plant-search-result-title-bg: #e3cb52;
     --plant-search-result-subtitle-bg:#ba7832;
-
-    --pot-brown: #6b3010;
-    --pot-rim-brown: #7c3a15;
-    --flower-white: #ffffff;
-    --flower-yellow: #f0e632;
-    --stem-green: #66a840;
-
     --plant-search-result-table-key-bg: #9dab62;
     --plant-search-result-table-key-font: #0d1102;
     --plant-search-result-table-value-bg: #E3DBBB;
     --plant-search-result-table-value-font: #0d1102;
-
-    --plantresultBtn-bg: #9dab62;
-    --plantresultBtn-hover-bg: #0d1102;
-    --plantresultBtn-font-color: #0d1102;
-    --plantresultBtn-hover-font-color: #9dab62;
-
+    --plantresultBtn-bg: #0d1102e7;
+    --plantresultBtn-hover-bg: #E3DBBB;
+    --plantresultBtn-font-color: #E3DBBB;
+    --plantresultBtn-hover-font-color: #0d1102;
+    /*------------------------------------------------------------------------------*/
 }
 body.dark-theme {
     --body-bg: #091e16;
@@ -684,14 +689,18 @@ section {
     margin: 1.15rem 0 0 1.15rem;
     background-color: var(--searchcontainer-bg);
     color: var(--searchcontainer-text);
-    box-shadow: 4px 4px 0px var(--searchcontainer-shadow);
+    border: var(--searchcontainer-border);
+    box-shadow: var(--searchcontainer-shadow);
     font-family: monospace;
     font-size: 1.1vw;
     border-radius: 30px;
     gap: 0.625rem;
 }
 .plant-search-data-title{
-    font-size: clamp(1.4rem, 2.2vw , 3rem);
+    font-size: clamp(1.4rem, 2vw , 2.8rem);
+    padding: 0.5rem 0 0.5rem 0;
+    background-color: var(--plant-search-result-title-bg);
+    border-radius: 1rem;
     text-align: center;
     margin: 0;
 }
@@ -702,7 +711,7 @@ section {
     display: flex;
     flex-direction: row;
     padding: 0.938rem;
-    border-radius: 10px;
+    border-radius: 1rem;
     background-color: var(--innercont-bg);
     transition: all 1.5s ease;
     gap: 0.625rem;
@@ -710,6 +719,7 @@ section {
 .textInp-cont label{
     width: 40%;
     font-size: clamp(0.7rem, 1.1vw, 1.4rem);
+    font-weight: bold;
 }
 .textInp-cont input{
     width: 60%;
@@ -730,7 +740,7 @@ section {
 
 .check-cont{
     padding: 0.938rem;
-    border-radius: 15px;
+    border-radius: 1rem;
     background-color: var(--innercont-bg);
     transition: all 1.5s ease;
 }
@@ -738,7 +748,7 @@ section {
     width: 90%;
     font-size: clamp(0.8rem,0.9vw,1.4rem); 
     border-bottom: 0.15rem solid var(--searchcontainer-text);
-    padding: 0 0 0.4rem 0;
+    padding: 0 0 0.2rem 0;
 }
 .water-selection-cont, .sunlight-selection-cont, .soil-selection-cont{
     display: flex;
@@ -752,7 +762,7 @@ section {
     margin: 0 0 0 0.5rem;
     cursor: pointer;
     font-size: clamp(0.6rem,0.9vw,1.4rem); 
-    font-weight: normal;
+    font-weight: 600;
 }
 .water-selection-cont input, .sunlight-selection-cont input, .soil-selection-cont input {
     margin: 0 0 0 -1.1vw;
@@ -765,7 +775,7 @@ section {
     display: flex;
     flex-direction: row;
     padding: 0.938rem;
-    border-radius: 10px;
+    border-radius: 1rem;
     background-color: var(--innercont-bg);
     transition: all 1.5s ease;
     gap: 0.625rem;
@@ -773,6 +783,7 @@ section {
 .selection-cont label{
     width: 40%;
     font-size: clamp(0.7rem, 1.1vw, 1.4rem);
+    font-weight: bold;
 }
 .selection-cont select{
     width: 60%;
@@ -847,6 +858,7 @@ section {
     border-radius: 3rem;
     background-color: var(--plant-search-result-bg);
     border: var(--plant-search-result-border);
+    box-shadow: var(--searchcontainer-shadow);
 }
 .plantdetails-title{
     width: 100%;
