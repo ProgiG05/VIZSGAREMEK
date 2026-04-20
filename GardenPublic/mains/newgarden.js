@@ -10,13 +10,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "/sites/login.html";
         return;
     }
-    const container = document.getElementById("add-garden-cont");
-    ShowAddGardenForm(container);
+    
+    ShowAddGardenForm();
 });
 
-function ShowAddGardenForm(container) {
+function ShowAddGardenForm() {
+    const maincontainer = document.getElementById("add-garden-cont");
+
     const form = document.createElement('form');
-    form.setAttribute('id', 'addGardenForm');
+    form.setAttribute('id', 'add-garden-form');
     form.setAttribute('class', 'add-garden-form');
 
     // --- Garden Name Section ---
@@ -70,24 +72,31 @@ function ShowAddGardenForm(container) {
     form.appendChild(inputCols);
     form.appendChild(submitBtn);
 
+    maincontainer.appendChild(form)
+
     // 2. Create the External Buttons and Container
+
+    const buttoncont = document.createElement("div")
+    buttoncont.setAttribute("class","button-cont")
+
     const cancelBtn = document.createElement('button');
     cancelBtn.setAttribute('class', 'back_btn');
     cancelBtn.setAttribute('onclick', "window.location.href = '/gardens.html'");
     cancelBtn.textContent = 'Cancel';
+    buttoncont.appendChild(cancelBtn)
 
     const previewBtn = document.createElement('button');
     previewBtn.setAttribute('class', 'preview_btn');
     previewBtn.setAttribute('id', 'preview_btn');
     previewBtn.textContent = 'Preview';
+    buttoncont.appendChild(previewBtn)
+
+    maincontainer.appendChild(buttoncont)
 
     const previewContainer = document.createElement('div');
     previewContainer.setAttribute('id', 'previewContainer');
 
-    container.appendChild(form)
-    container.appendChild(cancelBtn);
-    container.appendChild(previewBtn);
-    container.appendChild(previewContainer);
+    maincontainer.appendChild(previewContainer);
 
     document.getElementById("preview_btn").addEventListener("click", () => {
         const gardenRows = document.getElementById("gardenRows").value; 
@@ -96,7 +105,7 @@ function ShowAddGardenForm(container) {
         previewContainer.innerHTML = "";
         previewContainer.appendChild(previewGarden(gardenRows, gardenColumns));
     });
-    document.getElementById("addGardenForm").addEventListener("submit", async (e) => {
+    document.getElementById("add-garden-form").addEventListener("submit", async (e) => {
         e.preventDefault();
         const gardenName = document.getElementById("gardenName").value;
         const gardenRows = document.getElementById("gardenRows").value;
@@ -110,7 +119,7 @@ function ShowAddGardenForm(container) {
         await newGarden(garden);
         window.location.href = "/gardens.html";
     });
-    document.body.appendChild(document.getElementById("addGardenForm"));
+    document.body.appendChild(document.getElementById("add-garden-form"));
 }
 
 async function newGarden(garden) {
