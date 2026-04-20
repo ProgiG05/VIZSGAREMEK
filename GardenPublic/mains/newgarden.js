@@ -3,6 +3,7 @@ import { setupSidePanel} from './navbar.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
+    setupSidePanel();
 
     const token = localStorage.getItem('token');
     if (!token) {
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ShowAddGardenForm(container);
 });
 
-async function ShowAddGardenForm(container) {
+function ShowAddGardenForm(container) {
     const form = document.createElement('form');
     form.setAttribute('id', 'addGardenForm');
 
@@ -83,9 +84,9 @@ async function ShowAddGardenForm(container) {
     previewContainer.setAttribute('id', 'previewContainer');
 
     container.appendChild(form)
-    container.body.appendChild(cancelBtn);
-    container.body.appendChild(previewBtn);
-    container.body.appendChild(previewContainer);
+    container.appendChild(cancelBtn);
+    container.appendChild(previewBtn);
+    container.appendChild(previewContainer);
 
     document.getElementById("preview_btn").addEventListener("click", () => {
         const gardenRows = document.getElementById("gardenRows").value; 

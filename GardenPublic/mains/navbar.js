@@ -1,3 +1,11 @@
+const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user"));
+
+const accountHandler = (e) => {
+    e.preventDefault();
+    window.location.href = "/sites/accounts.html";
+};
+
 export function setupNavbar() {
     const body = document.body;
     const header = document.getElementById('top-navbar');
@@ -46,6 +54,12 @@ export function setupNavbar() {
         loginBtn.setAttribute("href", "../sites/login.html");
         loginBtn.textContent = "Login / Register";
         header.appendChild(loginBtn);
+
+        if (loginBtn) {
+            loginBtn.innerHTML = `${user.username}`;
+            loginBtn.onclick = accountHandler;
+            loginBtn.setAttribute('href', '/sites/accounts.html');
+        }
     }
 }
 
@@ -113,16 +127,9 @@ export function setupSidePanel() {
 }
 
 export function setupLoginState() {
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
     if (token && user) {
         const topLoginBtn = document.getElementById("logIn_Btn");
         const sideLoginBtn = document.getElementById("login_Btn");
-
-        const accountHandler = (e) => {
-            e.preventDefault();
-            window.location.href = "/sites/accounts.html";
-        };
 
         if (topLoginBtn) {
             topLoginBtn.innerHTML = `${user.username}`;
