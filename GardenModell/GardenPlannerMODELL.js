@@ -42,8 +42,12 @@ module.exports = {
         const [rows] = await connection.query(`INSERT INTO garden_manager (user_id, garden_name, garden_content) VALUES(?,?,?)`,[garden.user_id, garden.garden_name, garden.garden_content])
         return rows
     },
-    GetMySavedPlants : async function GetMySavedPlants() {
-        const [rows] = await connection.query(`SELECT * FROM saved_plants`)
+    GetMySavedPlants : async function GetMySavedPlants(userid) {
+        const [rows] = await connection.query(`SELECT * FROM saved_plants WHERE user_id = ?`, [userid])
+        return rows
+    },
+    SavePlant : async function SavePlant(userid, plantid) {
+        const [rows] = await connection.query(`INSERT INTO saved_plants (user_id, plant_id) VALUES(?,?)`, [userid, plantid])
         return rows
     },
     GetGardensByUserId : async function GetGardensByUserId(userId) {

@@ -13,6 +13,8 @@ router.get('/plantfinder', GardenController.GetSearchedPlantDetails)
 
 router.get('/savedplants', authenticateToken, GardenController.GetMySavedPlants)
 
+router.post('/saveplants', authenticateToken, GardenController.SavePlant)
+
 router.get('/worktools', GardenController.GetAllWorksAndTools)
 
 router.get('/plants', GardenController.GetAllPlants)

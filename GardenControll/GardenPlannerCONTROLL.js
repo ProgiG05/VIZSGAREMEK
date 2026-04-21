@@ -27,6 +27,11 @@ exports.GetMySavedPlants = async (req,res) => {
     const savedPlantsData = await GardenModel.GetMySavedPlants()
     res.json(savedPlantsData)
 }
+exports.SavePlant = async (req,res) => {
+    const {user_id, plant_id} = req.body
+    const savedPlant = await GardenModel.SavePlant(user_id, plant_id)
+    res.json(savedPlant)
+}
 exports.GetMyGardens = async (req, res) => {
     const userId = req.user.id;
     const myGardensData = await GardenModel.GetGardensByUserId(userId);

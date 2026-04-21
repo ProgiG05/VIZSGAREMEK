@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const PlantsContainer = document.getElementById('other-searched-results')
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
+    const SavedPlantsGrouping = document.getElementById("saved-plants-grouping")
+
+    SavedPlantsGrouping.addEventListener('click', async () => {
+        const savedPlants = await getSavedPlants();
+        PlantsContainer.innerHTML = ""
+        savedPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant.plant_id)))
+    })
 
     const AllPlantTypes = []
     response.forEach(onetype => {
@@ -162,7 +169,30 @@ function createPlantCards(plant) {
 // --- String first letter capitalize Logic & Pot button save Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved');}
+async function toggleSaveState(buttonElement) {
+    buttonElement.classList.toggle('saved');
+    await SavePlant();
+}
+
+async function SavePlant() {
+    const response = await fetch('/api/savedplants', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            plant_id: plant.id,
+            user_id: user.id
+        })
+    })
+    const data = await response.json();
+    console.log(data);
+}
+
+async function getSavedPlants() {
+    const response = await fetch('/api/savedplants', {method: 'GET', headers: {'Content-Type': 'application/json'}})
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
 
 function capitalizeFirstLetter(word) {return String(word).charAt(0).toUpperCase() + String(word).slice(1)}
 

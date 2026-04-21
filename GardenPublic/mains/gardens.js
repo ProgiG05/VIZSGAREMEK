@@ -2,6 +2,7 @@ import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
 
+
 const gardensContainer = document.getElementById("gardens-container");
 const token = localStorage.getItem('token');
 
