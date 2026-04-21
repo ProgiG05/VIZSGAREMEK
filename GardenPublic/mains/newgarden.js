@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function ShowAddGardenForm() {
-    document.getElementById("preview_btn").addEventListener("click", () => {
+    document.getElementById("preview-btn").addEventListener("click", () => {
 
         const gardenRows = document.getElementById("garden-rows").value; 
         const gardenColumns = document.getElementById("garden-columns").value;

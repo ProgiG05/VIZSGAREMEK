@@ -1,46 +1,86 @@
 :root {
-    --body-bg: linear-gradient(to bottom, #b2cd8f , #384d28 );
-    --header-cont-bg: linear-gradient(to left, #364d26,#92ac70);
-    --general-font-color:#060b04;
+    --body-bg: #b2cd8f;
+    --header-cont-bg: #92ac70;
+    --main-font-color: #0b0e0a;
+    --font-main: Georgia, serif;
+    --font-data: monospace;
 
     --general-btns-bg: #e0e9d5;
     --general-btns-font: #1a1e1a;
     --general-btns-hover-bg: #1a1e1a;
     --general-btns-hover-font: #e0e9d5;
-}
-body.dark-theme{
-    --body-bg: linear-gradient(to bottom, #677D6A, #1A3636);
+
+    --garden-card-bg:#3b5625d5;
+    --garden-card-title:rgb(255, 255, 255);
+    --garden-card-title-bg:#649034;
+    --garden-card-text:rgb(9, 16, 1);
+    --garden-card-cell-cont-bg:#cceeb9ce;
+    --garden-card-cell-bg:black;
+    --garden-card-cell-text:black;
+    --garden-card-cell-border:black;
+
+    --garden-card-editBtn-bg:#D97A2B;
+    --garden-card-editBtn-font:#ffffff;
+    --garden-card-editBtn-hover-bg:#ffe6d1;
+    --garden-card-editBtn-hover-font:#110801;
+
+    --garden-card-deleteBtn-bg:#C44545;
+    --garden-card-deleteBtn-font:#ffffff;
+    --garden-card-deleteBtn-hover-bg:#f8d6d6;
+    --garden-card-deleteBtn-hover-font:#0f0101;
 }
 /*------------------------------------------------------------------------------------------*/
 body {
-    background-image: var(--body-bg);
+    background-color: var(--body-bg);
     margin: 0;
     padding: 0;
     min-height: 100vh;
     font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 /*------------------------------------------------------------------------------------------*/
-
 .configure-cont{
-    width: 80%;
-    margin: 5rem auto 2rem auto;
+    width: 90%;
+    margin: 2rem auto 2rem auto;
     padding: 3rem 2rem 3rem 2rem;
     border-radius: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: var(--header-cont-bg);
+    background-color: var(--header-cont-bg);
+}
+.header-container {
+    margin: 1rem 0 1rem 0;
+    text-align: center;
+    text-wrap: balance;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .main-title{
-    font-family: 'Times New Roman', Times, serif;
-    color: var(--general-font-color);
-    font-size: clamp(2rem, 8vw, 10rem);
-    margin: 0;
-    padding: 2rem;
+    font-family: var(--font-main);
+    font-size: clamp(2rem,5vw, 7rem);
+    margin: 1rem 0 2rem 0;
+    color: var(--main-font-color);
+}
+.sub-title {
+    width: 40%;
+    margin: auto;
+    font-style: italic;
+    text-align: justify;
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.2vw, 1.3rem);
+    color: var(--main-font-color);
+    border-left: 1rem solid black;
+    padding-left: 2rem;
+    margin: 1rem 0 1rem 0;
 }
 .newgarden_btn {
     width: 40%;
@@ -48,18 +88,18 @@ body {
     padding: 1rem 1.5rem 1rem 1.5rem;
     background-color: var(--general-btns-bg);
     color: var(--general-btns-font);
-    font-family: monospace;
+    font-family: var(--font-data);
     font-size: clamp(0.9rem, 1.2vw, 1.5rem);
     border-radius: 1.5rem;
-    display: flex;
-    transition-duration: 0.2s all ease;
-    align-items: center;
-    justify-content: center;
-}
+    border: none;
+    transition: all 0.2s ease;
+    text-align: center;
+}   
 .newgarden_btn:hover{
     background-color: var(--general-btns-hover-bg);
     color: var(--general-btns-hover-font);
-    transition-duration: 0.2s all ease;
+    cursor: pointer;
+    transition: all 0.2s ease;
     width: 45% !important;
 }
 .information-cont{
@@ -110,41 +150,51 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    width: 90%;
     max-width: 100%;
     margin-top: 5rem;
+    padding-top: 5rem;
+    border-top: 0.5rem solid var(--header-cont-bg);
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
 .garden-card {
-    background-color: var(--bg-dark);
-    color: var(--text-green);
-    border-radius: 1.25rem;
+    background-color: var(--garden-card-bg);
+    color: var(--garden-card-text);
+    border-radius: 1.5rem;
     padding: 2rem;
-    width: 40%;
-    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
     transition: transform 0.3s ease;
 }
 .garden-card.is-editing {
-    border: 3px solid var(--text-green);
+    border: 3px solid var(--garden-card-title);
     transform: scale(1.02);
 }
 .garden-name {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2.5rem;
     margin: 0;
-    color: var(--text-main);
+    color: var(--garden-card-title);
+    background-color: var(--garden-card-title-bg);
+    width: 90%;
+    border-radius: 1.5rem;
+    padding: 0.4rem 0 0.4rem 0;
     text-align: center;
 }
 .garden-table {
     border-collapse: separate;
     border-spacing: 5px;
-    margin: 1rem 0;
+    border-radius: 1rem;
+    margin: auto;
+    padding: 1.5rem;
+    background-color: var(--garden-card-cell-cont-bg);
 }
 .garden-table td {
     width: 60px;
@@ -159,7 +209,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 .garden-table td.empty-cell {
-     background-color: transparent;
+    background-color: transparent;
     border: 2px solid rgba(117, 117, 117, 0.1);
 }
 .garden-table td.tobecollected-cell {
@@ -217,27 +267,41 @@ body {
 
 /*------------------------------------------------------------------------------------------*/
 
-button {
-    padding: 0.8rem 1.5rem;
+.edit_btn{
+    width: 50%;
+    font-weight: bold;
+    padding: 0.6rem 1rem 0.6rem 1rem;
+    font-family: var(--font-data);
+    font-size: clamp(0.7rem, 1.1vw,1.2rem);
+    transition: all 0.2s ease;
     border-radius: 2rem;
     border: none;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
+    background-color: var(--garden-card-editBtn-bg);
+    color: var(--garden-card-editBtn-font);
+}
+.edit_btn:hover{
+    width: 55%;
     cursor: pointer;
     transition: all 0.2s ease;
-    background-color: var(--btn-bg);
-    color: var(--btn-font-color);
-}
-button:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-font-color);
-    letter-spacing: 1px;
+    background-color: var(--garden-card-editBtn-hover-bg);
+    color: var(--garden-card-editBtn-hover-font);
 }
 .delete_btn {
-    background-color: #5c1a1a;
-    color: #ffcccc;
+    width: 50%;
+    font-weight: bold;
+    padding: 0.6rem 1rem 0.6rem 1rem;
+    font-family: var(--font-data);
+    font-size: clamp(0.7rem, 1.1vw,1.2rem);
+    transition: all 0.2s ease;
+    border-radius: 2rem;
+    border: none;
+    background-color: var(--garden-card-deleteBtn-bg);
+    color: var(--garden-card-deleteBtn-font);
 }
 .delete_btn:hover {
-    background-color: #ff4d4d;
-    color: #ffffff;
+    width: 55%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: var(--garden-card-deleteBtn-hover-bg);
+    color: var(--garden-card-deleteBtn-hover-font);
 }
