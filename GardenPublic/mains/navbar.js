@@ -120,7 +120,7 @@ export function setupSidePanel() {
         darkBtn.onclick = () => {
             document.body.classList.toggle('dark-theme');
             darkBtn.classList.toggle('dark-active');
-            const isDark = body.classList.contains('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         };
     }
