@@ -1,5 +1,5 @@
 :root {
-    --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
+    --body-bg: #a3b68a;
     --bg-dark: #7da87d;
     --text-green: #a7f070;
     --text-main: #ffffff;
@@ -11,25 +11,28 @@
 }
 
 body {
-    background-image: var(--body-bg);
+    background-color: var(--body-bg);
     background-attachment: fixed;
     margin: 0;
-    padding: 2rem;
+    padding: 0.5rem 2rem 1rem 2rem;
     min-height: 100vh;
     font-family: 'Quicksand', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 #editGardenContainer {
     width: 100%;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0;
+    /* border: 2px solid red; */
 }
 
 .garden-card {
@@ -38,8 +41,9 @@ body {
     border-radius: 1.25rem;
     padding: 2rem;
     width: 90%;
+    height: fit-content;
+    min-height: 80%;
     max-width: 1200px;
-    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -113,12 +113,12 @@ export function setupSidePanel() {
     if (darkBtn) {
         // Apply initial theme
         if (localStorage.getItem('theme') === 'dark') {
-            body.classList.add('dark-theme');
+            document.body.classList.add('dark-theme');
             darkBtn.classList.add('dark-active');
         }
 
         darkBtn.onclick = () => {
-            body.classList.toggle('dark-theme');
+            document.body.classList.toggle('dark-theme');
             darkBtn.classList.toggle('dark-active');
             const isDark = body.classList.contains('dark-theme');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');

@@ -1,5 +1,5 @@
 :root {
-    --body-bg: linear-gradient(to bottom, #a3b68a, #4a5c3c);
+    --body-bg: #a3b68a;
     --main-font-color: #0b0e0a;
     --font-main: Georgia, serif;
     --bg-dark: #7da87d;
@@ -13,7 +13,7 @@
 }
 
 body {
-    background-image: var(--body-bg);
+    background-color: var(--body-bg);
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
