@@ -21,6 +21,16 @@ function ShowAddGardenForm() {
         previewContainer.innerHTML = "";
         previewContainer.appendChild(previewGarden(gardenRows, gardenColumns));
     });
+
+    document.getElementById("cancel-btn").addEventListener("click", () => {
+
+        const gardenRows = document.getElementById("garden-rows").value; 
+        const gardenColumns = document.getElementById("garden-columns").value;
+        const previewContainer = document.getElementById("preview-container");
+
+        previewContainer.innerHTML = "";
+        window.location.href = "/gardens.html";
+    });
     
     document.getElementById("add-garden-form").addEventListener("submit", async (e) => {
         e.preventDefault();

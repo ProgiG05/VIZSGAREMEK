@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const infoCont = document.getElementById("information-cont")
 
         document.getElementById("newgarden_btn").style.display = "none";
+        document.getElementById("checkout_btn").style.display = "none";
+
         const loginText = document.createElement("h1")
         loginText.textContent = "You need to be logged in to view and create gardens."
         loginText.className = "loginText"
@@ -56,12 +58,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("newgarden_btn").addEventListener("click", () => {
         window.location.href = "/sites/newgarden.html";
     })
+    document.getElementById("checkout_btn").addEventListener("click", () => {
+        document.getElementById("gardens-container").scrollIntoView({behavior:"smooth"})
+    })
 
     // Insert controls before the gardens container
 
     // 3. Render Gardens
     gardens.forEach(garden => {
         const splittedContent = garden.garden_content.split(";");
+
         const gardenCard = document.createElement("div");
         gardenCard.className = "garden-card";
         gardenCard.id = "garden" + garden.id;
@@ -71,7 +77,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         gardenTitle.textContent = garden.garden_name;
         gardenCard.appendChild(gardenTitle);
 
-        gardenCard.appendChild(CreateTable(splittedContent, plants));
+        const TableContainer = document.createElement("div")
+        TableContainer.setAttribute("class","table-cont")
+        TableContainer.appendChild(CreateTable(splittedContent, plants))
+
+        gardenCard.appendChild(TableContainer)
+
+        // gardenCard.appendChild(CreateTable(splittedContent, plants));
         const deleteBtn = document.createElement("button");
         deleteBtn.style.display = "block"
         deleteBtn.textContent = "Delete Garden";

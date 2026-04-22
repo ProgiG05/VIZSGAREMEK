@@ -10,21 +10,23 @@
     --general-btns-hover-bg: #1a1e1a;
     --general-btns-hover-font: #e0e9d5;
 
-    --garden-card-bg:#3b5625d5;
-    --garden-card-title:rgb(255, 255, 255);
-    --garden-card-title-bg:#649034;
+    --garden-card-bg:#1d502ac9;
+    --garden-card-accent: rgba(86, 86, 86, 0.523);
+    --garden-card-border:0.25rem solid #071a14;
+    --garden-card-title:rgb(9, 16, 1);
+    --garden-card-title-bg:#F1E3D3;
     --garden-card-text:rgb(9, 16, 1);
     --garden-card-cell-cont-bg:#cceeb9ce;
-    --garden-card-cell-bg:black;
-    --garden-card-cell-text:black;
-    --garden-card-cell-border:black;
+    --garden-card-cell-bg:#FFF1CA;
+    --garden-card-cell-text:rgb(6, 10, 0);
+    --garden-card-cell-border: 0.15rem solid rgba(2, 31, 11, 0.564);
 
-    --garden-card-editBtn-bg:#D97A2B;
+    --garden-card-editBtn-bg:#E07A5F;
     --garden-card-editBtn-font:#ffffff;
     --garden-card-editBtn-hover-bg:#ffe6d1;
     --garden-card-editBtn-hover-font:#110801;
 
-    --garden-card-deleteBtn-bg:#C44545;
+    --garden-card-deleteBtn-bg:#690B22;
     --garden-card-deleteBtn-font:#ffffff;
     --garden-card-deleteBtn-hover-bg:#f8d6d6;
     --garden-card-deleteBtn-hover-font:#0f0101;
@@ -32,21 +34,23 @@
 /*------------------------------------------------------------------------------------------*/
 body {
     background-color: var(--body-bg);
+    transition: all 0.2s ease;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    font-family: 'Quicksand', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-items: center;
 }
 
 /*------------------------------------------------------------------------------------------*/
 .configure-cont{
-    width: 90%;
+    width: 70%;
+    height: 70vh;
     margin: 2rem auto 2rem auto;
-    padding: 3rem 2rem 3rem 2rem;
+    padding: 3rem 1rem 3rem 1rem;
     border-radius: 4rem;
     display: flex;
     flex-direction: column;
@@ -66,12 +70,14 @@ body {
 }
 .main-title{
     font-family: var(--font-main);
-    font-size: clamp(2rem,5vw, 7rem);
+    font-size: clamp(3rem,6.5vw, 7.8rem);
+    text-wrap: balance;
     margin: 1rem 0 2rem 0;
+    width: 100%;
     color: var(--main-font-color);
 }
 .sub-title {
-    width: 40%;
+    width: 50%;
     margin: auto;
     font-style: italic;
     text-align: justify;
@@ -82,7 +88,16 @@ body {
     padding-left: 2rem;
     margin: 1rem 0 1rem 0;
 }
-.newgarden_btn {
+.button-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 2rem;
+    margin: 2rem 0 2rem 0;
+}
+.newgarden_btn, .checkout_btn {
     width: 40%;
     height: fit-content;
     padding: 1rem 1.5rem 1rem 1.5rem;
@@ -95,7 +110,7 @@ body {
     transition: all 0.2s ease;
     text-align: center;
 }   
-.newgarden_btn:hover{
+.newgarden_btn:hover, .checkout_btn:hover{
     background-color: var(--general-btns-hover-bg);
     color: var(--general-btns-hover-font);
     cursor: pointer;
@@ -145,8 +160,7 @@ body {
 
 .gardens-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2rem;
@@ -163,11 +177,14 @@ body {
 .garden-card {
     background-color: var(--garden-card-bg);
     color: var(--garden-card-text);
+    box-shadow: 0.5rem 0.5rem 0.5rem var(--garden-card-accent);
+    border:var(--garden-card-border) ;
     border-radius: 1.5rem;
     padding: 2rem;
-    min-width: 30%;
-    width: fit-content;
-    max-width: 60%;
+    min-width: 20%;
+    /* width: fit-content; */
+    width: 80%;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,48 +202,55 @@ body {
     margin: 0;
     color: var(--garden-card-title);
     background-color: var(--garden-card-title-bg);
-    width: 90%;
+    width: 60%;
     border-radius: 1.5rem;
     padding: 0.4rem 0 0.4rem 0;
     text-align: center;
+}
+.table-cont{
+    width: 90%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    border-radius: 4rem;
+    background-color: var(--garden-card-cell-cont-bg);
 }
 .garden-table {
     border-collapse: separate;
     border-spacing: 5px;
     border-radius: 1rem;
-    margin: auto;
     padding: 1.5rem;
-    background-color: var(--garden-card-cell-cont-bg);
+    
 }
 .garden-table td {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
     font-family: monospace;
-    font-size: 0.8rem;
+    font-size: clamp(0.4rem, 0.8vw, 0.9rem);
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border:var(--garden-card-cell-border);
 }
 .garden-table td.empty-cell {
     background-color: transparent;
-    border: 2px solid rgba(117, 117, 117, 0.1);
+    border:var(--garden-card-cell-border);
 }
 .garden-table td.tobecollected-cell {
-    background-color: rgba(167, 240, 112, 0.2);
-    color: var(--text-green);
+    border:var(--garden-card-cell-border);
+    color: var(--garden-card-cell-text);
     font-size: 1.5rem;
 }
 .garden-table td.plant-cell {
-    background-color: var(--text-green);
-    color: var(--bg-dark);
+    background-color: var(--garden-card-cell-bg);
+    color: var(--garden-card-cell-text);
     font-weight: bold;
 }
 .garden-table td.active {
-    border: 3px solid var(--text-main);
-    box-shadow: 0 0 15px var(--text-green);
+    border:var(--garden-card-cell-border);
+    box-shadow: 0 0 15px var(--garden-card-cell-text);
     transform: scale(1.1);
     z-index: 5;
 }
@@ -270,7 +294,7 @@ body {
 /*------------------------------------------------------------------------------------------*/
 
 .edit_btn{
-    width: 50%;
+    width: 60%;
     font-weight: bold;
     padding: 0.6rem 1rem 0.6rem 1rem;
     font-family: var(--font-data);
@@ -282,14 +306,14 @@ body {
     color: var(--garden-card-editBtn-font);
 }
 .edit_btn:hover{
-    width: 55%;
+    width: 65%;
     cursor: pointer;
     transition: all 0.2s ease;
     background-color: var(--garden-card-editBtn-hover-bg);
     color: var(--garden-card-editBtn-hover-font);
 }
 .delete_btn {
-    width: 50%;
+    width: 60%;
     font-weight: bold;
     padding: 0.6rem 1rem 0.6rem 1rem;
     font-family: var(--font-data);
@@ -301,7 +325,7 @@ body {
     color: var(--garden-card-deleteBtn-font);
 }
 .delete_btn:hover {
-    width: 55%;
+    width: 65%;
     cursor: pointer;
     transition: all 0.2s ease;
     background-color: var(--garden-card-deleteBtn-hover-bg);

@@ -40,7 +40,6 @@
     background-color:var(--navbarBtn-hover-bg);
     color:var(--navbarBtn-hover-font-color);
 }
-
 .settings-sidepanel {
     width: 18.75rem;
     height: 100vh;

@@ -70,24 +70,78 @@ export function setupSidePanel() {
         sidePanel.setAttribute('id', 'settings-sidepanel');
         sidePanel.setAttribute('class', 'settings-sidepanel');
         
-        sidePanel.innerHTML = `
-            <h2 id="sidepanel-title">Personal Oasis</h2>
-            <button class="closeSidePanel" id="closeSidePanel">
-                <img src="../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Close">
-            </button>
-            <select class="lang-selection" id="lang-selection">
-                <option value="en">English</option>
-                <option value="hu">Hungarian</option>
-            </select>
-            <a id="savedI_Btn" href="../sites/ideas.html">Ideas</a>
-            <a id="savedP_Btn" href="../sites/plants.html">Plants</a>
-            <a id="savedGL_Btn" href="../sites/gardens.html">Gardens</a>
-            <a id="login_Btn" href="../sites/login.html">Login / Register</a>
-            <button class="darkmode" id="darkmode">
-                <img id="light-icon" class="theme-icon" src="../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Light mode" >
-                <img id="dark-icon" class="theme-icon" src="../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Dark mode" >
-            </button>
-        `;
+        // --- H2 Title ---
+        const h2 = document.createElement('h2');
+        h2.setAttribute('id', 'sidepanel-title');
+        h2.textContent = 'Personal Oasis';
+        sidePanel.appendChild(h2);
+
+        // --- Close Button ---
+        const closeBtn = document.createElement('button');
+        closeBtn.setAttribute('class', 'closeSidePanel');
+        closeBtn.setAttribute('id', 'closeSidePanel');
+
+        const closeImg = document.createElement('img');
+        closeImg.setAttribute('src', '../pics/icons/close_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png');
+        closeImg.setAttribute('alt', 'Close');
+
+        closeBtn.appendChild(closeImg);
+        sidePanel.appendChild(closeBtn);
+
+        // --- Language Selection ---
+        const select = document.createElement('select');
+        select.setAttribute('class', 'lang-selection');
+        select.setAttribute('id', 'lang-selection');
+
+        const optEn = document.createElement('option');
+        optEn.setAttribute('value', 'en');
+        optEn.textContent = 'English';
+
+        const optHu = document.createElement('option');
+        optHu.setAttribute('value', 'hu');
+        optHu.textContent = 'Hungarian';
+
+        select.appendChild(optEn);
+        select.appendChild(optHu);
+        sidePanel.appendChild(select);
+
+        // --- Navigation Links ---
+        const links = [
+            { id: 'savedI_Btn', href: '../sites/ideas.html', text: 'Ideas' },
+            { id: 'savedP_Btn', href: '../sites/plants.html', text: 'Plants' },
+            { id: 'savedGL_Btn', href: '../sites/gardens.html', text: 'Gardens' },
+            { id: 'login_Btn', href: '../sites/login.html', text: 'Login / Register' }
+        ];
+
+        links.forEach(linkData => {
+            const a = document.createElement('a');
+            a.setAttribute('id', linkData.id);
+            a.setAttribute('href', linkData.href);
+            a.textContent = linkData.text;
+            sidePanel.appendChild(a);
+        });
+
+        // --- Dark Mode Button ---
+        const darkModeBtn = document.createElement('button');
+        darkModeBtn.setAttribute('class', 'darkmode');
+        darkModeBtn.setAttribute('id', 'darkmode');
+
+        const lightIcon = document.createElement('img');
+        lightIcon.setAttribute('id', 'light-icon');
+        lightIcon.setAttribute('class', 'theme-icon');
+        lightIcon.setAttribute('src', '../pics/icons/dark_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png');
+        lightIcon.setAttribute('alt', 'Light mode');
+
+        const darkIcon = document.createElement('img');
+        darkIcon.setAttribute('id', 'dark-icon');
+        darkIcon.setAttribute('class', 'theme-icon');
+        darkIcon.setAttribute('src', '../pics/icons/light_mode_30dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png');
+        darkIcon.setAttribute('alt', 'Dark mode');
+
+        darkModeBtn.appendChild(lightIcon);
+        darkModeBtn.appendChild(darkIcon);
+        sidePanel.appendChild(darkModeBtn);
+
         document.body.appendChild(sidePanel);
     }
 
@@ -132,12 +186,14 @@ export function setupLoginState() {
         const sideLoginBtn = document.getElementById("login_Btn");
 
         if (topLoginBtn) {
-            topLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
+            // topLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
+            topLoginBtn.innerHTML = `${user.username}`;
             topLoginBtn.onclick = accountHandler;
             topLoginBtn.setAttribute('href', '/sites/accounts.html');
         }
         if (sideLoginBtn) {
-            sideLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
+            // sideLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
+            sideLoginBtn.innerHTML = `${user.username}`;
             sideLoginBtn.onclick = accountHandler;
             sideLoginBtn.setAttribute('href', '/sites/accounts.html');
         }
