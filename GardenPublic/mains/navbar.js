@@ -132,12 +132,12 @@ export function setupLoginState() {
         const sideLoginBtn = document.getElementById("login_Btn");
 
         if (topLoginBtn) {
-            topLoginBtn.innerHTML = `${user.username}`;
+            topLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
             topLoginBtn.onclick = accountHandler;
             topLoginBtn.setAttribute('href', '/sites/accounts.html');
         }
         if (sideLoginBtn) {
-            sideLoginBtn.innerHTML = `${user.username}`;
+            sideLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
             sideLoginBtn.onclick = accountHandler;
             sideLoginBtn.setAttribute('href', '/sites/accounts.html');
         }

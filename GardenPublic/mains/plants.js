@@ -79,7 +79,9 @@ function createPlantCards(plant) {
     // Save button 
     const potButton = document.createElement("button");
     potButton.setAttribute("class", "pot-button");
-    potButton.setAttribute("onclick","toggleSaveState(this)")
+    potButton.addEventListener('click', () => {
+        toggleSaveState(potButton, plant.id)
+    })
     
     const flowerAssembly = document.createElement("div");
     flowerAssembly.setAttribute("class", "flower-assembly");
@@ -169,12 +171,12 @@ function createPlantCards(plant) {
 // --- String first letter capitalize Logic & Pot button save Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-async function toggleSaveState(buttonElement) {
+async function toggleSaveState(buttonElement, plant) {
     buttonElement.classList.toggle('saved');
-    await SavePlant();
+    await SavePlant(plant);
 }
 
-async function SavePlant() {
+async function SavePlant(plant) {
     const response = await fetch('/api/savedplants', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
