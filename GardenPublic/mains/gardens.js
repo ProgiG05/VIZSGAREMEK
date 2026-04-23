@@ -129,6 +129,8 @@ function CreateTable(splittedContent, plants) {
     table.className = "garden-table";
     table.style.display = "inline-table";
 
+    
+
     splittedContent.forEach(row => {
         const columns = row.split(",");
         const tableRow = document.createElement("tr");
@@ -148,7 +150,50 @@ function CreateTable(splittedContent, plants) {
                 default:
                     const plant = plants.find(p => p.id === plantId);
                     tableColumn.className = "plant-cell";
-                    tableColumn.textContent = plant ? plant.common_name : "Unknown";
+                    const insidePicture = document.createElement("img")
+                    console.log(plant.type)
+                    
+                    switch (plant.type) {
+                        case "fruits" || "vegetables":
+                            // insidePicture.setAttribute("src","")
+                            // insidePicture.setAttribute("src","../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
+                            insidePicture.src = ""
+                            insidePicture.src = "../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+                            
+                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            break;
+                        case "herbs":
+                            // insidePicture.setAttribute("src","")
+                            // insidePicture.setAttribute("src","../pics/icons/cannabis_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
+                            insidePicture.src = ""
+                            insidePicture.src = ""
+                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            break;
+                        case "succulents" || "grass" || "ferns":
+                            // insidePicture.setAttribute("src","")
+                            // insidePicture.setAttribute("src","../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
+                            insidePicture.src = ""
+                            insidePicture.src = "../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            break;
+                        case "flowers":
+                            // insidePicture.setAttribute("src","")
+                            // insidePicture.setAttribute("src","../pics/icons/local_florist_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
+                            insidePicture.src = ""
+                            insidePicture.src = "../pics/icons/local_florist_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            break;
+                        case "trees":
+                            // insidePicture.setAttribute("src","")
+                            // insidePicture.setAttribute("src","../pics/icons/forest_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
+                            insidePicture.src = ""
+                            insidePicture.src = "../pics/icons/forest_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            break;
+                        default:
+                            break;
+                    }
+                    tableColumn.appendChild(insidePicture)
                     break;
             }
             tableRow.appendChild(tableColumn);
