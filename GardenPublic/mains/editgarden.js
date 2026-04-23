@@ -163,9 +163,9 @@ function EditGarden(garden, plants, parentContainer, controls) {
     gardenTitle.contentEditable = "true";
     gardenCard.appendChild(gardenTitle);
 
-    const gardcontent = document.createElement('p')
-    gardcontent.textContent = garden.garden_content
-    gardenCard.appendChild(gardcontent)
+    // const gardcontent = document.createElement('p')
+    // gardcontent.textContent = garden.garden_content
+    // gardenCard.appendChild(gardcontent)
 
     // ####### RENDER TABLE #######
     const splittedContent = garden.garden_content.split(";");

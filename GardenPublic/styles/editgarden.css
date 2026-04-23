@@ -1,13 +1,28 @@
 :root {
-    --body-bg: #a3b68a;
-    --bg-dark: #7da87d;
-    --text-green: #a7f070;
-    --text-main: #ffffff;
-    --beige-dark-shadow: #8a6a3a;
-    --btn-bg: #112d14;
-    --btn-hover-bg: #E3FFF5;
-    --btn-font-color: #E3FFF5;
-    --btn-hover-font-color: #112d14;
+    --body-bg: #b2cd8f;
+    --main-font-color: #0b0e0a;
+    --font-main: Georgia, serif;
+    --font-data: monospace;
+    --main-cont-bg: #7f995c;
+
+    --general-btns-bg: #e0e9d5;
+    --general-btns-font: #1a1e1a;
+    --general-btns-hover-bg: #1a1e1a;
+    --general-btns-hover-font: #e0e9d5;
+
+    --garden-card-bg: linear-gradient(145deg, #1d502a, #3e6b3c);
+    --garden-card-accent: rgba(86, 86, 86, 0.523);
+    --garden-card-border: 0.25rem solid #071a14;
+    --garden-card-title: rgb(9, 16, 1);
+    --garden-card-title-bg: #F1E3D3;
+    --garden-card-text: rgb(9, 16, 1);
+    
+    --garden-card-cell-cont-bg: #cceeb9ce;
+    --garden-card-cell-table-bg: #5e460e;
+    --garden-card-cell-bg: #a48231;
+    --garden-card-cell-text: rgb(6, 10, 0);
+    --garden-card-cell-border: 0.15rem solid rgba(2, 31, 11, 0.564);
+    --garden-card-cell-shadow: 0.18rem 0.18rem rgba(54, 141, 62, 0.756);
 }
 
 body {
@@ -16,7 +31,7 @@ body {
     margin: 0;
     padding: 0.5rem 2rem 1rem 2rem;
     min-height: 100vh;
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-data);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,13 +47,12 @@ body {
     gap: 2rem;
     max-width: 1400px;
     margin: 0;
-    /* border: 2px solid red; */
 }
 
 .garden-card {
-    background-color: var(--bg-dark);
-    color: var(--text-green);
-    border-radius: 1.25rem;
+    background: var(--garden-card-bg);
+    color: var(--garden-card-text);
+    border-radius: 1.5rem;
     padding: 2rem;
     width: 90%;
     height: fit-content;
@@ -48,72 +62,87 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    border: 3px solid var(--text-green); /* Visual feedback that we are editing */
+    border: var(--garden-card-border);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .garden-name {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 2.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
     margin: 0;
-    color: var(--text-main);
+    color: var(--garden-card-title);
+    background-color: var(--garden-card-title-bg);
     text-align: center;
     outline: none;
+    padding: 0.5rem 4vw;
+    border-radius: 0.6rem;
+    border: var(--garden-card-border);
 }
 
 .garden-name[contenteditable="true"] {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 0.2rem 1rem;
-    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 /* Garden Table Styling */
 .garden-table {
     border-collapse: separate;
     border-spacing: 5px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background-color: var(--garden-card-cell-table-bg);
     margin: 1rem 0;
 }
 
 .garden-table td {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
+    width: clamp(30px, 2vw, 60px);
+    height: clamp(30px, 4vh, 60px);
+    border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
-    font-size: 0.8rem;
+    font-family: var(--font-data);
+    font-size: clamp(0.4rem, 0.8vw, 0.9rem);
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: var(--garden-card-cell-border);
+    box-shadow: var(--garden-card-cell-shadow);
+    background-color: var(--garden-card-cell-bg);
+    color: var(--garden-card-cell-text);
     user-select: none;
 }
 
 .garden-table td.empty-cell {
     background-color: transparent;
-    border: 2px solid rgba(117, 117, 117, 0.1);
+    border: var(--garden-card-cell-border);
+    background-color: var(--garden-card-cell-bg);
 }
 
 .garden-table td.disabled-cell {
-    background-color: rgba(167, 240, 112, 0.2);
-    color: var(--text-green);
-    font-size: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    box-shadow: none;
+    width: 2rem !important;
+    height: 2rem !important;
+    border-radius: 0.5rem;
+    transform: scale(0.7);
 }
 
 .garden-table td.plant-cell {
-    background-color: var(--text-green);
-    color: var(--bg-dark);
-    font-weight: bold;
+    background-color: var(--garden-card-cell-cont-bg);
+    border: 2px solid white;
+    transform: scale(1.1);
 }
 
 .garden-table td.active {
-    border: 3px solid var(--text-main);
-    box-shadow: 0 0 15px var(--text-green);
+    border: var(--garden-card-cell-border);
+    box-shadow: 0 0 15px #ffffff;
     transform: scale(1.1);
     z-index: 5;
 }
 
 /* Controls Interface */
 #controls-container {
-    background-color: var(--bg-dark);
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 1.5rem;
     border-radius: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -122,18 +151,16 @@ body {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 1rem;
-    border: 1px solid var(--text-green);
 }
 
-/* Plant Selection Area - Now fixed at bottom for animation */
+/* Plant Selection Area - Fixed at bottom */
 #plantselection {
     position: fixed;
-    bottom: -100%; /* Hidden off-screen */
+    bottom: -100%;
     width: 100%;
     max-height: 50vh;
-    background: rgba(17, 45, 20, 0.95); /* Deep green glassmorphism */
-    backdrop-filter: blur(15px);
-    border-top: 3px solid var(--text-green);
+    background: var(--garden-card-bg);
+    border-top: var(--garden-card-border);
     padding: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -150,18 +177,21 @@ body {
 }
 
 #plantselection .plant-card {
-    background-color: #2a2e2a;
+    background-color: var(--main-cont-bg);
     padding: 1rem;
     border-radius: 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 1px solid rgba(167, 240, 112, 0.3);
-    color: var(--text-green);
+    border: 1px solid rgba(0,0,0,0.2);
+    color: var(--main-font-color);
+    font-family: var(--font-data);
+    font-weight: bold;
+    text-align: center;
 }
 
 #plantselection .plant-card:hover {
-    background-color: #3a3e3a;
-    border-color: var(--text-green);
+    background-color: var(--general-btns-hover-bg);
+    color: var(--general-btns-hover-font);
     transform: translateY(-5px);
 }
 
@@ -170,7 +200,8 @@ body {
     font-size: 0.9rem;
 }
 
-#addrowscolumns-form {
+/* Form Styles */
+#addrowscolumns-form, #removerowscolumns-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -178,66 +209,24 @@ body {
     justify-content: center;
     padding: 1rem;
     border-radius: 1rem;
-    background-color: var(--bg-dark);
-    color: var(--text-green);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--main-font-color);
 }
 
 #addrowscolumns-form input {
     width: 100px;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--text-green);
-    background-color: var(--bg-dark);
+    border: 1px solid #000;
+    background-color: #fff;
     color: black;
+    font-family: var(--font-data);
 }
 
 #addrowscolumns-form label {
     font-size: 1.2rem;
     font-weight: bold;
-    color: black;
-}
-
-#addrowscolumns-form button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--text-green);
-    background-color: var(--bg-dark);
-    color: black;
-}
-
-#addrowscolumns-form button:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-font-color);
-    letter-spacing: 1px;
-}
-
-#removerowscolumns-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background-color: var(--bg-dark);
-    color: var(--text-green);
-    display: flex;
-    flex-direction: column;
-    border-radius: 1rem;
-    padding: 1rem;
-}
-
-#removerowscolumns-form button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--text-green);
-    background-color: var(--bg-dark);
-    color: black;
-}
-
-#removerowscolumns-form button:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-font-color);
-    letter-spacing: 1px;
+    color: var(--main-font-color);
 }
 
 #manage-rows-columns-container {
@@ -250,59 +239,53 @@ body {
     background-color: transparent;
 }
 
-.cancel_btn {
-    background-color: #4a5c3c;
-    color: var(--text-main);
-    border: 1px solid var(--text-green);
-}
-
-.cancel_btn:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-font-color);
-    letter-spacing: 1px;
-}
-
-.addrowscolumns_btn {
-    background-color: #4a5c3c;
-    color: var(--text-main);
-    border: 1px solid var(--text-green);
-}
-
-.addrowscolumns_btn:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-font-color);
-    letter-spacing: 1px;
-}
-
-
 /* Button Styling */
 button {
     padding: 0.8rem 1.5rem;
     border-radius: 2rem;
     border: none;
-    font-family: 'Quicksand', sans-serif;
+    font-family: var(--font-data);
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s ease;
-    background-color: var(--btn-bg);
-    color: var(--btn-font-color);
+    background-color: var(--general-btns-bg);
+    color: var(--general-btns-font);
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
 }
 
 button:hover {
-    background-color: var(--btn-hover-bg);
-    color: var(--btn-hover-font-color);
+    background-color: var(--general-btns-hover-bg);
+    color: var(--general-btns-hover-font);
     letter-spacing: 1px;
 }
 
-.back_btn {
-    background-color: #4a5c3c;
-    color: var(--text-main);
-    border: 1px solid var(--text-green);
+.cancel_btn, .back_btn {
+    background-color: #e0e9d5;
+    color: #1a1e1a;
+}
+
+.addrowscolumns_btn {
+    background-color: #e0e9d5;
+    color: #1a1e1a;
 }
 
 .save_btn {
-    background-color: var(--text-green);
-    color: var(--bg-dark);
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.save_btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.delete_btn {
+    background-color: #690B22;
+    color: #ffffff;
+}
+.delete_btn:hover {
+    background-color: #f8d6d6;
+    color: #0f0101;
 }
 
 @media (max-width: 768px) {
@@ -311,12 +294,4 @@ button:hover {
         height: 45px;
         font-size: 0.7rem;
     }
-}
-.delete_btn {
-    background-color: #5c1a1a;
-    color: #ffcccc;
-}
-.delete_btn:hover {
-    background-color: #ff4d4d;
-    color: #ffffff;
 }

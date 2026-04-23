@@ -1,0 +1,103 @@
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 90vw;
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    /* Large shadow acts as an overlay/backdrop */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 100vmax rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+.popup-header-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+}
+
+.popup-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.close-popup-btn {
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.close-popup-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.popup-content-cont {
+    padding: 2rem 1.5rem;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.popup-content-text {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.popup-footer-cont {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 2px solid #000000;
+    background-color: #f9f9f9;
+}
+
+.confirm-btn, .cancel-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.confirm-btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+}
+
+.confirm-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.cancel-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+}
+
+.cancel-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}

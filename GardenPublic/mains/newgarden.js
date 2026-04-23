@@ -14,13 +14,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 function ShowAddGardenForm() {
     document.getElementById("preview-btn").addEventListener("click", () => {
 
-        const gardenName = document.getElementById("garden-name").value;
         const gardenRows = document.getElementById("garden-rows").value; 
         const gardenColumns = document.getElementById("garden-columns").value;
         const previewContainer = document.getElementById("preview-container");
 
         previewContainer.innerHTML = "";
+
+        const goBackBtn = document.createElement("button");
+        goBackBtn.textContent = "Go Back Up";
+        goBackBtn.className = "go-back-btn";
+        goBackBtn.addEventListener("click", () => {
+            previewContainer.innerHTML = "";
+            document.getElementById("garden-rows").value = "";
+            document.getElementById("garden-columns").value = "";
+            document.getElementById("add-garden-form").scrollIntoView({ behavior: "smooth" });
+        });
+
         previewContainer.appendChild(previewGarden(gardenRows, gardenColumns));
+        previewContainer.appendChild(goBackBtn);
+
+        document.getElementById("preview-container").scrollIntoView({ behavior: "smooth" });
     });
 
     document.getElementById("cancel-btn").addEventListener("click", () => {

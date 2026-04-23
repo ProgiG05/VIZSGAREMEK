@@ -10,27 +10,30 @@
     --general-btns-hover-bg: #1a1e1a;
     --general-btns-hover-font: #e0e9d5;
 
-    --garden-card-bg:#1d502ac9;
+    --garden-card-bg: linear-gradient(145deg, #1d502a, #3e6b3c);
     --garden-card-accent: rgba(86, 86, 86, 0.523);
-    --garden-card-border:0.25rem solid #071a14;
-    --garden-card-title:rgb(9, 16, 1);
-    --garden-card-title-bg:#F1E3D3;
-    --garden-card-text:rgb(9, 16, 1);
-    --garden-card-cell-cont-bg:#cceeb9ce;
-    --garden-card-cell-bg:#FFF1CA;
-    --garden-card-cell-text:rgb(6, 10, 0);
+    --garden-card-border: 0.25rem solid #071a14;
+    --garden-card-title: rgb(9, 16, 1);
+    --garden-card-title-bg: #F1E3D3;
+    --garden-card-text: rgb(9, 16, 1);
+    --garden-card-cell-cont-bg: #cceeb9ce;
+    --garden-card-cell-table-bg: #5e460e;
+    --garden-card-cell-bg: #a48231;
+    --garden-card-cell-text: rgb(6, 10, 0);
     --garden-card-cell-border: 0.15rem solid rgba(2, 31, 11, 0.564);
+    --garden-card-cell-shadow: 0.18rem 0.18rem rgba(54, 141, 62, 0.756);
 
-    --garden-card-editBtn-bg:#E07A5F;
-    --garden-card-editBtn-font:#ffffff;
-    --garden-card-editBtn-hover-bg:#ffe6d1;
-    --garden-card-editBtn-hover-font:#110801;
+    --garden-card-editBtn-bg: #E07A5F;
+    --garden-card-editBtn-font: #ffffff;
+    --garden-card-editBtn-hover-bg: #ffe6d1;
+    --garden-card-editBtn-hover-font: #110801;
 
-    --garden-card-deleteBtn-bg:#690B22;
-    --garden-card-deleteBtn-font:#ffffff;
-    --garden-card-deleteBtn-hover-bg:#f8d6d6;
-    --garden-card-deleteBtn-hover-font:#0f0101;
+    --garden-card-deleteBtn-bg: #690B22;
+    --garden-card-deleteBtn-font: #ffffff;
+    --garden-card-deleteBtn-hover-bg: #f8d6d6;
+    --garden-card-deleteBtn-hover-font: #0f0101;
 }
+
 /*------------------------------------------------------------------------------------------*/
 body {
     background-color: var(--body-bg);
@@ -46,7 +49,7 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------*/
-.configure-cont{
+.configure-cont {
     width: 70%;
     height: 70vh;
     margin: 2rem auto 2rem auto;
@@ -58,6 +61,7 @@ body {
     justify-content: center;
     background-color: var(--header-cont-bg);
 }
+
 .header-container {
     margin: 1rem 0 1rem 0;
     text-align: center;
@@ -68,9 +72,9 @@ body {
     align-items: center;
     justify-content: center;
 }
-.main-title{
+.main-title {
     font-family: var(--font-main);
-    font-size: clamp(3rem,6.5vw, 7.8rem);
+    font-size: clamp(3rem, 6.5vw, 7.8rem);
     text-wrap: balance;
     margin: 1rem 0 2rem 0;
     width: 100%;
@@ -88,7 +92,7 @@ body {
     padding-left: 2rem;
     margin: 1rem 0 1rem 0;
 }
-.button-cont{
+.button-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,6 +101,7 @@ body {
     gap: 2rem;
     margin: 2rem 0 2rem 0;
 }
+
 .newgarden_btn, .checkout_btn {
     width: 40%;
     height: fit-content;
@@ -109,15 +114,17 @@ body {
     border: none;
     transition: all 0.2s ease;
     text-align: center;
-}   
-.newgarden_btn:hover, .checkout_btn:hover{
+}
+
+.newgarden_btn:hover, .checkout_btn:hover {
     background-color: var(--general-btns-hover-bg);
     color: var(--general-btns-hover-font);
     cursor: pointer;
     transition: all 0.2s ease;
     width: 45% !important;
 }
-.information-cont{
+
+.information-cont {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -136,6 +143,7 @@ body {
     text-align: left;
     width: 50%;
 }
+
 .login_btn {
     width: 30%;
     height: fit-content;
@@ -150,7 +158,8 @@ body {
     align-items: center;
     justify-content: center;
 }
-.login_btn:hover{
+
+.login_btn:hover {
     background-color: var(--general-btns-hover-bg);
     color: var(--general-btns-hover-font);
     transition-duration: 0.2s all ease;
@@ -174,48 +183,85 @@ body {
     user-select: none;
 }
 
+/*------------------------------------------------------------------------------------------*/
+
 .garden-card {
-    background-color: var(--garden-card-bg);
+    background: var(--garden-card-bg);
+    position: relative;
+    padding: 0;
+    overflow: hidden;
     color: var(--garden-card-text);
-    box-shadow: 0.5rem 0.5rem 0.5rem var(--garden-card-accent);
-    border:var(--garden-card-border) ;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: var(--garden-card-border);
     border-radius: 1.5rem;
-    /* padding: 2rem; */
-    min-width: 20%;
-    /* width: fit-content; */
-    width: 80%;
-    max-width: 90%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     transition: transform 0.3s ease;
 }
 .garden-card.is-editing {
     border: 3px solid var(--garden-card-title);
     transform: scale(1.02);
 }
+
+/*------------------------------------------------------------------------------------------*/
+
+.edit_btn,.delete_btn {
+    position: absolute;
+    width: 40px !important;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.edit_btn:hover {
+    background-color: var(--garden-card-editBtn-bg);
+    color: var(--garden-card-editBtn-font);
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+.delete_btn:hover {
+    background-color: var(--garden-card-deleteBtn-bg);
+    color: var(--garden-card-deleteBtn-font);
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+.edit_btn {top: 1rem;right: 4rem;}
+.delete_btn {top: 1rem;right: 1rem;}
+
+/*------------------------------------------------------------------------------------------*/
+
 .garden-name {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.2rem,2vw,2.1rem);
     margin: 0;
     top: 0;
-    border-bottom-left-radius: 1.4rem;
-    border-bottom-right-radius: 1.4rem;
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
     color: var(--garden-card-title);
     background-color: var(--garden-card-title-bg);
     width: fit-content;
-    padding: 0 4vw 0 4vw;
-    /* padding: 0.4rem 0 0.4rem 0; */
+    padding: 0.3rem 4vw 0.2rem 4vw;
     text-align: center;
 }
-.table-cont{
-    width: 90%;
+.table-cont {
+    width: fit-content;
+    padding: 1rem;
+    margin: 0 auto;
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
-    border-radius: 4rem;
+    border-radius: 0.4rem;
     background-color: var(--garden-card-cell-cont-bg);
 }
 .garden-table {
@@ -223,11 +269,11 @@ body {
     border-spacing: 5px;
     border-radius: 1rem;
     padding: 1.5rem;
-    
+    background-color: var(--garden-card-cell-table-bg);
 }
 .garden-table td {
-    width: 3vw;
-    height: 5.76vh;
+    width: 1.667vw;
+    height: 3.2vh;
     border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
@@ -235,27 +281,94 @@ body {
     font-size: clamp(0.4rem, 0.8vw, 0.9rem);
     cursor: pointer;
     transition: all 0.2s ease;
-    border:var(--garden-card-cell-border);
+    border: var(--garden-card-cell-border);
+    box-shadow: var(--garden-card-cell-shadow);
+    background-color: var(--garden-card-cell-bg);
+    color: var(--garden-card-cell-text);
 }
 .garden-table td.empty-cell {
     background-color: transparent;
-    border:var(--garden-card-cell-border);
+    border: var(--garden-card-cell-border);
+    background-color: var(--garden-card-cell-bg);
 }
 .garden-table td.tobecollected-cell {
-    border:var(--garden-card-cell-border);
-    color: var(--garden-card-cell-text);
-    font-size: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    box-shadow: none;
+    width: 2rem !important;
+    height: 2rem !important;
+    border-radius: 0.5rem;
+    transform: scale(0.7);
 }
 .garden-table td.plant-cell {
-    background-color: var(--garden-card-cell-bg);
-    color: var(--garden-card-cell-text);
-    font-weight: bold;
+    background-color: var(--garden-card-cell-cont-bg);
+    border: 2px solid white;
+    transform: scale(1.1);
 }
 .garden-table td.active {
-    border:var(--garden-card-cell-border);
+    border: var(--garden-card-cell-border);
     box-shadow: 0 0 15px var(--garden-card-cell-text);
     transform: scale(1.1);
     z-index: 5;
+}
+
+/*------------------------------------------------------------------------------------------*/
+
+/* Layout Wrapper for the card body */
+.garden-card-body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+/*------------------------------------------------------------------------------------------*/
+
+.plant-list-cont {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.8rem;
+    color: white;
+    font-family: var(--font-data);
+    align-self: stretch;
+}
+
+.plant-list-cont h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.3rem;
+    width: 100%;
+}
+
+.plant-list-cont ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.plant-list-cont li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.plant-list-cont li::before {
+    content: "•";
+    color: var(--body-bg);
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -296,41 +409,56 @@ body {
 
 /*------------------------------------------------------------------------------------------*/
 
-.edit_btn{
-    width: 60%;
-    font-weight: bold;
-    padding: 0.6rem 1rem 0.6rem 1rem;
+.chart-cont {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.8rem;
+    align-self: stretch;
+}
+
+.chart-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.chart-label {
+    width: 35%;
+    text-align: right;
     font-family: var(--font-data);
-    font-size: clamp(0.7rem, 1.1vw,1.2rem);
-    transition: all 0.2s ease;
-    border-radius: 2rem;
-    border: none;
-    background-color: var(--garden-card-editBtn-bg);
-    color: var(--garden-card-editBtn-font);
+    font-size: 0.85rem;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.edit_btn:hover{
-    width: 65%;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: var(--garden-card-editBtn-hover-bg);
-    color: var(--garden-card-editBtn-hover-font);
+
+.chart-bar-cont {
+    flex-grow: 1;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    position: relative;
 }
-.delete_btn {
-    width: 60%;
-    font-weight: bold;
-    padding: 0.6rem 1rem 0.6rem 1rem;
+
+.chart-bar {
+    height: 100%;
+    background-color: var(--body-bg);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.chart-value {
+    width: 15%;
     font-family: var(--font-data);
-    font-size: clamp(0.7rem, 1.1vw,1.2rem);
-    transition: all 0.2s ease;
-    border-radius: 2rem;
-    border: none;
-    background-color: var(--garden-card-deleteBtn-bg);
-    color: var(--garden-card-deleteBtn-font);
+    font-size: 0.85rem;
+    color: white;
+    text-align: left;
 }
-.delete_btn:hover {
-    width: 65%;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: var(--garden-card-deleteBtn-hover-bg);
-    color: var(--garden-card-deleteBtn-hover-font);
-}
+

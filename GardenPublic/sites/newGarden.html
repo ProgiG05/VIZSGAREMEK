@@ -11,29 +11,31 @@
 <body>
     <nav id="top-navbar"></nav>
 
-    <div class="header-container">
-        <h1 class="main-title">Design your perfect garden layout</h1>
-        <p class="sub-title ">This garden layout creator tool helps visualizing a garden from top-view using a rough but simple and straight-forward grid system that includes plant, empty and unoccupied cell.</p>
-    </div>  
+    <div class="main-cont">
+        <div class="header-container">
+            <h1 class="main-title">Design your perfect garden layout</h1>
+            <p class="sub-title ">This garden layout creator tool helps visualizing a garden from top-view using a rough but simple and straight-forward grid system that includes plant, empty and unoccupied cell.</p>
+        </div>  
 
-    <div class="add-garden-cont" id="add-garden-cont">
-        <form class="add-garden-form" id="add-garden-form">
-            
-            <label for="garden-name">Garden name (max 25 character):</label>
-            <input type="text" name="garden-name" class="garden-name" id="garden-name" maxlength="25" required>
+        <div class="add-garden-cont" id="add-garden-cont">
+            <form class="add-garden-form" id="add-garden-form">
+                
+                <label for="garden-name">Garden name (max 25 character):</label>
+                <input type="text" name="garden-name" class="garden-name" id="garden-name" maxlength="25" required>
 
-            <label for="garden-rows">Garden rows (max 20):</label>
-            <input type="number" name="garden-rows" min="1" max="20" class="garden-rows" id="garden-rows" required>
-            
-            <label for="garden-columns">Garden columns (max 20):</label>
-            <input type="number" name="garden-columns" min="1" max="20"  class="garden-columns" id="garden-columns" required>
+                <label for="garden-rows">Garden rows (max 20):</label>
+                <input type="number" name="garden-rows" min="1" max="20" class="garden-rows" id="garden-rows" required>
+                
+                <label for="garden-columns">Garden columns (max 20):</label>
+                <input type="number" name="garden-columns" min="1" max="20"  class="garden-columns" id="garden-columns" required>
 
-            <button type="submit" id="add-garden_Btn">Add Garden</button>
-        </form>
+                <button type="submit" id="add-garden_Btn">Add Garden</button>
+            </form>
 
-        <div class="button-cont">
-            <button class="cancel-btn" id="cancel-btn">Cancel</button>
-            <button class="preview-btn" id="preview-btn">Preview</button>
+            <div class="button-cont">
+                <button class="cancel-btn" id="cancel-btn">Cancel</button>
+                <button class="preview-btn" id="preview-btn">Preview</button>
+            </div>
         </div>
     </div>
 

@@ -1,18 +1,18 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
+// import { showPopup } from './popup.js';
 
 
 const gardensContainer = document.getElementById("gardens-container");
 const token = localStorage.getItem('token');
 
-
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
-    const user = JSON.parse(localStorage.getItem("user"));
 
+    const user = JSON.parse(localStorage.getItem("user"));
 
     if (!token) {
         const infoCont = document.getElementById("information-cont")
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "/sites/newgarden.html";
     })
     document.getElementById("checkout_btn").addEventListener("click", () => {
-        document.getElementById("gardens-container").scrollIntoView({behavior:"smooth"})
+        document.getElementById("gardens-container").scrollIntoView({ behavior: "smooth" })
     })
 
     // Insert controls before the gardens container
@@ -67,6 +67,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 3. Render Gardens
     gardens.forEach(garden => {
         const splittedContent = garden.garden_content.split(";");
+
+        // 1. Calculate stats
+        let plantCellsCount = 0;
+        let disabledCellsCount = 0;
+        let emptyCellsCount = 0;
+        const usedPlants = new Set();
+
+        splittedContent.forEach(row => {
+            if (row === "") return;
+            row.split(",").forEach(col => {
+                if (col === "") { emptyCellsCount++; }
+                else if (col === "+") { disabledCellsCount++; }
+                else {
+                    plantCellsCount++;
+
+                    const plantId = parseInt(col);
+                    const plant = plants.find(p => p.id === plantId);
+
+                    if (plant) { usedPlants.add(plant.common_name); }
+                }
+            });
+        });
+
+        const maxCells = plantCellsCount + disabledCellsCount + emptyCellsCount;
 
         const gardenCard = document.createElement("div");
         gardenCard.className = "garden-card";
@@ -77,37 +101,100 @@ document.addEventListener("DOMContentLoaded", async () => {
         gardenTitle.textContent = garden.garden_name;
         gardenCard.appendChild(gardenTitle);
 
-        const TableContainer = document.createElement("div")
-        TableContainer.setAttribute("class","table-cont")
-        TableContainer.appendChild(CreateTable(splittedContent, plants))
+        // --- CREATE CARD BODY ---
+        const cardBody = document.createElement("div");
+        cardBody.className = "garden-card-body";
 
-        gardenCard.appendChild(TableContainer)
+        // Left Side: Plant List
+        const plantListCont = document.createElement("div");
+        plantListCont.className = "plant-list-cont";
+        const plantListTitle = document.createElement("h3");
+        plantListTitle.textContent = "Planted List";
+        plantListCont.appendChild(plantListTitle);
 
-        // gardenCard.appendChild(CreateTable(splittedContent, plants));
+        if (usedPlants.size > 0) {
+            const ul = document.createElement("ul");
+            usedPlants.forEach(plantName => {
+                const li = document.createElement("li");
+                li.textContent = plantName;
+                ul.appendChild(li);
+            });
+            plantListCont.appendChild(ul);
+        } else {
+            const emptyText = document.createElement("span");
+            emptyText.textContent = "No plants.";
+            plantListCont.appendChild(emptyText);
+        }
+
+        // Middle: Table Container
+        const tableContainer = document.createElement("div");
+        tableContainer.className = "table-cont";
+        tableContainer.appendChild(CreateTable(splittedContent, plants));
+
+        // Right Side: Chart Container
+        const chartCont = document.createElement("div");
+        chartCont.className = "chart-cont";
+
+        const stats = [
+            { label: "Plant cell", value: plantCellsCount },
+            { label: "Disabled cell", value: disabledCellsCount },
+            { label: "Empty cell", value: emptyCellsCount }
+        ];
+
+        stats.forEach(stat => {
+            const row = document.createElement("div");
+            row.className = "chart-row";
+
+            const label = document.createElement("div");
+            label.className = "chart-label";
+            label.textContent = stat.label;
+
+            const barCont = document.createElement("div");
+            barCont.className = "chart-bar-cont";
+
+            const bar = document.createElement("div");
+            bar.className = "chart-bar";
+            bar.style.width = maxCells > 0 ? `${(stat.value / maxCells) * 100}%` : "0%";
+
+            const value = document.createElement("div");
+            value.className = "chart-value";
+            value.textContent = stat.value;
+
+            barCont.appendChild(bar);
+            row.appendChild(label);
+            row.appendChild(barCont);
+            row.appendChild(value);
+            chartCont.appendChild(row);
+        });
+
+        // Assemble Card Body
+        cardBody.appendChild(plantListCont);
+        cardBody.appendChild(tableContainer);
+        cardBody.appendChild(chartCont);
+        gardenCard.appendChild(cardBody);
+
         const deleteBtn = document.createElement("button");
-        deleteBtn.style.display = "block"
-        deleteBtn.textContent = "Delete Garden";
+        deleteBtn.innerText = "✖";
         deleteBtn.className = "delete_btn";
-        // deleteBtn.style.display = "none";
         deleteBtn.addEventListener("click", () => {
+            // showPopup("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.");
             if (confirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.")) {
                 DeleteGarden(garden.id);
             }
         });
-        gardenCard.appendChild(document.createElement("br"));
+        gardenCard.appendChild(deleteBtn);
 
         const editBtn = document.createElement("button");
-        editBtn.style.display = "block"
-        editBtn.textContent = "Edit Garden";
+        editBtn.textContent = "✎";
         editBtn.className = "edit_btn";
         editBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to edit this garden?")) {
                 window.location.href = "/sites/editgarden.html?id=" + garden.id;
             }
         });
-
         gardenCard.appendChild(editBtn);
-        gardenCard.appendChild(deleteBtn);
+
+
         gardensContainer.appendChild(gardenCard);
     });
 });
@@ -129,7 +216,13 @@ function CreateTable(splittedContent, plants) {
     table.className = "garden-table";
     table.style.display = "inline-table";
 
-    
+    const paths = {
+        "fv": "../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "herbs": "../pics/icons/cannabis_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "flowers": "../pics/icons/local_florist_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "trees": "../pics/icons/forest_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "sgf": "../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+    };
 
     splittedContent.forEach(row => {
         const columns = row.split(",");
@@ -145,50 +238,36 @@ function CreateTable(splittedContent, plants) {
                     break;
                 case "+":
                     tableColumn.className = "tobecollected-cell";
-                    tableColumn.textContent = "+";
                     break;
                 default:
                     const plant = plants.find(p => p.id === plantId);
                     tableColumn.className = "plant-cell";
                     const insidePicture = document.createElement("img")
-                    console.log(plant.type)
-                    
                     switch (plant.type) {
                         case "fruits" || "vegetables":
-                            // insidePicture.setAttribute("src","")
-                            // insidePicture.setAttribute("src","../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
                             insidePicture.src = ""
-                            insidePicture.src = "../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
-                            
-                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            insidePicture.src = paths.fv;
+                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
                             break;
                         case "herbs":
-                            // insidePicture.setAttribute("src","")
-                            // insidePicture.setAttribute("src","../pics/icons/cannabis_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
                             insidePicture.src = ""
-                            insidePicture.src = ""
-                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            insidePicture.src = paths.herbs;
+                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
                             break;
                         case "succulents" || "grass" || "ferns":
-                            // insidePicture.setAttribute("src","")
-                            // insidePicture.setAttribute("src","../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
                             insidePicture.src = ""
-                            insidePicture.src = "../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
-                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            insidePicture.src = paths.sgf;
+                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
                             break;
                         case "flowers":
-                            // insidePicture.setAttribute("src","")
-                            // insidePicture.setAttribute("src","../pics/icons/local_florist_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
                             insidePicture.src = ""
-                            insidePicture.src = "../pics/icons/local_florist_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
-                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            insidePicture.src = paths.flowers;
+                            insidePicture.alt = plant ? plant.common_name : "Unknown"
                             break;
                         case "trees":
-                            // insidePicture.setAttribute("src","")
-                            // insidePicture.setAttribute("src","../pics/icons/forest_25dp_000000_FILL0_wght400_GRAD0_opsz24.png")
                             insidePicture.src = ""
-                            insidePicture.src = "../pics/icons/forest_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
-                            // insidePicture.setAttribute("alt",`${plant ? plant.common_name : "Unknown"}`)
+                            insidePicture.src = paths.trees;
+                            insidePicture.alt = plant ? plant.common_name : "Unknown"
                             break;
                         default:
                             break;
