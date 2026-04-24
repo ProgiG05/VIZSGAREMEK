@@ -34,6 +34,7 @@ login / signup page:
 	remove unnessecary stuff
 
 other:
+	expand the database with new entries
 	login system: token
 	error handling
 	documentation: inline comments + word document
