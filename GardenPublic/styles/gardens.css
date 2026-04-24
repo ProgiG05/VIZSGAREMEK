@@ -33,10 +33,20 @@
     --garden-card-deleteBtn-hover-bg: #f8d6d6;
     --garden-card-deleteBtn-hover-font: #0f0101;
 }
+/*------------------------------------------------------------------------------------------*/
+body.dark-theme {
+    --body-bg: #273220;
+    --main-font-color: #fdf8ef;
+    --header-cont-bg: #1a2211;
 
+    --navbarBtn-bg: #121e0bee;
+    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-hover-bg: #030502;
+    --navbarBtn-hover-font-color: rgb(255, 255, 255);
+}
 /*------------------------------------------------------------------------------------------*/
 body {
-    background-color: var(--body-bg);
+    background: var(--body-bg);
     transition: all 0.2s ease;
     height: 100%;
     width: 100%;
@@ -47,7 +57,6 @@ body {
     align-items: center;
     justify-items: center;
 }
-
 /*------------------------------------------------------------------------------------------*/
 .configure-cont {
     width: 70%;

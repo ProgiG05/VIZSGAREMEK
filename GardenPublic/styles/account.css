@@ -1,56 +1,71 @@
-/* Using your exact variables */
 :root {
-    --body-bg: linear-gradient(to bottom, #b2cd8f , #384d28 );
-    --header-cont-bg: linear-gradient(to left, #364d26,#92ac70);
-    --general-font-color:#060b04;
-    --bg-dark: #1a1e1a;
-    --text-green: #a7f070;
-    --navbarBtn-bg: #334429e2;
-    --pot-brown: #6b3010;
+    --body-bg: #b2cd8f;
+    --main-font-color: #0b0e0a;
+    --font-main: Georgia, serif;
+    --font-data: monospace;
+    --main-cont-bg: #7f995c;
+
+    --general-btns-bg: #e0e9d5;
+    --general-btns-font: #1a1e1a;
+    --general-btns-hover-bg: #1a1e1a;
+    --general-btns-hover-font: #e0e9d5;
+
+    --garden-card-bg: linear-gradient(145deg, #1d502a, #3e6b3c);
+    --garden-card-border: 0.25rem solid #071a14;
+    --garden-card-title: rgb(9, 16, 1);
+    --garden-card-title-bg: #F1E3D3;
+    --garden-card-text: #F1E3D3;
 }
 
 body {
-    background-image: var(--body-bg);
+    background-color: var(--body-bg);
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: var(--font-main);
 }
 
 .account-container {
-    width: 95%;
-    max-width: 1100px;
+    width: 90%;
+    max-width: 1200px;
     padding: 2rem 0;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
 }
 
 /* The Single Unified Card */
 .main-account-card {
-    background-color: var(--bg-dark);
-    border-radius: 4rem; /* Matching your header-container radius */
+    width: 100%;
+    background: var(--garden-card-bg);
+    border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border: var(--garden-card-border);
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
+    color: var(--garden-card-text);
 }
 
 /* Header within the card */
 .account-header {
-    background-image: var(--header-cont-bg);
-    padding: 3rem;
+    background-color: var(--garden-card-title-bg);
+    padding: 2rem 3rem;
     display: flex;
     align-items: center;
+    justify-content: center;
+    border-bottom: var(--garden-card-border);
 }
 
 .main-title {
     margin: 0;
-    color: var(--general-font-color);
-    font-size: clamp(2rem, 4vw, 4rem);
-    text-shadow: rgba(17, 26, 4, 0.4) 2px 2px;
-    letter-spacing: 3px;
-    font-weight: bolder;
+    color: var(--garden-card-title);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Sidebar and Content wrapper */
@@ -60,27 +75,49 @@ body {
     min-height: 500px;
 }
 
-/* Sidebar styling (First version's logic) */
+/* Sidebar styling */
 .account-sidebar {
     width: 250px;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.2); /* Darker backdrop */
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-right: var(--garden-card-border);
 }
 
 .account-sidebar-item {
     padding: 1rem;
-    margin-bottom: 0.8rem;
-    color: var(--text-green);
-    font-family: 'Courier New', Courier, monospace;
+    color: var(--garden-card-text);
+    font-family: var(--font-data);
     font-weight: bold;
-    border-radius: 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 1rem;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    background-color: rgba(255,255,255,0.05);
+    text-align: center;
+    border: 1px solid transparent;
 }
 
 .account-sidebar-item:hover {
-    transform: translateX(10px);
-    color: white;
+    background-color: var(--general-btns-bg);
+    color: var(--general-btns-font);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.account-sidebar-item:last-child {
+    margin-top: auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.account-sidebar-item:last-child:hover {
+    background: transparent;
+    transform: none;
+    box-shadow: none;
 }
 
 #top-navbar {
@@ -205,38 +242,46 @@ body {
 #darkmode.dark-active #dark-icon {opacity: 0;}
 #darkmode.dark-active #light-icon {opacity: 1;}
 
-/* Logout Button (Using your pot-brown) */
+/* Logout Button */
 #logout_btn {
     width: 100%;
-    background-color: var(--pot-brown);
+    background-color: #690B22;
     color: white;
     border: none;
-    padding: 0.8rem;
+    padding: 1rem;
     border-radius: 1rem;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font-data);
+    font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-
+    transition: all 0.2s ease;
 }
 
 #logout_btn:hover {
-    letter-spacing: 2px;
+    background-color: #f8d6d6;
+    color: #0f0101;
+    letter-spacing: 1px;
 }
 
-/* Main Display (Glassmorphism from first version) */
+/* Main Display */
 .account-main-display {
     flex-grow: 1;
     padding: 3rem;
-    background: rgba(255, 255, 255, 0.05); /* Very subtle glass effect */
-    backdrop-filter: blur(5px);
-    color: var(--text-green);
-    font-family: 'Courier New', Courier, monospace;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--garden-card-text);
+    font-family: var(--font-data);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .card-description {
     line-height: 1.6;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    background-color: rgba(0,0,0,0.3);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin: 0;
 }
 
 /* Mobile Responsiveness */
@@ -246,9 +291,7 @@ body {
     }
     .account-sidebar {
         width: 100%;
-        box-sizing: border-box;
-    }
-    .main-account-card {
-        border-radius: 2rem;
+        border-right: none;
+        border-bottom: var(--garden-card-border);
     }
 }

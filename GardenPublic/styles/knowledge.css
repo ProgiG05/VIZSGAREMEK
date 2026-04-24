@@ -1,5 +1,5 @@
 :root {
-    --body-bg: linear-gradient(to bottom, #b2cd8f , #384d28 );
+    --body-bg: #b2cd8f;
     --header-cont-bg: linear-gradient(to left, #364d26,#92ac70);
     --card-cont-bg: linear-gradient(to right, #364d26,#92ac70);
     --general-font-color:#060b04;
@@ -22,15 +22,19 @@
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 body.dark-theme{
-    --body-bg: linear-gradient(to bottom, #677D6A, #1A3636);
-    --navbarBtn-bg: #515e4aee;
+    --body-bg: #273220;
+    --navbarBtn-bg: #121e0bee;
     --navbarBtn-font-color:rgb(255, 255, 255);
-    --navbarBtn-hover-bg: #16220e;
+    --navbarBtn-hover-bg: #030502;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
+
+    --header-cont-bg: linear-gradient(to left, #222e1aff,#495f33ff);
+    --card-cont-bg: linear-gradient(to right, #222e1aff,#495f33ff);
+    --general-font-color:#ffffff;
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 body {
-    background-image: var(--body-bg);
+    background: var(--body-bg);
     transition: all 0.2s ease;
     height: 100%;
     width: 100%;
