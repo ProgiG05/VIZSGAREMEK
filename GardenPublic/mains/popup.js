@@ -1,4 +1,4 @@
-export function showPopup(content, title, confirmAction, cancelAction) {
+export function showPopup(content, title) {
     const overlay = document.createElement('div');
     overlay.setAttribute('class', 'popup-overlay');
 

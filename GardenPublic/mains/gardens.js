@@ -2,7 +2,7 @@ import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
 import { getToken, getUser, apiFetch } from './api.js';
-import { showPopup, showConfirm } from './popup.js';
+import { showAlert, showConfirm } from './popup.js';
 
 const gardensContainer = document.getElementById("gardens-container");
 const token = getToken();
@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
-    const popup = document.getElementById("popup");
-
-    const user = getUser();
 
     // Fetch plants first as they are needed for both real and example gardens
     const plantsResponse = await fetch("/api/plants", {

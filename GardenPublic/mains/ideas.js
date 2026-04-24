@@ -1,6 +1,7 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
+import { showAlert, showConfirm } from './popup.js';
 
 const token = localStorage.getItem("token");
 
@@ -180,7 +181,7 @@ document.getElementById("showSearch").addEventListener("click", () => {
 document.getElementById("searchBtn").addEventListener("click", async (e) => {
     e.preventDefault()
     const searchValue = document.getElementById("searchBar").value.toLowerCase();
-    if (searchValue === "") {alert("Searchbar is empty")}
+    if (searchValue === "") {showAlert("Searchbar is empty", "Error!")}
     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
     IdeasCardContainer.innerHTML = ``
     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
