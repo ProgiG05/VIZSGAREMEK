@@ -2,8 +2,6 @@ import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
 import { getToken, getUser, apiFetch } from './api.js';
-// import { showPopup } from './popup.js';
-
 
 const gardensContainer = document.getElementById("gardens-container");
 const token = getToken();
@@ -15,9 +13,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const user = getUser();
 
+    // Fetch plants first as they are needed for both real and example gardens
+    const plantsResponse = await fetch("/api/plants", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    });
+    const plants = await plantsResponse.json();
+
     if (!token) {
         const infoCont = document.getElementById("information-cont")
-
+        
         document.getElementById("newgarden_btn").style.display = "none";
         document.getElementById("checkout_btn").style.display = "none";
 
@@ -33,153 +38,168 @@ document.addEventListener("DOMContentLoaded", async () => {
         loginBtn.style.display = "block"
         loginBtn.addEventListener("click", () => { window.location.href = "/sites/login.html"; })
         infoCont.appendChild(loginBtn);
+
+        const exText = document.createElement("h2")
+        exText.textContent = "You can see an example garden below.";
+        exText.style.textAlign = "center";
+        exText.style.width = "100%";
+        exText.style.marginTop = "2rem";
+
+        gardensContainer.appendChild(exText);
+        
+        // Example garden data
+        const exGarden = {
+            id: 0,
+            garden_name: "BetterStay",
+            garden_content: "+,+,+,+,0,0,0,0,0,+,+,+,+;+,+,+,+,0,+,+,+,0,+,+,+,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,+,+,+,+,+,+,+,+,+,+,+,+"
+        }
+        
+        renderGarden(exGarden, plants, true);
         return;
     }
 
-    // 1. Fetch data
+    // --- LOGGED IN CASE ---
 
     const gardensResponse = await apiFetch("/api/gardens", {
         method: "GET"
     });
     if (!gardensResponse) return;
     const gardens = await gardensResponse.json();
-    console.log("Gardens:", gardens)
 
-    const plantsResponse = await fetch("/api/plants", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-    });
-    const plants = await plantsResponse.json();
-    console.log("Plants:", plants)
-
-    // 2. Create Global UI Elements (Buttons & Selection Area)
     document.getElementById("newgarden_btn").addEventListener("click", () => {
         window.location.href = "/sites/newgarden.html";
     })
     document.getElementById("checkout_btn").addEventListener("click", () => {
-        document.getElementById("gardens-container").scrollIntoView({ behavior: "smooth" })
+        const gardensCont = document.getElementById("gardens-container");
+        if (gardensCont) {
+            gardensCont.scrollIntoView({ behavior: "smooth" });
+        }
     })
 
-    // Insert controls before the gardens container
-
-    // 3. Render Gardens
     gardens.forEach(garden => {
-        const splittedContent = garden.garden_content.split(";");
+        renderGarden(garden, plants, false);
+    });
+});
 
-        // 1. Calculate stats
-        let plantCellsCount = 0;
-        let disabledCellsCount = 0;
-        let emptyCellsCount = 0;
-        const usedPlants = new Set();
+async function DeleteGarden(id) {
+    if (!confirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.")) return;
+    
+    const resp = await apiFetch(`/api/gardens/${id}`, {
+        method: "DELETE"
+    });
+    if (resp && resp.ok) {
+        window.location.reload();
+    }
+}
 
-        splittedContent.forEach(row => {
-            if (row === "") return;
-            row.split(",").forEach(col => {
-                if (col === "") { emptyCellsCount++; }
-                else if (col === "+") { disabledCellsCount++; }
-                else {
-                    plantCellsCount++;
+function renderGarden(garden, plants, isExample = false) {
+    const splittedContent = garden.garden_content.split(';');
 
-                    const plantId = parseInt(col);
-                    const plant = plants.find(p => p.id === plantId);
+    let plantCellsCount = 0;
+    let disabledCellsCount = 0;
+    let emptyCellsCount = 0;
+    const usedPlants = new Set();
 
-                    if (plant) { usedPlants.add(plant.common_name); }
-                }
-            });
+    splittedContent.forEach(row => {
+        if (row === "") return;
+        row.split(",").forEach(col => {
+            if (col === "") { emptyCellsCount++; }
+            else if (col === "+") { disabledCellsCount++; }
+            else {
+                plantCellsCount++;
+                const plantId = parseInt(col);
+                const plant = plants.find(p => p.id === plantId);
+                if (plant) { usedPlants.add(plant.common_name); }
+            }
         });
+    });
 
-        const maxCells = plantCellsCount + disabledCellsCount + emptyCellsCount;
+    const maxCells = plantCellsCount + disabledCellsCount + emptyCellsCount;
 
-        const gardenCard = document.createElement("div");
-        gardenCard.className = "garden-card";
-        gardenCard.id = "garden" + garden.id;
+    const gardenCard = document.createElement("div");
+    gardenCard.className = "garden-card";
+    gardenCard.id = "garden" + garden.id;
 
-        const gardenTitle = document.createElement("h2");
-        gardenTitle.className = "garden-name";
-        gardenTitle.textContent = garden.garden_name;
-        gardenCard.appendChild(gardenTitle);
+    const gardenTitle = document.createElement("h2");
+    gardenTitle.className = "garden-name";
+    gardenTitle.textContent = garden.garden_name;
+    gardenCard.appendChild(gardenTitle);
 
-        // --- CREATE CARD BODY ---
-        const cardBody = document.createElement("div");
-        cardBody.className = "garden-card-body";
+    const cardBody = document.createElement("div");
+    cardBody.className = "garden-card-body";
 
-        // Left Side: Plant List
-        const plantListCont = document.createElement("div");
-        plantListCont.className = "plant-list-cont";
-        const plantListTitle = document.createElement("h3");
-        plantListTitle.textContent = "Planted List";
-        plantListCont.appendChild(plantListTitle);
+    // Left Side: Plant List
+    const plantListCont = document.createElement("div");
+    plantListCont.className = "plant-list-cont";
+    const plantListTitle = document.createElement("h3");
+    plantListTitle.textContent = "Plant List";
+    plantListCont.appendChild(plantListTitle);
 
-        if (usedPlants.size > 0) {
-            const ul = document.createElement("ul");
-            usedPlants.forEach(plantName => {
-                const li = document.createElement("li");
-                li.textContent = plantName;
-                ul.appendChild(li);
-            });
-            plantListCont.appendChild(ul);
-        } else {
-            const emptyText = document.createElement("span");
-            emptyText.textContent = "No plants.";
-            plantListCont.appendChild(emptyText);
-        }
-
-        // Middle: Table Container
-        const tableContainer = document.createElement("div");
-        tableContainer.className = "table-cont";
-        tableContainer.appendChild(CreateTable(splittedContent, plants));
-
-        // Right Side: Chart Container
-        const chartCont = document.createElement("div");
-        chartCont.className = "chart-cont";
-
-        const stats = [
-            { label: "Plant cell", value: plantCellsCount },
-            { label: "Disabled cell", value: disabledCellsCount },
-            { label: "Empty cell", value: emptyCellsCount }
-        ];
-
-        stats.forEach(stat => {
-            const row = document.createElement("div");
-            row.className = "chart-row";
-
-            const label = document.createElement("div");
-            label.className = "chart-label";
-            label.textContent = stat.label;
-
-            const barCont = document.createElement("div");
-            barCont.className = "chart-bar-cont";
-
-            const bar = document.createElement("div");
-            bar.className = "chart-bar";
-            bar.style.width = maxCells > 0 ? `${(stat.value / maxCells) * 100}%` : "0%";
-
-            const value = document.createElement("div");
-            value.className = "chart-value";
-            value.textContent = stat.value;
-
-            barCont.appendChild(bar);
-            row.appendChild(label);
-            row.appendChild(barCont);
-            row.appendChild(value);
-            chartCont.appendChild(row);
+    if (usedPlants.size > 0) {
+        const ul = document.createElement("ul");
+        usedPlants.forEach(plantName => {
+            const li = document.createElement("li");
+            li.textContent = plantName;
+            ul.appendChild(li);
         });
+        plantListCont.appendChild(ul);
+    } else {
+        const emptyText = document.createElement("span");
+        emptyText.textContent = "No plants.";
+        plantListCont.appendChild(emptyText);
+    }
 
-        // Assemble Card Body
-        cardBody.appendChild(plantListCont);
-        cardBody.appendChild(tableContainer);
-        cardBody.appendChild(chartCont);
-        gardenCard.appendChild(cardBody);
+    // Middle: Table Container
+    const tableContainer = document.createElement("div");
+    tableContainer.className = "table-cont";
+    tableContainer.appendChild(CreateTable(splittedContent, plants));
 
+    // Right Side: Chart Container
+    const chartCont = document.createElement("div");
+    chartCont.className = "chart-cont";
+
+    const stats = [
+        { label: "Planted cell", value: plantCellsCount },
+        { label: "Disabled cell", value: disabledCellsCount },
+        { label: "Empty cell", value: emptyCellsCount }
+    ];
+
+    stats.forEach(stat => {
+        const row = document.createElement("div");
+        row.className = "chart-row";
+
+        const label = document.createElement("div");
+        label.className = "chart-label";
+        label.textContent = stat.label;
+
+        const barCont = document.createElement("div");
+        barCont.className = "chart-bar-cont";
+
+        const bar = document.createElement("div");
+        bar.className = "chart-bar";
+        bar.style.width = maxCells > 0 ? `${(stat.value / maxCells) * 100}%` : "0%";
+
+        const value = document.createElement("div");
+        value.className = "chart-value";
+        value.textContent = stat.value;
+
+        barCont.appendChild(bar);
+        row.appendChild(label);
+        row.appendChild(barCont);
+        row.appendChild(value);
+        chartCont.appendChild(row);
+    });
+
+    cardBody.appendChild(plantListCont);
+    cardBody.appendChild(tableContainer);
+    cardBody.appendChild(chartCont);
+    gardenCard.appendChild(cardBody);
+
+    if (!isExample) {
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "✖";
         deleteBtn.className = "delete_btn";
-        deleteBtn.addEventListener("click", () => {
-            // showPopup("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.");
-            if (confirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.")) {
-                DeleteGarden(garden.id);
-            }
-        });
+        deleteBtn.addEventListener("click", () => DeleteGarden(garden.id));
         gardenCard.appendChild(deleteBtn);
 
         const editBtn = document.createElement("button");
@@ -191,20 +211,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
         gardenCard.appendChild(editBtn);
-
-
-        gardensContainer.appendChild(gardenCard);
-    });
-});
-
-async function DeleteGarden(id) {
-    const resp = await apiFetch(`/api/gardens/${id}`, {
-        method: "DELETE"
-    });
-    if (resp) {
-        const data = await resp.json();
-        window.location.reload();
     }
+
+    gardensContainer.appendChild(gardenCard);
 }
 
 function CreateTable(splittedContent, plants) {
@@ -239,49 +248,32 @@ function CreateTable(splittedContent, plants) {
                     const plant = plants.find(p => p.id === plantId);
                     tableColumn.className = "plant-cell";
                     const insidePicture = document.createElement("img")
-                    switch (plant.type) {
-                        case "fruits":
-
-                            insidePicture.src = paths.fv;
-                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
-                            break;
-                        case "vegetables":
-                            
-                            insidePicture.src = paths.fv;
-                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
-                            break;
-                        case "herbs":
-
-                            insidePicture.src = paths.herbs;
-                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
-                            break;
-                        case "succulents":
-  
-                            insidePicture.src = paths.sgf;
-                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
-                            break;
-                        case "grass":
-  
-                            insidePicture.src = paths.sgf;
-                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
-                            break;
-                        case "ferns":
-  
-                            insidePicture.src = paths.sgf;
-                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
-                            break;
-                        case "flowers":
-  
-                            insidePicture.src = paths.flowers;
-                            insidePicture.alt = plant ? plant.common_name : "Unknown"
-                            break;
-                        case "trees":
-
-                            insidePicture.src = paths.trees;
-                            insidePicture.alt = plant ? plant.common_name : "Unknown"
-                            break;
-                        default:
-                            break;
+                    if (plant) {
+                        switch (plant.type) {
+                            case "fruits":
+                            case "vegetables":
+                                insidePicture.src = paths.fv;
+                                break;
+                            case "herbs":
+                                insidePicture.src = paths.herbs;
+                                break;
+                            case "succulents":
+                            case "grass":
+                            case "ferns":
+                                insidePicture.src = paths.sgf;
+                                break;
+                            case "flowers":
+                                insidePicture.src = paths.flowers;
+                                break;
+                            case "trees":
+                                insidePicture.src = paths.trees;
+                                break;
+                            default:
+                                break;
+                        }
+                        insidePicture.alt = plant.common_name;
+                    } else {
+                        insidePicture.alt = "";
                     }
                     tableColumn.appendChild(insidePicture)
                     break;
