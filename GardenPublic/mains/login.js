@@ -1,3 +1,4 @@
+import { showAlert } from "./popup.js";
 
 document.querySelector('.login-card').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -6,7 +7,7 @@ document.querySelector('.login-card').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     if (!username || !password) {
-        alert('Please fill in both fields.');
+        showAlert('Please fill in both fields.', "Error!");
         return;
     }
 
@@ -24,10 +25,10 @@ document.querySelector('.login-card').addEventListener('submit', async (e) => {
             localStorage.setItem('token', data.token);
             window.location.href = '/index.html';
         } else {
-            alert(data.message || 'Login failed. Please check your credentials.');
+            showAlert(data.message || 'Login failed. Please check your credentials.', "Error!");
         }
     } catch (error) {
         console.error('Login request failed:', error.message);
-        alert('Could not connect to the server. Please try again later.');
+        showAlert('Could not connect to the server. Please try again later.', "Error!");
     }
 });

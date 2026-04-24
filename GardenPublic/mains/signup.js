@@ -1,3 +1,4 @@
+import { showAlert } from "./popup.js";
 
 document.querySelector('.signup-card').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -6,7 +7,7 @@ document.querySelector('.signup-card').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     if (!username || !password) {
-        alert('Please fill in both fields.');
+        showAlert('Please fill in both fields.', "Error!");
         return;
     }
 
@@ -22,10 +23,10 @@ document.querySelector('.signup-card').addEventListener('submit', async (e) => {
         if (data.success) {
             window.location.href = '../sites/login.html';
         } else {
-            alert(data.message || 'Registration failed. Please try a different username.');
+            showAlert(data.message || 'Registration failed. Please try a different username.', "Error!");
         }
     } catch (error) {
         console.error('Registration request failed:', error.message);
-        alert('Could not connect to the server. Please try again later.');
+        showAlert('Could not connect to the server. Please try again later.', "Error!");
     }
 });

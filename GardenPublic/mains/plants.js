@@ -1,5 +1,6 @@
 import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
 import { getToken, getUser, apiFetch } from './api.js';
+import { showAlert, showConfirm } from './popup.js';
 
 const token = getToken();
 
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (SavedPlantsGrouping) {
         SavedPlantsGrouping.addEventListener('click', async () => {
             if (!token || !user) {
-                alert("Please log in to view your saved plants.");
+                showAlert("Please log in to view your saved plants.", "Not logged in!");
                 return;
             }
 
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 savedPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant.plant_id)));
             } catch (error) {
                 console.error("Failed to load saved plants:", error.message);
-                alert("Could not load saved plants. Please try again later.");
+                showAlert("Could not load saved plants. Please try again later.", "Error!");
             }
         });
     }
@@ -197,7 +198,7 @@ function createPlantCards(plant) {
 
 async function toggleSaveState(buttonElement, plantId) {
     if (!token) {
-        alert("Please log in to save plants.");
+        showAlert("Please log in to save plants.", "Not logged in!");
         return;
     }
 
@@ -208,7 +209,7 @@ async function toggleSaveState(buttonElement, plantId) {
     } catch (error) {
         console.error("Failed to save plant:", error.message);
         buttonElement.classList.toggle('saved'); // Revert toggle on failure
-        alert("Could not save plant. Please try again.");
+        showAlert("Could not save plant. Please try again.", "Error!");
     }
 }
 
@@ -381,6 +382,6 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
         clearForm();
     } catch (error) {
         console.error("Search failed:", error.message);
-        alert("Search failed. Please try again later.");
+        showAlert("Search failed. Please try again later.", "Error!");
     }
 });
