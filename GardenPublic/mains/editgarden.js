@@ -4,18 +4,19 @@ import { setupLoginState } from './navbar.js';
 import { getToken, apiFetch } from './api.js';
 
 const handler = document.getElementById("handler");
-
+const RowColumnManageSidePanel = document.getElementById("RowColumnManageSidePanel")
 
 document.addEventListener("DOMContentLoaded", async () => {
-    setupNavbar();
 
+    setupNavbar();
     const token = getToken();
+
     if (!token) {
         window.location.href = "/sites/login.html";
         return;
     }
 
-    // ####### GET GARDEN ID FROM URL #######
+    // ------------- GET GARDEN ID FROM URL --------------------------------------------------
     const urlparams = new URLSearchParams(window.location.search)
     const gardenId = urlparams.get("id");
     if (!gardenId) {
@@ -23,11 +24,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "/gardens.html";
         return;
     }
+    // ---------------------------------------------------------------------------------------
 
-    // ####### FETCH DATA #######
-    const gardenResp = await apiFetch(`/api/gardens/${gardenId}`, {
-        method: "GET"
-    });
+
+    // ------------- FETCH DATA --------------------------------------------------
+    const gardenResp = await apiFetch(`/api/gardens/${gardenId}`, { method: "GET"});
     if (!gardenResp) return;
     // Handle err403 or err404 
     if (!gardenResp.ok) {
@@ -36,76 +37,132 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "/gardens.html";
         return;
     }
-
+    
     const gardenArray = await gardenResp.json();
-
     if (!gardenArray || (Array.isArray(gardenArray) && gardenArray.length === 0)) {
         alert("Garden not found!");
         window.location.href = "/gardens.html";
         return;
     }
-
     const plantsResp = await fetch(`/api/plants`, {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     });
-    const plants = await plantsResp.json();
+    // ---------------------------------------------------------------------------------------
 
-    // ####### SETUP UI #######
-    const controls = loadContents(plants);
+
+    // ------------- SETUP UI & INITIAL RENDER --------------------------------------------------
+    const plants = await plantsResp.json();
     const editGardenContainer = document.getElementById("editGardenContainer");
-    
-    // ####### INITIAL RENDER #######
+    const controls = loadContents(plants);
+    // ------------------------------------------------------------------------
     EditGarden(gardenArray, plants, editGardenContainer, controls);
-    editGardenContainer.appendChild(controls.container);
+    // ---------------------------------------------------------------------------------------
 
 });
 
-//#########################################################
 
-// ####### LOAD CONTENTS #######
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+// ------------- LOAD CONTENTS --------------------------------------------------
 function loadContents(plants) {
     // Containers
     const controlsContainer = document.createElement("div");
     controlsContainer.id = "controls-container";
+    controlsContainer.className = "controls-container";
     controlsContainer.style.display = "none"; // Hidden until a cell is selected
 
     // Disabled button
     const disablecellbtn = document.createElement("button");
     disablecellbtn.textContent = "Empty Cell";
     disablecellbtn.className = "disablecellbtn";
+    controlsContainer.appendChild(disablecellbtn);
 
     // Empty button
     const emptycellbtn = document.createElement("button");
     emptycellbtn.textContent = "Disable Cell";
     emptycellbtn.className = "emptycellbtn";
+    controlsContainer.appendChild(emptycellbtn);
 
     // Plant button
     const plantcellbtn = document.createElement("button");
     plantcellbtn.textContent = "Plant Cell";
     plantcellbtn.className = "plantcellbtn";
+    controlsContainer.appendChild(plantcellbtn);
 
     // Plant selection area
     const plantselection = document.createElement("div");
     plantselection.id = "plantselection";
-    // plantselection.style.display = "none"; // Handled by CSS positioning now
 
-    // Populate plants for selection
+    // Search bar
+    const searchBar = document.createElement("input");
+    searchBar.type = "text";
+    searchBar.className = "plant-search-bar";
+    searchBar.placeholder = "Search by common name...";
+    plantselection.appendChild(searchBar);
+
+    // Columns container
+    const columnsContainer = document.createElement("div");
+    columnsContainer.className = "plant-columns-container";
+    plantselection.appendChild(columnsContainer);
+
+    // Group plants by type
+    const plantsByType = {};
     plants.forEach(plant => {
-        const card = document.createElement("div");
-        card.className = "plant-card";
-        card.dataset.id = plant.id;
-        card.innerHTML = `
-            <p><strong>${plant.common_name}</strong></p>
-            <p><em>${plant.botanical_name}</em></p>
-            <p>${plant.id}</p>
-        `;
-        plantselection.appendChild(card);
+        const type = plant.type || "Other";
+        if (!plantsByType[type]) {
+            plantsByType[type] = [];
+        }
+        plantsByType[type].push(plant);
     });
 
-    controlsContainer.appendChild(emptycellbtn);
-    controlsContainer.appendChild(disablecellbtn);
-    controlsContainer.appendChild(plantcellbtn);
+    const allCards = [];
+    Object.keys(plantsByType).forEach(type => {
+        const typeColumn = document.createElement("div");
+        typeColumn.className = "plant-type-column";
+
+        const typeTitle = document.createElement("h3");
+        typeTitle.className = "plant-type-title";
+        typeTitle.textContent = type;
+        typeColumn.appendChild(typeTitle);
+
+        plantsByType[type].forEach(plant => {
+            const card = document.createElement("div");
+            card.className = "plant-card";
+            card.dataset.id = plant.id;
+            
+            const pCommonName = document.createElement("p")
+            pCommonName.setAttribute("class","plant-selection-card-text")
+            pCommonName.textContent = `${plant.common_name}`
+            card.appendChild(pCommonName)
+
+            const pBotamicalName = document.createElement("p")
+            pBotamicalName.setAttribute("class","plant-selection-card-text")
+            pBotamicalName.textContent = `${plant.botanical_name}`
+            card.appendChild(pBotamicalName)
+
+            allCards.push({card, commonName: plant.common_name.toLowerCase()});
+            typeColumn.appendChild(card);
+        });
+        
+        columnsContainer.appendChild(typeColumn);
+    });
+
+    // Search functionality
+    searchBar.addEventListener("input", (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        allCards.forEach(item => {
+            if (item.commonName.includes(searchTerm)) {
+                item.card.style.display = "block";
+            } else {
+                item.card.style.display = "none";
+            }
+        });
+    });
+
     controlsContainer.appendChild(plantselection);
 
     return {
@@ -117,12 +174,18 @@ function loadContents(plants) {
     };
 }
 
-// ####### CREATE TABLE #######
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+// ------------- CREATE TABLE --------------------------------------------------
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
     
-    // ####### RENDER TABLE #######
+    // ------------- RENDER TABLE --------------------------------------------------
     splittedContent.forEach(row => {
         const columns = row.split(",");
         const tableRow = document.createElement("tr");
@@ -152,7 +215,13 @@ function CreateTable(splittedContent, plants) {
     return table;
 }
 
-// ####### EDIT GARDEN #######
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+// ------------- EDIT GARDEN --------------------------------------------------
 function EditGarden(garden, plants, parentContainer, controls) {
     const gardenCard = document.createElement("div");
     gardenCard.className = "garden-card";
@@ -164,45 +233,36 @@ function EditGarden(garden, plants, parentContainer, controls) {
     gardenTitle.contentEditable = "true";
     gardenCard.appendChild(gardenTitle);
 
-    // const gardcontent = document.createElement('p')
-    // gardcontent.textContent = garden.garden_content
-    // gardenCard.appendChild(gardcontent)
 
-    // ####### RENDER TABLE #######
+    // ------------- RENDER TABLE --------------------------------------------------
     const splittedContent = garden.garden_content.split(";");
     const table = CreateTable(splittedContent, plants);
-    gardenCard.appendChild(table);
 
-    // ####### FOOTER BUTTONS #######
-    const footer = document.createElement("div");
-    footer.className = "card-footer";
-    footer.style.marginTop = "1rem";
-    footer.style.display = "flex";
-    footer.style.gap = "1rem";
-
-    const saveBtn = document.createElement("button");
-    saveBtn.textContent = "Save Changes";
-    saveBtn.className = "save_btn";
+    const tableAndControlsWrapper = document.createElement("div");
+    tableAndControlsWrapper.className = "table-and-controls-wrapper";
+    tableAndControlsWrapper.appendChild(table);
+    tableAndControlsWrapper.appendChild(controls.container);
     
+    // ------------- ACTION BUTTONS (Above Table) --------------------------------------------------
+    const actionButtonsContainer = document.createElement("div");
+    actionButtonsContainer.className = "action-buttons";
+    actionButtonsContainer.style.display = "flex";
+    actionButtonsContainer.style.gap = "1rem";
+    actionButtonsContainer.style.justifyContent = "center";
+    actionButtonsContainer.style.width = "100%";
+    actionButtonsContainer.style.marginBottom = "1rem";
+
     const backBtn = document.createElement("button");
     backBtn.textContent = "Back to List";
     backBtn.className = "back_btn";
     backBtn.onclick = () => {if (confirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/gardens.html";}}
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete Garden";
-    deleteBtn.className = "delete_btn";
-    deleteBtn.onclick = async () => {
-        if (confirm("Are you sure you want to delete this garden?")) {
-            await DeleteGarden(garden.id);
-            window.location.href = "/sites/gardens.html";
-        }
-    };
+    actionButtonsContainer.appendChild(backBtn);
 
     const manageRowsColumnsBtn = document.createElement("button");
     manageRowsColumnsBtn.textContent = "Manage Rows/Columns";
     manageRowsColumnsBtn.className = "manage_rows_columns_btn";
     manageRowsColumnsBtn.onclick = () => ManageRowsColumns(garden, plants, parentContainer, controls);
+    actionButtonsContainer.appendChild(manageRowsColumnsBtn);
 
     const resetBtn = document.createElement("button");
     resetBtn.textContent = "Reset Garden";
@@ -212,26 +272,45 @@ function EditGarden(garden, plants, parentContainer, controls) {
             window.location.reload();
         }
     };
+    actionButtonsContainer.appendChild(resetBtn);
 
-    footer.appendChild(saveBtn);
-    footer.appendChild(backBtn);
-    footer.appendChild(deleteBtn);
-    footer.appendChild(manageRowsColumnsBtn);
-    footer.appendChild(resetBtn);
-    gardenCard.appendChild(footer);
+    gardenCard.appendChild(actionButtonsContainer);
+    gardenCard.appendChild(tableAndControlsWrapper);
+
+    // ------------- TOP RIGHT BUTTONS --------------------------------------------------
+    const topRightActions = document.createElement("div");
+    topRightActions.className = "top-right-actions";
+
+    const saveBtn = document.createElement("button");
+    saveBtn.title = "Save Changes";
+    saveBtn.className = "save_btn";
+    saveBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`;
+    topRightActions.appendChild(saveBtn);
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.title = "Delete Garden";
+    deleteBtn.className = "delete_btn";
+    deleteBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`;
+    deleteBtn.onclick = async () => {
+        if (confirm("Are you sure you want to delete this garden?")) {
+            await DeleteGarden(garden.id);
+            window.location.href = "/sites/gardens.html";
+        }
+    };
+    topRightActions.appendChild(deleteBtn);
+    
+    gardenCard.appendChild(topRightActions);
 
     parentContainer.appendChild(gardenCard);
 
-    // Interactive Logic
+    // ------------- INTERACTIVE LOGIC --------------------------------------------------
     const getActiveCell = () => table.querySelector('td.active');
 
     table.addEventListener('click', (e) => {
         const cell = e.target.closest('td');
         if (cell) {
             const currentActive = getActiveCell();
-            if (currentActive) {
-                currentActive.classList.remove('active');
-            }
+            if (currentActive) {currentActive.classList.remove('active');}
             cell.classList.add('active');
             showControls();
         }
@@ -344,20 +423,27 @@ async function SaveGarden(garden) {
 }
 
 async function DeleteGarden(id) {
-    const resp = await apiFetch(`/api/gardens/${id}`, {
-        method: "DELETE"
-    });
-    if (resp) {
-        return resp.json();
-    }
+    const resp = await apiFetch(`/api/gardens/${id}`, {method: "DELETE"});
+    if (resp) {return resp.json();}
     return null;
 }
 
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
 function ManageRowsColumns(garden, plants, parentContainer, controls) {
-    handler.innerHTML = "";
+    const sidePanel = document.getElementById("RowColumnManageSidePanel");
+    sidePanel.innerHTML = "";
+    sidePanel.classList.add("open");
+
     const ManageRowsColumnContainer = document.createElement("div");
     ManageRowsColumnContainer.id = "manage-rows-columns-container";
-    handler.appendChild(ManageRowsColumnContainer);
+    sidePanel.appendChild(ManageRowsColumnContainer);
+
+    // ---------- Adding Rows and Columns ----------
 
     const addRowsColumnsForm = document.createElement("div");
     addRowsColumnsForm.id = "addrowscolumns-form";
@@ -387,11 +473,9 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     addRowsColumnsForm.appendChild(addColumnsInput);
 
     const cancelBtn = document.createElement("button");
-    cancelBtn.textContent = "Cancel";
+    cancelBtn.textContent = "Close";
     cancelBtn.className = "cancel_btn";
-    cancelBtn.onclick = () => {
-        ManageRowsColumnContainer.style.display = "none";
-    }
+    cancelBtn.onclick = () => { sidePanel.classList.remove("open"); }
 
     const addRowsColumnsBtn = document.createElement("button");
     addRowsColumnsBtn.textContent = "Add Rows/Columns";
@@ -425,15 +509,14 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
         }
 
         garden.garden_content = rows.join(";");
-        console.log(garden.garden_content);
+
         // Re-render the garden
         parentContainer.innerHTML = "";
         EditGarden(garden, plants, parentContainer, controls);
-        parentContainer.appendChild(controls.container);
     }
     addRowsColumnsForm.appendChild(addRowsColumnsBtn);
 
-
+    // ---------- Removing Rows and Columns ----------
 
     const removeRowsColumnsForm = document.createElement("div");
     removeRowsColumnsForm.id = "removerowscolumns-form";
@@ -459,7 +542,6 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             // Re-render the garden
             parentContainer.innerHTML = "";
             EditGarden(garden, plants, parentContainer, controls);
-            parentContainer.appendChild(controls.container);
         }
     }
     removeRowsColumnsForm.appendChild(removeLastRowBtn);
@@ -495,11 +577,9 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             // Re-render the garden
             parentContainer.innerHTML = "";
             EditGarden(garden, plants, parentContainer, controls);
-            parentContainer.appendChild(controls.container);
         }
     }
     removeRowsColumnsForm.appendChild(removeLastColumnBtn);
 
     ManageRowsColumnContainer.appendChild(cancelBtn);
 }
-    

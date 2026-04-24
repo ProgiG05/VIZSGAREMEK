@@ -39,13 +39,13 @@ body {
 }
 
 #editGardenContainer {
-    width: 100%;
+    width: 98%;
     height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    max-width: 1400px;
+    max-width: 1800px;
     margin: 0;
 }
 
@@ -54,16 +54,17 @@ body {
     color: var(--garden-card-text);
     border-radius: 1.5rem;
     padding: 2rem;
-    width: 90%;
+    width: 95%;
     height: fit-content;
     min-height: 80%;
-    max-width: 1200px;
+    max-width: 1600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     border: var(--garden-card-border);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
 .garden-name {
@@ -95,8 +96,8 @@ body {
 }
 
 .garden-table td {
-    width: clamp(30px, 2vw, 60px);
-    height: clamp(30px, 4vh, 60px);
+    width: clamp(40px, 4vw, 80px);
+    height: clamp(40px, 4vh, 80px);
     border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
@@ -140,53 +141,143 @@ body {
     z-index: 5;
 }
 
-/* Controls Interface */
-#controls-container {
+.controls-container {
     background-color: rgba(0, 0, 0, 0.2);
     padding: 1.5rem;
     border-radius: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+.table-and-controls-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.top-right-actions {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.top-right-actions button {
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+}
+
+.top-right-actions svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* Plant Selection Area - Fixed at bottom */
 #plantselection {
     position: fixed;
-    bottom: -100%;
-    width: 100%;
-    max-height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 1200px;
+    max-height: 80vh;
     background: var(--garden-card-bg);
-    border-top: var(--garden-card-border);
+    border: var(--garden-card-border);
     padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1.2rem;
-    overflow-y: auto;
-    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
     z-index: 1000;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
-    border-radius: 2rem 2rem 0 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    border-radius: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.plant-search-bar {
+    width: 100%;
+    max-width: 600px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    border: none;
+    margin: 0 auto 1.5rem auto;
+    font-size: 1.1rem;
+    font-family: var(--font-data);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    outline: none;
+}
+
+.plant-columns-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+.plant-type-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 220px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.plant-type-column::-webkit-scrollbar {
+    width: 6px;
+}
+
+.plant-type-column::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
+.plant-type-title {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    color: #F1E3D3;
+    margin: 0 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(241, 227, 211, 0.3);
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 
 #plantselection.show {
-    bottom: 0;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
 }
 
 #plantselection .plant-card {
-    background-color: var(--main-cont-bg);
+    background-color: #f8f9fa;
     padding: 1rem;
     border-radius: 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
     border: 1px solid rgba(0,0,0,0.2);
-    color: var(--main-font-color);
+    color: #0b0e0a;
     font-family: var(--font-data);
     font-weight: bold;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #plantselection .plant-card:hover {
@@ -231,12 +322,33 @@ body {
 
 #manage-rows-columns-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 2rem;
     align-items: center;
     justify-content: center;
     padding: 1rem;
     background-color: transparent;
+}
+
+#RowColumnManageSidePanel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100vh;
+    background: var(--garden-card-bg);
+    z-index: 2000;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#RowColumnManageSidePanel.open {
+    right: 0;
 }
 
 /* Button Styling */
