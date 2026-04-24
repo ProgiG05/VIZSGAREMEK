@@ -63,6 +63,7 @@ exports.AddNewgarden = async (req, res) => {
         const garden = req.body;
         garden.user_id = req.user.id;
         const result = await GardenModel.AddNewgarden(garden);
+        console.log(`Garden created: "${garden.garden_name}" by user ${req.user.username}`);
         res.json(result);
     } catch (err) {
         console.error('Failed to create garden:', err.message);
@@ -91,6 +92,7 @@ exports.SavePlant = async (req, res) => {
         }
 
         const result = await GardenModel.SavePlant(userId, plant_id);
+        console.log(`Plant ${plant_id} saved by user ${req.user.username}`);
         res.json(result);
     } catch (err) {
         console.error('Failed to save plant:', err.message);
@@ -131,6 +133,7 @@ exports.DeleteGarden = async (req, res) => {
         const { id } = req.params;
         const userId = req.user.id;
         const result = await GardenModel.DeleteGarden(id, userId);
+        console.log(`Garden ${id} deleted by user ${req.user.username}`);
         res.json({ success: true, message: 'Garden deleted.', data: result });
     } catch (err) {
         console.error('Failed to delete garden:', err.message);
@@ -143,6 +146,7 @@ exports.UpdateGarden = async (req, res) => {
         const garden = req.body;
         const userId = req.user.id;
         const result = await GardenModel.UpdateGarden(garden, userId);
+        console.log(`Garden ${garden.id} updated by user ${req.user.username}`);
         res.json({ success: true, message: 'Garden updated.', data: result });
     } catch (err) {
         console.error('Failed to update garden:', err.message);
