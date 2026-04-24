@@ -27,7 +27,7 @@ function ShowAddGardenForm() {
             previewContainer.innerHTML = "";
             document.getElementById("garden-rows").value = "";
             document.getElementById("garden-columns").value = "";
-            document.getElementById("add-garden-form").scrollIntoView({ behavior: "smooth" });
+            window.scrollTo({top:0,behavior:"smooth"})
         });
 
         previewContainer.appendChild(previewGarden(gardenRows, gardenColumns));

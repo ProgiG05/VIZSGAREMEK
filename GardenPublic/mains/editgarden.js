@@ -141,7 +141,6 @@ function CreateTable(splittedContent, plants) {
                     const plant = plants.find(p => p.id === plantId);
                     tableColumn.className = "plant-cell";
                     tableColumn.textContent = plant ? plant.common_name : "Unknown";
-                    table.textContent += plant.type;
                     break;
             }
             tableRow.appendChild(tableColumn);

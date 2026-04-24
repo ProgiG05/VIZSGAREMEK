@@ -244,28 +244,43 @@ function CreateTable(splittedContent, plants) {
                     tableColumn.className = "plant-cell";
                     const insidePicture = document.createElement("img")
                     switch (plant.type) {
-                        case "fruits" || "vegetables":
-                            insidePicture.src = ""
+                        case "fruits":
+
+                            insidePicture.src = paths.fv;
+                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
+                            break;
+                        case "vegetables":
+                            
                             insidePicture.src = paths.fv;
                             insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
                             break;
                         case "herbs":
-                            insidePicture.src = ""
+
                             insidePicture.src = paths.herbs;
                             insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
                             break;
-                        case "succulents" || "grass" || "ferns":
-                            insidePicture.src = ""
+                        case "succulents":
+  
+                            insidePicture.src = paths.sgf;
+                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
+                            break;
+                        case "grass":
+  
+                            insidePicture.src = paths.sgf;
+                            insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
+                            break;
+                        case "ferns":
+  
                             insidePicture.src = paths.sgf;
                             insidePicture.alt = `${plant ? plant.common_name : "Unknown"}`
                             break;
                         case "flowers":
-                            insidePicture.src = ""
+  
                             insidePicture.src = paths.flowers;
                             insidePicture.alt = plant ? plant.common_name : "Unknown"
                             break;
                         case "trees":
-                            insidePicture.src = ""
+
                             insidePicture.src = paths.trees;
                             insidePicture.alt = plant ? plant.common_name : "Unknown"
                             break;

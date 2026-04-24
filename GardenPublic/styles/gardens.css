@@ -261,7 +261,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.4rem;
+    border-radius: 1rem;
     background-color: var(--garden-card-cell-cont-bg);
 }
 .garden-table {
@@ -462,3 +462,15 @@ body {
     text-align: left;
 }
 
+@media (max-width: 900px) {
+    .garden-card-body {
+        display: flex;
+        flex-direction: column;
+    }
+    .chart-cont{
+        width: 90%;
+    }
+    .plant-list-cont{
+        width: 90%;
+    }
+}
