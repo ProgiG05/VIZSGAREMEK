@@ -1,5 +1,15 @@
 const token = localStorage.getItem("token");
-const user = JSON.parse(localStorage.getItem("user"));
+function getUser() {
+    try {
+        return JSON.parse(localStorage.getItem("user"));
+    } catch {
+        console.warn("Failed to parse stored user data, clearing invalid entry.");
+        localStorage.removeItem("user");
+        return null;
+    }
+}
+
+const user = getUser();
 
 const accountHandler = (e) => {
     e.preventDefault();
@@ -7,59 +17,57 @@ const accountHandler = (e) => {
 };
 
 export function setupNavbar() {
-    const body = document.body;
     const header = document.getElementById('top-navbar');
+    if (!header || header.children.length > 1) return;
 
-    // --- Generate Top Navbar if empty ---
-    if (header && header.children.length <= 1) {
-        header.innerHTML = '';
+    header.innerHTML = '';
 
-        const settingsBtn = document.createElement("a");
-        settingsBtn.setAttribute("id", "settings_Btn");
-        settingsBtn.textContent = "Settings";
-        header.appendChild(settingsBtn);
+    const settingsBtn = document.createElement("a");
+    settingsBtn.setAttribute("id", "settings_Btn");
+    settingsBtn.textContent = "Settings";
+    header.appendChild(settingsBtn);
 
-        const homeBtn = document.createElement("a");
-        homeBtn.setAttribute("id", "home_Btn");
-        homeBtn.setAttribute("href", "../sites/index.html");
-        homeBtn.textContent = "Home";
-        header.appendChild(homeBtn);
+    const homeBtn = document.createElement("a");
+    homeBtn.setAttribute("id", "home_Btn");
+    homeBtn.setAttribute("href", "../sites/index.html");
+    homeBtn.textContent = "Home";
+    header.appendChild(homeBtn);
 
-        const ideasBtn = document.createElement("a");
-        ideasBtn.setAttribute("id", "goto_Ideas");
-        ideasBtn.setAttribute("href", "../sites/ideas.html");
-        ideasBtn.textContent = "Ideas";
-        header.appendChild(ideasBtn);
+    const ideasBtn = document.createElement("a");
+    ideasBtn.setAttribute("id", "goto_Ideas");
+    ideasBtn.setAttribute("href", "../sites/ideas.html");
+    ideasBtn.textContent = "Ideas";
+    header.appendChild(ideasBtn);
 
-        const plantfinderBtn = document.createElement("a");
-        plantfinderBtn.setAttribute("id", "goto_PlantFinder");
-        plantfinderBtn.setAttribute("href", "../sites/plants.html");
-        plantfinderBtn.textContent = "Plants";
-        header.appendChild(plantfinderBtn);
+    const plantfinderBtn = document.createElement("a");
+    plantfinderBtn.setAttribute("id", "goto_PlantFinder");
+    plantfinderBtn.setAttribute("href", "../sites/plants.html");
+    plantfinderBtn.textContent = "Plants";
+    header.appendChild(plantfinderBtn);
 
-        const knowledgesBtn = document.createElement("a");
-        knowledgesBtn.setAttribute("id", "goto_Knowledge");
-        knowledgesBtn.setAttribute("href", "../sites/knowledges.html");
-        knowledgesBtn.textContent = "Knowledges";
-        header.appendChild(knowledgesBtn);
+    const knowledgesBtn = document.createElement("a");
+    knowledgesBtn.setAttribute("id", "goto_Knowledge");
+    knowledgesBtn.setAttribute("href", "../sites/knowledges.html");
+    knowledgesBtn.textContent = "Knowledges";
+    header.appendChild(knowledgesBtn);
 
-        const gardensBtn = document.createElement("a");
-        gardensBtn.setAttribute("id", "goto_Gardens");
-        gardensBtn.setAttribute("href", "../sites/gardens.html");
-        gardensBtn.textContent = "Gardens";
-        header.appendChild(gardensBtn);
+    const gardensBtn = document.createElement("a");
+    gardensBtn.setAttribute("id", "goto_Gardens");
+    gardensBtn.setAttribute("href", "../sites/gardens.html");
+    gardensBtn.textContent = "Gardens";
+    header.appendChild(gardensBtn);
 
-        const loginBtn = document.createElement("a");
-        loginBtn.setAttribute("id", "logIn_Btn");
-        loginBtn.setAttribute("href", "../sites/login.html");
-        loginBtn.textContent = "Login / Register";
-        header.appendChild(loginBtn);
+    const loginBtn = document.createElement("a");
+    loginBtn.setAttribute("id", "logIn_Btn");
+    loginBtn.setAttribute("href", "../sites/login.html");
+    loginBtn.textContent = "Login / Register";
+    header.appendChild(loginBtn);
 
-        if (loginBtn) {
-            loginBtn.innerHTML = `${user.username}`;
-            loginBtn.onclick = accountHandler;
-            loginBtn.setAttribute('href', '/sites/accounts.html');
-        }
+    // Only override login button text if user is logged in
+    if (token && user) {
+        loginBtn.textContent = user.username;
+        loginBtn.onclick = accountHandler;
+        loginBtn.setAttribute('href', '/sites/accounts.html');
     }
 }
 
@@ -70,13 +78,11 @@ export function setupSidePanel() {
         sidePanel.setAttribute('id', 'settings-sidepanel');
         sidePanel.setAttribute('class', 'settings-sidepanel');
         
-        // --- H2 Title ---
         const h2 = document.createElement('h2');
         h2.setAttribute('id', 'sidepanel-title');
         h2.textContent = 'Personal Oasis';
         sidePanel.appendChild(h2);
 
-        // --- Close Button ---
         const closeBtn = document.createElement('button');
         closeBtn.setAttribute('class', 'closeSidePanel');
         closeBtn.setAttribute('id', 'closeSidePanel');
@@ -88,7 +94,6 @@ export function setupSidePanel() {
         closeBtn.appendChild(closeImg);
         sidePanel.appendChild(closeBtn);
 
-        // --- Language Selection ---
         const select = document.createElement('select');
         select.setAttribute('class', 'lang-selection');
         select.setAttribute('id', 'lang-selection');
@@ -105,7 +110,6 @@ export function setupSidePanel() {
         select.appendChild(optHu);
         sidePanel.appendChild(select);
 
-        // --- Navigation Links ---
         const links = [
             { id: 'savedI_Btn', href: '../sites/ideas.html', text: 'Ideas' },
             { id: 'savedP_Btn', href: '../sites/plants.html', text: 'Plants' },
@@ -121,7 +125,6 @@ export function setupSidePanel() {
             sidePanel.appendChild(a);
         });
 
-        // --- Dark Mode Button ---
         const darkModeBtn = document.createElement('button');
         darkModeBtn.setAttribute('class', 'darkmode');
         darkModeBtn.setAttribute('id', 'darkmode');
@@ -165,7 +168,6 @@ export function setupSidePanel() {
     // --- Dark Mode Logic ---
     const darkBtn = document.getElementById('darkmode');
     if (darkBtn) {
-        // Apply initial theme
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-theme');
             darkBtn.classList.add('dark-active');
@@ -181,21 +183,19 @@ export function setupSidePanel() {
 }
 
 export function setupLoginState() {
-    if (token && user) {
-        const topLoginBtn = document.getElementById("logIn_Btn");
-        const sideLoginBtn = document.getElementById("login_Btn");
+    if (!token || !user) return;
 
-        if (topLoginBtn) {
-            // topLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
-            topLoginBtn.innerHTML = `${user.username}`;
-            topLoginBtn.onclick = accountHandler;
-            topLoginBtn.setAttribute('href', '/sites/accounts.html');
-        }
-        if (sideLoginBtn) {
-            // sideLoginBtn.innerHTML = `${user.username[0].toUpperCase()}`;
-            sideLoginBtn.innerHTML = `${user.username}`;
-            sideLoginBtn.onclick = accountHandler;
-            sideLoginBtn.setAttribute('href', '/sites/accounts.html');
-        }
+    const topLoginBtn = document.getElementById("logIn_Btn");
+    const sideLoginBtn = document.getElementById("login_Btn");
+
+    if (topLoginBtn) {
+        topLoginBtn.textContent = user.username;
+        topLoginBtn.onclick = accountHandler;
+        topLoginBtn.setAttribute('href', '/sites/accounts.html');
+    }
+    if (sideLoginBtn) {
+        sideLoginBtn.textContent = user.username;
+        sideLoginBtn.onclick = accountHandler;
+        sideLoginBtn.setAttribute('href', '/sites/accounts.html');
     }
 }

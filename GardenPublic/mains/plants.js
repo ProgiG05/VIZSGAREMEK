@@ -1,6 +1,4 @@
-import { setupNavbar } from './navbar.js';
-import { setupSidePanel } from './navbar.js';
-import { setupLoginState } from './navbar.js';
+import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
 
 const token = localStorage.getItem("token");
 
@@ -9,79 +7,117 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupSidePanel();
     setupLoginState();
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const plantsData = await fetch('/api/plants', {method: 'GET', headers: {'Content-Type': 'application/json'}})
-    const response = await plantsData.json()
-
-    const PlantsContainer = document.getElementById('other-searched-results')
-    const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont")
-    const SavedPlantsGrouping = document.getElementById("saved-plants-grouping")
-
-    SavedPlantsGrouping.addEventListener('click', async () => {
-        const savedPlants = await getSavedPlants();
-        PlantsContainer.innerHTML = ""
-        savedPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant.plant_id)))
-    })
-
-    const AllPlantTypes = []
-    response.forEach(onetype => {
-        if (!AllPlantTypes.includes(onetype.type)) {AllPlantTypes.push(onetype.type)}
-    })
-
-    AllPlantTypes.forEach(onetype => {
-        const TypeButton = document.createElement("button")
-        TypeButton.classList.add("typeGroup_Btn")
-        TypeButton.textContent = `${capitalizeFirstLetter(onetype.trim())}`
-        TypeButton.id = `${onetype.trim()}`
-        TypeButton.addEventListener('click', async () => {await typeFilter(TypeButton.id, response)})
-        TypesGroupingContainer.appendChild(TypeButton)
-    })
-
-    const AllOrigins = []
-    response.forEach(oneorigin => {
-        if (!AllOrigins.includes(oneorigin.origin)) {AllOrigins.push(oneorigin.origin)}
-    })
-    const OriginSelection = document.getElementById("originSelection")
-    for (let i = 0; i < AllOrigins.length; i++) {
-        const OriginOption = document.createElement("option")
-        OriginOption.setAttribute("value",`${AllOrigins[i]}`)
-        OriginOption.textContent = `${AllOrigins[i]}`
-        OriginSelection.appendChild(OriginOption)
+    let user = null;
+    try {
+        user = JSON.parse(localStorage.getItem("user"));
+    } catch {
+        console.warn("Could not parse stored user data.");
     }
 
-    response.forEach(plant => {PlantsContainer.appendChild(createPlantCards(plant))})
+    // Fetch all plants
+    let response;
+    try {
+        const plantsData = await fetch('/api/plants', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-    document.getElementById('clear-water-btn').addEventListener('click', () => clearFilters('water'))
-    document.getElementById('clear-sunlight-btn').addEventListener('click', () => clearFilters('sunlight'))
-    document.getElementById('clear-soil-btn').addEventListener('click', () => clearFilters('soil'))
-})
+        if (!plantsData.ok) {
+            throw new Error(`Server returned ${plantsData.status}`);
+        }
 
-// --- Creating the cards Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        response = await plantsData.json();
+    } catch (error) {
+        console.error("Failed to load plants:", error.message);
+        const container = document.getElementById('other-searched-results');
+        if (container) {
+            container.innerHTML = '<p class="error-message">Could not load plants. Please try again later.</p>';
+        }
+        return;
+    }
+
+    const PlantsContainer = document.getElementById('other-searched-results');
+    const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont");
+    const SavedPlantsGrouping = document.getElementById("saved-plants-grouping");
+
+    // Only allow saved plants access when logged in
+    if (SavedPlantsGrouping) {
+        SavedPlantsGrouping.addEventListener('click', async () => {
+            if (!token || !user) {
+                alert("Please log in to view your saved plants.");
+                return;
+            }
+
+            try {
+                const savedPlants = await getSavedPlants();
+                PlantsContainer.innerHTML = "";
+                savedPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant.plant_id)));
+            } catch (error) {
+                console.error("Failed to load saved plants:", error.message);
+                alert("Could not load saved plants. Please try again later.");
+            }
+        });
+    }
+
+    // Build type filter buttons
+    const AllPlantTypes = [];
+    response.forEach(onetype => {
+        if (!AllPlantTypes.includes(onetype.type)) { AllPlantTypes.push(onetype.type); }
+    });
+
+    AllPlantTypes.forEach(onetype => {
+        const TypeButton = document.createElement("button");
+        TypeButton.classList.add("typeGroup_Btn");
+        TypeButton.textContent = capitalizeFirstLetter(onetype.trim());
+        TypeButton.id = onetype.trim();
+        TypeButton.addEventListener('click', async () => {
+            await typeFilter(TypeButton.id, response);
+        });
+        TypesGroupingContainer.appendChild(TypeButton);
+    });
+
+    // Build origin select options
+    const AllOrigins = [];
+    response.forEach(oneorigin => {
+        if (!AllOrigins.includes(oneorigin.origin)) { AllOrigins.push(oneorigin.origin); }
+    });
+    const OriginSelection = document.getElementById("originSelection");
+    for (let i = 0; i < AllOrigins.length; i++) {
+        const OriginOption = document.createElement("option");
+        OriginOption.setAttribute("value", AllOrigins[i]);
+        OriginOption.textContent = AllOrigins[i];
+        OriginSelection.appendChild(OriginOption);
+    }
+
+    // Render all plant cards
+    response.forEach(plant => { PlantsContainer.appendChild(createPlantCards(plant)); });
+
+    document.getElementById('clear-water-btn').addEventListener('click', () => clearFilters('water'));
+    document.getElementById('clear-sunlight-btn').addEventListener('click', () => clearFilters('sunlight'));
+    document.getElementById('clear-soil-btn').addEventListener('click', () => clearFilters('soil'));
+});
+
+// --- Creating the cards ---
 
 function createPlantCards(plant) {
-    // Plantcard wrapper
     const PlantCard = document.createElement("div");
     PlantCard.setAttribute("class", "plant-card");
-    PlantCard.style.zIndex = `${plant.id}`
+    PlantCard.style.zIndex = `${plant.id}`;
 
-    // Title
     const PlantTitle = document.createElement("h1");
     PlantTitle.setAttribute("class", "plant-title");
-    PlantTitle.textContent = `${plant.common_name}`;
+    PlantTitle.textContent = plant.common_name;
 
-    // SubTitle
     const PlantSubTitle = document.createElement("h3");
     PlantSubTitle.setAttribute("class", "plant-subtitle");
-    PlantSubTitle.textContent = `${plant.botanical_name}`;
+    PlantSubTitle.textContent = plant.botanical_name;
 
-    // Save button 
+    // Save button
     const potButton = document.createElement("button");
     potButton.setAttribute("class", "pot-button");
     potButton.addEventListener('click', () => {
-        toggleSaveState(potButton, plant.id)
-    })
+        toggleSaveState(potButton, plant.id);
+    });
     
     const flowerAssembly = document.createElement("div");
     flowerAssembly.setAttribute("class", "flower-assembly");
@@ -110,26 +146,22 @@ function createPlantCards(plant) {
     potButton.appendChild(potBase);
     potButton.appendChild(potRim);
 
-    // Container for the titles
-    const TitleContainer = document.createElement("div")
-    TitleContainer.setAttribute("class","plant-card-title-cont")
-    TitleContainer.appendChild(PlantTitle)
-    TitleContainer.appendChild(PlantSubTitle)
+    const TitleContainer = document.createElement("div");
+    TitleContainer.setAttribute("class", "plant-card-title-cont");
+    TitleContainer.appendChild(PlantTitle);
+    TitleContainer.appendChild(PlantSubTitle);
 
-    // Container of the titles and the savebutton
-    const HeaderContainer = document.createElement("div")
-    HeaderContainer.setAttribute("class","plant-card-header-cont")
-    HeaderContainer.appendChild(TitleContainer)
-    // HeaderContainer.appendChild(SavePlantButton)
-    HeaderContainer.appendChild(potButton)
+    const HeaderContainer = document.createElement("div");
+    HeaderContainer.setAttribute("class", "plant-card-header-cont");
+    HeaderContainer.appendChild(TitleContainer);
+    HeaderContainer.appendChild(potButton);
     
-    PlantCard.appendChild(HeaderContainer)
+    PlantCard.appendChild(HeaderContainer);
 
-    // Create the Table
+    // Create the details table
     const Table = document.createElement("table");
     Table.setAttribute("class", "plant-details-table");
 
-    // Helper function to create rows quickly
     const addTableRow = (label, value) => {
         const row = document.createElement("tr");
         
@@ -146,7 +178,6 @@ function createPlantCards(plant) {
         Table.appendChild(row);
     };
 
-    // Populate Table Rows
     addTableRow("Common name:", capitalizeFirstLetter(plant.common_name));
     addTableRow("Botanical name:", capitalizeFirstLetter(plant.botanical_name));
     addTableRow("Place of Origin:", capitalizeFirstLetter(plant.origin));
@@ -162,126 +193,167 @@ function createPlantCards(plant) {
     addTableRow("Is it Indoor:", plant.indoor ? "Yes, can stay inside also" : "No, can't be kept inside");
     addTableRow("Has Seeds:", plant.seeds ? "Yes, can be propagated by seed" : "No, can't be propagated by seed");
 
-    // Append table to the card
     PlantCard.appendChild(Table);
-
     return PlantCard;
 }
 
-// --- String first letter capitalize Logic & Pot button save Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// --- Toggle save & API calls ---
 
-async function toggleSaveState(buttonElement, plant) {
+async function toggleSaveState(buttonElement, plantId) {
+    if (!token) {
+        alert("Please log in to save plants.");
+        return;
+    }
+
     buttonElement.classList.toggle('saved');
-    await SavePlant(plant);
+
+    try {
+        await SavePlant(plantId);
+    } catch (error) {
+        console.error("Failed to save plant:", error.message);
+        buttonElement.classList.toggle('saved'); // Revert toggle on failure
+        alert("Could not save plant. Please try again.");
+    }
 }
 
-async function SavePlant(plant) {
-    const response = await fetch('/api/savedplants', {
+async function SavePlant(plantId) {
+    let user = null;
+    try {
+        user = JSON.parse(localStorage.getItem("user"));
+    } catch {
+        throw new Error("Invalid user data in storage.");
+    }
+
+    if (!user || !user.id) {
+        throw new Error("User not logged in.");
+    }
+
+    const response = await fetch('/api/saveplants', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({
-            plant_id: plant.id,
+            plant_id: plantId,
             user_id: user.id
         })
-    })
-    const data = await response.json();
-    console.log(data);
+    });
+
+    if (!response.ok) {
+        throw new Error(`Save failed with status ${response.status}`);
+    }
+
+    return await response.json();
 }
 
 async function getSavedPlants() {
-    const response = await fetch('/api/savedplants', {method: 'GET', headers: {'Content-Type': 'application/json'}})
-    const data = await response.json();
-    console.log(data);
-    return data;
+    const response = await fetch('/api/savedplants', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch saved plants: ${response.status}`);
+    }
+
+    return await response.json();
 }
 
-function capitalizeFirstLetter(word) {return String(word).charAt(0).toUpperCase() + String(word).slice(1)}
+function capitalizeFirstLetter(word) {
+    return String(word).charAt(0).toUpperCase() + String(word).slice(1);
+}
 
-// --- Filling up the first result container with the search result Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// --- Search display logic ---
 
-const form = document.getElementById('search-form')
+const form = document.getElementById('search-form');
 
 function SearchPlantDetails(details, container) {
-    container.innerText = ''
-    const firstresult = details[0]
-    container.appendChild(createPlantCards(firstresult))
+    container.innerText = '';
 
-    const ButtonCont = document.createElement("div")
-    ButtonCont.setAttribute("id","result-button-container")
-    ButtonCont.setAttribute("class","result-button-container")
+    if (!details || details.length === 0) {
+        container.innerHTML = '<p class="error-message">No plants matched your search.</p>';
+        return;
+    }
 
-    const LoadMoreBtn = document.createElement('button')
-    LoadMoreBtn.setAttribute("id","loadMore_Btn")
-    LoadMoreBtn.setAttribute("class","loadMore_Btn")
-    LoadMoreBtn.textContent = "Load more"
-    LoadMoreBtn.addEventListener("click", async () => {
-        container.removeChild(ButtonCont)
-        ButtonCont.removeChild(LoadMoreBtn)
-        for (let i = 1; i < details.length; i++) {
-            container.appendChild(createPlantCards(details[i]))
-            container.appendChild(ButtonCont)
-        }
-    })
-    ButtonCont.appendChild(LoadMoreBtn)
+    container.appendChild(createPlantCards(details[0]));
 
-    const GoBackToSearchingBtn = document.createElement('button')
-    GoBackToSearchingBtn.setAttribute("id","GoBackSearch_Btn")
-    GoBackToSearchingBtn.setAttribute("class","GoBackSearch_Btn")
-    GoBackToSearchingBtn.textContent = "Search another"
+    const ButtonCont = document.createElement("div");
+    ButtonCont.setAttribute("id", "result-button-container");
+    ButtonCont.setAttribute("class", "result-button-container");
+
+    if (details.length > 1) {
+        const LoadMoreBtn = document.createElement('button');
+        LoadMoreBtn.setAttribute("id", "loadMore_Btn");
+        LoadMoreBtn.setAttribute("class", "loadMore_Btn");
+        LoadMoreBtn.textContent = "Load more";
+        LoadMoreBtn.addEventListener("click", () => {
+            container.removeChild(ButtonCont);
+            ButtonCont.removeChild(LoadMoreBtn);
+            for (let i = 1; i < details.length; i++) {
+                container.appendChild(createPlantCards(details[i]));
+            }
+            container.appendChild(ButtonCont);
+        });
+        ButtonCont.appendChild(LoadMoreBtn);
+    }
+
+    const GoBackToSearchingBtn = document.createElement('button');
+    GoBackToSearchingBtn.setAttribute("id", "GoBackSearch_Btn");
+    GoBackToSearchingBtn.setAttribute("class", "GoBackSearch_Btn");
+    GoBackToSearchingBtn.textContent = "Search another";
     GoBackToSearchingBtn.addEventListener("click", () => {
-        form.scrollIntoView({behavior:"smooth"})
-        container.innerText = ''
-    })
-    ButtonCont.appendChild(GoBackToSearchingBtn)
+        form.scrollIntoView({ behavior: "smooth" });
+        container.innerText = '';
+    });
+    ButtonCont.appendChild(GoBackToSearchingBtn);
 
-    container.appendChild(ButtonCont)
+    container.appendChild(ButtonCont);
 }
 
-// --- Clearing the radio button filters Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// --- Filter helpers ---
 
 function clearFilters(type) {
-    const checks = document.querySelectorAll(`.${type}-radioBtn`)
-    checks.forEach(check => check.checked = false)
+    const checks = document.querySelectorAll(`.${type}-radioBtn`);
+    checks.forEach(check => check.checked = false);
 }
-
-// --- Clear all the search details in the searching container Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 function clearForm() {
-    document.getElementById('commonplant-search-inp').value = ""
-    document.getElementById('botanicalplant-search-inp').value = ""
-    document.getElementById('plantingSelection').value = "none"
-    document.getElementById('harvestingSelection').value = "none"
-    document.getElementById('originSelection').value = "none"
-    document.getElementById('indoorCheckbox').checked = false
-    document.getElementById('seedsCheckbox').checked = false
-    clearFilters('water')
-    clearFilters('sunlight')
-    clearFilters('soil')
+    document.getElementById('commonplant-search-inp').value = "";
+    document.getElementById('botanicalplant-search-inp').value = "";
+    document.getElementById('plantingSelection').value = "none";
+    document.getElementById('harvestingSelection').value = "none";
+    document.getElementById('originSelection').value = "none";
+    document.getElementById('indoorCheckbox').checked = false;
+    document.getElementById('seedsCheckbox').checked = false;
+    clearFilters('water');
+    clearFilters('sunlight');
+    clearFilters('soil');
 }
 
-// --- Scroll up btn & scroll to seaerch btn & scrool to browse btn Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// --- Scroll buttons ---
 
 document.getElementById("showSearch_Btn").addEventListener("click", () => {
-    document.getElementById("search-form").scrollIntoView({behavior:"smooth"})
-})
+    document.getElementById("search-form").scrollIntoView({ behavior: "smooth" });
+});
 document.getElementById("showBroswe_Btn").addEventListener("click", () => {
-    document.getElementById("browse-title").scrollIntoView({behavior:"smooth"})
-})
+    document.getElementById("browse-title").scrollIntoView({ behavior: "smooth" });
+});
 
 async function typeFilter(type, plantsData) {
-    const filteredPlants = plantsData.filter(plant => plant.type === type)
-    const PlantsContainer = document.getElementById('other-searched-results')
-    PlantsContainer.innerHTML = ""
-    filteredPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant)))
+    const filteredPlants = plantsData.filter(plant => plant.type === type);
+    const PlantsContainer = document.getElementById('other-searched-results');
+    PlantsContainer.innerHTML = "";
+    filteredPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant)));
 }
 
+// --- Search handler ---
+
 document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const commonNameSearch = document.getElementById('commonplant-search-inp').value.toLowerCase().trim();
     const botanicalNameSearch = document.getElementById('botanicalplant-search-inp').value.toLowerCase().trim();
@@ -294,26 +366,39 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
     const indoorChecked = document.getElementById('indoorCheckbox').checked;
     const seedsChecked = document.getElementById('seedsCheckbox').checked;
 
-    const response = await fetch('/api/plants', {method: "GET", headers: {'Content-Type' : 'application/json'}})
-    const plants = await response.json()
+    try {
+        const response = await fetch('/api/plants', {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-    const filteredPlants = plants.filter(p => {
-        const criteriaCommon = !commonNameSearch || p.common_name.toLowerCase().includes(commonNameSearch);
-        const criteriaBotanical = !botanicalNameSearch || p.botanical_name.toLowerCase().includes(botanicalNameSearch);
-        const criteriaWater = !water || p.water.toLowerCase() === water;
-        const criteriaSunlight = !sunlight || p.sunlight.toLowerCase() === sunlight;
-        const criteriaSoil = !soil || p.soil.toLowerCase() === soil;
-        const criteriaPlanting = plantingMonth === "none" || !plantingMonth || p.planting.toLowerCase().includes(plantingMonth);
-        const criteriaHarvesting = harvestingMonth === "none" || !harvestingMonth || p.harvesting.toLowerCase().includes(harvestingMonth);
-        const criteriaOrigin = origin === "none" || !origin || p.origin.toLowerCase() === origin;
-        const criteriaIndoor = !indoorChecked || p.indoor;
-        const criteriaSeeds = !seedsChecked || p.seeds;
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
 
-        return criteriaCommon && criteriaBotanical && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting && criteriaOrigin && criteriaIndoor && criteriaSeeds;
-    });
+        const plants = await response.json();
 
-    const searchedPlantsContainer = document.getElementById('first-searched-result');
-    searchedPlantsContainer.scrollIntoView({behavior:"smooth"});
-    SearchPlantDetails(filteredPlants, searchedPlantsContainer);
-    clearForm();
-})
+        const filteredPlants = plants.filter(p => {
+            const criteriaCommon = !commonNameSearch || p.common_name.toLowerCase().includes(commonNameSearch);
+            const criteriaBotanical = !botanicalNameSearch || p.botanical_name.toLowerCase().includes(botanicalNameSearch);
+            const criteriaWater = !water || p.water.toLowerCase() === water;
+            const criteriaSunlight = !sunlight || p.sunlight.toLowerCase() === sunlight;
+            const criteriaSoil = !soil || p.soil.toLowerCase() === soil;
+            const criteriaPlanting = plantingMonth === "none" || !plantingMonth || p.planting.toLowerCase().includes(plantingMonth);
+            const criteriaHarvesting = harvestingMonth === "none" || !harvestingMonth || p.harvesting.toLowerCase().includes(harvestingMonth);
+            const criteriaOrigin = origin === "none" || !origin || p.origin.toLowerCase() === origin;
+            const criteriaIndoor = !indoorChecked || p.indoor;
+            const criteriaSeeds = !seedsChecked || p.seeds;
+
+            return criteriaCommon && criteriaBotanical && criteriaWater && criteriaSunlight && criteriaSoil && criteriaPlanting && criteriaHarvesting && criteriaOrigin && criteriaIndoor && criteriaSeeds;
+        });
+
+        const searchedPlantsContainer = document.getElementById('first-searched-result');
+        searchedPlantsContainer.scrollIntoView({ behavior: "smooth" });
+        SearchPlantDetails(filteredPlants, searchedPlantsContainer);
+        clearForm();
+    } catch (error) {
+        console.error("Search failed:", error.message);
+        alert("Search failed. Please try again later.");
+    }
+});

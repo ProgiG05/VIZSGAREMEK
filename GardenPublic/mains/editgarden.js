@@ -31,15 +31,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             "Authorization": `Bearer ${token}`
         }
     });
-    const gardenArray = await gardenResp.json();
-    const garden = gardenArray[0]; // The API returns an array
-    //console.log(garden)
+    // Handle err403 or err404 
+    if (!gardenResp.ok) {
+        const errorData = await gardenResp.json();
+        alert(errorData.message || "Garden not found or access denied.");
+        window.location.href = "/gardens.html";
+        return;
+    }
 
-    if (!gardenArray) {
+    const gardenArray = await gardenResp.json();
+
+    if (!gardenArray || (Array.isArray(gardenArray) && gardenArray.length === 0)) {
         alert("Garden not found!");
-        console.log(gardenArray)
-        console.log(garden)
-        //window.location.href = "/gardens.html";
+        window.location.href = "/gardens.html";
         return;
     }
 
