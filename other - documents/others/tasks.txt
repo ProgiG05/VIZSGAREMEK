@@ -29,7 +29,9 @@ garden editing page:
 	adding smth into a cell: adding container next to the table
 	icons for every possible button
 	add / fix / check responsivity
-
+login / signup page:
+	redesign the page
+	remove unnessecary stuff
 
 other:
 	login system: token
