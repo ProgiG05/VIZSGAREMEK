@@ -2,6 +2,7 @@ import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
 import { getToken, apiFetch } from './api.js';
+import { showAlert, showConfirm } from './popup.js';
 
 const handler = document.getElementById("handler");
 
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const urlparams = new URLSearchParams(window.location.search)
     const gardenId = urlparams.get("id");
     if (!gardenId) {
-        alert("No garden ID provided!");
+        await showAlert("No garden ID provided!");
         window.location.href = "/gardens.html";
         return;
     }
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Handle err403 or err404 
     if (!gardenResp.ok) {
         const errorData = await gardenResp.json();
-        alert(errorData.message || "Garden not found or access denied.");
+        await showAlert(errorData.message || "Garden not found or access denied.");
         window.location.href = "/gardens.html";
         return;
     }
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const gardenArray = await gardenResp.json();
 
     if (!gardenArray || (Array.isArray(gardenArray) && gardenArray.length === 0)) {
-        alert("Garden not found!");
+        await showAlert("Garden not found!");
         window.location.href = "/gardens.html";
         return;
     }
@@ -187,13 +188,13 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const backBtn = document.createElement("button");
     backBtn.textContent = "Back to List";
     backBtn.className = "back_btn";
-    backBtn.onclick = () => {if (confirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/gardens.html";}}
+    backBtn.onclick = async () => {if (await showConfirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/gardens.html";}}
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete Garden";
     deleteBtn.className = "delete_btn";
     deleteBtn.onclick = async () => {
-        if (confirm("Are you sure you want to delete this garden?")) {
+        if (await showConfirm("Are you sure you want to delete this garden?")) {
             await DeleteGarden(garden.id);
             window.location.href = "/sites/gardens.html";
         }
@@ -207,8 +208,8 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const resetBtn = document.createElement("button");
     resetBtn.textContent = "Reset Garden";
     resetBtn.className = "reset_btn";
-    resetBtn.onclick = () => {
-        if (confirm("Are you sure you want to reset this garden? Any unsaved changes will be lost.")) {
+    resetBtn.onclick = async () => {
+        if (await showConfirm("Are you sure you want to reset this garden? Any unsaved changes will be lost.")) {
             window.location.reload();
         }
     };
@@ -329,7 +330,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
 
         const result = await SaveGarden(updatedGarden);
         if (result) {
-            alert("Garden saved successfully!");
+            await showAlert("Garden saved successfully!");
             window.location.reload();
         }
     };
@@ -443,15 +444,15 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     removeLastRowBtn.textContent = "Remove Last Row";
     removeLastRowBtn.className = "removelastrow_btn";
     removeLastRowBtn.type = "button";
-    removeLastRowBtn.onclick = () => {
-        if (confirm("Are you sure you want to remove the last row from this garden? Any unsaved changes will be lost.")) {
+    removeLastRowBtn.onclick = async () => {
+        if (await showConfirm("Are you sure you want to remove the last row from this garden? Any unsaved changes will be lost.")) {
             let rows = garden.garden_content.split(";");
 
             if (!rows[rows.length - 1].split(",").map(val => val === "").includes(false)) {
                 rows.pop();
             }
             else {
-                alert("Last row is not empty, it cannot be removed.")
+                await showAlert("Last row is not empty, it cannot be removed.")
                 return;
             }
             garden.garden_content = rows.join(";");
@@ -468,8 +469,8 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     removeLastColumnBtn.textContent = "Remove Last Column";
     removeLastColumnBtn.className = "removelastcolumn_btn";
     removeLastColumnBtn.type = "button";
-    removeLastColumnBtn.onclick = () => {
-        if (confirm("Are you sure you want to remove the last column from this garden? Any unsaved changes will be lost.")) {
+    removeLastColumnBtn.onclick = async () => {
+        if (await showConfirm("Are you sure you want to remove the last column from this garden? Any unsaved changes will be lost.")) {
             let rows = garden.garden_content.split(";");
             let canRemove = true;
             rows = rows.map(row => {
@@ -488,7 +489,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
                 });
             }
             else {
-                alert("Last column is not empty, it cannot be removed.")
+                await showAlert("Last column is not empty, it cannot be removed.")
                 return;
             }
             garden.garden_content = rows.join(";");

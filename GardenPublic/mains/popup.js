@@ -1,4 +1,7 @@
 export function showPopup(content, title, confirmAction, cancelAction) {
+    const overlay = document.createElement('div');
+    overlay.setAttribute('class', 'popup-overlay');
+
     const popupContainer = document.createElement('div');
     popupContainer.setAttribute('id', 'popup-container');
     popupContainer.setAttribute('class', 'popup-container');
@@ -10,7 +13,7 @@ export function showPopup(content, title, confirmAction, cancelAction) {
     const popupTitle = document.createElement('h2');
     popupTitle.setAttribute('id', 'popup-title');
     popupTitle.setAttribute('class', 'popup-title');
-    popupTitle.textContent = 'Garden Preview';
+    popupTitle.textContent = title;
     popupHeaderCont.appendChild(popupTitle);
 
     const closeBtn = document.createElement('button');
@@ -50,14 +53,67 @@ export function showPopup(content, title, confirmAction, cancelAction) {
     popupFooterCont.appendChild(cancelBtn);
 
     popupContainer.appendChild(popupFooterCont);
+    overlay.appendChild(popupContainer);
 
+    // Generic close logic (can be overridden in wrappers)
     closeBtn.addEventListener('click', () => {
-        popupContainer.remove();
+        overlay.remove();
     });
 
     cancelBtn.addEventListener('click', () => {
-        popupContainer.remove();
+        overlay.remove();
     });
 
-    return popupContainer;
+    return overlay;
+}
+
+export function showAlert(content, title = "Information") {
+    return new Promise((resolve) => {
+        const popup = showPopup(content, title);
+        const mountPoint = document.getElementById('popup') || document.body;
+        mountPoint.appendChild(popup);
+
+        const confirmBtn = popup.querySelector('#confirm-btn');
+        const cancelBtn = popup.querySelector('#cancel-btn');
+        const closeBtn = popup.querySelector('#close-popup-btn');
+
+        // Alert only needs one button
+        if (cancelBtn) cancelBtn.style.display = "none";
+        if (confirmBtn) confirmBtn.textContent = "OK";
+
+        const handleClose = () => {
+            popup.remove();
+            resolve();
+        };
+
+        if (confirmBtn) confirmBtn.addEventListener('click', handleClose);
+        if (closeBtn) closeBtn.addEventListener('click', handleClose);
+    });
+}
+
+export function showConfirm(content, title = "Confirmation") {
+    return new Promise((resolve) => {
+        const popup = showPopup(content, title);
+        const mountPoint = document.getElementById('popup') || document.body;
+        mountPoint.appendChild(popup);
+
+        const confirmBtn = popup.querySelector('#confirm-btn');
+        const cancelBtn = popup.querySelector('#cancel-btn');
+        const closeBtn = popup.querySelector('#close-popup-btn');
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                popup.remove();
+                resolve(true);
+            });
+        }
+
+        const handleCancel = () => {
+            popup.remove();
+            resolve(false);
+        };
+
+        if (cancelBtn) cancelBtn.addEventListener('click', handleCancel);
+        if (closeBtn) closeBtn.addEventListener('click', handleCancel);
+    });
 }

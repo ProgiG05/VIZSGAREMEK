@@ -2,6 +2,7 @@ import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
 import { getToken, getUser, apiFetch } from './api.js';
+import { showPopup, showConfirm } from './popup.js';
 
 const gardensContainer = document.getElementById("gardens-container");
 const token = getToken();
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
+    const popup = document.getElementById("popup");
 
     const user = getUser();
 
@@ -82,13 +84,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function DeleteGarden(id) {
-    if (!confirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.")) return;
-    
-    const resp = await apiFetch(`/api/gardens/${id}`, {
-        method: "DELETE"
-    });
-    if (resp && resp.ok) {
-        window.location.reload();
+    const confirmed = await showConfirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.", "Delete");
+    if (confirmed) {
+        const resp = await apiFetch(`/api/gardens/${id}`, {
+            method: "DELETE"
+        });
+        if (resp && resp.ok) {
+            window.location.reload();
+        }
     }
 }
 
@@ -205,8 +208,8 @@ function renderGarden(garden, plants, isExample = false) {
         const editBtn = document.createElement("button");
         editBtn.textContent = "✎";
         editBtn.className = "edit_btn";
-        editBtn.addEventListener("click", () => {
-            if (confirm("Are you sure you want to edit this garden?")) {
+        editBtn.addEventListener("click", async () => {
+            if (await showConfirm("Are you sure you want to edit this garden?")) {
                 window.location.href = "/sites/editgarden.html?id=" + garden.id;
             }
         });
