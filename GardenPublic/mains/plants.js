@@ -1,18 +1,14 @@
 import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
+import { getToken, getUser, apiFetch } from './api.js';
 
-const token = localStorage.getItem("token");
+const token = getToken();
 
 document.addEventListener('DOMContentLoaded', async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
 
-    let user = null;
-    try {
-        user = JSON.parse(localStorage.getItem("user"));
-    } catch {
-        console.warn("Could not parse stored user data.");
-    }
+    const user = getUser();
 
     // Fetch all plants
     let response;
@@ -217,47 +213,33 @@ async function toggleSaveState(buttonElement, plantId) {
 }
 
 async function SavePlant(plantId) {
-    let user = null;
-    try {
-        user = JSON.parse(localStorage.getItem("user"));
-    } catch {
-        throw new Error("Invalid user data in storage.");
-    }
-
+    const user = getUser();
     if (!user || !user.id) {
         throw new Error("User not logged in.");
     }
 
-    const response = await fetch('/api/saveplants', {
+    const response = await apiFetch('/api/saveplants', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
         body: JSON.stringify({
             plant_id: plantId,
             user_id: user.id
         })
     });
 
-    if (!response.ok) {
-        throw new Error(`Save failed with status ${response.status}`);
+    if (!response || !response.ok) {
+        throw new Error(`Save failed`);
     }
 
     return await response.json();
 }
 
 async function getSavedPlants() {
-    const response = await fetch('/api/savedplants', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
+    const response = await apiFetch('/api/savedplants', {
+        method: 'GET'
     });
 
-    if (!response.ok) {
-        throw new Error(`Failed to fetch saved plants: ${response.status}`);
+    if (!response || !response.ok) {
+        throw new Error(`Failed to fetch saved plants`);
     }
 
     return await response.json();

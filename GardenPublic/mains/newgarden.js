@@ -1,11 +1,12 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel} from './navbar.js';
+import { getToken, apiFetch } from './api.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
 
-    const token = localStorage.getItem('token');
+    const token = getToken();
     if (!token) {  window.location.href = "/sites/login.html";  return;}
     
     ShowAddGardenForm();
@@ -62,16 +63,11 @@ function ShowAddGardenForm() {
 }
 
 async function newGarden(garden) {
-    const token = localStorage.getItem('token');
-    const resp = await fetch(`/api/gardens/newgarden`, {
+    const resp = await apiFetch(`/api/gardens/newgarden`, {
         method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
         body: JSON.stringify(garden)
     });
-    return resp.json();
+    return resp ? resp.json() : null;
 }
 
 function previewGarden(rows, columns) {

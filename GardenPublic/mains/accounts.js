@@ -1,13 +1,14 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
+import { getToken, getUser } from './api.js';
 
-const token = localStorage.getItem("token");
+const token = getToken();
 document.addEventListener("DOMContentLoaded", () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
     if (!token) {
         window.location.href = "/sites/login.html";
         return;

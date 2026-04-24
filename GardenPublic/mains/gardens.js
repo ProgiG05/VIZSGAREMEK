@@ -1,18 +1,19 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
+import { getToken, getUser, apiFetch } from './api.js';
 // import { showPopup } from './popup.js';
 
 
 const gardensContainer = document.getElementById("gardens-container");
-const token = localStorage.getItem('token');
+const token = getToken();
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
 
     if (!token) {
         const infoCont = document.getElementById("information-cont")
@@ -37,13 +38,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 1. Fetch data
 
-    const gardensResponse = await fetch("/api/gardens", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
+    const gardensResponse = await apiFetch("/api/gardens", {
+        method: "GET"
     });
+    if (!gardensResponse) return;
     const gardens = await gardensResponse.json();
     console.log("Gardens:", gardens)
 
@@ -200,15 +198,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function DeleteGarden(id) {
-    const resp = await fetch(`/api/gardens/${id}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
+    const resp = await apiFetch(`/api/gardens/${id}`, {
+        method: "DELETE"
     });
-    const data = await resp.json();
-    window.location.reload();
+    if (resp) {
+        const data = await resp.json();
+        window.location.reload();
+    }
 }
 
 function CreateTable(splittedContent, plants) {

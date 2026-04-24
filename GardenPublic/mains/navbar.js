@@ -1,14 +1,6 @@
-const token = localStorage.getItem("token");
-function getUser() {
-    try {
-        return JSON.parse(localStorage.getItem("user"));
-    } catch {
-        console.warn("Failed to parse stored user data, clearing invalid entry.");
-        localStorage.removeItem("user");
-        return null;
-    }
-}
+import { getToken, getUser } from './api.js';
 
+const token = getToken();
 const user = getUser();
 
 const accountHandler = (e) => {

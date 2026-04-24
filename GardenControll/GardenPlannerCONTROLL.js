@@ -1,7 +1,6 @@
 const GardenModel = require('../GardenModell/GardenPlannerMODELL');
 const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
-require('dotenv').config();
 
 // Public data endpoints
 
@@ -61,6 +60,10 @@ exports.GetAllWorksAndTools = async (req, res) => {
 exports.AddNewgarden = async (req, res) => {
     try {
         const garden = req.body;
+        if (!garden.garden_name || !garden.garden_content) {
+            return res.status(400).json({ success: false, message: 'Garden name and content are required.' });
+        }
+        
         garden.user_id = req.user.id;
         const result = await GardenModel.AddNewgarden(garden);
         console.log(`Garden created: "${garden.garden_name}" by user ${req.user.username}`);
@@ -145,6 +148,10 @@ exports.UpdateGarden = async (req, res) => {
     try {
         const garden = req.body;
         const userId = req.user.id;
+
+        if (!garden.id || !garden.name || !garden.content) {
+            return res.status(400).json({ success: false, message: 'Garden ID, name, and content are required.' });
+        }
         const result = await GardenModel.UpdateGarden(garden, userId);
         console.log(`Garden ${garden.id} updated by user ${req.user.username}`);
         res.json({ success: true, message: 'Garden updated.', data: result });

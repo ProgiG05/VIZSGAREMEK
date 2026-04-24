@@ -1,6 +1,7 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
+import { getToken, apiFetch } from './api.js';
 
 const handler = document.getElementById("handler");
 
@@ -8,7 +9,7 @@ const handler = document.getElementById("handler");
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
 
-    const token = localStorage.getItem('token');
+    const token = getToken();
     if (!token) {
         window.location.href = "/sites/login.html";
         return;
@@ -24,13 +25,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // ####### FETCH DATA #######
-    const gardenResp = await fetch(`/api/gardens/${gardenId}`, {
-        method: "GET",
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
+    const gardenResp = await apiFetch(`/api/gardens/${gardenId}`, {
+        method: "GET"
     });
+    if (!gardenResp) return;
     // Handle err403 or err404 
     if (!gardenResp.ok) {
         const errorData = await gardenResp.json();
@@ -338,30 +336,21 @@ function EditGarden(garden, plants, parentContainer, controls) {
 }
 
 async function SaveGarden(garden) {
-    const token = localStorage.getItem('token');
-    const resp = await fetch(`/api/gardens/${garden.id}`, {
+    const resp = await apiFetch(`/api/gardens/${garden.id}`, {
         method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
         body: JSON.stringify(garden)
     });
-    return resp.json();
+    return resp ? resp.json() : null;
 }
 
 async function DeleteGarden(id) {
-    const token = localStorage.getItem('token');
-    const resp = await fetch(`/api/gardens/${id}`, {
-        method: "DELETE",
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
+    const resp = await apiFetch(`/api/gardens/${id}`, {
+        method: "DELETE"
     });
-    const data = await resp.json();
-    console.log(data);
-    return data;
+    if (resp) {
+        return resp.json();
+    }
+    return null;
 }
 
 function ManageRowsColumns(garden, plants, parentContainer, controls) {
