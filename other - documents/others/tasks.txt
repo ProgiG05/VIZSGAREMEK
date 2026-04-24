@@ -1,44 +1,34 @@
 index page: 
-	(maybe more pictures, more icons)
-	make it more compact, use every space
+	change colors
+	add / fix / check responsivity
 ideas page:
-	change color scheme
-	ideas and knowledges page should be identical
-	check / add responsiveness
+	fix some proportions
+	immersive landing cont and section
+	add / fix / check responsivity
 knowledges page:
-	make the reader cards more immersive
-	change some colors and fonts
-	ideas and knowledges page should be identical
-	check / add responsiveness
+	change colors
+	immersive landing cont and section
+	fix some proportions
+	add / fix / check responsivity
 plants page:
-	style the plant searcher container
-	redesign the cards: fetched data(table) + save button(simple button) 
-	check / add responsiveness
-	landing container:
-		title + subtitle + navbuttons
-	plant searcher container:
-		detailed search options neatly organized subcontainers
-	all plants container:
-		at the top: first & best matching searched plant
-		the rest: load button, 2 columns, 40% width
-
+	result plants layout change
+	add searchbar on top of the plant type filter
+	add / fix / check responsivity
 gardens page:
-	check / add responsiveness
-	redesign the garden card:
-		dimensions, height and width
-		grid items
-		icons
-	redesign the page layout:
-		neat showcase layout
-garden adding page:
-	check / add responsiveness
-	layout change, left to right, adding station + adding elements | preview section
-	same color pattern to the gardens page
+	immersive landing container and section
+	adding new garden should be on the gardens page:
+		container: 
+			left side: adding form
+			right side preview for (maybe realtime = oninput)
+	garden card:
+		if the page too small, only the area of the garden for display
+		fix scaling issues
+	add / fix / check responsivity
 garden editing page:
-	check / add responsiveness
-	right and left floating inwards panels
-	same color pattern to the gardens page
-
+	sidepanel: managing rows and columns container
+	adding smth into a cell: adding container next to the table
+	icons for every possible button
+	add / fix / check responsivity
 
 
 other:
