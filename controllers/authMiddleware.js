@@ -9,7 +9,7 @@ function authenticateToken(req, res, next) {
     }
 
     try {
-        const user = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+        const user = jwt.verify(token, process.env.JWT_ACCESS_SECRET, { algorithms: ['HS256'] });
         req.user = user;
         next();
     } catch (err) {
