@@ -55,7 +55,7 @@ exports.GetAllWorksAndTools = async (req, res) => {
     }
 };
 
-//  Authenticated endpoints 
+// Authenticated endpoints
 
 exports.AddNewgarden = async (req, res) => {
     try {
@@ -120,7 +120,7 @@ exports.GetGardenById = async (req, res) => {
         const userId = req.user.id;
         const data = await GardenModel.GetGardenById(id, userId);
         
-        if (!data || data.length === 0) {
+        if (!data || !Array.isArray(data) || data.length === 0) {
             return res.status(404).json({ success: false, message: 'Garden not found or access denied.' });
         }
         
@@ -204,21 +204,111 @@ exports.Login = async (req, res) => {
             return res.status(401).json({ success: false, message: 'Invalid username or password.' });
         }
 
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
             { id: user.id, username: user.username },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: '1h', algorithm: 'HS256' }
         );
+
+        const refreshToken = jwt.sign(
+            { id: user.id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h', algorithm: 'HS256' }
+        );
+
+        const secureCookie = process.env.NODE_ENV === 'production';
+        const cookieBase = { secure: secureCookie, sameSite: 'Strict', path: '/' };
+
+        res.cookie('accessToken', accessToken, {
+            ...cookieBase,
+            httpOnly: true,
+            maxAge: 3600000 // 1 hour
+        });
+
+        res.cookie('refreshToken', refreshToken, {
+            ...cookieBase,
+            httpOnly: true,
+            maxAge: 86400000 // 24 hours
+        });
+
+        res.cookie('user', JSON.stringify({ id: user.id, username: user.username }), {
+            ...cookieBase,
+            httpOnly: false,
+            maxAge: 3600000 // 1 hour
+        });
 
         console.log(`User logged in: ${username}`);
         return res.status(200).json({
             success: true,
-            message: 'Login successful.',
-            token,
-            user: { id: user.id, username: user.username }
+            message: 'Login successful.'
         });
     } catch (err) {
         console.error('Login error:', err.message);
         return res.status(500).json({ success: false, message: 'Login failed. Please try again.' });
+    }
+};
+
+exports.Logout = async (req, res) => {
+    try {
+        const secureCookie = process.env.NODE_ENV === 'production';
+        const cookieBase = { secure: secureCookie, sameSite: 'Strict', path: '/' };
+        
+        res.clearCookie('accessToken', { ...cookieBase, httpOnly: true });
+        res.clearCookie('refreshToken', { ...cookieBase, httpOnly: true });
+        res.clearCookie('user', { ...cookieBase, httpOnly: false });
+        
+        return res.status(200).json({ success: true, message: 'Logged out successfully.' });
+    } catch(err) {
+        console.error('Logout error:', err.message);
+        return res.status(500).json({ success: false, message: 'Logout failed.' });
+    }
+};
+
+exports.Refresh = async (req, res) => {
+    try {
+        const refreshTokenCookie = req.cookies.refreshToken;
+        if (!refreshTokenCookie) {
+            return res.status(401).json({ success: false, message: 'Invalid token.' });
+        }
+
+        const decoded = jwt.verify(refreshTokenCookie, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+
+        const accessToken = jwt.sign(
+            { id: decoded.id, username: decoded.username },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h', algorithm: 'HS256' }
+        );
+
+        const newRefreshToken = jwt.sign(
+            { id: decoded.id, username: decoded.username },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h', algorithm: 'HS256' }
+        );
+
+        const secureCookie = process.env.NODE_ENV === 'production';
+        const cookieBase = { secure: secureCookie, sameSite: 'Strict', path: '/' };
+
+        res.cookie('accessToken', accessToken, {
+            ...cookieBase,
+            httpOnly: true,
+            maxAge: 3600000 // 1 hour
+        });
+
+        res.cookie('refreshToken', newRefreshToken, {
+            ...cookieBase,
+            httpOnly: true,
+            maxAge: 86400000 // 24 hours
+        });
+        
+        res.cookie('user', JSON.stringify({ id: decoded.id, username: decoded.username }), {
+            ...cookieBase,
+            httpOnly: false,
+            maxAge: 3600000 // 1 hour
+        });
+
+        return res.status(200).json({ success: true, message: 'Token refreshed successfully.' });
+    } catch(err) {
+        console.error('Refresh error:', err.message);
+        return res.status(401).json({ success: false, message: 'Invalid token.' });
     }
 };

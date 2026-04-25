@@ -1,5 +1,6 @@
 import { showAlert } from "./popup.js";
 
+
 document.querySelector('.signup-card').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -15,6 +16,7 @@ document.querySelector('.signup-card').addEventListener('submit', async (e) => {
         const res = await fetch('/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify({ username, password })
         });
 

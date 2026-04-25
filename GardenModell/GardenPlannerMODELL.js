@@ -1,11 +1,12 @@
 const mysql = require("mysql2/promise")
 const connection = mysql.createPool({   
-host:     process.env.DB_HOST,
-user:     process.env.DB_USER,
-password: process.env.DB_PASSWORD,
-database: process.env.DB_NAME,
-port: process.env.DB_PORT
+    host:     process.env.DB_HOST,
+    user:     process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 })
+
 
 const plant_search_query = `
     SELECT * FROM plants 
@@ -22,6 +23,7 @@ const plant_search_query = `
     planting LIKE ? OR 
     pruning LIKE ? OR
     harvesting LIKE ?`
+
 
 module.exports = {
     GetAllIdeas: async() => {
@@ -61,14 +63,9 @@ module.exports = {
         const [rows] = await connection.query(`SELECT * FROM worksandtools`)
         return rows
     },
-    CreateUser : async function CreateUser(user) {
-        const {id,username,password} = user
-        const [rows] = await connection.query(`INSERT INTO users (id,username,password) VALUES(?,?,?)`,[id,username,password])
-        return rows
-    },
     GetGardens: async (userId) => {
-    const [rows] = await connection.query('SELECT * FROM garden_manager WHERE user_id = ?', [userId])
-    return rows
+        const [rows] = await connection.query('SELECT * FROM garden_manager WHERE user_id = ?', [userId])
+        return rows
     },
     GetAllPlants: async () => {
         const [rows] = await connection.query('SELECT * FROM plants')
@@ -83,17 +80,17 @@ module.exports = {
         return rows
     },
     GetUserByUsername: async function GetUserByUsername(username) {
-    const [rows] = await connection.query(
-        `SELECT * FROM users WHERE username = ? LIMIT 1`,
-        [username]
-    )
-    return rows
+        const [rows] = await connection.query(
+            `SELECT * FROM users WHERE username = ? LIMIT 1`,
+            [username]
+        )
+        return rows
     },
     CreateUser: async function CreateUser(username, passwordHash) {
-    const [rows] = await connection.query(
-        `INSERT INTO users (username, password) VALUES (?, ?)`,
-        [username, passwordHash]
-    )
-    return rows
+        const [rows] = await connection.query(
+            `INSERT INTO users (username, password) VALUES (?, ?)`,
+            [username, passwordHash]
+        )
+        return rows
     },
 }

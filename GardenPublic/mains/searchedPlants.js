@@ -1,5 +1,6 @@
 import { setupNavbar } from './navbar.js';
 
+
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
 
@@ -9,6 +10,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         method: "GET",
         headers: {"Content-Type": "application/json"}
     })
+
+    if (!response.ok) {
+        searchedPlantContainer.innerHTML = '<p>Could not load plant details.</p>';
+        return;
+    }
+
     const searchedPlant = await response.json()
     searchedPlantContainer.innerHTML = '';
     

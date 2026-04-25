@@ -1,29 +1,38 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
-import { getToken, getUser } from './api.js';
+import { getUser, apiFetch } from './api.js';
 
-const token = getToken();
+
 document.addEventListener("DOMContentLoaded", () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
+
     const user = getUser();
-    if (!token) {
+    if (!user) {
         window.location.href = "/sites/login.html";
         return;
-    }   
+    }
+
     const accountheader = document.getElementById("account-header");
-    const accountHeaderTitle = document.createElement("h1");
-    accountHeaderTitle.textContent = `${user.username}`;
-    accountheader.appendChild(accountHeaderTitle);
+    if (accountheader) {
+        const accountHeaderTitle = document.createElement("h1");
+        accountHeaderTitle.textContent = `${user.username}`;
+        accountheader.appendChild(accountHeaderTitle);
+    }
 
     const logoutBtn = document.getElementById("logout_btn");
-    logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        window.location.href = "/index.html";
-    });
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                await apiFetch('/api/logout', { method: 'POST' });
+            } catch (error) {
+                console.error('Logout request failed:', error.message);
+            }
 
-    console.log(user.username)
+            document.cookie = 'user=; Max-Age=0; path=/; SameSite=Strict';
+            window.location.href = "/index.html";
+        });
+    }
 });

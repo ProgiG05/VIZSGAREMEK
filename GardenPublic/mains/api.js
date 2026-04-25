@@ -1,36 +1,75 @@
 // Shared authentication helpers
 
-export function getToken() {
-    return localStorage.getItem('token');
-}
 
 export function getUser() {
+    const match = document.cookie.match(/(?:^|; )user=([^;]*)/);
+    if (!match) return null;
     try {
-        return JSON.parse(localStorage.getItem('user'));
+        return JSON.parse(decodeURIComponent(match[1]));
     } catch {
-        localStorage.removeItem('user');
         return null;
     }
 }
 
-// Shared fetch wrapper -> auto-attaches token to session, redirects to login page if status 401, JSON parse
+
+// Shared fetch wrapper -> sends cookies automatically, refreshes token on 401, redirects to login if refresh fails
+
+
+let isRefreshing = false;
+let refreshQueue = [];
+
+
+async function doRefresh() {
+    try {
+        const res = await fetch('/api/refresh', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        return res.ok;
+    } catch {
+        return false;
+    }
+}
+
 
 export async function apiFetch(url, options = {}) {
-    const token = getToken();
-
     const headers = { 'Content-Type': 'application/json', ...options.headers };
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
+
+
+    const res = await fetch(url, {
+        ...options,
+        headers,
+        credentials: 'include'
+    });
+
+
+    if (res.status !== 401) {
+        return res;
     }
 
-    const res = await fetch(url, { ...options, headers });
 
-    if (res.status === 401) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/sites/login.html';
-        return;
+    // Token expired -> attempt silent refresh
+    if (isRefreshing) {
+        return new Promise((resolve) => {
+            refreshQueue.push(() => resolve(apiFetch(url, options)));
+        });
     }
 
-    return res;
+
+    isRefreshing = true;
+    const refreshed = await doRefresh();
+    isRefreshing = false;
+
+
+    if (refreshed) {
+        refreshQueue.forEach((cb) => cb());
+        refreshQueue = [];
+        return apiFetch(url, options);
+    }
+
+
+    // Refresh failed -> clear state and redirect
+    refreshQueue = [];
+    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+    window.location.href = '/sites/login.html';
 }
