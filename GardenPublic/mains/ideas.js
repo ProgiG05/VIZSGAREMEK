@@ -1,63 +1,88 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
-import { showAlert, showConfirm } from './popup.js';
+import { showAlert } from './popup.js';
 
-const token = localStorage.getItem("token");
 
-document.addEventListener("DOMContentLoaded", async (e) => {
+document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
-    const user = JSON.parse(localStorage.getItem("user"));
 
-    e.preventDefault()
-    const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
-    const ListOfIdeas = await responseIdeas.json()
+    await loadIdeas();
+    setupTopButton();
+    setupShowSearchButton();
+    setupSearchButton();
+});
 
-    const IdeasCardContainer = document.getElementById("gardenIdeas-container")
-    const OneIdeaShowcasecont = document.getElementById("oneCardShowcase_cont")
 
-    if (ListOfIdeas.length > 0) {
-        const randomNum = Math.floor(Math.random() * ListOfIdeas.length)
-        OneIdeaShowcasecont.appendChild(createIdeaCard(ListOfIdeas[randomNum]))
+async function loadIdeas() {
+    const IdeasCardContainer = document.getElementById("gardenIdeas-container");
+    const OneIdeaShowcasecont = document.getElementById("oneCardShowcase_cont");
+
+    if (!IdeasCardContainer || !OneIdeaShowcasecont) return;
+
+    try {
+        const responseIdeas = await fetch('/api/ideas', {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'same-origin'
+        });
+
+        if (!responseIdeas.ok) {
+            throw new Error('Failed to load ideas');
+        }
+
+        const ListOfIdeas = await responseIdeas.json();
+
+        if (ListOfIdeas.length > 0) {
+            const randomNum = Math.floor(Math.random() * ListOfIdeas.length);
+            OneIdeaShowcasecont.appendChild(createIdeaCard(ListOfIdeas[randomNum]));
+        }
+
+        ListOfIdeas.forEach(idea => {
+            IdeasCardContainer.appendChild(createIdeaCard(idea));
+        });
+    } catch (error) {
+        console.error('Failed to load ideas:', error.message);
+        showAlert('Could not load garden ideas.', 'Error!');
     }
+}
 
-    ListOfIdeas.forEach(idea => {
-        IdeasCardContainer.appendChild(createIdeaCard(idea))
-    });
-
-})
 
 function createIdeaCard(idea) {
     // 1. Create the Main Card Container
     const OneIdeaCard = document.createElement("div");
     OneIdeaCard.setAttribute("class", "garden-card");
 
+
     // 2. Image Section
     const imgWrapper = document.createElement("div");
     imgWrapper.setAttribute("class", "image-placeholder-wrapper");
     const imgPlace = document.createElement("img");
     imgPlace.setAttribute("class", "insideImage");
-    // Using the path logic from your initial loop
     imgPlace.setAttribute("src", "../pics/gardenideas/" + idea.picture + ".png");
     imgPlace.setAttribute("alt", idea.title);
     imgWrapper.appendChild(imgPlace);
     OneIdeaCard.appendChild(imgWrapper);
 
+
     // 3. Title & Description
     const OneIdeaTitle = document.createElement("h2");
     OneIdeaTitle.textContent = idea.title;
     OneIdeaTitle.setAttribute("class", "card-title");
-    OneIdeaTitle.setAttribute("onclick", "ConvertToReadingMode(this)")
+    OneIdeaTitle.addEventListener("click", () => ConvertToReadingMode(OneIdeaCard));
     OneIdeaCard.appendChild(OneIdeaTitle);
+
 
     const OneIdeaDescription = document.createElement("p");
     OneIdeaDescription.textContent = idea.description;
     OneIdeaDescription.setAttribute("class", "card-description");
     OneIdeaCard.appendChild(OneIdeaDescription);
 
+
     OneIdeaCard.appendChild(document.createElement("hr"));
+
 
     // 4. Plant List
     const plantList = document.createElement("p");
@@ -71,38 +96,48 @@ function createIdeaCard(idea) {
     });
     OneIdeaCard.appendChild(plantList);
 
+
     // 5. Stats Footer
     const cardFooter = document.createElement("div");
     cardFooter.setAttribute("class", "card-footer");
     const statsContainer = document.createElement("div");
     statsContainer.setAttribute("class", "stats-container");
 
+
     const createStatBox = (label, value) => {
         const statBox = document.createElement("div");
         statBox.setAttribute("class", "stat-box");
+
         const badge = document.createElement("div");
         badge.setAttribute("class", "stat-badge");
         badge.textContent = value;
+
         const statLabel = document.createElement("div");
         statLabel.setAttribute("class", "stat-label");
         statLabel.textContent = label;
+
         statBox.appendChild(badge);
         statBox.appendChild(statLabel);
         return statBox;
     };
+
 
     statsContainer.appendChild(createStatBox("Sunlight", idea.sunlight));
     statsContainer.appendChild(createStatBox("Water", idea.water));
     statsContainer.appendChild(createStatBox("Hardiness", idea.maintenance));
     cardFooter.appendChild(statsContainer);
 
+
     // 6. Pot Button
     const potButton = document.createElement("button");
     potButton.setAttribute("class", "pot-button");
-    potButton.setAttribute("onclick", "toggleSaveState(this)");
-    
+    potButton.setAttribute("type", "button");
+    potButton.setAttribute("aria-label", "Toggle saved state");
+    potButton.addEventListener("click", () => toggleSaveState(potButton));
+
     const flowerAssembly = document.createElement("div");
     flowerAssembly.setAttribute("class", "flower-assembly");
+
     const flowerHead = document.createElement("div");
     flowerHead.setAttribute("class", "flower-head");
     for (let i = 1; i <= 4; i++) {
@@ -110,10 +145,11 @@ function createIdeaCard(idea) {
         petal.setAttribute("class", `petal p${i}`);
         flowerHead.appendChild(petal);
     }
+
     const center = document.createElement("div");
     center.setAttribute("class", "center");
     flowerHead.appendChild(center);
-    
+
     const stem = document.createElement("div");
     stem.setAttribute("class", "stem");
     flowerAssembly.appendChild(flowerHead);
@@ -134,29 +170,48 @@ function createIdeaCard(idea) {
     cardbottomCont.appendChild(potButton);
 
     OneIdeaCard.appendChild(cardbottomCont);
-    
+
     return OneIdeaCard;
 }
 
+
 // --- Save idea function Logic, Go to the top of the page Logic, Dark theme local storage Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-function toggleSaveState(buttonElement) {buttonElement.classList.toggle('saved');}
-document.getElementById('toup').addEventListener('click', () => {
-    window.scrollTo({top:0, behavior: 'smooth'})
-})
-window.onload = () => {
+function toggleSaveState(buttonElement) {
+    buttonElement.classList.toggle('saved');
 }
-function ConvertToReadingMode(card) {
 
+function setupTopButton() {
+    const topBtn = document.getElementById('toup');
+    if (!topBtn) return;
+
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
+
+window.onload = () => {
+};
+
+function ConvertToReadingMode(card) {
+    console.log('Reading mode clicked:', card);
+}
+
 
 // --- Searchbar Logic 1---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+function setupShowSearchButton() {
+    const showSearchBtn = document.getElementById("showSearch");
+    const searchCont = document.getElementById("search-cont");
 
-document.getElementById("showSearch").addEventListener("click", () => {
-    document.getElementById("search-cont").scrollIntoView({behavior:"smooth"})
-})
+    if (!showSearchBtn || !searchCont) return;
+
+    showSearchBtn.addEventListener("click", () => {
+        searchCont.scrollIntoView({ behavior: "smooth" });
+    });
+}
+
 
 // document.getElementById("searchBar").addEventListener("input", async (e) => {
 //     e.preventDefault()
@@ -175,34 +230,64 @@ document.getElementById("showSearch").addEventListener("click", () => {
 //     });
 // })
 
+
 // --- Searchbar Logic 2---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-document.getElementById("searchBtn").addEventListener("click", async (e) => {
-    e.preventDefault()
-    const searchValue = document.getElementById("searchBar").value.toLowerCase();
-    if (searchValue === "") {showAlert("Searchbar is empty", "Error!")}
-    const IdeasCardContainer = document.getElementById("gardenIdeas-container")
-    IdeasCardContainer.innerHTML = ``
-    const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
-    const ListOfIdeas = await responseIdeas.json()
-    const match = true
-    ListOfIdeas.forEach(idea => {
-        let ideaTitle = idea.title.toLowerCase()
-        if (ideaTitle.includes(searchValue)) {
-            const card = createIdeaCard(idea)
-            IdeasCardContainer.appendChild(card)
-        }
-        else{
-            match == false
-        }
-        //handling no matching result
-    });
-    if (match) {
-        const MessageContainer = document.createElement("div")
-        MessageContainer.setAttribute("class","message-cont")
-        MessageContainer.textContent = ""
-        IdeasCardContainer.appendChild(MessageContainer)
-    }
+function setupSearchButton() {
+    const searchBtn = document.getElementById("searchBtn");
+    if (!searchBtn) return;
 
-})
+    searchBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const searchBar = document.getElementById("searchBar");
+        const IdeasCardContainer = document.getElementById("gardenIdeas-container");
+
+        if (!searchBar || !IdeasCardContainer) return;
+
+        const searchValue = searchBar.value.toLowerCase().trim();
+
+        if (searchValue === "") {
+            showAlert("Searchbar is empty", "Error!");
+            return;
+        }
+
+        IdeasCardContainer.innerHTML = ``;
+
+        try {
+            const responseIdeas = await fetch('/api/ideas', {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                credentials: 'same-origin'
+            });
+
+            if (!responseIdeas.ok) {
+                throw new Error('Failed to load ideas');
+            }
+
+            const ListOfIdeas = await responseIdeas.json();
+            let foundMatch = false;
+
+            ListOfIdeas.forEach(idea => {
+                const ideaTitle = idea.title.toLowerCase();
+
+                if (ideaTitle.includes(searchValue)) {
+                    const card = createIdeaCard(idea);
+                    IdeasCardContainer.appendChild(card);
+                    foundMatch = true;
+                }
+            });
+
+            if (!foundMatch) {
+                const MessageContainer = document.createElement("div");
+                MessageContainer.setAttribute("class", "message-cont");
+                MessageContainer.textContent = "No matching garden ideas found.";
+                IdeasCardContainer.appendChild(MessageContainer);
+            }
+        } catch (error) {
+            console.error('Search failed:', error.message);
+            showAlert('Could not search garden ideas.', 'Error!');
+        }
+    });
+}

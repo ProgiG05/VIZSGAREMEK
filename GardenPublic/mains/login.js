@@ -1,5 +1,6 @@
 import { showAlert } from "./popup.js";
 
+
 document.querySelector('.login-card').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -15,14 +16,13 @@ document.querySelector('.login-card').addEventListener('submit', async (e) => {
         const res = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
             body: JSON.stringify({ username, password })
         });
 
         const data = await res.json();
 
         if (data.success) {
-            localStorage.setItem('user', JSON.stringify(data.user));
-            localStorage.setItem('token', data.token);
             window.location.href = '/index.html';
         } else {
             showAlert(data.message || 'Login failed. Please check your credentials.', "Error!");
