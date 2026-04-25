@@ -1,75 +1,36 @@
 // Shared authentication helpers
 
+export function getToken() {
+    return localStorage.getItem('token');
+}
 
 export function getUser() {
-    const match = document.cookie.match(/(?:^|; )user=([^;]*)/);
-    if (!match) return null;
     try {
-        return JSON.parse(decodeURIComponent(match[1]));
+        return JSON.parse(localStorage.getItem('user'));
     } catch {
+        localStorage.removeItem('user');
         return null;
     }
 }
 
-
-// Shared fetch wrapper -> sends cookies automatically, refreshes token on 401, redirects to login if refresh fails
-
-
-let isRefreshing = false;
-let refreshQueue = [];
-
-
-async function doRefresh() {
-    try {
-        const res = await fetch('/api/refresh', {
-            method: 'POST',
-            credentials: 'include'
-        });
-        return res.ok;
-    } catch {
-        return false;
-    }
-}
-
+// Shared fetch wrapper -> auto-attaches token to session, redirects to login page if status 401, JSON parse
 
 export async function apiFetch(url, options = {}) {
+    const token = getToken();
+
     const headers = { 'Content-Type': 'application/json', ...options.headers };
-
-
-    const res = await fetch(url, {
-        ...options,
-        headers,
-        credentials: 'include'
-    });
-
-
-    if (res.status !== 401) {
-        return res;
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
 
+    const res = await fetch(url, { ...options, headers });
 
-    // Token expired -> attempt silent refresh
-    if (isRefreshing) {
-        return new Promise((resolve) => {
-            refreshQueue.push(() => resolve(apiFetch(url, options)));
-        });
+    if (res.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/sites/login.html';
+        return;
     }
 
-
-    isRefreshing = true;
-    const refreshed = await doRefresh();
-    isRefreshing = false;
-
-
-    if (refreshed) {
-        refreshQueue.forEach((cb) => cb());
-        refreshQueue = [];
-        return apiFetch(url, options);
-    }
-
-
-    // Refresh failed -> clear state and redirect
-    refreshQueue = [];
-    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-    window.location.href = '/sites/login.html';
+    return res;
 }

@@ -1,7 +1,8 @@
 import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
-import { getUser, apiFetch } from './api.js';
+import { getToken, getUser, apiFetch } from './api.js';
 import { showAlert, showConfirm } from './popup.js';
 
+const token = getToken();
 
 document.addEventListener('DOMContentLoaded', async () => {
     setupNavbar();
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Only allow saved plants access when logged in
     if (SavedPlantsGrouping) {
         SavedPlantsGrouping.addEventListener('click', async () => {
-            if (!user) {
+            if (!token || !user) {
                 showAlert("Please log in to view your saved plants.", "Not logged in!");
                 return;
             }
@@ -93,9 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('clear-soil-btn').addEventListener('click', () => clearFilters('soil'));
 });
 
-
 // --- Creating the cards ---
-
 
 function createPlantCards(plant) {
     const PlantCard = document.createElement("div");
@@ -195,13 +194,10 @@ function createPlantCards(plant) {
     return PlantCard;
 }
 
-
 // --- Toggle save & API calls ---
 
-
 async function toggleSaveState(buttonElement, plantId) {
-    const user = getUser();
-    if (!user) {
+    if (!token) {
         showAlert("Please log in to save plants.", "Not logged in!");
         return;
     }
@@ -216,7 +212,6 @@ async function toggleSaveState(buttonElement, plantId) {
         showAlert("Could not save plant. Please try again.", "Error!");
     }
 }
-
 
 async function SavePlant(plantId) {
     const user = getUser();
@@ -239,7 +234,6 @@ async function SavePlant(plantId) {
     return await response.json();
 }
 
-
 async function getSavedPlants() {
     const response = await apiFetch('/api/savedplants', {
         method: 'GET'
@@ -252,17 +246,13 @@ async function getSavedPlants() {
     return await response.json();
 }
 
-
 function capitalizeFirstLetter(word) {
     return String(word).charAt(0).toUpperCase() + String(word).slice(1);
 }
 
-
 // --- Search display logic ---
 
-
 const form = document.getElementById('search-form');
-
 
 function SearchPlantDetails(details, container) {
     container.innerText = '';
@@ -307,9 +297,7 @@ function SearchPlantDetails(details, container) {
     container.appendChild(ButtonCont);
 }
 
-
 // --- Filter helpers ---
-
 
 function clearFilters(type) {
     const checks = document.querySelectorAll(`.${type}-radioBtn`);
@@ -329,9 +317,7 @@ function clearForm() {
     clearFilters('soil');
 }
 
-
 // --- Scroll buttons ---
-
 
 document.getElementById("showSearch_Btn").addEventListener("click", () => {
     document.getElementById("search-form").scrollIntoView({ behavior: "smooth" });
@@ -340,7 +326,6 @@ document.getElementById("showBroswe_Btn").addEventListener("click", () => {
     document.getElementById("browse-title").scrollIntoView({ behavior: "smooth" });
 });
 
-
 async function typeFilter(type, plantsData) {
     const filteredPlants = plantsData.filter(plant => plant.type === type);
     const PlantsContainer = document.getElementById('other-searched-results');
@@ -348,9 +333,7 @@ async function typeFilter(type, plantsData) {
     filteredPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant)));
 }
 
-
 // --- Search handler ---
-
 
 document.getElementById('searchPlant_Btn').addEventListener('click', async (e) => {
     e.preventDefault();

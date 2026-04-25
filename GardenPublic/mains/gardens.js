@@ -1,17 +1,16 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
-import { getUser, apiFetch } from './api.js';
+import { getToken, getUser, apiFetch } from './api.js';
 import { showAlert, showConfirm } from './popup.js';
 
+const gardensContainer = document.getElementById("gardens-container");
+const token = getToken();
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
-
-    const gardensContainer = document.getElementById("gardens-container");
-    const user = getUser();
 
     // Fetch plants first as they are needed for both real and example gardens
     const plantsResponse = await fetch("/api/plants", {
@@ -20,14 +19,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     const plants = await plantsResponse.json();
 
-    if (!user) {
+    if (!token) {
         const infoCont = document.getElementById("information-cont")
         
-        const newGardenBtn = document.getElementById("newgarden_btn");
-        const checkoutBtn = document.getElementById("checkout_btn");
-        
-        if (newGardenBtn) newGardenBtn.style.display = "none";
-        if (checkoutBtn) checkoutBtn.style.display = "none";
+        document.getElementById("newgarden_btn").style.display = "none";
+        document.getElementById("checkout_btn").style.display = "none";
 
         const loginText = document.createElement("h1")
         loginText.textContent = "You need to be logged in to view and create gardens."
@@ -48,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         exText.style.width = "100%";
         exText.style.marginTop = "2rem";
 
-        if (gardensContainer) gardensContainer.appendChild(exText);
+        gardensContainer.appendChild(exText);
         
         // Example garden data
         const exGarden = {
@@ -66,33 +62,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     const gardensResponse = await apiFetch("/api/gardens", {
         method: "GET"
     });
-    if (!gardensResponse || !gardensResponse.ok) return;
+    if (!gardensResponse) return;
     const gardens = await gardensResponse.json();
 
-    const newGardenBtn = document.getElementById("newgarden_btn");
-    const checkoutBtn = document.getElementById("checkout_btn");
+    document.getElementById("newgarden_btn").addEventListener("click", () => {
+        window.location.href = "/sites/newgarden.html";
+    })
+    document.getElementById("checkout_btn").addEventListener("click", () => {
+        const gardensCont = document.getElementById("gardens-container");
+        if (gardensCont) {
+            gardensCont.scrollIntoView({ behavior: "smooth" });
+        }
+    })
 
-    if (newGardenBtn) {
-        newGardenBtn.addEventListener("click", () => {
-            window.location.href = "/sites/newgarden.html";
-        })
-    }
-    
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener("click", () => {
-            if (gardensContainer) {
-                gardensContainer.scrollIntoView({ behavior: "smooth" });
-            }
-        })
-    }
-
-    if (gardensContainer) {
-        gardens.forEach(garden => {
-            renderGarden(garden, plants, false);
-        });
-    }
+    gardens.forEach(garden => {
+        renderGarden(garden, plants, false);
+    });
 });
-
 
 async function DeleteGarden(id) {
     const confirmed = await showConfirm("Are you sure you want to delete this garden? You will not be able to access this garden after deletion.", "Delete");
@@ -106,11 +92,7 @@ async function DeleteGarden(id) {
     }
 }
 
-
 function renderGarden(garden, plants, isExample = false) {
-    const gardensContainer = document.getElementById("gardens-container");
-    if (!gardensContainer) return;
-
     const splittedContent = garden.garden_content.split(';');
 
     let plantCellsCount = 0;
@@ -233,7 +215,6 @@ function renderGarden(garden, plants, isExample = false) {
 
     gardensContainer.appendChild(gardenCard);
 }
-
 
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");

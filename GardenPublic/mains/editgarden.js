@@ -1,80 +1,70 @@
 import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
-import { getUser, apiFetch } from './api.js';
+import { getToken, apiFetch } from './api.js';
 import { showAlert, showConfirm } from './popup.js';
 
+const handler = document.getElementById("handler");
+const RowColumnManageSidePanel = document.getElementById("RowColumnManageSidePanel")
 
 document.addEventListener("DOMContentLoaded", async () => {
-    setupNavbar();
-    setupSidePanel();
-    setupLoginState();
 
-    const user = getUser();
-    if (!user) {
+    setupNavbar();
+    const token = getToken();
+
+    if (!token) {
         window.location.href = "/sites/login.html";
         return;
     }
 
-    const handler = document.getElementById("handler");
-    const RowColumnManageSidePanel = document.getElementById("RowColumnManageSidePanel");
-
     // ------------- GET GARDEN ID FROM URL --------------------------------------------------
-    const urlparams = new URLSearchParams(window.location.search);
+    const urlparams = new URLSearchParams(window.location.search)
     const gardenId = urlparams.get("id");
     if (!gardenId) {
         await showAlert("No garden ID provided!");
-        window.location.href = "/sites/gardens.html";
+        window.location.href = "/gardens.html";
         return;
     }
     // ---------------------------------------------------------------------------------------
 
+
     // ------------- FETCH DATA --------------------------------------------------
-    const gardenResp = await apiFetch(`/api/gardens/${gardenId}`, { method: "GET" });
+    const gardenResp = await apiFetch(`/api/gardens/${gardenId}`, { method: "GET"});
     if (!gardenResp) return;
-
-    let gardenData;
-    try {
-        gardenData = await gardenResp.json();
-    } catch {
-        await showAlert("Garden not found or access denied.");
-        window.location.href = "/sites/gardens.html";
-        return;
-    }
-
+    // Handle err403 or err404 
     if (!gardenResp.ok) {
-        await showAlert(gardenData.message || "Garden not found or access denied.");
-        window.location.href = "/sites/gardens.html";
+        const errorData = await gardenResp.json();
+        await showAlert(errorData.message || "Garden not found or access denied.");
+        window.location.href = "/gardens.html";
         return;
     }
-
-    const garden = Array.isArray(gardenData) ? gardenData[0] : gardenData;
-    if (!garden) {
+    
+    const gardenArray = await gardenResp.json();
+    if (!gardenArray || (Array.isArray(gardenArray) && gardenArray.length === 0)) {
         await showAlert("Garden not found!");
-        window.location.href = "/sites/gardens.html";
+        window.location.href = "/gardens.html";
         return;
     }
-
-    const plantsResp = await fetch("/api/plants", {
+    const plantsResp = await fetch(`/api/plants`, {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     });
     // ---------------------------------------------------------------------------------------
+
 
     // ------------- SETUP UI & INITIAL RENDER --------------------------------------------------
     const plants = await plantsResp.json();
     const editGardenContainer = document.getElementById("editGardenContainer");
     const controls = loadContents(plants);
     // ------------------------------------------------------------------------
-    EditGarden(garden, plants, editGardenContainer, controls);
+    EditGarden(gardenArray, plants, editGardenContainer, controls);
     // ---------------------------------------------------------------------------------------
+
 });
 
 
 
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 
 
 
@@ -187,9 +177,7 @@ function loadContents(plants) {
 
 
 
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 
 
 
@@ -230,9 +218,7 @@ function CreateTable(splittedContent, plants) {
 
 
 
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 
 
 
@@ -247,6 +233,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     gardenTitle.textContent = garden.garden_name;
     gardenTitle.contentEditable = "true";
     gardenCard.appendChild(gardenTitle);
+
 
     // ------------- RENDER TABLE --------------------------------------------------
     const splittedContent = garden.garden_content.split(";");
@@ -269,7 +256,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const backBtn = document.createElement("button");
     backBtn.textContent = "Back to List";
     backBtn.className = "back_btn";
-    backBtn.onclick = async () => {if (await showConfirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/sites/gardens.html";}}
+    backBtn.onclick = async () => {if (await showConfirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/gardens.html";}}
     actionButtonsContainer.appendChild(backBtn);
 
     const manageRowsColumnsBtn = document.createElement("button");
@@ -428,7 +415,6 @@ function EditGarden(garden, plants, parentContainer, controls) {
     };
 }
 
-
 async function SaveGarden(garden) {
     const resp = await apiFetch(`/api/gardens/${garden.id}`, {
         method: "POST",
@@ -436,7 +422,6 @@ async function SaveGarden(garden) {
     });
     return resp ? resp.json() : null;
 }
-
 
 async function DeleteGarden(id) {
     const resp = await apiFetch(`/api/gardens/${id}`, {method: "DELETE"});
@@ -446,16 +431,12 @@ async function DeleteGarden(id) {
 
 
 
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 
 
 
 function ManageRowsColumns(garden, plants, parentContainer, controls) {
     const sidePanel = document.getElementById("RowColumnManageSidePanel");
-    if (!sidePanel) return;
-
     sidePanel.innerHTML = "";
     sidePanel.classList.add("open");
 
@@ -507,7 +488,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
         const addColumns = parseInt(addColumnsInput.value) || 0;
         
         let rows = garden.garden_content.split(";");
-
+        
         // Add columns to existing rows
         if (addColumns > 0) {
             rows = rows.map(row => {

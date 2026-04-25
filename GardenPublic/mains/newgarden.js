@@ -1,23 +1,16 @@
 import { setupNavbar } from './navbar.js';
-import { setupSidePanel } from './navbar.js';
-import { setupLoginState } from './navbar.js';
-import { getUser, apiFetch } from './api.js';
-
+import { setupSidePanel} from './navbar.js';
+import { getToken, apiFetch } from './api.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
-    setupLoginState();
 
-    const user = getUser();
-    if (!user) {
-        window.location.href = "/sites/login.html";
-        return;
-    }
+    const token = getToken();
+    if (!token) {  window.location.href = "/sites/login.html";  return;}
     
     ShowAddGardenForm();
 });
-
 
 function ShowAddGardenForm() {
     document.getElementById("preview-btn").addEventListener("click", () => {
@@ -69,7 +62,6 @@ function ShowAddGardenForm() {
     });
 }
 
-
 async function newGarden(garden) {
     const resp = await apiFetch(`/api/gardens/newgarden`, {
         method: "POST",
@@ -77,7 +69,6 @@ async function newGarden(garden) {
     });
     return resp ? resp.json() : null;
 }
-
 
 function previewGarden(rows, columns) {
     const gardenTable = document.createElement("table");

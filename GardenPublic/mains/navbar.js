@@ -1,5 +1,6 @@
-import { getUser } from './api.js';
+import { getToken, getUser } from './api.js';
 
+const token = getToken();
 const user = getUser();
 
 const accountHandler = (e) => {
@@ -55,7 +56,7 @@ export function setupNavbar() {
     header.appendChild(loginBtn);
 
     // Only override login button text if user is logged in
-    if (user) {
+    if (token && user) {
         loginBtn.textContent = user.username;
         loginBtn.onclick = accountHandler;
         loginBtn.setAttribute('href', '/sites/accounts.html');
@@ -174,7 +175,7 @@ export function setupSidePanel() {
 }
 
 export function setupLoginState() {
-    if (!user) return;
+    if (!token || !user) return;
 
     const topLoginBtn = document.getElementById("logIn_Btn");
     const sideLoginBtn = document.getElementById("login_Btn");
