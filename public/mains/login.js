@@ -32,7 +32,7 @@ document.querySelector(".login-card").addEventListener("submit", async (e) => {
   } catch (error) {
     console.error("Login request failed:", error);
     showAlert(
-      "Could not connect to the server. Please try again later.",
+      `Could not connect to the server. Please try again later. ${error}`,
       "Error!",
     );
   }
