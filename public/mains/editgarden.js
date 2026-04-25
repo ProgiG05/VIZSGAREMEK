@@ -431,7 +431,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
 
 async function SaveGarden(garden) {
     const resp = await apiFetch(`/api/gardens/${garden.id}`, {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(garden)
     });
     return resp ? resp.json() : null;

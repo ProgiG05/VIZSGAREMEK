@@ -98,7 +98,7 @@ exports.addNewGarden = async (req, res) => {
     }
 
     garden.user_id = req.user.id;
-    const result = await GardenModel.AddNewGarden(garden);
+    const result = await GardenModel.createGarden(garden);
     console.log(
       `Garden created: "${garden.garden_name}" by user ${req.user.username}`,
     );

@@ -418,8 +418,16 @@ body {
 
 /*------------------------------------------------------------------------------------------*/
 
-.chart-cont {
+.right-side-cont {
     width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: stretch;
+}
+
+.chart-cont {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -427,7 +435,7 @@ body {
     padding: 1.5rem;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 0.8rem;
-    align-self: stretch;
+    box-sizing: border-box;
 }
 
 .chart-row {
@@ -471,12 +479,57 @@ body {
     text-align: left;
 }
 
+.extra-stats-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.extra-stats-cont h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.3rem;
+    width: 100%;
+    color: white;
+    font-family: var(--font-data);
+}
+
+.extra-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-family: var(--font-data);
+    font-size: 0.9rem;
+    color: white;
+}
+
+.extra-stat-label {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.extra-stat-value {
+    text-align: right;
+}
+
 @media (max-width: 900px) {
     .garden-card-body {
         display: flex;
         flex-direction: column;
     }
     .chart-cont{
+        width: 100%;
+    }
+    .right-side-cont {
         width: 90%;
     }
     .plant-list-cont{

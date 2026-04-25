@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!user) {
         const infoCont = document.getElementById("information-cont")
-        
+
         const newGardenBtn = document.getElementById("newgarden_btn");
         const checkoutBtn = document.getElementById("checkout_btn");
-        
+
         if (newGardenBtn) newGardenBtn.style.display = "none";
         if (checkoutBtn) checkoutBtn.style.display = "none";
 
@@ -49,14 +49,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         exText.style.marginTop = "2rem";
 
         if (gardensContainer) gardensContainer.appendChild(exText);
-        
+
         // Example garden data
         const exGarden = {
             id: 0,
             garden_name: "BetterStay",
             garden_content: "+,+,+,+,0,0,0,0,0,+,+,+,+;+,+,+,+,0,+,+,+,0,+,+,+,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,0,0,0,0,0,0,0,0,0,0,0,+;+,+,+,+,+,+,+,+,+,+,+,+,+"
         }
-        
+
         renderGarden(exGarden, plants, true);
         return;
     }
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.href = "/sites/newgarden.html";
         })
     }
-    
+
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
             if (gardensContainer) {
@@ -118,6 +118,10 @@ function renderGarden(garden, plants, isExample = false) {
     let emptyCellsCount = 0;
     const usedPlants = new Set();
 
+    const soilCounts = {};
+    const waterCounts = {};
+    const sunlightCounts = {};
+
     splittedContent.forEach(row => {
         if (row === "") return;
         row.split(",").forEach(col => {
@@ -127,10 +131,36 @@ function renderGarden(garden, plants, isExample = false) {
                 plantCellsCount++;
                 const plantId = parseInt(col);
                 const plant = plants.find(p => p.id === plantId);
-                if (plant) { usedPlants.add(plant.common_name); }
+                if (plant) {
+                    usedPlants.add(plant.common_name);
+
+                    const s = plant.soil || plant.Soil;
+                    const w = plant.water || plant.Watering;
+                    const sl = plant.sunlight || plant.Sunlight;
+
+                    if (s) soilCounts[s] = (soilCounts[s] || 0) + 1;
+                    if (w) waterCounts[w] = (waterCounts[w] || 0) + 1;
+                    if (sl) sunlightCounts[sl] = (sunlightCounts[sl] || 0) + 1;
+                }
             }
         });
     });
+
+    const getMostFrequent = (counts) => {
+        let max = 0;
+        let mostFrequent = "N/A";
+        for (const key in counts) {
+            if (counts[key] > max) {
+                max = counts[key];
+                mostFrequent = key;
+            }
+        }
+        return mostFrequent;
+    };
+
+    const avgSoil = getMostFrequent(soilCounts);
+    const avgWater = getMostFrequent(waterCounts);
+    const avgSunlight = getMostFrequent(sunlightCounts);
 
     const maxCells = plantCellsCount + disabledCellsCount + emptyCellsCount;
 
@@ -172,6 +202,10 @@ function renderGarden(garden, plants, isExample = false) {
     tableContainer.className = "table-cont";
     tableContainer.appendChild(CreateTable(splittedContent, plants));
 
+    // Right Side Wrapper
+    const rightSideCont = document.createElement("div");
+    rightSideCont.className = "right-side-cont";
+
     // Right Side: Chart Container
     const chartCont = document.createElement("div");
     chartCont.className = "chart-cont";
@@ -208,9 +242,43 @@ function renderGarden(garden, plants, isExample = false) {
         chartCont.appendChild(row);
     });
 
+    // Right Side: Extra Stats Container
+    const extraStatsCont = document.createElement("div");
+    extraStatsCont.className = "extra-stats-cont";
+
+    const extraStatsTitle = document.createElement("h3");
+    extraStatsTitle.textContent = "Garden Averages";
+    extraStatsCont.appendChild(extraStatsTitle);
+
+    const extraStats = [
+        { label: "Soil", value: avgSoil },
+        { label: "Watering", value: avgWater },
+        { label: "Sunlight", value: avgSunlight }
+    ];
+
+    extraStats.forEach(stat => {
+        const row = document.createElement("div");
+        row.className = "extra-stat-row";
+
+        const label = document.createElement("span");
+        label.className = "extra-stat-label";
+        label.textContent = stat.label + ":";
+
+        const value = document.createElement("span");
+        value.className = "extra-stat-value";
+        value.textContent = stat.value !== "N/A" ? stat.value.charAt(0).toUpperCase() + stat.value.slice(1) : stat.value;
+
+        row.appendChild(label);
+        row.appendChild(value);
+        extraStatsCont.appendChild(row);
+    });
+
+    rightSideCont.appendChild(chartCont);
+    rightSideCont.appendChild(extraStatsCont);
+
     cardBody.appendChild(plantListCont);
     cardBody.appendChild(tableContainer);
-    cardBody.appendChild(chartCont);
+    cardBody.appendChild(rightSideCont);
     gardenCard.appendChild(cardBody);
 
     if (!isExample) {
@@ -241,11 +309,13 @@ function CreateTable(splittedContent, plants) {
     table.style.display = "inline-table";
 
     const paths = {
-        "fv": "../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "fruits": "../pics/icons/nutrition_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "vegetables": "../pics/icons/potted_plant_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
         "herbs": "../pics/icons/cannabis_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
         "flowers": "../pics/icons/local_florist_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
         "trees": "../pics/icons/forest_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
-        "sgf": "../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+        "succulents": "../pics/icons/psychiatry_25dp_000000_FILL0_wght400_GRAD0_opsz24.png",
+        "grass_ferns": "../pics/icons/grass_25dp_000000_FILL0_wght400_GRAD0_opsz24.png"
     };
 
     splittedContent.forEach(row => {
@@ -270,16 +340,22 @@ function CreateTable(splittedContent, plants) {
                     if (plant) {
                         switch (plant.type) {
                             case "fruits":
+                                insidePicture.src = paths.fruits;
+                                break;
                             case "vegetables":
-                                insidePicture.src = paths.fv;
+                                insidePicture.src = paths.vegetables;
                                 break;
                             case "herbs":
                                 insidePicture.src = paths.herbs;
                                 break;
                             case "succulents":
+                                insidePicture.src = paths.succulents;
+                                break;
                             case "grass":
+                                insidePicture.src = paths.grass_ferns;
+                                break;
                             case "ferns":
-                                insidePicture.src = paths.sgf;
+                                insidePicture.src = paths.grass_ferns;
                                 break;
                             case "flowers":
                                 insidePicture.src = paths.flowers;
