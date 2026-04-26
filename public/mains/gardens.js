@@ -43,10 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         infoCont.appendChild(loginBtn);
 
         const exText = document.createElement("h2")
-        exText.textContent = "You can see an example garden below.";
-        exText.style.textAlign = "center";
-        exText.style.width = "100%";
-        exText.style.marginTop = "2rem";
+        exText.textContent = "This is how a garden layout would look like. You can see an example garden below.";
+        exText.className = "exampleText"
 
         if (gardensContainer) gardensContainer.appendChild(exText);
 

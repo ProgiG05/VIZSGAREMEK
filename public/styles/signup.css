@@ -1,10 +1,10 @@
 :root {
-    --forest-green: #2d5a27;
-    --leaf-green: #4caf50;
-    --soft-sage: #8da88b;
-    --mist-green: #f1f8f1;
-    --earth-brown: #5d4037;
-    --white: #ffffff;
+    --forest-green: #346133;
+    --leaf-green: #408134;
+    --soft-sage: #4c8148;
+    --mist-green: #d8e6d9;
+    --earth-brown: #4d7049;
+    --white: #d8e6d9;
     --transition: all 0.3s ease;
 }
 
@@ -143,6 +143,15 @@ body {
 #light-icon {order: 2;opacity: 0;}
 #darkmode.dark-active #dark-icon {opacity: 0;}
 #darkmode.dark-active #light-icon {opacity: 1;}
+
+.signup-section {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 3rem);
+}
 
 .signup-container {
     display: flex;

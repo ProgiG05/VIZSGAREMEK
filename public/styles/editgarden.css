@@ -1,6 +1,8 @@
 :root {
     --body-bg: #b2cd8f;
     --main-font-color: #0b0e0a;
+    --secondary-font-color: #dbecd5;
+    --sidebar-bg: #0c2908cb;
     --font-main: Georgia, serif;
     --font-data: monospace;
     --main-cont-bg: #7f995c;
@@ -10,7 +12,7 @@
     --general-btns-hover-bg: #1a1e1a;
     --general-btns-hover-font: #e0e9d5;
 
-    --garden-card-bg: linear-gradient(145deg, #1d502a, #3e6b3c);
+    --garden-card-bg: linear-gradient(to bottom,#3d663a, #1c592b);
     --garden-card-accent: rgba(86, 86, 86, 0.523);
     --garden-card-border: 0.25rem solid #071a14;
     --garden-card-title: rgb(9, 16, 1);
@@ -41,7 +43,8 @@ body {
 
 #editGardenContainer {
     width: 98%;
-    height: 90vh;
+    min-width: 90vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -300,17 +303,18 @@ body {
 #addrowscolumns-form, #removerowscolumns-form {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 1rem;
     align-items: center;
     justify-content: center;
     padding: 1rem;
     border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.416);
     color: var(--main-font-color);
 }
 
 #addrowscolumns-form input {
-    width: 100px;
+    width: 70%;
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: 1px solid #000;
@@ -320,9 +324,12 @@ body {
 }
 
 #addrowscolumns-form label {
-    font-size: 1.2rem;
+    font-size: clamp(0.5rem, 1.6vw, 1.75rem);
     font-weight: bold;
-    color: var(--main-font-color);
+    color: var(--secondary-font-color);
+}
+#addrowscolumns-form button, #removerowscolumns-form button{
+    width: 90%;
 }
 
 #manage-rows-columns-container {
@@ -332,6 +339,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    width: 100%;
     background-color: transparent;
 }
 
@@ -341,7 +349,8 @@ body {
     right: -400px;
     width: 350px;
     height: 100vh;
-    background: var(--garden-card-bg);
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(10px);
     z-index: 2000;
     transition: right 0.3s ease;
     box-shadow: -5px 0 15px rgba(0,0,0,0.5);
@@ -375,7 +384,9 @@ button:hover {
     color: var(--general-btns-hover-font);
     letter-spacing: 1px;
 }
-
+.cancel_btn{
+    width: 60%;    
+}
 .cancel_btn, .back_btn {
     background-color: #e0e9d5;
     color: #1a1e1a;

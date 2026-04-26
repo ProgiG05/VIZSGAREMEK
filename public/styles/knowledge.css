@@ -1,8 +1,8 @@
 :root {
     --body-bg: #b2cd8f;
-    --header-cont-bg: linear-gradient(to left, #364d26,#92ac70);
-    --card-cont-bg: linear-gradient(to right, #364d26,#92ac70);
-    --general-font-color:#060b04;
+    --header-cont-bg: linear-gradient(to right, #64884a, #92ac70);
+    --card-cont-bg: linear-gradient(to right, #658151, #92ac70);
+    --general-font-color: #11170f;
 
     --search-btns-bg: #e0e9d5;
     --search-btns-font: #1a1e1a;
@@ -10,32 +10,34 @@
     --search-btns-hover-font: #e0e9d5;
 
     --card-bg: #1a1e1a;
-    --paragraph-bg:rgb(255, 239, 229);
-    --paragraph-font:rgb(10, 4, 1);
-    --card-shadow:rgba(249, 249, 157, 0.751);
-    --card-text:#a7f070;
-    --card-borders-color:rgb(255, 212, 185);
-    --cardBtn-bg: #6b3010;
-    --cardBtn-hover-bg: #7c3a15;
+    --paragraph-bg: rgb(255, 239, 229);
+    --paragraph-font: rgb(10, 4, 1);
+    --card-shadow: rgba(249, 249, 157, 0.751);
+    --card-text: #a7f070;
+    --card-borders-color: rgb(255, 212, 185);
+    --cardBtn-bg: #26351e;
+    --cardBtn-hover-bg: #466046;
     --cardbtn-color: #ffffff;
     --cardbtn-hover-font-color: #d9fad3;
 }
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
-body.dark-theme{
+body.dark-theme {
     --body-bg: #273220;
     --navbarBtn-bg: #121e0bee;
-    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-font-color: rgb(255, 255, 255);
     --navbarBtn-hover-bg: #030502;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
 
-    --header-cont-bg: linear-gradient(to left, #222e1aff,#495f33ff);
-    --card-cont-bg: linear-gradient(to right, #222e1aff,#495f33ff);
-    --general-font-color:#ffffff;
+    --header-cont-bg: linear-gradient(to right, #222e1aff, #495f33ff);
+    --card-cont-bg: linear-gradient(to right, #222e1aff, #495f33ff);
+    --general-font-color: #c3eeae;
 }
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 body {
     background: var(--body-bg);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -45,7 +47,8 @@ body {
     align-items: center;
     justify-items: center;
 }
-.header-container{
+
+.header-container {
     width: 95%;
     min-height: 75vh;
     display: flex;
@@ -53,10 +56,11 @@ body {
     margin: 2rem 0 5rem 0;
     padding: 2rem 0 2rem 0;
     border-radius: 5rem;
-    align-items:center;
-    background-image: var(--header-cont-bg);
+    align-items: center;
+    background: var(--header-cont-bg);
 }
-.left-cont{
+
+.left-cont {
     margin: 0;
     padding: 1rem;
     display: flex;
@@ -67,7 +71,8 @@ body {
     width: 50%;
     height: 100%;
 }
-.right-cont{
+
+.right-cont {
     margin: 0;
     padding: 0;
     width: 50%;
@@ -77,9 +82,13 @@ body {
     align-items: center;
     justify-items: center;
 }
-.right-cont > div{width: 80%;}
-.main-title{
-    font-family: Georgia, 'Times New Roman', Times, serif; 
+
+.right-cont>div {
+    width: 80%;
+}
+
+.main-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
     font-size: clamp(2.5rem, 5.9vw, 7rem);
     text-shadow: var(--title-text-shadow);
@@ -90,7 +99,8 @@ body {
     text-align: left;
     padding-left: 5rem;
 }
-.sub-title{
+
+.sub-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
     border-left: 1rem solid var(--general-font-color);
@@ -103,12 +113,13 @@ body {
     padding-left: 2vw;
     margin-left: 5vw;
 }
-#showContainer{
+
+#showContainer {
     width: 30vw;
     height: fit-content;
     padding: 0.8rem 0 0.8rem 0;
-    margin: 8rem 0 0 0 ;
-    font-size: clamp(0.7rem,1vw,3rem);
+    margin: 8rem 0 0 0;
+    font-size: clamp(0.7rem, 1vw, 3rem);
     border-radius: 2rem;
     font-family: 'Courier New', Courier, monospace;
     border: none;
@@ -117,7 +128,8 @@ body {
     background-color: var(--search-btns-bg);
     color: var(--search-btns-font);
 }
-#showContainer:hover{
+
+#showContainer:hover {
     width: 32vw;
     transition: all 0.2s ease-in-out;
     background-color: var(--search-btns-hover-bg);
@@ -128,7 +140,7 @@ body {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.ShowCaseOneKnowledgeCard{
+.ShowCaseOneKnowledgeCard {
     width: 40%;
     height: fit-content;
     display: flex;
@@ -138,7 +150,7 @@ body {
     overflow: hidden;
     background-color: var(--card-bg);
     padding: 1rem;
-    margin: 1.5rem ;
+    margin: 1.5rem;
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--card-shadow);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -146,32 +158,35 @@ body {
     z-index: 1000;
     position: relative;
 }
+
 .ShowCaseOneKnowledgeCard::before {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
+    top: 0;
+    left: -100%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(
-        to right, 
-        transparent, 
-        rgba(255, 255, 255, 0.05), 
-        transparent
-    );
+    background: linear-gradient(to right,
+            transparent,
+            rgba(255, 255, 255, 0.05),
+            transparent);
     transition: 0.5s;
     pointer-events: none;
 }
+
 .ShowCaseOneKnowledgeCard:hover::before {
     left: 150%;
 }
+
 .ShowCaseOneKnowledgeCard:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
     border-color: var(--card-text);
 }
-.ShowCaseOneKnowledgeTitle{
+
+.ShowCaseOneKnowledgeTitle {
     color: var(--card-text);
-    font-family: Georgia, 'Times New Roman', Times, serif; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(1.8rem, 4vw, 4.5rem);
     text-align: center;
     text-wrap: balance;
@@ -179,6 +194,7 @@ body {
     letter-spacing: 1px;
     font-weight: bold;
 }
+
 .ShowCaseOneKnowledgeTitle::after {
     content: '';
     position: absolute;
@@ -196,22 +212,25 @@ body {
 .ShowCaseOneKnowledgeCard:hover .ShowCaseOneKnowledgeTitle::after {
     width: 30rem;
 }
-.ShowCaseOneKnowledgeSummary{
+
+.ShowCaseOneKnowledgeSummary {
     font-size: clamp(0.6rem, 1vw, 1.1rem);
     color: var(--card-text);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: justify; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: justify;
     width: 80%;
     word-spacing: 0.3vw;
     border-top: 0.2rem solid var(--card-text);
     padding-top: 1.5rem;
 }
-.ShowCaseOneKnowledgePictureWrapper{
+
+.ShowCaseOneKnowledgePictureWrapper {
     width: 80%;
     height: 50%;
     margin: 2rem;
 }
-.ShowCaseOneKnowledgePicture{
+
+.ShowCaseOneKnowledgePicture {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -222,7 +241,7 @@ body {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.knowledges-container{
+.knowledges-container {
     width: 95%;
     display: flex;
     flex-direction: column;
@@ -231,19 +250,46 @@ body {
     background-image: var(--card-cont-bg);
     border-radius: 5rem;
 }
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-.OneKnowledgeSet.expanded {width: 95%;}
-.OneKnowledgeSet.expanded .readMoreBtn{display: none;}
-.OneKnowledgeSet.expanded .OneKnowledgeCard{ width: 100% !important; flex-direction: column;}
-.OneKnowledgeSet.expanded .OneKnowledgeSummary{ width: 60% !important;}
-.OneKnowledgeSet.expanded .OneKnowledgeTitle{ width: 70% !important;}
-.OneKnowledgeSet.expanded .OneKnowledgeCard {overflow: visible;}
-.OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {position: absolute;top: 1.5rem;right: 1.5rem;width: 28%;height: auto;margin: 0;}
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.OneKnowledgeSet{
+.OneKnowledgeSet.expanded {
+    width: 95%;
+}
+
+.OneKnowledgeSet.expanded .readMoreBtn {
+    display: none;
+}
+
+.OneKnowledgeSet.expanded .OneKnowledgeCard {
+    width: 100% !important;
+    flex-direction: column;
+}
+
+.OneKnowledgeSet.expanded .OneKnowledgeSummary {
+    width: 60% !important;
+}
+
+.OneKnowledgeSet.expanded .OneKnowledgeTitle {
+    width: 70% !important;
+}
+
+.OneKnowledgeSet.expanded .OneKnowledgeCard {
+    overflow: visible;
+}
+
+.OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 28%;
+    height: auto;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.OneKnowledgeSet {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -253,7 +299,8 @@ body {
     margin: 1rem 0 1rem 0;
     transition: all 0.5s ease;
 }
-.readMoreBtn{
+
+.readMoreBtn {
     background-color: var(--cardBtn-bg);
     color: var(--cardbtn-color);
     font-family: monospace;
@@ -268,12 +315,14 @@ body {
     border: 0.2rem solid var(--card-bg);
     transition: 0.3s all ease;
 }
-.readMoreBtn:hover{
+
+.readMoreBtn:hover {
     background-color: var(--cardBtn-hover-bg);
     color: var(--cardbtn-hover-font-color);
     transition: 0.3s all ease;
 }
-.closeBtn{
+
+.closeBtn {
     background-color: var(--cardBtn-bg);
     color: var(--cardbtn-color);
     width: 70%;
@@ -283,7 +332,8 @@ body {
     border: 0.2rem solid rgb(18, 11, 2);
     transition: all 0.3s ease;
 }
-.closeBtn:hover{
+
+.closeBtn:hover {
     background-color: var(--cardBtn-hover-bg);
     color: var(--cardbtn-hover-font-color);
     width: 90%;
@@ -305,7 +355,7 @@ body {
     overflow: visible;
     background-color: var(--card-bg);
     padding: 2.5rem;
-    margin: 2rem ;
+    margin: 2rem;
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--card-shadow);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -314,12 +364,13 @@ body {
     position: relative;
 }
 
-.OneKnowledgeCard .card-content{
+.OneKnowledgeCard .card-content {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
-.OneKnowledgeCard .card-actions{
+
+.OneKnowledgeCard .card-actions {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -332,7 +383,7 @@ body {
 
 .OneKnowledgeTitle {
     color: var(--card-text);
-    font-family: Georgia, 'Times New Roman', Times, serif; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(1.8rem, 4.2vw, 4.6rem);
     text-align: left;
     text-wrap: balance;
@@ -340,6 +391,7 @@ body {
     letter-spacing: 1px;
     font-weight: bold;
 }
+
 .OneKnowledgeTitle::after {
     content: '';
     position: absolute;
@@ -353,14 +405,16 @@ body {
     transition: width 0.3s ease;
     opacity: 0.6;
 }
+
 .OneKnowledgeCard:hover .OneKnowledgeTitle::after {
     width: 30rem;
 }
-.OneKnowledgeSummary{
+
+.OneKnowledgeSummary {
     font-size: clamp(1rem, 1.3vw, 1.5rem);
     color: var(--card-text);
     font-family: Georgia, 'Times New Roman', Times, serif;
-    text-align: left; 
+    text-align: left;
     width: 90%;
     word-spacing: 0.3vw;
     border-top: 0.2rem solid var(--card-text);
@@ -375,7 +429,7 @@ body {
     font-family: monospace;
     white-space: pre-line;
     opacity: 0.9;
-    text-align: left; 
+    text-align: left;
     border-left: 5px solid rgba(176, 246, 123, 0.601);
     padding-left: 1rem;
     height: 20rem;
@@ -388,6 +442,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .OneKnowledgeParagraph {
     font-size: clamp(0.6rem, 1vw, 1.2rem);
     text-indent: 1rem;
@@ -400,19 +455,26 @@ body {
 }
 
 @keyframes slideIn {
-    from { opacity: 0; max-height: 0;}
-    to { opacity: 1; max-height: 25rem;}
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        max-height: 25rem;
+    }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.OneKnowledgePictureWrapper{
+.OneKnowledgePictureWrapper {
     width: 45%;
     height: 80%;
     margin: 2rem;
 }
 
-.OneKnowledgePicture{
+.OneKnowledgePicture {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -423,7 +485,7 @@ body {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.toup{
+.toup {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -440,18 +502,27 @@ body {
     transition: 0.2s all ease;
     z-index: 1000;
 }
-.toup img{width: 100%;height: 100%;margin: 0;padding: 0;}
-.toup:hover{cursor: pointer;}
-.toup:active{transform: translateY(5px);transition: 0.3s all ease;}
+
+.toup img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.toup:hover {
+    cursor: pointer;
+}
+
+.toup:active {
+    transform: translateY(5px);
+    transition: 0.3s all ease;
+}
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-@media (max-width: 900px) {
+@media (max-width: 900px) {}
 
-}
-
-@media (max-width: 600px) {
-
-}
+@media (max-width: 600px) {}
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/

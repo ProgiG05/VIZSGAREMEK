@@ -1,11 +1,10 @@
-/* --- Global Resets & Variables --- */
 :root {
-    --forest-green: #2d5a27;
-    --leaf-green: #4caf50;
-    --soft-sage: #8da88b;
-    --mist-green: #f1f8f1;
-    --earth-brown: #5d4037;
-    --white: #ffffff;
+    --forest-green: #346133;
+    --leaf-green: #408134;
+    --soft-sage: #4c8148;
+    --mist-green: #d8e6d9;
+    --earth-brown: #4d7049;
+    --white: #d8e6d9;
     --transition: all 0.3s ease;
 }
 
@@ -18,8 +17,6 @@
 body {
     font-family: 'Quicksand', sans-serif;
     background-color: var(--mist-green);
-    color: #333;
-    line-height: 1.6;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -147,177 +144,137 @@ body {
 #darkmode.dark-active #dark-icon {opacity: 0;}
 #darkmode.dark-active #light-icon {opacity: 1;}
 
-/* --- Layout Container --- */
 .login-section {
     width: 100%;
     padding: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 3rem);
 }
 
 .login-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Desktop layout */
     background: var(--white);
-    max-width: 900px;
-    width: 100%;
-    border-radius: 24px;
+    max-width: 1000px;
+    width: 95%;
+    border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(45, 90, 39, 0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
-/* --- Left Side: Branding/Info --- */
-.login-info-cont {
-    flex: 1;
-    background-color: var(--forest-green);
-    background-image: linear-gradient(135deg, rgba(45, 90, 39, 0.9) 0%, rgba(76, 175, 80, 0.8) 100%),
-                      url('https://images.unsplash.com/photo-1530836361253-ee882ad2714c?auto=format&fit=crop&q=80&w=1000'); /* Subtle plant background */
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
-    padding: 60px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.main-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.main-title span {
-    display: block;
-    color: #a5d6a7;
-}
-
-.small-description {
-    font-size: 1.1rem;
-    font-weight: 300;
-    opacity: 0.9;
-}
-
-/* --- Right Side: Form --- */
+/* --- Left Side: Form --- */
 .login-form-cont {
-    flex: 1;
-    padding: 60px 40px;
-    background: var(--white);
+    flex: 1.2;
+    padding: 50px;
 }
 
-.search-title {
+.form-title {
     color: var(--forest-green);
-    font-size: 2rem;
-    margin-bottom: 30px;
-    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 5px;
 }
 
-/* --- Input Styling --- */
+.form-subtitle {
+    color: var(--soft-sage);
+    margin-bottom: 30px;
+}
+
 .textInp-cont {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .textInp-cont label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: var(--earth-brown);
-    font-size: 0.9rem;
+    margin-bottom: 5px;
 }
 
-.commonplant-search-inp {
+.garden-input {
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e0e6e0;
-    border-radius: 12px;
+    padding: 12px;
+    border: 2px solid #edf2ed;
+    border-radius: 10px;
     font-family: inherit;
-    font-size: 1rem;
     transition: var(--transition);
 }
 
-.commonplant-search-inp:focus {
+.garden-input:focus {
     outline: none;
     border-color: var(--leaf-green);
-    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+    background-color: #f9fff9;
 }
 
-/* --- Checkbox Styling --- */
-.check-cont {
-    margin: 20px 0;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.check-cont div {
+/* --- Right Side: Image --- */
+.login-info-cont {
+    flex: 1;
+    background-image: linear-gradient(to bottom, rgba(45, 90, 39, 0.7), rgba(45, 90, 39, 0.7)), 
+                      url('https://images.unsplash.com/photo-1530836361253-ee882ad2714c?auto=format&fit=crop&q=80&w=1000');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
-    gap: 8px;
+    padding: 40px;
+    color: white;
 }
 
-#remember {
-    accent-color: var(--forest-green);
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
+.main-title span {
+    color: #c8e6c9;
 }
 
-/* --- Button Styling --- */
+/* --- Button & Links --- */
 .login-btn {
     width: 100%;
-    padding: 14px;
-    background-color: var(--forest-green);
-    color: var(--white);
+    padding: 15px;
+    background: var(--forest-green);
+    color: white;
     border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
+    border-radius: 10px;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
+    margin-top: 20px;
     transition: var(--transition);
-    margin-top: 10px;
 }
 
 .login-btn:hover {
-    background-color: var(--leaf-green);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    background: var(--leaf-green);
+    transform: scale(1.02);
 }
 
-/* --- Footer Links --- */
-.login-footer {
-    margin-top: 30px;
+.form-footer {
     text-align: center;
-    font-size: 0.95rem;
+    margin-top: 20px;
 }
 
-.plant-list {
+.login-link {
     color: var(--forest-green);
     text-decoration: none;
     font-weight: 700;
-    border-bottom: 2px solid transparent;
-    transition: var(--transition);
 }
 
-.plant-list:hover {
-    border-bottom-color: var(--leaf-green);
+/* --- Checkbox --- */
+.check-cont {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+.check-cont a {
     color: var(--leaf-green);
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
+/* --- Responsive --- */
+@media (max-width: 850px) {
     .login-container {
-        flex-direction: column;
+        flex-direction: column-reverse; /* Form on top for mobile */
     }
-
     .login-info-cont {
-        padding: 40px 30px;
-        text-align: center;
-    }
-
-    .login-form-cont {
-        padding: 40px 30px;
-    }
-
-    .main-title {
-        font-size: 2rem;
+        min-height: 200px;
     }
 }

@@ -14,37 +14,39 @@
     <nav id="top-navbar"></nav>
     <section class="login-section">
         <div class="login-container">
-            <div class="login-info-cont first-cont">
-                <h1 class="main-title">Grow <span>With Us</span></h1>
-                <p class="small-description">Enter your sanctuary. Manage your urban garden and gather ideas and knowledges about gardens.</p>
-            </div>
-            <div class="login-form-cont second-cont">
-                <form class="search-cont login-card">
-                    <h2 class="search-title">Login</h2>
+            <div class="login-form-cont first-cont">
+                <form class="login-card">
+                    <h2 class="form-title">Login</h2>
+                    <p class="form-subtitle">Welcome back to your sanctuary.</p>
                     
                     <div class="textInp-cont">
                         <label for="username">Username</label>
-                        <input type="text" id="username" class="commonplant-search-inp">
+                        <input type="text" id="username" class="garden-input" placeholder="John Plant">
                     </div>
 
                     <div class="textInp-cont">
                         <label for="password">Password</label>
-                        <input type="password" id="password" class="commonplant-search-inp">
+                        <input type="password" id="password" class="garden-input" placeholder="••••••••">
                     </div>
 
                     <div class="check-cont">
-                        <div>
-                            <input type="checkbox" id="remember">
-                            <label for="remember">Keep me rooted (Remember me)</label>
-                        </div>
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
                     </div>
 
-                    <button type="submit" class="gardenMakerPage_Btn login-btn">Sign In</button>
+                    <button type="submit" class="login-btn">Sign In</button>
                     
-                    <div class="login-footer">
-                        <p>New sprout? <a href="../sites/signup.html" class="plant-list">Create an account</a></p>
+                    <div class="form-footer">
+                        <p>No account yet? <a href="signup.html" class="login-link">Create an account</a></p>
                     </div>
                 </form>
+            </div>
+
+            <div class="login-info-cont second-cont">
+                <div class="overlay-text">
+                    <h1 class="main-title">Grow <span>With Us</span></h1>
+                    <p class="small-description">Enter your sanctuary. Manage your urban garden and gather ideas and knowledges about gardens.</p>
+                </div>
             </div>
         </div>
     </section>

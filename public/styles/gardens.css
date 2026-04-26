@@ -1,7 +1,7 @@
 :root {
     --body-bg: #b2cd8f;
-    --header-cont-bg: #92ac70;
-    --main-font-color: #0b0e0a;
+    --header-cont-bg: linear-gradient(to left, #547538ff, #92ac70);
+    --main-font-color: #11170f;
     --font-main: Georgia, serif;
     --font-data: monospace;
 
@@ -33,21 +33,23 @@
     --garden-card-deleteBtn-hover-bg: #f8d6d6;
     --garden-card-deleteBtn-hover-font: #0f0101;
 }
+
 /*------------------------------------------------------------------------------------------*/
 body.dark-theme {
     --body-bg: #273220;
-    --main-font-color: #fdf8ef;
-    --header-cont-bg: #1a2211;
+    --main-font-color: #c3eeae;
+    --header-cont-bg: linear-gradient(to top, rgb(50, 67, 39), rgb(62, 77, 47));
 
     --navbarBtn-bg: #121e0bee;
-    --navbarBtn-font-color:rgb(255, 255, 255);
+    --navbarBtn-font-color: rgb(255, 255, 255);
     --navbarBtn-hover-bg: #030502;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
 }
+
 /*------------------------------------------------------------------------------------------*/
 body {
     background: var(--body-bg);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -57,50 +59,55 @@ body {
     align-items: center;
     justify-items: center;
 }
+
 /*------------------------------------------------------------------------------------------*/
 .configure-cont {
-    width: 70%;
+    width: 90%;
     height: 70vh;
     margin: 2rem auto 2rem auto;
-    padding: 3rem 1rem 3rem 1rem;
+    padding: 2rem 1rem 2rem 1rem;
     border-radius: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--header-cont-bg);
+    background: var(--header-cont-bg);
 }
 
 .header-container {
-    margin: 1rem 0 1rem 0;
+    margin: 0;
     text-align: center;
-    text-wrap: balance;
     width: 95%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .main-title {
     font-family: var(--font-main);
-    font-size: clamp(3rem, 6.5vw, 7.8rem);
-    text-wrap: balance;
+    font-size: clamp(3rem, 6vw, 6.2rem);
+    text-align: center;
     margin: 1rem 0 2rem 0;
+    padding: 0;
     width: 100%;
     color: var(--main-font-color);
 }
+
 .sub-title {
-    width: 50%;
+    width: 70%;
     margin: auto;
     font-style: italic;
     text-align: justify;
+    text-wrap: auto;
     font-family: var(--font-main);
     font-size: clamp(1rem, 1.2vw, 1.3rem);
     color: var(--main-font-color);
-    border-left: 1rem solid black;
+    border-left: 1rem solid var(--main-font-color);
     padding-left: 2rem;
     margin: 1rem 0 1rem 0;
 }
+
 .button-cont {
     display: flex;
     flex-direction: column;
@@ -111,7 +118,8 @@ body {
     margin: 2rem 0 2rem 0;
 }
 
-.newgarden_btn, .checkout_btn {
+.newgarden_btn,
+.checkout_btn {
     width: 40%;
     height: fit-content;
     padding: 1rem 1.5rem 1rem 1.5rem;
@@ -125,7 +133,8 @@ body {
     text-align: center;
 }
 
-.newgarden_btn:hover, .checkout_btn:hover {
+.newgarden_btn:hover,
+.checkout_btn:hover {
     background-color: var(--general-btns-hover-bg);
     color: var(--general-btns-hover-font);
     cursor: pointer;
@@ -145,10 +154,12 @@ body {
 /*------------------------------------------------------------------------------------------*/
 
 .loginText {
-    color: var(--general-font-color);
+    color: var(--main-font-color);
+    font-family: var(--font-data);
     text-wrap: balance;
-    font-size: clamp(1rem, 1.4vw, 1.6rem);
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
     font-weight: bold;
+    font-style: italic;
     text-align: left;
     width: 50%;
 }
@@ -156,25 +167,38 @@ body {
 .login_btn {
     width: 30%;
     height: fit-content;
-    padding: 1rem 1.5rem 1rem 1.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     background-color: var(--general-btns-bg);
     color: var(--general-btns-font);
     font-family: monospace;
-    font-size: clamp(0.9rem, 1.2vw, 1.5rem);
-    border-radius: 1.5rem;
-    transition-duration: 0.2s all ease;
+    font-size: clamp(0.7rem, 1vw, 1.1rem);
+    border-radius: 1rem;
+    transition: 0.2s all ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    cursor: pointer;
 }
 
 .login_btn:hover {
     background-color: var(--general-btns-hover-bg);
     color: var(--general-btns-hover-font);
-    transition-duration: 0.2s all ease;
+    transition: 0.2s all ease;
 }
 
 /*------------------------------------------------------------------------------------------*/
+.exampleText {
+    color: var(--main-font-color);
+    font-family: var(--font-main);
+    text-wrap: balance;
+    font-size: clamp(1rem, 2.9vw, 3.5rem);
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto 3rem auto;
+}
 
 .gardens-container {
     display: flex;
@@ -210,6 +234,7 @@ body {
     gap: 1rem;
     transition: transform 0.3s ease;
 }
+
 .garden-card.is-editing {
     border: 3px solid var(--garden-card-title);
     transform: scale(1.02);
@@ -217,7 +242,8 @@ body {
 
 /*------------------------------------------------------------------------------------------*/
 
-.edit_btn,.delete_btn {
+.edit_btn,
+.delete_btn {
     position: absolute;
     width: 40px !important;
     height: 40px;
@@ -233,26 +259,36 @@ body {
     transition: all 0.2s ease;
     cursor: pointer;
 }
+
 .edit_btn:hover {
     background-color: var(--garden-card-editBtn-bg);
     color: var(--garden-card-editBtn-font);
     transform: scale(1.1);
     transition: all 0.2s ease;
 }
+
 .delete_btn:hover {
     background-color: var(--garden-card-deleteBtn-bg);
     color: var(--garden-card-deleteBtn-font);
     transform: scale(1.1);
     transition: all 0.2s ease;
 }
-.edit_btn {top: 1rem;right: 4rem;}
-.delete_btn {top: 1rem;right: 1rem;}
+
+.edit_btn {
+    top: 1rem;
+    right: 4rem;
+}
+
+.delete_btn {
+    top: 1rem;
+    right: 1rem;
+}
 
 /*------------------------------------------------------------------------------------------*/
 
 .garden-name {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(1.2rem,2vw,2.1rem);
+    font-size: clamp(1.2rem, 2vw, 2.1rem);
     margin: 0;
     top: 0;
     border-bottom-left-radius: 0.6rem;
@@ -263,6 +299,7 @@ body {
     padding: 0.3rem 4vw 0.2rem 4vw;
     text-align: center;
 }
+
 .table-cont {
     width: fit-content;
     padding: 1rem;
@@ -273,6 +310,7 @@ body {
     border-radius: 1rem;
     background-color: var(--garden-card-cell-cont-bg);
 }
+
 .garden-table {
     border-collapse: separate;
     border-spacing: 5px;
@@ -280,6 +318,7 @@ body {
     padding: 1.5rem;
     background-color: var(--garden-card-cell-table-bg);
 }
+
 .garden-table td {
     width: 1.667vw;
     height: 3.2vh;
@@ -295,11 +334,13 @@ body {
     background-color: var(--garden-card-cell-bg);
     color: var(--garden-card-cell-text);
 }
+
 .garden-table td.empty-cell {
     background-color: transparent;
     border: var(--garden-card-cell-border);
     background-color: var(--garden-card-cell-bg);
 }
+
 .garden-table td.tobecollected-cell {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
@@ -309,11 +350,13 @@ body {
     border-radius: 0.5rem;
     transform: scale(0.7);
 }
+
 .garden-table td.plant-cell {
     background-color: var(--garden-card-cell-cont-bg);
     border: 2px solid white;
     transform: scale(1.1);
 }
+
 .garden-table td.active {
     border: var(--garden-card-cell-border);
     box-shadow: 0 0 15px var(--garden-card-cell-text);
@@ -354,7 +397,7 @@ body {
     margin-top: 0;
     margin-bottom: 0.8rem;
     font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     padding-bottom: 0.3rem;
     width: 100%;
 }
@@ -495,7 +538,7 @@ body {
     margin-top: 0;
     margin-bottom: 0.8rem;
     font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     padding-bottom: 0.3rem;
     width: 100%;
     color: white;
@@ -526,13 +569,16 @@ body {
         display: flex;
         flex-direction: column;
     }
-    .chart-cont{
+
+    .chart-cont {
         width: 100%;
     }
+
     .right-side-cont {
         width: 90%;
     }
-    .plant-list-cont{
+
+    .plant-list-cont {
         width: 90%;
     }
 }
