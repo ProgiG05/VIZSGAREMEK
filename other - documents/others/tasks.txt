@@ -25,9 +25,7 @@ gardens page:
 		fix scaling issues
 	add / fix / check responsivity
 garden editing page:
-	sidepanel: managing rows and columns container
-	adding smth into a cell: adding container next to the table
-	icons for every possible button
+	fix some proportions
 	add / fix / check responsivity
 login / signup page:
 	redesign the page
