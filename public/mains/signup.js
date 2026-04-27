@@ -1,14 +1,22 @@
 import { showAlert } from "./popup.js";
+import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupNavbar();
+    setupSidePanel();
+    setupLoginState();
+});
 
 document.querySelector('.signup-card').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
+    const terms = document.getElementById('terms').checked;
 
-    if (!username || !password) {
-        showAlert('Please fill in both fields.', "Error!");
+    if (!username || !password || !terms) {
+        showAlert('Please fill in all fields and accept the terms and conditions.', "Error!");
         return;
     }
 

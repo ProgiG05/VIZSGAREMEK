@@ -1,4 +1,11 @@
 import { showAlert } from "./popup.js";
+import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupNavbar();
+  setupSidePanel();
+  setupLoginState();
+});
 
 document.querySelector(".login-card").addEventListener("submit", async (e) => {
   e.preventDefault();

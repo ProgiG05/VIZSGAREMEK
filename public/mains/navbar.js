@@ -49,7 +49,7 @@ export function setupNavbar() {
     header.appendChild(gardensBtn);
 
     const loginBtn = document.createElement("a");
-    loginBtn.setAttribute("id", "logIn_Btn");
+    loginBtn.setAttribute("id", "navbar-login-btn");
     loginBtn.setAttribute("href", "../sites/login.html");
     loginBtn.textContent = "Login / Register";
     header.appendChild(loginBtn);
@@ -104,8 +104,8 @@ export function setupSidePanel() {
         const links = [
             { id: 'savedI_Btn', href: '../sites/ideas.html', text: 'Ideas' },
             { id: 'savedP_Btn', href: '../sites/plants.html', text: 'Plants' },
-            { id: 'savedGL_Btn', href: '../sites/gardens.html', text: 'Gardens' },
-            { id: 'login_Btn', href: '../sites/login.html', text: 'Login / Register' }
+            { id: 'savedK_Btn', href: '../sites/knowledges.html', text: 'Knowledges' },
+            { id: 'savedGL_Btn', href: '../sites/gardens.html', text: 'Gardens' }
         ];
 
         links.forEach(linkData => {
@@ -115,6 +115,12 @@ export function setupSidePanel() {
             a.textContent = linkData.text;
             sidePanel.appendChild(a);
         });
+
+        const sideLoginBtn = document.createElement('a');
+        sideLoginBtn.setAttribute('id', 'side-login-btn');
+        sideLoginBtn.setAttribute('href', '../sites/login.html');
+        sideLoginBtn.textContent = 'Login / Register';
+        sidePanel.appendChild(sideLoginBtn);
 
         const darkModeBtn = document.createElement('button');
         darkModeBtn.setAttribute('class', 'darkmode');
@@ -176,8 +182,8 @@ export function setupSidePanel() {
 export function setupLoginState() {
     if (!user) return;
 
-    const topLoginBtn = document.getElementById("logIn_Btn");
-    const sideLoginBtn = document.getElementById("login_Btn");
+    const topLoginBtn = document.getElementById("navbar-login-btn");
+    const sideLoginBtn = document.getElementById("side-login-btn");
 
     if (topLoginBtn) {
         topLoginBtn.textContent = user.username;
@@ -185,7 +191,7 @@ export function setupLoginState() {
         topLoginBtn.setAttribute('href', '/sites/accounts.html');
     }
     if (sideLoginBtn) {
-        sideLoginBtn.textContent = user.username;
+        sideLoginBtn.textContent = `Profile: ${user.username}`;
         sideLoginBtn.onclick = accountHandler;
         sideLoginBtn.setAttribute('href', '/sites/accounts.html');
     }

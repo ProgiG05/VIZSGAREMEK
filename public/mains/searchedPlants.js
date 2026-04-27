@@ -1,8 +1,10 @@
-import { setupNavbar } from './navbar.js';
+import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
 
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
+    setupSidePanel();
+    setupLoginState();
 
     const searchedPlantContainer = document.getElementById("searchedPlant-container")
 
