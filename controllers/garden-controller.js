@@ -9,7 +9,7 @@ exports.getAllIdeas = async (req, res) => {
     const data = await GardenModel.getAllIdeas();
     res.json(data);
   } catch (err) {
-    console.error("Failed to fetch ideas:", err.message);
+    console.error("Failed to fetch ideas:", err);
     res.status(500).json({ success: false, message: "Could not load ideas." });
   }
 };
@@ -19,7 +19,7 @@ exports.getAllKnowledges = async (req, res) => {
     const data = await GardenModel.getAllKnowledges();
     res.json(data);
   } catch (err) {
-    console.error("Failed to fetch knowledges:", err.message);
+    console.error("Failed to fetch knowledges:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not load knowledges." });
@@ -31,7 +31,7 @@ exports.getAllPlants = async (req, res) => {
     const data = await GardenModel.getAllPlants();
     res.json(data);
   } catch (err) {
-    console.error("Failed to fetch plants:", err.message);
+    console.error("Failed to fetch plants:", err);
     res.status(500).json({ success: false, message: "Could not load plants." });
   }
 };
@@ -68,7 +68,7 @@ exports.getSearchedPlantDetails = async (req, res) => {
     );
     res.json(data);
   } catch (err) {
-    console.error("Plant search failed:", err.message);
+    console.error("Plant search failed:", err);
     res.status(500).json({ success: false, message: "Plant search failed." });
   }
 };
@@ -78,7 +78,7 @@ exports.getAllWorksAndTools = async (req, res) => {
     const data = await GardenModel.getAllWorksAndTools();
     res.json(data);
   } catch (err) {
-    console.error("Failed to fetch works and tools:", err.message);
+    console.error("Failed to fetch works and tools:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not load works and tools." });
@@ -104,7 +104,7 @@ exports.addNewGarden = async (req, res) => {
     );
     res.json(result);
   } catch (err) {
-    console.error("Failed to create garden:", err.message);
+    console.error("Failed to create garden:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not create garden." });
@@ -117,7 +117,7 @@ exports.getMySavedPlants = async (req, res) => {
     const data = await GardenModel.getMySavedPlants(userId);
     res.json(data);
   } catch (err) {
-    console.error("Failed to fetch saved plants:", err.message);
+    console.error("Failed to fetch saved plants:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not load saved plants." });
@@ -139,7 +139,7 @@ exports.savePlant = async (req, res) => {
     console.log(`Plant ${plant_id} saved by user ${req.user.username}`);
     res.json(result);
   } catch (err) {
-    console.error("Failed to save plant:", err.message);
+    console.error("Failed to save plant:", err);
     res.status(500).json({ success: false, message: "Could not save plant." });
   }
 };
@@ -150,7 +150,7 @@ exports.getMyGardens = async (req, res) => {
     const data = await GardenModel.getGardensByUserId(userId);
     res.json(data);
   } catch (err) {
-    console.error("Failed to fetch gardens:", err.message);
+    console.error("Failed to fetch gardens:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not load your gardens." });
@@ -172,7 +172,7 @@ exports.getGardenById = async (req, res) => {
 
     res.json(data[0]);
   } catch (err) {
-    console.error("Failed to fetch garden:", err.message);
+    console.error("Failed to fetch garden:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not load garden details." });
@@ -187,7 +187,7 @@ exports.deleteGarden = async (req, res) => {
     console.log(`Garden ${id} deleted by user ${req.user.username}`);
     res.json({ success: true, message: "Garden deleted.", data: result });
   } catch (err) {
-    console.error("Failed to delete garden:", err.message);
+    console.error("Failed to delete garden:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not delete garden." });
@@ -209,7 +209,7 @@ exports.updateGarden = async (req, res) => {
     console.log(`Garden ${garden.id} updated by user ${req.user.username}`);
     res.json({ success: true, message: "Garden updated.", data: result });
   } catch (err) {
-    console.error("Failed to update garden:", err.message);
+    console.error("Failed to update garden:", err);
     res
       .status(500)
       .json({ success: false, message: "Could not update garden." });
@@ -257,7 +257,7 @@ exports.register = async (req, res) => {
         .status(409)
         .json({ success: false, message: "This username is already taken." });
     }
-    console.error("Registration error:", err.message);
+    console.error("Registration error:", err);
     return res.status(500).json({
       success: false,
       message: "Registration failed. Please try again.",
@@ -267,7 +267,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, rememberMe } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({
@@ -297,6 +297,17 @@ exports.login = async (req, res) => {
         .json({ success: false, message: "Invalid username or password." });
     }
 
+    // If rememberMe -> refresh lasts 30 days, user cookie lasts 30 days
+    // If not -> refresh lasts 24h, user cookie lasts 1h
+    const remember = rememberMe === true || rememberMe === "true";
+    const refreshMaxAge = remember
+      ? 30 * 24 * 60 * 60 * 1000
+      : 24 * 60 * 60 * 1000;
+    const userCookieMaxAge = remember
+      ? 30 * 24 * 60 * 60 * 1000
+      : 60 * 60 * 1000;
+    const refreshExpiry = remember ? "30d" : "24h";
+
     const accessToken = jwt.sign(
       { id: user.id, username: user.username },
       process.env.JWT_ACCESS_SECRET,
@@ -306,7 +317,7 @@ exports.login = async (req, res) => {
     const refreshToken = jwt.sign(
       { id: user.id, username: user.username },
       process.env.JWT_REFRESH_SECRET,
-      { expiresIn: "24h", algorithm: "HS256" },
+      { expiresIn: refreshExpiry, algorithm: "HS256" },
     );
 
     const refreshTokenHash = await argon2.hash(refreshToken);
@@ -324,7 +335,7 @@ exports.login = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       ...cookieBase,
       httpOnly: true,
-      maxAge: 86400000,
+      maxAge: refreshMaxAge,
     });
 
     res.cookie(
@@ -333,16 +344,16 @@ exports.login = async (req, res) => {
       {
         ...cookieBase,
         httpOnly: false,
-        maxAge: 60 * 60 * 1000,
+        maxAge: userCookieMaxAge,
       },
     );
 
-    console.log(`User logged in: ${username}`);
+    console.log(`User logged in: ${username} (rememberMe: ${remember})`);
     return res
       .status(200)
       .json({ success: true, message: "Login successful." });
   } catch (err) {
-    console.error("Login error:", err.message);
+    console.error("Login error:", err);
     return res
       .status(500)
       .json({ success: false, message: "Login failed. Please try again." });
@@ -374,7 +385,7 @@ exports.logout = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Logged out successfully." });
   } catch (err) {
-    console.error("Logout error:", err.message);
+    console.error("Logout error:", err);
     return res.status(500).json({ success: false, message: "Logout failed." });
   }
 };
@@ -448,7 +459,7 @@ exports.refresh = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Token refreshed successfully." });
   } catch (err) {
-    console.error("Refresh error:", err.message);
+    console.error("Refresh error:", err);
     return res.status(401).json({ success: false, message: "Invalid token." });
   }
 };

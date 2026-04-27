@@ -8,7 +8,6 @@ const rateLimit = require("express-rate-limit"); // rate limiter
 const helmet = require("helmet"); // XSS Protection
 
 app.use(helmet());
-app.disable("x-powered-by");
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json({ limit: "10kb" }));
