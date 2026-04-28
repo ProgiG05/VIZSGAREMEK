@@ -428,7 +428,7 @@ exports.refresh = async (req, res) => {
     );
 
     const newRefreshTokenHash = await argon2.hash(newRefreshToken);
-    await GardenModel.StoreRefreshToken(decoded.id, newRefreshTokenHash);
+    await GardenModel.storeRefreshToken(decoded.id, newRefreshTokenHash);
 
     const secureCookie = process.env.NODE_ENV === "production";
     const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };

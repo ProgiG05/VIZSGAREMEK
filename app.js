@@ -4,7 +4,6 @@ const app = express();
 const morgan = require("morgan"); // HTTP request logger
 const GardenRoutes = require("./routes/garden-routes");
 const cookieParser = require("cookie-parser");
-const rateLimit = require("express-rate-limit"); // rate limiter
 const helmet = require("helmet"); // XSS Protection
 
 app.use(helmet());
@@ -14,6 +13,42 @@ app.use(express.json({ limit: "10kb" }));
 app.use(express.static("public"));
 app.use(express.static("public/sites", { extensions: ["html"] }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Sproutified API",
+      version: "1.0.0",
+      description: "API documentation for Sproutified's features",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+    components: {
+      securitySchemes: {
+        cookieAuth: {
+          type: "apiKey",
+          in: "cookie",
+          name: "accessToken",
+        },
+      },
+    },
+  },
+  apis: ["./routes/*.js"],
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+
+if (process.env.NODE_ENV === "development") {
+  app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+}
+
 app.use("/api", GardenRoutes);
 
 // 404 handler for unknown API routes
@@ -38,12 +73,4 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running http://localhost:${port}`);
-});
-
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10,
-  message: { success: false, message: "Too many attempts. Try again later." },
-  standardHeaders: true,
-  legacyHeaders: false,
 });
