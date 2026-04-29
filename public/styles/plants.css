@@ -1,6 +1,6 @@
 :root {
     --body-bg: #b2cd8f;
-    --header-cont-bg: linear-gradient(to left, #547538ff, #92ac70);
+    --header-cont-bg: linear-gradient(to right, #64884a, #92ac70);
     --main-font-color: #151c13;
     --font-main: Georgia, serif;
     --font-data: 'Courier New', monospace;

@@ -1,7 +1,7 @@
 :root {
     /* ######################################################## */
     --body-bg: #b2cd8f;
-    --header-cont-bg: linear-gradient(to left, #547538ff, #92ac70);
+    --header-cont-bg: linear-gradient(to right, #64884a, #92ac70);
     --general-font-color: #11170f;
     --title-text-shadow: rgba(17, 26, 4, 0.878);
     --gardenideas-cont-bg: #000000;
