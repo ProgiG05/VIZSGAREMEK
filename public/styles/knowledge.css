@@ -201,8 +201,8 @@ body {
     bottom: 0;
     margin-bottom: 1rem;
     left: 50%;
-    width: 10rem;
-    height: 3px;
+    width: 10vw;
+    height: 0.2vw;
     background: var(--card-text);
     transform: translateX(-50%);
     transition: width 0.3s ease;
@@ -210,7 +210,7 @@ body {
 }
 
 .ShowCaseOneKnowledgeCard:hover .ShowCaseOneKnowledgeTitle::after {
-    width: 30rem;
+    width: 30vw;
 }
 
 .ShowCaseOneKnowledgeSummary {
@@ -226,13 +226,13 @@ body {
 
 .ShowCaseOneKnowledgePictureWrapper {
     width: 80%;
-    height: 50%;
+    height: auto;
     margin: 2rem;
 }
 
 .ShowCaseOneKnowledgePicture {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
     aspect-ratio: 4/2;
     border-radius: 2rem;
@@ -470,13 +470,13 @@ body {
 
 .OneKnowledgePictureWrapper {
     width: 45%;
-    height: 80%;
+    height: auto;
     margin: 2rem;
 }
 
 .OneKnowledgePicture {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
     aspect-ratio: 4/2.5;
     border-radius: 2rem;
@@ -521,8 +521,85 @@ body {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-@media (max-width: 900px) {}
+@media (max-width: 1300px) {
+    .header-container {
+        flex-direction: column;
+    }
 
-@media (max-width: 600px) {}
+    .left-cont {
+        width: 90%;
+    }
+    
+    .right-cont {
+        width: 100%;
+        margin-top: 3rem;
+    }
+    .main-title {
+        font-size: clamp(1rem, 8.5vw, 9rem);
+        text-align: center;
+        padding-left: 0;
+    }
+    #showContainer{
+        margin: 2rem 0 0 0;
+        width: 70%;
+    }
+    #showContainer:hover{
+        width: 90%;
+    }
+
+    .OneKnowledgeCard {
+        flex-direction: column;
+    }
+    
+    .OneKnowledgePictureWrapper {
+        width: 80%;
+        margin: 1rem auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .OneKnowledgeSet {
+        flex-direction: column;
+        max-height: none;
+    }
+    
+    .readMoreBtn {
+        width: 80%;
+        padding: 1rem;
+        height: auto;
+    }
+    
+    .ShowCaseOneKnowledgeCard{
+        width: 95%;
+    }
+    .OneKnowledgeCard {
+        width: 80%;
+    }
+    .OneKnowledgeSet.expanded{
+        width:80%
+    }
+}
+
+@media (max-width: 600px) {
+    .OneKnowledgeCard {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .OneKnowledgeSet.expanded .OneKnowledgeSummary {
+        width: 100% !important;
+    }
+
+    .OneKnowledgeSet.expanded .OneKnowledgeTitle {
+        width: 100% !important;
+    }
+    
+    .OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 90%;
+    }
+}
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/

@@ -84,6 +84,33 @@ body.dark-theme {
     .pot-button {
         transform: scale(0.7);
     }
+    
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .left-cont {
+        width: 80%;
+    }
+
+    .right-cont {
+        width: 90%;
+        margin-top: 2rem;
+    }
+
+    .main-title {
+        font-size: clamp(1rem, 8.5vw, 9rem);
+        text-align: center;
+        padding-left: 0;
+    }
+    #showSearch {
+        margin: 2rem 0 0 0;
+        width: 70%;
+    }
+    #showSearch:hover {
+        width: 90%;
+    }
 }
 
 @media (max-width: 850px) {
@@ -94,15 +121,19 @@ body.dark-theme {
     #searchBar {
         width: 90%;
     }
+    
+    #showSearch {
+        width: 80vw;
+    }
+    
+    .left-cont {
+        width: 95%;
+    }
 }
 
 @media (max-width: 650px) {
     .gardenIdeas-container {
         flex-direction: column;
-    }
-
-    .garden-card {
-        width: 70%;
     }
 
     .card-title {
@@ -298,7 +329,8 @@ body {
     border-radius: 1.25rem;
     padding: 1.25rem;
     margin: 0.6rem;
-    width: 30%;
+    flex: 1 1 350px;
+    max-width: 600px;
     height: fit-content;
     background-color: var(--bg-dark);
     color: var(--text-green);
@@ -313,7 +345,10 @@ body {
 }
 
 .image-placeholder-wrapper {
-    height: 10%;
+    height: auto;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
     box-shadow: 4px 4px 2px var(--beige-dark-shadow);
     transition-timing-function: ease-in-out;
     transition-duration: 0.5s;
@@ -322,6 +357,7 @@ body {
 .insideImage {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     aspect-ratio: 3/2;
 }
 

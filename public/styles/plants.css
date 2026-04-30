@@ -558,7 +558,7 @@ select {
     border-radius: 1.5rem;
     padding: 1rem;
     margin-top: 1rem;
-    width: 85%;
+    width: 95%;
     height: fit-content;
     background-color: var(--card-bg);
     color: var(--card-font-color);
@@ -750,18 +750,31 @@ select {
     .other-searched-results {
         grid-template-columns: 1fr 1fr;
     }
+    
+    .searching-cont {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 900px) {
     .clearBtn {
         width: 90%;
     }
+    
+    .selection-cont {
+        grid-template-columns: 1fr;
+    }
+
+    .origin-selection-cont, 
+    .indoor-switch-cont, 
+    .seeds-switch-cont {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 700px) {
     .other-searched-results {
         grid-template-columns: 1fr;
-        grid-template-columns: auto;
     }
 
     .plant-card {
@@ -778,6 +791,18 @@ select {
         height: calc(100% - 0.3rem);
         top: 0.15rem;
         left: 0.15rem;
+    }
+    
+    .quick-buttons-cont {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .showSearch_Btn, .showBroswe_Btn {
+        width: 80%;
+        border-radius: 1.5rem;
     }
 }
 
