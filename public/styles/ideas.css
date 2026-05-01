@@ -52,7 +52,7 @@
 
 body.dark-theme {
     --body-bg: #273220;
-    --header-cont-bg: linear-gradient(to right, #222e1aff, #495f33ff);
+    --header-cont-bg: linear-gradient(to right, #222e1a, #495f33);
     --general-font-color: #c3eeae;
     --title-text-shadow: rgba(24, 38, 4, 0.848);
     --gardenideas-cont-bg: #000000;
@@ -65,106 +65,68 @@ body.dark-theme {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-@media (max-width: 1870px) {
-    .gardenIdeas-container {
-        justify-content: center;
-        gap: 3rem;
-    }
-}
-
-@media (max-width: 1650px) {
-    .gardenIdeas-container {
-        justify-content: center;
-        gap: 2rem;
-    }
-}
-
 @media (max-width: 1300px) {
-    .pot-button {
-        transform: scale(0.7);
+    #gardenIdeas-container{
+        grid-template-columns: 1fr 1fr;
     }
-    
-    .header-container {
+}
+@media (max-width: 1000px) {
+    #header-container{
         flex-direction: column;
-        text-align: center;
+        margin: 2rem 0 1rem 0;
     }
-    
-    .left-cont {
-        width: 80%;
-    }
-
-    .right-cont {
+    #left-cont {
         width: 90%;
-        margin-top: 2rem;
     }
-
-    .main-title {
-        font-size: clamp(1rem, 8.5vw, 9rem);
-        text-align: center;
-        padding-left: 0;
-    }
-    #showSearch {
+    #left-cont > button{
         margin: 2rem 0 0 0;
         width: 70%;
     }
-    #showSearch:hover {
+    #left-cont > button:hover{
         width: 90%;
     }
-}
-
-@media (max-width: 850px) {
-    .pot-button {
-        transform: scale(0.5);
+    #oneCardShowcase_cont{
+        width: 100%;
+        margin-top: 3rem;
     }
-
-    #searchBar {
-        width: 90%;
+    #oneCardShowcase_cont > div{
+        width: 50%;
     }
-    
-    #showSearch {
-        width: 80vw;
+    #main-title{
+        font-size: clamp(2.5rem, 5vw, 9rem);
+        text-align: center;
+        padding-left: 0;
     }
-    
-    .left-cont {
-        width: 95%;
-    }
-}
-
-@media (max-width: 650px) {
-    .gardenIdeas-container {
-        flex-direction: column;
-    }
-
-    .card-title {
-        font-size: 1.6rem;
-    }
-
-    .card-description {
-        font-size: 0.6rem;
-    }
-
-    .plant-list a {
-        font-size: 0.7rem;
-    }
-
-    .stat-box {
-        width: 5rem;
-    }
-
-    .stat-badge {
-        font-size: 0.7rem;
-    }
-
-    .stat-label {
-        font-size: 0.7rem;
-    }
-
-    .pot-button {
-        transform: scale(0.6);
+    #sub-title{
+        margin: 2vh 0 2vh 2vw;
+        font-size: clamp(0.6rem, 1.1vw, 1.3rem);
+        line-height: 2vh;
+        border: none;
+        padding-left: 0;
+        text-align: center;
     }
 }
-
+@media (max-width: 600px) {
+    #gardenIdeas-container{
+        grid-template-columns: 1fr;
+        background-color: #101c0a58;
+        border-radius: 2.5rem;
+        padding: 2rem 0 0 0;
+    }
+    .garden-card{
+        width: 50%;
+    }
+    .plant-list{
+        margin: 0 0 0.5rem 0;
+    }
+    .card-footer{
+        margin: 0.5rem 0.2rem 0.5rem 0.2rem;
+        padding: 0;
+    }
+    .pot-button{
+        scale: calc(0.7);
+    }
+}
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 body {
@@ -189,7 +151,7 @@ body {
     padding: 2rem 0 2rem 0;
     border-radius: 5rem;
     align-items: center;
-    background: var(--header-cont-bg);
+    background-image: var(--header-cont-bg);
 }
 
 .left-cont {
@@ -318,19 +280,19 @@ body {
 
 .gardenIdeas-container {
     background: transparent;
-    display: flex;
-    flex-wrap: wrap;
-    width: 95%;
-    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     align-items: center;
+    gap: 1rem;
+    width: 90%;
+    margin: auto;
 }
 
 .garden-card {
     border-radius: 1.25rem;
     padding: 1.25rem;
-    margin: 0.6rem;
-    flex: 1 1 350px;
-    max-width: 600px;
+    width: 90%;
     height: fit-content;
     background-color: var(--bg-dark);
     color: var(--text-green);
@@ -344,26 +306,20 @@ body {
     box-shadow: 4px 4px 4px var(--card-shadow);
 }
 
-.image-placeholder-wrapper {
-    height: auto;
-    width: 100%;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.5s;
-}
-
 .insideImage {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 5/3;
     object-fit: cover;
-    aspect-ratio: 3/2;
+    border-radius: 1rem;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+    box-shadow: 4px 4px 2px var(--beige-dark-shadow);
 }
 
 .card-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(0.3rem, 2vw, 2rem);
+    font-size: clamp(0.8rem, 2vw, 2rem);
     font-weight: bold;
     text-align: center;
     cursor: default;
@@ -382,7 +338,7 @@ body {
 
 .card-description {
     font-family: monospace;
-    font-size: clamp(0.3rem, 1vw, 1rem);
+    font-size: clamp(0.5rem, 1vw, 1rem);
     text-indent: 1rem;
     text-align: left;
     word-spacing: 0.1rem;
@@ -393,7 +349,7 @@ body {
     list-style-type: none;
     padding: 0;
     padding: 0.501vh 0 0.501vh 0;
-    font-size: clamp(0.3rem, 0.729vw, 1.2rem);
+    font-size: clamp(0.45rem, 0.75vw, 1.2rem);
     text-decoration: none;
     color: var(--text-green);
     font-family: 'Courier New', Courier, monospace;
@@ -413,6 +369,8 @@ body {
 
 .card-footer {
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     margin: auto;
 }
@@ -424,7 +382,7 @@ body {
 
 .stat-box {
     text-align: center;
-    width: 5.833vw;
+    width: 8vw;
 }
 
 .stat-badge {
@@ -432,9 +390,10 @@ body {
     color: var(--stat-text);
     font-family: monospace;
     font-weight: bold;
-    font-size: 0.75vw;
+    font-size: clamp(0.45rem, 0.6vw, 0.7vw);
     border-radius: 5px;
-    padding: 0.25vw;
+    padding: 0.25vh 0.3vw 0.25vh 0.3vw;
+    width: 85%;
 }
 
 .stat-badge:hover {
@@ -443,7 +402,7 @@ body {
 
 .stat-label {
     font-family: monospace;
-    font-size: 0.833vw;
+    font-size: clamp(0.3rem, 0.6vw, 0.7vw);
     font-weight: bold;
     text-decoration: underline;
     margin-top: 5px;

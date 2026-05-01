@@ -22,6 +22,7 @@
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
 body.dark-theme {
     --body-bg: #273220;
     --navbarBtn-bg: #121e0bee;
@@ -29,12 +30,66 @@ body.dark-theme {
     --navbarBtn-hover-bg: #030502;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
 
-    --header-cont-bg: linear-gradient(to right, #222e1aff, #495f33ff);
-    --card-cont-bg: linear-gradient(to right, #222e1aff, #495f33ff);
+    --header-cont-bg: linear-gradient(to right, #222e1a, #495f33);
+    --card-cont-bg: linear-gradient(to right, #222e1a, #495f33);
     --general-font-color: #c3eeae;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 1300px) {
+
+    .header-container {flex-direction: column;}
+    .left-cont {width: 90%;}
+    .right-cont {width: 100%;margin-top: 1vh;}
+    .main-title {font-size: clamp(1rem, 8.5vw, 9rem);text-align: center;padding-left: 0;}
+    .sub-title{width: 70%;margin: 2vh 0 2vh 8vw;font-size: clamp(0.8rem, 1.1vw, 1.3rem);}
+    #showContainer{margin: 2rem 0 0 0;width: 70%;}
+    #showContainer:hover{width: 90%;}
+    .OneKnowledgeCard {flex-direction: column;}
+    .OneKnowledgePictureWrapper {width: 50%;margin: 1rem 1rem 1rem 0;}
+    .readMoreBtn{padding: 7rem 0.2rem 7rem 0.2rem;}
+
+}
+
+@media (max-width: 900px) {
+
+    .OneKnowledgeSet {flex-direction: column-reverse;max-height: none;}
+    .sub-title{border-left: 0.3rem solid var(--general-font-color);line-height: 1.5vh;}
+    .readMoreBtn {width: 80%;padding: 0.3rem 0 0.3rem 0;height: auto;border-radius: 1.2rem;}
+    .ShowCaseOneKnowledgeCard{width: 95%;}
+    .OneKnowledgeCard {width: 80%;margin: 1rem 1rem 2rem 1rem;}
+    .OneKnowledgeSet.expanded{width:80%}
+    .OneKnowledgeDescription{width: 95%;}
+    .OneKnowledgePictureWrapper {width: 80%;}
+    .OneKnowledgeParagraph{width: 80%;}
+
+}
+
+@media (max-width: 600px) {
+
+    .header-container{border-radius: 2.5rem;}
+    .sub-title{
+        width: 95%;
+        margin: 2vh 0 2vh 0;
+        font-size: clamp(0.8rem, 1.1vw, 1.3rem);
+        text-align: center;
+        text-wrap: balance;
+        border: none;
+    }
+    .knowledges-container{border-radius: 2.5rem;}
+    .OneKnowledgeSet {border-radius: 2.5rem;}
+    .OneKnowledgeCard {padding: 1.5rem;margin: 1rem 0;}
+    .OneKnowledgeTitle {text-align: center;}
+    .OneKnowledgeSummary{text-align: justify;}
+    .OneKnowledgeSet.expanded .OneKnowledgeSummary {width: 100% !important;}
+    .OneKnowledgeSet.expanded .OneKnowledgeTitle {width: 100% !important;}
+    .OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {position: relative;top: 0;right: 0;width: 100%;}
+    
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
 body {
     background: var(--body-bg);
     transition: all 0.3s ease;
@@ -55,9 +110,9 @@ body {
     flex-direction: row;
     margin: 2rem 0 5rem 0;
     padding: 2rem 0 2rem 0;
-    border-radius: 5rem;
+    border-radius: 4rem;
     align-items: center;
-    background: var(--header-cont-bg);
+    background-image: var(--header-cont-bg);
 }
 
 .left-cont {
@@ -103,7 +158,7 @@ body {
 .sub-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
-    border-left: 1rem solid var(--general-font-color);
+    border-left: 0.8rem solid var(--general-font-color);
     font-size: clamp(1rem, 1vw, 1.2rem);
     text-align: left;
     width: 90%;
@@ -111,7 +166,7 @@ body {
     font-style: italic;
     text-wrap: balance;
     padding-left: 2vw;
-    margin-left: 5vw;
+    margin-left: 4vw;
 }
 
 #showContainer {
@@ -155,7 +210,6 @@ body {
     box-shadow: 6px 6px 4px var(--card-shadow);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(194, 226, 170, 0.1);
-    z-index: 1000;
     position: relative;
 }
 
@@ -202,11 +256,11 @@ body {
     margin-bottom: 1rem;
     left: 50%;
     width: 10vw;
-    height: 0.2vw;
+    height: 0.2vh;
     background: var(--card-text);
     transform: translateX(-50%);
     transition: width 0.3s ease;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .ShowCaseOneKnowledgeCard:hover .ShowCaseOneKnowledgeTitle::after {
@@ -221,7 +275,7 @@ body {
     width: 80%;
     word-spacing: 0.3vw;
     border-top: 0.2rem solid var(--card-text);
-    padding-top: 1.5rem;
+    padding-top: 1.5vh;
 }
 
 .ShowCaseOneKnowledgePictureWrapper {
@@ -248,13 +302,14 @@ body {
     justify-content: center;
     align-items: center;
     background-image: var(--card-cont-bg);
-    border-radius: 5rem;
+    border-radius: 4rem;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .OneKnowledgeSet.expanded {
     width: 95%;
+    background:transparent;
 }
 
 .OneKnowledgeSet.expanded .readMoreBtn {
@@ -280,9 +335,9 @@ body {
 
 .OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 28%;
+    top: 1.3rem;
+    right: 1.6rem;
+    width: 24%;
     height: auto;
     margin: 0;
 }
@@ -298,47 +353,53 @@ body {
     max-height: 40%;
     margin: 1rem 0 1rem 0;
     transition: all 0.5s ease;
+    background-color: #101c0a58;
+    border-radius: 3rem;
 }
 
-.readMoreBtn {
+.readMoreBtn{
     background-color: var(--cardBtn-bg);
     color: var(--cardbtn-color);
     font-family: monospace;
-    font-size: 2vw;
+    font-size: clamp(1rem, 2.5vw, 2.6rem);
     border-radius: 0.7rem;
-    width: 2vw;
+    width: 2.5vw;
     height: fit-content;
-    padding: 10rem 0 10rem 0;
+    padding: 8.5rem 0.2rem 8.5rem 0.2rem;
+    margin: 0 1rem 0 1rem;
     transition: all 0.3s ease;
     cursor: pointer;
     text-align: center;
     border: 0.2rem solid var(--card-bg);
-    transition: 0.3s all ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .readMoreBtn:hover {
     background-color: var(--cardBtn-hover-bg);
     color: var(--cardbtn-hover-font-color);
-    transition: 0.3s all ease;
+    transform: translateY(-5px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .closeBtn {
     background-color: var(--cardBtn-bg);
     color: var(--cardbtn-color);
-    width: 70%;
+    font-size: clamp(0.5rem, 1vw, 1.2vw);
+    width: 100%;
     height: fit-content;
+    text-align: center;
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     border-radius: 1rem;
     border: 0.2rem solid rgb(18, 11, 2);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .closeBtn:hover {
     background-color: var(--cardBtn-hover-bg);
     color: var(--cardbtn-hover-font-color);
-    width: 90%;
     height: fit-content;
-    transition: all 0.3s ease;
+    transform: translateY(-5px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
 
@@ -355,12 +416,11 @@ body {
     overflow: visible;
     background-color: var(--card-bg);
     padding: 2.5rem;
-    margin: 2rem;
+    margin: 2rem 0 2rem 2rem;
     border-radius: 1.5rem;
     box-shadow: 6px 6px 4px var(--card-shadow);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(194, 226, 170, 0.1);
-    z-index: 1000;
     position: relative;
 }
 
@@ -376,7 +436,7 @@ body {
     justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
-    width: 20%;
+    width: 35%;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -384,10 +444,10 @@ body {
 .OneKnowledgeTitle {
     color: var(--card-text);
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(1.8rem, 4.2vw, 4.6rem);
+    font-size: clamp(2.2rem, 4.2vw, 4.6rem);
+    width: 100%;
     text-align: left;
-    text-wrap: balance;
-    margin: 0.2rem 0 1.5rem 0;
+    margin: 0.2vh 0 1.5vh 0;
     letter-spacing: 1px;
     font-weight: bold;
 }
@@ -398,27 +458,27 @@ body {
     bottom: 0;
     margin-bottom: 1rem;
     left: 50%;
-    width: 10rem;
-    height: 3px;
+    width: 10vw;
+    height: 0.2vh;
     background: var(--card-text);
     transform: translateX(-50%);
     transition: width 0.3s ease;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .OneKnowledgeCard:hover .OneKnowledgeTitle::after {
-    width: 30rem;
+    width: 30vw;
 }
 
 .OneKnowledgeSummary {
-    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    font-size: clamp(0.6rem, 1.3vw, 1.5rem);
     color: var(--card-text);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: left;
     width: 90%;
     word-spacing: 0.3vw;
     border-top: 0.2rem solid var(--card-text);
-    padding-top: 2.5rem;
+    padding-top: 1.8vh;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -431,7 +491,7 @@ body {
     opacity: 0.9;
     text-align: left;
     border-left: 5px solid rgba(176, 246, 123, 0.601);
-    padding-left: 1rem;
+    padding-left: 0.5rem;
     height: 20rem;
     width: 100%;
     overflow-y: auto;
@@ -469,7 +529,7 @@ body {
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .OneKnowledgePictureWrapper {
-    width: 45%;
+    width: 40%;
     height: auto;
     margin: 2rem;
 }
@@ -519,87 +579,3 @@ body {
     transition: 0.3s all ease;
 }
 
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-@media (max-width: 1300px) {
-    .header-container {
-        flex-direction: column;
-    }
-
-    .left-cont {
-        width: 90%;
-    }
-    
-    .right-cont {
-        width: 100%;
-        margin-top: 3rem;
-    }
-    .main-title {
-        font-size: clamp(1rem, 8.5vw, 9rem);
-        text-align: center;
-        padding-left: 0;
-    }
-    #showContainer{
-        margin: 2rem 0 0 0;
-        width: 70%;
-    }
-    #showContainer:hover{
-        width: 90%;
-    }
-
-    .OneKnowledgeCard {
-        flex-direction: column;
-    }
-    
-    .OneKnowledgePictureWrapper {
-        width: 80%;
-        margin: 1rem auto;
-    }
-}
-
-@media (max-width: 900px) {
-    .OneKnowledgeSet {
-        flex-direction: column;
-        max-height: none;
-    }
-    
-    .readMoreBtn {
-        width: 80%;
-        padding: 1rem;
-        height: auto;
-    }
-    
-    .ShowCaseOneKnowledgeCard{
-        width: 95%;
-    }
-    .OneKnowledgeCard {
-        width: 80%;
-    }
-    .OneKnowledgeSet.expanded{
-        width:80%
-    }
-}
-
-@media (max-width: 600px) {
-    .OneKnowledgeCard {
-        padding: 1rem;
-        margin: 1rem 0;
-    }
-    
-    .OneKnowledgeSet.expanded .OneKnowledgeSummary {
-        width: 100% !important;
-    }
-
-    .OneKnowledgeSet.expanded .OneKnowledgeTitle {
-        width: 100% !important;
-    }
-    
-    .OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {
-        position: relative;
-        top: 0;
-        right: 0;
-        width: 90%;
-    }
-}
-
-/*---------------------------------------------------------------------------------------------------------------------------------*/

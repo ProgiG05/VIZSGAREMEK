@@ -61,6 +61,7 @@ function createIdeaCard(idea) {
     imgWrapper.setAttribute("class", "image-placeholder-wrapper");
     const imgPlace = document.createElement("img");
     imgPlace.setAttribute("class", "insideImage");
+    imgPlace.setAttribute("id", "insideImage");
     imgPlace.setAttribute("src", "../pics/gardenideas/" + idea.picture + ".png");
     imgPlace.setAttribute("alt", idea.title);
     imgWrapper.appendChild(imgPlace);

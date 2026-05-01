@@ -44,8 +44,10 @@
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
+
 body.dark-theme {
     --body-bg: #273220;
+    --header-cont-bg: linear-gradient(to right, #222e1a, #495f33);
     --primary-color: #8BAE66;
     --border-color: #628141;
     --main-font-color: #c3eeae;
@@ -57,6 +59,69 @@ body.dark-theme {
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
+
+@media (max-width: 1100px) {
+    .other-searched-results {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .searching-cont {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .clearBtn {
+        width: 90%;
+    }
+    
+    .selection-cont {
+        grid-template-columns: 1fr;
+    }
+
+    .origin-selection-cont, 
+    .indoor-switch-cont, 
+    .seeds-switch-cont {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .other-searched-results {
+        grid-template-columns: 1fr;
+    }
+
+    .plant-card {
+        width: 100%;
+    }
+
+    .switch {
+        width: clamp(2rem, 6vw, 2.8rem);
+        height: clamp(1.2rem, 4vw, 1.5rem);
+    }
+
+    .slider:before {
+        width: calc(50% - 0.2rem);
+        height: calc(100% - 0.3rem);
+        top: 0.15rem;
+        left: 0.15rem;
+    }
+    
+    .quick-buttons-cont {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .showSearch_Btn, .showBroswe_Btn {
+        width: 80%;
+        border-radius: 1.5rem;
+    }
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
 body {
     background: var(--body-bg);
     transition: all 0.3s ease;
@@ -81,7 +146,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--header-cont-bg);
+    background-image: var(--header-cont-bg);
     border-radius: 4rem;
 }
 
@@ -558,7 +623,7 @@ select {
     border-radius: 1.5rem;
     padding: 1rem;
     margin-top: 1rem;
-    width: 95%;
+    width: 90%;
     height: fit-content;
     background-color: var(--card-bg);
     color: var(--card-font-color);
@@ -743,67 +808,3 @@ select {
 }
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
-
-/*---------------------------------------------------------------------------------------------------------------------------------*/
-
-@media (max-width: 1100px) {
-    .other-searched-results {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .searching-cont {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 900px) {
-    .clearBtn {
-        width: 90%;
-    }
-    
-    .selection-cont {
-        grid-template-columns: 1fr;
-    }
-
-    .origin-selection-cont, 
-    .indoor-switch-cont, 
-    .seeds-switch-cont {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 700px) {
-    .other-searched-results {
-        grid-template-columns: 1fr;
-    }
-
-    .plant-card {
-        width: 100%;
-    }
-
-    .switch {
-        width: clamp(2rem, 6vw, 2.8rem);
-        height: clamp(1.2rem, 4vw, 1.5rem);
-    }
-
-    .slider:before {
-        width: calc(50% - 0.2rem);
-        height: calc(100% - 0.3rem);
-        top: 0.15rem;
-        left: 0.15rem;
-    }
-    
-    .quick-buttons-cont {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    .showSearch_Btn, .showBroswe_Btn {
-        width: 80%;
-        border-radius: 1.5rem;
-    }
-}
-
-/*---------------------------------------------------------------------------------------------------------------------------------*/
