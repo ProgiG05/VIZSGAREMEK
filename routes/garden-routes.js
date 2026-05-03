@@ -298,8 +298,7 @@ router.post("/gardens/newgarden",authenticateToken,GardenController.addNewGarden
  *       500:
  *         description: Could not load saved plants
  */
-router.get("/savedplants",authenticateToken,GardenController.getMySavedPlants,
-);
+router.get("/savedplants",authenticateToken,GardenController.getMySavedPlants);
 
 /**
  * @swagger

@@ -2,6 +2,7 @@ import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
 import { getUser, apiFetch } from './api.js';
 import { showAlert, showConfirm } from './popup.js';
 
+let savedPlantIds = new Set();
 
 document.addEventListener('DOMContentLoaded', async () => {
     setupNavbar();
@@ -9,6 +10,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupLoginState();
 
     const user = getUser();
+
+    if (user) {
+        try {
+            const saved = await getSavedPlants();
+            saved.forEach(p => savedPlantIds.add(p.id));
+        } catch (e) {
+            console.warn("Could not load saved plants.");
+        }
+    }
 
     // Fetch all plants
     let response;
@@ -34,32 +44,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const PlantsContainer = document.getElementById('other-searched-results');
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont");
-    const SavedPlantsGrouping = document.getElementById("saved-plants-grouping");
-
-    // Only allow saved plants access when logged in
-    if (SavedPlantsGrouping) {
-        SavedPlantsGrouping.addEventListener('click', async () => {
-            if (!user) {
-                showAlert("Please log in to view your saved plants.", "Not logged in!");
-                return;
-            }
-
-            try {
-                const savedPlants = await getSavedPlants();
-                PlantsContainer.innerHTML = "";
-                savedPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant.plant_id)));
-            } catch (error) {
-                console.error("Failed to load saved plants:", error.message);
-                showAlert("Could not load saved plants. Please try again later.", "Error!");
-            }
-        });
-    }
-
+   
     // Build type filter buttons
-    const AllPlantTypes = [];
+    const AllPlantTypes = ["Saved plants"];
     response.forEach(onetype => {
         if (!AllPlantTypes.includes(onetype.type)) { AllPlantTypes.push(onetype.type); }
     });
+
 
     AllPlantTypes.forEach(onetype => {
         const TypeButton = document.createElement("button");
@@ -67,7 +58,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         TypeButton.textContent = capitalizeFirstLetter(onetype.trim());
         TypeButton.id = onetype.trim();
         TypeButton.addEventListener('click', async () => {
-            await typeFilter(TypeButton.id, response);
+            if (TypeButton.id === "Saved plants") {
+                if (!user) {
+                showAlert("Please log in to view your saved plants.", "Not logged in!");
+                return;
+            }
+
+            try {
+                const savedPlants = await getSavedPlants();
+                PlantsContainer.innerHTML = "";
+                savedPlants.forEach(plant => PlantsContainer.appendChild(createPlantCards(plant)));
+            } catch (error) {
+                console.error("Failed to load saved plants:", error.message);
+                showAlert("Could not load saved plants. Please try again later.", "Error!");
+            }
+            } else {
+                typeFilter(TypeButton.id, response);
+            }
         });
         TypesGroupingContainer.appendChild(TypeButton);
     });
@@ -113,6 +120,10 @@ function createPlantCards(plant) {
     // Save button
     const potButton = document.createElement("button");
     potButton.setAttribute("class", "pot-button");
+    if (savedPlantIds.has(plant.id)) {
+        potButton.classList.add("saved");
+    }
+
     potButton.addEventListener('click', () => {
         toggleSaveState(potButton, plant.id);
     });
@@ -207,12 +218,22 @@ async function toggleSaveState(buttonElement, plantId) {
     }
 
     buttonElement.classList.toggle('saved');
+    if (buttonElement.classList.contains('saved')) {
+        savedPlantIds.add(plantId);
+    } else {
+        savedPlantIds.delete(plantId);
+    }
 
     try {
         await SavePlant(plantId);
     } catch (error) {
         console.error("Failed to save plant:", error.message);
         buttonElement.classList.toggle('saved'); // Revert toggle on failure
+        if (buttonElement.classList.contains('saved')) {
+            savedPlantIds.add(plantId);
+        } else {
+            savedPlantIds.delete(plantId);
+        }
         showAlert("Could not save plant. Please try again.", "Error!");
     }
 }
@@ -227,8 +248,7 @@ async function SavePlant(plantId) {
     const response = await apiFetch('/api/saveplants', {
         method: 'POST',
         body: JSON.stringify({
-            plant_id: plantId,
-            user_id: user.id
+            id: plantId
         })
     });
 
@@ -248,7 +268,6 @@ async function getSavedPlants() {
     if (!response || !response.ok) {
         throw new Error(`Failed to fetch saved plants`);
     }
-
     return await response.json();
 }
 
