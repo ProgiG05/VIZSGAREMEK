@@ -71,39 +71,35 @@ body.dark-theme {
     }
 }
 @media (max-width: 1000px) {
-    #header-container{
+    body .header-container{
         flex-direction: column;
         margin: 2rem 0 1rem 0;
+        align-items: center;
     }
-    #left-cont {
+    body .header-container .left-cont {
         width: 90%;
     }
-    #left-cont > button{
+    body #showSearch{
         margin: 2rem 0 0 0;
         width: 70%;
     }
-    #left-cont > button:hover{
+    body #showSearch:hover{
         width: 90%;
     }
-    #oneCardShowcase_cont{
+    body .header-container .right-cont{
         width: 100%;
         margin-top: 3rem;
     }
-    #oneCardShowcase_cont > div{
-        width: 50%;
+    body .header-container .right-cont> div{
+        width: 70%;
     }
-    #main-title{
-        font-size: clamp(2.5rem, 5vw, 9rem);
+    body .main-title{
         text-align: center;
         padding-left: 0;
     }
-    #sub-title{
-        margin: 2vh 0 2vh 2vw;
-        font-size: clamp(0.6rem, 1.1vw, 1.3rem);
-        line-height: 2vh;
-        border: none;
-        padding-left: 0;
-        text-align: center;
+    body .sub-title{
+        margin: 2.5vh 0 2.5vh 5vw;
+        line-height: 1.7vh;
     }
 }
 @media (max-width: 600px) {
@@ -113,18 +109,31 @@ body.dark-theme {
         border-radius: 2.5rem;
         padding: 2rem 0 0 0;
     }
-    .garden-card{
-        width: 50%;
+    body .garden-card{
+        width: 70%;
     }
-    .plant-list{
-        margin: 0 0 0.5rem 0;
+    body .plant-list{
+        margin: 0 0 0.7rem 0;
     }
-    .card-footer{
-        margin: 0.5rem 0.2rem 0.5rem 0.2rem;
-        padding: 0;
-    }
-    .pot-button{
+    body .pot-button{
         scale: calc(0.7);
+    }
+    body .stat-box {
+        flex: 1;
+        padding: 2vw 0.5rem 2vw 0.5rem;
+    }
+    body .stats-container {
+        width: 100%;
+        gap: 2px;
+    }
+    body .stat-badge {
+        padding: 0.25vh 0.5vw 0.25vh 0.5vw;
+
+    }
+}
+@media (max-width: 450px) {
+    body .main-title{
+        font-size: 10vw;
     }
 }
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -149,9 +158,10 @@ body {
     flex-direction: row;
     margin: 2rem 0 5rem 0;
     padding: 2rem 0 2rem 0;
-    border-radius: 5rem;
+    border-radius: 2rem;
     align-items: center;
     background-image: var(--header-cont-bg);
+    background-color: #13220b68;
 }
 
 .left-cont {
@@ -184,7 +194,7 @@ body {
 .main-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
-    font-size: clamp(2.5rem, 5.9vw, 7rem);
+    font-size: clamp(3.6rem, 5.9vw, 7rem);
     text-shadow: var(--title-text-shadow);
     letter-spacing: 5px;
     font-weight: bolder;
@@ -198,10 +208,10 @@ body {
 .sub-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
-    border-left: 1rem solid var(--general-font-color);
-    font-size: clamp(1rem, 1vw, 1.2rem);
+    border-left: 1vw solid var(--general-font-color);
+    font-size: clamp(0.58rem, 1.2vw, 1.2rem);
     text-align: left;
-    width: 90%;
+    width: 70%;
     line-height: 2.7vh;
     font-style: italic;
     text-wrap: balance;
@@ -281,12 +291,11 @@ body {
 .gardenIdeas-container {
     background: transparent;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
     justify-items: center;
     align-items: center;
     gap: 1rem;
     width: 90%;
-    margin: auto;
 }
 
 .garden-card {
@@ -382,7 +391,7 @@ body {
 
 .stat-box {
     text-align: center;
-    width: 8vw;
+    width: 10vw;
 }
 
 .stat-badge {
@@ -555,3 +564,19 @@ body {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.message-cont{
+    margin: 2rem auto 0 auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--text-green);
+    width: 60%;
+    max-width: 500px;
+    height: fit-content;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid var(--beige-light);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.2rem;
+}

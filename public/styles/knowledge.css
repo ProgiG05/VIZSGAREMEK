@@ -39,37 +39,37 @@ body.dark-theme {
 
 @media (max-width: 1300px) {
 
-    .header-container {flex-direction: column;}
-    .left-cont {width: 90%;}
-    .right-cont {width: 100%;margin-top: 1vh;}
-    .main-title {font-size: clamp(1rem, 8.5vw, 9rem);text-align: center;padding-left: 0;}
-    .sub-title{width: 70%;margin: 2vh 0 2vh 8vw;font-size: clamp(0.8rem, 1.1vw, 1.3rem);}
-    #showContainer{margin: 2rem 0 0 0;width: 70%;}
-    #showContainer:hover{width: 90%;}
-    .OneKnowledgeCard {flex-direction: column;}
-    .OneKnowledgePictureWrapper {width: 50%;margin: 1rem 1rem 1rem 0;}
-    .readMoreBtn{padding: 7rem 0.2rem 7rem 0.2rem;}
+    body .header-container {flex-direction: column;}
+    body .left-cont {width: 90%;}
+    body .right-cont {width: 100%;margin-top: 1vh;}
+    body .main-title {font-size: clamp(1rem, 8.5vw, 9rem);text-align: center;padding-left: 0;}
+    body .sub-title{width: 70%;margin: 2vh 0 2vh 8vw;font-size: clamp(0.8rem, 1.1vw, 1.3rem);}
+    body #showContainer{margin: 2rem 0 0 0;width: 70%;}
+    body #showContainer:hover{width: 90%;}
+    body .OneKnowledgeCard {flex-direction: column;}
+    body .OneKnowledgePictureWrapper {width: 50%;margin: 1rem 1rem 1rem 0;}
+    body .readMoreBtn{padding: 7rem 0.2rem 7rem 0.2rem;}
 
 }
 
 @media (max-width: 900px) {
 
-    .OneKnowledgeSet {flex-direction: column-reverse;max-height: none;}
-    .sub-title{border-left: 0.3rem solid var(--general-font-color);line-height: 1.5vh;}
-    .readMoreBtn {width: 80%;padding: 0.3rem 0 0.3rem 0;height: auto;border-radius: 1.2rem;}
-    .ShowCaseOneKnowledgeCard{width: 95%;}
-    .OneKnowledgeCard {width: 80%;margin: 1rem 1rem 2rem 1rem;}
-    .OneKnowledgeSet.expanded{width:80%}
-    .OneKnowledgeDescription{width: 95%;}
-    .OneKnowledgePictureWrapper {width: 80%;}
-    .OneKnowledgeParagraph{width: 80%;}
+    body .OneKnowledgeSet {flex-direction: column-reverse;max-height: none;}
+    body .sub-title{line-height: 1.5vh;}
+    body .readMoreBtn {width: 80%;padding: 0.3rem 0 0.3rem 0;height: auto;border-radius: 1.2rem;}
+    body .ShowCaseOneKnowledgeCard{width: 95%;}
+    body .OneKnowledgeCard {width: 80%;margin: 1rem 1rem 2rem 1rem;}
+    body .OneKnowledgeSet.expanded{width:80%}
+    body .OneKnowledgeDescription{width: 95%;}
+    body .OneKnowledgePictureWrapper {width: 80%;}
+    body .OneKnowledgeParagraph{width: 80%;}
 
 }
 
 @media (max-width: 600px) {
 
-    .header-container{border-radius: 2.5rem;}
-    .sub-title{
+    body .header-container{border-radius: 2.5rem;}
+    body .sub-title{
         width: 95%;
         margin: 2vh 0 2vh 0;
         font-size: clamp(0.8rem, 1.1vw, 1.3rem);
@@ -77,14 +77,14 @@ body.dark-theme {
         text-wrap: balance;
         border: none;
     }
-    .knowledges-container{border-radius: 2.5rem;}
-    .OneKnowledgeSet {border-radius: 2.5rem;}
-    .OneKnowledgeCard {padding: 1.5rem;margin: 1rem 0;}
-    .OneKnowledgeTitle {text-align: center;}
-    .OneKnowledgeSummary{text-align: justify;}
-    .OneKnowledgeSet.expanded .OneKnowledgeSummary {width: 100% !important;}
-    .OneKnowledgeSet.expanded .OneKnowledgeTitle {width: 100% !important;}
-    .OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {position: relative;top: 0;right: 0;width: 100%;}
+    body .knowledges-container{border-radius: 2.5rem;}
+    body .OneKnowledgeSet {border-radius: 2.5rem;}
+    body .OneKnowledgeCard {padding: 1.5rem;margin: 1rem 0;}
+    body .OneKnowledgeTitle {text-align: center;}
+    body .OneKnowledgeSummary{text-align: justify;}
+    body .OneKnowledgeSet.expanded .OneKnowledgeSummary {width: 100% !important;}
+    body .OneKnowledgeSet.expanded .OneKnowledgeTitle {width: 100% !important;}
+    body .OneKnowledgeSet.expanded .OneKnowledgePictureWrapper {position: relative;top: 0;right: 0;width: 100%;}
     
 }
 
@@ -112,7 +112,8 @@ body {
     padding: 2rem 0 2rem 0;
     border-radius: 4rem;
     align-items: center;
-    background-image: var(--header-cont-bg);
+    /* background-image: var(--header-cont-bg); */
+    background-color: #13220b68;
 }
 
 .left-cont {
@@ -158,7 +159,7 @@ body {
 .sub-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
-    border-left: 0.8rem solid var(--general-font-color);
+    border-left: 0.8vw solid var(--general-font-color);
     font-size: clamp(1rem, 1vw, 1.2rem);
     text-align: left;
     width: 90%;

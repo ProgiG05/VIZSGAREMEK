@@ -191,9 +191,6 @@ function setupTopButton() {
     });
 }
 
-window.onload = () => {
-};
-
 function ConvertToReadingMode(card) {
     console.log('Reading mode clicked:', card);
 }
@@ -212,25 +209,6 @@ function setupShowSearchButton() {
         searchCont.scrollIntoView({ behavior: "smooth" });
     });
 }
-
-
-// document.getElementById("searchBar").addEventListener("input", async (e) => {
-//     e.preventDefault()
-//     const searchValue = document.getElementById("searchBar").value.toLowerCase();
-//     const IdeasCardContainer = document.getElementById("gardenIdeas-container")
-//     IdeasCardContainer.innerHTML = ``
-//     const responseIdeas = await fetch('/api/ideas', { method: "GET", headers : {"Content-Type" : "application/json"}})
-//     const ListOfIdeas = await responseIdeas.json()
-//     ListOfIdeas.forEach(idea => {
-//         let ideaTitle = idea.title.toLowerCase()
-//         if (ideaTitle.includes(searchValue)) {
-//             const card = createIdeaCard(idea)
-//             IdeasCardContainer.appendChild(card)
-//         }
-//         //handling no matching result
-//     });
-// })
-
 
 // --- Searchbar Logic 2---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

@@ -107,7 +107,8 @@ body {
 
 }
 .add-garden-form {
-    background-color: var(--main-cont-bg);
+    /* background-color: var(--main-cont-bg); */
+    background-color: #13220b68;
     color: var(--text-main);
     padding: 2.5rem;
     border-radius: 1.5rem;

@@ -59,64 +59,104 @@ body.dark-theme {
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
-
-@media (max-width: 1100px) {
-    .other-searched-results {
+@media (max-width: 1600px) {
+    #other-searched-results {
         grid-template-columns: 1fr 1fr;
     }
     
-    .searching-cont {
+    #searching-cont {
         grid-template-columns: 1fr;
     }
 }
+@media (max-width: 1000px) {
+    #other-searched-results {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+    }
+    #other-searched-results .plant-card{
+        width: 60%;
+    }
+}
+
 
 @media (max-width: 900px) {
+    body .main-title{
+        font-size: clamp(2.5rem, 10vw, 14rem);
+        margin: 0.5rem 0 1rem 0;
+    }
     .clearBtn {
         width: 90%;
     }
     
-    .selection-cont {
-        grid-template-columns: 1fr;
+    body .origin-selection-cont, 
+    body .indoor-switch-cont, 
+    body .seeds-switch-cont {
+        display: flex;
+        flex-direction: column;
     }
-
-    .origin-selection-cont, 
-    .indoor-switch-cont, 
-    .seeds-switch-cont {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 700px) {
-    .other-searched-results {
-        grid-template-columns: 1fr;
-    }
-
-    .plant-card {
-        width: 100%;
-    }
-
     .switch {
-        width: clamp(2rem, 6vw, 2.8rem);
-        height: clamp(1.2rem, 4vw, 1.5rem);
+        width: 100%;
+        height: clamp(1.2rem, calc(100% * (2/3)), 1.5rem);
     }
-
     .slider:before {
         width: calc(50% - 0.2rem);
         height: calc(100% - 0.3rem);
         top: 0.15rem;
         left: 0.15rem;
     }
-    
-    .quick-buttons-cont {
+    body .plant-type-grouping-cont{
+        width: 70%;
+        margin: 2rem 0 1rem 0;
+    }
+}
+
+@media (max-width: 700px) {
+    body .other-searched-results {
+        grid-template-columns: 1fr;
+    }
+    body .quick-buttons-cont {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
     }
     
-    .showSearch_Btn, .showBroswe_Btn {
+    body .quick-buttons-cont .showSearch_Btn, body .quick-buttons-cont .showBrowse_Btn {
         width: 80%;
         border-radius: 1.5rem;
+    }
+}
+@media (max-width: 650px) {
+    body .searching-cont{
+        display: flex;
+        flex-direction: column;
+    }
+    body .left-container{
+        width: 100%;
+    }
+    body .right-container{
+        width: 100%;
+    }
+    body .origin-selection-cont, 
+    body .indoor-switch-cont, 
+    body .seeds-switch-cont {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    body .clearBtn {
+        width: fit-content;
+        padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+    }
+}
+@media (max-width: 450px) {
+    body .origin-selection-cont{
+        display: flex;
+        flex-direction: column;
+    }
+    body .clearBtn {
+        width: 90%;
     }
 }
 
@@ -147,7 +187,8 @@ body {
     align-items: center;
     justify-content: center;
     background-image: var(--header-cont-bg);
-    border-radius: 4rem;
+    background-color: #13220b68;
+    border-radius: 2rem;
 }
 
 .main-title {
@@ -163,26 +204,25 @@ body {
     font-style: italic;
     text-align: justify;
     font-family: var(--font-main);
-    font-size: clamp(1rem, 1.7vw, 1.5rem);
+    font-size: clamp(0.7rem, 1.7vw, 1.5rem);
     color: var(--main-font-color);
-    border-left: 1rem solid var(--main-font-color);
-    padding-left: 2rem;
-    margin: 2rem 0 2rem 0;
+    border-left: 1vw solid var(--main-font-color);
+    padding-left: 2vw;
+    margin: 2vh 0 2rem 0;
 }
 
 .quick-buttons-cont {
     width: 100%;
-    margin: 2rem 0 2rem 0;
+    margin: 2rem 0 1rem 0;
 }
-
 .showSearch_Btn {
     width: 20%;
     height: fit-content;
-    padding: 1rem 3rem 1rem 3rem;
+    padding: 0.8rem 3rem 0.8rem 3rem;
     text-align: center;
     font-family: var(--font-data);
     font-weight: bold;
-    font-size: clamp(0.4rem, 1vw, 1.5rem);
+    font-size: clamp(0.7rem, 1vw, 1.5rem);
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
     transition: all 0.2s ease;
@@ -190,14 +230,14 @@ body {
     color: var(--general-button-font-color);
 }
 
-.showBroswe_Btn {
+.showBrowse_Btn {
     width: 20%;
     height: fit-content;
-    padding: 1rem 3rem 1rem 3rem;
+    padding: 0.8rem 3rem 0.8rem 3rem;
     text-align: center;
     font-family: var(--font-data);
     font-weight: bold;
-    font-size: clamp(0.4rem, 1vw, 1.5rem);
+    font-size: clamp(0.7rem, 1vw, 1.5rem);
     border-top-right-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
     transition: all 0.3s ease;
@@ -206,7 +246,7 @@ body {
 }
 
 .showSearch_Btn:hover,
-.showBroswe_Btn:hover {
+.showBrowse_Btn:hover {
     transition: all 0.3s ease;
     cursor: pointer;
     background-color: var(--general-button-hover-bg);
@@ -225,7 +265,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 0.7vh 8vw 0.7vh 8vw;
-    margin: 2rem auto;
+    margin: 1rem auto;
     width: 90%;
     min-height: 80vh;
     height: auto;
@@ -360,6 +400,10 @@ body {
     cursor: pointer;
     font-size: clamp(0.6rem, 0.9vw, 1.4rem);
     font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85vw;
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -407,20 +451,9 @@ body {
 
 /*-----------------------------------------------------------------------------------------*/
 
-.origin-selection-cont {
+.origin-selection-cont, .indoor-switch-cont, .seeds-switch-cont {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* Two equal columns */
-    gap: 1.5rem;
-}
-
-/*-----------------------------------------------------------------------------------------*/
-
-.indoor-switch-cont,
-.seeds-switch-cont {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* Two equal columns */
     gap: 1.5rem;
 }
 
@@ -555,9 +588,10 @@ select {
 .typeGroup_Btn {
     height: fit-content;
     width: 10vw;
+    min-width: 5rem;
     padding: 0.6rem 0.3rem 0.6rem 0.3rem;
     font-family: monospace;
-    font-size: clamp(0.4rem, 1vw, 1.5rem);
+    font-size: clamp(0.6rem, 1vw, 1.5rem);
     text-align: center;
     color: var(--general-button-font-color);
     background-color: var(--general-button-bg);

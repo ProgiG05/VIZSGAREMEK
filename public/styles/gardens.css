@@ -71,7 +71,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--header-cont-bg);
+    /* background: var(--header-cont-bg); */
+    background-color: #13220b68;
 }
 
 .header-container {
