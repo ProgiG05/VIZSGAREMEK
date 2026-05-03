@@ -197,6 +197,7 @@ function loadContents(plants) {
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
+    console.log(splittedContent)
     
     // ------------- RENDER TABLE --------------------------------------------------
     splittedContent.forEach(row => {
@@ -550,7 +551,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
         if (await showConfirm("Are you sure you want to remove the last row from this garden? Any unsaved changes will be lost.")) {
             let rows = garden.garden_content.split(";");
 
-            if (!rows[rows.length - 1].split(",").map(val => val === "").includes(false)) {
+            if (!rows[rows.length - 1].split(",").map(val => val === "+").includes(false)) {
                 rows.pop();
             }
             else {
@@ -576,7 +577,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             let canRemove = true;
             rows = rows.map(row => {
                 let cols = row.split(",");
-                if (cols[cols.length - 1] != "") {
+                if (cols[cols.length - 1] != "+") {
                     canRemove = false;
                     return row
                 }
