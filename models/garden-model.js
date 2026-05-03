@@ -72,17 +72,30 @@ module.exports = {
   },
   getMySavedPlants: async function getMySavedPlants(userid) {
     const [rows] = await connection.query(
-      `SELECT * FROM saved_plants WHERE user_id = ?`,
+      `SELECT * FROM saved_plants JOIN plants ON saved_plants.plant_id = plants.id WHERE saved_plants.user_id = ?`,
       [userid],
     );
     return rows;
   },
   savePlant: async function savePlant(userid, plantid) {
-    const [rows] = await connection.query(
-      `INSERT INTO saved_plants (user_id, plant_id) VALUES(?,?)`,
+    const [existing] = await connection.query(
+      `SELECT * FROM saved_plants WHERE user_id = ? AND plant_id = ?`,
       [userid, plantid],
     );
-    return rows;
+
+    if (existing.length > 0) {
+      const [rows] = await connection.query(
+        `DELETE FROM saved_plants WHERE user_id = ? AND plant_id = ?`,
+        [userid, plantid],
+      );
+      return { action: "removed", result: rows };
+    } else {
+      const [rows] = await connection.query(
+        `INSERT INTO saved_plants (user_id, plant_id) VALUES(?,?)`,
+        [userid, plantid],
+      );
+      return { action: "added", result: rows };
+    }
   },
   getGardensByUserId: async function getGardensByUserId(userId) {
     const [rows] = await connection.query(

@@ -126,7 +126,7 @@ exports.getMySavedPlants = async (req, res) => {
 
 exports.savePlant = async (req, res) => {
   try {
-    const { plant_id } = req.body;
+    const plant_id = req.body.id;
     const userId = req.user.id;
 
     if (!plant_id) {
@@ -135,8 +135,8 @@ exports.savePlant = async (req, res) => {
         .json({ success: false, message: "Plant ID is required." });
     }
 
-    const result = await GardenModel.SavePlant(userId, plant_id);
-    console.log(`Plant ${plant_id} saved by user ${req.user.username}`);
+    const result = await GardenModel.savePlant(userId, plant_id);
+    console.log(`Plant ${plant_id} ${result.action} by user ${req.user.username}`);
     res.json(result);
   } catch (err) {
     console.error("Failed to save plant:", err);
