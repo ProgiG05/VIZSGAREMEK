@@ -197,7 +197,6 @@ function loadContents(plants) {
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
-    console.log(splittedContent)
     
     // ------------- RENDER TABLE --------------------------------------------------
     splittedContent.forEach(row => {
@@ -514,7 +513,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
             rows = rows.map(row => {
                 let cols = row.split(",");
                 for (let i = 0; i < addColumns; i++) {
-                    cols.push("");
+                    cols.push("+");
                 }
                 return cols.join(",");
             });
@@ -524,7 +523,7 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
         if (addRows > 0) {
             const currentColumnCount = rows[0].split(",").length;
             for (let i = 0; i < addRows; i++) {
-                const newRow = Array(currentColumnCount).fill("").join(",");
+                const newRow = Array(currentColumnCount).fill("+").join(",");
                 rows.push(newRow);
             }
         }
