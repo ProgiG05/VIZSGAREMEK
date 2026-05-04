@@ -172,4 +172,31 @@ module.exports = {
       userId,
     ]);
   },
+  getMySavedIdeas: async function getMySavedIdeas(userid) {
+    const [rows] = await connection.query(
+      `SELECT * FROM saved_ideas JOIN ideas ON saved_ideas.idea_id = ideas.id WHERE saved_ideas.user_id = ?`,
+      [userid],
+    );
+    return rows;
+  },
+  saveIdea: async (userid, ideaid) => {
+    const [existing] = await connection.query(
+      `SELECT * FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
+      [userid, ideaid]
+    );
+
+    if (existing.length > 0) {
+      const [rows] = await connection.query(
+        `DELETE FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
+        [userid, ideaid]
+      );
+      return { action: "removed", result: rows };
+    } else {
+      const [rows] = await connection.query(
+        `INSERT INTO saved_ideas (user_id, idea_id) VALUES (?, ?)`,
+        [userid, ideaid]
+      );
+      return { action: "added", result: rows };
+    }
+  },
 };

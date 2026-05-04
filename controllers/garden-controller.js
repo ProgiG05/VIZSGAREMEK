@@ -144,6 +144,39 @@ exports.savePlant = async (req, res) => {
   }
 };
 
+exports.getMySavedIdeas = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const data = await GardenModel.getMySavedIdeas(userId);
+    res.json(data);
+  } catch (err) {
+    console.error("Failed to fetch saved ideas:", err);
+    res
+      .status(500)
+      .json({ success: false, message: "Could not load saved ideas." });
+  }
+};
+
+exports.saveIdea = async (req, res) => {
+  try {
+    const idea_id = req.body.id;
+    const userId = req.user.id;
+
+    if (!idea_id) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Idea ID is required." });
+    }
+
+    const result = await GardenModel.saveIdea(userId, idea_id);
+    console.log(`Idea ${idea_id} ${result.action} by user ${req.user.username}`);
+    res.json({ success: true, action: result.action, data: result.result });
+  } catch (err) {
+    console.error("Failed to save idea:", err);
+    res.status(500).json({ success: false, message: "Could not toggle idea." });
+  }
+};
+
 exports.getMyGardens = async (req, res) => {
   try {
     const userId = req.user.id;

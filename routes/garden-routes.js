@@ -334,6 +334,56 @@ router.post("/saveplants", authenticateToken, GardenController.savePlant);
 
 /**
  * @swagger
+ * /api/savedideas:
+ *   get:
+ *     summary: Get my saved ideas
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Saved ideas fetched successfully
+ *       401:
+ *         description: Please log in to access this feature
+ *       500:
+ *         description: Could not load saved ideas
+ */
+router.get("/savedideas",authenticateToken,GardenController.getMySavedIdeas);
+
+/**
+ * @swagger
+ * /api/saveideas:
+ *   post:
+ *     summary: Save an idea
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - id
+ *             properties:
+ *               id:
+ *                 type: integer
+ *                 example: 5
+ *     responses:
+ *       200:
+ *         description: Idea saved successfully
+ *       400:
+ *         description: Idea ID is required
+ *       401:
+ *         description: Please log in to access this feature
+ *       500:
+ *         description: Could not save idea
+ */
+router.post("/saveideas", authenticateToken, GardenController.saveIdea);
+
+/**
+ * @swagger
  * /api/gardens:
  *   get:
  *     summary: Get my gardens

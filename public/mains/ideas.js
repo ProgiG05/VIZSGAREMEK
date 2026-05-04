@@ -1,13 +1,26 @@
-import { setupNavbar } from './navbar.js';
-import { setupSidePanel } from './navbar.js';
-import { setupLoginState } from './navbar.js';
+import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
 import { showAlert } from './popup.js';
+import { getUser, apiFetch } from './api.js';
 
+let savedIdeaIds = new Set();
 
 document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
+
+    const user = getUser();
+    if (user) {
+        try {
+            const response = await apiFetch('/api/savedideas', { method: 'GET' });
+            if (response && response.ok) {
+                const saved = await response.json();
+                saved.forEach(idea => savedIdeaIds.add(idea.id));
+            }
+        } catch (e) {
+            console.warn("Could not load initial saved ideas", e);
+        }
+    }
 
     await loadIdeas();
     setupTopButton();
@@ -134,7 +147,10 @@ function createIdeaCard(idea) {
     potButton.setAttribute("class", "pot-button");
     potButton.setAttribute("type", "button");
     potButton.setAttribute("aria-label", "Toggle saved state");
-    potButton.addEventListener("click", () => toggleSaveState(potButton));
+    if (savedIdeaIds.has(idea.id)) {
+        potButton.classList.add("saved");
+    }
+    potButton.addEventListener("click", () => toggleSaveState(potButton, idea.id));
 
     const flowerAssembly = document.createElement("div");
     flowerAssembly.setAttribute("class", "flower-assembly");
@@ -178,8 +194,39 @@ function createIdeaCard(idea) {
 
 // --- Save idea function Logic, Go to the top of the page Logic, Dark theme local storage Logic ---
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-function toggleSaveState(buttonElement) {
+async function toggleSaveState(buttonElement, ideaId) {
+    const user = getUser();
+    if (!user) {
+        showAlert("Please log in to save ideas.", "Not logged in!");
+        return;
+    }
+
     buttonElement.classList.toggle('saved');
+    if (buttonElement.classList.contains('saved')) {
+        savedIdeaIds.add(ideaId);
+    } else {
+        savedIdeaIds.delete(ideaId);
+    }
+
+    try {
+        const response = await apiFetch('/api/saveideas', {
+            method: 'POST',
+            body: JSON.stringify({ id: ideaId })
+        });
+        
+        if (!response || !response.ok) {
+            throw new Error('Save failed');
+        }
+    } catch (error) {
+        console.error("Failed to save idea:", error.message);
+        buttonElement.classList.toggle('saved'); // Revert toggle on failure
+        if (buttonElement.classList.contains('saved')) {
+            savedIdeaIds.add(ideaId);
+        } else {
+            savedIdeaIds.delete(ideaId);
+        }
+        showAlert("Could not save idea. Please try again.", "Error!");
+    }
 }
 
 function setupTopButton() {
