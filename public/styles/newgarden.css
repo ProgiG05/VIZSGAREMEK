@@ -34,7 +34,10 @@
     --garden-card-deleteBtn-font: #ffffff;
     --garden-card-deleteBtn-hover-bg: #f8d6d6;
     --garden-card-deleteBtn-hover-font: #0f0101;
-}/*------------------------------------------------------------------------------------------*/
+}
+
+/*------------------------------------------------------------------------------------------*/
+
 body.dark-theme {
     --body-bg: #273220;
     --main-font-color: #fdf8ef;
@@ -45,7 +48,9 @@ body.dark-theme {
     --navbarBtn-hover-bg: #030502;
     --navbarBtn-hover-font-color: rgb(255, 255, 255);
 }
+
 /*------------------------------------------------------------------------------------------*/
+
 body {
     background: var(--body-bg);
     background-attachment: fixed;
@@ -85,15 +90,15 @@ body {
     text-align: left;
 }
 .sub-title {
-    width: 95%;
+    width: 80%;
     font-style: italic;
-    text-align: justify;
+    text-align: left ;
     font-family: var(--font-main);
-    font-size: clamp(1rem, 1.1vw, 1.2rem);
+    font-size: clamp(0.7rem, 1.1vw, 1.2rem);
     color: var(--main-font-color);
-    border-left: 1rem solid black;
-    padding-left: 2rem;
-    margin: 1rem 0 1rem 7rem;
+    border-left: 1vw solid var(--main-font-color);
+    padding-left: 2vw;
+    margin: 1rem 0 1rem 0;
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -229,4 +234,51 @@ button:active {transform: translateY(0);}
     box-shadow: var(--garden-card-cell-shadow);
     background-color: var(--garden-card-cell-bg);
     color: var(--garden-card-cell-text);
+}
+
+/*------------------------------------------------------------------------------------------*/
+/* Responsive */
+/*------------------------------------------------------------------------------------------*/
+
+@media (max-width: 850px) {
+    .main-cont {
+        flex-direction: column;
+        padding: 2rem 0;
+    }
+    .header-container {
+        width: 95%;
+    }
+    .main-title {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        margin: 1rem 0;
+        text-align: center;
+        width: 100%;
+    }
+    .sub-title {
+        margin: 1rem auto;
+        padding-left: 1rem;
+        border: none;
+        width: 90%;
+        text-align: center;
+    }
+    .add-garden-form {
+        width: 90%;
+        padding: 1.5rem;
+        margin: 0.5rem;
+    }
+    .button-cont {
+        width: 90%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .cancel-btn, .preview-btn {
+        width: 100%;
+    }
+    .go-back-btn {
+        padding: 0.5rem 2rem;
+        width: 80%;
+    }
+    .preview-container {
+        margin: 1rem 0;
+    }
 }

@@ -253,7 +253,7 @@ function setupShowSearchButton() {
     if (!showSearchBtn || !searchCont) return;
 
     showSearchBtn.addEventListener("click", () => {
-        searchCont.scrollIntoView({ behavior: "smooth" });
+        document.getElementById('gardenIdeas-container').scrollIntoView({ behavior: "smooth" });
     });
 }
 

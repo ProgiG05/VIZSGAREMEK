@@ -1,6 +1,6 @@
 :root {
 
-    --font-main: Georgia, serif;
+    --font-main: Arial, Helvetica, sans-serif;
     --font-data: monospace;
 
     --popup-bg-color: rgb(232, 245, 189);
@@ -15,7 +15,7 @@
     /* --- CONFIRM DIALOGUE VARIABLES --- */
 
     --confirmBtn-bg: rgb(196, 69, 69);
-    --confirmBtn-bg-hover: #a13a3a;
+    --confirmBtn-bg-hover: #3d0c0c;
     --confirmBtn-font-color: #ffffff;
     --confirmBtn-font-color-hover: #ffffff;
 
@@ -26,9 +26,8 @@
 
     --close-btn-bg: rgb(162, 203, 139);
     --close-btn-color: #1a1e1a;
-    --close-btn-bg-hover: rgb(91, 126, 60);
+    --close-btn-bg-hover: rgb(31, 41, 22);
     --close-btn-color-hover: #ffffff;
-
 }
 
 .popup-overlay {
@@ -95,7 +94,6 @@
     color: var(--header-cont-font);
     padding: 1.2rem 1.5rem;
     border-bottom: var(--popup-border);
-    border-top: var(--popup-border);
 }
 
 .popup-title {
@@ -111,6 +109,7 @@
     color: var(--close-btn-color);
     padding: 0.4rem 1rem;
     border-radius: 6px;
+    border: 0.14rem outset var(--close-btn-color);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: bold;
@@ -132,6 +131,10 @@
 .popup-content-text {
     margin: 0;
     line-height: 1.6;
+    font-family: var(--font-data);
+    font-weight: bold;
+    color: var(--popup-font-color);
+    font-size: clamp(1rem, 1.4vw, 1.8rem);
 }
 
 .popup-footer-cont {
@@ -157,13 +160,16 @@
 .confirm-btn {
     background-color: var(--confirmBtn-bg);
     color: var(--confirmBtn-font-color);
-    border: 2px solid var(--confirmBtn-bg);
+    width: 8rem;
+    text-align: center;
+    padding: 0.2rem 3rem 0.2rem 3rem;
+    font-size: clamp(1rem, 1.4vw, 1.8rem);
+    font-family: var(--font-data);
 }
 
 .confirm-btn:hover {
     background-color: var(--confirmBtn-bg-hover);
     color: var(--confirmBtn-font-color-hover);
-    border-color: var(--confirmBtn-font-color-hover);
 }
 
 .cancel-btn {

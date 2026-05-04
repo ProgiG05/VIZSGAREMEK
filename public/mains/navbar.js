@@ -51,7 +51,7 @@ export function setupNavbar() {
     const loginBtn = document.createElement("a");
     loginBtn.setAttribute("id", "navbar-login-btn");
     loginBtn.setAttribute("href", "../sites/login.html");
-    loginBtn.textContent = "Login / Register";
+    loginBtn.textContent = "Login/Register";
     header.appendChild(loginBtn);
 
     // Only override login button text if user is logged in
@@ -85,21 +85,21 @@ export function setupSidePanel() {
         closeBtn.appendChild(closeImg);
         sidePanel.appendChild(closeBtn);
 
-        const select = document.createElement('select');
-        select.setAttribute('class', 'lang-selection');
-        select.setAttribute('id', 'lang-selection');
+        // const select = document.createElement('select');
+        // select.setAttribute('class', 'lang-selection');
+        // select.setAttribute('id', 'lang-selection');
 
-        const optEn = document.createElement('option');
-        optEn.setAttribute('value', 'en');
-        optEn.textContent = 'English';
+        // const optEn = document.createElement('option');
+        // optEn.setAttribute('value', 'en');
+        // optEn.textContent = 'English';
 
-        const optHu = document.createElement('option');
-        optHu.setAttribute('value', 'hu');
-        optHu.textContent = 'Hungarian';
+        // const optHu = document.createElement('option');
+        // optHu.setAttribute('value', 'hu');
+        // optHu.textContent = 'Hungarian';
 
-        select.appendChild(optEn);
-        select.appendChild(optHu);
-        sidePanel.appendChild(select);
+        // select.appendChild(optEn);
+        // select.appendChild(optHu);
+        // sidePanel.appendChild(select);
 
         const links = [
             { id: 'savedI_Btn', href: '../sites/ideas.html', text: 'Ideas' },

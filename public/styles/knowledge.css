@@ -43,7 +43,7 @@ body.dark-theme {
     body .left-cont {width: 90%;}
     body .right-cont {width: 100%;margin-top: 1vh;}
     body .main-title {font-size: clamp(1rem, 8.5vw, 9rem);text-align: center;padding-left: 0;}
-    body .sub-title{width: 70%;margin: 2vh 0 2vh 8vw;font-size: clamp(0.8rem, 1.1vw, 1.3rem);}
+    body .sub-title{margin: 2vh 0 2vh 10vw;}
     body #showContainer{margin: 2rem 0 0 0;width: 70%;}
     body #showContainer:hover{width: 90%;}
     body .OneKnowledgeCard {flex-direction: column;}
@@ -55,7 +55,6 @@ body.dark-theme {
 @media (max-width: 900px) {
 
     body .OneKnowledgeSet {flex-direction: column-reverse;max-height: none;}
-    body .sub-title{line-height: 1.5vh;}
     body .readMoreBtn {width: 80%;padding: 0.3rem 0 0.3rem 0;height: auto;border-radius: 1.2rem;}
     body .ShowCaseOneKnowledgeCard{width: 95%;}
     body .OneKnowledgeCard {width: 80%;margin: 1rem 1rem 2rem 1rem;}
@@ -69,14 +68,7 @@ body.dark-theme {
 @media (max-width: 600px) {
 
     body .header-container{border-radius: 2.5rem;}
-    body .sub-title{
-        width: 95%;
-        margin: 2vh 0 2vh 0;
-        font-size: clamp(0.8rem, 1.1vw, 1.3rem);
-        text-align: center;
-        text-wrap: balance;
-        border: none;
-    }
+    body .sub-title{margin: 2vh 0 2vh 0;}
     body .knowledges-container{border-radius: 2.5rem;}
     body .OneKnowledgeSet {border-radius: 2.5rem;}
     body .OneKnowledgeCard {padding: 1.5rem;margin: 1rem 0;}
@@ -160,10 +152,10 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--general-font-color);
     border-left: 0.8vw solid var(--general-font-color);
-    font-size: clamp(1rem, 1vw, 1.2rem);
+    font-size: clamp(0.7rem, 1.1vw, 1.2rem);
     text-align: left;
-    width: 90%;
-    line-height: 2.7vh;
+    width: 80%;
+    line-height: clamp(1.2rem,1.7vh,2.7vh);
     font-style: italic;
     text-wrap: balance;
     padding-left: 2vw;

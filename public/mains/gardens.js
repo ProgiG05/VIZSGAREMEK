@@ -198,6 +198,29 @@ function renderGarden(garden, plants, isExample = false) {
     // Middle: Table Container
     const tableContainer = document.createElement("div");
     tableContainer.className = "table-cont";
+
+    //------------------------------------ Garden Layout ------------------------------------
+
+    const activeRows = splittedContent.filter(r => r.trim() !== "");
+    const rowsCount = activeRows.length;
+    let colsCount = 0;
+    if (rowsCount > 0) {
+        colsCount = activeRows[0].split(",").length;
+    }
+    
+    const genericDetails = document.createElement("div");
+    genericDetails.className = "generic-details";
+    const detailsTitle = document.createElement("h3");
+    detailsTitle.textContent = "Garden Layout";
+    const detailsText = document.createElement("p");
+    detailsText.textContent = `${rowsCount} x ${colsCount} Grid`;
+    genericDetails.appendChild(detailsTitle);
+    genericDetails.appendChild(detailsText);
+    
+    tableContainer.appendChild(genericDetails);
+
+    //------------------------------------ Garden Table ------------------------------------   
+    
     tableContainer.appendChild(CreateTable(splittedContent, plants));
 
     // Right Side Wrapper

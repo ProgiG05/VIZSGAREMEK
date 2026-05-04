@@ -35,6 +35,7 @@
 }
 
 /*------------------------------------------------------------------------------------------*/
+
 body.dark-theme {
     --body-bg: #273220;
     --main-font-color: #c3eeae;
@@ -47,6 +48,53 @@ body.dark-theme {
 }
 
 /*------------------------------------------------------------------------------------------*/
+
+@media (max-width: 1300px){
+    body .gardens-container{
+        width: 99%;
+    }
+    body .garden-card{
+        width: 95%;
+    }
+}
+@media (max-width: 900px) {
+    body .garden-card-body {display: flex; flex-direction: column;}
+    body .chart-cont {width: 100%;}
+    body .right-side-cont {width: 90%; align-items: flex-start; align-self: flex-start;}
+    body .plant-list-cont {width: 90%; align-items: flex-start; align-self: flex-start;}
+    body .information-cont {
+        flex-direction: column;
+        gap: 2rem;
+        width: 90%;
+        align-self: center;
+        justify-self: center;
+    }
+    body .login_btn {
+        width: 80%;
+        margin: 0 1rem 2rem 1rem;
+    }
+    body .loginText {
+        width: 80%;
+        text-align: center;
+    }
+    body .table-cont {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 90%;
+        margin-left: 0 !important;
+    }
+    body .garden-table {
+        display: none !important;
+    }
+    body .generic-details {
+        display: block;
+    }
+}
+
+/*------------------------------------------------------------------------------------------*/
+
 body {
     background: var(--body-bg);
     transition: all 0.3s ease;
@@ -63,7 +111,7 @@ body {
 /*------------------------------------------------------------------------------------------*/
 .configure-cont {
     width: 90%;
-    height: 70vh;
+    height: 60vh;
     margin: 2rem auto 2rem auto;
     padding: 2rem 1rem 2rem 1rem;
     border-radius: 4rem;
@@ -86,7 +134,8 @@ body {
 }
 
 .main-title {
-    font-family: var(--font-main);
+    /* font-family: var(--font-main); */
+    font-family: Georgia, Times, serif;
     font-size: clamp(3rem, 6vw, 6.2rem);
     text-align: center;
     margin: 1rem 0 2rem 0;
@@ -101,11 +150,12 @@ body {
     font-style: italic;
     text-align: justify;
     text-wrap: auto;
-    font-family: var(--font-main);
-    font-size: clamp(1rem, 1.2vw, 1.3rem);
+    /* font-family: var(--font-main); */
+    font-family: Georgia, Times, serif;
+    font-size: clamp(0.7rem, 1.2vw, 1.3rem);
     color: var(--main-font-color);
-    border-left: 1rem solid var(--main-font-color);
-    padding-left: 2rem;
+    border-left: 1vw solid var(--main-font-color);
+    padding-left: 2vw;
     margin: 1rem 0 1rem 0;
 }
 
@@ -121,7 +171,7 @@ body {
 
 .newgarden_btn,
 .checkout_btn {
-    width: 40%;
+    width: 80%;
     height: fit-content;
     padding: 1rem 1.5rem 1rem 1.5rem;
     background-color: var(--general-btns-bg);
@@ -140,7 +190,7 @@ body {
     color: var(--general-btns-hover-font);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: 45% !important;
+    width: 85% !important;
 }
 
 .information-cont {
@@ -243,8 +293,7 @@ body {
 
 /*------------------------------------------------------------------------------------------*/
 
-.edit_btn,
-.delete_btn {
+.edit_btn, .delete_btn {
     position: absolute;
     width: 40px !important;
     height: 40px;
@@ -321,8 +370,8 @@ body {
 }
 
 .garden-table td {
-    width: 1.667vw;
-    height: 3.2vh;
+    width: 1.667vw !important;
+    height: 3.2vh !important;
     border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
@@ -382,7 +431,7 @@ body {
 /*------------------------------------------------------------------------------------------*/
 
 .plant-list-cont {
-    width: 25%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -565,21 +614,22 @@ body {
     text-align: right;
 }
 
-@media (max-width: 900px) {
-    .garden-card-body {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .chart-cont {
-        width: 100%;
-    }
-
-    .right-side-cont {
-        width: 90%;
-    }
-
-    .plant-list-cont {
-        width: 90%;
-    }
+.generic-details {
+    display: none;
+    width: 100%;
+    text-align: center;
+    color: var(--main-font-color);
 }
+
+.generic-details h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-family: Georgia, Times, serif;
+}
+
+.generic-details p {
+    margin: 0;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-family: monospace;
+}
+
