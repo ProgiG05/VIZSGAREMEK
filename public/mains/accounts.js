@@ -2,6 +2,7 @@ import { setupNavbar } from "./navbar.js";
 import { setupSidePanel } from "./navbar.js";
 import { setupLoginState } from "./navbar.js";
 import { getUser, apiFetch } from "./api.js";
+import { showConfirm } from "./popup.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   setupNavbar();
@@ -187,7 +188,7 @@ async function loadSavedPlants() {
       const delBtn = card.querySelector(".delete-saved-btn");
       delBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
-        if (confirm("Remove this plant from your saved items?")) {
+        if (await showConfirm("Remove this plant from your saved items?", "Confirm deletion")) {
           try {
             const res = await apiFetch("/api/saveplants", {
               method: "POST",
