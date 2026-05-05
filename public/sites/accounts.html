@@ -21,10 +21,13 @@
 
             <div class="account-content-wrapper">
                 <aside class="account-sidebar">
-                    <div class="account-sidebar-item">
+                    <div class="account-sidebar-item active" data-tab="profile">
                         <div>Profile</div>
                     </div>
-                    <div class="account-sidebar-item">
+                    <div class="account-sidebar-item" data-tab="saved">
+                        <div>Saved Items</div>
+                    </div>
+                    <div class="account-sidebar-item" data-tab="settings">
                         <div>Settings</div>
                     </div>
                     <div class="account-sidebar-item">
@@ -33,7 +36,59 @@
                 </aside>
 
                 <main class="account-main-display">
-                    <p class="card-description">Welcome back to your garden dashboard. Manage your settings and plants here.</p>
+
+                    <!-- Profile Tab -->
+                    <div id="tab-profile">
+                        <div class="card-description">
+                            <h3>Change Username</h3>
+                            <p style="font-size:0.9rem; opacity:0.7; margin:0 0 1rem 0;">Must be 6–20 characters. Cannot be the same as your current one.</p>
+                            <label>New Username</label>
+                            <input type="text" id="new-username-input" class="account-input" placeholder="Enter new username" minlength="6" maxlength="20" autocomplete="off">
+                            <div id="username-feedback" style="min-height:1.2rem; font-size:0.9rem;"></div>
+                            <button id="save-username-btn" class="account-btn">Update Username</button>
+                        </div>
+
+                        <div class="card-description">
+                            <h3>Change Password</h3>
+                            <p style="font-size:0.9rem; opacity:0.7; margin:0 0 1rem 0;">Must be 8–32 characters. Cannot be the same as your current one.</p>
+                            <label>Current Password</label>
+                            <input type="password" id="current-password-input" class="account-input" placeholder="Enter current password" autocomplete="current-password">
+                            <label>New Password</label>
+                            <input type="password" id="new-password-input" class="account-input" placeholder="Enter new password" minlength="8" maxlength="32" autocomplete="new-password">
+                            <div id="password-feedback" style="min-height:1.2rem; font-size:0.9rem;"></div>
+                            <button id="save-password-btn" class="account-btn">Update Password</button>
+                        </div>
+                    </div>
+
+                    <!-- Saved Items Tab -->
+                    <div id="tab-saved" class="hidden">
+                        <div class="card-description">
+                            <h3>Saved Plants</h3>
+                            <div id="saved-plants-list" class="saved-grid">
+                                <p style="opacity:0.5;">Loading...</p>
+                            </div>
+                        </div>
+
+                        <div class="card-description">
+                            <h3>Saved Ideas</h3>
+                            <div id="saved-ideas-list" class="saved-grid">
+                                <p style="opacity:0.5;">Loading...</p>
+                            </div>
+                        </div>
+
+                        <div class="card-description">
+                            <h3>My Gardens</h3>
+                            <div id="saved-gardens-list" class="saved-grid">
+                                <p style="opacity:0.5;">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="tab-settings" class="hidden">
+                        <p class="card-description">Welcome back to your garden dashboard. Manage your settings and plants here.</p>
+                    </div>
+
                 </main>
             </div>
 

@@ -495,4 +495,74 @@ router.put("/gardens/:id", authenticateToken, GardenController.updateGarden);
  */
 router.delete("/gardens/:id", authenticateToken, GardenController.deleteGarden);
 
+/**
+ * @swagger
+ * /api/profile/username:
+ *   put:
+ *     summary: Update username
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - newUsername
+ *             properties:
+ *               newUsername:
+ *                 type: string
+ *                 example: mynewname
+ *     responses:
+ *       200:
+ *         description: Username updated successfully
+ *       400:
+ *         description: Invalid input or same as current username
+ *       401:
+ *         description: Please log in to access this feature
+ *       409:
+ *         description: Username already taken
+ *       500:
+ *         description: Could not update username
+ */
+router.put("/profile/username", authenticateToken, GardenController.updateUsername);
+
+/**
+ * @swagger
+ * /api/profile/password:
+ *   put:
+ *     summary: Update password
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - currentPassword
+ *               - newPassword
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *                 example: myoldpassword
+ *               newPassword:
+ *                 type: string
+ *                 example: mynewpassword123
+ *     responses:
+ *       200:
+ *         description: Password updated successfully
+ *       400:
+ *         description: Invalid input or same as current password
+ *       401:
+ *         description: Current password incorrect or not logged in
+ *       500:
+ *         description: Could not update password
+ */
+router.put("/profile/password", authenticateToken, GardenController.updatePassword);
+
 module.exports = router;

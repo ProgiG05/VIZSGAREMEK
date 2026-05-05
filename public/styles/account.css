@@ -205,4 +205,98 @@ body {
     padding: 2rem;
     border-radius: 1rem;
     margin: 0;
+<<<<<<< Updated upstream
+=======
+}
+
+/* Tab system */
+.hidden { display: none; }
+
+.account-sidebar-item.active {
+    background-color: var(--general-btns-bg);
+    color: var(--general-btns-font);
+}
+
+/* Form elements */
+.account-input {
+    width: 100%;
+    padding: 0.7rem;
+    margin: 0.3rem 0 0.8rem 0;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 0.5rem;
+    background: rgba(255,255,255,0.1);
+    color: inherit;
+    font-family: var(--font-data);
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.account-input:focus {
+    border-color: var(--general-btns-bg);
+}
+
+.account-btn {
+    padding: 0.65rem 1.5rem;
+    border: none;
+    border-radius: 0.7rem;
+    background: var(--general-btns-bg);
+    color: var(--general-btns-font);
+    font-family: var(--font-data);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.account-btn:hover {
+    background: var(--general-btns-hover-bg);
+    color: var(--general-btns-hover-font);
+}
+
+.account-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Saved items grid */
+.saved-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.saved-card {
+    flex: 1 1 140px;
+    max-width: 180px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.75rem;
+    padding: 0.8rem;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.saved-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 750px) {
+    .account-content-wrapper {
+        flex-direction: column;
+    }
+    .account-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: var(--garden-card-border);
+    }
+    .saved-card {
+        max-width: 100%;
+    }
+>>>>>>> Stashed changes
 }

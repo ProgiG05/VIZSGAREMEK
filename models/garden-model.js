@@ -199,4 +199,25 @@ module.exports = {
       return { action: "added", result: rows };
     }
   },
+  getUserById: async (userId) => {
+    const [rows] = await connection.query(
+      `SELECT id, username, password FROM users WHERE id = ? LIMIT 1`,
+      [userId]
+    );
+    return rows[0];
+  },
+  updateUsername: async (userId, newUsername) => {
+    const [rows] = await connection.query(
+      `UPDATE users SET username = ? WHERE id = ?`,
+      [newUsername, userId]
+    );
+    return rows;
+  },
+  updatePassword: async (userId, newPasswordHash) => {
+    const [rows] = await connection.query(
+      `UPDATE users SET password = ? WHERE id = ?`,
+      [newPasswordHash, userId]
+    );
+    return rows;
+  },
 };
