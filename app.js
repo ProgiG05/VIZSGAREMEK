@@ -73,4 +73,5 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running http://localhost:${port}`);
+  console.log(`Swagger docs http://localhost:${port}/api/docs`); //remove at the end
 });
