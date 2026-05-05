@@ -2,7 +2,7 @@ import { setupNavbar } from './navbar.js';
 import { setupSidePanel } from './navbar.js';
 import { setupLoginState } from './navbar.js';
 import { getUser, apiFetch } from './api.js';
-import { showAlert, showConfirm } from './popup.js';
+import { showConfirm } from './popup.js';
 
 
 document.addEventListener("DOMContentLoaded", async () => {
