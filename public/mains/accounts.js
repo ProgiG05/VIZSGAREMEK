@@ -241,7 +241,7 @@ async function loadSavedIdeas() {
       const delBtn = card.querySelector(".delete-saved-btn");
       delBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
-        if (confirm("Remove this idea from your saved items?")) {
+        if (await showConfirm("Remove this idea from your saved items?", "Confirm deletion")) {
           try {
             const res = await apiFetch("/api/saveideas", {
               method: "POST",
