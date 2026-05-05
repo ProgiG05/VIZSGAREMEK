@@ -47,15 +47,100 @@ body.dark-theme {
 }
 
 /*------------------------------------------------------------------------------------------*/
-
-@media (max-width: 750px) {
-    .account-content-wrapper {
-        flex-direction: column;
+@media (max-width: 800px) {
+    body .account-container {
+        width: 95%;
+        max-width: 95vw;
+        padding: 1rem 0;
+        margin: 1rem auto;
     }
-    .account-sidebar {
+    body .account-content-wrapper {
+        flex-direction: column;
+        min-height: auto;
+    }
+    body .account-sidebar {
         width: 100%;
+        box-sizing: border-box;
+        flex-direction: row;
         border-right: none;
         border-bottom: var(--garden-card-border);
+        padding: 1rem;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    body .account-sidebar-item {
+        flex: 1;
+        padding: 0.8rem 0.5rem;
+        font-size: 1rem;
+        margin: 0;
+    }
+    body .account-sidebar-item:last-child {
+        margin-top: 0;
+    }
+    body .account-header {
+        padding: 1.5rem;
+    }
+    body .card-description {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 750px) {
+    body .account-content-wrapper {
+        flex-direction: column;
+    }
+    body .account-sidebar {
+        width: 100% !important;
+        box-sizing: border-box;
+        flex-direction: row;
+        border-right: none;
+        border-bottom: var(--garden-card-border);
+        padding: 1rem;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    body .account-main-display {
+        width: 100% !important;
+    }
+    body .account-sidebar-item {
+        flex: 1;
+        padding: 0.8rem 0.5rem;
+        font-size: 1rem;
+        margin: 0;
+    }
+    
+    body .account-header {
+        padding: 1.5rem;
+    }
+    body .card-description {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 600px) {
+    body .account-sidebar {
+        flex-direction: column;
+    }
+    body .account-sidebar-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    body .main-title {
+        font-size: 2rem;
+    }
+    body .account-header {
+        padding: 1rem;
+    }
+    body .account-main-display {
+        padding: 1rem 0.5rem;
+    }
+    body .card-description {
+        padding: 1rem;
+    }
+    body .saved-card {
+        flex: 1 1 100%;
     }
 }
 
@@ -75,9 +160,9 @@ body {
 
 .account-container {
     width: 90%;
-    max-width: 80vw;
+    max-width: 1300px;
     padding: 2rem 0;
-    margin: 2rem auto;
+    margin: 1rem 0;
     display: flex;
     justify-content: center;
 }
@@ -98,7 +183,7 @@ body {
 /* Header within the card */
 .account-header {
     background-color: var(--garden-card-title-bg);
-    padding: 2rem 3rem;
+    padding: 0.75rem 2rem 0.75rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,13 +274,12 @@ body {
 /* Main Display */
 .account-main-display {
     flex-grow: 1;
-    padding: 3rem;
+    padding: 0 1rem 1.5rem 1rem;
     background: rgba(255, 255, 255, 0.05);
     color: var(--garden-card-text);
     font-family: var(--font-data);
     display: flex;
     flex-direction: column;
-    gap: 2rem;
 }
 
 .card-description {
@@ -203,10 +287,8 @@ body {
     font-size: 1.2rem;
     background-color: rgba(0,0,0,0.3);
     padding: 2rem;
-    border-radius: 1rem;
-    margin: 0;
-<<<<<<< Updated upstream
-=======
+    border-radius: 2rem;
+    margin: 1.5rem 0 1.5rem 0;
 }
 
 /* Tab system */
@@ -266,10 +348,20 @@ body {
     gap: 1rem;
     margin-top: 0.5rem;
 }
+#saved-plants-list,#saved-ideas-list,#saved-gardens-list{
+    overflow-y: auto;
+    max-height: 20rem;
+}
+#saved-gardens-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
 
 .saved-card {
     flex: 1 1 140px;
-    max-width: 180px;
+    width: fit-content;
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 0.75rem;
@@ -285,18 +377,18 @@ body {
     transform: translateY(-3px);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 750px) {
-    .account-content-wrapper {
-        flex-direction: column;
-    }
-    .account-sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: var(--garden-card-border);
-    }
-    .saved-card {
-        max-width: 100%;
-    }
->>>>>>> Stashed changes
+.delete-saved-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.delete-saved-btn:hover {
+    transform: scale(1.2);
 }

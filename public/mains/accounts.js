@@ -166,26 +166,49 @@ async function loadSavedPlants() {
   const list = document.getElementById("saved-plants-list");
   if (!list) return;
 
+  const showEmptyMessage = (msg) => {
+    list.textContent = "";
+    const p = document.createElement("p");
+    p.style.opacity = "0.5";
+    p.textContent = msg;
+    list.appendChild(p);
+  };
+
   try {
     const res = await apiFetch("/api/savedplants");
     const plants = await res.json();
 
     if (!Array.isArray(plants) || plants.length === 0) {
-      list.innerHTML = "<p style='opacity:0.5;'>No saved plants yet.</p>";
+      showEmptyMessage("No saved plants yet.");
       return;
     }
 
-    list.innerHTML = "";
+    list.textContent = "";
     plants.forEach((p) => {
       const card = document.createElement("div");
       card.className = "saved-card";
       card.style.position = "relative";
-      card.innerHTML = `
-        <div class="delete-saved-btn" style="position:absolute; top:8px; right:12px; color:red; cursor:pointer; font-weight:bold; font-size:1.2rem; line-height:1;" title="Remove saved plant">&times;</div>
-        <strong style="display:block; padding-right:20px;">${esc(p.common_name || "Unknown Plant")}</strong>
-        <div style="font-size:0.85rem; opacity:0.7; margin-top:0.3rem;">${esc(p.botanical_name || p.type || "")}</div>`;
       
-      const delBtn = card.querySelector(".delete-saved-btn");
+      const delBtn = document.createElement("div");
+      delBtn.className = "delete-saved-btn";
+      delBtn.title = "Remove saved plant";
+      delBtn.textContent = "×";
+      
+      const strong = document.createElement("strong");
+      strong.style.display = "block";
+      strong.style.paddingRight = "20px";
+      strong.textContent = p.common_name || "Unknown Plant";
+      
+      const sub = document.createElement("div");
+      sub.style.fontSize = "0.85rem";
+      sub.style.opacity = "0.7";
+      sub.style.marginTop = "0.3rem";
+      sub.textContent = p.botanical_name || p.type || "";
+      
+      card.appendChild(delBtn);
+      card.appendChild(strong);
+      card.appendChild(sub);
+
       delBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         if (await showConfirm("Remove this plant from your saved items?", "Confirm deletion")) {
@@ -197,7 +220,7 @@ async function loadSavedPlants() {
             if (res.ok) {
               card.remove();
               if (list.children.length === 0) {
-                list.innerHTML = "<p style='opacity:0.5;'>No saved plants yet.</p>";
+                showEmptyMessage("No saved plants yet.");
               }
             }
           } catch (err) {
@@ -208,7 +231,7 @@ async function loadSavedPlants() {
       list.appendChild(card);
     });
   } catch {
-    list.innerHTML = "<p style='opacity:0.5;'>Could not load plants.</p>";
+    showEmptyMessage("Could not load plants.");
   }
 }
 
@@ -216,16 +239,24 @@ async function loadSavedIdeas() {
   const list = document.getElementById("saved-ideas-list");
   if (!list) return;
 
+  const showEmptyMessage = (msg) => {
+    list.textContent = "";
+    const p = document.createElement("p");
+    p.style.opacity = "0.5";
+    p.textContent = msg;
+    list.appendChild(p);
+  };
+
   try {
     const res = await apiFetch("/api/savedideas");
     const ideas = await res.json();
 
     if (!Array.isArray(ideas) || ideas.length === 0) {
-      list.innerHTML = "<p style='opacity:0.5;'>No saved ideas yet.</p>";
+      showEmptyMessage("No saved ideas yet.");
       return;
     }
 
-    list.innerHTML = "";
+    list.textContent = "";
     ideas.forEach((i) => {
       const card = document.createElement("div");
       card.className = "saved-card";
@@ -233,12 +264,27 @@ async function loadSavedIdeas() {
       const title = i.title || i.idea_name || "Idea";
       const desc = i.description || i.idea_content || "";
       const snippet = desc.length > 80 ? desc.substring(0, 80) + "..." : desc;
-      card.innerHTML = `
-        <div class="delete-saved-btn" style="position:absolute; top:8px; right:12px; color:red; cursor:pointer; font-weight:bold; font-size:1.2rem; line-height:1;" title="Remove saved idea">&times;</div>
-        <strong style="display:block; padding-right:20px;">${esc(title)}</strong>
-        <div style="font-size:0.85rem; opacity:0.7; margin-top:0.3rem;">${esc(snippet)}</div>`;
       
-      const delBtn = card.querySelector(".delete-saved-btn");
+      const delBtn = document.createElement("div");
+      delBtn.className = "delete-saved-btn";
+      delBtn.title = "Remove saved idea";
+      delBtn.textContent = "×";
+      
+      const strong = document.createElement("strong");
+      strong.style.display = "block";
+      strong.style.paddingRight = "20px";
+      strong.textContent = title;
+      
+      const sub = document.createElement("div");
+      sub.style.fontSize = "0.85rem";
+      sub.style.opacity = "0.7";
+      sub.style.marginTop = "0.3rem";
+      sub.textContent = snippet;
+      
+      card.appendChild(delBtn);
+      card.appendChild(strong);
+      card.appendChild(sub);
+      
       delBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         if (await showConfirm("Remove this idea from your saved items?", "Confirm deletion")) {
@@ -250,7 +296,7 @@ async function loadSavedIdeas() {
             if (res.ok) {
               card.remove();
               if (list.children.length === 0) {
-                list.innerHTML = "<p style='opacity:0.5;'>No saved ideas yet.</p>";
+                showEmptyMessage("No saved ideas yet.");
               }
             }
           } catch (err) {
@@ -261,7 +307,7 @@ async function loadSavedIdeas() {
       list.appendChild(card);
     });
   } catch {
-    list.innerHTML = "<p style='opacity:0.5;'>Could not load ideas.</p>";
+    showEmptyMessage("Could not load ideas.");
   }
 }
 
@@ -269,16 +315,24 @@ async function loadSavedGardens() {
   const list = document.getElementById("saved-gardens-list");
   if (!list) return;
 
+  const showEmptyMessage = (msg) => {
+    list.textContent = "";
+    const p = document.createElement("p");
+    p.style.opacity = "0.5";
+    p.textContent = msg;
+    list.appendChild(p);
+  };
+
   try {
     const res = await apiFetch("/api/gardens");
     const gardens = await res.json();
 
     if (!Array.isArray(gardens) || gardens.length === 0) {
-      list.innerHTML = "<p style='opacity:0.5;'>No gardens yet.</p>";
+      showEmptyMessage("No gardens yet.");
       return;
     }
 
-    list.innerHTML = "";
+    list.textContent = "";
     gardens.forEach((g) => {
       const card = document.createElement("div");
       card.className = "saved-card";
@@ -289,13 +343,27 @@ async function loadSavedGardens() {
         window.location.href = `/sites/editgarden.html?id=${g.id}`;
       });
 
-      // Construct mini grid preview
-      let gridHTML = "";
+      const titleDiv = document.createElement("div");
+      titleDiv.style.fontSize = "1.1rem";
+      titleDiv.style.fontWeight = "bold";
+      titleDiv.style.textAlign = "center";
+      titleDiv.textContent = g.garden_name || "Unnamed Garden";
+      card.appendChild(titleDiv);
+
       if (g.garden_content) {
-        gridHTML = `<div style="display:inline-block; background:rgba(0,0,0,0.3); padding:8px; border-radius:6px; margin-top:0.8rem;">`;
+        const gridWrapper = document.createElement("div");
+        gridWrapper.style.display = "inline-block";
+        gridWrapper.style.background = "rgba(0,0,0,0.3)";
+        gridWrapper.style.padding = "8px";
+        gridWrapper.style.borderRadius = "6px";
+        gridWrapper.style.marginTop = "0.8rem";
+
         const rows = g.garden_content.split(";").filter(r => r.trim() !== "");
         rows.forEach(row => {
-          gridHTML += `<div style="display:flex; justify-content:center;">`;
+          const rowDiv = document.createElement("div");
+          rowDiv.style.display = "flex";
+          rowDiv.style.justifyContent = "center";
+
           const cols = row.split(",");
           cols.forEach(col => {
             let bgColor = "#a48231"; 
@@ -303,25 +371,22 @@ async function loadSavedGardens() {
             else if (col === "+") bgColor = "rgba(255, 255, 255, 0.2)";
             else bgColor = "#cceeb9";
 
-            gridHTML += `<div style="width:14px; height:14px; margin:2px; background:${bgColor}; border-radius:3px;"></div>`;
+            const cellDiv = document.createElement("div");
+            cellDiv.style.width = "14px";
+            cellDiv.style.height = "14px";
+            cellDiv.style.margin = "2px";
+            cellDiv.style.background = bgColor;
+            cellDiv.style.borderRadius = "3px";
+            rowDiv.appendChild(cellDiv);
           });
-          gridHTML += `</div>`;
+          gridWrapper.appendChild(rowDiv);
         });
-        gridHTML += `</div>`;
+        card.appendChild(gridWrapper);
       }
-      
-      card.innerHTML = `<div style="font-size:1.1rem; font-weight:bold; text-align:center;">${esc(g.garden_name || "Unnamed Garden")}</div>
-        ${gridHTML}`;
       
       list.appendChild(card);
     });
   } catch {
-    list.innerHTML = "<p style='opacity:0.5;'>Could not load gardens.</p>";
+    showEmptyMessage("Could not load gardens.");
   }
-}
-
-function esc(str) {
-  const d = document.createElement("div");
-  d.textContent = str;
-  return d.innerHTML;
 }

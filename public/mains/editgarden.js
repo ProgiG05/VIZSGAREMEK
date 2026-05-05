@@ -260,11 +260,6 @@ function EditGarden(garden, plants, parentContainer, controls) {
     // ------------- ACTION BUTTONS (Above Table) --------------------------------------------------
     const actionButtonsContainer = document.createElement("div");
     actionButtonsContainer.className = "action-buttons";
-    actionButtonsContainer.style.display = "flex";
-    actionButtonsContainer.style.gap = "1rem";
-    actionButtonsContainer.style.justifyContent = "center";
-    actionButtonsContainer.style.width = "100%";
-    actionButtonsContainer.style.marginBottom = "1rem";
 
     const backBtn = document.createElement("button");
     backBtn.textContent = "Back to List";
