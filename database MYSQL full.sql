@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS sproutified_db;
 CREATE DATABASE sproutified_db;
 USE sproutified_db;
 
@@ -107,37 +108,12 @@ CREATE TABLE saved_worksandtools (
     FOREIGN KEY (worksandtools_id) REFERENCES worksandtools(id) ON DELETE CASCADE
 );
 
-
-
-
-
-
-INSERT INTO users (username, password) VALUES
-('user1','pass1'),
-('user2','pass2'),
-('user3','pass3'),
-('user4','pass4'),
-('user5','pass5'),
-('user6','pass6'),
-('user7','pass7'),
-('user8','pass8'),
-('user9','pass9'),
-('user10','pass10');
-
-
-
-INSERT INTO `garden_manager` (`user_id`, `garden_name`, `garden_content`, `last_garden_saved`) VALUES
-  (1, 'Salsa Patch', '13,29,35;+,,15;,,;,+,', '2026-03-24 12:09:05'),
-  (1, 'Victory Garden', '7,8,7,8;8,7,8,7;9,9,9,9', '2026-03-03 09:00:00'),
-  (2, 'Empty Cell Test 1', '-,0,2;0,2,0;2,-,1', '2026-03-01 08:15:00'),
-  (2, 'Disabled Cell Test 1', '3,,2;0,2,;5,-,1', '2026-03-01 08:15:00'),
-  (3, 'new garden test', '+,+,+,+,;+,+,+,+,;+,+,+,+,;+,+,+,+,10', '2026-03-13 10:35:54'),
-  (4, 'Alexovics kertje', '32', '2026-03-18 10:04:04'),
-  (4, 'Some Patch', '13,29,35;+,,15;,,;,+,', '2026-03-24 12:09:05'),
-  (5, 'IDK Garden', '7,8,7,8;8,7,8,7;9,9,9,9', '2026-03-03 09:00:00'),
-  (5, 'Loss Garden', '-,0,2;0,2,0;2,-,1', '2026-03-01 08:15:00'),
-  (5, 'Placeholder', '3,,2;0,2,;5,-,1', '2026-03-01 08:15:00');
-
+CREATE TABLE refresh_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token_hash VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
 
 INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water`, `sunlight`, `soil`, `indoor`, `seeds`, `planting`, `pruning`, `harvesting`) VALUES
