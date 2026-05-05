@@ -60,46 +60,34 @@ body.dark-theme {
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 @media (max-width: 1600px) {
-    #other-searched-results {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    #searching-cont {
-        grid-template-columns: 1fr;
-    }
+    body #other-searched-results {grid-template-columns: 1fr 1fr;}
+    body #searching-cont {grid-template-columns: 1fr;}
 }
 @media (max-width: 1000px) {
-    #other-searched-results {
+    body #other-searched-results {
         grid-template-columns: 1fr;
         align-items: center;
         justify-items: center;
     }
-    #other-searched-results .plant-card{
-        width: 60%;
-    }
+    body #other-searched-results .plant-card{width: 60%;}
 }
-
-
 @media (max-width: 900px) {
     body .main-title{
         font-size: clamp(2.5rem, 10vw, 14rem);
         margin: 0.5rem 0 1rem 0;
     }
-    .clearBtn {
-        width: 90%;
-    }
-    
+    body .clearBtn {width: 90%;}
     body .origin-selection-cont, 
     body .indoor-switch-cont, 
     body .seeds-switch-cont {
         display: flex;
         flex-direction: column;
     }
-    .switch {
+    body .switch {
         width: 100%;
         height: clamp(1.2rem, calc(100% * (2/3)), 1.5rem);
     }
-    .slider:before {
+    body .slider:before {
         width: calc(50% - 0.2rem);
         height: calc(100% - 0.3rem);
         top: 0.15rem;
@@ -112,32 +100,22 @@ body.dark-theme {
 }
 
 @media (max-width: 700px) {
-    body .other-searched-results {
-        grid-template-columns: 1fr;
-    }
+    body .other-searched-results {grid-template-columns: 1fr;}
     body .quick-buttons-cont {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
     }
-    
     body .quick-buttons-cont .showSearch_Btn, body .quick-buttons-cont .showBrowse_Btn {
         width: 80%;
         border-radius: 1.5rem;
     }
 }
 @media (max-width: 650px) {
-    body .searching-cont{
-        display: flex;
-        flex-direction: column;
-    }
-    body .left-container{
-        width: 100%;
-    }
-    body .right-container{
-        width: 100%;
-    }
+    body .searching-cont{display: flex;flex-direction: column;}
+    body .left-container{width: 100%;}
+    body .right-container{width: 100%;}
     body .origin-selection-cont, 
     body .indoor-switch-cont, 
     body .seeds-switch-cont {
@@ -151,13 +129,8 @@ body.dark-theme {
     }
 }
 @media (max-width: 450px) {
-    body .origin-selection-cont{
-        display: flex;
-        flex-direction: column;
-    }
-    body .clearBtn {
-        width: 90%;
-    }
+    body .origin-selection-cont{display: flex;flex-direction: column;}
+    body .clearBtn {width: 90%;}
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
@@ -192,7 +165,8 @@ body {
 }
 
 .main-title {
-    font-family: var(--font-main);
+    /* font-family: var(--font-main); */
+    font-family: Georgia, serif;
     font-size: clamp(2rem, 7vw, 8rem);
     margin: 3rem 0 3rem 0;
     color: var(--main-font-color);
@@ -203,7 +177,8 @@ body {
     margin: auto;
     font-style: italic;
     text-align: justify;
-    font-family: var(--font-main);
+    /* font-family: var(--font-main); */
+    font-family: Georgia, serif;
     font-size: clamp(0.7rem, 1.7vw, 1.5rem);
     color: var(--main-font-color);
     border-left: 1vw solid var(--main-font-color);
@@ -277,7 +252,8 @@ body {
 }
 
 .search-title {
-    font-family: var(--font-main);
+    /* font-family: var(--font-main); */
+    font-family: Georgia, serif;
     background-color: var(--pfinder-cont-title-bg);
     box-shadow: 0.5rem 0.5rem var(--pfinder-accent2-color);
     border-radius: 1rem;
@@ -288,7 +264,8 @@ body {
 }
 
 .browse-title {
-    font-family: var(--font-main);
+    /* font-family: var(--font-main); */
+    font-family: Georgia, serif;
     font-size: clamp(1.75rem, 6vw, 6.4rem);
     color: var(--main-font-color);
     margin: 4rem 0 1rem 0;

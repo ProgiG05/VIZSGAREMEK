@@ -66,9 +66,7 @@ body.dark-theme {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 @media (max-width: 1300px) {
-    #gardenIdeas-container{
-        grid-template-columns: 1fr 1fr;
-    }
+    body #gardenIdeas-container{grid-template-columns: 1fr 1fr;}
 }
 @media (max-width: 1000px) {
     body .header-container{
@@ -102,7 +100,7 @@ body.dark-theme {
     }
 }
 @media (max-width: 600px) {
-    #gardenIdeas-container{
+    body #gardenIdeas-container{
         grid-template-columns: 1fr;
         background-color: #101c0a58;
         border-radius: 1.5rem;

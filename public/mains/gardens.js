@@ -375,6 +375,12 @@ function CreateTable(splittedContent, plants) {
                             case "grass":
                                 insidePicture.src = paths.grass_ferns;
                                 break;
+                            case "ornamental":
+                                insidePicture.src = paths.grass_ferns;
+                                break;
+                            case "mosses":
+                                insidePicture.src = paths.grass_ferns;
+                                break;
                             case "ferns":
                                 insidePicture.src = paths.grass_ferns;
                                 break;

@@ -50,12 +50,8 @@ body.dark-theme {
 /*------------------------------------------------------------------------------------------*/
 
 @media (max-width: 1300px){
-    body .gardens-container{
-        width: 99%;
-    }
-    body .garden-card{
-        width: 95%;
-    }
+    body .gardens-container{width: 99%;}
+    body .garden-card{width: 95%;}
 }
 @media (max-width: 900px) {
     body .garden-card-body {display: flex; flex-direction: column;}

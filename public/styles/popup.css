@@ -134,7 +134,7 @@
     font-family: var(--font-data);
     font-weight: bold;
     color: var(--popup-font-color);
-    font-size: clamp(1rem, 1.4vw, 1.8rem);
+    font-size: clamp(0.9rem, 1.1vw, 1.2rem);
 }
 
 .popup-footer-cont {
@@ -160,10 +160,10 @@
 .confirm-btn {
     background-color: var(--confirmBtn-bg);
     color: var(--confirmBtn-font-color);
-    width: 8rem;
+    width: fit-content;
     text-align: center;
     padding: 0.2rem 3rem 0.2rem 3rem;
-    font-size: clamp(1rem, 1.4vw, 1.8rem);
+    font-size: clamp(0.9rem, 1.1vw, 1.2rem);
     font-family: var(--font-data);
 }
 

@@ -23,14 +23,8 @@
 }
 
 @media (max-width: 850px) {
-    .login-container {
-        flex-direction: column-reverse;
-        /* Form on top for mobile */
-    }
-
-    .login-info-cont {
-        min-height: 200px;
-    }
+    .login-container {flex-direction: column-reverse;}
+    .login-info-cont {min-height: 200px;}
 }
 
 /*------------------------------------------------------------------------------------------*/

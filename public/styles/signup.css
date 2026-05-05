@@ -23,12 +23,8 @@
 }
 
 @media (max-width: 850px) {
-    .signup-container {
-        flex-direction: column-reverse; /* Form on top for mobile */
-    }
-    .signup-info-cont {
-        min-height: 200px;
-    }
+    .signup-container {flex-direction: column-reverse;}
+    .signup-info-cont {min-height: 200px;}
 }
 
 /*------------------------------------------------------------------------------------------*/

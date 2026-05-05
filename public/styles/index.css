@@ -1,17 +1,12 @@
 :root {
     /*------------------------------------------------------------------------------*/
-    /* --body-bg: #4d795d; */
     --text-main: #E3FFF5;
-    /* --section-main-titles-font-color: #011b0a; */
-
     --body-bg: #9db57e;
     --section-main-titles-font-color: #11170f;  
     /*------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------*/
-    /* --text-landing: #195840; */
     --text-landing: rgb(37, 55, 22);
-    /* --landing-bg: linear-gradient(to bottom, rgba(203, 234, 222, 0.541), rgba(28, 115, 82, 0.541)); */
     --landing-bg: linear-gradient(to right, rgb(116, 148, 88), #92ac70);
     --btn-bg: #0a330f;
     --btn-hover-bg: #E3FFF5;
@@ -77,14 +72,11 @@
 }
 
 body.dark-theme {
-    /* --body-bg: #091e16; */
     --body-bg: #273220;
     --text-main: #ffffff;
     --navbtn-bg: rgba(40, 84, 68, 0.669);
     --text-landing: rgb(173, 200, 150);
-    /* --landing-bg: linear-gradient(to bottom, rgba(127, 216, 184, 0.669), rgba(19, 75, 54, 0.664)); */
     --landing-bg: linear-gradient(to right, rgb(53, 69, 42), rgb(90, 110, 68));
-    /* --section-main-titles-font-color: #e7f8ec; */
     --section-main-titles-font-color: #c3eeae;
     --bg-dark: #0b100b;
     --ideasPage-bg: #0b100b;
@@ -122,11 +114,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-image: var(--section-bg-odd); */
 }
-
-/* section:nth-child(even){background-image: var(--section-bg-even);} */
-
 .hidden {
     opacity: 0;
     transition: all 1s ease;
@@ -146,29 +134,12 @@ section {
 }
 
 @keyframes rotate {
-    0% {
-        transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg);
-    }
-
-    20% {
-        transform: translateZ(-100px) rotateX(-15deg) rotateY(60deg);
-    }
-
-    40% {
-        transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg);
-    }
-
-    60% {
-        transform: translateZ(-100px) rotateX(-15deg) rotateY(60deg);
-    }
-
-    80% {
-        transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg);
-    }
-
-    100% {
-        transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg);
-    }
+    0% {transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg);}
+    20% {transform: translateZ(-100px) rotateX(-15deg) rotateY(60deg);}
+    40% {transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg);}
+    60% {transform: translateZ(-100px) rotateX(-15deg) rotateY(60deg);}
+    80% {transform: translateZ(-100px) rotateX(-15deg) rotateY(-60deg);}
+    100% {transform: translateZ(-100px) rotateX(-15deg) rotateY(-30deg);}
 }
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
@@ -226,14 +197,13 @@ section {
     text-align: left;
     margin: none;
     padding-left: 0.625rem;
-    border-left: var(--text-main) 0.625rem solid;
-    line-height: 1.25rem;
+    border-left: var(--text-main) 0.75vw solid;
+    line-height: clamp(0.8rem, 1.2vw, 1.6rem);
     color: var(--text-main);
     font-size: clamp(0.6rem, 0.9vw, 1.5rem);
     font-family: 'Courier New', Courier, monospace;
     font-style: italic;
     font-weight: 700;
-    word-spacing: 0.35rem;
 }
 
 /* ----- right container with the 3D animation and button -----*/
@@ -252,7 +222,7 @@ section {
 
 .gardenMakerPage_Btn {
     width: 50%;
-    height: 1.2vw;
+    height: fit-content;
     text-align: center;
     margin: auto;
     padding: 0.625rem 0 0.625rem 0;
@@ -262,17 +232,14 @@ section {
     text-decoration: none;
     font-family: monospace;
     font-size: clamp(0.7rem, 0.9vw, 2rem);
-    transition-timing-function: ease-in;
-    transition-duration: 0.2s;
+    transition: all 0.3s ease;
 }
 
 .gardenMakerPage_Btn:hover {
     background-color: var(--btn-hover-bg);
     color: var(--btn-hover-font-color);
-    letter-spacing: 5px;
     font-weight: bold;
-    transition-timing-function: ease-in;
-    transition-duration: 0.2s;
+    transform: translateY(-5px);
 }
 
 .container {
@@ -903,7 +870,7 @@ section {
     width: 100%;
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: clamp(3rem, 3.8vw, 4.4rem);
+    font-size: clamp(2rem, 3.8vw, 4.4rem);
     font-weight: bold;
     margin: 1rem 0 1rem 0;
     padding: 1rem 0.5rem 1rem 0.5rem;
@@ -1025,7 +992,7 @@ section {
     padding: 2rem;
     margin-left: 1rem;
     text-align: left;
-    border-left: 20px solid var(--section-main-titles-font-color);
+    border-left: 2.5vw solid var(--section-main-titles-font-color);
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(1.8rem, 5vw, 6rem);
     color: var(--section-main-titles-font-color);
@@ -1162,51 +1129,32 @@ section {
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 @media (max-width: 1300px) {
-    /*Plant finder section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .resultimage-cont {
         aspect-ratio: 2/3.8;
     }
 
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*Knowledges section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
-    .bigknowledge-reader,
-    .smallknowledge-reader {
+    .bigknowledge-reader, .smallknowledge-reader {
         gap: 0;
         height: 25rem;
         justify-content: space-evenly;
     }
 
-    .smallstory:nth-child(even),
-    .bigstory:nth-child(even) {
+    .smallstory:nth-child(even), .bigstory:nth-child(even) {
         margin-left: 1rem;
         margin-right: 0;
         padding: 1.2rem;
         justify-content: center;
     }
 
-    .smallstory:nth-child(odd),
-    .bigstory:nth-child(odd) {
+    .smallstory:nth-child(odd), .bigstory:nth-child(odd) {
         margin-left: 1rem;
         margin-right: 0;
         padding: 1.2rem;
         justify-content: center;
     }
-
-    /*------------------------------------------------------------------------------------------------------*/
-
 }
 
 @media (max-width: 1200px) {
-    /*Landing section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .landing-cont {
         height: fit-content;
         flex-direction: column;
@@ -1233,20 +1181,15 @@ section {
 
     .small-description {
         width: 80%;
-        font-size: clamp(0.9rem, 1.3vw, 2.4rem);
+        font-size: clamp(0.6rem, 1.3vw, 2.4rem);
     }
 
     .gardenMakerPage_Btn {
         width: 70%;
     }
-
-    /*------------------------------------------------------------------------------------------------------*/
 }
 
 @media (max-width: 1100px) {
-    /*Ideas section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .garden-card:last-child {
         display: none;
     }
@@ -1255,11 +1198,6 @@ section {
         width: 60%;
     }
 
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*Plant finder section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .plant-finder-section {
         align-items: center;
         justify-content: center;
@@ -1269,13 +1207,9 @@ section {
         display: none;
     }
 
-    /*------------------------------------------------------------------------------------------------------*/
 }
 
 @media (max-width: 1000px) {
-    /*Ideas section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .garden-card:last-child {
         display: none;
     }
@@ -1283,16 +1217,9 @@ section {
     .garden-card {
         width: 50%;
     }
-
-    /*------------------------------------------------------------------------------------------------------*/
 }
 
 @media (max-width: 900px) {
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*Ideas section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .showcase_container {
         width: 90%;
         flex-direction: column;
@@ -1303,7 +1230,6 @@ section {
         width: 60%;
     }
 
-    /* .garden-card:nth-last-child(-n + 2) {display: none;} */
     .image-placeholder-wrapper {
         height: 25%;
     }
@@ -1316,11 +1242,6 @@ section {
         margin: 0 0 4rem 0;
     }
 
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*Plant finder section:*/
-
-    /*------------------------------------------------------------------------------------------------------*/
     .plant-finder-main-container {
         flex-direction: column;
     }
@@ -1332,39 +1253,33 @@ section {
     .plant-search-result-cont {
         width: 70%;
     }
-
-    /*------------------------------------------------------------------------------------------------------*/
 }
 
 @media (max-width: 700px) {
-
-    /*Ideas section:*/
-    /*------------------------------------------------------------------------------------------------------*/
     .garden-card {
         height: fit-content;
         width: 80%;
     }
 
-    /*------------------------------------------------------------------------------------------------------*/
-
-    /*Knowledges section:*/
-    /*------------------------------------------------------------------------------------------------------*/
     .reader-cont {
         flex-direction: column;
     }
 
-    .smallknowledge-cont,
-    .bigknowledge-cont {
+    .smallknowledge-cont, .bigknowledge-cont {
         width: 90%;
         height: 35%;
         margin: 0.5rem;
         padding: 0.5rem;
     }
-
-    /*------------------------------------------------------------------------------------------------------*/
 }
 
 @media (max-width: 500px) {
+    .cube{
+        scale: 0.7;
+    }
+    .landing-cont{
+        padding: 2rem 0.625rem 2rem 0.625rem;
+    }
     .clearBtn {
         width: 90%;
     }
@@ -1383,5 +1298,12 @@ section {
 
     .plant-search-data-cont {
         width: 80%;
+    }
+
+    .knowledgesPage_Btn {
+        width: 80%;
+    }
+    .knowledgesPage_Btn:hover{
+        width: 90%;
     }
 }

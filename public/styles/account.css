@@ -22,6 +22,8 @@
     --navbtn-hover-font-color: #ffffff;
 }
 
+/*------------------------------------------------------------------------------------------*/
+
 body.dark-theme {
     --body-bg: #1e2617;
     --main-font-color: #e8f5bd;
@@ -43,6 +45,21 @@ body.dark-theme {
     --navbtn-hover-bg: #5b7e3c;
     --navbtn-hover-font-color: #ffffff;
 }
+
+/*------------------------------------------------------------------------------------------*/
+
+@media (max-width: 750px) {
+    .account-content-wrapper {
+        flex-direction: column;
+    }
+    .account-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: var(--garden-card-border);
+    }
+}
+
+/*------------------------------------------------------------------------------------------*/
 
 body {
     background-color: var(--body-bg);
@@ -188,16 +205,4 @@ body {
     padding: 2rem;
     border-radius: 1rem;
     margin: 0;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 750px) {
-    .account-content-wrapper {
-        flex-direction: column;
-    }
-    .account-sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: var(--garden-card-border);
-    }
 }
