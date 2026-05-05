@@ -1,3 +1,4 @@
+INSERT INTO `ideas` (`title`, `description`, `picture`,`plants`,`sunlight`,`water`,`maintenance`) VALUES
 (
 'The Moonlight Evening Garden',
 'Designed to be enjoyed after sundown, this ethereal garden features white blooms and silver foliage that glow under the moon. Night-scented flowers fill the air with perfume, creating a magical atmosphere for late-night relaxation. Thriving in Moderate sunlight during the day, it requires Medium water and Average maintenance to keep the luminous blooms pristine.',
