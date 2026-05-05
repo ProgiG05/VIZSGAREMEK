@@ -141,11 +141,11 @@ INSERT INTO `garden_manager` (`user_id`, `garden_name`, `garden_content`, `last_
 
 
 INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water`, `sunlight`, `soil`, `indoor`, `seeds`, `planting`, `pruning`, `harvesting`) VALUES
-('Apple', 'Malus domestica', 'Central Asia', 'fruits', 'medium', 'high', 'moderate', 0, 0, 'March-April', 'February-March', 'September-October'),
+('Apple', 'Malus domestica', 'Central Asia', 'fruits', 'medium', 'high', 'moderate', 0, 1, 'March-April', 'February-March', 'September-October'),
 ('Potato', 'Solanum tuberosum', 'South America', 'vegetables', 'medium', 'moderate', 'high', 0, 1, 'April-May', 'None', 'August'),
 ('Tomato', 'Solanum lycopersicum', 'South America', 'vegetables', 'high', 'high', 'high', 0, 1, 'March-April', 'June-August', 'July-August'),
 ('Mint', 'Mentha spicata', 'Europe', 'herbs', 'medium', 'moderate', 'moderate', 1, 1, 'April', 'May-September', 'June-August'),
-('Lemon', 'Citrus limon', 'South Asia', 'fruits', 'medium', 'high', 'high', 0, 0, 'March', 'March-April', 'October'),
+('Lemon', 'Citrus limon', 'South Asia', 'fruits', 'medium', 'high', 'high', 0, 1, 'March', 'March-April', 'October'),
 ('Lavender', 'Lavandula angustifolia', 'Mediterranean', 'herbs', 'low', 'high', 'moderate', 0, 1, 'April-May', 'August-September', 'July-August'),
 ('Basil', 'Ocimum basilicum', 'Central Africa', 'herbs', 'medium', 'high', 'moderate', 1, 1, 'April', 'June-August', 'July'),
 ('Aloe Vera', 'Aloe barbadensis miller', 'Arabian Peninsula', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'April-May', 'Year-round'),
@@ -156,8 +156,8 @@ INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water
 ('Parsley', 'Petroselinum crispum', 'Mediterranean', 'herbs', 'medium', 'moderate', 'high', 1, 1, 'March-April', 'None', 'June-October'),
 ('Chives', 'Allium schoenoprasum', 'Asia/Europe', 'herbs', 'medium', 'moderate', 'high', 1, 1, 'March-May', 'None', 'April-November'),
 ('Strawberry', 'Fragaria x ananassa', 'North America', 'fruits', 'medium', 'high', 'moderate', 0, 1, 'March-April', 'October', 'June-July'),
-('Blueberry', 'Vaccinium corymbosum', 'North America', 'fruits', 'high', 'high', 'high', 0, 0, 'March-April', 'January-February', 'July-August'),
-('Raspberry', 'Rubus idaeus', 'Europe/Asia', 'fruits', 'medium', 'high', 'high', 0, 0, 'November-March', 'February', 'July-August'),
+('Blueberry', 'Vaccinium corymbosum', 'North America', 'fruits', 'high', 'high', 'high', 0, 1, 'March-April', 'January-February', 'July-August'),
+('Raspberry', 'Rubus idaeus', 'Europe/Asia', 'fruits', 'medium', 'high', 'high', 0, 1, 'November-March', 'February', 'July-August'),
 ('Goji berry', 'Lycium barbarum', 'Asia', 'fruits', 'medium', 'high', 'moderate', 0, 1, 'March-May', 'February', 'August-October'),
 ('Pineapple', 'Ananas comosus', 'South America', 'fruits', 'medium', 'high', 'low', 1, 0, 'Year-round', 'None', 'Year-round'),
 ('Banana', 'Musa', 'Southeast Asia', 'fruits', 'high', 'high', 'high', 0, 0, 'Year-round', 'Year-round', 'Year-round'),

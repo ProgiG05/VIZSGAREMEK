@@ -1,0 +1,63 @@
+(
+'The Moonlight Evening Garden',
+'Designed to be enjoyed after sundown, this ethereal garden features white blooms and silver foliage that glow under the moon. Night-scented flowers fill the air with perfume, creating a magical atmosphere for late-night relaxation. Thriving in Moderate sunlight during the day, it requires Medium water and Average maintenance to keep the luminous blooms pristine.',
+'MoonlightEveningGarden',
+'Moonflower, Jasmine, White Rose, Silver Mound Artemisia, Evening Primrose',
+'Moderate',
+'Medium',
+'Average'
+),
+(
+'The Tea Lover’s Patch',
+'Cultivate your own organic infusions with this soothing herbal collection. From calming chamomile to invigorating mint, these plants offer a variety of flavors for fresh or dried teas. Most of these herbs enjoy High sunlight and Medium watering. This Low maintenance garden provides a sustainable way to enjoy a warm cup of homegrown comfort whenever you need a break.',
+'TeaLoversPatch',
+'Chamomile, Peppermint, Lemon Balm, Stevia, Lavender',
+'High',
+'Medium',
+'Low'
+),
+(
+'The Spicy Salsa Border',
+'Everything you need for a fiesta in one productive patch. This garden combines heat-loving peppers and juicy tomatoes with aromatic cilantro and onions. Requiring High sunlight and Medium watering, this Average maintenance setup is perfect for the home cook who wants to step straight from the garden to the kitchen with maximum flavor for their next gathering.',
+'SpicySalsaBorder',
+'Jalapeño Peppers, Roma Tomatoes, Cilantro, Red Onion, Bell Peppers',
+'High',
+'Medium',
+'Average'
+),
+(
+'Vertical Succulent Frame',
+'A living piece of art for your wall, this vertical arrangement features a variety of colorful, hardy succulents. Perfect for small spaces or sunny exterior walls, it thrives in High sunlight with Low water requirements. Because succulents are slow-growing and resilient, this setup requires very Low maintenance while providing a modern, geometric aesthetic to your home.',
+'VerticalSucculentFrame',
+'Echeveria, Sedum, Jade Plant, Ghost Plant, Aloe Vera',
+'High',
+'Low',
+'Low'
+),
+(
+'The Fragrant Walkway',
+'Transform a simple path into a sensory journey with aromatic groundcovers and low shrubs. Every footstep releases a pleasant scent, from creeping thyme to sweet alyssum. This garden thrives in High sunlight and prefers Low water once established. It is a Low maintenance way to soften hard landscaping while inviting pollinators to your garden borders with its perfume.',
+'FragrantWalkway',
+'Creeping Thyme, Sweet Alyssum, Gardenia, Dianthus, Scented Geranium',
+'High',
+'Low',
+'Low'
+),
+(
+'The Mini Backyard Orchard',
+'You do not need an estate to grow fruit. This setup utilizes dwarf and columnar tree varieties that grow vertically rather than spreading wide. Ideal for small backyards, these trees require High sunlight and Medium water. With High maintenance—including specific seasonal pruning—you can enjoy home-grown apples and pears even in a compact residential lot.',
+'MiniBackyardOrchard',
+'Columnar Apple, Dwarf Pear, Dwarf Cherry, Fig, Meyer Lemon',
+'High',
+'Medium',
+'High'
+),
+(
+'The Zen Moss Garden',
+'A quiet, minimalist space designed for deep shade and reflection. This garden replaces thirsty lawns with a plush carpet of various mosses and ferns, creating a lush green environment that feels cool and damp. Thriving in Low sunlight and requiring High water to maintain its velvet-like vibrancy, this Average maintenance garden offers a serene escape from the daily grind.',
+'ZenMossGarden',
+'Sheet Moss, Cushion Moss, Maidenhair Fern, Irish Moss, Japanese Maple',
+'Low',
+'High',
+'Average'
+);

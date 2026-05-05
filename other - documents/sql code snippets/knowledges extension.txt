@@ -1,0 +1,25 @@
+INSERT INTO `knowledges` (`title`, `description`, `summary`,`picture`) VALUES
+(
+'Companion Planting', 
+'Companion planting is the strategic placement of different plant species close to one another to enhance growth, deter pests, and improve soil quality. This ancient practice relies on the natural relationships between plants; for example, tall sunflowers can provide shade for sensitive lettuce, while marigolds release chemicals that repel harmful nematodes. One of the most famous examples is the "Three Sisters" method—corn, beans, and squash—where the corn provides a trellis for beans, beans fix nitrogen in the soil, and squash leaves act as a living mulch. By creating these symbiotic relationships, gardeners can reduce their reliance on chemical fertilizers and pesticides, fostering a more balanced and resilient garden ecosystem.', 
+'Boost garden health and yield by pairing plants that naturally protect each other and share nutrients, creating a harmonious and chemical-free ecosystem.',
+'CompanionPlanting'
+),
+(
+'Moon Phase Gardening', 
+'Moon phase gardening is a traditional practice based on the belief that the lunar cycle influences plant growth through its gravitational pull on water, similar to the tides. According to this method, the "waxing" moon (increasing light) is the best time for planting crops that produce above-ground, such as leafy greens and grains, because the rising moisture encourages germination. Conversely, the "waning" moon (decreasing light) is ideal for root crops like carrots and potatoes, as the energy shifts toward the soil and root development. While scientific debate continues, many gardeners swear by these cycles to improve plant vigor and harvest quality, connecting modern horticulture to ancient celestial wisdom.', 
+'Use the lunar cycle to time planting and harvesting, leveraging the moon\'s gravitational pull on water to optimize seed germination and plant growth.',
+'MoonPhaseGardening'
+),
+(
+'Victory Gardens', 
+'Victory gardens, also known as "war gardens," were fruit, herb, and vegetable gardens planted at private residences and public parks during World War I and World War II. These gardens were promoted by governments to reduce pressure on the public food supply and boost morale by allowing citizens to contribute directly to the war effort. At their peak, nearly 20 million victory gardens in the United States produced roughly 40 percent of all vegetables consumed in the country. This movement transformed lawns and empty lots into productive spaces, teaching an entire generation the value of self-sufficiency and community resilience. Today, the spirit of victory gardening lives on in the modern push for urban agriculture and food security.', 
+'Rediscover the historical movement of home-grown food that supported nations during wartime, fostering community spirit and total food self-sufficiency.',
+'VictoryGardens'
+),
+(
+'The Science of Edible Flowers', 
+'Edible flowers have been used for centuries in culinary traditions ranging from Ancient Rome to Victorian England, adding color, fragrance, and unique flavors to dishes. Common garden varieties like nasturtiums, pansies, lavender, and calendula are not only decorative but often packed with antioxidants and vitamins. For instance, nasturtiums offer a peppery kick similar to watercress, while borage provides a refreshing cucumber-like taste. Beyond their culinary appeal, growing edible flowers encourages pollinators like bees and butterflies to visit the garden, which improves the yields of neighboring vegetable crops. Integrating these blooms turns a functional vegetable patch into a multi-sensory gourmet landscape.', 
+'Enhance your plate and garden with vibrant, edible blooms that offer unique flavors and nutritional benefits, turning landscapes into gourmet pantries.',
+'EdibleFlowers'
+);
