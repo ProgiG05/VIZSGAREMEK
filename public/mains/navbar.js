@@ -105,6 +105,7 @@ export function setupSidePanel() {
     // sidePanel.appendChild(select);
 
     const links = [
+      { id: "home_Btn", href: "../sites/index.html", text: "Home" },
       { id: "savedI_Btn", href: "../sites/ideas.html", text: "Ideas" },
       { id: "savedP_Btn", href: "../sites/plants.html", text: "Plants" },
       {
