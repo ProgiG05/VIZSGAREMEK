@@ -178,8 +178,32 @@ async function loadSavedPlants() {
     plants.forEach((p) => {
       const card = document.createElement("div");
       card.className = "saved-card";
-      card.innerHTML = `<strong>${esc(p.common_name || "Unknown Plant")}</strong>
+      card.style.position = "relative";
+      card.innerHTML = `
+        <div class="delete-saved-btn" style="position:absolute; top:8px; right:12px; color:red; cursor:pointer; font-weight:bold; font-size:1.2rem; line-height:1;" title="Remove saved plant">&times;</div>
+        <strong style="display:block; padding-right:20px;">${esc(p.common_name || "Unknown Plant")}</strong>
         <div style="font-size:0.85rem; opacity:0.7; margin-top:0.3rem;">${esc(p.botanical_name || p.type || "")}</div>`;
+      
+      const delBtn = card.querySelector(".delete-saved-btn");
+      delBtn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (confirm("Remove this plant from your saved items?")) {
+          try {
+            const res = await apiFetch("/api/saveplants", {
+              method: "POST",
+              body: JSON.stringify({ id: p.plant_id || p.id })
+            });
+            if (res.ok) {
+              card.remove();
+              if (list.children.length === 0) {
+                list.innerHTML = "<p style='opacity:0.5;'>No saved plants yet.</p>";
+              }
+            }
+          } catch (err) {
+            console.error("Failed to remove saved plant:", err);
+          }
+        }
+      });
       list.appendChild(card);
     });
   } catch {
@@ -204,11 +228,35 @@ async function loadSavedIdeas() {
     ideas.forEach((i) => {
       const card = document.createElement("div");
       card.className = "saved-card";
+      card.style.position = "relative";
       const title = i.title || i.idea_name || "Idea";
       const desc = i.description || i.idea_content || "";
       const snippet = desc.length > 80 ? desc.substring(0, 80) + "..." : desc;
-      card.innerHTML = `<strong>${esc(title)}</strong>
+      card.innerHTML = `
+        <div class="delete-saved-btn" style="position:absolute; top:8px; right:12px; color:red; cursor:pointer; font-weight:bold; font-size:1.2rem; line-height:1;" title="Remove saved idea">&times;</div>
+        <strong style="display:block; padding-right:20px;">${esc(title)}</strong>
         <div style="font-size:0.85rem; opacity:0.7; margin-top:0.3rem;">${esc(snippet)}</div>`;
+      
+      const delBtn = card.querySelector(".delete-saved-btn");
+      delBtn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (confirm("Remove this idea from your saved items?")) {
+          try {
+            const res = await apiFetch("/api/saveideas", {
+              method: "POST",
+              body: JSON.stringify({ id: i.idea_id || i.id })
+            });
+            if (res.ok) {
+              card.remove();
+              if (list.children.length === 0) {
+                list.innerHTML = "<p style='opacity:0.5;'>No saved ideas yet.</p>";
+              }
+            }
+          } catch (err) {
+            console.error("Failed to remove saved idea:", err);
+          }
+        }
+      });
       list.appendChild(card);
     });
   } catch {
