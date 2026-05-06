@@ -139,6 +139,19 @@ body.dark-theme {
     body .pot-button{
         scale: 0.8;
     }
+    body .error-message {
+        width: 90%;
+    }
+    body .search-sub-cont {
+        padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+}
+@media (max-width: 550px) {
+    body #other-searched-results .plant-card{width: 80%;}
+    body .plant-type-grouping-cont{
+        width: 90%;
+        margin: 1rem 0 1rem 0;
+    }
 }
 @media (max-width: 450px) {
     body .origin-selection-cont{display: flex;flex-direction: column;}
@@ -165,8 +178,9 @@ body {
 
 .header-container {
     margin: 3rem 0 3rem 0;
+    padding: 2rem 0.5rem 1rem 0.5rem;
     text-align: center;
-    width: 95%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -827,9 +841,27 @@ select {
     transform: translate(-50%, -50%) rotate(135deg);
 }
 
-
-
-
+.error-message {
+    color: var(--card-font-color);
+    font-family: monospace;
+    font-size: clamp(0.9rem, 2vw, 2rem);
+    font-weight: bold;
+    text-align: center;
+    text-wrap: balance;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--card-title-bg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: var(--card-border);
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .toup {

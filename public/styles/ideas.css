@@ -65,6 +65,14 @@ body.dark-theme {
 @media (max-width: 1300px) {
     body #gardenIdeas-container{grid-template-columns: 1fr 1fr;}
 }
+@media (max-width: 1150px){
+    body .main-title{
+        font-size: clamp(3rem, 8.5vw, 9vw);
+        text-wrap: wrap;
+        text-align:center;
+        padding-left: 0;
+    }
+}
 @media (max-width: 1000px) {
     body .header-container{
         flex-direction: column;
@@ -225,7 +233,7 @@ body {
     font-style: italic;
     text-wrap: balance;
     padding-left: 2vw;
-    margin-left: 5vw;
+    margin-left: 1vw;
 }
 
 #showSearch {
@@ -374,7 +382,8 @@ body {
 }
 
 .plant-list a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    cursor: default;
 }
 
 .cardbottom-cont {
@@ -598,4 +607,5 @@ body {
     text-align: center;
     font-family: monospace;
     font-size: 1.2rem;
+    z-index: 1000;
 }

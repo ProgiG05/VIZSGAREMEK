@@ -10,6 +10,8 @@
     --general-btns-hover-bg: #1a1e1a;
     --general-btns-hover-font: #e0e9d5;
     --toup-border-color: #e0f7e0;
+    --chart-bar-color: #d7ebbe;
+    --generic-details-color: #11170f;
 
     --garden-card-bg: linear-gradient(145deg, #1d502a, #3e6b3c);
     --garden-card-accent: rgba(86, 86, 86, 0.523);
@@ -42,10 +44,8 @@ body.dark-theme {
     --main-font-color: #c3eeae;
     --header-cont-bg: linear-gradient(to top, rgb(50, 67, 39), rgb(62, 77, 47));
 
-    --navbarBtn-bg: #121e0bee;
-    --navbarBtn-font-color: rgb(255, 255, 255);
-    --navbarBtn-hover-bg: #030502;
-    --navbarBtn-hover-font-color: rgb(255, 255, 255);
+    --chart-bar-color: rgba(162, 246, 190, 0.741);
+    --generic-details-color: #11170f;
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -93,6 +93,11 @@ body.dark-theme {
         width: 70%;
     }
 }
+@media (max-width: 500px) {
+    body .configure-cont{
+        border-radius: 2rem;
+    }
+}
 
 /*------------------------------------------------------------------------------------------*/
 
@@ -114,7 +119,7 @@ body {
     width: 90%;
     height: 60vh;
     margin: 2rem auto 2rem auto;
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 2rem 0.5rem 2rem 0.5rem;
     border-radius: 4rem;
     display: flex;
     flex-direction: column;
@@ -471,7 +476,7 @@ body {
 
 .plant-list-cont li::before {
     content: "•";
-    color: var(--body-bg);
+    color: white;
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -560,7 +565,7 @@ body {
 
 .chart-bar {
     height: 100%;
-    background-color: var(--body-bg);
+    background-color: var(--chart-bar-color);
     border-radius: 5px;
     transition: width 0.5s ease;
 }
@@ -619,7 +624,7 @@ body {
     display: none;
     width: 100%;
     text-align: center;
-    color: var(--main-font-color);
+    color: var(--generic-details-color);
 }
 
 .generic-details h3 {

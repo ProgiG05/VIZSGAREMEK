@@ -23,8 +23,8 @@
 }
 
 @media (max-width: 850px) {
-    .login-container {flex-direction: column-reverse;}
-    .login-info-cont {min-height: 200px;}
+    body .login-container {flex-direction: column-reverse;}
+    body .login-info-cont {min-height: 200px;}
 }
 
 /*------------------------------------------------------------------------------------------*/

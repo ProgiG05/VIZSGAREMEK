@@ -23,8 +23,8 @@
 }
 
 @media (max-width: 850px) {
-    .signup-container {flex-direction: column-reverse;}
-    .signup-info-cont {min-height: 200px;}
+    body .signup-container {flex-direction: column-reverse;}
+    body .signup-info-cont {min-height: 200px;}
 }
 
 /*------------------------------------------------------------------------------------------*/
