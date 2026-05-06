@@ -557,7 +557,7 @@ select {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    width: 98%;
+    width: 90%;
     gap: 0.5rem;
     margin: 3rem auto;
 }

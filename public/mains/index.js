@@ -346,6 +346,11 @@ function setupPlantSearch() {
         const plantingSeasonSelect = document.querySelector('#plantingSelection')?.value.toLowerCase() || '';
         const resultTitle = document.getElementById('plantdetails-title');
 
+        if (!commonNameSearch && ActiveWaterCheckboxes.length === 0 && ActiveSunlightCheckboxes.length === 0 && ActiveSoilCheckboxes.length === 0 && (!plantingSeasonSelect || plantingSeasonSelect === 'none')) {
+            displayDefaultResult();
+            return;
+        }
+
         try {
             const response = await fetch('/api/plants', {
                 method: 'GET',
@@ -403,7 +408,7 @@ function displayResults(results) {
     resultTitle.innerText = 'Plant Details';
     resultTitle.style.backgroundColor = 'var(--plant-search-result-title-bg)';
     resultTable.innerHTML = '';
-    resultPic.style.display = 'block';
+    resultPic.style.display = 'none';
     resultBtn.style.display = 'block';
 
     const p = results[0]; // first and best matching result
@@ -438,4 +443,46 @@ function makeRow(resultTable, key, value, category = null) {
     tr.appendChild(tdKey);
     tr.appendChild(tdVal);
     resultTable.appendChild(tr);
+}
+
+
+function displayDefaultResult() {
+    const resultContainer = document.getElementById('plant-search-result-cont');
+    const resultTable = document.getElementById('result-details-cont-table');
+    const resultTitle = document.getElementById('plantdetails-title');
+    const resultBtn = document.getElementById('plantsearchPage_Btn');
+    const resultPic = document.getElementById('resultimage');
+
+    if (!resultContainer || !resultTable || !resultTitle || !resultBtn || !resultPic) return;
+
+    resultContainer.classList.remove('hidden2');
+
+    resultTitle.style.textAlign = 'center';
+    resultTitle.innerText = 'Plant Details';
+    resultTitle.style.backgroundColor = 'var(--plant-search-result-title-bg)';
+
+    while (resultTable.firstChild) {
+        resultTable.removeChild(resultTable.firstChild);
+    }
+
+    makeRow(resultTable, 'Common:', 'Swiss Cheese Plant');
+    makeRow(resultTable, 'Scientific:', 'Monstera deliciosa');
+    makeRow(resultTable, 'Watering:', 'Allow soil to dry completely before giving a thorough soak.');
+    makeRow(resultTable, 'Sunlight:', 'Bright filtered light indoors or dappled shade in outdoor spaces.');
+    makeRow(resultTable, 'Soil:', 'Balanced medium with a steady, moderate supply of essential nutrients.');
+    makeRow(resultTable, 'Planting:', 'Year-round');
+
+    while (resultPic.firstChild) {
+        resultPic.removeChild(resultPic.firstChild);
+    }
+
+    const imgElement = document.createElement('img');
+    imgElement.setAttribute('class', 'result-imgInner');
+    imgElement.setAttribute('src', '../pics/others/searchedplant_placeholder.png');
+    imgElement.setAttribute('alt', 'Swiss Cheese Plant');
+
+    resultPic.appendChild(imgElement);
+
+    resultPic.style.display = '';
+    resultBtn.style.display = 'block';
 }

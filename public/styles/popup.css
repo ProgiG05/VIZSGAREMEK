@@ -1,5 +1,4 @@
 :root {
-
     --font-main: Arial, Helvetica, sans-serif;
     --font-data: monospace;
 
@@ -27,6 +26,30 @@
     --close-btn-bg: rgb(162, 203, 139);
     --close-btn-color: #1a1e1a;
     --close-btn-bg-hover: rgb(31, 41, 22);
+    --close-btn-color-hover: #ffffff;
+}
+
+body.dark-theme {
+    --popup-bg-color: #395539;
+    --popup-font-color: #ffffff;
+    --popup-border: 0.2rem solid #0b0e0a;
+    --popup-content-bg: #1a1e1a;
+    --header-cont-bg: #202d1d;
+    --header-cont-font: #ffffff;
+
+    --confirmBtn-bg: #c44545;
+    --confirmBtn-bg-hover: #3d0c0c;
+    --confirmBtn-font-color: #ffffff;
+    --confirmBtn-font-color-hover: #ffffff;
+
+    --cancelBtn-bg: #a2cd8bd6;
+    --cancelBtn-bg-hover: #5b7e3d;
+    --cancelBtn-font-color: #1a1e1a;
+    --cancelBtn-font-color-hover: #ffffff;
+
+    --close-btn-bg: #a2cd8bd6;
+    --close-btn-color: #1a1e1a;
+    --close-btn-bg-hover: #5d8c36;
     --close-btn-color-hover: #ffffff;
 }
 
@@ -109,7 +132,7 @@
     color: var(--close-btn-color);
     padding: 0.4rem 1rem;
     border-radius: 6px;
-    border: 0.14rem outset var(--close-btn-color);
+    border: 0.14rem solid var(--close-btn-color);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: bold;
