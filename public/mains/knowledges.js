@@ -1,250 +1,248 @@
-import { setupNavbar } from './navbar.js';
-import { setupSidePanel } from './navbar.js';
-import { setupLoginState } from './navbar.js';
-import { getUser } from './api.js';
+import { setupNavbar, setupSidePanel, setupLoginState } from "./navbar.js";
+import { getUser } from "./api.js";
 
-
-// --- Knowledges cards read Logic ---
-
-
+// --- Knowledges cards read logic ---
 
 document.addEventListener("DOMContentLoaded", async () => {
-    setupNavbar();
-    setupSidePanel();
-    setupLoginState();
-    const user = getUser();
+  // Setup
+  setupNavbar();
+  setupSidePanel();
+  setupLoginState();
 
-    const responseKnowledges = await fetch('/api/knowledge', {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'same-origin'
+  const user = getUser();
+
+  // Optional login check
+  if (!user) {
+    console.error("User is not logged in.");
+  }
+
+  // Request
+  try {
+    const responseKnowledges = await fetch("/api/knowledge", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
     });
 
     if (!responseKnowledges.ok) {
-        console.error('Failed to load knowledges');
-        return;
+      console.error("Failed to load knowledges");
+      return;
     }
 
-    const ListOfKnowledges = await responseKnowledges.json();
+    const listOfKnowledges = await responseKnowledges.json();
 
-    const KnowledgesCardContainer = document.getElementById("knowledges-container");
-    const OneKnowledgeShowcasecont = document.getElementById("oneCardShowcase_cont");
+    const knowledgesCardContainer = document.getElementById(
+      "knowledges-container",
+    );
+    const oneKnowledgeShowcaseCont = document.getElementById(
+      "oneCardShowcase_cont",
+    );
 
-    if (!KnowledgesCardContainer || !OneKnowledgeShowcasecont) return;
+    if (!knowledgesCardContainer || !oneKnowledgeShowcaseCont) return;
 
-    if (ListOfKnowledges.length > 0) {
-        const randomNum = Math.floor(Math.random() * ListOfKnowledges.length);
-        OneKnowledgeShowcasecont.appendChild(createKnowledgeCard(ListOfKnowledges[randomNum]));
+    // Showcase item
+    if (listOfKnowledges.length > 0) {
+      const randomNum = Math.floor(Math.random() * listOfKnowledges.length);
+      oneKnowledgeShowcaseCont.appendChild(
+        createKnowledgeCard(listOfKnowledges[randomNum]),
+      );
     }
 
-    ListOfKnowledges.forEach(knowledge => {
-        KnowledgesCardContainer.appendChild(createKnowledgeSection(knowledge));
+    // Generate list
+    listOfKnowledges.forEach((knowledge) => {
+      knowledgesCardContainer.appendChild(createKnowledgeSection(knowledge));
     });
+  } catch (error) {
+    console.error("Knowledge loading failed:", error);
+  }
 });
 
+// --- Create knowledge section ---
 
 function createKnowledgeSection(knowledge) {
-    // 1. Create the horizontal container
-    const OneKnowledgeSet = document.createElement("div");
-    OneKnowledgeSet.setAttribute("class", "OneKnowledgeSet");
+  // Container
+  const oneKnowledgeSet = document.createElement("div");
+  oneKnowledgeSet.setAttribute("class", "OneKnowledgeSet");
 
+  // Card container
+  const oneKnowledgeCard = document.createElement("div");
+  oneKnowledgeCard.setAttribute("class", "OneKnowledgeCard");
 
-    // 2. Create the Card Container
-    const OneKnowledgeCard = document.createElement("div");
-    OneKnowledgeCard.setAttribute("class", "OneKnowledgeCard");
+  // Content wrapper
+  const cardContent = document.createElement("div");
+  cardContent.setAttribute("class", "card-content");
 
+  // Title and summary
+  const oneKnowledgeTitle = document.createElement("h2");
+  oneKnowledgeTitle.setAttribute("class", "OneKnowledgeTitle");
+  oneKnowledgeTitle.textContent = knowledge.title;
 
-    // 3. Create content wrapper
-    const cardContent = document.createElement("div");
-    cardContent.setAttribute("class", "card-content");
+  const oneKnowledgeSummary = document.createElement("p");
+  oneKnowledgeSummary.setAttribute("class", "OneKnowledgeSummary");
+  oneKnowledgeSummary.textContent = knowledge.summary;
 
+  // Buttons
+  const readMoreBtn = document.createElement("button");
+  readMoreBtn.setAttribute("class", "readMoreBtn");
+  readMoreBtn.textContent = ">";
 
-    // 4. Title & Summary creation
-    const OneKnowledgeTitle = document.createElement("h2");
-    OneKnowledgeTitle.setAttribute("class", "OneKnowledgeTitle");
-    OneKnowledgeTitle.textContent = `${knowledge.title}`;
+  const closeBtn = document.createElement("button");
+  closeBtn.setAttribute("class", "closeBtn");
+  closeBtn.textContent = "Close";
 
+  // Expanding content
+  const cardActions = document.createElement("div");
+  cardActions.setAttribute("class", "card-actions");
 
-    const OneKnowledgeSummary = document.createElement('p');
-    OneKnowledgeSummary.setAttribute('class', 'OneKnowledgeSummary');
-    OneKnowledgeSummary.textContent = `${knowledge.summary}`;
+  const oneKnowledgeDescription = document.createElement("div");
+  oneKnowledgeDescription.setAttribute("class", "OneKnowledgeDescription");
 
+  // Images
+  const imageWrapper = document.createElement("div");
+  imageWrapper.setAttribute("class", "OneKnowledgePictureWrapper");
 
-    // 5. Readmore & Close button creation
-    const readMoreBtn = document.createElement('button');
-    readMoreBtn.setAttribute('class', 'readMoreBtn');
-    readMoreBtn.textContent = `>`;
+  const imagePlace = document.createElement("img");
+  imagePlace.setAttribute("class", "OneKnowledgePicture");
+  imagePlace.setAttribute(
+    "src",
+    "../pics/gardenknowledges/" + knowledge.picture + ".png",
+  );
+  imagePlace.setAttribute("alt", knowledge.title);
 
+  imageWrapper.appendChild(imagePlace);
 
-    const closeBtn = document.createElement("button");
-    closeBtn.setAttribute('class', 'closeBtn');
-    closeBtn.textContent = 'Close';
+  // Read more
+  readMoreBtn.addEventListener("click", () => {
+    oneKnowledgeSet.classList.add("expanded");
 
+    const descriptionBuffer = knowledge.description
+      .split(".")
+      .map((part) => part.trim())
+      .filter((part) => part !== "");
 
-    const cardActions = document.createElement("div");
-    cardActions.setAttribute("class", "card-actions");
+    oneKnowledgeDescription.innerHTML = "";
 
+    for (let i = 0; i < descriptionBuffer.length; i += 2) {
+      const paragraph = document.createElement("p");
+      paragraph.setAttribute("class", "OneKnowledgeParagraph");
 
-    const OneKnowledgeDescription = document.createElement("div");
-    OneKnowledgeDescription.setAttribute("class", "OneKnowledgeDescription");
+      if (descriptionBuffer[i + 1] !== undefined) {
+        paragraph.textContent = `${descriptionBuffer[i]}. ${descriptionBuffer[i + 1]}.`;
+      } else {
+        paragraph.textContent = `${descriptionBuffer[i]}.`;
+      }
 
+      oneKnowledgeDescription.appendChild(paragraph);
+    }
 
-    const imageWrapper = document.createElement("div");
-    imageWrapper.setAttribute("class", "OneKnowledgePictureWrapper");
+    if (!oneKnowledgeCard.contains(oneKnowledgeDescription)) {
+      oneKnowledgeCard.appendChild(oneKnowledgeDescription);
+    }
 
+    cardActions.innerHTML = "";
+    cardActions.appendChild(closeBtn);
 
-    const imagePlace = document.createElement("img");
-    imagePlace.setAttribute("class", "OneKnowledgePicture");
-    imagePlace.setAttribute("src", "../pics/gardenknowledges/" + knowledge.picture + ".png");
-    imagePlace.setAttribute("alt", knowledge.title);
+    if (!oneKnowledgeCard.contains(cardActions)) {
+      oneKnowledgeCard.appendChild(cardActions);
+    }
 
+    readMoreBtn.style.display = "none";
 
-    imageWrapper.appendChild(imagePlace);
+    if (oneKnowledgeSet.contains(imageWrapper)) {
+      oneKnowledgeSet.removeChild(imageWrapper);
+      oneKnowledgeCard.appendChild(imageWrapper);
+    }
+  });
 
+  // Close
+  closeBtn.addEventListener("click", () => {
+    oneKnowledgeSet.classList.remove("expanded");
 
-    // 6. Button functions
-    readMoreBtn.addEventListener('click', () => {
-        OneKnowledgeSet.classList.add('expanded');
+    oneKnowledgeDescription.innerHTML = "";
+    cardActions.innerHTML = "";
 
-        let descriptionBuffer = knowledge.description
-            .split('.')
-            .map(part => part.trim())
-            .filter(part => part !== '');
+    if (oneKnowledgeCard.contains(oneKnowledgeDescription)) {
+      oneKnowledgeCard.removeChild(oneKnowledgeDescription);
+    }
 
-        OneKnowledgeDescription.innerHTML = "";
+    if (oneKnowledgeCard.contains(cardActions)) {
+      oneKnowledgeCard.removeChild(cardActions);
+    }
 
-        for (let i = 0; i < descriptionBuffer.length; i += 2) {
-            const paragraph = document.createElement('p');
-            paragraph.setAttribute('class', 'OneKnowledgeParagraph');
+    readMoreBtn.style.display = "";
 
-            if (descriptionBuffer[i + 1] !== undefined) {
-                paragraph.textContent = `${descriptionBuffer[i]}. ${descriptionBuffer[i + 1]}.`;
-            } else {
-                paragraph.textContent = `${descriptionBuffer[i]}.`;
-            }
+    if (oneKnowledgeCard.contains(imageWrapper)) {
+      oneKnowledgeCard.removeChild(imageWrapper);
+      oneKnowledgeSet.appendChild(imageWrapper);
+    }
+  });
 
-            OneKnowledgeDescription.appendChild(paragraph);
-        }
+  // Assembly
+  cardContent.appendChild(oneKnowledgeTitle);
+  cardContent.appendChild(oneKnowledgeSummary);
+  oneKnowledgeCard.appendChild(cardContent);
 
-        if (!OneKnowledgeCard.contains(OneKnowledgeDescription)) {
-            OneKnowledgeCard.appendChild(OneKnowledgeDescription);
-        }
+  oneKnowledgeSet.appendChild(oneKnowledgeCard);
+  oneKnowledgeSet.appendChild(readMoreBtn);
+  oneKnowledgeSet.appendChild(imageWrapper);
 
-        cardActions.innerHTML = "";
-        cardActions.appendChild(closeBtn);
-
-        if (!OneKnowledgeCard.contains(cardActions)) {
-            OneKnowledgeCard.appendChild(cardActions);
-        }
-
-        readMoreBtn.style.display = 'none';
-
-        if (OneKnowledgeSet.contains(imageWrapper)) {
-            OneKnowledgeSet.removeChild(imageWrapper);
-            OneKnowledgeCard.appendChild(imageWrapper);
-        }
-    });
-
-    closeBtn.addEventListener('click', () => {
-        OneKnowledgeSet.classList.remove('expanded');
-
-        OneKnowledgeDescription.innerHTML = "";
-        cardActions.innerHTML = "";
-
-        if (OneKnowledgeCard.contains(OneKnowledgeDescription)) {
-            OneKnowledgeCard.removeChild(OneKnowledgeDescription);
-        }
-
-        if (OneKnowledgeCard.contains(cardActions)) {
-            OneKnowledgeCard.removeChild(cardActions);
-        }
-
-        readMoreBtn.style.display = '';
-
-        if (OneKnowledgeCard.contains(imageWrapper)) {
-            OneKnowledgeCard.removeChild(imageWrapper);
-            OneKnowledgeSet.appendChild(imageWrapper);
-        }
-    });
-
-
-    // 7. Assembly
-    cardContent.appendChild(OneKnowledgeTitle);
-    cardContent.appendChild(OneKnowledgeSummary);
-    OneKnowledgeCard.appendChild(cardContent);
-
-    OneKnowledgeSet.appendChild(OneKnowledgeCard);
-    OneKnowledgeSet.appendChild(readMoreBtn);
-    OneKnowledgeSet.appendChild(imageWrapper);
-
-    return OneKnowledgeSet;
+  return oneKnowledgeSet;
 }
 
+// --- Create knowledge card ---
 
 function createKnowledgeCard(knowledge) {
-    // 1. Create the Main Card Container
-    const OneKnowledgeCard = document.createElement("div");
-    OneKnowledgeCard.setAttribute("class", "ShowCaseOneKnowledgeCard");
+  // Container
+  const oneKnowledgeCard = document.createElement("div");
+  oneKnowledgeCard.setAttribute("class", "ShowCaseOneKnowledgeCard");
 
+  // Title and summary
+  const oneKnowledgeTitle = document.createElement("h2");
+  oneKnowledgeTitle.setAttribute("class", "ShowCaseOneKnowledgeTitle");
+  oneKnowledgeTitle.textContent = knowledge.title;
 
-    // 2. Title & Summary creation
-    const OneKnowledgeTitle = document.createElement("h2");
-    OneKnowledgeTitle.setAttribute("class", "ShowCaseOneKnowledgeTitle");
-    OneKnowledgeTitle.textContent = `${knowledge.title}`;
+  const oneKnowledgeSummary = document.createElement("p");
+  oneKnowledgeSummary.setAttribute("class", "ShowCaseOneKnowledgeSummary");
+  oneKnowledgeSummary.textContent = knowledge.summary;
 
+  // Image
+  const imageWrapper = document.createElement("div");
+  imageWrapper.setAttribute("class", "ShowCaseOneKnowledgePictureWrapper");
 
-    const OneKnowledgeSummary = document.createElement('p');
-    OneKnowledgeSummary.setAttribute('class', 'ShowCaseOneKnowledgeSummary');
-    OneKnowledgeSummary.textContent = `${knowledge.summary}`;
+  const imagePlace = document.createElement("img");
+  imagePlace.setAttribute("class", "ShowCaseOneKnowledgePicture");
+  imagePlace.setAttribute(
+    "src",
+    "../pics/gardenknowledges/" + knowledge.picture + ".png",
+  );
+  imagePlace.setAttribute("alt", knowledge.title);
 
+  imageWrapper.appendChild(imagePlace);
 
-    //3. Assembly
-    OneKnowledgeCard.appendChild(OneKnowledgeTitle);
-    OneKnowledgeCard.appendChild(OneKnowledgeSummary);
+  // Assembly
+  oneKnowledgeCard.appendChild(oneKnowledgeTitle);
+  oneKnowledgeCard.appendChild(oneKnowledgeSummary);
+  oneKnowledgeCard.appendChild(imageWrapper);
 
-
-    const imageWrapper = document.createElement("div");
-    imageWrapper.setAttribute("class", "ShowCaseOneKnowledgePictureWrapper");
-
-
-    const imagePlace = document.createElement("img");
-    imagePlace.setAttribute("class", "ShowCaseOneKnowledgePicture");
-    imagePlace.setAttribute("src", "../pics/gardenknowledges/" + knowledge.picture + ".png");
-    imagePlace.setAttribute("alt", knowledge.title);
-
-
-    imageWrapper.appendChild(imagePlace);
-
-    OneKnowledgeCard.appendChild(imageWrapper);
-
-    return OneKnowledgeCard;
+  return oneKnowledgeCard;
 }
 
+// --- Scroll navigation ---
 
-
-
-// --- Localstorage Logic ---
-
-window.onload = () => {
-};
-
-
-// --- Scroll up btn & scroll down btn Logic ---
-
-const ToUpBtn = document.getElementById("toup");
-if (ToUpBtn) {
-    ToUpBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+const toUpBtn = document.getElementById("toup");
+if (toUpBtn) {
+  toUpBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
+const showContainerBtn = document.getElementById("showContainer");
+if (showContainerBtn) {
+  showContainerBtn.addEventListener("click", () => {
+    const knowledgesContainer = document.getElementById("knowledges-container");
 
-const ShowContainerBtn = document.getElementById("showContainer");
-if (ShowContainerBtn) {
-    ShowContainerBtn.addEventListener("click", () => {
-        const KnowledgesContainer = document.getElementById("knowledges-container");
-        if (KnowledgesContainer) {
-            KnowledgesContainer.scrollIntoView({ behavior: "smooth" });
-        }
-    });
+    if (knowledgesContainer) {
+      knowledgesContainer.scrollIntoView({ behavior: "smooth" });
+    }
+  });
 }

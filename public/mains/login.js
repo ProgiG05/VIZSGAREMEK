@@ -1,23 +1,31 @@
+// --- Imports ---
 import { showAlert } from "./popup.js";
-import { setupNavbar, setupSidePanel, setupLoginState } from './navbar.js';
+import { setupNavbar, setupSidePanel, setupLoginState } from "./navbar.js";
 
-document.addEventListener('DOMContentLoaded', () => {
+// --- Page load setup ---
+
+document.addEventListener("DOMContentLoaded", () => {
   setupNavbar();
   setupSidePanel();
   setupLoginState();
 });
 
+// --- Login form submission ---
+
 document.querySelector(".login-card").addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  // Inputs
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
 
+  // Validation
   if (!username || !password) {
     showAlert("Please fill in both fields.", "Error!");
     return;
   }
 
+  // Request
   try {
     const res = await fetch("/api/login", {
       method: "POST",
@@ -28,6 +36,7 @@ document.querySelector(".login-card").addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
+    // Redirect or error
     if (data.success) {
       window.location.href = "/index.html";
     } else {

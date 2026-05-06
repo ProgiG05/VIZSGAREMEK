@@ -22,9 +22,10 @@ const plantSpecs = {
   },
 };
 
-// --- Initialize State ---
+// --- Setup ---
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // Setup
   setupNavbar();
   setupSidePanel();
   setupLoginState();
@@ -44,6 +45,7 @@ async function loadIdeas() {
   const IdeasCardContainer = document.getElementById("showcase-container");
   if (!IdeasCardContainer) return;
 
+  // Request
   try {
     const responseIdeas = await fetch("/api/ideas", {
       method: "GET",
@@ -58,6 +60,7 @@ async function loadIdeas() {
     const ListOfIdeas = await responseIdeas.json();
     const returnIdeas = ListOfIdeas.slice(0, 3);
 
+    // Cards
     returnIdeas.forEach((idea) => {
       const card = createIdeaCard(idea);
       IdeasCardContainer.appendChild(card);
@@ -67,12 +70,14 @@ async function loadIdeas() {
   }
 }
 
+// --- Create idea card ---
+
 function createIdeaCard(idea) {
-  // 1. Create the Main Card Container
+  // Card container
   const OneIdeaCard = document.createElement("div");
   OneIdeaCard.setAttribute("class", "garden-card");
 
-  // 2. Create the Image Placeholder Section
+  // Image
   const imgWrapper = document.createElement("div");
   imgWrapper.setAttribute("class", "image-placeholder-wrapper");
 
@@ -85,18 +90,19 @@ function createIdeaCard(idea) {
   imgWrapper.appendChild(imgPlace);
   OneIdeaCard.appendChild(imgWrapper);
 
-  // 3. Create the Title
+  // Title
   const OneIdeaTitle = document.createElement("h2");
   OneIdeaTitle.textContent = idea.title;
   OneIdeaTitle.setAttribute("class", "card-title");
   OneIdeaCard.appendChild(OneIdeaTitle);
 
-  // 4. Create the section of the description
+  // Description
   const OneIdeaDescription = document.createElement("p");
   OneIdeaDescription.textContent = idea.description;
   OneIdeaDescription.setAttribute("class", "card-description");
   OneIdeaCard.appendChild(OneIdeaDescription);
 
+  // Plant list
   OneIdeaCard.appendChild(document.createElement("hr"));
 
   const plantList = document.createElement("p");
@@ -112,7 +118,7 @@ function createIdeaCard(idea) {
 
   OneIdeaCard.appendChild(plantList);
 
-  // 5. Create the Footer & Stats Container
+  // Footer stats
   const cardFooter = document.createElement("div");
   cardFooter.setAttribute("class", "card-footer");
 
@@ -125,7 +131,7 @@ function createIdeaCard(idea) {
 
   cardFooter.appendChild(statsContainer);
 
-  // 6. Create the Complex "Pot Button"
+  // Save button
   const potButton = document.createElement("button");
   potButton.setAttribute("class", "pot-button");
   potButton.setAttribute("title", "save this garden idea");
@@ -174,6 +180,8 @@ function createIdeaCard(idea) {
   return OneIdeaCard;
 }
 
+// --- Create stat box ---
+
 function createStatBox(label, value) {
   const statBox = document.createElement("div");
   statBox.setAttribute("class", "stat-box");
@@ -186,6 +194,7 @@ function createStatBox(label, value) {
   statLabel.setAttribute("class", "stat-label");
   statLabel.textContent = label;
 
+  // Tooltip text
   if (label === "Sunlight") {
     if (value === "Low") badge.setAttribute("title", "Shady place");
     if (value === "Moderate") badge.setAttribute("title", "Near a window");
@@ -215,7 +224,7 @@ function toggleSaveState(buttonElement) {
   buttonElement.classList.toggle("saved");
 }
 
-// --- Garden maker 3D art animation logic ---
+// --- Garden maker animation ---
 
 function setupGardenMakerAnimation() {
   const cube = document.getElementById("cube");
@@ -232,7 +241,7 @@ function setupGardenMakerAnimation() {
   });
 }
 
-// --- Scrolling animations logic ---
+// --- Scroll animations ---
 
 function setupScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
@@ -252,7 +261,7 @@ function setupScrollAnimations() {
   hidden2Elements.forEach((e) => observer.observe(e));
 }
 
-// --- Save garden ideas button logic ---
+// --- Details toggle ---
 
 function setupDetailsToggle() {
   document.querySelectorAll(".detailsListItem").forEach((item) => {
@@ -296,6 +305,7 @@ function setupPlantSearch() {
   searchPlantBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
+    // Search values
     const commonNameSearch =
       document.getElementById("commonplant-search-inp")?.value.toLowerCase() ||
       "";
@@ -319,6 +329,7 @@ function setupPlantSearch() {
       document.querySelector("#plantingSelection")?.value.toLowerCase() || "";
     const resultTitle = document.getElementById("plantdetails-title");
 
+    // Default result
     if (
       !commonNameSearch &&
       ActiveWaterCheckboxes.length === 0 &&
@@ -343,6 +354,7 @@ function setupPlantSearch() {
 
       const plants = await response.json();
 
+      // Filter results
       const filteredPlants = plants.filter((p) => {
         const criteriacommonName =
           !commonNameSearch ||
@@ -370,6 +382,7 @@ function setupPlantSearch() {
         );
       });
 
+      // Display results
       displayResults(filteredPlants);
     } catch (error) {
       console.error("Error:", error.message);
@@ -396,6 +409,7 @@ function displayResults(results) {
 
   resultContainer.classList.remove("hidden2");
 
+  // Empty result
   if (!results || results.length === 0) {
     resultTitle.innerText = "No plants found matching your criteria.";
     resultTitle.style.textAlign = "left";
@@ -407,6 +421,7 @@ function displayResults(results) {
     return;
   }
 
+  // First result
   resultTitle.style.textAlign = "center";
   resultTitle.innerText = "Plant Details";
   resultTitle.style.backgroundColor = "var(--plant-search-result-title-bg)";
@@ -414,7 +429,7 @@ function displayResults(results) {
   resultPic.style.display = "none";
   resultBtn.style.display = "block";
 
-  const p = results[0]; // first and best matching result
+  const p = results[0];
 
   makeRow(resultTable, "Common:", p.common_name);
   makeRow(resultTable, "Scientific:", p.botanical_name);
@@ -423,6 +438,8 @@ function displayResults(results) {
   makeRow(resultTable, "Soil:", p.soil, "soil");
   makeRow(resultTable, "Planting:", p.planting);
 }
+
+// --- Result helpers ---
 
 function makeRow(resultTable, key, value, category = null) {
   if (!value) return;
@@ -469,10 +486,12 @@ function displayDefaultResult() {
 
   resultContainer.classList.remove("hidden2");
 
+  // Default title
   resultTitle.style.textAlign = "center";
   resultTitle.innerText = "Plant Details";
   resultTitle.style.backgroundColor = "var(--plant-search-result-title-bg)";
 
+  // Default rows
   while (resultTable.firstChild) {
     resultTable.removeChild(resultTable.firstChild);
   }
@@ -496,6 +515,7 @@ function displayDefaultResult() {
   );
   makeRow(resultTable, "Planting:", "Year-round");
 
+  // Default image
   while (resultPic.firstChild) {
     resultPic.removeChild(resultPic.firstChild);
   }

@@ -2,7 +2,10 @@ import { getUser, apiFetch } from "./api.js";
 import { showConfirm, showDetailPopup } from "./popup.js";
 import { setupLoginState, setupSidePanel, setupNavbar } from "./navbar.js";
 
+// --- Account setup ---
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Setup
   setupNavbar();
   setupSidePanel();
   setupLoginState();
@@ -30,20 +33,23 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", () => {
       const target = item.getAttribute("data-tab");
 
+      // Active tab
       sidebarItems.forEach((i) => i.classList.remove("active"));
       item.classList.add("active");
 
+      // Tab content
       tabs.forEach((tab) => {
         tab.classList.toggle("hidden", tab.id !== `tab-${target}`);
       });
 
+      // Saved items
       if (target === "saved") {
         loadSavedItems();
       }
     });
   });
 
-  // --- Logout function ---
+  // Logout
   const logoutBtn = document.getElementById("logout_btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
@@ -57,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Update Username ---
+  // Username update
   const saveUsernameBtn = document.getElementById("save-username-btn");
   if (saveUsernameBtn) {
     saveUsernameBtn.addEventListener("click", async () => {
@@ -65,17 +71,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const feedback = document.getElementById("username-feedback");
       const newUsername = input.value.trim();
 
+      // Reset feedback
       feedback.textContent = "";
       feedback.style.color = "";
 
+      // Validation
       if (!newUsername) {
         showFeedback(feedback, "Please enter a new username.", false);
         return;
       }
 
+      // Button state
       saveUsernameBtn.disabled = true;
       saveUsernameBtn.textContent = "Saving...";
 
+      // Request
       try {
         const res = await apiFetch("/api/profile/username", {
           method: "PUT",
@@ -83,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const data = await res.json();
 
+        // Response handling
         if (res.ok && data.success) {
           showFeedback(feedback, data.message, true);
           input.value = "";
@@ -99,12 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
         showFeedback(feedback, "Network error. Please try again.", false);
       }
 
+      // Reset button
       saveUsernameBtn.disabled = false;
       saveUsernameBtn.textContent = "Update Username";
     });
   }
 
-  // --- Update Password ---
+  // Password update
   const savePasswordBtn = document.getElementById("save-password-btn");
   if (savePasswordBtn) {
     savePasswordBtn.addEventListener("click", async () => {
@@ -112,17 +124,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const newInput = document.getElementById("new-password-input");
       const feedback = document.getElementById("password-feedback");
 
+      // Reset feedback
       feedback.textContent = "";
       feedback.style.color = "";
 
+      // Validation
       if (!curInput.value || !newInput.value) {
         showFeedback(feedback, "Please fill in both fields.", false);
         return;
       }
 
+      // Button state
       savePasswordBtn.disabled = true;
       savePasswordBtn.textContent = "Saving...";
 
+      // Request
       try {
         const res = await apiFetch("/api/profile/password", {
           method: "PUT",
@@ -133,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const data = await res.json();
 
+        // Response handling
         if (res.ok && data.success) {
           showFeedback(feedback, data.message, true);
           curInput.value = "";
@@ -148,18 +165,21 @@ document.addEventListener("DOMContentLoaded", () => {
         showFeedback(feedback, "Network error. Please try again.", false);
       }
 
+      // Reset button
       savePasswordBtn.disabled = false;
       savePasswordBtn.textContent = "Update Password";
     });
   }
 });
 
+// --- Feedback helper ---
+
 function showFeedback(el, message, success) {
   el.textContent = message;
   el.style.color = success ? "#4caf50" : "#e74c3c";
 }
 
-// --- Saved Items --- //
+// --- Saved items ---
 
 let savedLoaded = false;
 
@@ -171,10 +191,13 @@ function loadSavedItems() {
   loadSavedGardens();
 }
 
+// --- Load saved plants ---
+
 async function loadSavedPlants() {
   const list = document.getElementById("saved-plants-list");
   if (!list) return;
 
+  // Empty state
   const showEmptyMessage = (msg) => {
     list.textContent = "";
     const p = document.createElement("p");
@@ -183,15 +206,18 @@ async function loadSavedPlants() {
     list.appendChild(p);
   };
 
+  // Request
   try {
     const res = await apiFetch("/api/savedplants");
     const plants = await res.json();
 
+    // Empty result
     if (!Array.isArray(plants) || plants.length === 0) {
       showEmptyMessage("No saved plants yet.");
       return;
     }
 
+    // Cards
     list.textContent = "";
     plants.forEach((p) => {
       const card = document.createElement("div");
@@ -219,7 +245,7 @@ async function loadSavedPlants() {
       cardBody.appendChild(sub);
       card.appendChild(cardBody);
 
-      // --- Delete button ---
+      // Delete
       delBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         setTimeout(() => {
@@ -249,7 +275,7 @@ async function loadSavedPlants() {
         }
       });
 
-      // --- Detail popup on card click ---
+      // Details
       card.addEventListener("click", () => {
         showDetailPopup(buildPlantDetail(p), p.common_name || "Plant Details");
       });
@@ -261,10 +287,13 @@ async function loadSavedPlants() {
   }
 }
 
+// --- Load saved ideas ---
+
 async function loadSavedIdeas() {
   const list = document.getElementById("saved-ideas-list");
   if (!list) return;
 
+  // Empty state
   const showEmptyMessage = (msg) => {
     list.textContent = "";
     const p = document.createElement("p");
@@ -273,15 +302,18 @@ async function loadSavedIdeas() {
     list.appendChild(p);
   };
 
+  // Request
   try {
     const res = await apiFetch("/api/savedideas");
     const ideas = await res.json();
 
+    // Empty result
     if (!Array.isArray(ideas) || ideas.length === 0) {
       showEmptyMessage("No saved ideas yet.");
       return;
     }
 
+    // Cards
     list.textContent = "";
     ideas.forEach((i) => {
       const card = document.createElement("div");
@@ -313,7 +345,7 @@ async function loadSavedIdeas() {
       cardBody.appendChild(sub);
       card.appendChild(cardBody);
 
-      // --- Plant tags footer ---
+      // Plant tags
       if (i.plants) {
         const cardFooter = document.createElement("div");
         cardFooter.className = "saved-card-footer";
@@ -328,7 +360,7 @@ async function loadSavedIdeas() {
         card.appendChild(cardFooter);
       }
 
-      // --- Delete button ---
+      // Delete
       delBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
         setTimeout(() => {
@@ -358,7 +390,7 @@ async function loadSavedIdeas() {
         }
       });
 
-      // --- Detail popup on card click ---
+      // Details
       card.addEventListener("click", () => {
         showDetailPopup(buildIdeaDetail(i), i.title || "Idea Details");
       });
@@ -370,10 +402,13 @@ async function loadSavedIdeas() {
   }
 }
 
+// --- Load saved gardens ---
+
 async function loadSavedGardens() {
   const list = document.getElementById("saved-gardens-list");
   if (!list) return;
 
+  // Empty state
   const showEmptyMessage = (msg) => {
     list.textContent = "";
     const p = document.createElement("p");
@@ -382,15 +417,18 @@ async function loadSavedGardens() {
     list.appendChild(p);
   };
 
+  // Request
   try {
     const res = await apiFetch("/api/gardens");
     const gardens = await res.json();
 
+    // Empty result
     if (!Array.isArray(gardens) || gardens.length === 0) {
       showEmptyMessage("No gardens yet.");
       return;
     }
 
+    // Cards
     list.textContent = "";
     gardens.forEach((g) => {
       const card = document.createElement("div");
@@ -398,6 +436,7 @@ async function loadSavedGardens() {
       card.style.cursor = "pointer";
       card.title = "Click to edit garden";
 
+      // Redirect
       card.addEventListener("click", () => {
         window.location.href = `/sites/editgarden.html?id=${g.id}`;
       });
@@ -409,6 +448,7 @@ async function loadSavedGardens() {
       titleDiv.textContent = g.garden_name || "Unnamed Garden";
       card.appendChild(titleDiv);
 
+      // Garden preview
       if (g.garden_content) {
         const gridWrapper = document.createElement("div");
         gridWrapper.style.display = "inline-block";
@@ -451,11 +491,12 @@ async function loadSavedGardens() {
   }
 }
 
-// --- Detail content builders for the popup ---
+// --- Detail popup builders ---
 
 function buildPlantDetail(plant) {
   const wrapper = document.createElement("div");
 
+  // Detail row
   const addRow = (label, value) => {
     const row = document.createElement("tr");
 
@@ -472,9 +513,11 @@ function buildPlantDetail(plant) {
     return row;
   };
 
+  // Text format
   const capitalize = (str) =>
     str ? String(str).charAt(0).toUpperCase() + String(str).slice(1) : "-";
 
+  // Details table
   const table = document.createElement("table");
   table.setAttribute("class", "plant-details-table");
 
@@ -534,7 +577,7 @@ function buildIdeaDetail(idea) {
   title.textContent = idea.title || "";
   wrapper.appendChild(title);
 
-  // Full description
+  // Description
   const desc = document.createElement("p");
   desc.setAttribute("class", "dp-idea-description");
   desc.textContent = idea.description || "";
@@ -542,7 +585,7 @@ function buildIdeaDetail(idea) {
 
   wrapper.appendChild(document.createElement("hr"));
 
-  // Plant tags (comma-separated plants field from DB)
+  // Plant tags
   if (idea.plants) {
     const plantListWrapper = document.createElement("div");
     plantListWrapper.setAttribute("class", "dp-plant-list");

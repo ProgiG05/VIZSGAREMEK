@@ -1,11 +1,16 @@
+// --- Imports ---
 import { getUser } from "./api.js";
 
 const user = getUser();
+
+// --- Account handler ---
 
 const accountHandler = (e) => {
   e.preventDefault();
   window.location.href = "/sites/accounts.html";
 };
+
+// --- Setup Navbar ---
 
 export function setupNavbar() {
   const header = document.getElementById("top-navbar");
@@ -13,48 +18,55 @@ export function setupNavbar() {
 
   header.innerHTML = "";
 
+  // Menu button
   const settingsBtn = document.createElement("a");
   settingsBtn.setAttribute("id", "settings_Btn");
   settingsBtn.textContent = "Menu";
   header.appendChild(settingsBtn);
 
+  // Home link
   const homeBtn = document.createElement("a");
   homeBtn.setAttribute("id", "home_Btn");
   homeBtn.setAttribute("href", "../sites/index.html");
   homeBtn.textContent = "Home";
   header.appendChild(homeBtn);
 
+  // Ideas link
   const ideasBtn = document.createElement("a");
   ideasBtn.setAttribute("id", "goto_Ideas");
   ideasBtn.setAttribute("href", "../sites/ideas.html");
   ideasBtn.textContent = "Ideas";
   header.appendChild(ideasBtn);
 
+  // Plants link
   const plantfinderBtn = document.createElement("a");
   plantfinderBtn.setAttribute("id", "goto_PlantFinder");
   plantfinderBtn.setAttribute("href", "../sites/plants.html");
   plantfinderBtn.textContent = "Plants";
   header.appendChild(plantfinderBtn);
 
+  // Knowledges link
   const knowledgesBtn = document.createElement("a");
   knowledgesBtn.setAttribute("id", "goto_Knowledge");
   knowledgesBtn.setAttribute("href", "../sites/knowledges.html");
   knowledgesBtn.textContent = "Knowledges";
   header.appendChild(knowledgesBtn);
 
+  // Gardens link
   const gardensBtn = document.createElement("a");
   gardensBtn.setAttribute("id", "goto_Gardens");
   gardensBtn.setAttribute("href", "../sites/gardens.html");
   gardensBtn.textContent = "Gardens";
   header.appendChild(gardensBtn);
 
+  // Login link
   const loginBtn = document.createElement("a");
   loginBtn.setAttribute("id", "navbar-login-btn");
   loginBtn.setAttribute("href", "../sites/login.html");
   loginBtn.textContent = "Login/Register";
   header.appendChild(loginBtn);
 
-  // Only override login button text if user is logged in
+  // Login state
   if (user) {
     loginBtn.textContent = user.username;
     loginBtn.onclick = accountHandler;
@@ -62,18 +74,23 @@ export function setupNavbar() {
   }
 }
 
+// --- Setup Side Panel ---
+
 export function setupSidePanel() {
   let sidePanel = document.getElementById("settings-sidepanel");
   if (!sidePanel) {
+    // Container setup
     sidePanel = document.createElement("div");
     sidePanel.setAttribute("id", "settings-sidepanel");
     sidePanel.setAttribute("class", "settings-sidepanel");
 
+    // Title
     const h2 = document.createElement("h2");
     h2.setAttribute("id", "sidepanel-title");
     h2.textContent = "Personal Oasis";
     sidePanel.appendChild(h2);
 
+    // Close button
     const closeBtn = document.createElement("button");
     closeBtn.setAttribute("class", "closeSidePanel");
     closeBtn.setAttribute("id", "closeSidePanel");
@@ -88,22 +105,7 @@ export function setupSidePanel() {
     closeBtn.appendChild(closeImg);
     sidePanel.appendChild(closeBtn);
 
-    // const select = document.createElement('select');
-    // select.setAttribute('class', 'lang-selection');
-    // select.setAttribute('id', 'lang-selection');
-
-    // const optEn = document.createElement('option');
-    // optEn.setAttribute('value', 'en');
-    // optEn.textContent = 'English';
-
-    // const optHu = document.createElement('option');
-    // optHu.setAttribute('value', 'hu');
-    // optHu.textContent = 'Hungarian';
-
-    // select.appendChild(optEn);
-    // select.appendChild(optHu);
-    // sidePanel.appendChild(select);
-
+    // Navigation links
     const links = [
       { id: "home_Btn", href: "../sites/index.html", text: "Home" },
       { id: "savedI_Btn", href: "../sites/ideas.html", text: "Ideas" },
@@ -124,12 +126,14 @@ export function setupSidePanel() {
       sidePanel.appendChild(a);
     });
 
+    // Side login button
     const sideLoginBtn = document.createElement("a");
     sideLoginBtn.setAttribute("id", "side-login-btn");
     sideLoginBtn.setAttribute("href", "../sites/login.html");
     sideLoginBtn.textContent = "Login / Register";
     sidePanel.appendChild(sideLoginBtn);
 
+    // Dark mode toggle
     const darkModeBtn = document.createElement("button");
     darkModeBtn.setAttribute("class", "darkmode");
     darkModeBtn.setAttribute("id", "darkmode");
@@ -159,7 +163,7 @@ export function setupSidePanel() {
     document.body.appendChild(sidePanel);
   }
 
-  // --- Side Panel Toggle Logic ---
+  // Toggle logic
   const settingsBtn = document.getElementById("settings_Btn");
   const closePanel = document.getElementById("closeSidePanel");
 
@@ -176,7 +180,7 @@ export function setupSidePanel() {
     };
   }
 
-  // --- Dark Mode Logic ---
+  // Dark mode state
   const darkBtn = document.getElementById("darkmode");
   if (darkBtn) {
     if (localStorage.getItem("theme") === "dark") {
@@ -192,6 +196,8 @@ export function setupSidePanel() {
     };
   }
 }
+
+// --- Setup Login State ---
 
 export function setupLoginState() {
   if (!user) return;
