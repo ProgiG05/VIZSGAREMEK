@@ -501,41 +501,19 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
   addRowsColumnsBtn.textContent = "Add Rows/Columns";
   addRowsColumnsBtn.className = "addrowscolumns_btn";
   addRowsColumnsBtn.type = "button";
-  addRowsColumnsBtn.onclick = () => {
+  addRowsColumnsBtn.onclick = async () => {
     const addRows = parseInt(addRowsInput.value) || 0;
     const addColumns = parseInt(addColumnsInput.value) || 0;
 
-<<<<<<< Updated upstream
-    const addRowsColumnsBtn = document.createElement("button");
-    addRowsColumnsBtn.textContent = "Add Rows/Columns";
-    addRowsColumnsBtn.className = "addrowscolumns_btn";
-    addRowsColumnsBtn.type = "button";
-    addRowsColumnsBtn.onclick = async () => {
+    if (addRows > 20 || addColumns > 20) {
+      await showAlert("You can add maximum 20 rows or columns at a time!");
+      return;
+    }
+    if (addRows < 0 || addColumns < 0) {
+      await showAlert("You cannot add negative rows or columns!");
+      return;
+    }
 
-        const addRows = parseInt(addRowsInput.value) || 0;
-        const addColumns = parseInt(addColumnsInput.value) || 0;
-
-        if (addRows > 20 || addColumns > 20) {
-            await showAlert("You can add maximum 20 rows or columns at a time!");
-            return;
-        }
-        if (addRows < 0 || addColumns < 0) {
-            await showAlert("You cannot add negative rows or columns!");
-            return;
-        }
-
-        let rows = garden.garden_content.split(";");
-
-        // Add columns to existing rows
-        if (addColumns > 0) {
-            rows = rows.map(row => {
-                let cols = row.split(",");
-                for (let i = 0; i < addColumns; i++) {
-                    cols.push("+");
-                }
-                return cols.join(",");
-            });
-=======
     let rows = garden.garden_content.split(";");
 
     // Add columns to existing rows
@@ -544,7 +522,6 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
         let cols = row.split(",");
         for (let i = 0; i < addColumns; i++) {
           cols.push("+");
->>>>>>> Stashed changes
         }
         return cols.join(",");
       });
