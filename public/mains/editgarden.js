@@ -144,21 +144,21 @@ function loadContents(plants) {
             const card = document.createElement("div");
             card.className = "plant-card";
             card.dataset.id = plant.id;
-            
+
             const pCommonName = document.createElement("p")
-            pCommonName.setAttribute("class","plant-selection-card-text")
+            pCommonName.setAttribute("class", "plant-selection-card-text")
             pCommonName.textContent = `${plant.common_name}`
             card.appendChild(pCommonName)
 
             const pBotamicalName = document.createElement("p")
-            pBotamicalName.setAttribute("class","plant-selection-card-text")
+            pBotamicalName.setAttribute("class", "plant-selection-card-text")
             pBotamicalName.textContent = `${plant.botanical_name}`
             card.appendChild(pBotamicalName)
 
-            allCards.push({card, commonName: plant.common_name.toLowerCase()});
+            allCards.push({ card, commonName: plant.common_name.toLowerCase() });
             typeColumn.appendChild(card);
         });
-        
+
         columnsContainer.appendChild(typeColumn);
     });
 
@@ -197,7 +197,7 @@ function loadContents(plants) {
 function CreateTable(splittedContent, plants) {
     const table = document.createElement("table");
     table.className = "garden-table";
-    
+
     // ------------- RENDER TABLE --------------------------------------------------
     splittedContent.forEach(row => {
         const columns = row.split(",");
@@ -206,7 +206,7 @@ function CreateTable(splittedContent, plants) {
         columns.forEach(column => {
             const tableColumn = document.createElement("td");
             const plantId = parseInt(column);
-            
+
             switch (column) {
                 case "":
                     tableColumn.className = "empty-cell";
@@ -256,7 +256,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     tableAndControlsWrapper.className = "table-and-controls-wrapper";
     tableAndControlsWrapper.appendChild(table);
     tableAndControlsWrapper.appendChild(controls.container);
-    
+
     // ------------- ACTION BUTTONS (Above Table) --------------------------------------------------
     const actionButtonsContainer = document.createElement("div");
     actionButtonsContainer.className = "action-buttons";
@@ -264,7 +264,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     const backBtn = document.createElement("button");
     backBtn.textContent = "Back to List";
     backBtn.className = "back_btn";
-    backBtn.onclick = async () => {if (await showConfirm("Are you sure you want to go back? Any unsaved changes will be lost.")) {window.location.href = "/sites/gardens.html";}}
+    backBtn.onclick = async () => { if (await showConfirm("Are you sure you want to go back? Any unsaved changes will be lost.")) { window.location.href = "/sites/gardens.html"; } }
     actionButtonsContainer.appendChild(backBtn);
 
     const manageRowsColumnsBtn = document.createElement("button");
@@ -295,7 +295,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     saveBtn.className = "save_btn";
     saveBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`;
     topRightActions.appendChild(saveBtn);
-    
+
     const deleteBtn = document.createElement("button");
     deleteBtn.title = "Delete Garden";
     deleteBtn.className = "delete_btn";
@@ -307,7 +307,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
         }
     };
     topRightActions.appendChild(deleteBtn);
-    
+
     gardenCard.appendChild(topRightActions);
 
     parentContainer.appendChild(gardenCard);
@@ -319,7 +319,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
         const cell = e.target.closest('td');
         if (cell) {
             const currentActive = getActiveCell();
-            if (currentActive) {currentActive.classList.remove('active');}
+            if (currentActive) { currentActive.classList.remove('active'); }
             cell.classList.add('active');
             showControls();
         }
@@ -328,7 +328,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
     document.addEventListener('click', (e) => {
         const clickedCell = e.target.closest('td');
         const clickedControls = e.target.closest('#controls-container');
-        
+
         if (!clickedCell && !clickedControls) {
             const currentActive = getActiveCell();
             if (currentActive) {
@@ -387,7 +387,7 @@ function EditGarden(garden, plants, parentContainer, controls) {
                 controls.selection.classList.remove('show');
             }
         }
-        
+
         garden.garden_content = tempSaveGardenData();
     };
 
@@ -434,8 +434,8 @@ async function SaveGarden(garden) {
 
 
 async function DeleteGarden(id) {
-    const resp = await apiFetch(`/api/gardens/${id}`, {method: "DELETE"});
-    if (resp) {return resp.json();}
+    const resp = await apiFetch(`/api/gardens/${id}`, { method: "DELETE" });
+    if (resp) { return resp.json(); }
     return null;
 }
 
@@ -497,10 +497,10 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
     addRowsColumnsBtn.className = "addrowscolumns_btn";
     addRowsColumnsBtn.type = "button";
     addRowsColumnsBtn.onclick = () => {
-        
+
         const addRows = parseInt(addRowsInput.value) || 0;
         const addColumns = parseInt(addColumnsInput.value) || 0;
-        
+
         let rows = garden.garden_content.split(";");
 
         // Add columns to existing rows
