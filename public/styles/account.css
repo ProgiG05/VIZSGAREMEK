@@ -20,6 +20,9 @@
     --navbtn-font-color: #1a1e1a;
     --navbtn-hover-bg: rgb(91, 126, 60);
     --navbtn-hover-font-color: #ffffff;
+
+    --saved-card-footer-bg: rgba(0, 0, 0, 0.25);
+    --saved-card-footer-border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -44,9 +47,13 @@ body.dark-theme {
     --navbtn-font-color: #e8f5bd;
     --navbtn-hover-bg: #5b7e3c;
     --navbtn-hover-font-color: #ffffff;
+
+    --saved-card-footer-bg: rgba(0, 0, 0, 0.4);
+    --saved-card-footer-border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /*------------------------------------------------------------------------------------------*/
+
 @media (max-width: 800px) {
     body .account-container {
         width: 95%;
@@ -109,7 +116,6 @@ body.dark-theme {
         font-size: 1rem;
         margin: 0;
     }
-    
     body .account-header {
         padding: 1.5rem;
     }
@@ -141,6 +147,11 @@ body.dark-theme {
     }
     body .saved-card {
         flex: 1 1 100%;
+    }
+    #saved-plants-list,
+    #saved-ideas-list,
+    #saved-gardens-list {
+        max-height: 60vh;
     }
 }
 
@@ -348,17 +359,27 @@ body {
     gap: 1rem;
     margin-top: 0.5rem;
 }
-#saved-plants-list,#saved-ideas-list,#saved-gardens-list{
+
+#saved-plants-list, #saved-ideas-list, #saved-gardens-list {
     overflow-y: auto;
     max-height: 20rem;
 }
-#saved-gardens-list{
+
+#saved-gardens-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 0.5rem;
 }
 
+#saved-ideas-list .saved-card {
+    flex: 1 1 120px;
+    max-width: 160px;
+    font-size: 0.85rem;
+    overflow: hidden;
+}
+
+/* Original saved-card from repo */
 .saved-card {
     flex: 1 1 140px;
     width: fit-content;
@@ -371,10 +392,59 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
 }
 
 .saved-card:hover {
     transform: translateY(-3px);
+}
+
+/* Saved card inner sections - ideas only */
+.saved-card-body {
+    padding: 0;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.saved-card-title {
+    display: block;
+    text-align: center;
+    padding-right: 20px;
+    font-weight: bold;
+    color: var(--garden-card-text);
+}
+
+.saved-card-sub {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 0.3rem;
+    text-align: center;
+    color: var(--garden-card-text);
+}
+
+.saved-card-footer {
+    background: var(--saved-card-footer-bg);
+    border-top: var(--saved-card-footer-border);
+    padding: 0.6rem 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% + 1.6rem);
+    margin: 0.6rem -0.8rem -0.8rem -0.8rem;
+    box-sizing: border-box;
+}
+
+.saved-card-plant-tag {
+    font-size: 0.75rem;
+    font-family: monospace;
+    opacity: 0.85;
+    color: var(--garden-card-text);
 }
 
 .delete-saved-btn {

@@ -205,3 +205,203 @@ body.dark-theme {
     background-color: var(--cancelBtn-bg-hover);
     color: var(--cancelBtn-font-color-hover);
 }
+
+/* --- DETAIL POPUP (saved items) --- */
+
+.detail-popup-container {
+    position: relative;
+    width: 680px;
+    max-width: 92vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    background-color: var(--popup-bg-color);
+    color: var(--popup-font-color);
+    border: var(--popup-border);
+    border-radius: 12px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-main);
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.8);
+    opacity: 0;
+    animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(91, 126, 60) transparent;
+}
+
+.detail-popup-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detail-popup-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detail-popup-container::-webkit-scrollbar-thumb {
+    background-color: rgb(91, 126, 60);
+    border-radius: 6px;
+}
+
+.detail-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--header-cont-bg);
+    color: var(--header-cont-font);
+    padding: 1.2rem 1.5rem;
+    border-bottom: var(--popup-border);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.detail-popup-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.detail-popup-body {
+    padding: 1.5rem;
+    background-color: var(--popup-content-bg);
+    color: var(--popup-font-color);
+}
+
+/* Plant details table inside popup */
+.detail-popup-body .plant-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+.detail-popup-body .detail-label {
+    padding: 0.4rem 0.8rem 0.4rem 0;
+    font-weight: bold;
+    color: var(--popup-font-color);
+    opacity: 0.75;
+    white-space: nowrap;
+    width: 45%;
+}
+
+.detail-popup-body .detail-value {
+    padding: 0.4rem 0;
+    color: var(--popup-font-color);
+}
+
+/* Idea card inside popup */
+.detail-popup-body .dp-idea-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.detail-popup-body .dp-idea-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0 0 0.6rem 0;
+    font-family: Georgia, serif;
+}
+
+.detail-popup-body .dp-idea-description {
+    font-size: 0.97rem;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+    font-family: monospace;
+}
+
+.detail-popup-body hr {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.2);
+    margin: 0.8rem 0;
+}
+
+.detail-popup-body .dp-plant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 1rem 0;
+    padding: 0;
+}
+
+.detail-popup-body .dp-plant-tag {
+    background: rgb(91, 126, 60);
+    color: #fff;
+    padding: 0.25rem 0.7rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+.detail-popup-body .dp-stats {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.detail-popup-body .dp-stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.detail-popup-body .dp-stat-badge {
+    background: rgb(91, 126, 60);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.detail-popup-body .dp-stat-label {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    font-family: monospace;
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 600px) {
+    .detail-popup-container {
+        max-width: 97vw;
+        max-height: 90vh;
+        border-radius: 8px;
+    }
+
+    .detail-popup-header {
+        padding: 1rem;
+    }
+
+    .detail-popup-title {
+        font-size: 1.1rem;
+    }
+
+    .detail-popup-body {
+        padding: 1rem;
+    }
+
+    .detail-popup-body .plant-details-table {
+        font-size: 0.85rem;
+    }
+
+    .detail-popup-body .dp-idea-title {
+        font-size: 1.1rem;
+    }
+
+    .detail-popup-body .dp-idea-image {
+        max-height: 160px;
+    }
+
+    .detail-popup-body .detail-label {
+        width: 50%;
+        font-size: 0.82rem;
+    }
+}
