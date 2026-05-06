@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const handler = document.getElementById("handler");
     const RowColumnManageSidePanel = document.getElementById("RowColumnManageSidePanel");
 
-    // ------------- GET GARDEN ID FROM URL --------------------------------------------------
+    // --- GET GARDEN ID FROM URL ---
     const urlparams = new URLSearchParams(window.location.search);
     const gardenId = urlparams.get("id");
     if (!gardenId) {
@@ -27,9 +27,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "/sites/gardens.html";
         return;
     }
-    // ---------------------------------------------------------------------------------------
+   
 
-    // ------------- FETCH DATA --------------------------------------------------
+    // --- FETCH DATA ---
     const gardenResp = await apiFetch(`/api/gardens/${gardenId}`, { method: "GET" });
     if (!gardenResp) return;
 
@@ -59,26 +59,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         method: "GET",
         headers: { "Content-Type": "application/json" }
     });
-    // ---------------------------------------------------------------------------------------
+   
 
-    // ------------- SETUP UI & INITIAL RENDER --------------------------------------------------
+    // --- SETUP UI & INITIAL RENDER ---
     const plants = await plantsResp.json();
     const editGardenContainer = document.getElementById("editGardenContainer");
     const controls = loadContents(plants);
-    // ------------------------------------------------------------------------
     EditGarden(garden, plants, editGardenContainer, controls);
-    // ---------------------------------------------------------------------------------------
 });
 
 
 
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//
 
 
 
 
-// ------------- LOAD CONTENTS --------------------------------------------------
+// --- LOAD CONTENTS ---
 function loadContents(plants) {
     // Containers
     const controlsContainer = document.createElement("div");
@@ -162,7 +160,7 @@ function loadContents(plants) {
         columnsContainer.appendChild(typeColumn);
     });
 
-    // Search functionality
+    // --- Search functionality ---
     searchBar.addEventListener("input", (e) => {
         const searchTerm = e.target.value.toLowerCase();
         allCards.forEach(item => {
@@ -188,7 +186,7 @@ function loadContents(plants) {
 
 
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//
 
 
 
@@ -231,7 +229,7 @@ function CreateTable(splittedContent, plants) {
 
 
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//
 
 
 
@@ -442,7 +440,7 @@ async function DeleteGarden(id) {
 
 
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//
 
 
 

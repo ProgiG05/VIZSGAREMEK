@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Fetch all plants
+    // --- Fetch all plants ---
     let response;
     try {
         const plantsData = await fetch('/api/plants', {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const PlantsContainer = document.getElementById('other-searched-results');
     const TypesGroupingContainer = document.getElementById("plant-type-grouping-cont");
    
-    // Build type filter buttons
+    // --- Build type filter buttons ---
     const AllPlantTypes = ["Saved plants"];
     response.forEach(onetype => {
         if (!AllPlantTypes.includes(onetype.type)) { AllPlantTypes.push(onetype.type); }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         TypesGroupingContainer.appendChild(TypeButton);
     });
 
-    // Build origin select options
+    // --- Build origin select options ---
     const AllOrigins = [];
     response.forEach(oneorigin => {
         if (!AllOrigins.includes(oneorigin.origin)) { AllOrigins.push(oneorigin.origin); }

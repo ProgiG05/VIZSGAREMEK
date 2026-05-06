@@ -5,7 +5,7 @@ import { getUser } from './api.js';
 
 
 // --- Knowledges cards read Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -224,14 +224,12 @@ function createKnowledgeCard(knowledge) {
 
 
 // --- Localstorage Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 window.onload = () => {
 };
 
 
 // --- Scroll up btn & scroll down btn Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 
 const ToUpBtn = document.getElementById("toup");
 if (ToUpBtn) {

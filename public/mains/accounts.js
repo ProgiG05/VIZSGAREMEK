@@ -1,8 +1,6 @@
-import { setupNavbar } from "./navbar.js";
-import { setupSidePanel } from "./navbar.js";
-import { setupLoginState } from "./navbar.js";
 import { getUser, apiFetch } from "./api.js";
 import { showConfirm, showDetailPopup } from "./popup.js";
+import { setupLoginState, setupSidePanel, setupNavbar } from "./navbar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   setupNavbar();
@@ -45,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Logout
+  // --- Logout function ---
   const logoutBtn = document.getElementById("logout_btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
@@ -59,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Update Username
+  // --- Update Username ---
   const saveUsernameBtn = document.getElementById("save-username-btn");
   if (saveUsernameBtn) {
     saveUsernameBtn.addEventListener("click", async () => {
@@ -106,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Update Password
+  // --- Update Password ---
   const savePasswordBtn = document.getElementById("save-password-btn");
   if (savePasswordBtn) {
     savePasswordBtn.addEventListener("click", async () => {
@@ -161,8 +159,7 @@ function showFeedback(el, message, success) {
   el.style.color = success ? "#4caf50" : "#e74c3c";
 }
 
-// Saved Items
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// --- Saved Items --- //
 
 let savedLoaded = false;
 
@@ -455,7 +452,6 @@ async function loadSavedGardens() {
 }
 
 // --- Detail content builders for the popup ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 function buildPlantDetail(plant) {
   const wrapper = document.createElement("div");

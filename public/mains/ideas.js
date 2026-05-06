@@ -193,7 +193,6 @@ function createIdeaCard(idea) {
 
 
 // --- Save idea function Logic, Go to the top of the page Logic, Dark theme local storage Logic ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 async function toggleSaveState(buttonElement, ideaId) {
     const user = getUser();
     if (!user) {
@@ -244,7 +243,7 @@ function ConvertToReadingMode(card) {
 
 
 // --- Searchbar Logic 1---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//
 
 function setupShowSearchButton() {
     const showSearchBtn = document.getElementById("showSearch");
@@ -258,7 +257,7 @@ function setupShowSearchButton() {
 }
 
 // --- Searchbar Logic 2---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//
 
 function setupSearchButton() {
     const searchBtn = document.getElementById("searchBtn");

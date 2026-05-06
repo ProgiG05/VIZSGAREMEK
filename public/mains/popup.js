@@ -119,7 +119,6 @@ export function showConfirm(content, title = "Confirmation") {
 }
 
 // --- Detail popup for saved items (plants & ideas) ---
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 export function showDetailPopup(domNode, title) {
   const overlay = document.createElement("div");
