@@ -9,7 +9,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 
-
 CREATE TABLE garden_manager (
     id              INT          AUTO_INCREMENT PRIMARY KEY,
     user_id         INT,
@@ -18,8 +17,6 @@ CREATE TABLE garden_manager (
     last_garden_saved TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY     (user_id) 	 REFERENCES users(id) ON DELETE CASCADE
 );
-
-
 
 CREATE TABLE `plants` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -36,6 +33,7 @@ CREATE TABLE `plants` (
   `pruning` varchar(100) DEFAULT NULL,
   `harvesting` varchar(100) DEFAULT NULL
 );
+
 CREATE TABLE saved_plants (
     id       INT       AUTO_INCREMENT PRIMARY KEY,
     user_id  INT,
@@ -44,7 +42,6 @@ CREATE TABLE saved_plants (
     FOREIGN KEY (user_id)  REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
-
 
 CREATE TABLE ideas (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,6 +53,7 @@ CREATE TABLE ideas (
     `water` varchar(50) NOT NULL,
     `maintenance` varchar(50) NOT NULL
 );
+
 CREATE TABLE saved_ideas (
     id      INT       AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -65,8 +63,6 @@ CREATE TABLE saved_ideas (
     FOREIGN KEY (idea_id) REFERENCES ideas(id) ON DELETE CASCADE
 );
 
-
-
 CREATE TABLE idea_plants (
     idea_id INT,
     plant_id INT,
@@ -74,8 +70,6 @@ CREATE TABLE idea_plants (
     FOREIGN KEY (idea_id) REFERENCES ideas(id) ON DELETE CASCADE,
     FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
 );
-
-
 
 CREATE TABLE knowledges (
     id          INT           AUTO_INCREMENT PRIMARY KEY,
@@ -85,35 +79,13 @@ CREATE TABLE knowledges (
     picture	TEXT	      DEFAULT NULL
 );
 
-
-
-CREATE TABLE worksandtools (
-    id        INT          AUTO_INCREMENT PRIMARY KEY,
-    user_id   INT,
-    garden_id INT,
-    work_name  VARCHAR(50),
-    tool_name  VARCHAR(100),
-    FOREIGN KEY (user_id)   REFERENCES users(id) ON DELETE SET NULL,
-    FOREIGN KEY (garden_id) REFERENCES garden_manager(id) ON DELETE CASCADE
-);
-
-CREATE TABLE saved_worksandtools (
-    id               INT       AUTO_INCREMENT PRIMARY KEY,
-    user_id          INT,
-    garden_id        INT,
-    worksandtools_id INT,
-    created          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id)          REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (garden_id)        REFERENCES garden_manager(id) ON DELETE CASCADE,
-    FOREIGN KEY (worksandtools_id) REFERENCES worksandtools(id) ON DELETE CASCADE
-);
-
 CREATE TABLE refresh_tokens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     token_hash VARCHAR(255) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
 
 
 INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water`, `sunlight`, `soil`, `indoor`, `seeds`, `planting`, `pruning`, `harvesting`) VALUES
@@ -173,21 +145,32 @@ INSERT INTO `plants` ( `common_name`, `botanical_name`, `origin`, `type`, `water
 ('Ostrich Fern', 'Matteuccia struthiopteris', 'N. Hemisphere', 'ferns', 'high', 'low', 'high', 1, 0, 'March-April', 'None', 'None'),
 ('Japanese Forest Grass', 'Hakonechloa macra', 'Japan', 'grass', 'high', 'low', 'high', 0, 0, 'March-April', 'March', 'None'),
 ('Bleeding Heart', 'Lamprocapnos spectabilis', 'Asia', 'flowers', 'medium', 'low', 'high', 0, 0, 'March-April', 'None', 'May-June'),
-('Wild Ginger', 'Asarum', 'N. Hemisphere', 'herbs', 'medium', 'low', 'high', 1, 0, 'March-April', 'None', 'Year-round');
-
-
-
-INSERT INTO worksandtools (user_id, garden_id, work_name, tool_name) VALUES
-(1,1,'planting','Hand Trowel, Gardening Gloves'),
-(1,2,'watering','Watering Can, Moisture Meter'),
-(2,3,'weeding','Hand Hoe, Kneeling Pad'),
-(2,4,'harvesting','Pruning Shears, Garden Basket'),
-(3,5,'chemical spraying','Backpack Sprayer, Safety Goggles'),
-(3,6,'watering','Garden Hose, Spray Nozzle'),
-(4,7,'planting','Garden Shovel, Compost Bag'),
-(4,8,'weeding','Cape Cod Weeder, Garden Fork'),
-(5,9,'harvesting','Sickle, Collection Crate'),
-(5,10,'watering','Oscillating Sprinkler, Water Timer');
+('Wild Ginger', 'Asarum', 'N. Hemisphere', 'herbs', 'medium', 'low', 'high', 1, 0, 'March-April', 'None', 'Year-round'),
+('Moonflower', 'Ipomoea alba', 'Tropical Americas', 'flowers', 'high', 'high', 'moderate', 0, 1, 'April-May', 'None', 'August-October'),
+('Jasmine', 'Jasminum officinale', 'Eurasia', 'flowers', 'medium', 'high', 'moderate', 1, 0, 'March-April', 'February-March', 'June-September'),
+('White Rose', 'Rosa alba', 'Europe', 'flowers', 'medium', 'high', 'high', 0, 0, 'March-April', 'February', 'June-July'),
+('Silver Mound Artemisia', 'Artemisia schmidtiana', 'Japan', 'ornamental', 'low', 'high', 'low', 0, 0, 'April-May', 'July', 'None'),
+('Evening Primrose', 'Oenothera biennis', 'North America', 'flowers', 'low', 'high', 'low', 0, 1, 'April-May', 'None', 'July-September'),
+('Chamomile', 'Matricaria chamomilla', 'Europe', 'herbs', 'medium', 'high', 'moderate', 1, 1, 'March-May', 'None', 'June-August'),
+('Peppermint', 'Mentha × piperita', 'Europe', 'herbs', 'high', 'moderate', 'moderate', 1, 0, 'April-May', 'May-September', 'June-September'),
+('Lemon Balm', 'Melissa officinalis', 'Europe', 'herbs', 'medium', 'moderate', 'moderate', 1, 1, 'March-May', 'June-August', 'June-October'),
+('Stevia', 'Stevia rebaudiana', 'South America', 'herbs', 'high', 'high', 'high', 1, 1, 'May-June', 'None', 'September-October'),
+('Cilantro', 'Coriandrum sativum', 'Mediterranean', 'herbs', 'medium', 'moderate', 'moderate', 1, 1, 'March-September', 'None', 'May-October'),
+('Red Onion', 'Allium cepa', 'Central Asia', 'vegetables', 'medium', 'high', 'moderate', 0, 1, 'March-April', 'None', 'August-September'),
+('Echeveria', 'Echeveria elegans', 'Mexico', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'None', 'Year-round'),
+('Sedum', 'Sedum spectabile', 'East Asia', 'succulents', 'low', 'high', 'low', 0, 0, 'April-May', 'March', 'None'),
+('Jade Plant', 'Crassula ovata', 'South Africa', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'March-April', 'Year-round'),
+('Ghost Plant', 'Graptopetalum paraguayense', 'Mexico', 'succulents', 'low', 'high', 'low', 1, 0, 'Year-round', 'None', 'Year-round'),
+('Sweet Alyssum', 'Lobularia maritima', 'Mediterranean', 'flowers', 'medium', 'high', 'moderate', 0, 1, 'March-May', 'None', 'June-October'),
+('Gardenia', 'Gardenia jasminoides', 'East Asia', 'flowers', 'high', 'moderate', 'high', 1, 0, 'March-April', 'July', 'June-August'),
+('Dianthus', 'Dianthus caryophyllus', 'Eurasia', 'flowers', 'medium', 'high', 'moderate', 0, 1, 'March-May', 'None', 'June-August'),
+('Scented Geranium', 'Pelargonium graveolens', 'South Africa', 'herbs', 'low', 'high', 'moderate', 1, 0, 'April-May', 'March', 'June-September'),
+('Dwarf Pear', 'Pyrus communis', 'Eurasia', 'fruits', 'medium', 'high', 'high', 0, 0, 'March-April', 'February', 'August-September'),
+('Dwarf Cherry', 'Prunus avium', 'Europe', 'fruits', 'medium', 'high', 'high', 0, 0, 'March-April', 'February', 'June-July'),
+('Sheet Moss', 'Hypnum cupressiforme', 'Northern Hemisphere', 'mosses', 'high', 'low', 'moderate', 0, 0, 'Year-round', 'None', 'None'),
+('Cushion Moss', 'Leucobryum glaucum', 'North America', 'mosses', 'high', 'low', 'moderate', 0, 0, 'Year-round', 'None', 'None'),
+('Maidenhair Fern', 'Adiantum aethiopicum', 'Australia', 'ferns', 'high', 'low', 'high', 1, 0, 'March-April', 'March', 'None'),
+('Irish Moss', 'Sagina subulata', 'Europe', 'ornamental', 'medium', 'moderate', 'moderate', 0, 1, 'April-May', 'None', 'June-August');
 
 
 
@@ -255,6 +238,30 @@ INSERT INTO `knowledges` (`title`, `description`, `summary`,`picture`) VALUES
 'Matcha’s story started in 1191 when the monk Eisai brought seeds from China to Japan, eventually finding the perfect terroir in Uji, Kyoto. Originally a medicinal tonic for Zen monks, matcha farming evolved significantly during the 16th century with the invention of shading.By covering the bushes weeks before harvest, farmers forced the plants to produce extra chlorophyll and L-theanine, creating that signature vibrant green and mellow umami taste.This labor-intensive tradition remains the backbone of Japanese tea culture, transforming humble leaves into the \"liquid jade\" we obsess over today.', 
 'Trace matcha from 12th-century monk traditions to Kyoto’s shading techniques, creating the vibrant, umami-rich \"liquid jade\" celebrated in Japanese culture.',
 'HistoryOfMatcha'
+),
+(
+'Companion Planting', 
+'Companion planting is the strategic placement of different plant species close to one another to enhance growth, deter pests, and improve soil quality. This ancient practice relies on the natural relationships between plants; for example, tall sunflowers can provide shade for sensitive lettuce, while marigolds release chemicals that repel harmful nematodes. One of the most famous examples is the "Three Sisters" method—corn, beans, and squash—where the corn provides a trellis for beans, beans fix nitrogen in the soil, and squash leaves act as a living mulch. By creating these symbiotic relationships, gardeners can reduce their reliance on chemical fertilizers and pesticides, fostering a more balanced and resilient garden ecosystem.', 
+'Boost garden health and yield by pairing plants that naturally protect each other and share nutrients, creating a harmonious and chemical-free ecosystem.',
+'CompanionPlanting'
+),
+(
+'Moon Phase Gardening', 
+'Moon phase gardening is a traditional practice based on the belief that the lunar cycle influences plant growth through its gravitational pull on water, similar to the tides. According to this method, the "waxing" moon (increasing light) is the best time for planting crops that produce above-ground, such as leafy greens and grains, because the rising moisture encourages germination. Conversely, the "waning" moon (decreasing light) is ideal for root crops like carrots and potatoes, as the energy shifts toward the soil and root development. While scientific debate continues, many gardeners swear by these cycles to improve plant vigor and harvest quality, connecting modern horticulture to ancient celestial wisdom.', 
+'Use the lunar cycle to time planting and harvesting, leveraging the moon\'s gravitational pull on water to optimize seed germination and plant growth.',
+'MoonPhaseGardening'
+),
+(
+'Victory Gardens', 
+'Victory gardens, also known as "war gardens," were fruit, herb, and vegetable gardens planted at private residences and public parks during World War I and World War II. These gardens were promoted by governments to reduce pressure on the public food supply and boost morale by allowing citizens to contribute directly to the war effort. At their peak, nearly 20 million victory gardens in the United States produced roughly 40 percent of all vegetables consumed in the country. This movement transformed lawns and empty lots into productive spaces, teaching an entire generation the value of self-sufficiency and community resilience. Today, the spirit of victory gardening lives on in the modern push for urban agriculture and food security.', 
+'Rediscover the historical movement of home-grown food that supported nations during wartime, fostering community spirit and total food self-sufficiency.',
+'VictoryGardens'
+),
+(
+'The Science of Edible Flowers', 
+'Edible flowers have been used for centuries in culinary traditions ranging from Ancient Rome to Victorian England, adding color, fragrance, and unique flavors to dishes. Common garden varieties like nasturtiums, pansies, lavender, and calendula are not only decorative but often packed with antioxidants and vitamins. For instance, nasturtiums offer a peppery kick similar to watercress, while borage provides a refreshing cucumber-like taste. Beyond their culinary appeal, growing edible flowers encourages pollinators like bees and butterflies to visit the garden, which improves the yields of neighboring vegetable crops. Integrating these blooms turns a functional vegetable patch into a multi-sensory gourmet landscape.', 
+'Enhance your plate and garden with vibrant, edible blooms that offer unique flavors and nutritional benefits, turning landscapes into gourmet pantries.',
+'EdibleFlowers'
 );
 
 
@@ -376,4 +383,67 @@ INSERT INTO `ideas` (`title`, `description`, `picture`,`plants`,`sunlight`,`wate
 'Low',
 'Medium',
 'Easy'
+),
+(
+'The Moonlight Evening Garden',
+'Designed to be enjoyed after sundown, this ethereal garden features white blooms and silver foliage that glow under the moon. Night-scented flowers fill the air with perfume, creating a magical atmosphere for late-night relaxation. Thriving in Moderate sunlight during the day, it requires Medium water and Average maintenance to keep the luminous blooms pristine.',
+'MoonlightEveningGarden',
+'Moonflower, Jasmine, White Rose, Silver Mound Artemisia, Evening Primrose',
+'Moderate',
+'Medium',
+'Average'
+),
+(
+'The Tea Lover’s Patch',
+'Cultivate your own organic infusions with this soothing herbal collection. From calming chamomile to invigorating mint, these plants offer a variety of flavors for fresh or dried teas. Most of these herbs enjoy High sunlight and Medium watering. This Low maintenance garden provides a sustainable way to enjoy a warm cup of homegrown comfort whenever you need a break.',
+'TeaLoversPatch',
+'Chamomile, Peppermint, Lemon Balm, Stevia, Lavender',
+'High',
+'Medium',
+'Low'
+),
+(
+'The Spicy Salsa Border',
+'Everything you need for a fiesta in one productive patch. This garden combines heat-loving peppers and juicy tomatoes with aromatic cilantro and onions. Requiring High sunlight and Medium watering, this Average maintenance setup is perfect for the home cook who wants to step straight from the garden to the kitchen with maximum flavor for their next gathering.',
+'SpicySalsaBorder',
+'Jalapeño Peppers, Roma Tomatoes, Cilantro, Red Onion, Bell Peppers',
+'High',
+'Medium',
+'Average'
+),
+(
+'Vertical Succulent Frame',
+'A living piece of art for your wall, this vertical arrangement features a variety of colorful, hardy succulents. Perfect for small spaces or sunny exterior walls, it thrives in High sunlight with Low water requirements. Because succulents are slow-growing and resilient, this setup requires very Low maintenance while providing a modern, geometric aesthetic to your home.',
+'VerticalSucculentFrame',
+'Echeveria, Sedum, Jade Plant, Ghost Plant, Aloe Vera',
+'High',
+'Low',
+'Low'
+),
+(
+'The Fragrant Walkway',
+'Transform a simple path into a sensory journey with aromatic groundcovers and low shrubs. Every footstep releases a pleasant scent, from creeping thyme to sweet alyssum. This garden thrives in High sunlight and prefers Low water once established. It is a Low maintenance way to soften hard landscaping while inviting pollinators to your garden borders with its perfume.',
+'FragrantWalkway',
+'Creeping Thyme, Sweet Alyssum, Gardenia, Dianthus, Scented Geranium',
+'High',
+'Low',
+'Low'
+),
+(
+'The Mini Backyard Orchard',
+'You do not need an estate to grow fruit. This setup utilizes dwarf and columnar tree varieties that grow vertically rather than spreading wide. Ideal for small backyards, these trees require High sunlight and Medium water. With High maintenance—including specific seasonal pruning—you can enjoy home-grown apples and pears even in a compact residential lot.',
+'MiniBackyardOrchard',
+'Columnar Apple, Dwarf Pear, Dwarf Cherry, Fig, Meyer Lemon',
+'High',
+'Medium',
+'High'
+),
+(
+'The Zen Moss Garden',
+'A quiet, minimalist space designed for deep shade and reflection. This garden replaces thirsty lawns with a plush carpet of various mosses and ferns, creating a lush green environment that feels cool and damp. Thriving in Low sunlight and requiring High water to maintain its velvet-like vibrancy, this Average maintenance garden offers a serene escape from the daily grind.',
+'ZenMossGarden',
+'Sheet Moss, Cushion Moss, Maidenhair Fern, Irish Moss, Japanese Maple',
+'Low',
+'High',
+'Average'
 );
