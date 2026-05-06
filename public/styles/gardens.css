@@ -88,6 +88,10 @@ body.dark-theme {
     body .generic-details {
         display: block;
     }
+    body .newgarden_btn,
+    body .checkout_btn {
+        width: 70%;
+    }
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -168,7 +172,7 @@ body {
 
 .newgarden_btn,
 .checkout_btn {
-    width: 80%;
+    width: 50%;
     height: fit-content;
     padding: 1rem 1.5rem 1rem 1.5rem;
     background-color: var(--general-btns-bg);
@@ -187,7 +191,7 @@ body {
     color: var(--general-btns-hover-font);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: 85% !important;
+    transform: translateY(-3px);
 }
 
 .information-cont {

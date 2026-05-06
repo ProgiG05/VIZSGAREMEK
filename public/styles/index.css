@@ -23,12 +23,12 @@
     --ideasPage-hover-bg: #a7f070;
     --ideasPage-font-color: #a7f070;
     --ideasPage-hover-font-color: #1a1e1a;
-    /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
     --onecard-bg-primary: #c6e7d8;
     --onecard-font-primary: rgb(6, 19, 18);
     --onecard-bg-secondary: rgb(6, 19, 18);
     --onecard-font-secondary: #c6e7d8;
-    /*oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo*/
+
     --bg-dark: #1a1e1a;
     --text-green: #a7f070;
     --beige-light: #e0cda7;
@@ -53,7 +53,7 @@
     --plantsearchPage-hover-bg: #E3DBBB;
     --plantsearchPage-font-color: #E3DBBB;
     --plantsearchPage-hover-font-color: #0d1102;
-    /*oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo*/
+    
     --plant-search-result-title: #ffffff;
     --plant-search-result-bg: #4c3a22f5;
     --plant-search-result-font-color: #030c01e4;

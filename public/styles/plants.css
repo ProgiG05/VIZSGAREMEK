@@ -60,6 +60,7 @@ body.dark-theme {
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
+
 @media (max-width: 1600px) {
     body #other-searched-results {grid-template-columns: 1fr 1fr;}
     body #searching-cont {grid-template-columns: 1fr;}

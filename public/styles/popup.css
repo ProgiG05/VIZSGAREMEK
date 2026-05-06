@@ -53,6 +53,12 @@ body.dark-theme {
     --close-btn-color-hover: #ffffff;
 }
 
+@media (max-width: 500px) {
+    body .confirm-btn{
+        padding: 0.1rem 1.5rem 0.1rem 1.5rem;
+    }
+}
+
 .popup-overlay {
     position: fixed;
     top: 0;
