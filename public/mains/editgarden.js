@@ -67,13 +67,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Initial render
   const plants = await plantsResp.json();
   const editGardenContainer = document.getElementById("editGardenContainer");
-  const controls = loadContents(plants);
+  const controls = await loadContents(plants);
   EditGarden(garden, plants, editGardenContainer, controls);
 });
 
 // --- Load contents ---
 
-function loadContents(plants) {
+async function loadContents(plants) {
   // Container
   const controlsContainer = document.createElement("div");
   controlsContainer.id = "controls-container";
@@ -113,7 +113,12 @@ function loadContents(plants) {
   plantselection.appendChild(columnsContainer);
 
   // Group plants
-  const plantsByType = {};
+  const savedPlantsResp = await apiFetch("/api/savedplants", { method: "GET" });
+  let savedPlants = [];
+  if (savedPlantsResp.ok) {
+    savedPlants = await savedPlantsResp.json();
+  }
+  const plantsByType = {"Saved Plants": savedPlants};
   plants.forEach((plant) => {
     const type = plant.type || "Other";
     if (!plantsByType[type]) {
@@ -121,6 +126,7 @@ function loadContents(plants) {
     }
     plantsByType[type].push(plant);
   });
+
 
   // Plant cards
   const allCards = [];
