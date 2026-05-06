@@ -1,20 +1,17 @@
 :root {
-    /* ######################################################## */
     --body-bg: #b2cd8f;
     --header-cont-bg: linear-gradient(to right, #64884a, #92ac70);
     --general-font-color: #11170f;
     --title-text-shadow: rgba(17, 26, 4, 0.878);
     --gardenideas-cont-bg: #000000;
     --text-main: #ffffff;
-    --navbarBtn-bg: #334429e2;
-    --navbarBtn-font-color: rgb(255, 255, 255);
-    --navbarBtn-hover-bg: #212c19;
-    --navbarBtn-hover-font-color: rgb(255, 255, 255);
+
     --search-btns-bg: #e0e9d5;
     --search-btns-font: #1a1e1a;
     --search-btns-hover-bg: #1a1e1a;
     --search-btns-hover-font: #e0e9d5;
-    /* ######################################################## */
+    --toup-border-color: #e0f7e0;
+
     --bg-dark: #1a1e1a;
     --text-green: #a7f070;
     --card-shadow: #ffffff88;
@@ -26,7 +23,6 @@
     --flower-yellow: #f0e632;
     --stem-green: #66a840;
     --stat-text: #1a1e1a;
-    /* ######################################################## */
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -562,7 +558,7 @@ body {
     border-radius: 2rem;
     border: none;
     background-color: #1e2b1b;
-    border: 1px solid var(--general-font-color);
+    border: 0.15rem solid var(--toup-border-color);
     align-items: center;
     justify-content: center;
     transition: 0.2s all ease;

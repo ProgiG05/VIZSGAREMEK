@@ -8,6 +8,7 @@
     --search-btns-font: #1a1e1a;
     --search-btns-hover-bg: #1a1e1a;
     --search-btns-hover-font: #e0e9d5;
+    --toup-border-color: #e0f7e0;
 
     --card-bg: #1a1e1a;
     --paragraph-bg: rgb(255, 239, 229);
@@ -542,7 +543,7 @@ body {
     border-radius: 2rem;
     border: none;
     background-color: #1e2b1b;
-    border: 1px solid var(--general-font-color);
+    border: 0.15rem solid var(--toup-border-color);
     align-items: center;
     justify-content: center;
     transition: 0.2s all ease;

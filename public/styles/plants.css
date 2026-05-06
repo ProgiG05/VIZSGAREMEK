@@ -10,6 +10,7 @@
     --general-button-font-color: #0b0e0a;
     --general-button-hover-bg: #0b0e0a;
     --general-button-hover-font-color: #f5ece5;
+    --toup-border-color: #e0f7e0;
 
     --pfinder-cont-bg: #4c3a22f5;
     --pfinder-cont-font-color: #030c01e4;
@@ -81,7 +82,11 @@ body.dark-theme {
     body .indoor-switch-cont, 
     body .seeds-switch-cont {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    body .indoor-switch-cont, 
+    body .seeds-switch-cont {
+        padding-bottom: 2rem;
     }
     body .switch {
         width: 100%;
@@ -96,6 +101,9 @@ body.dark-theme {
     body .plant-type-grouping-cont{
         width: 70%;
         margin: 2rem 0 1rem 0;
+    }
+    body .pot-button{
+        scale: 0.9;
     }
 }
 
@@ -126,6 +134,9 @@ body.dark-theme {
     body .clearBtn {
         width: fit-content;
         padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+    }
+    body .pot-button{
+        scale: 0.8;
     }
 }
 @media (max-width: 450px) {
@@ -474,7 +485,7 @@ body {
     left: 0.2rem;
     top: 0.2rem;
     background-color: white;
-    border-radius: 50%;
+    border-radius: 1rem;
     transition: transform 0.3s ease;
 }
 
@@ -488,11 +499,11 @@ input:checked+.slider:before {
 
 /* Rounded slider container */
 .slider.round {
-    border-radius: 0.6rem;
+    border-radius: 0.8rem;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+    border-radius: 1rem;
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -819,3 +830,42 @@ select {
 }
 
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.toup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-left: 0.5vw;
+    margin-bottom: 0.9vh;
+    height: 2.8rem;
+    width: 2.8rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: #1e2b1b;
+    border: 0.15rem solid var(--toup-border-color);
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s all ease;
+    z-index: 1000;
+}
+
+.toup img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.toup:hover {
+    cursor: pointer;
+}
+
+.toup:active {
+    transform: translateY(5px);
+    transition: 0.3s all ease;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */

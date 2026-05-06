@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
+    setupTopButton();
 
     const gardensContainer = document.getElementById("gardens-container");
     const user = getUser();
@@ -405,4 +406,12 @@ function CreateTable(splittedContent, plants) {
         table.appendChild(tableRow);
     });
     return table;
+}
+function setupTopButton() {
+    const topBtn = document.getElementById('toup');
+    if (!topBtn) return;
+
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }

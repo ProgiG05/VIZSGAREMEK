@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupNavbar();
     setupSidePanel();
     setupLoginState();
+    setupTopButton();
 
     const user = getUser();
 
@@ -37,7 +38,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Failed to load plants:", error.message);
         const container = document.getElementById('other-searched-results');
         if (container) {
-            container.innerHTML = '<p class="error-message">Could not load plants. Please try again later.</p>';
+            const errorText = document.createElement('p');
+            errorText.className = 'error-message';
+            errorText.textContent = "Could not load plants. Please try again later.";
+            container.appendChild(errorText);
         }
         return;
     }
@@ -187,6 +191,20 @@ function createPlantCards(plant) {
         Table.appendChild(row);
     };
 
+    const plantWateringMetrics = {
+        succulents: "175ml",
+        herbs: "250ml",
+        flowers: "350ml",
+        ornamental: "350ml",
+        grass: "2400ml",
+        vegetables: "2750ml",
+        fruits: "3000ml",
+        ferns: "500ml",
+        mosses: "75ml",
+        trees: "5500ml"   
+    };
+    
+
     addTableRow("Common name:", capitalizeFirstLetter(plant.common_name));
     addTableRow("Botanical name:", capitalizeFirstLetter(plant.botanical_name));
     addTableRow("Place of Origin:", capitalizeFirstLetter(plant.origin));
@@ -196,8 +214,40 @@ function createPlantCards(plant) {
     const pruningText = plant.pruning.toLowerCase() === "none" ? "No need for pruning" : plant.pruning;
     addTableRow("Pruning season:", pruningText);
     addTableRow("Harvesting season:", capitalizeFirstLetter(plant.harvesting));
-    addTableRow("Soil type:", capitalizeFirstLetter(plant.soil));
-    addTableRow("Water quantity:", capitalizeFirstLetter(plant.water));
+    addTableRow("Soil type:", `${capitalizeFirstLetter(plant.soil)} nutrient density`);
+
+    switch (plant.type.toLowerCase()){
+        case "succulents":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.succulents})`);
+            break;
+        case "herbs":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.herbs})`);
+            break;
+        case "flowers":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.flowers})`);
+            break;
+        case "ornamental":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.ornamental})`);
+            break;
+        case "grass":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.grass})`);
+            break;
+        case "vegetables":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.vegetables})`);
+            break;
+        case "fruits":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.fruits})`);
+            break;
+        case "ferns":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.ferns})`);
+            break;
+        case "mosses":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.mosses})`);
+            break;
+        case "trees":
+            addTableRow("Water quantity:", `${capitalizeFirstLetter(plant.water)}:  (${plantWateringMetrics.trees})`);
+            break;
+    }
     addTableRow("Sunlight intensity:", capitalizeFirstLetter(plant.sunlight));
     addTableRow("Is it Indoor:", plant.indoor ? "Yes, can stay inside also" : "No, can't be kept inside");
     addTableRow("Has Seeds:", plant.seeds ? "Yes, can be propagated by seed" : "No, can't be propagated by seed");
@@ -287,7 +337,10 @@ function SearchPlantDetails(details, container) {
     container.innerText = '';
 
     if (!details || details.length === 0) {
-        container.innerHTML = '<p class="error-message">No plants matched your search.</p>';
+        const errorText = document.createElement('p');
+        errorText.className = 'error-message';
+        errorText.textContent = "No plants matched your search.";
+        container.appendChild(errorText);
         return;
     }
 
@@ -421,3 +474,11 @@ document.getElementById('searchPlant_Btn').addEventListener('click', async (e) =
         showAlert("Search failed. Please try again later.", "Error!");
     }
 });
+function setupTopButton() {
+    const topBtn = document.getElementById('toup');
+    if (!topBtn) return;
+
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
