@@ -94,9 +94,6 @@ function createIdeaCard(idea) {
   const OneIdeaTitle = document.createElement("h2");
   OneIdeaTitle.textContent = idea.title;
   OneIdeaTitle.setAttribute("class", "card-title");
-  OneIdeaTitle.addEventListener("click", () =>
-    ConvertToReadingMode(OneIdeaCard),
-  );
   OneIdeaCard.appendChild(OneIdeaTitle);
 
   const OneIdeaDescription = document.createElement("p");
@@ -206,7 +203,8 @@ async function toggleSaveState(buttonElement, ideaId) {
     return;
   }
 
-  // Toggle state
+  const nowSaving = !buttonElement.classList.contains("saved"); // read BEFORE toggle
+
   buttonElement.classList.toggle("saved");
   if (buttonElement.classList.contains("saved")) {
     savedIdeaIds.add(ideaId);
@@ -214,20 +212,13 @@ async function toggleSaveState(buttonElement, ideaId) {
     savedIdeaIds.delete(ideaId);
   }
 
-  // Database request
   try {
-    const isSaved = savedIdeaIds.has(ideaId);
     const response = await apiFetch(`/api/savedideas/${ideaId}`, {
-      method: isSaved ? "DELETE" : "POST",
+      method: nowSaving ? "POST" : "DELETE",
     });
-
-    if (!response || !response.ok) {
-      throw new Error("Save failed");
-    }
+    if (!response || !response.ok) throw new Error("Save failed");
   } catch (error) {
     console.error("Failed to save idea:", error.message);
-
-    // Revert state
     buttonElement.classList.toggle("saved");
     if (buttonElement.classList.contains("saved")) {
       savedIdeaIds.add(ideaId);
@@ -249,10 +240,6 @@ function setupTopButton() {
   });
 }
 
-function ConvertToReadingMode(card) {
-  console.log("Reading mode clicked:", card);
-}
-
 // --- Search logic ---
 
 function setupShowSearchButton() {
@@ -265,13 +252,14 @@ function setupShowSearchButton() {
   showSearchBtn.addEventListener("click", async () => {
     const container = document.getElementById("gardenIdeas-container");
     const container2 = document.getElementById("oneCardShowcase_cont");
-    const searchCont = document.getElementById("searchBar");
     if (container) {
-      container.innerHTML = ``; // clear previous cards
-      container2.innerHTML = ``; // clear previous cards
-      searchCont.value = ""; // clear previous search results
-      await loadIdeas(); // reload all ideas
-      searchCont.scrollIntoView({ behavior: "smooth" });
+      container.innerHTML = ``;
+      container2.innerHTML = ``;
+      document.getElementById("searchBar").value = "";
+      await loadIdeas();
+      document
+        .getElementById("searchBar")
+        .scrollIntoView({ behavior: "smooth" });
     }
   });
 }

@@ -7,22 +7,6 @@ const connection = mysql.createPool({
   port: process.env.DB_PORT,
 });
 
-const plant_search_query = `
-    SELECT * FROM plants 
-    WHERE 
-    common_name LIKE ? OR
-    botanical_name LIKE ? OR 
-    origin LIKE ? OR
-    type LIKE ? OR 
-    water LIKE ? OR 
-    sunlight LIKE ? OR 
-    soil LIKE ? OR 
-    indoor LIKE ? OR
-    seeds LIKE ? OR
-    planting LIKE ? OR 
-    pruning LIKE ? OR
-    harvesting LIKE ?`;
-
 module.exports = {
   getAllIdeas: async () => {
     const [rows] = await connection.query(`SELECT * FROM ideas`);

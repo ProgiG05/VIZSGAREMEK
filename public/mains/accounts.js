@@ -191,15 +191,12 @@ document.addEventListener("DOMContentLoaded", () => {
           document.cookie = "user=; Max-Age=0; path=/; SameSite=Strict";
           window.location.href = "/index.html";
         } else {
-          await showConfirm(
-            data.message || "Could not delete account.",
-            "Error",
-          );
+          showAlert(data.message || "Could not delete account.", "Error");
           deleteAccountBtn.disabled = false;
           deleteAccountBtn.textContent = "Delete Account";
         }
       } catch {
-        await showConfirm("Network error. Please try again.", "Error");
+        showAlert("Network error. Please try again.", "Error");
         deleteAccountBtn.disabled = false;
         deleteAccountBtn.textContent = "Delete Account";
       }
@@ -294,10 +291,12 @@ async function loadSavedPlants() {
           )
         ) {
           try {
-            const res = await apiFetch("/api/saveplants", {
-              method: "POST",
-              body: JSON.stringify({ id: p.plant_id || p.id }),
-            });
+            const res = await apiFetch(
+              `/api/savedplants/${p.plant_id || p.id}`,
+              {
+                method: "DELETE",
+              },
+            );
             if (res.ok) {
               card.remove();
               if (list.children.length === 0) {
@@ -409,9 +408,8 @@ async function loadSavedIdeas() {
           )
         ) {
           try {
-            const res = await apiFetch("/api/saveideas", {
-              method: "POST",
-              body: JSON.stringify({ id: i.idea_id || i.id }),
+            const res = await apiFetch(`/api/savedideas/${i.idea_id || i.id}`, {
+              method: "DELETE",
             });
             if (res.ok) {
               card.remove();
