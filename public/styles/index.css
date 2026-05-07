@@ -356,6 +356,26 @@ section {
     padding-bottom: 4rem;
 }
 
+.dp-plant-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.5rem 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.dp-plant-tag {
+  background: rgb(91, 126, 60);
+  color: #fff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-family: monospace;
+  white-space: nowrap;
+  font-size: 0.65rem;
+}
+
 .ideasPage_Btn {
     width: 40%;
     height: 2rem;

@@ -103,11 +103,14 @@ function createIdeaCard(idea) {
 
   OneIdeaCard.appendChild(document.createElement("hr"));
 
-  // Plant list
-  const plantList = document.createElement("p");
-  plantList.setAttribute("class", "plant-list");
+  // Plant tags
+  const plantList = document.createElement("div");
+  plantList.setAttribute("class", "dp-plant-list");
   idea.plants.split(",").forEach((plantName) => {
-    plantList.textContent += plantName.trim() + " ";
+    const tag = document.createElement("span");
+    tag.setAttribute("class", "dp-plant-tag");
+    tag.textContent = plantName.trim();
+    plantList.appendChild(tag);
   });
   OneIdeaCard.appendChild(plantList);
 
