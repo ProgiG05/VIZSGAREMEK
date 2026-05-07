@@ -2,6 +2,14 @@ const GardenModel = require("../models/garden-model");
 const jwt = require("jsonwebtoken");
 const argon2 = require("argon2");
 
+// Shared helpers
+
+const getCookieBase = () => ({
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "Strict",
+  path: "/",
+});
+
 // Public data endpoints
 
 exports.getAllIdeas = async (req, res) => {
@@ -53,7 +61,9 @@ exports.addNewGarden = async (req, res) => {
     console.log(
       `Garden created: "${garden.garden_name}" by user ${req.user.username}`,
     );
-    res.json(result);
+    return res
+      .status(201)
+      .json({ success: true, message: "Garden created.", id: result.insertId });
   } catch (err) {
     console.error("Failed to create garden:", err);
     res
@@ -171,9 +181,9 @@ exports.deleteGarden = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
-    const result = await GardenModel.deleteGarden(id, userId);
+    await GardenModel.deleteGarden(id, userId);
     console.log(`Garden ${id} deleted by user ${req.user.username}`);
-    res.json({ success: true, message: "Garden deleted.", data: result });
+    return res.status(204).send();
   } catch (err) {
     console.error("Failed to delete garden:", err);
     res
@@ -222,7 +232,9 @@ exports.updateProfile = async (req, res) => {
 
       const currentUser = await GardenModel.getUserById(userId);
       if (!currentUser) {
-        return res.status(404).json({ success: false, message: "User not found." });
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found." });
       }
 
       if (currentUser.username === newUsername) {
@@ -234,13 +246,16 @@ exports.updateProfile = async (req, res) => {
 
       await GardenModel.updateUsername(userId, newUsername);
 
-      const secureCookie = process.env.NODE_ENV === "production";
-      const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
-      res.cookie("user", JSON.stringify({ id: userId, username: newUsername }), {
-        ...cookieBase,
-        httpOnly: false,
-        maxAge: 60 * 60 * 1000,
-      });
+      const cookieBase = getCookieBase();
+      res.cookie(
+        "user",
+        JSON.stringify({ id: userId, username: newUsername }),
+        {
+          ...cookieBase,
+          httpOnly: false,
+          maxAge: 60 * 60 * 1000,
+        },
+      );
 
       const accessToken = jwt.sign(
         { id: userId, username: newUsername },
@@ -254,7 +269,11 @@ exports.updateProfile = async (req, res) => {
       });
 
       console.log(`User ${userId} changed username to "${newUsername}"`);
-      return res.json({ success: true, message: "Username updated successfully.", newUsername });
+      return res.json({
+        success: true,
+        message: "Username updated successfully.",
+        newUsername,
+      });
     }
 
     // --- Password update ---
@@ -268,12 +287,19 @@ exports.updateProfile = async (req, res) => {
 
       const currentUser = await GardenModel.getUserById(userId);
       if (!currentUser) {
-        return res.status(404).json({ success: false, message: "User not found." });
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found." });
       }
 
-      const passwordOk = await argon2.verify(currentUser.password, currentPassword);
+      const passwordOk = await argon2.verify(
+        currentUser.password,
+        currentPassword,
+      );
       if (!passwordOk) {
-        return res.status(401).json({ success: false, message: "Current password is incorrect." });
+        return res
+          .status(401)
+          .json({ success: false, message: "Current password is incorrect." });
       }
 
       const sameAsOld = await argon2.verify(currentUser.password, newPassword);
@@ -287,18 +313,29 @@ exports.updateProfile = async (req, res) => {
       const newHash = await argon2.hash(newPassword);
       await GardenModel.updatePassword(userId, newHash);
 
-      console.log(`User ${userId} (${req.user.username}) changed their password`);
-      return res.json({ success: true, message: "Password updated successfully." });
+      console.log(
+        `User ${userId} (${req.user.username}) changed their password`,
+      );
+      return res.json({
+        success: true,
+        message: "Password updated successfully.",
+      });
     }
 
     // --- Nothing valid sent ---
-    return res.status(400).json({ success: false, message: "No valid fields provided." });
+    return res
+      .status(400)
+      .json({ success: false, message: "No valid fields provided." });
   } catch (err) {
     if (err.code === "ER_DUP_ENTRY") {
-      return res.status(409).json({ success: false, message: "This username is already taken." });
+      return res
+        .status(409)
+        .json({ success: false, message: "This username is already taken." });
     }
     console.error("Update profile error:", err);
-    return res.status(500).json({ success: false, message: "Could not update profile." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Could not update profile." });
   }
 };
 
@@ -409,8 +446,7 @@ exports.login = async (req, res) => {
     const refreshTokenHash = await argon2.hash(refreshToken);
     await GardenModel.storeRefreshToken(user.id, refreshTokenHash);
 
-    const secureCookie = process.env.NODE_ENV === "production";
-    const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
+    const cookieBase = getCookieBase();
 
     res.cookie("accessToken", accessToken, {
       ...cookieBase,
@@ -448,8 +484,7 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    const secureCookie = process.env.NODE_ENV === "production";
-    const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
+    const cookieBase = getCookieBase();
 
     res.clearCookie("accessToken", { ...cookieBase, httpOnly: true });
     res.clearCookie("refreshToken", { ...cookieBase, httpOnly: true });
@@ -516,8 +551,7 @@ exports.refresh = async (req, res) => {
     const newRefreshTokenHash = await argon2.hash(newRefreshToken);
     await GardenModel.storeRefreshToken(decoded.id, newRefreshTokenHash);
 
-    const secureCookie = process.env.NODE_ENV === "production";
-    const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
+    const cookieBase = getCookieBase();
 
     res.cookie("accessToken", accessToken, {
       ...cookieBase,
@@ -549,22 +583,22 @@ exports.refresh = async (req, res) => {
     return res.status(401).json({ success: false, message: "Invalid token." });
   }
 };
+
+// --- Delete account ---
+
 exports.deleteAccount = async (req, res) => {
   try {
     const userId = req.user.id;
 
     await GardenModel.deleteUser(userId);
 
-    const secureCookie = process.env.NODE_ENV === "production";
-    const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
+    const cookieBase = getCookieBase();
     res.clearCookie("accessToken", { ...cookieBase, httpOnly: true });
     res.clearCookie("refreshToken", { ...cookieBase, httpOnly: true });
     res.clearCookie("user", { ...cookieBase, httpOnly: false });
 
     console.log(`User ${userId} (${req.user.username}) deleted their account`);
-    return res
-      .status(200)
-      .json({ success: true, message: "Account deleted successfully." });
+    return res.status(204).send();
   } catch (err) {
     console.error("Delete account error:", err);
     return res

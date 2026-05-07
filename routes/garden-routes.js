@@ -181,7 +181,7 @@ router.post("/logout", GardenController.logout);
  *                 type: string
  *                 example: Tomatoes, basil, and peppers
  *     responses:
- *       200:
+ *       201:
  *         description: Garden created successfully
  *       400:
  *         description: Missing required fields

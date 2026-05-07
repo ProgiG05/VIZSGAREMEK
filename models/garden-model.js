@@ -28,7 +28,7 @@ module.exports = {
     const [rows] = await connection.query(`SELECT * FROM ideas`);
     return rows;
   },
-  getAllKnowledges: async function GetAllKnowledges() {
+  getAllKnowledges: async () => {
     const [rows] = await connection.query(`SELECT * FROM knowledges`);
     return rows;
   },
