@@ -142,48 +142,10 @@ function createIdeaCard(idea) {
   cardFooter.appendChild(statsContainer);
 
   // Save button
-  const potButton = document.createElement("button");
-  potButton.setAttribute("class", "pot-button");
-  potButton.setAttribute("title", "save this garden idea");
-  potButton.setAttribute("aria-label", "Toggle Save");
-  potButton.addEventListener("click", () => toggleSaveState(potButton));
-
-  const flowerAssembly = document.createElement("div");
-  flowerAssembly.setAttribute("class", "flower-assembly");
-
-  const flowerHead = document.createElement("div");
-  flowerHead.setAttribute("class", "flower-head");
-
-  for (let i = 1; i <= 4; i++) {
-    const petal = document.createElement("div");
-    petal.setAttribute("class", `petal p${i}`);
-    flowerHead.appendChild(petal);
-  }
-
-  const center = document.createElement("div");
-  center.setAttribute("class", "center");
-  flowerHead.appendChild(center);
-
-  const stem = document.createElement("div");
-  stem.setAttribute("class", "stem");
-
-  flowerAssembly.appendChild(flowerHead);
-  flowerAssembly.appendChild(stem);
-
-  const potBase = document.createElement("div");
-  potBase.setAttribute("class", "pot-base");
-
-  const potRim = document.createElement("div");
-  potRim.setAttribute("class", "pot-rim");
-
-  potButton.appendChild(flowerAssembly);
-  potButton.appendChild(potBase);
-  potButton.appendChild(potRim);
 
   const cardbottomCont = document.createElement("div");
   cardbottomCont.setAttribute("class", "cardbottom-cont");
   cardbottomCont.appendChild(cardFooter);
-  cardbottomCont.appendChild(potButton);
 
   OneIdeaCard.appendChild(cardbottomCont);
 
