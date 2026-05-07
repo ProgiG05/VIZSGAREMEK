@@ -5,157 +5,212 @@ const crypto = require("crypto");
 
 const ENV_PATH = path.resolve(__dirname, "../.env");
 
-// --- Standalone secret generator ---
 if (process.argv.includes("--generate-secret")) {
-  const secret = crypto.randomBytes(64).toString("hex");
-  console.log(secret);
+  console.log(crypto.randomBytes(64).toString("hex"));
   process.exit(0);
 }
 
-const fields = [
-  {
-    key: "DB_HOST",
-    description: "Database host",
-    default: "localhost",
-  },
-  {
-    key: "DB_PORT",
-    description: "Database port",
-    default: "3306",
-  },
-  {
-    key: "DB_NAME",
-    description: "Database name",
-    default: "sproutified_db",
-  },
-  {
-    key: "DB_USER",
-    description: "Database user",
-    default: "root",
-  },
-  {
-    key: "DB_PASSWORD",
-    description: "Database password",
-    default: "",
-    secret: true,
-  },
-  {
-    key: "JWT_ACCESS_SECRET",
-    description:
-      "JWT access token secret (min 8 chars, type 'generate' to auto-fill)",
-    default: "",
-    secret: true,
-    autoGenerate: true,
-  },
-  {
-    key: "JWT_REFRESH_SECRET",
-    description:
-      "JWT refresh token secret (min 8 chars, type 'generate' to auto-fill)",
-    default: "",
-    secret: true,
-    autoGenerate: true,
-  },
-];
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-if (fs.existsSync(ENV_PATH)) {
-  rl.question(
-    "\nA .env file already exists. Overwrite it? (y/N): ",
-    (answer) => {
-      if (answer.toLowerCase() !== "y") {
-        console.log("Setup cancelled. Your existing .env was not changed.\n");
-        rl.close();
-        process.exit(0);
-      }
-      runSetup();
-    },
-  );
-} else {
-  runSetup();
-}
-
-function runSetup() {
-  console.log("\nSproutified .env Setup");
-  console.log("Press Enter to use the default value shown in brackets.");
-  console.log(
-    "Type 'generate' for JWT secrets to auto-fill a 64 character hex string.\n",
-  );
-
-  const answers = {};
-  let index = 0;
-
-  function askNext() {
-    if (index >= fields.length) {
-      writeEnv(answers);
-      return;
-    }
-
-    const field = fields[index];
-    const defaultHint = field.default
-      ? ` [${field.secret ? "****" : field.default}]`
-      : "";
-    const prompt = `${field.key} (${field.description})${defaultHint}: `;
-
-    rl.question(prompt, (input) => {
-      const trimmed = input.trim();
-
-      if (field.autoGenerate && trimmed.toLowerCase() === "generate") {
-        const generated = crypto.randomBytes(32).toString("hex");
-        console.log(
-          `  Generated: ${generated.substring(0, 8)}...${generated.substring(56)}`,
-        );
-        answers[field.key] = generated;
-        index++;
-        askNext();
-        return;
-      }
-
-      const value = trimmed || field.default;
-
-      if (!value) {
-        console.log(`  "${field.key}" cannot be empty. Please enter a value.`);
-        askNext();
-        return;
-      }
-
-      if (field.validate && !field.validate(value)) {
-        console.log(
-          `  Invalid value for ${field.key}. ${field.hint || "Please try again."}`,
-        );
-        askNext();
-        return;
-      }
-
-      answers[field.key] = value;
-      index++;
-      askNext();
+async function main() {
+  if (fs.existsSync(ENV_PATH)) {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    await new Promise((resolve) => {
+      rl.question(
+        "\nA .env file already exists. Overwrite it? (y/N): ",
+        (answer) => {
+          rl.close();
+          if (answer.toLowerCase() !== "y") {
+            console.log(
+              "Setup cancelled. Your existing .env was not changed.\n",
+            );
+            process.exit(0);
+          }
+          resolve();
+        },
+      );
     });
   }
 
-  askNext();
-}
-
-function writeEnv(answers) {
   const lines = [
     "# Database",
-    `DB_HOST=${answers.DB_HOST}`,
-    `DB_PORT=${answers.DB_PORT}`,
-    `DB_NAME=${answers.DB_NAME}`,
-    `DB_USER=${answers.DB_USER}`,
-    `DB_PASSWORD=${answers.DB_PASSWORD}`,
+    "DB_HOST=localhost",
+    "DB_PORT=3306",
+    "DB_NAME=sproutified_db",
+    "DB_USER=root",
+    "DB_PASSWORD=",
     "",
     "# JWT Secrets",
-    `JWT_ACCESS_SECRET=${answers.JWT_ACCESS_SECRET}`,
-    `JWT_REFRESH_SECRET=${answers.JWT_REFRESH_SECRET}`,
+    `JWT_ACCESS_SECRET=${crypto.randomBytes(64).toString("hex")}`,
+    `JWT_REFRESH_SECRET=${crypto.randomBytes(64).toString("hex")}`,
   ];
 
   fs.writeFileSync(ENV_PATH, lines.join("\n") + "\n", "utf8");
-
   console.log("\n.env file created successfully at the project root.");
-  console.log("Run `npm run dev` to start the development server.\n");
-  rl.close();
+
+  await setupDatabase();
 }
+
+// --- DB setup ---
+
+const EXPECTED_TABLES = [
+  "users",
+  "refresh_tokens",
+  "plants",
+  "ideas",
+  "knowledges",
+  "garden_manager",
+  "saved_plants",
+  "saved_ideas",
+];
+
+const EXPECTED_ROW_COUNTS = [
+  { table: "plants", count: 82 },
+  { table: "ideas", count: 20 },
+  { table: "knowledges", count: 15 },
+];
+
+const EXPECTED_UNIQUE_KEYS = [
+  { table: "saved_plants", keyName: "unique_user_plant" },
+  { table: "saved_ideas", keyName: "unique_user_idea" },
+];
+
+const EXPECTED_FOREIGN_KEYS = [
+  { table: "garden_manager", column: "user_id", refTable: "users" },
+  { table: "refresh_tokens", column: "user_id", refTable: "users" },
+  { table: "saved_plants", column: "user_id", refTable: "users" },
+  { table: "saved_plants", column: "plant_id", refTable: "plants" },
+  { table: "saved_ideas", column: "user_id", refTable: "users" },
+  { table: "saved_ideas", column: "idea_id", refTable: "ideas" },
+];
+
+async function validateDatabase(connection, dbName) {
+  const issues = [];
+
+  const [tables] = await connection.query(`SHOW TABLES`);
+  const tableNames = tables.map((r) => Object.values(r)[0]);
+  for (const expected of EXPECTED_TABLES) {
+    if (!tableNames.includes(expected)) {
+      issues.push(`Missing table: "${expected}"`);
+    }
+  }
+
+  if (issues.length > 0) return issues;
+
+  for (const { table, count } of EXPECTED_ROW_COUNTS) {
+    const [[{ total }]] = await connection.query(
+      `SELECT COUNT(*) AS total FROM \`${table}\``,
+    );
+    if (total < count) {
+      issues.push(
+        `Table "${table}" has ${total} rows, expected at least ${count}`,
+      );
+    }
+  }
+
+  for (const { table, keyName } of EXPECTED_UNIQUE_KEYS) {
+    const [keys] = await connection.query(
+      `SELECT INDEX_NAME FROM information_schema.STATISTICS
+       WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND INDEX_NAME = ? AND NON_UNIQUE = 0`,
+      [dbName, table, keyName],
+    );
+    if (keys.length === 0) {
+      issues.push(`Missing UNIQUE constraint "${keyName}" on table "${table}"`);
+    }
+  }
+
+  for (const { table, column, refTable } of EXPECTED_FOREIGN_KEYS) {
+    const [fks] = await connection.query(
+      `SELECT CONSTRAINT_NAME FROM information_schema.KEY_COLUMN_USAGE
+       WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ? AND REFERENCED_TABLE_NAME = ?`,
+      [dbName, table, column, refTable],
+    );
+    if (fks.length === 0) {
+      issues.push(
+        `Missing foreign key on "${table}.${column}" -> "${refTable}"`,
+      );
+    }
+  }
+
+  return issues;
+}
+
+async function setupDatabase() {
+  let mysql;
+  try {
+    mysql = require("mysql2/promise");
+  } catch {
+    console.log("\nSkipping database setup: mysql2 is not installed yet.");
+    console.log("Run `npm install` first, then re-run this script.\n");
+    process.exit(0);
+  }
+
+  const sqlPath = path.resolve(__dirname, "db/sproutified_db.sql");
+  if (!fs.existsSync(sqlPath)) {
+    console.log(
+      "\nSkipping database setup: sproutified_db.sql not found in scripts/db/.",
+    );
+    console.log("Run `npm run dev` to start the development server.\n");
+    process.exit(0);
+  }
+
+  console.log("\nChecking database connection...");
+
+  let connection;
+  try {
+    connection = await mysql.createConnection({
+      host: "localhost",
+      port: 3306,
+      user: "root",
+      password: "",
+      multipleStatements: true,
+    });
+  } catch (err) {
+    console.log(`\nCould not connect to MySQL: ${err.message}`);
+    console.log("Make sure MySQL is running in XAMPP.");
+    console.log("Run `npm run dev` to start the development server.\n");
+    process.exit(0);
+  }
+
+  try {
+    const [rows] = await connection.query(
+      `SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = ?`,
+      ["sproutified_db"],
+    );
+
+    if (rows.length > 0) {
+      await connection.query(`USE \`sproutified_db\``);
+      const [tables] = await connection.query(`SHOW TABLES`);
+
+      if (tables.length > 0) {
+        console.log("\nDatabase found. Validating schema...");
+        const issues = await validateDatabase(connection, "sproutified_db");
+
+        if (issues.length === 0) {
+          console.log("Database validation passed.");
+          await connection.end();
+          console.log("Run `npm run dev` to start the development server.\n");
+          process.exit(0);
+        }
+
+        console.log("\nDatabase validation failed:");
+        issues.forEach((issue) => console.log(`  - ${issue}`));
+        console.log("\nRe-importing database to fix issues...");
+      }
+    }
+
+    console.log("\nSetting up database...");
+    await connection.query(fs.readFileSync(sqlPath, "utf8"));
+    console.log("Database set up successfully.");
+  } catch (err) {
+    console.error("\nDatabase setup failed:", err.message);
+  } finally {
+    await connection.end();
+  }
+
+  console.log("Run `npm run dev` to start the development server.\n");
+  process.exit(0);
+}
+
+main();
