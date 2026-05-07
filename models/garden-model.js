@@ -23,6 +23,27 @@ const plant_search_query = `
     pruning LIKE ? OR
     harvesting LIKE ?`;
 
+const toggleSaved = async (table, userColumn, itemColumn, userId, itemId) => {
+  const [existing] = await connection.query(
+    `SELECT * FROM ${table} WHERE ${userColumn} = ? AND ${itemColumn} = ?`,
+    [userId, itemId],
+  );
+
+  if (existing.length > 0) {
+    const [rows] = await connection.query(
+      `DELETE FROM ${table} WHERE ${userColumn} = ? AND ${itemColumn} = ?`,
+      [userId, itemId],
+    );
+    return { action: "removed", result: rows };
+  } else {
+    const [rows] = await connection.query(
+      `INSERT INTO ${table} (${userColumn}, ${itemColumn}) VALUES (?, ?)`,
+      [userId, itemId],
+    );
+    return { action: "added", result: rows };
+  }
+};
+
 module.exports = {
   getAllIdeas: async () => {
     const [rows] = await connection.query(`SELECT * FROM ideas`);
@@ -46,25 +67,8 @@ module.exports = {
     );
     return rows;
   },
-  savePlant: async function savePlant(userid, plantid) {
-    const [existing] = await connection.query(
-      `SELECT * FROM saved_plants WHERE user_id = ? AND plant_id = ?`,
-      [userid, plantid],
-    );
-
-    if (existing.length > 0) {
-      const [rows] = await connection.query(
-        `DELETE FROM saved_plants WHERE user_id = ? AND plant_id = ?`,
-        [userid, plantid],
-      );
-      return { action: "removed", result: rows };
-    } else {
-      const [rows] = await connection.query(
-        `INSERT INTO saved_plants (user_id, plant_id) VALUES(?,?)`,
-        [userid, plantid],
-      );
-      return { action: "added", result: rows };
-    }
+  savePlant: async (userId, plantId) => {
+    return toggleSaved("saved_plants", "user_id", "plant_id", userId, plantId);
   },
   getGardensByUserId: async function getGardensByUserId(userId) {
     const [rows] = await connection.query(
@@ -77,13 +81,6 @@ module.exports = {
     const [rows] = await connection.query(
       `SELECT * FROM garden_manager WHERE id = ? AND user_id = ?`,
       [id, userId],
-    );
-    return rows;
-  },
-  getGardens: async (userId) => {
-    const [rows] = await connection.query(
-      "SELECT * FROM garden_manager WHERE user_id = ?",
-      [userId],
     );
     return rows;
   },
@@ -144,25 +141,8 @@ module.exports = {
     );
     return rows;
   },
-  saveIdea: async (userid, ideaid) => {
-    const [existing] = await connection.query(
-      `SELECT * FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
-      [userid, ideaid],
-    );
-
-    if (existing.length > 0) {
-      const [rows] = await connection.query(
-        `DELETE FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
-        [userid, ideaid],
-      );
-      return { action: "removed", result: rows };
-    } else {
-      const [rows] = await connection.query(
-        `INSERT INTO saved_ideas (user_id, idea_id) VALUES (?, ?)`,
-        [userid, ideaid],
-      );
-      return { action: "added", result: rows };
-    }
+  saveIdea: async (userId, ideaId) => {
+    return toggleSaved("saved_ideas", "user_id", "idea_id", userId, ideaId);
   },
   getUserById: async (userId) => {
     const [rows] = await connection.query(
