@@ -170,6 +170,41 @@ document.addEventListener("DOMContentLoaded", () => {
       savePasswordBtn.textContent = "Update Password";
     });
   }
+  // Delete account
+  const deleteAccountBtn = document.getElementById("delete-account-btn");
+  if (deleteAccountBtn) {
+    deleteAccountBtn.addEventListener("click", async () => {
+      const confirmed = await showConfirm(
+        "This will permanently delete your account and all associated data. This action cannot be undone.",
+        "Delete Account",
+      );
+      if (!confirmed) return;
+
+      deleteAccountBtn.disabled = true;
+      deleteAccountBtn.textContent = "Deleting...";
+
+      try {
+        const res = await apiFetch("/api/profile", { method: "DELETE" });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          document.cookie = "user=; Max-Age=0; path=/; SameSite=Strict";
+          window.location.href = "/index.html";
+        } else {
+          await showConfirm(
+            data.message || "Could not delete account.",
+            "Error",
+          );
+          deleteAccountBtn.disabled = false;
+          deleteAccountBtn.textContent = "Delete Account";
+        }
+      } catch {
+        await showConfirm("Network error. Please try again.", "Error");
+        deleteAccountBtn.disabled = false;
+        deleteAccountBtn.textContent = "Delete Account";
+      }
+    });
+  }
 });
 
 // --- Feedback helper ---

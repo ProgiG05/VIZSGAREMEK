@@ -1,10 +1,67 @@
 require("dotenv").config();
+
+// --- .env validation ---
+
+const requiredEnvVars = [
+  {
+    key: "DB_HOST",
+    example:
+      "DB_HOST=localhost. To generate a .env file, write into console 'npm run setup'",
+  },
+  {
+    key: "DB_PORT",
+    example: "DB_PORT=3306",
+    validate: (v) => !isNaN(Number(v)),
+    hint: "must be a valid port number",
+  },
+  { key: "DB_NAME", example: "DB_NAME=sproutified_db" },
+  { key: "DB_USER", example: "DB_USER=root" },
+  { key: "DB_PASSWORD", example: "DB_PASSWORD=yourpassword" },
+  {
+    key: "JWT_ACCESS_SECRET",
+    example: "JWT_ACCESS_SECRET=yoursecret",
+    validate: (v) => v.length >= 16,
+    hint: "must be at least 16 characters long",
+  },
+  {
+    key: "JWT_REFRESH_SECRET",
+    example: "JWT_REFRESH_SECRET=yoursecret",
+    validate: (v) => v.length >= 16,
+    hint: "must be at least 16 characters long",
+  },
+];
+
+for (const envVar of requiredEnvVars) {
+  const value = process.env[envVar.key];
+
+  if (!value || value.trim() === "") {
+    console.error(
+      `Missing .env value: "${envVar.key}" is not set or is empty.`,
+    );
+    console.error(
+      `Fix: Add the following line to your .env file: ${envVar.example}`,
+    );
+    process.exit(1);
+  }
+
+  if (envVar.validate && !envVar.validate(value)) {
+    console.error(
+      `Invalid .env value: "${envVar.key}" is incorrectly configured.`,
+    );
+    console.error(`Reason: ${envVar.hint}`);
+    console.error(`Fix: Check your .env file. Example: ${envVar.example}`);
+    process.exit(1);
+  }
+}
+
+// --- App setup ---
+
 const express = require("express");
 const app = express();
-const morgan = require("morgan"); // HTTP request logger
+const morgan = require("morgan");
 const GardenRoutes = require("./routes/garden-routes");
 const cookieParser = require("cookie-parser");
-const helmet = require("helmet"); // XSS Protection
+const helmet = require("helmet");
 
 app.use(helmet());
 app.use(cookieParser());
@@ -73,5 +130,5 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running http://localhost:${port}`);
-  console.log(`Swagger docs http://localhost:${port}/api/docs`); //remove at the end
+  console.log(`Swagger docs http://localhost:${port}/api/docs`);
 });

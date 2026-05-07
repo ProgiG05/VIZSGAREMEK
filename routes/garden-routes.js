@@ -476,5 +476,23 @@ router.put("/profile/username", authenticateToken, GardenController.updateUserna
  *         description: Could not update password
  */
 router.put("/profile/password", authenticateToken, GardenController.updatePassword);
+/**
+ * @swagger
+ * /api/profile:
+ *   delete:
+ *     summary: Delete account
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Account deleted successfully
+ *       401:
+ *         description: Please log in to access this feature
+ *       500:
+ *         description: Could not delete account
+ */
+router.delete("/profile", authenticateToken, GardenController.deleteAccount);
+
 
 module.exports = router;

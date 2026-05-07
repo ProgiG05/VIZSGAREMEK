@@ -124,7 +124,9 @@ exports.savePlant = async (req, res) => {
     }
 
     const result = await GardenModel.savePlant(userId, plant_id);
-    console.log(`Plant ${plant_id} ${result.action} by user ${req.user.username}`);
+    console.log(
+      `Plant ${plant_id} ${result.action} by user ${req.user.username}`,
+    );
     res.json(result);
   } catch (err) {
     console.error("Failed to save plant:", err);
@@ -157,7 +159,9 @@ exports.saveIdea = async (req, res) => {
     }
 
     const result = await GardenModel.saveIdea(userId, idea_id);
-    console.log(`Idea ${idea_id} ${result.action} by user ${req.user.username}`);
+    console.log(
+      `Idea ${idea_id} ${result.action} by user ${req.user.username}`,
+    );
     res.json({ success: true, action: result.action, data: result.result });
   } catch (err) {
     console.error("Failed to save idea:", err);
@@ -245,7 +249,9 @@ exports.updateUsername = async (req, res) => {
     const { newUsername } = req.body;
 
     if (!newUsername) {
-      return res.status(400).json({ success: false, message: "New username is required." });
+      return res
+        .status(400)
+        .json({ success: false, message: "New username is required." });
     }
 
     if (newUsername.length > 20 || newUsername.length < 6) {
@@ -257,7 +263,9 @@ exports.updateUsername = async (req, res) => {
 
     const currentUser = await GardenModel.getUserById(userId);
     if (!currentUser) {
-      return res.status(404).json({ success: false, message: "User not found." });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found." });
     }
 
     if (currentUser.username === newUsername) {
@@ -272,17 +280,17 @@ exports.updateUsername = async (req, res) => {
     // Update the user cookie so the frontend reflects the new username
     const secureCookie = process.env.NODE_ENV === "production";
     const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
-    res.cookie(
-      "user",
-      JSON.stringify({ id: userId, username: newUsername }),
-      { ...cookieBase, httpOnly: false, maxAge: 60 * 60 * 1000 }
-    );
+    res.cookie("user", JSON.stringify({ id: userId, username: newUsername }), {
+      ...cookieBase,
+      httpOnly: false,
+      maxAge: 60 * 60 * 1000,
+    });
 
     // Issue a new access token with the updated username
     const accessToken = jwt.sign(
       { id: userId, username: newUsername },
       process.env.JWT_ACCESS_SECRET,
-      { expiresIn: "15m", algorithm: "HS256" }
+      { expiresIn: "15m", algorithm: "HS256" },
     );
     res.cookie("accessToken", accessToken, {
       ...cookieBase,
@@ -290,14 +298,24 @@ exports.updateUsername = async (req, res) => {
       maxAge: 15 * 60 * 1000,
     });
 
-    console.log(`User ${userId} changed username from "${currentUser.username}" to "${newUsername}"`);
-    return res.json({ success: true, message: "Username updated successfully.", newUsername });
+    console.log(
+      `User ${userId} changed username from "${currentUser.username}" to "${newUsername}"`,
+    );
+    return res.json({
+      success: true,
+      message: "Username updated successfully.",
+      newUsername,
+    });
   } catch (err) {
     if (err.code === "ER_DUP_ENTRY") {
-      return res.status(409).json({ success: false, message: "This username is already taken." });
+      return res
+        .status(409)
+        .json({ success: false, message: "This username is already taken." });
     }
     console.error("Update username error:", err);
-    return res.status(500).json({ success: false, message: "Could not update username." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Could not update username." });
   }
 };
 
@@ -322,12 +340,19 @@ exports.updatePassword = async (req, res) => {
 
     const currentUser = await GardenModel.getUserById(userId);
     if (!currentUser) {
-      return res.status(404).json({ success: false, message: "User not found." });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found." });
     }
 
-    const passwordOk = await argon2.verify(currentUser.password, currentPassword);
+    const passwordOk = await argon2.verify(
+      currentUser.password,
+      currentPassword,
+    );
     if (!passwordOk) {
-      return res.status(401).json({ success: false, message: "Current password is incorrect." });
+      return res
+        .status(401)
+        .json({ success: false, message: "Current password is incorrect." });
     }
 
     // Check that the new password is not the same as the old one
@@ -343,10 +368,15 @@ exports.updatePassword = async (req, res) => {
     await GardenModel.updatePassword(userId, newHash);
 
     console.log(`User ${userId} (${req.user.username}) changed their password`);
-    return res.json({ success: true, message: "Password updated successfully." });
+    return res.json({
+      success: true,
+      message: "Password updated successfully.",
+    });
   } catch (err) {
     console.error("Update password error:", err);
-    return res.status(500).json({ success: false, message: "Could not update password." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Could not update password." });
   }
 };
 
@@ -597,3 +627,26 @@ exports.refresh = async (req, res) => {
     return res.status(401).json({ success: false, message: "Invalid token." });
   }
 };
+exports.deleteAccount = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    await GardenModel.deleteUser(userId);
+
+    const secureCookie = process.env.NODE_ENV === "production";
+    const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
+    res.clearCookie("accessToken", { ...cookieBase, httpOnly: true });
+    res.clearCookie("refreshToken", { ...cookieBase, httpOnly: true });
+    res.clearCookie("user", { ...cookieBase, httpOnly: false });
+
+    console.log(`User ${userId} (${req.user.username}) deleted their account`);
+    return res
+      .status(200)
+      .json({ success: true, message: "Account deleted successfully." });
+  } catch (err) {
+    console.error("Delete account error:", err);
+    return res
+      .status(500)
+      .json({ success: false, message: "Could not delete account." });
+  }
+}; 
