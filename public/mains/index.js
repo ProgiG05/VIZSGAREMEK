@@ -122,6 +122,9 @@ function createIdeaCard(idea) {
 
   const plantList = document.createElement("p");
   plantList.setAttribute("class", "plant-list");
+  idea.plants.split(",").forEach((plantName) => {
+    plantList.textContent += plantName.trim() + " ";
+  });
 
   OneIdeaCard.appendChild(plantList);
 
