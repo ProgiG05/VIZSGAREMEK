@@ -383,7 +383,6 @@ body {
     vertical-align: middle;
     font-family: monospace;
     font-size: clamp(0.4rem, 0.8vw, 0.9rem);
-    cursor: pointer;
     transition: all 0.2s ease;
     border: var(--garden-card-cell-border);
     box-shadow: var(--garden-card-cell-shadow);

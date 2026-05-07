@@ -354,14 +354,6 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-.card-title:hover {
-    background-color: #57862ea8;
-    color: #97fd49;
-    border-radius: 1.3rem;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
 .card-description {
     font-family: monospace;
     font-size: clamp(0.5rem, 1vw, 1rem);

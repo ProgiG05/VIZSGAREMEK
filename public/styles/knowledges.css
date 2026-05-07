@@ -444,6 +444,7 @@ body {
     margin: 0.2vh 0 1.5vh 0;
     letter-spacing: 1px;
     font-weight: bold;
+    cursor: default;
 }
 
 .OneKnowledgeTitle::after {
@@ -473,6 +474,7 @@ body {
     word-spacing: 0.3vw;
     border-top: 0.2rem solid var(--card-text);
     padding-top: 1.8vh;
+    cursor: default;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -501,6 +503,7 @@ body {
     font-size: clamp(0.6rem, 1vw, 1.2rem);
     text-indent: 1rem;
     text-align: justify;
+    cursor: default;
     margin: 0.4rem 0rem 0.1rem 0rem;
     background-color: var(--paragraph-bg);
     padding: 0.5rem 1rem 0.5rem 1rem;

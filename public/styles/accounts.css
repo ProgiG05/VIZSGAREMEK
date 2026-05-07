@@ -362,7 +362,7 @@ body {
 
 #saved-plants-list, #saved-ideas-list, #saved-gardens-list {
     overflow-y: auto;
-    max-height: 20rem;
+    max-height: 25rem;
 }
 
 #saved-gardens-list {
@@ -387,7 +387,7 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 0.75rem;
     padding: 0.8rem;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -397,6 +397,8 @@ body {
 
 .saved-card:hover {
     transform: translateY(-3px);
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.23);
 }
 
 /* Saved card inner sections - ideas only */
