@@ -55,13 +55,14 @@ async function loadIdeas() {
 
     const ListOfIdeas = await responseIdeas.json();
 
-    // Showcase card
+    // Showcase card and remove it from the main list
     if (ListOfIdeas.length > 0) {
-      const randomNum = Math.floor(Math.random() * ListOfIdeas.length);
-      OneIdeaShowcasecont.appendChild(createIdeaCard(ListOfIdeas[randomNum]));
+      const randomIndex = Math.floor(Math.random() * ListOfIdeas.length);
+      const [showcaseIdea] = ListOfIdeas.splice(randomIndex, 1); // remove from array
+      OneIdeaShowcasecont.appendChild(createIdeaCard(showcaseIdea));
     }
 
-    // Idea cards
+    // Idea cards (remaining ideas)
     ListOfIdeas.forEach((idea) => {
       IdeasCardContainer.appendChild(createIdeaCard(idea));
     });
@@ -260,12 +261,19 @@ function setupShowSearchButton() {
 
   if (!showSearchBtn || !searchCont) return;
 
-  // Scroll to ideas
-  showSearchBtn.addEventListener("click", () => {
-    document
-      .getElementById("gardenIdeas-container")
-      .scrollIntoView({ behavior: "smooth" });
-  });
+    // Scroll to ideas and refill container
+    showSearchBtn.addEventListener("click", async () => {
+      const container = document.getElementById("gardenIdeas-container");
+      const container2 = document.getElementById("oneCardShowcase_cont");
+      const searchCont = document.getElementById("searchBar");
+      if (container) {
+        container.innerHTML = ``; // clear previous cards
+        container2.innerHTML = ``; // clear previous cards
+        searchCont.value = ""; // clear previous search results
+        await loadIdeas(); // reload all ideas
+        searchCont.scrollIntoView({ behavior: "smooth" });
+      }
+    });
 }
 
 function setupSearchButton() {

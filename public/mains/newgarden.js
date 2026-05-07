@@ -39,8 +39,6 @@ function showAddGardenForm() {
 
     goBackBtn.addEventListener("click", () => {
       previewContainer.innerHTML = "";
-      document.getElementById("garden-rows").value = "";
-      document.getElementById("garden-columns").value = "";
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 

@@ -83,7 +83,7 @@ body {
 }
 .main-title {
     font-family: var(--font-main);
-    font-size: clamp(4rem, 6.2vw, 7.2rem);
+    font-size: clamp(4.5rem, 6.2vw, 7.2rem);
     margin: 1rem 0 1rem 3rem;
     color: var(--main-font-color);
     width: 95%;
@@ -128,7 +128,7 @@ body {
     font-weight: bold;
     font-family: var(--font-data);
     color: var(--text-main);
-    font-size: clamp(1rem, 1.5vw, 1.7rem);
+    font-size: clamp(0.9rem, 1.5vw, 1.7rem);
     text-align: left;
 }
 .add-garden-form input {
@@ -137,7 +137,7 @@ body {
     border: none;
     background-color: rgba(255, 255, 255, 0.15);
     color: var(--text-main);
-    font-family: inherit;
+    font-family: var(--font-data);
     font-size: 1rem;
 }
 .add-garden-form input:focus {
@@ -186,7 +186,8 @@ button:active {transform: translateY(0);}
     flex-direction:column-reverse;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 90%;
+    overflow: auto;
 }
 .go-back-btn {
     padding: 0.5rem 10rem 0.5rem 10rem;
@@ -218,7 +219,7 @@ button:active {transform: translateY(0);}
     border-spacing: 5px;
     border-radius: 1rem;
     padding: 1rem;
-    background-color: var(--garden-card-cell-table-bg);
+    background-color: var(--garden-card-cell-table-bg);;
 }
 .garden-table td {
     width: clamp(30px, 1.7vw, 50px);
