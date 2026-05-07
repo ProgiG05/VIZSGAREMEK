@@ -23,27 +23,6 @@ const plant_search_query = `
     pruning LIKE ? OR
     harvesting LIKE ?`;
 
-const toggleSaved = async (table, userColumn, itemColumn, userId, itemId) => {
-  const [existing] = await connection.query(
-    `SELECT * FROM ${table} WHERE ${userColumn} = ? AND ${itemColumn} = ?`,
-    [userId, itemId],
-  );
-
-  if (existing.length > 0) {
-    const [rows] = await connection.query(
-      `DELETE FROM ${table} WHERE ${userColumn} = ? AND ${itemColumn} = ?`,
-      [userId, itemId],
-    );
-    return { action: "removed", result: rows };
-  } else {
-    const [rows] = await connection.query(
-      `INSERT INTO ${table} (${userColumn}, ${itemColumn}) VALUES (?, ?)`,
-      [userId, itemId],
-    );
-    return { action: "added", result: rows };
-  }
-};
-
 module.exports = {
   getAllIdeas: async () => {
     const [rows] = await connection.query(`SELECT * FROM ideas`);
