@@ -16,7 +16,11 @@ const requiredEnvVars = [
   },
   { key: "DB_NAME", example: "DB_NAME=sproutified_db" },
   { key: "DB_USER", example: "DB_USER=root" },
-  { key: "DB_PASSWORD", example: "DB_PASSWORD=yourpassword" },
+  {
+    key: "DB_PASSWORD",
+    example: "DB_PASSWORD=yourpassword",
+    allowEmpty: true,
+  },
   {
     key: "JWT_ACCESS_SECRET",
     example: "JWT_ACCESS_SECRET=yoursecret",
@@ -34,10 +38,16 @@ const requiredEnvVars = [
 for (const envVar of requiredEnvVars) {
   const value = process.env[envVar.key];
 
-  if (!value || value.trim() === "") {
+  if (typeof value === "undefined") {
+    console.error(`Missing .env value: "${envVar.key}" is not set.`);
     console.error(
-      `Missing .env value: "${envVar.key}" is not set or is empty.`,
+      `Fix: Add the following line to your .env file: ${envVar.example}`,
     );
+    process.exit(1);
+  }
+
+  if (!envVar.allowEmpty && value.trim() === "") {
+    console.error(`Missing .env value: "${envVar.key}" is empty.`);
     console.error(
       `Fix: Add the following line to your .env file: ${envVar.example}`,
     );

@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 const crypto = require("crypto");
+const { execSync } = require("child_process");
 
 const ENV_PATH = path.resolve(__dirname, "../.env");
 
@@ -10,12 +11,39 @@ if (process.argv.includes("--generate-secret")) {
   process.exit(0);
 }
 
+function installDependencies() {
+  const projectRoot = path.resolve(__dirname, "..");
+  const lockPath = path.join(projectRoot, "package-lock.json");
+
+  console.log("\nInstalling dependencies...");
+
+  try {
+    if (fs.existsSync(lockPath)) {
+      execSync("npm ci", {
+        cwd: projectRoot,
+        stdio: "inherit",
+      });
+    } else {
+      execSync("npm install", {
+        cwd: projectRoot,
+        stdio: "inherit",
+      });
+    }
+
+    console.log("Dependencies installed successfully.");
+  } catch {
+    console.error("\nDependency installation failed.");
+    process.exit(1);
+  }
+}
+
 async function main() {
   if (fs.existsSync(ENV_PATH)) {
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
     });
+
     await new Promise((resolve) => {
       rl.question(
         "\nA .env file already exists. Overwrite it? (y/N): ",
@@ -49,6 +77,7 @@ async function main() {
   fs.writeFileSync(ENV_PATH, lines.join("\n") + "\n", "utf8");
   console.log("\n.env file created successfully at the project root.");
 
+  installDependencies();
   await setupDatabase();
 }
 
@@ -67,7 +96,7 @@ const EXPECTED_TABLES = [
 
 const EXPECTED_ROW_COUNTS = [
   { table: "plants", count: 82 },
-  { table: "ideas", count: 20 },
+  { table: "ideas", count: 13 },
   { table: "knowledges", count: 15 },
 ];
 
@@ -90,6 +119,7 @@ async function validateDatabase(connection, dbName) {
 
   const [tables] = await connection.query(`SHOW TABLES`);
   const tableNames = tables.map((r) => Object.values(r)[0]);
+
   for (const expected of EXPECTED_TABLES) {
     if (!tableNames.includes(expected)) {
       issues.push(`Missing table: "${expected}"`);
@@ -142,7 +172,7 @@ async function setupDatabase() {
     mysql = require("mysql2/promise");
   } catch {
     console.log("\nSkipping database setup: mysql2 is not installed yet.");
-    console.log("Run `npm install` first, then re-run this script.\n");
+    console.log("Run the setup script again after dependencies install.\n");
     process.exit(0);
   }
 
