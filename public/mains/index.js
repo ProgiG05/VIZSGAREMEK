@@ -117,15 +117,15 @@ function createIdeaCard(idea) {
   OneIdeaDescription.setAttribute("class", "card-description");
   OneIdeaCard.appendChild(OneIdeaDescription);
 
-  // Plant list
-  OneIdeaCard.appendChild(document.createElement("hr"));
-
-  const plantList = document.createElement("p");
-  plantList.setAttribute("class", "plant-list");
+  // Plant tags
+  const plantList = document.createElement("div");
+  plantList.setAttribute("class", "dp-plant-list");
   idea.plants.split(",").forEach((plantName) => {
-    plantList.textContent += plantName.trim() + " ";
+    const tag = document.createElement("span");
+    tag.setAttribute("class", "dp-plant-tag");
+    tag.textContent = plantName.trim();
+    plantList.appendChild(tag);
   });
-
   OneIdeaCard.appendChild(plantList);
 
   // Footer stats
