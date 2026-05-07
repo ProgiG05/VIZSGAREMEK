@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Request
       try {
-        const res = await apiFetch("/api/profile/username", {
-          method: "PUT",
+        const res = await apiFetch("/api/profile", {
+          method: "PATCH",
           body: JSON.stringify({ newUsername }),
         });
         const data = await res.json();
@@ -140,8 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Request
       try {
-        const res = await apiFetch("/api/profile/password", {
-          method: "PUT",
+        const res = await apiFetch("/api/profile", {
+          method: "PATCH",
           body: JSON.stringify({
             currentPassword: curInput.value,
             newPassword: newInput.value,

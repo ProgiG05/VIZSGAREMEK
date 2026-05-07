@@ -32,37 +32,6 @@ module.exports = {
     const [rows] = await connection.query(`SELECT * FROM knowledges`);
     return rows;
   },
-  getSearchedPlantDetails: async function GetSearchedPlantDetails(
-    commonName,
-    botanicalName,
-    origin,
-    type,
-    water,
-    sunlight,
-    soil,
-    indoor,
-    seeds,
-    planting,
-    pruning,
-    harvesting,
-  ) {
-    const [rows] = await connection.query(plant_search_query, [
-      commonName,
-      botanicalName,
-      origin,
-      type,
-      water,
-      sunlight,
-      soil,
-      indoor,
-      seeds,
-      planting,
-      pruning,
-      harvesting,
-    ]);
-    console.log(rows);
-    return rows;
-  },
   createGarden: async function createGarden(garden) {
     const [rows] = await connection.query(
       `INSERT INTO garden_manager (user_id, garden_name, garden_content) VALUES(?,?,?)`,

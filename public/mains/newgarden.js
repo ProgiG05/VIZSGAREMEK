@@ -88,7 +88,7 @@ function showAddGardenForm() {
 // --- API request (create new garden) ---
 
 async function newGarden(garden) {
-  const resp = await apiFetch(`/api/gardens/newgarden`, {
+  const resp = await apiFetch(`/api/gardens`, {
     method: "POST",
     body: JSON.stringify(garden),
   });

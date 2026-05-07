@@ -43,7 +43,6 @@ router.get("/ideas", GardenController.getAllIdeas);
  */
 router.get("/knowledge", GardenController.getAllKnowledges);
 
-
 /**
  * @swagger
  * /api/plants:
@@ -159,7 +158,7 @@ router.post("/logout", GardenController.logout);
 
 /**
  * @swagger
- * /api/gardens/newgarden:
+ * /api/gardens:
  *   post:
  *     summary: Add a new garden
  *     tags: [Authenticated]
@@ -191,8 +190,7 @@ router.post("/logout", GardenController.logout);
  *       500:
  *         description: Could not create garden
  */
-router.post("/gardens/newgarden",authenticateToken,GardenController.addNewGarden,
-);
+router.post("/gardens", authenticateToken, GardenController.addNewGarden);
 
 /**
  * @swagger
@@ -210,7 +208,11 @@ router.post("/gardens/newgarden",authenticateToken,GardenController.addNewGarden
  *       500:
  *         description: Could not load saved plants
  */
-router.get("/savedplants",authenticateToken,GardenController.getMySavedPlants);
+router.get(
+  "/savedplants",
+  authenticateToken,
+  GardenController.getMySavedPlants,
+);
 
 /**
  * @swagger
@@ -260,7 +262,7 @@ router.post("/saveplants", authenticateToken, GardenController.savePlant);
  *       500:
  *         description: Could not load saved ideas
  */
-router.get("/savedideas",authenticateToken,GardenController.getMySavedIdeas);
+router.get("/savedideas", authenticateToken, GardenController.getMySavedIdeas);
 
 /**
  * @swagger
@@ -409,9 +411,9 @@ router.delete("/gardens/:id", authenticateToken, GardenController.deleteGarden);
 
 /**
  * @swagger
- * /api/profile/username:
- *   put:
- *     summary: Update username
+ * /api/profile:
+ *   patch:
+ *     summary: Update username or password
  *     tags: [Authenticated]
  *     security:
  *       - cookieAuth: []
@@ -420,62 +422,41 @@ router.delete("/gardens/:id", authenticateToken, GardenController.deleteGarden);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - newUsername
- *             properties:
- *               newUsername:
- *                 type: string
- *                 example: mynewname
+ *             oneOf:
+ *               - type: object
+ *                 required:
+ *                   - newUsername
+ *                 properties:
+ *                   newUsername:
+ *                     type: string
+ *                     example: mynewname
+ *               - type: object
+ *                 required:
+ *                   - currentPassword
+ *                   - newPassword
+ *                 properties:
+ *                   currentPassword:
+ *                     type: string
+ *                     example: myoldpassword
+ *                   newPassword:
+ *                     type: string
+ *                     example: mynewpassword123
  *     responses:
  *       200:
- *         description: Username updated successfully
+ *         description: Username or password updated successfully
  *       400:
- *         description: Invalid input or same as current username
+ *         description: Invalid input, same as current value, or no valid fields provided
  *       401:
- *         description: Please log in to access this feature
+ *         description: Current password incorrect or not logged in
+ *       404:
+ *         description: User not found
  *       409:
  *         description: Username already taken
  *       500:
- *         description: Could not update username
+ *         description: Could not update profile
  */
-router.put("/profile/username", authenticateToken, GardenController.updateUsername);
+router.patch("/profile", authenticateToken, GardenController.updateProfile);
 
-/**
- * @swagger
- * /api/profile/password:
- *   put:
- *     summary: Update password
- *     tags: [Authenticated]
- *     security:
- *       - cookieAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - currentPassword
- *               - newPassword
- *             properties:
- *               currentPassword:
- *                 type: string
- *                 example: myoldpassword
- *               newPassword:
- *                 type: string
- *                 example: mynewpassword123
- *     responses:
- *       200:
- *         description: Password updated successfully
- *       400:
- *         description: Invalid input or same as current password
- *       401:
- *         description: Current password incorrect or not logged in
- *       500:
- *         description: Could not update password
- */
-router.put("/profile/password", authenticateToken, GardenController.updatePassword);
 /**
  * @swagger
  * /api/profile:
@@ -485,7 +466,7 @@ router.put("/profile/password", authenticateToken, GardenController.updatePasswo
  *     security:
  *       - cookieAuth: []
  *     responses:
- *       200:
+ *       204:
  *         description: Account deleted successfully
  *       401:
  *         description: Please log in to access this feature
@@ -493,6 +474,5 @@ router.put("/profile/password", authenticateToken, GardenController.updatePasswo
  *         description: Could not delete account
  */
 router.delete("/profile", authenticateToken, GardenController.deleteAccount);
-
 
 module.exports = router;

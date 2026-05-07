@@ -36,43 +36,6 @@ exports.getAllPlants = async (req, res) => {
   }
 };
 
-exports.getSearchedPlantDetails = async (req, res) => {
-  try {
-    const {
-      commonName,
-      botanicalName,
-      origin,
-      type,
-      water,
-      sunlight,
-      soil,
-      indoor,
-      seeds,
-      planting,
-      pruning,
-      harvesting,
-    } = req.query;
-    const data = await GardenModel.getSearchedPlantDetails(
-      commonName,
-      botanicalName,
-      origin,
-      type,
-      water,
-      sunlight,
-      soil,
-      indoor,
-      seeds,
-      planting,
-      pruning,
-      harvesting,
-    );
-    res.json(data);
-  } catch (err) {
-    console.error("Plant search failed:", err);
-    res.status(500).json({ success: false, message: "Plant search failed." });
-  }
-};
-
 // Authenticated endpoints
 
 exports.addNewGarden = async (req, res) => {
@@ -243,140 +206,99 @@ exports.updateGarden = async (req, res) => {
 
 // Profile update endpoints
 
-exports.updateUsername = async (req, res) => {
+exports.updateProfile = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { newUsername } = req.body;
+    const { newUsername, currentPassword, newPassword } = req.body;
 
-    if (!newUsername) {
-      return res
-        .status(400)
-        .json({ success: false, message: "New username is required." });
-    }
+    // --- Username update ---
+    if (newUsername) {
+      if (newUsername.length > 20 || newUsername.length < 6) {
+        return res.status(400).json({
+          success: false,
+          message: "Username must be between 6 and 20 characters.",
+        });
+      }
 
-    if (newUsername.length > 20 || newUsername.length < 6) {
-      return res.status(400).json({
-        success: false,
-        message: "Username must be between 6 and 20 characters.",
+      const currentUser = await GardenModel.getUserById(userId);
+      if (!currentUser) {
+        return res.status(404).json({ success: false, message: "User not found." });
+      }
+
+      if (currentUser.username === newUsername) {
+        return res.status(400).json({
+          success: false,
+          message: "New username cannot be the same as your current username.",
+        });
+      }
+
+      await GardenModel.updateUsername(userId, newUsername);
+
+      const secureCookie = process.env.NODE_ENV === "production";
+      const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
+      res.cookie("user", JSON.stringify({ id: userId, username: newUsername }), {
+        ...cookieBase,
+        httpOnly: false,
+        maxAge: 60 * 60 * 1000,
       });
-    }
 
-    const currentUser = await GardenModel.getUserById(userId);
-    if (!currentUser) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found." });
-    }
-
-    if (currentUser.username === newUsername) {
-      return res.status(400).json({
-        success: false,
-        message: "New username cannot be the same as your current username.",
+      const accessToken = jwt.sign(
+        { id: userId, username: newUsername },
+        process.env.JWT_ACCESS_SECRET,
+        { expiresIn: "15m", algorithm: "HS256" },
+      );
+      res.cookie("accessToken", accessToken, {
+        ...cookieBase,
+        httpOnly: true,
+        maxAge: 15 * 60 * 1000,
       });
+
+      console.log(`User ${userId} changed username to "${newUsername}"`);
+      return res.json({ success: true, message: "Username updated successfully.", newUsername });
     }
 
-    await GardenModel.updateUsername(userId, newUsername);
+    // --- Password update ---
+    if (currentPassword && newPassword) {
+      if (newPassword.length > 32 || newPassword.length < 8) {
+        return res.status(400).json({
+          success: false,
+          message: "New password must be between 8 and 32 characters.",
+        });
+      }
 
-    // Update the user cookie so the frontend reflects the new username
-    const secureCookie = process.env.NODE_ENV === "production";
-    const cookieBase = { secure: secureCookie, sameSite: "Strict", path: "/" };
-    res.cookie("user", JSON.stringify({ id: userId, username: newUsername }), {
-      ...cookieBase,
-      httpOnly: false,
-      maxAge: 60 * 60 * 1000,
-    });
+      const currentUser = await GardenModel.getUserById(userId);
+      if (!currentUser) {
+        return res.status(404).json({ success: false, message: "User not found." });
+      }
 
-    // Issue a new access token with the updated username
-    const accessToken = jwt.sign(
-      { id: userId, username: newUsername },
-      process.env.JWT_ACCESS_SECRET,
-      { expiresIn: "15m", algorithm: "HS256" },
-    );
-    res.cookie("accessToken", accessToken, {
-      ...cookieBase,
-      httpOnly: true,
-      maxAge: 15 * 60 * 1000,
-    });
+      const passwordOk = await argon2.verify(currentUser.password, currentPassword);
+      if (!passwordOk) {
+        return res.status(401).json({ success: false, message: "Current password is incorrect." });
+      }
 
-    console.log(
-      `User ${userId} changed username from "${currentUser.username}" to "${newUsername}"`,
-    );
-    return res.json({
-      success: true,
-      message: "Username updated successfully.",
-      newUsername,
-    });
+      const sameAsOld = await argon2.verify(currentUser.password, newPassword);
+      if (sameAsOld) {
+        return res.status(400).json({
+          success: false,
+          message: "New password cannot be the same as your current password.",
+        });
+      }
+
+      const newHash = await argon2.hash(newPassword);
+      await GardenModel.updatePassword(userId, newHash);
+
+      console.log(`User ${userId} (${req.user.username}) changed their password`);
+      return res.json({ success: true, message: "Password updated successfully." });
+    }
+
+    // --- Nothing valid sent ---
+    return res.status(400).json({ success: false, message: "No valid fields provided." });
   } catch (err) {
     if (err.code === "ER_DUP_ENTRY") {
-      return res
-        .status(409)
-        .json({ success: false, message: "This username is already taken." });
+      return res.status(409).json({ success: false, message: "This username is already taken." });
     }
-    console.error("Update username error:", err);
-    return res
-      .status(500)
-      .json({ success: false, message: "Could not update username." });
-  }
-};
-
-exports.updatePassword = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { currentPassword, newPassword } = req.body;
-
-    if (!currentPassword || !newPassword) {
-      return res.status(400).json({
-        success: false,
-        message: "Current password and new password are required.",
-      });
-    }
-
-    if (newPassword.length > 32 || newPassword.length < 8) {
-      return res.status(400).json({
-        success: false,
-        message: "New password must be between 8 and 32 characters.",
-      });
-    }
-
-    const currentUser = await GardenModel.getUserById(userId);
-    if (!currentUser) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found." });
-    }
-
-    const passwordOk = await argon2.verify(
-      currentUser.password,
-      currentPassword,
-    );
-    if (!passwordOk) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Current password is incorrect." });
-    }
-
-    // Check that the new password is not the same as the old one
-    const sameAsOld = await argon2.verify(currentUser.password, newPassword);
-    if (sameAsOld) {
-      return res.status(400).json({
-        success: false,
-        message: "New password cannot be the same as your current password.",
-      });
-    }
-
-    const newHash = await argon2.hash(newPassword);
-    await GardenModel.updatePassword(userId, newHash);
-
-    console.log(`User ${userId} (${req.user.username}) changed their password`);
-    return res.json({
-      success: true,
-      message: "Password updated successfully.",
-    });
-  } catch (err) {
-    console.error("Update password error:", err);
-    return res
-      .status(500)
-      .json({ success: false, message: "Could not update password." });
+    console.error("Update profile error:", err);
+    return res.status(500).json({ success: false, message: "Could not update profile." });
   }
 };
 
@@ -649,4 +571,4 @@ exports.deleteAccount = async (req, res) => {
       .status(500)
       .json({ success: false, message: "Could not delete account." });
   }
-}; 
+};
