@@ -178,19 +178,19 @@ module.exports = {
   saveIdea: async (userid, ideaid) => {
     const [existing] = await connection.query(
       `SELECT * FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
-      [userid, ideaid]
+      [userid, ideaid],
     );
 
     if (existing.length > 0) {
       const [rows] = await connection.query(
         `DELETE FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
-        [userid, ideaid]
+        [userid, ideaid],
       );
       return { action: "removed", result: rows };
     } else {
       const [rows] = await connection.query(
         `INSERT INTO saved_ideas (user_id, idea_id) VALUES (?, ?)`,
-        [userid, ideaid]
+        [userid, ideaid],
       );
       return { action: "added", result: rows };
     }
@@ -198,22 +198,40 @@ module.exports = {
   getUserById: async (userId) => {
     const [rows] = await connection.query(
       `SELECT id, username, password FROM users WHERE id = ? LIMIT 1`,
-      [userId]
+      [userId],
     );
     return rows[0];
   },
   updateUsername: async (userId, newUsername) => {
     const [rows] = await connection.query(
       `UPDATE users SET username = ? WHERE id = ?`,
-      [newUsername, userId]
+      [newUsername, userId],
     );
     return rows;
   },
   updatePassword: async (userId, newPasswordHash) => {
     const [rows] = await connection.query(
       `UPDATE users SET password = ? WHERE id = ?`,
-      [newPasswordHash, userId]
+      [newPasswordHash, userId],
     );
+    return rows;
+  },
+  deleteUser: async (userId) => {
+    await connection.query(`DELETE FROM saved_plants WHERE user_id = ?`, [
+      userId,
+    ]);
+    await connection.query(`DELETE FROM saved_ideas WHERE user_id = ?`, [
+      userId,
+    ]);
+    await connection.query(`DELETE FROM garden_manager WHERE user_id = ?`, [
+      userId,
+    ]);
+    await connection.query(`DELETE FROM refresh_tokens WHERE user_id = ?`, [
+      userId,
+    ]);
+    const [rows] = await connection.query(`DELETE FROM users WHERE id = ?`, [
+      userId,
+    ]);
     return rows;
   },
 };
