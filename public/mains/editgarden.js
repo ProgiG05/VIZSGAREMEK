@@ -580,8 +580,6 @@ function ManageRowsColumns(garden, plants, parentContainer, controls) {
       }
 
       garden.garden_content = rows.join(";");
-      console.log(garden.garden_content);
-
       // Re-render the garden
       parentContainer.innerHTML = "";
       EditGarden(garden, plants, parentContainer, controls);

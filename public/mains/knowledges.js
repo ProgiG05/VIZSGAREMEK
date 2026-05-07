@@ -9,12 +9,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupSidePanel();
   setupLoginState();
 
-  const user = getUser();
 
   // Optional login check
-  if (!user) {
-    console.error("User is not logged in.");
-  }
 
   // Request
   try {

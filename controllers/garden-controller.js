@@ -73,18 +73,6 @@ exports.getSearchedPlantDetails = async (req, res) => {
   }
 };
 
-exports.getAllWorksAndTools = async (req, res) => {
-  try {
-    const data = await GardenModel.getAllWorksAndTools();
-    res.json(data);
-  } catch (err) {
-    console.error("Failed to fetch works and tools:", err);
-    res
-      .status(500)
-      .json({ success: false, message: "Could not load works and tools." });
-  }
-};
-
 // Authenticated endpoints
 
 exports.addNewGarden = async (req, res) => {

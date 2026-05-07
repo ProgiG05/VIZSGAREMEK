@@ -111,10 +111,6 @@ module.exports = {
     );
     return rows;
   },
-  getAllWorksAndTools: async function getAllWorksAndTools() {
-    const [rows] = await connection.query(`SELECT * FROM worksandtools`);
-    return rows;
-  },
   getGardens: async (userId) => {
     const [rows] = await connection.query(
       "SELECT * FROM garden_manager WHERE user_id = ?",
