@@ -97,6 +97,11 @@ exports.savePlant = async (req, res) => {
     console.log(`Plant ${plant_id} saved by user ${req.user.username}`);
     return res.status(201).json({ success: true, message: "Plant saved." });
   } catch (err) {
+    if (err.code === "ER_DUP_ENTRY") {
+      return res
+        .status(409)
+        .json({ success: false, message: "Plant already saved." });
+    }
     console.error("Failed to save plant:", err);
     res.status(500).json({ success: false, message: "Could not save plant." });
   }
@@ -146,6 +151,11 @@ exports.saveIdea = async (req, res) => {
     console.log(`Idea ${idea_id} saved by user ${req.user.username}`);
     return res.status(201).json({ success: true, message: "Idea saved." });
   } catch (err) {
+    if (err.code === "ER_DUP_ENTRY") {
+      return res
+        .status(409)
+        .json({ success: false, message: "Idea already saved." });
+    }
     console.error("Failed to save idea:", err);
     res.status(500).json({ success: false, message: "Could not save idea." });
   }
