@@ -39,6 +39,8 @@
     top: 0;
     margin: 0;
     padding: 0;
+    position: sticky;
+    z-index: 1000;
 }
 #top-navbar a {
     height: 100%;
