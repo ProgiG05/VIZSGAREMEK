@@ -21,6 +21,7 @@ CREATE DATABASE IF NOT EXISTS `sproutified_db` /*!40100 DEFAULT CHARACTER SET ut
 USE `sproutified_db`;
 
 -- Dumping structure for table sproutified_db.garden_manager
+DROP TABLE IF EXISTS `garden_manager`;
 CREATE TABLE IF NOT EXISTS `garden_manager` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -33,43 +34,38 @@ CREATE TABLE IF NOT EXISTS `garden_manager` (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-
 -- Dumping structure for table sproutified_db.ideas
+DROP TABLE IF EXISTS `ideas`;
 CREATE TABLE IF NOT EXISTS `ideas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `picture` varchar(50) NOT NULL,
+  `plants` varchar(255) NOT NULL,
   `sunlight` varchar(50) NOT NULL,
   `water` varchar(50) NOT NULL,
   `maintenance` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table sproutified_db.ideas: ~20 rows (approximately)
-INSERT INTO `ideas` (`id`, `title`, `description`, `picture`, `sunlight`, `water`, `maintenance`) VALUES
-	(1, 'Herbal Kitchen Box', 'This compact indoor garden is designed for your kitchen countertop. It features essential culinary herbs including basil, thyme, and oregano. Requiring Moderate sunlight and Medium watering, this low-maintenance setup ensures you always have fresh, aromatic ingredients at your fingertips 	to elevate your home-cooked meals with natural flavors.', 'HerbalKitchenBox', 'Moderate', 'Medium', 'Low'),
-	(2, 'Balcony Berry Wall', 'Maximize your outdoor space with this vertical berry garden, perfect for sunny balconies. Grow strawberries and raspberries in a space-saving arrangement. These plants thrive in High sunlight with Medium water requirements. With Average maintenance, you can enjoy a bountiful harvest of 	fresh, antioxidant-rich berries throughout the summer season.', 'BalconyBerryWall', 'High', 'Medium', 'Average'),
-	(3, 'Tropical Patio Garden', 'Transform your patio into a lush exotic oasis with this tropical selection. Featuring pineapple and banana, this garden brings a vacation feel home. These plants require High sunlight and High water levels to mimic their natural habitat. With Average maintenance, you are rewarded with 	striking foliage and unique flavors.', 'TropicalPatioGarden', 'High', 'High', 'Average'),
-	(4, 'Mediterranean Herb Corner', 'Bring Mediterranean fragrances to your home with this hardy herb collection. It includes rosemary and lavender, which are drought-tolerant and love High sunlight. Because they require Low water and Low maintenance, they are perfect for busy gardeners. This aromatic corner provides savory herbs 	while attracting pollinators with beautiful blooms.', 'MediterraneanHerbCorner', 'High', 'Low', 'Low'),
-	(5, 'Salad Bowl Planter', 'Grow fresh salad greens in a single large container. This mix includes lettuce and arugula, providing textures and nutrients for your meals. The planter thrives in Moderate sunlight with Medium watering. This Low maintenance approach allows for continuous harvesting, ensuring you have crisp, organic greens ready for every dinner.', 'SaladBowlPlanter', 'Moderate', 'Medium', 'Low'),
-	(6, 'Urban Vegetable Crate', 'This rustic wooden crate setup is perfect for growing vegetables in city environments. It houses tomatoes, peppers, and basil. These plants require 	High sunlight and Medium watering. With Average maintenance, this compact garden produces a significant yield of fresh produce, proving you do not need a large backyard garden.', 'UrbanVegetableCrate', 'High', 'Medium', 'Average'),
-	(7, 'Rooftop Tomato Rack', 'Utilize your rooftop’s full sun potential with this vertical tomato growing rack. It features cherry tomatoes and basil for a complete Italian-inspired garden. These plants need High sunlight and Medium water. Though they require High maintenance to manage growth, the reward is a heavy harvest of sweet, sun-ripened tomatoes.', 'RooftopTomatoRack', 'High', 'Medium', 'High'),
-	(8, 'Desert-Friendly Edible Bed', 'Designed for hot climates, this edible garden features heat-loving plants like figs and chili peppers. These species thrive in High sunlight and require Low water once established. With Average maintenance, this sustainable garden provides a unique variety of fruits and spices while remaining resilient against harsh temperatures and limited resources.', 'DesertFriendlyEdibleBed', 'High', 'Low', 'Average'),
-	(9, 'Cold-Season Root Box', 'Keep your garden productive during cooler months with this root vegetable collection. It features carrots and radishes, which grow well in Moderate sunlight and Medium water. This Low maintenance box is ideal for autumn gardening, providing hearty, nutrient-dense vegetables that thrive in temperatures too cold for typical summer crops.', 'ColdSeasonRootBox', 'Moderate', 'Medium', 'Low'),
-	(10, 'Indoor LED Microgarden', 'Grow nutrient-packed microgreens year-round, regardless of the weather. Using integrated LED technology, this system supports lettuce and basil even in Low light indoor areas. With Medium water and Low maintenance, this high-tech garden ensures a constant supply of fresh garnishes, making it a perfect addition to any modern home.', 'IndoorLEDMicrogarden', 'Low', 'Medium', 'Low'),
-	(11, 'The Pollinator Paradise', 'A vibrant, buzzing oasis designed to attract butterflies and bees. This garden features a succession of colorful blooms and native plants, providing essential nectar throughout the seasons. The variety of heights creates a lively, natural look that supports local biodiversity while remaining incredibly Easy to care for in High sunlight.', 'ThePollinatorParadise', 'High', 'Medium', 'Easy'),
-	(12, 'The Sun-Drenched Haven', 'This Mediterranean-inspired retreat pairs drought-tolerant lavender and rosemary with structural agaves. A gravel path leads to a quiet bench under a small olive tree, creating a water-wise sanctuary that thrives in High sunlight with minimal effort. This Low water and Easy maintenance garden offers a peaceful, sunny getaway.', 'TheSunDrenchedHaven', 'High', 'Low', 'Easy'),
-	(13, 'The Shady Woodland Retreat', 'Escape to a tranquil, cool sanctuary. This garden uses a canopy of existing trees to nurture a dense tapestry of textures, featuring varied greens from hostas and ferns. A winding path creates a natural, Easy to maintain sense of journey in Low sunlight environments with Medium water needs.', 'TheShadyWoodlandRetreat', 'Low', 'Medium', 'Easy'),
-	(14, 'The Moonlight Evening Garden', 'Designed to be enjoyed after sundown, this ethereal garden features white blooms and silver foliage that glow under the moon. Night-scented flowers fill the air with perfume, creating a magical atmosphere for late-night relaxation. Thriving in Moderate sunlight during the day, it requires Medium water and Average maintenance to keep the luminous blooms pristine.', 'MoonlightEveningGarden', 'Moderate', 'Medium', 'Average'),
-	(15, 'The Tea Lover’s Patch', 'Cultivate your own organic infusions with this soothing herbal collection. From calming chamomile to invigorating mint, these plants offer a variety of flavors for fresh or dried teas. Most of these herbs enjoy High sunlight and Medium watering. This Low maintenance garden provides a sustainable way to enjoy a warm cup of homegrown comfort whenever you need a break.', 'TeaLoversPatch', 'High', 'Medium', 'Low'),
-	(16, 'The Spicy Salsa Border', 'Everything you need for a fiesta in one productive patch. This garden combines heat-loving peppers and juicy tomatoes with aromatic cilantro and onions. Requiring High sunlight and Medium watering, this Average maintenance setup is perfect for the home cook who wants to step straight from the garden to the kitchen with maximum flavor for their next gathering.', 'SpicySalsaBorder', 'High', 'Medium', 'Average'),
-	(17, 'Vertical Succulent Frame', 'A living piece of art for your wall, this vertical arrangement features a variety of colorful, hardy succulents. Perfect for small spaces or sunny exterior walls, it thrives in High sunlight with Low water requirements. Because succulents are slow-growing and resilient, this setup requires very Low maintenance while providing a modern, geometric aesthetic to your home.', 'VerticalSucculentFrame', 'High', 'Low', 'Low'),
-	(18, 'The Fragrant Walkway', 'Transform a simple path into a sensory journey with aromatic groundcovers and low shrubs. Every footstep releases a pleasant scent, from creeping thyme to sweet alyssum. This garden thrives in High sunlight and prefers Low water once established. It is a Low maintenance way to soften hard landscaping while inviting pollinators to your garden borders with its perfume.', 'FragrantWalkway', 'High', 'Low', 'Low'),
-	(19, 'The Mini Backyard Orchard', 'You do not need an estate to grow fruit. This setup utilizes dwarf and columnar tree varieties that grow vertically rather than spreading wide. Ideal for small backyards, these trees require High sunlight and Medium water. With High maintenance—including specific seasonal pruning—you can enjoy home-grown apples and pears even in a compact residential lot.', 'MiniBackyardOrchard', 'High', 'Medium', 'High'),
-	(20, 'The Zen Moss Garden', 'A quiet, minimalist space designed for deep shade and reflection. This garden replaces thirsty lawns with a plush carpet of various mosses and ferns, creating a lush green environment that feels cool and damp. Thriving in Low sunlight and requiring High water to maintain its velvet-like vibrancy, this Average maintenance garden offers a serene escape from the daily grind.', 'ZenMossGarden', 'Low', 'High', 'Average');
+-- Dumping data for table sproutified_db.ideas: ~13 rows (approximately)
+INSERT INTO `ideas` (`id`, `title`, `description`, `picture`, `plants`, `sunlight`, `water`, `maintenance`) VALUES
+	(1, 'Herbal Kitchen Box', 'This compact indoor garden is designed for your kitchen countertop. It features essential culinary herbs including basil, thyme, and oregano. Requiring Moderate sunlight and Medium watering, this low-maintenance setup ensures you always have fresh, aromatic ingredients at your fingertips 	to elevate your home-cooked meals with natural flavors.', 'HerbalKitchenBox', 'Basil, Thyme, Oregano, Parsley, Chives', 'Moderate', 'Medium', 'Low'),
+	(2, 'Balcony Berry Wall', 'Maximize your outdoor space with this vertical berry garden, perfect for sunny balconies. Grow strawberries and raspberries in a space-saving arrangement. These plants thrive in High sunlight with Medium water requirements. With Average maintenance, you can enjoy a bountiful harvest of 	fresh, antioxidant-rich berries throughout the summer season.', 'BalconyBerryWall', 'Strawberries, Blueberries, Raspberries, Goji berries', 'High', 'Medium', 'Average'),
+	(3, 'Tropical Patio Garden', 'Transform your patio into a lush exotic oasis with this tropical selection. Featuring pineapple and banana, this garden brings a vacation feel home. These plants require High sunlight and High water levels to mimic their natural habitat. With Average maintenance, you are rewarded with 	striking foliage and unique flavors.', 'TropicalPatioGarden', 'Pineapple, Banana, Papaya, Lemongrass, Taro', 'High', 'High', 'Average'),
+	(4, 'Mediterranean Herb Corner', 'Bring Mediterranean fragrances to your home with this hardy herb collection. It includes rosemary and lavender, which are drought-tolerant and love High sunlight. Because they require Low water and Low maintenance, they are perfect for busy gardeners. This aromatic corner provides savory herbs 	while attracting pollinators with beautiful blooms.', 'MediterraneanHerbCorner', 'Rosemary, Sage, Lavender, Oregano, Thyme', 'High', 'Low', 'Low'),
+	(5, 'Salad Bowl Planter', 'Grow fresh salad greens in a single large container. This mix includes lettuce and arugula, providing textures and nutrients for your meals. The planter thrives in Moderate sunlight with Medium watering. This Low maintenance approach allows for continuous harvesting, ensuring you have crisp, organic greens ready for every dinner.', 'SaladBowlPlanter', 'Lettuce, Spinach, Arugula, Kale, Chives', 'Moderate', 'Medium', 'Low'),
+	(6, 'Urban Vegetable Crate', 'This rustic wooden crate setup is perfect for growing vegetables in city environments. It houses tomatoes, peppers, and basil. These plants require 	High sunlight and Medium watering. With Average maintenance, this compact garden produces a significant yield of fresh produce, proving you do not need a large backyard garden.', 'UrbanVegetableCrate', 'Tomatoes, Peppers, Eggplant, Basil, Celery', 'High', 'Medium', 'Average'),
+	(7, 'Rooftop Tomato Rack', 'Utilize your rooftop’s full sun potential with this vertical tomato growing rack. It features cherry tomatoes and basil for a complete Italian-inspired garden. These plants need High sunlight and Medium water. Though they require High maintenance to manage growth, the reward is a heavy harvest of sweet, sun-ripened tomatoes.', 'RooftopTomatoRack', 'Cherry tomato, Roma tomato, Basil, Oregano, Parsley', 'High', 'Medium', 'High'),
+	(8, 'Desert-Friendly Edible Bed', 'Designed for hot climates, this edible garden features heat-loving plants like figs and chili peppers. These species thrive in High sunlight and require Low water once established. With Average maintenance, this sustainable garden provides a unique variety of fruits and spices while remaining resilient against harsh temperatures and limited resources.', 'DesertFriendlyEdibleBed', 'Figs, Chili peppers, Rosemary, Dates, Oregano', 'High', 'Low', 'Average'),
+	(9, 'Cold-Season Root Box', 'Keep your garden productive during cooler months with this root vegetable collection. It features carrots and radishes, which grow well in Moderate sunlight and Medium water. This Low maintenance box is ideal for autumn gardening, providing hearty, nutrient-dense vegetables that thrive in temperatures too cold for typical summer crops.', 'ColdSeasonRootBox', 'Carrots, Beets, Radishes, Turnips, Parsnips', 'Moderate', 'Medium', 'Low'),
+	(10, 'Indoor LED Microgarden', 'Grow nutrient-packed microgreens year-round, regardless of the weather. Using integrated LED technology, this system supports lettuce and basil even in Low light indoor areas. With Medium water and Low maintenance, this high-tech garden ensures a constant supply of fresh garnishes, making it a perfect addition to any modern home.', 'IndoorLEDMicrogarden', 'Microgreens, Lettuce, Basil, Mint, Chives', 'Low', 'Medium', 'Low'),
+	(11, 'The Pollinator Paradise', 'A vibrant, buzzing oasis designed to attract butterflies and bees. This garden features a succession of colorful blooms and native plants, providing essential nectar throughout the seasons. The variety of heights creates a lively, natural look that supports local biodiversity while remaining incredibly Easy to care for in High sunlight.', 'ThePollinatorParadise', 'Purple Coneflower, Butterfly bush, Milkweed, Bee Balm, Black-eyed Susan, Aster', 'High', 'Medium', 'Easy'),
+	(12, 'The Sun-Drenched Haven', 'This Mediterranean-inspired retreat pairs drought-tolerant lavender and rosemary with structural agaves. A gravel path leads to a quiet bench under a small olive tree, creating a water-wise sanctuary that thrives in High sunlight with minimal effort. This Low water and Easy maintenance garden offers a peaceful, sunny getaway.', 'TheSunDrenchedHaven', 'Olive Tree, Lavender, Rosemary, Agave, Mexican Feather Grass, Thyme', 'High', 'Low', 'Easy'),
+	(13, 'The Shady Woodland Retreat', 'Escape to a tranquil, cool sanctuary. This garden uses a canopy of existing trees to nurture a dense tapestry of textures, featuring varied greens from hostas and ferns. A winding path creates a natural, Easy to maintain sense of journey in Low sunlight environments with Medium water needs.', 'TheShadyWoodlandRetreat', 'Japanese Maple, Hosta, Ostrich Fern, Japanese Forest Grass, Bleeding Heart, Wild Ginger', 'Low', 'Medium', 'Easy');
 
 -- Dumping structure for table sproutified_db.knowledges
+DROP TABLE IF EXISTS `knowledges`;
 CREATE TABLE IF NOT EXISTS `knowledges` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
@@ -93,11 +89,12 @@ INSERT INTO `knowledges` (`id`, `title`, `description`, `summary`, `picture`) VA
 	(10, 'Coastal Gardening', 'Coastal gardening deals with challenges such as salty winds, sandy soils, and high humidity. With strategic planning, gardeners can successfully cultivate edible plants like figs, rosemary, tomatoes, and chard in coastal zones. Techniques include creating windbreaks, improving soil structure with organic matter, and selecting salt-tolerant varieties. Coastal gardens often benefit from abundant sunlight and mild temperatures, which support year-round growth of many crops. The result is a productive garden well-adapted to its marine environment.', 'Cultivate salt-tolerant gardens by building windbreaks and enriching sandy soils to grow resilient, sun-drenched crops in demanding maritime environments.', 'CoastalGardening'),
 	(11, 'History of matcha', 'Matcha’s story started in 1191 when the monk Eisai brought seeds from China to Japan, eventually finding the perfect terroir in Uji, Kyoto. Originally a medicinal tonic for Zen monks, matcha farming evolved significantly during the 16th century with the invention of shading.By covering the bushes weeks before harvest, farmers forced the plants to produce extra chlorophyll and L-theanine, creating that signature vibrant green and mellow umami taste.This labor-intensive tradition remains the backbone of Japanese tea culture, transforming humble leaves into the "liquid jade" we obsess over today.', 'Trace matcha from 12th-century monk traditions to Kyoto’s shading techniques, creating the vibrant, umami-rich "liquid jade" celebrated in Japanese culture.', 'HistoryOfMatcha'),
 	(12, 'Companion Planting', 'Companion planting is the strategic placement of different plant species close to one another to enhance growth, deter pests, and improve soil quality. This ancient practice relies on the natural relationships between plants; for example, tall sunflowers can provide shade for sensitive lettuce, while marigolds release chemicals that repel harmful nematodes. One of the most famous examples is the "Three Sisters" method—corn, beans, and squash—where the corn provides a trellis for beans, beans fix nitrogen in the soil, and squash leaves act as a living mulch. By creating these symbiotic relationships, gardeners can reduce their reliance on chemical fertilizers and pesticides, fostering a more balanced and resilient garden ecosystem.', 'Boost garden health and yield by pairing plants that naturally protect each other and share nutrients, creating a harmonious and chemical-free ecosystem.', 'CompanionPlanting'),
-	(13, 'Moon Phase Gardening', 'Moon phase gardening is a traditional practice based on the belief that the lunar cycle influences plant growth through its gravitational pull on water, similar to the tides. According to this method, the "waxing" moon (increasing light) is the best time for planting crops that produce above-ground, such as leafy greens and grains, because the rising moisture encourages germination. Conversely, the "waning" moon (decreasing light) is ideal for root crops like carrots and potatoes, as the energy shifts toward the soil and root development. While scientific debate continues, many gardeners swear by these cycles to improve plant vigor and harvest quality, connecting modern horticulture to ancient celestial wisdom.', 'Use the lunar cycle to time planting and harvesting, leveraging the gravitational pull of the moon on water to optimize seed germination and plant growth.', 'MoonPhaseGardening'),
+	(13, 'Moon Phase Gardening', 'Moon phase gardening is a traditional practice based on the belief that the lunar cycle influences plant growth through its gravitational pull on water, similar to the tides. According to this method, the "waxing" moon (increasing light) is the best time for planting crops that produce above-ground, such as leafy greens and grains, because the rising moisture encourages germination. Conversely, the "waning" moon (decreasing light) is ideal for root crops like carrots and potatoes, as the energy shifts toward the soil and root development. While scientific debate continues, many gardeners swear by these cycles to improve plant vigor and harvest quality, connecting modern horticulture to ancient celestial wisdom.', 'Use the lunar cycle to time planting and harvesting, leveraging the moon\'s gravitational pull on water to optimize seed germination and plant growth.', 'MoonPhaseGardening'),
 	(14, 'Victory Gardens', 'Victory gardens, also known as "war gardens," were fruit, herb, and vegetable gardens planted at private residences and public parks during World War I and World War II. These gardens were promoted by governments to reduce pressure on the public food supply and boost morale by allowing citizens to contribute directly to the war effort. At their peak, nearly 20 million victory gardens in the United States produced roughly 40 percent of all vegetables consumed in the country. This movement transformed lawns and empty lots into productive spaces, teaching an entire generation the value of self-sufficiency and community resilience. Today, the spirit of victory gardening lives on in the modern push for urban agriculture and food security.', 'Rediscover the historical movement of home-grown food that supported nations during wartime, fostering community spirit and total food self-sufficiency.', 'VictoryGardens'),
 	(15, 'The Science of Edible Flowers', 'Edible flowers have been used for centuries in culinary traditions ranging from Ancient Rome to Victorian England, adding color, fragrance, and unique flavors to dishes. Common garden varieties like nasturtiums, pansies, lavender, and calendula are not only decorative but often packed with antioxidants and vitamins. For instance, nasturtiums offer a peppery kick similar to watercress, while borage provides a refreshing cucumber-like taste. Beyond their culinary appeal, growing edible flowers encourages pollinators like bees and butterflies to visit the garden, which improves the yields of neighboring vegetable crops. Integrating these blooms turns a functional vegetable patch into a multi-sensory gourmet landscape.', 'Enhance your plate and garden with vibrant, edible blooms that offer unique flavors and nutritional benefits, turning landscapes into gourmet pantries.', 'EdibleFlowers');
 
 -- Dumping structure for table sproutified_db.plants
+DROP TABLE IF EXISTS `plants`;
 CREATE TABLE IF NOT EXISTS `plants` (
   `id` int NOT NULL AUTO_INCREMENT,
   `common_name` varchar(100) DEFAULT NULL,
@@ -201,6 +198,7 @@ INSERT INTO `plants` (`id`, `common_name`, `botanical_name`, `origin`, `type`, `
 	(82, 'Irish Moss', 'Sagina subulata', 'Europe', 'ornamental', 'medium', 'moderate', 'moderate', 0, 1, 'April-May', 'None', 'June-August');
 
 -- Dumping structure for table sproutified_db.refresh_tokens
+DROP TABLE IF EXISTS `refresh_tokens`;
 CREATE TABLE IF NOT EXISTS `refresh_tokens` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
@@ -209,32 +207,33 @@ CREATE TABLE IF NOT EXISTS `refresh_tokens` (
   PRIMARY KEY (`id`),
   KEY `FK_refresh_tokens_users` (`user_id`),
   CONSTRAINT `FK_refresh_tokens_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- Dumping structure for table sproutified_db.saved_ideas
+DROP TABLE IF EXISTS `saved_ideas`;
 CREATE TABLE IF NOT EXISTS `saved_ideas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `idea_id` int DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_user_idea` (`user_id`,`idea_id`),
   KEY `user_id` (`user_id`),
   KEY `idea_id` (`idea_id`),
   CONSTRAINT `saved_ideas_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `saved_ideas_ibfk_2` FOREIGN KEY (`idea_id`) REFERENCES `ideas` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Dumping data for table sproutified_db.saved_ideas: ~0 rows (approximately)
 
 -- Dumping structure for table sproutified_db.saved_plants
+DROP TABLE IF EXISTS `saved_plants`;
 CREATE TABLE IF NOT EXISTS `saved_plants` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `plant_id` int DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_user_plant` (`user_id`,`plant_id`),
   KEY `user_id` (`user_id`),
   KEY `plant_id` (`plant_id`),
   CONSTRAINT `saved_plants_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
@@ -243,6 +242,7 @@ CREATE TABLE IF NOT EXISTS `saved_plants` (
 
 
 -- Dumping structure for table sproutified_db.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
@@ -250,6 +250,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

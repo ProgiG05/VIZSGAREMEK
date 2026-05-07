@@ -141,8 +141,6 @@ function createIdeaCard(idea) {
 
   cardFooter.appendChild(statsContainer);
 
-  // Save button
-
   const cardbottomCont = document.createElement("div");
   cardbottomCont.setAttribute("class", "cardbottom-cont");
   cardbottomCont.appendChild(cardFooter);
