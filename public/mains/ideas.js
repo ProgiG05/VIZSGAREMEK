@@ -104,16 +104,12 @@ function createIdeaCard(idea) {
   OneIdeaCard.appendChild(document.createElement("hr"));
 
   // Plant list
-  // const plantList = document.createElement("p");
-  // plantList.setAttribute("class", "plant-list");
-  // idea.plants.split(",").forEach((plantName) => {
-  //   const link = document.createElement("a");
-  //   link.setAttribute("class", "plantListItem");
-  //   link.setAttribute("href", "#");
-  //   link.textContent = plantName.trim() + " ";
-  //   plantList.appendChild(link);
-  // });
-  // OneIdeaCard.appendChild(plantList);
+  const plantList = document.createElement("p");
+  plantList.setAttribute("class", "plant-list");
+  idea.plants.split(",").forEach((plantName) => {
+    plantList.textContent += plantName.trim() + " ";
+  });
+  OneIdeaCard.appendChild(plantList);
 
   // Footer stats
   const cardFooter = document.createElement("div");
