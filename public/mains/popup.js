@@ -22,12 +22,6 @@ export function showPopup(content, title) {
   popupTitle.textContent = title;
   popupHeaderCont.appendChild(popupTitle);
 
-  // Close button
-  const closeBtn = document.createElement("button");
-  closeBtn.setAttribute("id", "close-popup-btn");
-  closeBtn.setAttribute("class", "close-popup-btn");
-  closeBtn.textContent = "Close";
-  popupHeaderCont.appendChild(closeBtn);
 
   popupContainer.appendChild(popupHeaderCont);
 
@@ -69,9 +63,6 @@ export function showPopup(content, title) {
   overlay.appendChild(popupContainer);
 
   // Generic close logic
-  closeBtn.addEventListener("click", () => {
-    overlay.remove();
-  });
 
   cancelBtn.addEventListener("click", () => {
     overlay.remove();

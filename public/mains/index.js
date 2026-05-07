@@ -71,16 +71,16 @@ async function loadIdeas() {
   }
 }
 
-function loadPreviewGarden(){
+function loadPreviewGarden() {
   const previewGarden = document.getElementById("garden-preview");
   const table = document.createElement("table");
   for (let i = 0; i < 9; i++) {
     const tr = document.createElement("tr");
     for (let j = 0; j < 9; j++) {
       const td = document.createElement("td");
-      tr.appendChild(td);   
+      tr.appendChild(td);
     }
-    table.appendChild(tr);  
+    table.appendChild(tr);
   }
   previewGarden.appendChild(table);
 }
@@ -122,14 +122,6 @@ function createIdeaCard(idea) {
 
   const plantList = document.createElement("p");
   plantList.setAttribute("class", "plant-list");
-
-  idea.plants.split(",").forEach((plantName) => {
-    const link = document.createElement("a");
-    link.setAttribute("class", "plantListItem");
-    link.setAttribute("href", "#");
-    link.textContent = plantName.trim() + " ";
-    plantList.appendChild(link);
-  });
 
   OneIdeaCard.appendChild(plantList);
 
