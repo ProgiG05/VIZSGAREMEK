@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupSidePanel();
   setupLoginState();
 
+  loadPreviewGarden();
   setupGardenMakerAnimation();
   setupScrollAnimations();
   setupDetailsToggle();
@@ -68,6 +69,20 @@ async function loadIdeas() {
   } catch (error) {
     console.error("Failed to load ideas:", error.message);
   }
+}
+
+function loadPreviewGarden(){
+  const previewGarden = document.getElementById("garden-preview");
+  const table = document.createElement("table");
+  for (let i = 0; i < 9; i++) {
+    const tr = document.createElement("tr");
+    for (let j = 0; j < 9; j++) {
+      const td = document.createElement("td");
+      tr.appendChild(td);   
+    }
+    table.appendChild(tr);  
+  }
+  previewGarden.appendChild(table);
 }
 
 // --- Create idea card ---
