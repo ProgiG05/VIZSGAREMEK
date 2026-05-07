@@ -68,8 +68,18 @@ module.exports = {
     return rows;
   },
   savePlant: async (userId, plantId) => {
-    return toggleSaved("saved_plants", "user_id", "plant_id", userId, plantId);
+    await connection.query(
+      `INSERT IGNORE INTO saved_plants (user_id, plant_id) VALUES (?, ?)`,
+      [userId, plantId],
+    );
   },
+  unsavePlant: async (userId, plantId) => {
+    await connection.query(
+      `DELETE FROM saved_plants WHERE user_id = ? AND plant_id = ?`,
+      [userId, plantId],
+    );
+  },
+
   getGardensByUserId: async function getGardensByUserId(userId) {
     const [rows] = await connection.query(
       `SELECT * FROM garden_manager WHERE user_id = ?`,
@@ -142,7 +152,16 @@ module.exports = {
     return rows;
   },
   saveIdea: async (userId, ideaId) => {
-    return toggleSaved("saved_ideas", "user_id", "idea_id", userId, ideaId);
+    await connection.query(
+      `INSERT IGNORE INTO saved_ideas (user_id, idea_id) VALUES (?, ?)`,
+      [userId, ideaId],
+    );
+  },
+  unsaveIdea: async (userId, ideaId) => {
+    await connection.query(
+      `DELETE FROM saved_ideas WHERE user_id = ? AND idea_id = ?`,
+      [userId, ideaId],
+    );
   },
   getUserById: async (userId) => {
     const [rows] = await connection.query(

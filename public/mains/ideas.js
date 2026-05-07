@@ -216,9 +216,9 @@ async function toggleSaveState(buttonElement, ideaId) {
 
   // Database request
   try {
-    const response = await apiFetch("/api/saveideas", {
-      method: "POST",
-      body: JSON.stringify({ id: ideaId }),
+    const isSaved = savedIdeaIds.has(ideaId);
+    const response = await apiFetch(`/api/savedideas/${ideaId}`, {
+      method: isSaved ? "DELETE" : "POST",
     });
 
     if (!response || !response.ok) {
@@ -261,19 +261,19 @@ function setupShowSearchButton() {
 
   if (!showSearchBtn || !searchCont) return;
 
-    // Scroll to ideas and refill container
-    showSearchBtn.addEventListener("click", async () => {
-      const container = document.getElementById("gardenIdeas-container");
-      const container2 = document.getElementById("oneCardShowcase_cont");
-      const searchCont = document.getElementById("searchBar");
-      if (container) {
-        container.innerHTML = ``; // clear previous cards
-        container2.innerHTML = ``; // clear previous cards
-        searchCont.value = ""; // clear previous search results
-        await loadIdeas(); // reload all ideas
-        searchCont.scrollIntoView({ behavior: "smooth" });
-      }
-    });
+  // Scroll to ideas and refill container
+  showSearchBtn.addEventListener("click", async () => {
+    const container = document.getElementById("gardenIdeas-container");
+    const container2 = document.getElementById("oneCardShowcase_cont");
+    const searchCont = document.getElementById("searchBar");
+    if (container) {
+      container.innerHTML = ``; // clear previous cards
+      container2.innerHTML = ``; // clear previous cards
+      searchCont.value = ""; // clear previous search results
+      await loadIdeas(); // reload all ideas
+      searchCont.scrollIntoView({ behavior: "smooth" });
+    }
+  });
 }
 
 function setupSearchButton() {

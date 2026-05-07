@@ -1,7 +1,6 @@
 const express = require("express");
 const GardenController = require("../controllers/garden-controller");
 const authenticateToken = require("../controllers/authMiddleware");
-
 const router = express.Router();
 
 /**
@@ -216,26 +215,21 @@ router.get(
 
 /**
  * @swagger
- * /api/saveplants:
+ * /api/savedplants/{id}:
  *   post:
  *     summary: Save a plant
  *     tags: [Authenticated]
  *     security:
  *       - cookieAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - plant_id
- *             properties:
- *               plant_id:
- *                 type: integer
- *                 example: 5
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 5
  *     responses:
- *       200:
+ *       201:
  *         description: Plant saved successfully
  *       400:
  *         description: Plant ID is required
@@ -244,7 +238,38 @@ router.get(
  *       500:
  *         description: Could not save plant
  */
-router.post("/saveplants", authenticateToken, GardenController.savePlant);
+router.post("/savedplants/:id", authenticateToken, GardenController.savePlant);
+
+/**
+ * @swagger
+ * /api/savedplants/{id}:
+ *   delete:
+ *     summary: Unsave a plant
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 5
+ *     responses:
+ *       204:
+ *         description: Plant unsaved successfully
+ *       400:
+ *         description: Plant ID is required
+ *       401:
+ *         description: Please log in to access this feature
+ *       500:
+ *         description: Could not unsave plant
+ */
+router.delete(
+  "/savedplants/:id",
+  authenticateToken,
+  GardenController.unsavePlant,
+);
 
 /**
  * @swagger
@@ -266,26 +291,21 @@ router.get("/savedideas", authenticateToken, GardenController.getMySavedIdeas);
 
 /**
  * @swagger
- * /api/saveideas:
+ * /api/savedideas/{id}:
  *   post:
  *     summary: Save an idea
  *     tags: [Authenticated]
  *     security:
  *       - cookieAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - id
- *             properties:
- *               id:
- *                 type: integer
- *                 example: 5
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 5
  *     responses:
- *       200:
+ *       201:
  *         description: Idea saved successfully
  *       400:
  *         description: Idea ID is required
@@ -294,7 +314,38 @@ router.get("/savedideas", authenticateToken, GardenController.getMySavedIdeas);
  *       500:
  *         description: Could not save idea
  */
-router.post("/saveideas", authenticateToken, GardenController.saveIdea);
+router.post("/savedideas/:id", authenticateToken, GardenController.saveIdea);
+
+/**
+ * @swagger
+ * /api/savedideas/{id}:
+ *   delete:
+ *     summary: Unsave an idea
+ *     tags: [Authenticated]
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 5
+ *     responses:
+ *       204:
+ *         description: Idea unsaved successfully
+ *       400:
+ *         description: Idea ID is required
+ *       401:
+ *         description: Please log in to access this feature
+ *       500:
+ *         description: Could not unsave idea
+ */
+router.delete(
+  "/savedideas/:id",
+  authenticateToken,
+  GardenController.unsaveIdea,
+);
 
 /**
  * @swagger
@@ -400,7 +451,7 @@ router.put("/gardens/:id", authenticateToken, GardenController.updateGarden);
  *           type: string
  *         example: 1
  *     responses:
- *       200:
+ *       204:
  *         description: Garden deleted successfully
  *       401:
  *         description: Please log in to access this feature
@@ -422,25 +473,17 @@ router.delete("/gardens/:id", authenticateToken, GardenController.deleteGarden);
  *       content:
  *         application/json:
  *           schema:
- *             oneOf:
- *               - type: object
- *                 required:
- *                   - newUsername
- *                 properties:
- *                   newUsername:
- *                     type: string
- *                     example: mynewname
- *               - type: object
- *                 required:
- *                   - currentPassword
- *                   - newPassword
- *                 properties:
- *                   currentPassword:
- *                     type: string
- *                     example: myoldpassword
- *                   newPassword:
- *                     type: string
- *                     example: mynewpassword123
+ *             type: object
+ *             properties:
+ *               newUsername:
+ *                 type: string
+ *                 example: mynewname
+ *               currentPassword:
+ *                 type: string
+ *                 example: myoldpassword
+ *               newPassword:
+ *                 type: string
+ *                 example: mynewpassword123
  *     responses:
  *       200:
  *         description: Username or password updated successfully

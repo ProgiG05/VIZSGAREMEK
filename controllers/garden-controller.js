@@ -87,23 +87,37 @@ exports.getMySavedPlants = async (req, res) => {
 
 exports.savePlant = async (req, res) => {
   try {
-    const plant_id = req.body.id;
+    const plant_id = parseInt(req.params.id);
     const userId = req.user.id;
-
-    if (!plant_id) {
+    if (!plant_id)
       return res
         .status(400)
         .json({ success: false, message: "Plant ID is required." });
-    }
-
-    const result = await GardenModel.savePlant(userId, plant_id);
-    console.log(
-      `Plant ${plant_id} ${result.action} by user ${req.user.username}`,
-    );
-    res.json(result);
+    await GardenModel.savePlant(userId, plant_id);
+    console.log(`Plant ${plant_id} saved by user ${req.user.username}`);
+    return res.status(201).json({ success: true, message: "Plant saved." });
   } catch (err) {
     console.error("Failed to save plant:", err);
     res.status(500).json({ success: false, message: "Could not save plant." });
+  }
+};
+
+exports.unsavePlant = async (req, res) => {
+  try {
+    const plant_id = parseInt(req.params.id);
+    const userId = req.user.id;
+    if (!plant_id)
+      return res
+        .status(400)
+        .json({ success: false, message: "Plant ID is required." });
+    await GardenModel.unsavePlant(userId, plant_id);
+    console.log(`Plant ${plant_id} unsaved by user ${req.user.username}`);
+    return res.status(204).send();
+  } catch (err) {
+    console.error("Failed to unsave plant:", err);
+    res
+      .status(500)
+      .json({ success: false, message: "Could not unsave plant." });
   }
 };
 
@@ -122,23 +136,35 @@ exports.getMySavedIdeas = async (req, res) => {
 
 exports.saveIdea = async (req, res) => {
   try {
-    const idea_id = req.body.id;
+    const idea_id = parseInt(req.params.id);
     const userId = req.user.id;
-
-    if (!idea_id) {
+    if (!idea_id)
       return res
         .status(400)
         .json({ success: false, message: "Idea ID is required." });
-    }
-
-    const result = await GardenModel.saveIdea(userId, idea_id);
-    console.log(
-      `Idea ${idea_id} ${result.action} by user ${req.user.username}`,
-    );
-    res.json({ success: true, action: result.action, data: result.result });
+    await GardenModel.saveIdea(userId, idea_id);
+    console.log(`Idea ${idea_id} saved by user ${req.user.username}`);
+    return res.status(201).json({ success: true, message: "Idea saved." });
   } catch (err) {
     console.error("Failed to save idea:", err);
-    res.status(500).json({ success: false, message: "Could not toggle idea." });
+    res.status(500).json({ success: false, message: "Could not save idea." });
+  }
+};
+
+exports.unsaveIdea = async (req, res) => {
+  try {
+    const idea_id = parseInt(req.params.id);
+    const userId = req.user.id;
+    if (!idea_id)
+      return res
+        .status(400)
+        .json({ success: false, message: "Idea ID is required." });
+    await GardenModel.unsaveIdea(userId, idea_id);
+    console.log(`Idea ${idea_id} unsaved by user ${req.user.username}`);
+    return res.status(204).send();
+  } catch (err) {
+    console.error("Failed to unsave idea:", err);
+    res.status(500).json({ success: false, message: "Could not unsave idea." });
   }
 };
 

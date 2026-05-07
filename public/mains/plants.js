@@ -344,7 +344,7 @@ async function toggleSaveState(buttonElement, plantId) {
   }
 
   try {
-    await SavePlant(plantId);
+    await SavePlant(plantId, buttonElement.classList.contains("saved"));
   } catch (error) {
     console.error("Failed to save plant:", error.message);
     buttonElement.classList.toggle("saved"); // Revert toggle on failure
@@ -357,24 +357,16 @@ async function toggleSaveState(buttonElement, plantId) {
   }
 }
 
-async function SavePlant(plantId) {
+async function SavePlant(plantId, nowSaved) {
   const user = getUser();
-  if (!user || !user.id) {
-    throw new Error("User not logged in.");
-  }
+  if (!user || !user.id) throw new Error("User not logged in.");
 
-  const response = await apiFetch("/api/saveplants", {
-    method: "POST",
-    body: JSON.stringify({
-      id: plantId,
-    }),
+  const response = await apiFetch(`/api/savedplants/${plantId}`, {
+    method: nowSaved ? "POST" : "DELETE",
   });
 
-  if (!response || !response.ok) {
-    throw new Error(`Save failed`);
-  }
-
-  return await response.json();
+  if (!response || !response.ok) throw new Error("Save failed");
+  if (response.status !== 204) return await response.json();
 }
 
 async function getSavedPlants() {
